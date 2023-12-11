@@ -35,14 +35,47 @@
  * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022 
  */
 
+
+
  library HIVIND27
 
  using FHIR version '4.0.1'
+ 
 
- include /* include concepts and referenced librares*/
+ include HIVIndicatorCommon called HIC
+ include FHIRHelpers version '4.0.1'
+ include WHOCommon called WCom
+ include FHIRCommon called FC
 
  parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-01-31]
+ 
  context Unfiltered
 
+/*
+* Many indicator specifications in ANC and Immunization have context as patient. 
+* I believe these should be unfiltered to get all observations not just those related to a current patient
+* Should discuss.
+*/
+
+
  define "numerator":
-   PatientData."PLHIV" and PatientData."On ART"
+   HIC."HIV Positive during measurement period"
+   and HIC."HIV Treatment during the measurement period"
+   and not HIC."Patient Deceased During Measurement Period"
+   and not HIC."Patient Transferred Out During Measurement Period"
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
