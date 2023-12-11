@@ -1,0 +1,1129 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://worldhealthorganization.github.io/smart/CodeSystem/HIV.EF> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "HIV.EF"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This case-insensitive code system <code>http://worldhealthorganization.github.io/smart/CodeSystem/HIV.EF</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">DE1<a name=\"HIV.EF-DE1\"> </a></td><td>Pregnant woman's first name</td><td>Pregnant woman's first or given name</td></tr><tr><td style=\"white-space:nowrap\">DE2<a name=\"HIV.EF-DE2\"> </a></td><td>Pregnant woman's surname</td><td>Pregnant woman's family name or last name</td></tr><tr><td style=\"white-space:nowrap\">DE3<a name=\"HIV.EF-DE3\"> </a></td><td>Pregnant woman's unique ID</td><td>Unique identifier generated for new clients or a universal ID, if used in the country</td></tr><tr><td style=\"white-space:nowrap\">DE4<a name=\"HIV.EF-DE4\"> </a></td><td>Antenatal care number</td><td>Identification number assigned to woman at first visit to the ANC based on national system</td></tr><tr><td style=\"white-space:nowrap\">DE5<a name=\"HIV.EF-DE5\"> </a></td><td>Gestational age</td><td>Gestational age in weeks and/or days depending on the source of gestational age</td></tr><tr><td style=\"white-space:nowrap\">DE6<a name=\"HIV.EF-DE6\"> </a></td><td>Source of gestational age</td><td>Gestational age can be calculated multiple ways. This data element describes where the gestational age above has been calculated from.</td></tr><tr><td style=\"white-space:nowrap\">DE7<a name=\"HIV.EF-DE7\"> </a></td><td>Last menstrual period (LMP)</td><td>Gestational age (GA) calculated from LMP</td></tr><tr><td style=\"white-space:nowrap\">DE8<a name=\"HIV.EF-DE8\"> </a></td><td>Ultrasound</td><td>Woman's gestational age today calculated field using ultrasound GA and ultrasound date</td></tr><tr><td style=\"white-space:nowrap\">DE9<a name=\"HIV.EF-DE9\"> </a></td><td>Symphysis fundal height (SFH) or abdominal palpation</td><td>If LMP is unknown and either ultrasound wasn't done or it wasn't done early enough, then show the option for health worker to enter GA in weeks based on Symphysis Fundal Height (SFH) or abdominal palpation.</td></tr><tr><td style=\"white-space:nowrap\">DE10<a name=\"HIV.EF-DE10\"> </a></td><td>Expected date of delivery (EDD)</td><td>Expected date of delivery based on gestational age</td></tr><tr><td style=\"white-space:nowrap\">DE11<a name=\"HIV.EF-DE11\"> </a></td><td>Number of pregnancies (gravida)</td><td>Total number of times the woman has been pregnant (including this pregnancy). Also referred to as gravida.</td></tr><tr><td style=\"white-space:nowrap\">DE12<a name=\"HIV.EF-DE12\"> </a></td><td>Number of previous pregnancies</td><td>This calculates the total number of all previous pregnancies (i.e. not including this current pregnancy). This is done for easier obstetric history calculations.</td></tr><tr><td style=\"white-space:nowrap\">DE13<a name=\"HIV.EF-DE13\"> </a></td><td>Number of miscarriages and/or abortions</td><td>Total number of pregnancies lost or ended due to miscarriages and/or abortions before 22 weeks / 5 months</td></tr><tr><td style=\"white-space:nowrap\">DE14<a name=\"HIV.EF-DE14\"> </a></td><td>Number of live births</td><td>Total number of live births after 22 weeks</td></tr><tr><td style=\"white-space:nowrap\">DE15<a name=\"HIV.EF-DE15\"> </a></td><td>Number of caesarian sections</td><td>Total number of caesarean sections</td></tr><tr><td style=\"white-space:nowrap\">DE16<a name=\"HIV.EF-DE16\"> </a></td><td>Number of stillbirths</td><td>Total number of stillbirths after 22 weeks</td></tr><tr><td style=\"white-space:nowrap\">DE17<a name=\"HIV.EF-DE17\"> </a></td><td>Past pregnancy complications</td><td>Whether the woman has had any complications or problems in any previous pregnancy</td></tr><tr><td style=\"white-space:nowrap\">DE18<a name=\"HIV.EF-DE18\"> </a></td><td>No past pregnancy complications</td><td>No known past pregnancy problems</td></tr><tr><td style=\"white-space:nowrap\">DE19<a name=\"HIV.EF-DE19\"> </a></td><td>Does not know of any past pregnancy complications</td><td>Don't know if there were any problems during past pregnancies</td></tr><tr><td style=\"white-space:nowrap\">DE20<a name=\"HIV.EF-DE20\"> </a></td><td>Pre-eclampsia</td><td>A condition specific to pregnancy, arising after the 20th week of gestation, characterized by hypertension and proteinuria. Oedema may also be present, but is no longer considered a cardinal sign because it is present to some extent in most pregnancies. If not controlled, pre-eclampsia will lead to eclampsia which is characterized by fits, followed by coma, and has a high mortality rate.</td></tr><tr><td style=\"white-space:nowrap\">DE21<a name=\"HIV.EF-DE21\"> </a></td><td>Eclampsia</td><td>A condition peculiar to pregnancy or a newly delivered woman, characterized by fits followed coma. The woman usually has hypertension and proteinuria. The fits may occur in the antepartum, intrapartum or early postpartum periods. </td></tr><tr><td style=\"white-space:nowrap\">DE22<a name=\"HIV.EF-DE22\"> </a></td><td>Alcohol use</td><td>Alcohol intake</td></tr><tr><td style=\"white-space:nowrap\">DE23<a name=\"HIV.EF-DE23\"> </a></td><td>Baby died within 24 hours of birth</td><td>The woman's baby died within 24 hours of childbirth </td></tr><tr><td style=\"white-space:nowrap\">DE24<a name=\"HIV.EF-DE24\"> </a></td><td>Prolonged labour</td><td>The woman's experienced prolonged labour</td></tr><tr><td style=\"white-space:nowrap\">DE25<a name=\"HIV.EF-DE25\"> </a></td><td>Convulsions</td><td>Woman had convulsions during her past pregnancy</td></tr><tr><td style=\"white-space:nowrap\">DE26<a name=\"HIV.EF-DE26\"> </a></td><td>Forceps</td><td>Woman required forceps delivery</td></tr><tr><td style=\"white-space:nowrap\">DE27<a name=\"HIV.EF-DE27\"> </a></td><td>Gestational diabetes mellitus</td><td>Hyperglycaemia first detected at any time during pregnancy</td></tr><tr><td style=\"white-space:nowrap\">DE28<a name=\"HIV.EF-DE28\"> </a></td><td>Heavy bleeding (during or after delivery)</td><td>Woman was bleeding heavily during or after giving birth during previous pregnancy/pregnancies</td></tr><tr><td style=\"white-space:nowrap\">DE29<a name=\"HIV.EF-DE29\"> </a></td><td>Macrosomia</td><td>Fetus large for gestational age</td></tr><tr><td style=\"white-space:nowrap\">DE30<a name=\"HIV.EF-DE30\"> </a></td><td>Perineal tear (3rd or 4th degree)</td><td>Woman experienced 3rd or 4th degree perineal tear</td></tr><tr><td style=\"white-space:nowrap\">DE31<a name=\"HIV.EF-DE31\"> </a></td><td>Substance use</td><td>Illicit drug use (e.g. cannabis, amphetamines, prescription stimulants, opioids, opiates, ecstasy, cocaine)</td></tr><tr><td style=\"white-space:nowrap\">DE32<a name=\"HIV.EF-DE32\"> </a></td><td>Tobacco use</td><td>Use of tobacco products, in any form</td></tr><tr><td style=\"white-space:nowrap\">DE33<a name=\"HIV.EF-DE33\"> </a></td><td>Vacuum delivery</td><td>Woman required vacuum delivery</td></tr><tr><td style=\"white-space:nowrap\">DE34<a name=\"HIV.EF-DE34\"> </a></td><td>Other past pregnancy problems</td><td>Woman experienced other past pregnancy problems not described above</td></tr><tr><td style=\"white-space:nowrap\">DE35<a name=\"HIV.EF-DE35\"> </a></td><td>Other past pregnancy problems (specify)</td><td>Woman experienced other past pregnancy problems not described above (specify)</td></tr><tr><td style=\"white-space:nowrap\">DE36<a name=\"HIV.EF-DE36\"> </a></td><td>Parity</td><td>Total number of live and stillbirths (calculated)</td></tr><tr><td style=\"white-space:nowrap\">DE37<a name=\"HIV.EF-DE37\"> </a></td><td>Pregnancy in HIV-infected woman</td><td>Any HIV diagnosis in a pregnant woman as determined by the national HIV testing algorithm, or a pregnancy in a woman previously diagnosed with HIV</td></tr><tr><td style=\"white-space:nowrap\">DE38<a name=\"HIV.EF-DE38\"> </a></td><td>Date new pregnancy of HIV-positive woman identified</td><td>Earliest date when a new pregnancy of an HIV-positive woman is recorded</td></tr><tr><td style=\"white-space:nowrap\">DE39<a name=\"HIV.EF-DE39\"> </a></td><td>ANC contact during pregnancy</td><td>Whether the mother had at least one ANC contact (visit)</td></tr><tr><td style=\"white-space:nowrap\">DE40<a name=\"HIV.EF-DE40\"> </a></td><td>Date of first ANC visit</td><td>Date of the pregnant woman's first ANC visit</td></tr><tr><td style=\"white-space:nowrap\">DE41<a name=\"HIV.EF-DE41\"> </a></td><td>Timing of ART initiation</td><td>When the pregnant woman or mother initiated ART, for women living with HIV.</td></tr><tr><td style=\"white-space:nowrap\">DE42<a name=\"HIV.EF-DE42\"> </a></td><td>Already on ART at first antenatal care visit</td><td>The pregnant woman was already on antiretroviral therapy (ART) at first antenatal care visit</td></tr><tr><td style=\"white-space:nowrap\">DE43<a name=\"HIV.EF-DE43\"> </a></td><td>Newly on ART during pregnancy</td><td>The pregnant woman started ART during her pregnancy</td></tr><tr><td style=\"white-space:nowrap\">DE44<a name=\"HIV.EF-DE44\"> </a></td><td>Newly on ART during labour and delivery</td><td>The woman started ART during labour and delivery</td></tr><tr><td style=\"white-space:nowrap\">DE45<a name=\"HIV.EF-DE45\"> </a></td><td>Maternal use of recommended ART regimen</td><td>Whether the mother is taking a recommended ART regimen</td></tr><tr><td style=\"white-space:nowrap\">DE46<a name=\"HIV.EF-DE46\"> </a></td><td>Delivery date</td><td>Date on which the woman delivered</td></tr><tr><td style=\"white-space:nowrap\">DE47<a name=\"HIV.EF-DE47\"> </a></td><td>Pregnancy outcome</td><td>Outcome of current pregnancy</td></tr><tr><td style=\"white-space:nowrap\">DE48<a name=\"HIV.EF-DE48\"> </a></td><td>Live birth</td><td>Outcome of pregnancy was a live birth</td></tr><tr><td style=\"white-space:nowrap\">DE49<a name=\"HIV.EF-DE49\"> </a></td><td>Early fetal loss/miscarriage</td><td>Outcome of pregnancy was early fetal loss/miscarriage</td></tr><tr><td style=\"white-space:nowrap\">DE50<a name=\"HIV.EF-DE50\"> </a></td><td>Induced abortion</td><td>Outcome of pregnancy was induced abortion</td></tr><tr><td style=\"white-space:nowrap\">DE51<a name=\"HIV.EF-DE51\"> </a></td><td>Stillbirth</td><td>Outcome of pregnancy was stillbirth</td></tr><tr><td style=\"white-space:nowrap\">DE52<a name=\"HIV.EF-DE52\"> </a></td><td>Delivery mode</td><td>Mode of delivery for current pregnancy</td></tr><tr><td style=\"white-space:nowrap\">DE53<a name=\"HIV.EF-DE53\"> </a></td><td>Spontaneous vaginal delivery</td><td>Mode of delivery for current pregnancy spontaneous vaginal delivery (SVD)</td></tr><tr><td style=\"white-space:nowrap\">DE54<a name=\"HIV.EF-DE54\"> </a></td><td>Assisted vaginal delivery</td><td>Mode of delivery for current pregnancy was assisted vaginal delivery</td></tr><tr><td style=\"white-space:nowrap\">DE55<a name=\"HIV.EF-DE55\"> </a></td><td>Caesarian section (C/S, operative delivery)</td><td>Mode of delivery for current pregnancy was caesarian section (C/S; operative delivery)</td></tr><tr><td style=\"white-space:nowrap\">DE56<a name=\"HIV.EF-DE56\"> </a></td><td>Indications for caesarian section (C/S)</td><td>Indications for caesarian section</td></tr><tr><td style=\"white-space:nowrap\">DE57<a name=\"HIV.EF-DE57\"> </a></td><td>Obstetric complications</td><td>Serious or life-threatening obstetric complications during pregnancy, delivery or postpartum experienced by mother or her newborn</td></tr><tr><td style=\"white-space:nowrap\">DE58<a name=\"HIV.EF-DE58\"> </a></td><td>Live birth</td><td>The woman had a live birth</td></tr><tr><td style=\"white-space:nowrap\">DE59<a name=\"HIV.EF-DE59\"> </a></td><td>Live birth to an HIV-positive woman</td><td>A woman living with HIV had a live birth</td></tr><tr><td style=\"white-space:nowrap\">DE60<a name=\"HIV.EF-DE60\"> </a></td><td>Gestational age at birth</td><td>Best estimate of gestational age in completed weeks when infant was born (an indication of prematurity, preterm and extreme preterm)</td></tr><tr><td style=\"white-space:nowrap\">DE61<a name=\"HIV.EF-DE61\"> </a></td><td>Small for gestational age (SGA)</td><td>Whether the infant was small for gestational age (SGA) at birth (&lt;10th percentile)</td></tr><tr><td style=\"white-space:nowrap\">DE62<a name=\"HIV.EF-DE62\"> </a></td><td>Preterm birth status</td><td>The woman gave birth when the gestational age is less than 37 weeks</td></tr><tr><td style=\"white-space:nowrap\">DE63<a name=\"HIV.EF-DE63\"> </a></td><td>Not preterm</td><td>The birth was not preterm</td></tr><tr><td style=\"white-space:nowrap\">DE64<a name=\"HIV.EF-DE64\"> </a></td><td>Preterm (&lt;37 weeks gestation)</td><td>Gestational age at birth was &lt;37 weeks</td></tr><tr><td style=\"white-space:nowrap\">DE65<a name=\"HIV.EF-DE65\"> </a></td><td>Very preterm (&lt;32 weeks gestation)</td><td>Gestational age at birth was &lt;32 weeks</td></tr><tr><td style=\"white-space:nowrap\">DE66<a name=\"HIV.EF-DE66\"> </a></td><td>Maternal ART start date</td><td>The date on which the infant was started or restarted on ART</td></tr><tr><td style=\"white-space:nowrap\">DE67<a name=\"HIV.EF-DE67\"> </a></td><td>Place of delivery</td><td>The type of place where the woman delivered</td></tr><tr><td style=\"white-space:nowrap\">DE68<a name=\"HIV.EF-DE68\"> </a></td><td>Health facility</td><td>The woman delivered at a health facility</td></tr><tr><td style=\"white-space:nowrap\">DE69<a name=\"HIV.EF-DE69\"> </a></td><td>Home</td><td>The woman delivered at home</td></tr><tr><td style=\"white-space:nowrap\">DE70<a name=\"HIV.EF-DE70\"> </a></td><td>Other</td><td>The woman delivered at another location that is not at home or at a health facility</td></tr><tr><td style=\"white-space:nowrap\">DE71<a name=\"HIV.EF-DE71\"> </a></td><td>Other (specify)</td><td>The woman delivered at another location that is not at home or at a health facility (specify)</td></tr><tr><td style=\"white-space:nowrap\">DE72<a name=\"HIV.EF-DE72\"> </a></td><td>Delivery facility</td><td>Facility where the infant or child was born</td></tr><tr><td style=\"white-space:nowrap\">DE73<a name=\"HIV.EF-DE73\"> </a></td><td>Date of miscarriage or abortion</td><td>Date of the miscarriage/abortion</td></tr><tr><td style=\"white-space:nowrap\">DE74<a name=\"HIV.EF-DE74\"> </a></td><td>Date of death of mother</td><td>Date that the woman died</td></tr><tr><td style=\"white-space:nowrap\">DE75<a name=\"HIV.EF-DE75\"> </a></td><td>Cause of death of mother</td><td>The woman's cause of death</td></tr><tr><td style=\"white-space:nowrap\">DE76<a name=\"HIV.EF-DE76\"> </a></td><td>Infant's first name</td><td>Infant's first or given name</td></tr><tr><td style=\"white-space:nowrap\">DE77<a name=\"HIV.EF-DE77\"> </a></td><td>Infant's surname</td><td>Infant's family name or last name</td></tr><tr><td style=\"white-space:nowrap\">DE78<a name=\"HIV.EF-DE78\"> </a></td><td>Infant's unique ID</td><td>Unique identifier generated for new clients or a universal ID, if used in the country</td></tr><tr><td style=\"white-space:nowrap\">DE79<a name=\"HIV.EF-DE79\"> </a></td><td>Mother's first name</td><td>Biological mother's first or given name</td></tr><tr><td style=\"white-space:nowrap\">DE80<a name=\"HIV.EF-DE80\"> </a></td><td>Mother's surname</td><td>Biological mother's family name or last name</td></tr><tr><td style=\"white-space:nowrap\">DE81<a name=\"HIV.EF-DE81\"> </a></td><td>Mother's unique ID</td><td>Unique identifier generated for new clients or a universal ID, if used in the country</td></tr><tr><td style=\"white-space:nowrap\">DE82<a name=\"HIV.EF-DE82\"> </a></td><td>Caregiver's first name</td><td>Caregiver's first or given name</td></tr><tr><td style=\"white-space:nowrap\">DE83<a name=\"HIV.EF-DE83\"> </a></td><td>Caregiver's surname</td><td>Caregiver's family name or last name</td></tr><tr><td style=\"white-space:nowrap\">DE84<a name=\"HIV.EF-DE84\"> </a></td><td>Caregiver's unique identifier</td><td>Unique identifier generated for new clients or a universal ID, if used in the country</td></tr><tr><td style=\"white-space:nowrap\">DE85<a name=\"HIV.EF-DE85\"> </a></td><td>ANC contact date</td><td>The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')</td></tr><tr><td style=\"white-space:nowrap\">DE86<a name=\"HIV.EF-DE86\"> </a></td><td>Referral</td><td>If infant was referred for care</td></tr><tr><td style=\"white-space:nowrap\">DE87<a name=\"HIV.EF-DE87\"> </a></td><td>Infant date of birth</td><td>The infant's date of birth (DOB) if known</td></tr><tr><td style=\"white-space:nowrap\">DE88<a name=\"HIV.EF-DE88\"> </a></td><td>Date of birth of infant unknown</td><td>Is the client's DOB unknown?</td></tr><tr><td style=\"white-space:nowrap\">DE89<a name=\"HIV.EF-DE89\"> </a></td><td>Estimated age of infant</td><td>If DOB is unknown, enter the client's estimated age. Display client's age in number of years</td></tr><tr><td style=\"white-space:nowrap\">DE90<a name=\"HIV.EF-DE90\"> </a></td><td>Age of infant</td><td>Infant age calculated using date of birth</td></tr><tr><td style=\"white-space:nowrap\">DE91<a name=\"HIV.EF-DE91\"> </a></td><td>Gender of infant</td><td>Gender of the infant</td></tr><tr><td style=\"white-space:nowrap\">DE92<a name=\"HIV.EF-DE92\"> </a></td><td>Female</td><td>Client identifies as female</td></tr><tr><td style=\"white-space:nowrap\">DE93<a name=\"HIV.EF-DE93\"> </a></td><td>Male</td><td>Client identifies as male</td></tr><tr><td style=\"white-space:nowrap\">DE94<a name=\"HIV.EF-DE94\"> </a></td><td>Other</td><td>Client identifies in a non-binary way</td></tr><tr><td style=\"white-space:nowrap\">DE95<a name=\"HIV.EF-DE95\"> </a></td><td>Infant height</td><td>The infant's height in centimetres</td></tr><tr><td style=\"white-space:nowrap\">DE96<a name=\"HIV.EF-DE96\"> </a></td><td>Infant weight</td><td>The infant's current weight in kilograms</td></tr><tr><td style=\"white-space:nowrap\">DE97<a name=\"HIV.EF-DE97\"> </a></td><td>Birth weight</td><td>Birth weight in kg of the baby</td></tr><tr><td style=\"white-space:nowrap\">DE98<a name=\"HIV.EF-DE98\"> </a></td><td>Low birth weight</td><td>Note if infant &lt;/¬¨‚â•2500 g at birth</td></tr><tr><td style=\"white-space:nowrap\">DE99<a name=\"HIV.EF-DE99\"> </a></td><td>Length of infant</td><td>Length of infant at birth in cm</td></tr><tr><td style=\"white-space:nowrap\">DE100<a name=\"HIV.EF-DE100\"> </a></td><td>Head circumference</td><td>Head circumference of infant at birth in cm</td></tr><tr><td style=\"white-space:nowrap\">DE101<a name=\"HIV.EF-DE101\"> </a></td><td>Mother HIV test conducted</td><td>Whether an HIV test of the mother was conducted</td></tr><tr><td style=\"white-space:nowrap\">DE102<a name=\"HIV.EF-DE102\"> </a></td><td>Mother HIV test ordered</td><td>Whether an HIV test of the mother was ordered</td></tr><tr><td style=\"white-space:nowrap\">DE103<a name=\"HIV.EF-DE103\"> </a></td><td>Mother HIV test date</td><td>Date when a mother's HIV test was conducted</td></tr><tr><td style=\"white-space:nowrap\">DE104<a name=\"HIV.EF-DE104\"> </a></td><td>Maternal HIV test result</td><td>Test result for mother after applying the testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE105<a name=\"HIV.EF-DE105\"> </a></td><td>HIV-positive</td><td>Test result is HIV-positive</td></tr><tr><td style=\"white-space:nowrap\">DE106<a name=\"HIV.EF-DE106\"> </a></td><td>HIV-negative</td><td>Test result is HIV-negative</td></tr><tr><td style=\"white-space:nowrap\">DE107<a name=\"HIV.EF-DE107\"> </a></td><td>HIV-inconclusive</td><td>Test result is HIV-inconclusive</td></tr><tr><td style=\"white-space:nowrap\">DE108<a name=\"HIV.EF-DE108\"> </a></td><td>Infant or child exposure to HIV</td><td>Whether the infant or child was determined to have had HIV exposure through mother</td></tr><tr><td style=\"white-space:nowrap\">DE109<a name=\"HIV.EF-DE109\"> </a></td><td>Not exposed</td><td>Infant or child is not known to have been exposed to HIV</td></tr><tr><td style=\"white-space:nowrap\">DE110<a name=\"HIV.EF-DE110\"> </a></td><td>HIV-exposed</td><td>Infant had known exposure to HIV</td></tr><tr><td style=\"white-space:nowrap\">DE111<a name=\"HIV.EF-DE111\"> </a></td><td>Unknown HIV exposure</td><td>Don't know whether infant or child was exposed to HIV, such as if mother's HIV status is unknown</td></tr><tr><td style=\"white-space:nowrap\">DE112<a name=\"HIV.EF-DE112\"> </a></td><td>HIV-exposed infant or child</td><td>Whether the infant or child was determined to have had HIV exposure</td></tr><tr><td style=\"white-space:nowrap\">DE113<a name=\"HIV.EF-DE113\"> </a></td><td>Key population member*</td><td>Mother is a member of a key population which has an increased risk of HIV</td></tr><tr><td style=\"white-space:nowrap\">DE114<a name=\"HIV.EF-DE114\"> </a></td><td>Key population member type*</td><td>The type of key population that the infant's mother is included in</td></tr><tr><td style=\"white-space:nowrap\">DE115<a name=\"HIV.EF-DE115\"> </a></td><td>Sex worker</td><td>Infant's mother is a sex worker</td></tr><tr><td style=\"white-space:nowrap\">DE116<a name=\"HIV.EF-DE116\"> </a></td><td>People who inject drugs</td><td>Infant's mother is a person who injects drugs</td></tr><tr><td style=\"white-space:nowrap\">DE117<a name=\"HIV.EF-DE117\"> </a></td><td>Transgender people</td><td>Infant's mother is transgender</td></tr><tr><td style=\"white-space:nowrap\">DE118<a name=\"HIV.EF-DE118\"> </a></td><td>People living in prisons and other closed setting</td><td>Infant's mother is in a prison or closed setting</td></tr><tr><td style=\"white-space:nowrap\">DE119<a name=\"HIV.EF-DE119\"> </a></td><td>Postpartum family planning counselling conducted</td><td>Provide family planning and contraception counselling</td></tr><tr><td style=\"white-space:nowrap\">DE120<a name=\"HIV.EF-DE120\"> </a></td><td>Age of infant on HIV test date</td><td>Infant's age when an HIV test is performed in months and years (calculated from date of birth)</td></tr><tr><td style=\"white-space:nowrap\">DE121<a name=\"HIV.EF-DE121\"> </a></td><td>ARV adherence counselling</td><td>Counselling was carried out during visit</td></tr><tr><td style=\"white-space:nowrap\">DE122<a name=\"HIV.EF-DE122\"> </a></td><td>Infant feeding counselling provided</td><td>Support on infant and child feeding to mother or caregiver provided</td></tr><tr><td style=\"white-space:nowrap\">DE123<a name=\"HIV.EF-DE123\"> </a></td><td>Date infant feeding counselling provided</td><td>Date support on infant and child feeding to mother or caregiver provided</td></tr><tr><td style=\"white-space:nowrap\">DE124<a name=\"HIV.EF-DE124\"> </a></td><td>Malaria prevention counselling conducted</td><td>Counselling provided on how to prevent malaria</td></tr><tr><td style=\"white-space:nowrap\">DE125<a name=\"HIV.EF-DE125\"> </a></td><td>Insecticide treated bednet (ITN) provided or referred</td><td>An insecticide treated bednet (ITN) was provided or the client was referred</td></tr><tr><td style=\"white-space:nowrap\">DE126<a name=\"HIV.EF-DE126\"> </a></td><td>Maternal syphilis treatment</td><td>Whether or not mother was treated for syphilis</td></tr><tr><td style=\"white-space:nowrap\">DE127<a name=\"HIV.EF-DE127\"> </a></td><td>Infant feeding practice</td><td>Infant feeding practice</td></tr><tr><td style=\"white-space:nowrap\">DE128<a name=\"HIV.EF-DE128\"> </a></td><td>Exclusively breastfeeding</td><td>Specifies whether the infant is exclusively being breastfed by the mother</td></tr><tr><td style=\"white-space:nowrap\">DE129<a name=\"HIV.EF-DE129\"> </a></td><td>Replacement feeding</td><td>Infant is not receiving any breast milk with a diet that provides all the nutrients needed until they can be fully fed on family foods</td></tr><tr><td style=\"white-space:nowrap\">DE130<a name=\"HIV.EF-DE130\"> </a></td><td>Mixed feeding</td><td>Infant younger than 6 months of age is given other liquids and/or foods together with breast milk. This could be water, other types of milk or any type of solid food.</td></tr><tr><td style=\"white-space:nowrap\">DE131<a name=\"HIV.EF-DE131\"> </a></td><td>Infant feeding practice recorded date</td><td>Date on which infant feeding practice was recorded</td></tr><tr><td style=\"white-space:nowrap\">DE132<a name=\"HIV.EF-DE132\"> </a></td><td>Stopped breastfeeding</td><td>The mother has fully stopped breastfeeding the infant or child</td></tr><tr><td style=\"white-space:nowrap\">DE133<a name=\"HIV.EF-DE133\"> </a></td><td>Date stopped breastfeeding</td><td>The date on which the mother stopped breastfeeding the infant</td></tr><tr><td style=\"white-space:nowrap\">DE134<a name=\"HIV.EF-DE134\"> </a></td><td>Taking iron and folic acid (IFA) tablets</td><td>Is client taking her iron and folic acid (IFA) tablets? Select whether the woman is continuing to take IFA supplements</td></tr><tr><td style=\"white-space:nowrap\">DE135<a name=\"HIV.EF-DE135\"> </a></td><td>Amount of iron prescribed</td><td>Amount of iron supplements prescribed in milligrams for intake</td></tr><tr><td style=\"white-space:nowrap\">DE136<a name=\"HIV.EF-DE136\"> </a></td><td>Type of iron supplement dosage provided</td><td>Whether the amount of iron prescribed is for daily or weekly intake</td></tr><tr><td style=\"white-space:nowrap\">DE137<a name=\"HIV.EF-DE137\"> </a></td><td>Daily </td><td>Iron supplements prescribed for daily intake</td></tr><tr><td style=\"white-space:nowrap\">DE138<a name=\"HIV.EF-DE138\"> </a></td><td>Weekly</td><td>Iron supplements prescribed for daily intake</td></tr><tr><td style=\"white-space:nowrap\">DE139<a name=\"HIV.EF-DE139\"> </a></td><td>Amount of daily dose of folic acid prescribed</td><td>Amount of folic acid supplements prescribed in milligrams for daily intake</td></tr><tr><td style=\"white-space:nowrap\">DE140<a name=\"HIV.EF-DE140\"> </a></td><td>Date infant ARV prophylaxis dispensed (or started)</td><td>Date HIV-exposed infant received ARV prophylaxis (for the first time)</td></tr><tr><td style=\"white-space:nowrap\">DE141<a name=\"HIV.EF-DE141\"> </a></td><td>Maternal HIV status</td><td>The HIV status of the infant's mother</td></tr><tr><td style=\"white-space:nowrap\">DE142<a name=\"HIV.EF-DE142\"> </a></td><td>HIV-positive</td><td>Infant's mother is HIV-positive</td></tr><tr><td style=\"white-space:nowrap\">DE143<a name=\"HIV.EF-DE143\"> </a></td><td>HIV-negative</td><td>Infant's mother is HIV-negative</td></tr><tr><td style=\"white-space:nowrap\">DE144<a name=\"HIV.EF-DE144\"> </a></td><td>Unknown</td><td>Don't know HIV status - client does not know partner's HIV status</td></tr><tr><td style=\"white-space:nowrap\">DE145<a name=\"HIV.EF-DE145\"> </a></td><td>Maternal HIV status at first ANC visit</td><td>The HIV status of the infant's mother at first ANC visit</td></tr><tr><td style=\"white-space:nowrap\">DE146<a name=\"HIV.EF-DE146\"> </a></td><td>HIV-positive</td><td>Infant's mother is HIV-positive</td></tr><tr><td style=\"white-space:nowrap\">DE147<a name=\"HIV.EF-DE147\"> </a></td><td>HIV-negative</td><td>Infant's mother is HIV-negative</td></tr><tr><td style=\"white-space:nowrap\">DE148<a name=\"HIV.EF-DE148\"> </a></td><td>Unknown</td><td>Don't know HIV status - client does not know partner's HIV status</td></tr><tr><td style=\"white-space:nowrap\">DE149<a name=\"HIV.EF-DE149\"> </a></td><td>Maternal syphilis test result</td><td>Result from maternal syphilis test</td></tr><tr><td style=\"white-space:nowrap\">DE150<a name=\"HIV.EF-DE150\"> </a></td><td>Positive</td><td>Test result is positive for syphilis</td></tr><tr><td style=\"white-space:nowrap\">DE151<a name=\"HIV.EF-DE151\"> </a></td><td>Negative</td><td>Test result is negative for syphilis</td></tr><tr><td style=\"white-space:nowrap\">DE152<a name=\"HIV.EF-DE152\"> </a></td><td>Inconclusive</td><td>Test result is inconclusive</td></tr><tr><td style=\"white-space:nowrap\">DE153<a name=\"HIV.EF-DE153\"> </a></td><td>Hypertension</td><td>Whether the client has developed hypertension associated with pregnancy</td></tr><tr><td style=\"white-space:nowrap\">DE154<a name=\"HIV.EF-DE154\"> </a></td><td>Pre-eclampsia</td><td>Whether the client has pre-eclampsia</td></tr><tr><td style=\"white-space:nowrap\">DE155<a name=\"HIV.EF-DE155\"> </a></td><td>Signs of substantial risk of HIV infection</td><td>Signs the client is at a substantial risk of HIV infection</td></tr><tr><td style=\"white-space:nowrap\">DE156<a name=\"HIV.EF-DE156\"> </a></td><td>No condom use during sex with more than one partner in the past 6 months</td><td>Recent vaginal or anal sexual intercourse without a condom with more than one partner</td></tr><tr><td style=\"white-space:nowrap\">DE157<a name=\"HIV.EF-DE157\"> </a></td><td>STI in the past 6 months</td><td>A recent history (in the last 6 months) of a sexually transmitted infection (STI) by laboratory testing or self-report of syndromic STI treatment</td></tr><tr><td style=\"white-space:nowrap\">DE158<a name=\"HIV.EF-DE158\"> </a></td><td>A sexual partner in the past 6 months had one or more HIV risk factors</td><td>A recent sex partner of the client had HIV risk factors</td></tr><tr><td style=\"white-space:nowrap\">DE159<a name=\"HIV.EF-DE159\"> </a></td><td>PrEP requested by client</td><td>Client is requesting PrEP, reflecting a decision-making process has already taken place and suggesting of substantial risk of HIV</td></tr><tr><td style=\"white-space:nowrap\">DE160<a name=\"HIV.EF-DE160\"> </a></td><td>Serodiscordant partner</td><td>Mother's HIV status is different from a current partner's HIV status</td></tr><tr><td style=\"white-space:nowrap\">DE161<a name=\"HIV.EF-DE161\"> </a></td><td>Date woman received counselling for CPT</td><td>Date woman received counselling for co-trimoxazole preventive therapy (CPT)</td></tr><tr><td style=\"white-space:nowrap\">DE162<a name=\"HIV.EF-DE162\"> </a></td><td>Date woman received counselling for TPT</td><td>Date woman received counselling for TB preventive therapy</td></tr><tr><td style=\"white-space:nowrap\">DE163<a name=\"HIV.EF-DE163\"> </a></td><td>Infant's co-trimoxazole prophylaxis start date</td><td>Start date of co-trimoxazole prophylaxis</td></tr><tr><td style=\"white-space:nowrap\">DE164<a name=\"HIV.EF-DE164\"> </a></td><td>Infant's age when co-trimoxazole prophylaxis was started</td><td>The number of weeks or months infant was when started on co-trimoxazole (CTX) prophylaxis preventive therapy</td></tr><tr><td style=\"white-space:nowrap\">DE165<a name=\"HIV.EF-DE165\"> </a></td><td>Presumptive clinical diagnosis of severe HIV infection in infants</td><td>Presumptive clinical diagnosis of severe HIV infection in infants</td></tr><tr><td style=\"white-space:nowrap\">DE166<a name=\"HIV.EF-DE166\"> </a></td><td>Infant ARV prophylaxis</td><td>Infant is taking an antiretroviral prophylaxis to prevent infection from HIV exposure</td></tr><tr><td style=\"white-space:nowrap\">DE167<a name=\"HIV.EF-DE167\"> </a></td><td>Infant ARV prophylaxis start date</td><td>The date on which the infant was started on an antiretroviral prophylaxis</td></tr><tr><td style=\"white-space:nowrap\">DE168<a name=\"HIV.EF-DE168\"> </a></td><td>HIV test type</td><td>Type of HIV test</td></tr><tr><td style=\"white-space:nowrap\">DE169<a name=\"HIV.EF-DE169\"> </a></td><td>Rapid diagnostic test for HIV</td><td>Antibody test for HIV performed with a rapid diagnostic (RDT)</td></tr><tr><td style=\"white-space:nowrap\">DE170<a name=\"HIV.EF-DE170\"> </a></td><td>Enzyme immunoassay for HIV</td><td>Antibody test for HIV performed with an enzyme immunoassay (EIA)</td></tr><tr><td style=\"white-space:nowrap\">DE171<a name=\"HIV.EF-DE171\"> </a></td><td>Nucleic acid test for HIV</td><td>Virological test, which includes testing for early infant diagnosis</td></tr><tr><td style=\"white-space:nowrap\">DE172<a name=\"HIV.EF-DE172\"> </a></td><td>Dual HIV/syphilis rapid diagnostic test</td><td>Antibody test for HIV and syphilis performed with a rapid diagnostic</td></tr><tr><td style=\"white-space:nowrap\">DE173<a name=\"HIV.EF-DE173\"> </a></td><td>Maternal and child health service visit</td><td>Maternal and child health service visit attended by an HIV-exposed infant</td></tr><tr><td style=\"white-space:nowrap\">DE174<a name=\"HIV.EF-DE174\"> </a></td><td>12-month visit</td><td>HIV-exposed infant attending MCH services for a 12-month visit</td></tr><tr><td style=\"white-space:nowrap\">DE175<a name=\"HIV.EF-DE175\"> </a></td><td>24-month visit</td><td>HIV-exposed infants attending MCH services for a 24-month visit</td></tr><tr><td style=\"white-space:nowrap\">DE176<a name=\"HIV.EF-DE176\"> </a></td><td>First visit after the end of breastfeeding</td><td>HIV-exposed infant attending MCH services for a first visit after the end of breastfeeding</td></tr><tr><td style=\"white-space:nowrap\">DE177<a name=\"HIV.EF-DE177\"> </a></td><td>Weeks postpartum</td><td>Number of weeks postpartum on this visit date</td></tr><tr><td style=\"white-space:nowrap\">DE178<a name=\"HIV.EF-DE178\"> </a></td><td>Birth cohort</td><td>Month and year of infant's birth, which the infant is registered into. The cohort is a group of infants born in the same month, whose status is followed over time.</td></tr><tr><td style=\"white-space:nowrap\">DE179<a name=\"HIV.EF-DE179\"> </a></td><td>Registered in birth cohort</td><td>Whether the infant has been registered in a birth cohort</td></tr><tr><td style=\"white-space:nowrap\">DE180<a name=\"HIV.EF-DE180\"> </a></td><td>EID sample number</td><td>Early infant diagnosis (EID) sample number</td></tr><tr><td style=\"white-space:nowrap\">DE181<a name=\"HIV.EF-DE181\"> </a></td><td>EID sample 1</td><td>First sample used to test an infant for HIV</td></tr><tr><td style=\"white-space:nowrap\">DE182<a name=\"HIV.EF-DE182\"> </a></td><td>EID sample 2</td><td>Second sample used to test an infant for HIV</td></tr><tr><td style=\"white-space:nowrap\">DE183<a name=\"HIV.EF-DE183\"> </a></td><td>EID test number</td><td>Early infant diagnosis (EID) HIV test number using the same sample</td></tr><tr><td style=\"white-space:nowrap\">DE184<a name=\"HIV.EF-DE184\"> </a></td><td>EID test number 1</td><td>First test on a sample to test an infant for HIV</td></tr><tr><td style=\"white-space:nowrap\">DE185<a name=\"HIV.EF-DE185\"> </a></td><td>EID test number 2</td><td>Second test on a sample to test an infant for HIV</td></tr><tr><td style=\"white-space:nowrap\">DE186<a name=\"HIV.EF-DE186\"> </a></td><td>EID test number 1 test result</td><td>Early infant diagnosis test number 1 test result</td></tr><tr><td style=\"white-space:nowrap\">DE187<a name=\"HIV.EF-DE187\"> </a></td><td>Positive</td><td>Positive HIV test result from the nucleic acid test</td></tr><tr><td style=\"white-space:nowrap\">DE188<a name=\"HIV.EF-DE188\"> </a></td><td>Negative</td><td>Negative HIV test result from the nucleic acid test</td></tr><tr><td style=\"white-space:nowrap\">DE189<a name=\"HIV.EF-DE189\"> </a></td><td>Indeterminate</td><td>Indeterminate HIV test result from the nucleic acid test</td></tr><tr><td style=\"white-space:nowrap\">DE190<a name=\"HIV.EF-DE190\"> </a></td><td>EID test number 2 test result</td><td>Early infant diagnosis test number 2 test result</td></tr><tr><td style=\"white-space:nowrap\">DE191<a name=\"HIV.EF-DE191\"> </a></td><td>Positive</td><td>Positive HIV test result from the nucleic acid test</td></tr><tr><td style=\"white-space:nowrap\">DE192<a name=\"HIV.EF-DE192\"> </a></td><td>Negative</td><td>Negative HIV test result from the nucleic acid test</td></tr><tr><td style=\"white-space:nowrap\">DE193<a name=\"HIV.EF-DE193\"> </a></td><td>Indeterminate</td><td>Indeterminate HIV test result from the nucleic acid test</td></tr><tr><td style=\"white-space:nowrap\">DE194<a name=\"HIV.EF-DE194\"> </a></td><td>Assay number in testing strategy</td><td>The number of the assay (test kit) in the HIV testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE195<a name=\"HIV.EF-DE195\"> </a></td><td>Assay 0</td><td>A community outreach test-for-triage or self-test which is not included in the HIV testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE196<a name=\"HIV.EF-DE196\"> </a></td><td>Assay 1</td><td>The first test in the HIV testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE197<a name=\"HIV.EF-DE197\"> </a></td><td>Assay 2</td><td>The second test in the HIV testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE198<a name=\"HIV.EF-DE198\"> </a></td><td>Assay 3</td><td>The third test in the HIV testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE199<a name=\"HIV.EF-DE199\"> </a></td><td>Assay 1 repeated</td><td>The first test in the HIV testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE200<a name=\"HIV.EF-DE200\"> </a></td><td>Test result of HIV assay 1</td><td>The result of the first HIV assay in the testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE201<a name=\"HIV.EF-DE201\"> </a></td><td>Reactive</td><td>The result of the HIV assay in the testing strategy was reactive</td></tr><tr><td style=\"white-space:nowrap\">DE202<a name=\"HIV.EF-DE202\"> </a></td><td>Non-reactive</td><td>The result of the HIV assay in the testing strategy was non-reactive</td></tr><tr><td style=\"white-space:nowrap\">DE203<a name=\"HIV.EF-DE203\"> </a></td><td>Invalid</td><td>The result of the HIV assay in the testing strategy was invalid</td></tr><tr><td style=\"white-space:nowrap\">DE204<a name=\"HIV.EF-DE204\"> </a></td><td>Test result of HIV assay 2</td><td>The result of the second HIV assay in the testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE205<a name=\"HIV.EF-DE205\"> </a></td><td>Reactive</td><td>The result of the HIV assay in the testing strategy was reactive</td></tr><tr><td style=\"white-space:nowrap\">DE206<a name=\"HIV.EF-DE206\"> </a></td><td>Non-reactive</td><td>The result of the HIV assay in the testing strategy was non-reactive</td></tr><tr><td style=\"white-space:nowrap\">DE207<a name=\"HIV.EF-DE207\"> </a></td><td>Invalid</td><td>The result of the HIV assay in the testing strategy was invalid</td></tr><tr><td style=\"white-space:nowrap\">DE208<a name=\"HIV.EF-DE208\"> </a></td><td>Test result of HIV assay 3</td><td>The result of the third HIV assay in the testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE209<a name=\"HIV.EF-DE209\"> </a></td><td>Reactive</td><td>The result of the HIV assay in the testing strategy was reactive</td></tr><tr><td style=\"white-space:nowrap\">DE210<a name=\"HIV.EF-DE210\"> </a></td><td>Non-reactive</td><td>The result of the HIV assay in the testing strategy was non-reactive</td></tr><tr><td style=\"white-space:nowrap\">DE211<a name=\"HIV.EF-DE211\"> </a></td><td>Invalid</td><td>The result of the HIV assay in the testing strategy was invalid</td></tr><tr><td style=\"white-space:nowrap\">DE212<a name=\"HIV.EF-DE212\"> </a></td><td>Test result of HIV assay 1 repeated</td><td>The result of the repeated first HIV assay in the testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE213<a name=\"HIV.EF-DE213\"> </a></td><td>Reactive</td><td>The result of the HIV assay in the testing strategy was reactive</td></tr><tr><td style=\"white-space:nowrap\">DE214<a name=\"HIV.EF-DE214\"> </a></td><td>Non-reactive</td><td>The result of the HIV assay in the testing strategy was non-reactive</td></tr><tr><td style=\"white-space:nowrap\">DE215<a name=\"HIV.EF-DE215\"> </a></td><td>Invalid</td><td>The result of the HIV assay in the testing strategy was invalid</td></tr><tr><td style=\"white-space:nowrap\">DE216<a name=\"HIV.EF-DE216\"> </a></td><td>Test result of syphilis assay 1</td><td>The result of the first syphilis assay in the testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE217<a name=\"HIV.EF-DE217\"> </a></td><td>Reactive</td><td>The result of the first syphilis assay in the testing strategy was reactive</td></tr><tr><td style=\"white-space:nowrap\">DE218<a name=\"HIV.EF-DE218\"> </a></td><td>Non-reactive</td><td>The result of the first syphilis assay in the testing strategy was non-reactive</td></tr><tr><td style=\"white-space:nowrap\">DE219<a name=\"HIV.EF-DE219\"> </a></td><td>Invalid</td><td>The result of the HIV assay in the testing strategy was invalid</td></tr><tr><td style=\"white-space:nowrap\">DE220<a name=\"HIV.EF-DE220\"> </a></td><td>Test result of syphilis assay 1 repeated</td><td>The result of the first syphilis assay repeated in the testing strategy</td></tr><tr><td style=\"white-space:nowrap\">DE221<a name=\"HIV.EF-DE221\"> </a></td><td>Reactive</td><td>The result of the first syphilis assay repeated in the testing strategy was reactive</td></tr><tr><td style=\"white-space:nowrap\">DE222<a name=\"HIV.EF-DE222\"> </a></td><td>Non-reactive</td><td>The result of the first syphilis assay repeated in the testing strategy was non-reactive</td></tr><tr><td style=\"white-space:nowrap\">DE223<a name=\"HIV.EF-DE223\"> </a></td><td>Invalid</td><td>The result of the first syphilis assay repeated in the testing strategy was invalid</td></tr><tr><td style=\"white-space:nowrap\">DE224<a name=\"HIV.EF-DE224\"> </a></td><td>HIV test date</td><td>Date of the HIV test</td></tr><tr><td style=\"white-space:nowrap\">DE225<a name=\"HIV.EF-DE225\"> </a></td><td>Infant HIV status</td><td>HIV status reported after applying the HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.</td></tr><tr><td style=\"white-space:nowrap\">DE226<a name=\"HIV.EF-DE226\"> </a></td><td>HIV-positive</td><td>Infant is HIV-positive</td></tr><tr><td style=\"white-space:nowrap\">DE227<a name=\"HIV.EF-DE227\"> </a></td><td>HIV-negative</td><td>Infant is HIV-negative</td></tr><tr><td style=\"white-space:nowrap\">DE228<a name=\"HIV.EF-DE228\"> </a></td><td>Unknown</td><td>Infant has unknown HIV status</td></tr><tr><td style=\"white-space:nowrap\">DE229<a name=\"HIV.EF-DE229\"> </a></td><td>Infant ART start date</td><td>The date on which the infant was started or restarted on antiretroviral therapy (ART)</td></tr><tr><td style=\"white-space:nowrap\">DE230<a name=\"HIV.EF-DE230\"> </a></td><td>Final diagnosis of HIV-exposed infant</td><td>HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later).</td></tr><tr><td style=\"white-space:nowrap\">DE231<a name=\"HIV.EF-DE231\"> </a></td><td>HIV-positive</td><td>The infant is HIV-positive</td></tr><tr><td style=\"white-space:nowrap\">DE232<a name=\"HIV.EF-DE232\"> </a></td><td>HIV-negative and no longer breastfeeding</td><td>The infant is HIV-negative and the mother has quit breastfeeding</td></tr><tr><td style=\"white-space:nowrap\">DE233<a name=\"HIV.EF-DE233\"> </a></td><td>HIV status unknown</td><td>The final HIV status of the child is unknown because the infant died, was lost to follow-up or transferred out without ever having an HIV-positive diagnosis or is active in care but was not tested at 18 months</td></tr><tr><td style=\"white-space:nowrap\">DE234<a name=\"HIV.EF-DE234\"> </a></td><td>HIV-exposed infant reason for unknown final status</td><td>The outcome for the infant does not have a final outcome, which may because of death, stopped treatment or lost to follow-up.</td></tr><tr><td style=\"white-space:nowrap\">DE235<a name=\"HIV.EF-DE235\"> </a></td><td>Lost to follow-up</td><td>Twenty-eight days or more since last missed appointment</td></tr><tr><td style=\"white-space:nowrap\">DE236<a name=\"HIV.EF-DE236\"> </a></td><td>Transferred out</td><td>The client transferred to another facility</td></tr><tr><td style=\"white-space:nowrap\">DE237<a name=\"HIV.EF-DE237\"> </a></td><td>Death (documented)</td><td>People living with HIV previously on ART who are confirmed to have died from any cause</td></tr><tr><td style=\"white-space:nowrap\">DE238<a name=\"HIV.EF-DE238\"> </a></td><td>Refused (stopped) treatment</td><td>Client was contacted and confirmed to have stopped ART</td></tr><tr><td style=\"white-space:nowrap\">DE239<a name=\"HIV.EF-DE239\"> </a></td><td>Date of death of infant</td><td>Date that the infant died</td></tr><tr><td style=\"white-space:nowrap\">DE240<a name=\"HIV.EF-DE240\"> </a></td><td>Cause of death of infant</td><td>The infant's cause of death</td></tr><tr><td style=\"white-space:nowrap\">DE241<a name=\"HIV.EF-DE241\"> </a></td><td>Infant died within 24 hours of childbirth</td><td>The infant died within 24 hours of childbirth</td></tr><tr><td style=\"white-space:nowrap\">DE242<a name=\"HIV.EF-DE242\"> </a></td><td>Action(s) needed during infant follow-up visit</td><td>Any actions needed during infant follow-up visit</td></tr><tr><td style=\"white-space:nowrap\">DE243<a name=\"HIV.EF-DE243\"> </a></td><td>Timing of additional infant HIV test</td><td>Age in months when additional infant HIV test is performed</td></tr><tr><td style=\"white-space:nowrap\">DE244<a name=\"HIV.EF-DE244\"> </a></td><td>Date of sample collection of additional infant HIV test</td><td>Date of sample collection of additional infant HIV test</td></tr><tr><td style=\"white-space:nowrap\">DE245<a name=\"HIV.EF-DE245\"> </a></td><td>Haemoglobin (Hb) result</td><td>Result of woman's haemoglobin test during ANC, labour or delivery. Full blood count testing is recommended, and if not available, use of  haemoglobinometer over haemoglobin colour scale. </td></tr><tr><td style=\"white-space:nowrap\">DE246<a name=\"HIV.EF-DE246\"> </a></td><td>Blood group and Rh factor</td><td>Mother's blood type and blood Rh factor</td></tr><tr><td style=\"white-space:nowrap\">DE247<a name=\"HIV.EF-DE247\"> </a></td><td>A+</td><td>Mother's blood type and blood Rh factor is A+</td></tr><tr><td style=\"white-space:nowrap\">DE248<a name=\"HIV.EF-DE248\"> </a></td><td>A-</td><td>Mother's blood type and blood Rh factor is A-</td></tr><tr><td style=\"white-space:nowrap\">DE249<a name=\"HIV.EF-DE249\"> </a></td><td>B+</td><td>Mother's blood type and blood Rh factor is B+</td></tr><tr><td style=\"white-space:nowrap\">DE250<a name=\"HIV.EF-DE250\"> </a></td><td>B-</td><td>Mother's blood type and blood Rh factor is B-</td></tr><tr><td style=\"white-space:nowrap\">DE251<a name=\"HIV.EF-DE251\"> </a></td><td>O+</td><td>Mother's blood type and blood Rh factor is O+</td></tr><tr><td style=\"white-space:nowrap\">DE252<a name=\"HIV.EF-DE252\"> </a></td><td>O-</td><td>Mother's blood type and blood Rh factor is O-</td></tr><tr><td style=\"white-space:nowrap\">DE253<a name=\"HIV.EF-DE253\"> </a></td><td>AB+</td><td>Mother's blood type and blood Rh factor is AB+</td></tr><tr><td style=\"white-space:nowrap\">DE254<a name=\"HIV.EF-DE254\"> </a></td><td>AB-</td><td>Mother's blood type and blood Rh factor is AB-</td></tr><tr><td style=\"white-space:nowrap\">DE255<a name=\"HIV.EF-DE255\"> </a></td><td>Asymptomatic bacteriuria (ASB) test result</td><td>Result of urine culture (or urine Gram-staining if not available over dipstick tests) for diagnosing asymptomatic bacteriuria</td></tr><tr><td style=\"white-space:nowrap\">DE256<a name=\"HIV.EF-DE256\"> </a></td><td>Positive</td><td>Result of test for asymptomatic bacteriuria is positive</td></tr><tr><td style=\"white-space:nowrap\">DE257<a name=\"HIV.EF-DE257\"> </a></td><td>Negative</td><td>Result of test for asymptomatic bacteriuria is negative</td></tr><tr><td style=\"white-space:nowrap\">DE258<a name=\"HIV.EF-DE258\"> </a></td><td>Unknown</td><td>Result of test for asymptomatic bacteriuria is unknown</td></tr><tr><td style=\"white-space:nowrap\">DE259<a name=\"HIV.EF-DE259\"> </a></td><td>Urine protein test result</td><td>Results of urine protein test of mother during ANC visit</td></tr><tr><td style=\"white-space:nowrap\">DE260<a name=\"HIV.EF-DE260\"> </a></td><td>0</td><td>Result of urine protein test of mother during ANC visit is '0'</td></tr><tr><td style=\"white-space:nowrap\">DE261<a name=\"HIV.EF-DE261\"> </a></td><td>+</td><td>Result of urine protein test of mother during ANC visit is '+'</td></tr><tr><td style=\"white-space:nowrap\">DE262<a name=\"HIV.EF-DE262\"> </a></td><td>++</td><td>Result of urine protein test of mother during ANC visit is '++'</td></tr><tr><td style=\"white-space:nowrap\">DE263<a name=\"HIV.EF-DE263\"> </a></td><td>+++</td><td>Result of urine protein test of mother during ANC visit is '+++'</td></tr><tr><td style=\"white-space:nowrap\">DE264<a name=\"HIV.EF-DE264\"> </a></td><td>Type of hypertensive disorder</td><td>Type of hypertensive disorder of the mother</td></tr><tr><td style=\"white-space:nowrap\">DE265<a name=\"HIV.EF-DE265\"> </a></td><td>Chronic hypertension</td><td>Hypertension detected pre-pregnancy or before 20 weeks' gestation</td></tr><tr><td style=\"white-space:nowrap\">DE266<a name=\"HIV.EF-DE266\"> </a></td><td>Essential</td><td>Hypertension without a known secondary cause (pre-pregnancy or at less than 20 weeks)</td></tr><tr><td style=\"white-space:nowrap\">DE267<a name=\"HIV.EF-DE267\"> </a></td><td>Secondary</td><td>Hypertension with a known secondary cause (e.g. renal disease; detected pre-pregnancy or at less than 20 weeks)</td></tr><tr><td style=\"white-space:nowrap\">DE268<a name=\"HIV.EF-DE268\"> </a></td><td>White-coat hypertension</td><td>sBP greater than or equal to 140 and/or dBP greater than or equal to 90 mmHg when measured in the office or clinic, and BP less than 135/85 mmHg using HBPM or ABPM readings (pre-pregnancy or at less than 20 weeks)</td></tr><tr><td style=\"white-space:nowrap\">DE269<a name=\"HIV.EF-DE269\"> </a></td><td>Masked hypertension</td><td>BP that is less than 140/90 mmHg at a clinic/office visit, but greater then or equal to 135/85 mmHg at other times outside the clinic/ office (pre-pregnancy or at less than 20 weeks)</td></tr><tr><td style=\"white-space:nowrap\">DE270<a name=\"HIV.EF-DE270\"> </a></td><td>Gestational hypertension</td><td>Hypertension arising de novo at greater than or equal to 20 weeks' gestation in the absence of proteinuria or other findings suggestive of pre-eclampsia</td></tr><tr><td style=\"white-space:nowrap\">DE271<a name=\"HIV.EF-DE271\"> </a></td><td>Transient gestational hypertension</td><td>Hypertension arising at greater than or equal to 20 weeks' gestation in the clinic, which resolves with repeated BP readings</td></tr><tr><td style=\"white-space:nowrap\">DE272<a name=\"HIV.EF-DE272\"> </a></td><td>Pre-eclampsia</td><td>Pre-eclampsia</td></tr><tr><td style=\"white-space:nowrap\">DE273<a name=\"HIV.EF-DE273\"> </a></td><td>Superimposed on chronic hypertension</td><td>Among women with chronic hypertension, development of new proteinuria, another maternal organ dysfunction(s), or evidence of uteroplacental dysfunction.</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.EF"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "HIV_EF"] ; # 
+  fhir:title [ fhir:v "HIV.E-F PMTCT  CodeSystem"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v "false"^^xsd:boolean] ; # 
+  fhir:date [ fhir:v "2023-12-10T23:25:54+00:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "WHO"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "WHO" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "http://who.int" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "CodeSystem for HIV.E-F PMTCT  Data Elements"] ; # 
+  fhir:caseSensitive [ fhir:v "false"^^xsd:boolean] ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "273"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "DE1" ] ;
+     fhir:display [ fhir:v "Pregnant woman's first name" ] ;
+     fhir:definition [ fhir:v "Pregnant woman's first or given name" ]
+  ] [
+     fhir:code [ fhir:v "DE2" ] ;
+     fhir:display [ fhir:v "Pregnant woman's surname" ] ;
+     fhir:definition [ fhir:v "Pregnant woman's family name or last name" ]
+  ] [
+     fhir:code [ fhir:v "DE3" ] ;
+     fhir:display [ fhir:v "Pregnant woman's unique ID" ] ;
+     fhir:definition [ fhir:v "Unique identifier generated for new clients or a universal ID, if used in the country" ]
+  ] [
+     fhir:code [ fhir:v "DE4" ] ;
+     fhir:display [ fhir:v "Antenatal care number" ] ;
+     fhir:definition [ fhir:v "Identification number assigned to woman at first visit to the ANC based on national system" ]
+  ] [
+     fhir:code [ fhir:v "DE5" ] ;
+     fhir:display [ fhir:v "Gestational age" ] ;
+     fhir:definition [ fhir:v "Gestational age in weeks and/or days depending on the source of gestational age" ]
+  ] [
+     fhir:code [ fhir:v "DE6" ] ;
+     fhir:display [ fhir:v "Source of gestational age" ] ;
+     fhir:definition [ fhir:v "Gestational age can be calculated multiple ways. This data element describes where the gestational age above has been calculated from." ]
+  ] [
+     fhir:code [ fhir:v "DE7" ] ;
+     fhir:display [ fhir:v "Last menstrual period (LMP)" ] ;
+     fhir:definition [ fhir:v "Gestational age (GA) calculated from LMP" ]
+  ] [
+     fhir:code [ fhir:v "DE8" ] ;
+     fhir:display [ fhir:v "Ultrasound" ] ;
+     fhir:definition [ fhir:v "Woman's gestational age today calculated field using ultrasound GA and ultrasound date" ]
+  ] [
+     fhir:code [ fhir:v "DE9" ] ;
+     fhir:display [ fhir:v "Symphysis fundal height (SFH) or abdominal palpation" ] ;
+     fhir:definition [ fhir:v "If LMP is unknown and either ultrasound wasn't done or it wasn't done early enough, then show the option for health worker to enter GA in weeks based on Symphysis Fundal Height (SFH) or abdominal palpation." ]
+  ] [
+     fhir:code [ fhir:v "DE10" ] ;
+     fhir:display [ fhir:v "Expected date of delivery (EDD)" ] ;
+     fhir:definition [ fhir:v "Expected date of delivery based on gestational age" ]
+  ] [
+     fhir:code [ fhir:v "DE11" ] ;
+     fhir:display [ fhir:v "Number of pregnancies (gravida)" ] ;
+     fhir:definition [ fhir:v "Total number of times the woman has been pregnant (including this pregnancy). Also referred to as gravida." ]
+  ] [
+     fhir:code [ fhir:v "DE12" ] ;
+     fhir:display [ fhir:v "Number of previous pregnancies" ] ;
+     fhir:definition [ fhir:v "This calculates the total number of all previous pregnancies (i.e. not including this current pregnancy). This is done for easier obstetric history calculations." ]
+  ] [
+     fhir:code [ fhir:v "DE13" ] ;
+     fhir:display [ fhir:v "Number of miscarriages and/or abortions" ] ;
+     fhir:definition [ fhir:v "Total number of pregnancies lost or ended due to miscarriages and/or abortions before 22 weeks / 5 months" ]
+  ] [
+     fhir:code [ fhir:v "DE14" ] ;
+     fhir:display [ fhir:v "Number of live births" ] ;
+     fhir:definition [ fhir:v "Total number of live births after 22 weeks" ]
+  ] [
+     fhir:code [ fhir:v "DE15" ] ;
+     fhir:display [ fhir:v "Number of caesarian sections" ] ;
+     fhir:definition [ fhir:v "Total number of caesarean sections" ]
+  ] [
+     fhir:code [ fhir:v "DE16" ] ;
+     fhir:display [ fhir:v "Number of stillbirths" ] ;
+     fhir:definition [ fhir:v "Total number of stillbirths after 22 weeks" ]
+  ] [
+     fhir:code [ fhir:v "DE17" ] ;
+     fhir:display [ fhir:v "Past pregnancy complications" ] ;
+     fhir:definition [ fhir:v "Whether the woman has had any complications or problems in any previous pregnancy" ]
+  ] [
+     fhir:code [ fhir:v "DE18" ] ;
+     fhir:display [ fhir:v "No past pregnancy complications" ] ;
+     fhir:definition [ fhir:v "No known past pregnancy problems" ]
+  ] [
+     fhir:code [ fhir:v "DE19" ] ;
+     fhir:display [ fhir:v "Does not know of any past pregnancy complications" ] ;
+     fhir:definition [ fhir:v "Don't know if there were any problems during past pregnancies" ]
+  ] [
+     fhir:code [ fhir:v "DE20" ] ;
+     fhir:display [ fhir:v "Pre-eclampsia" ] ;
+     fhir:definition [ fhir:v "A condition specific to pregnancy, arising after the 20th week of gestation, characterized by hypertension and proteinuria. Oedema may also be present, but is no longer considered a cardinal sign because it is present to some extent in most pregnancies. If not controlled, pre-eclampsia will lead to eclampsia which is characterized by fits, followed by coma, and has a high mortality rate." ]
+  ] [
+     fhir:code [ fhir:v "DE21" ] ;
+     fhir:display [ fhir:v "Eclampsia" ] ;
+     fhir:definition [ fhir:v "A condition peculiar to pregnancy or a newly delivered woman, characterized by fits followed coma. The woman usually has hypertension and proteinuria. The fits may occur in the antepartum, intrapartum or early postpartum periods. " ]
+  ] [
+     fhir:code [ fhir:v "DE22" ] ;
+     fhir:display [ fhir:v "Alcohol use" ] ;
+     fhir:definition [ fhir:v "Alcohol intake" ]
+  ] [
+     fhir:code [ fhir:v "DE23" ] ;
+     fhir:display [ fhir:v "Baby died within 24 hours of birth" ] ;
+     fhir:definition [ fhir:v "The woman's baby died within 24 hours of childbirth " ]
+  ] [
+     fhir:code [ fhir:v "DE24" ] ;
+     fhir:display [ fhir:v "Prolonged labour" ] ;
+     fhir:definition [ fhir:v "The woman's experienced prolonged labour" ]
+  ] [
+     fhir:code [ fhir:v "DE25" ] ;
+     fhir:display [ fhir:v "Convulsions" ] ;
+     fhir:definition [ fhir:v "Woman had convulsions during her past pregnancy" ]
+  ] [
+     fhir:code [ fhir:v "DE26" ] ;
+     fhir:display [ fhir:v "Forceps" ] ;
+     fhir:definition [ fhir:v "Woman required forceps delivery" ]
+  ] [
+     fhir:code [ fhir:v "DE27" ] ;
+     fhir:display [ fhir:v "Gestational diabetes mellitus" ] ;
+     fhir:definition [ fhir:v "Hyperglycaemia first detected at any time during pregnancy" ]
+  ] [
+     fhir:code [ fhir:v "DE28" ] ;
+     fhir:display [ fhir:v "Heavy bleeding (during or after delivery)" ] ;
+     fhir:definition [ fhir:v "Woman was bleeding heavily during or after giving birth during previous pregnancy/pregnancies" ]
+  ] [
+     fhir:code [ fhir:v "DE29" ] ;
+     fhir:display [ fhir:v "Macrosomia" ] ;
+     fhir:definition [ fhir:v "Fetus large for gestational age" ]
+  ] [
+     fhir:code [ fhir:v "DE30" ] ;
+     fhir:display [ fhir:v "Perineal tear (3rd or 4th degree)" ] ;
+     fhir:definition [ fhir:v "Woman experienced 3rd or 4th degree perineal tear" ]
+  ] [
+     fhir:code [ fhir:v "DE31" ] ;
+     fhir:display [ fhir:v "Substance use" ] ;
+     fhir:definition [ fhir:v "Illicit drug use (e.g. cannabis, amphetamines, prescription stimulants, opioids, opiates, ecstasy, cocaine)" ]
+  ] [
+     fhir:code [ fhir:v "DE32" ] ;
+     fhir:display [ fhir:v "Tobacco use" ] ;
+     fhir:definition [ fhir:v "Use of tobacco products, in any form" ]
+  ] [
+     fhir:code [ fhir:v "DE33" ] ;
+     fhir:display [ fhir:v "Vacuum delivery" ] ;
+     fhir:definition [ fhir:v "Woman required vacuum delivery" ]
+  ] [
+     fhir:code [ fhir:v "DE34" ] ;
+     fhir:display [ fhir:v "Other past pregnancy problems" ] ;
+     fhir:definition [ fhir:v "Woman experienced other past pregnancy problems not described above" ]
+  ] [
+     fhir:code [ fhir:v "DE35" ] ;
+     fhir:display [ fhir:v "Other past pregnancy problems (specify)" ] ;
+     fhir:definition [ fhir:v "Woman experienced other past pregnancy problems not described above (specify)" ]
+  ] [
+     fhir:code [ fhir:v "DE36" ] ;
+     fhir:display [ fhir:v "Parity" ] ;
+     fhir:definition [ fhir:v "Total number of live and stillbirths (calculated)" ]
+  ] [
+     fhir:code [ fhir:v "DE37" ] ;
+     fhir:display [ fhir:v "Pregnancy in HIV-infected woman" ] ;
+     fhir:definition [ fhir:v "Any HIV diagnosis in a pregnant woman as determined by the national HIV testing algorithm, or a pregnancy in a woman previously diagnosed with HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE38" ] ;
+     fhir:display [ fhir:v "Date new pregnancy of HIV-positive woman identified" ] ;
+     fhir:definition [ fhir:v "Earliest date when a new pregnancy of an HIV-positive woman is recorded" ]
+  ] [
+     fhir:code [ fhir:v "DE39" ] ;
+     fhir:display [ fhir:v "ANC contact during pregnancy" ] ;
+     fhir:definition [ fhir:v "Whether the mother had at least one ANC contact (visit)" ]
+  ] [
+     fhir:code [ fhir:v "DE40" ] ;
+     fhir:display [ fhir:v "Date of first ANC visit" ] ;
+     fhir:definition [ fhir:v "Date of the pregnant woman's first ANC visit" ]
+  ] [
+     fhir:code [ fhir:v "DE41" ] ;
+     fhir:display [ fhir:v "Timing of ART initiation" ] ;
+     fhir:definition [ fhir:v "When the pregnant woman or mother initiated ART, for women living with HIV." ]
+  ] [
+     fhir:code [ fhir:v "DE42" ] ;
+     fhir:display [ fhir:v "Already on ART at first antenatal care visit" ] ;
+     fhir:definition [ fhir:v "The pregnant woman was already on antiretroviral therapy (ART) at first antenatal care visit" ]
+  ] [
+     fhir:code [ fhir:v "DE43" ] ;
+     fhir:display [ fhir:v "Newly on ART during pregnancy" ] ;
+     fhir:definition [ fhir:v "The pregnant woman started ART during her pregnancy" ]
+  ] [
+     fhir:code [ fhir:v "DE44" ] ;
+     fhir:display [ fhir:v "Newly on ART during labour and delivery" ] ;
+     fhir:definition [ fhir:v "The woman started ART during labour and delivery" ]
+  ] [
+     fhir:code [ fhir:v "DE45" ] ;
+     fhir:display [ fhir:v "Maternal use of recommended ART regimen" ] ;
+     fhir:definition [ fhir:v "Whether the mother is taking a recommended ART regimen" ]
+  ] [
+     fhir:code [ fhir:v "DE46" ] ;
+     fhir:display [ fhir:v "Delivery date" ] ;
+     fhir:definition [ fhir:v "Date on which the woman delivered" ]
+  ] [
+     fhir:code [ fhir:v "DE47" ] ;
+     fhir:display [ fhir:v "Pregnancy outcome" ] ;
+     fhir:definition [ fhir:v "Outcome of current pregnancy" ]
+  ] [
+     fhir:code [ fhir:v "DE48" ] ;
+     fhir:display [ fhir:v "Live birth" ] ;
+     fhir:definition [ fhir:v "Outcome of pregnancy was a live birth" ]
+  ] [
+     fhir:code [ fhir:v "DE49" ] ;
+     fhir:display [ fhir:v "Early fetal loss/miscarriage" ] ;
+     fhir:definition [ fhir:v "Outcome of pregnancy was early fetal loss/miscarriage" ]
+  ] [
+     fhir:code [ fhir:v "DE50" ] ;
+     fhir:display [ fhir:v "Induced abortion" ] ;
+     fhir:definition [ fhir:v "Outcome of pregnancy was induced abortion" ]
+  ] [
+     fhir:code [ fhir:v "DE51" ] ;
+     fhir:display [ fhir:v "Stillbirth" ] ;
+     fhir:definition [ fhir:v "Outcome of pregnancy was stillbirth" ]
+  ] [
+     fhir:code [ fhir:v "DE52" ] ;
+     fhir:display [ fhir:v "Delivery mode" ] ;
+     fhir:definition [ fhir:v "Mode of delivery for current pregnancy" ]
+  ] [
+     fhir:code [ fhir:v "DE53" ] ;
+     fhir:display [ fhir:v "Spontaneous vaginal delivery" ] ;
+     fhir:definition [ fhir:v "Mode of delivery for current pregnancy spontaneous vaginal delivery (SVD)" ]
+  ] [
+     fhir:code [ fhir:v "DE54" ] ;
+     fhir:display [ fhir:v "Assisted vaginal delivery" ] ;
+     fhir:definition [ fhir:v "Mode of delivery for current pregnancy was assisted vaginal delivery" ]
+  ] [
+     fhir:code [ fhir:v "DE55" ] ;
+     fhir:display [ fhir:v "Caesarian section (C/S, operative delivery)" ] ;
+     fhir:definition [ fhir:v "Mode of delivery for current pregnancy was caesarian section (C/S; operative delivery)" ]
+  ] [
+     fhir:code [ fhir:v "DE56" ] ;
+     fhir:display [ fhir:v "Indications for caesarian section (C/S)" ] ;
+     fhir:definition [ fhir:v "Indications for caesarian section" ]
+  ] [
+     fhir:code [ fhir:v "DE57" ] ;
+     fhir:display [ fhir:v "Obstetric complications" ] ;
+     fhir:definition [ fhir:v "Serious or life-threatening obstetric complications during pregnancy, delivery or postpartum experienced by mother or her newborn" ]
+  ] [
+     fhir:code [ fhir:v "DE58" ] ;
+     fhir:display [ fhir:v "Live birth" ] ;
+     fhir:definition [ fhir:v "The woman had a live birth" ]
+  ] [
+     fhir:code [ fhir:v "DE59" ] ;
+     fhir:display [ fhir:v "Live birth to an HIV-positive woman" ] ;
+     fhir:definition [ fhir:v "A woman living with HIV had a live birth" ]
+  ] [
+     fhir:code [ fhir:v "DE60" ] ;
+     fhir:display [ fhir:v "Gestational age at birth" ] ;
+     fhir:definition [ fhir:v "Best estimate of gestational age in completed weeks when infant was born (an indication of prematurity, preterm and extreme preterm)" ]
+  ] [
+     fhir:code [ fhir:v "DE61" ] ;
+     fhir:display [ fhir:v "Small for gestational age (SGA)" ] ;
+     fhir:definition [ fhir:v "Whether the infant was small for gestational age (SGA) at birth (<10th percentile)" ]
+  ] [
+     fhir:code [ fhir:v "DE62" ] ;
+     fhir:display [ fhir:v "Preterm birth status" ] ;
+     fhir:definition [ fhir:v "The woman gave birth when the gestational age is less than 37 weeks" ]
+  ] [
+     fhir:code [ fhir:v "DE63" ] ;
+     fhir:display [ fhir:v "Not preterm" ] ;
+     fhir:definition [ fhir:v "The birth was not preterm" ]
+  ] [
+     fhir:code [ fhir:v "DE64" ] ;
+     fhir:display [ fhir:v "Preterm (<37 weeks gestation)" ] ;
+     fhir:definition [ fhir:v "Gestational age at birth was <37 weeks" ]
+  ] [
+     fhir:code [ fhir:v "DE65" ] ;
+     fhir:display [ fhir:v "Very preterm (<32 weeks gestation)" ] ;
+     fhir:definition [ fhir:v "Gestational age at birth was <32 weeks" ]
+  ] [
+     fhir:code [ fhir:v "DE66" ] ;
+     fhir:display [ fhir:v "Maternal ART start date" ] ;
+     fhir:definition [ fhir:v "The date on which the infant was started or restarted on ART" ]
+  ] [
+     fhir:code [ fhir:v "DE67" ] ;
+     fhir:display [ fhir:v "Place of delivery" ] ;
+     fhir:definition [ fhir:v "The type of place where the woman delivered" ]
+  ] [
+     fhir:code [ fhir:v "DE68" ] ;
+     fhir:display [ fhir:v "Health facility" ] ;
+     fhir:definition [ fhir:v "The woman delivered at a health facility" ]
+  ] [
+     fhir:code [ fhir:v "DE69" ] ;
+     fhir:display [ fhir:v "Home" ] ;
+     fhir:definition [ fhir:v "The woman delivered at home" ]
+  ] [
+     fhir:code [ fhir:v "DE70" ] ;
+     fhir:display [ fhir:v "Other" ] ;
+     fhir:definition [ fhir:v "The woman delivered at another location that is not at home or at a health facility" ]
+  ] [
+     fhir:code [ fhir:v "DE71" ] ;
+     fhir:display [ fhir:v "Other (specify)" ] ;
+     fhir:definition [ fhir:v "The woman delivered at another location that is not at home or at a health facility (specify)" ]
+  ] [
+     fhir:code [ fhir:v "DE72" ] ;
+     fhir:display [ fhir:v "Delivery facility" ] ;
+     fhir:definition [ fhir:v "Facility where the infant or child was born" ]
+  ] [
+     fhir:code [ fhir:v "DE73" ] ;
+     fhir:display [ fhir:v "Date of miscarriage or abortion" ] ;
+     fhir:definition [ fhir:v "Date of the miscarriage/abortion" ]
+  ] [
+     fhir:code [ fhir:v "DE74" ] ;
+     fhir:display [ fhir:v "Date of death of mother" ] ;
+     fhir:definition [ fhir:v "Date that the woman died" ]
+  ] [
+     fhir:code [ fhir:v "DE75" ] ;
+     fhir:display [ fhir:v "Cause of death of mother" ] ;
+     fhir:definition [ fhir:v "The woman's cause of death" ]
+  ] [
+     fhir:code [ fhir:v "DE76" ] ;
+     fhir:display [ fhir:v "Infant's first name" ] ;
+     fhir:definition [ fhir:v "Infant's first or given name" ]
+  ] [
+     fhir:code [ fhir:v "DE77" ] ;
+     fhir:display [ fhir:v "Infant's surname" ] ;
+     fhir:definition [ fhir:v "Infant's family name or last name" ]
+  ] [
+     fhir:code [ fhir:v "DE78" ] ;
+     fhir:display [ fhir:v "Infant's unique ID" ] ;
+     fhir:definition [ fhir:v "Unique identifier generated for new clients or a universal ID, if used in the country" ]
+  ] [
+     fhir:code [ fhir:v "DE79" ] ;
+     fhir:display [ fhir:v "Mother's first name" ] ;
+     fhir:definition [ fhir:v "Biological mother's first or given name" ]
+  ] [
+     fhir:code [ fhir:v "DE80" ] ;
+     fhir:display [ fhir:v "Mother's surname" ] ;
+     fhir:definition [ fhir:v "Biological mother's family name or last name" ]
+  ] [
+     fhir:code [ fhir:v "DE81" ] ;
+     fhir:display [ fhir:v "Mother's unique ID" ] ;
+     fhir:definition [ fhir:v "Unique identifier generated for new clients or a universal ID, if used in the country" ]
+  ] [
+     fhir:code [ fhir:v "DE82" ] ;
+     fhir:display [ fhir:v "Caregiver's first name" ] ;
+     fhir:definition [ fhir:v "Caregiver's first or given name" ]
+  ] [
+     fhir:code [ fhir:v "DE83" ] ;
+     fhir:display [ fhir:v "Caregiver's surname" ] ;
+     fhir:definition [ fhir:v "Caregiver's family name or last name" ]
+  ] [
+     fhir:code [ fhir:v "DE84" ] ;
+     fhir:display [ fhir:v "Caregiver's unique identifier" ] ;
+     fhir:definition [ fhir:v "Unique identifier generated for new clients or a universal ID, if used in the country" ]
+  ] [
+     fhir:code [ fhir:v "DE85" ] ;
+     fhir:display [ fhir:v "ANC contact date" ] ;
+     fhir:definition [ fhir:v "The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')" ]
+  ] [
+     fhir:code [ fhir:v "DE86" ] ;
+     fhir:display [ fhir:v "Referral" ] ;
+     fhir:definition [ fhir:v "If infant was referred for care" ]
+  ] [
+     fhir:code [ fhir:v "DE87" ] ;
+     fhir:display [ fhir:v "Infant date of birth" ] ;
+     fhir:definition [ fhir:v "The infant's date of birth (DOB) if known" ]
+  ] [
+     fhir:code [ fhir:v "DE88" ] ;
+     fhir:display [ fhir:v "Date of birth of infant unknown" ] ;
+     fhir:definition [ fhir:v "Is the client's DOB unknown?" ]
+  ] [
+     fhir:code [ fhir:v "DE89" ] ;
+     fhir:display [ fhir:v "Estimated age of infant" ] ;
+     fhir:definition [ fhir:v "If DOB is unknown, enter the client's estimated age. Display client's age in number of years" ]
+  ] [
+     fhir:code [ fhir:v "DE90" ] ;
+     fhir:display [ fhir:v "Age of infant" ] ;
+     fhir:definition [ fhir:v "Infant age calculated using date of birth" ]
+  ] [
+     fhir:code [ fhir:v "DE91" ] ;
+     fhir:display [ fhir:v "Gender of infant" ] ;
+     fhir:definition [ fhir:v "Gender of the infant" ]
+  ] [
+     fhir:code [ fhir:v "DE92" ] ;
+     fhir:display [ fhir:v "Female" ] ;
+     fhir:definition [ fhir:v "Client identifies as female" ]
+  ] [
+     fhir:code [ fhir:v "DE93" ] ;
+     fhir:display [ fhir:v "Male" ] ;
+     fhir:definition [ fhir:v "Client identifies as male" ]
+  ] [
+     fhir:code [ fhir:v "DE94" ] ;
+     fhir:display [ fhir:v "Other" ] ;
+     fhir:definition [ fhir:v "Client identifies in a non-binary way" ]
+  ] [
+     fhir:code [ fhir:v "DE95" ] ;
+     fhir:display [ fhir:v "Infant height" ] ;
+     fhir:definition [ fhir:v "The infant's height in centimetres" ]
+  ] [
+     fhir:code [ fhir:v "DE96" ] ;
+     fhir:display [ fhir:v "Infant weight" ] ;
+     fhir:definition [ fhir:v "The infant's current weight in kilograms" ]
+  ] [
+     fhir:code [ fhir:v "DE97" ] ;
+     fhir:display [ fhir:v "Birth weight" ] ;
+     fhir:definition [ fhir:v "Birth weight in kg of the baby" ]
+  ] [
+     fhir:code [ fhir:v "DE98" ] ;
+     fhir:display [ fhir:v "Low birth weight" ] ;
+     fhir:definition [ fhir:v "Note if infant </¬¨‚â•2500 g at birth" ]
+  ] [
+     fhir:code [ fhir:v "DE99" ] ;
+     fhir:display [ fhir:v "Length of infant" ] ;
+     fhir:definition [ fhir:v "Length of infant at birth in cm" ]
+  ] [
+     fhir:code [ fhir:v "DE100" ] ;
+     fhir:display [ fhir:v "Head circumference" ] ;
+     fhir:definition [ fhir:v "Head circumference of infant at birth in cm" ]
+  ] [
+     fhir:code [ fhir:v "DE101" ] ;
+     fhir:display [ fhir:v "Mother HIV test conducted" ] ;
+     fhir:definition [ fhir:v "Whether an HIV test of the mother was conducted" ]
+  ] [
+     fhir:code [ fhir:v "DE102" ] ;
+     fhir:display [ fhir:v "Mother HIV test ordered" ] ;
+     fhir:definition [ fhir:v "Whether an HIV test of the mother was ordered" ]
+  ] [
+     fhir:code [ fhir:v "DE103" ] ;
+     fhir:display [ fhir:v "Mother HIV test date" ] ;
+     fhir:definition [ fhir:v "Date when a mother's HIV test was conducted" ]
+  ] [
+     fhir:code [ fhir:v "DE104" ] ;
+     fhir:display [ fhir:v "Maternal HIV test result" ] ;
+     fhir:definition [ fhir:v "Test result for mother after applying the testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE105" ] ;
+     fhir:display [ fhir:v "HIV-positive" ] ;
+     fhir:definition [ fhir:v "Test result is HIV-positive" ]
+  ] [
+     fhir:code [ fhir:v "DE106" ] ;
+     fhir:display [ fhir:v "HIV-negative" ] ;
+     fhir:definition [ fhir:v "Test result is HIV-negative" ]
+  ] [
+     fhir:code [ fhir:v "DE107" ] ;
+     fhir:display [ fhir:v "HIV-inconclusive" ] ;
+     fhir:definition [ fhir:v "Test result is HIV-inconclusive" ]
+  ] [
+     fhir:code [ fhir:v "DE108" ] ;
+     fhir:display [ fhir:v "Infant or child exposure to HIV" ] ;
+     fhir:definition [ fhir:v "Whether the infant or child was determined to have had HIV exposure through mother" ]
+  ] [
+     fhir:code [ fhir:v "DE109" ] ;
+     fhir:display [ fhir:v "Not exposed" ] ;
+     fhir:definition [ fhir:v "Infant or child is not known to have been exposed to HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE110" ] ;
+     fhir:display [ fhir:v "HIV-exposed" ] ;
+     fhir:definition [ fhir:v "Infant had known exposure to HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE111" ] ;
+     fhir:display [ fhir:v "Unknown HIV exposure" ] ;
+     fhir:definition [ fhir:v "Don't know whether infant or child was exposed to HIV, such as if mother's HIV status is unknown" ]
+  ] [
+     fhir:code [ fhir:v "DE112" ] ;
+     fhir:display [ fhir:v "HIV-exposed infant or child" ] ;
+     fhir:definition [ fhir:v "Whether the infant or child was determined to have had HIV exposure" ]
+  ] [
+     fhir:code [ fhir:v "DE113" ] ;
+     fhir:display [ fhir:v "Key population member*" ] ;
+     fhir:definition [ fhir:v "Mother is a member of a key population which has an increased risk of HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE114" ] ;
+     fhir:display [ fhir:v "Key population member type*" ] ;
+     fhir:definition [ fhir:v "The type of key population that the infant's mother is included in" ]
+  ] [
+     fhir:code [ fhir:v "DE115" ] ;
+     fhir:display [ fhir:v "Sex worker" ] ;
+     fhir:definition [ fhir:v "Infant's mother is a sex worker" ]
+  ] [
+     fhir:code [ fhir:v "DE116" ] ;
+     fhir:display [ fhir:v "People who inject drugs" ] ;
+     fhir:definition [ fhir:v "Infant's mother is a person who injects drugs" ]
+  ] [
+     fhir:code [ fhir:v "DE117" ] ;
+     fhir:display [ fhir:v "Transgender people" ] ;
+     fhir:definition [ fhir:v "Infant's mother is transgender" ]
+  ] [
+     fhir:code [ fhir:v "DE118" ] ;
+     fhir:display [ fhir:v "People living in prisons and other closed setting" ] ;
+     fhir:definition [ fhir:v "Infant's mother is in a prison or closed setting" ]
+  ] [
+     fhir:code [ fhir:v "DE119" ] ;
+     fhir:display [ fhir:v "Postpartum family planning counselling conducted" ] ;
+     fhir:definition [ fhir:v "Provide family planning and contraception counselling" ]
+  ] [
+     fhir:code [ fhir:v "DE120" ] ;
+     fhir:display [ fhir:v "Age of infant on HIV test date" ] ;
+     fhir:definition [ fhir:v "Infant's age when an HIV test is performed in months and years (calculated from date of birth)" ]
+  ] [
+     fhir:code [ fhir:v "DE121" ] ;
+     fhir:display [ fhir:v "ARV adherence counselling" ] ;
+     fhir:definition [ fhir:v "Counselling was carried out during visit" ]
+  ] [
+     fhir:code [ fhir:v "DE122" ] ;
+     fhir:display [ fhir:v "Infant feeding counselling provided" ] ;
+     fhir:definition [ fhir:v "Support on infant and child feeding to mother or caregiver provided" ]
+  ] [
+     fhir:code [ fhir:v "DE123" ] ;
+     fhir:display [ fhir:v "Date infant feeding counselling provided" ] ;
+     fhir:definition [ fhir:v "Date support on infant and child feeding to mother or caregiver provided" ]
+  ] [
+     fhir:code [ fhir:v "DE124" ] ;
+     fhir:display [ fhir:v "Malaria prevention counselling conducted" ] ;
+     fhir:definition [ fhir:v "Counselling provided on how to prevent malaria" ]
+  ] [
+     fhir:code [ fhir:v "DE125" ] ;
+     fhir:display [ fhir:v "Insecticide treated bednet (ITN) provided or referred" ] ;
+     fhir:definition [ fhir:v "An insecticide treated bednet (ITN) was provided or the client was referred" ]
+  ] [
+     fhir:code [ fhir:v "DE126" ] ;
+     fhir:display [ fhir:v "Maternal syphilis treatment" ] ;
+     fhir:definition [ fhir:v "Whether or not mother was treated for syphilis" ]
+  ] [
+     fhir:code [ fhir:v "DE127" ] ;
+     fhir:display [ fhir:v "Infant feeding practice" ] ;
+     fhir:definition [ fhir:v "Infant feeding practice" ]
+  ] [
+     fhir:code [ fhir:v "DE128" ] ;
+     fhir:display [ fhir:v "Exclusively breastfeeding" ] ;
+     fhir:definition [ fhir:v "Specifies whether the infant is exclusively being breastfed by the mother" ]
+  ] [
+     fhir:code [ fhir:v "DE129" ] ;
+     fhir:display [ fhir:v "Replacement feeding" ] ;
+     fhir:definition [ fhir:v "Infant is not receiving any breast milk with a diet that provides all the nutrients needed until they can be fully fed on family foods" ]
+  ] [
+     fhir:code [ fhir:v "DE130" ] ;
+     fhir:display [ fhir:v "Mixed feeding" ] ;
+     fhir:definition [ fhir:v "Infant younger than 6 months of age is given other liquids and/or foods together with breast milk. This could be water, other types of milk or any type of solid food." ]
+  ] [
+     fhir:code [ fhir:v "DE131" ] ;
+     fhir:display [ fhir:v "Infant feeding practice recorded date" ] ;
+     fhir:definition [ fhir:v "Date on which infant feeding practice was recorded" ]
+  ] [
+     fhir:code [ fhir:v "DE132" ] ;
+     fhir:display [ fhir:v "Stopped breastfeeding" ] ;
+     fhir:definition [ fhir:v "The mother has fully stopped breastfeeding the infant or child" ]
+  ] [
+     fhir:code [ fhir:v "DE133" ] ;
+     fhir:display [ fhir:v "Date stopped breastfeeding" ] ;
+     fhir:definition [ fhir:v "The date on which the mother stopped breastfeeding the infant" ]
+  ] [
+     fhir:code [ fhir:v "DE134" ] ;
+     fhir:display [ fhir:v "Taking iron and folic acid (IFA) tablets" ] ;
+     fhir:definition [ fhir:v "Is client taking her iron and folic acid (IFA) tablets? Select whether the woman is continuing to take IFA supplements" ]
+  ] [
+     fhir:code [ fhir:v "DE135" ] ;
+     fhir:display [ fhir:v "Amount of iron prescribed" ] ;
+     fhir:definition [ fhir:v "Amount of iron supplements prescribed in milligrams for intake" ]
+  ] [
+     fhir:code [ fhir:v "DE136" ] ;
+     fhir:display [ fhir:v "Type of iron supplement dosage provided" ] ;
+     fhir:definition [ fhir:v "Whether the amount of iron prescribed is for daily or weekly intake" ]
+  ] [
+     fhir:code [ fhir:v "DE137" ] ;
+     fhir:display [ fhir:v "Daily " ] ;
+     fhir:definition [ fhir:v "Iron supplements prescribed for daily intake" ]
+  ] [
+     fhir:code [ fhir:v "DE138" ] ;
+     fhir:display [ fhir:v "Weekly" ] ;
+     fhir:definition [ fhir:v "Iron supplements prescribed for daily intake" ]
+  ] [
+     fhir:code [ fhir:v "DE139" ] ;
+     fhir:display [ fhir:v "Amount of daily dose of folic acid prescribed" ] ;
+     fhir:definition [ fhir:v "Amount of folic acid supplements prescribed in milligrams for daily intake" ]
+  ] [
+     fhir:code [ fhir:v "DE140" ] ;
+     fhir:display [ fhir:v "Date infant ARV prophylaxis dispensed (or started)" ] ;
+     fhir:definition [ fhir:v "Date HIV-exposed infant received ARV prophylaxis (for the first time)" ]
+  ] [
+     fhir:code [ fhir:v "DE141" ] ;
+     fhir:display [ fhir:v "Maternal HIV status" ] ;
+     fhir:definition [ fhir:v "The HIV status of the infant's mother" ]
+  ] [
+     fhir:code [ fhir:v "DE142" ] ;
+     fhir:display [ fhir:v "HIV-positive" ] ;
+     fhir:definition [ fhir:v "Infant's mother is HIV-positive" ]
+  ] [
+     fhir:code [ fhir:v "DE143" ] ;
+     fhir:display [ fhir:v "HIV-negative" ] ;
+     fhir:definition [ fhir:v "Infant's mother is HIV-negative" ]
+  ] [
+     fhir:code [ fhir:v "DE144" ] ;
+     fhir:display [ fhir:v "Unknown" ] ;
+     fhir:definition [ fhir:v "Don't know HIV status - client does not know partner's HIV status" ]
+  ] [
+     fhir:code [ fhir:v "DE145" ] ;
+     fhir:display [ fhir:v "Maternal HIV status at first ANC visit" ] ;
+     fhir:definition [ fhir:v "The HIV status of the infant's mother at first ANC visit" ]
+  ] [
+     fhir:code [ fhir:v "DE146" ] ;
+     fhir:display [ fhir:v "HIV-positive" ] ;
+     fhir:definition [ fhir:v "Infant's mother is HIV-positive" ]
+  ] [
+     fhir:code [ fhir:v "DE147" ] ;
+     fhir:display [ fhir:v "HIV-negative" ] ;
+     fhir:definition [ fhir:v "Infant's mother is HIV-negative" ]
+  ] [
+     fhir:code [ fhir:v "DE148" ] ;
+     fhir:display [ fhir:v "Unknown" ] ;
+     fhir:definition [ fhir:v "Don't know HIV status - client does not know partner's HIV status" ]
+  ] [
+     fhir:code [ fhir:v "DE149" ] ;
+     fhir:display [ fhir:v "Maternal syphilis test result" ] ;
+     fhir:definition [ fhir:v "Result from maternal syphilis test" ]
+  ] [
+     fhir:code [ fhir:v "DE150" ] ;
+     fhir:display [ fhir:v "Positive" ] ;
+     fhir:definition [ fhir:v "Test result is positive for syphilis" ]
+  ] [
+     fhir:code [ fhir:v "DE151" ] ;
+     fhir:display [ fhir:v "Negative" ] ;
+     fhir:definition [ fhir:v "Test result is negative for syphilis" ]
+  ] [
+     fhir:code [ fhir:v "DE152" ] ;
+     fhir:display [ fhir:v "Inconclusive" ] ;
+     fhir:definition [ fhir:v "Test result is inconclusive" ]
+  ] [
+     fhir:code [ fhir:v "DE153" ] ;
+     fhir:display [ fhir:v "Hypertension" ] ;
+     fhir:definition [ fhir:v "Whether the client has developed hypertension associated with pregnancy" ]
+  ] [
+     fhir:code [ fhir:v "DE154" ] ;
+     fhir:display [ fhir:v "Pre-eclampsia" ] ;
+     fhir:definition [ fhir:v "Whether the client has pre-eclampsia" ]
+  ] [
+     fhir:code [ fhir:v "DE155" ] ;
+     fhir:display [ fhir:v "Signs of substantial risk of HIV infection" ] ;
+     fhir:definition [ fhir:v "Signs the client is at a substantial risk of HIV infection" ]
+  ] [
+     fhir:code [ fhir:v "DE156" ] ;
+     fhir:display [ fhir:v "No condom use during sex with more than one partner in the past 6 months" ] ;
+     fhir:definition [ fhir:v "Recent vaginal or anal sexual intercourse without a condom with more than one partner" ]
+  ] [
+     fhir:code [ fhir:v "DE157" ] ;
+     fhir:display [ fhir:v "STI in the past 6 months" ] ;
+     fhir:definition [ fhir:v "A recent history (in the last 6 months) of a sexually transmitted infection (STI) by laboratory testing or self-report of syndromic STI treatment" ]
+  ] [
+     fhir:code [ fhir:v "DE158" ] ;
+     fhir:display [ fhir:v "A sexual partner in the past 6 months had one or more HIV risk factors" ] ;
+     fhir:definition [ fhir:v "A recent sex partner of the client had HIV risk factors" ]
+  ] [
+     fhir:code [ fhir:v "DE159" ] ;
+     fhir:display [ fhir:v "PrEP requested by client" ] ;
+     fhir:definition [ fhir:v "Client is requesting PrEP, reflecting a decision-making process has already taken place and suggesting of substantial risk of HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE160" ] ;
+     fhir:display [ fhir:v "Serodiscordant partner" ] ;
+     fhir:definition [ fhir:v "Mother's HIV status is different from a current partner's HIV status" ]
+  ] [
+     fhir:code [ fhir:v "DE161" ] ;
+     fhir:display [ fhir:v "Date woman received counselling for CPT" ] ;
+     fhir:definition [ fhir:v "Date woman received counselling for co-trimoxazole preventive therapy (CPT)" ]
+  ] [
+     fhir:code [ fhir:v "DE162" ] ;
+     fhir:display [ fhir:v "Date woman received counselling for TPT" ] ;
+     fhir:definition [ fhir:v "Date woman received counselling for TB preventive therapy" ]
+  ] [
+     fhir:code [ fhir:v "DE163" ] ;
+     fhir:display [ fhir:v "Infant's co-trimoxazole prophylaxis start date" ] ;
+     fhir:definition [ fhir:v "Start date of co-trimoxazole prophylaxis" ]
+  ] [
+     fhir:code [ fhir:v "DE164" ] ;
+     fhir:display [ fhir:v "Infant's age when co-trimoxazole prophylaxis was started" ] ;
+     fhir:definition [ fhir:v "The number of weeks or months infant was when started on co-trimoxazole (CTX) prophylaxis preventive therapy" ]
+  ] [
+     fhir:code [ fhir:v "DE165" ] ;
+     fhir:display [ fhir:v "Presumptive clinical diagnosis of severe HIV infection in infants" ] ;
+     fhir:definition [ fhir:v "Presumptive clinical diagnosis of severe HIV infection in infants" ]
+  ] [
+     fhir:code [ fhir:v "DE166" ] ;
+     fhir:display [ fhir:v "Infant ARV prophylaxis" ] ;
+     fhir:definition [ fhir:v "Infant is taking an antiretroviral prophylaxis to prevent infection from HIV exposure" ]
+  ] [
+     fhir:code [ fhir:v "DE167" ] ;
+     fhir:display [ fhir:v "Infant ARV prophylaxis start date" ] ;
+     fhir:definition [ fhir:v "The date on which the infant was started on an antiretroviral prophylaxis" ]
+  ] [
+     fhir:code [ fhir:v "DE168" ] ;
+     fhir:display [ fhir:v "HIV test type" ] ;
+     fhir:definition [ fhir:v "Type of HIV test" ]
+  ] [
+     fhir:code [ fhir:v "DE169" ] ;
+     fhir:display [ fhir:v "Rapid diagnostic test for HIV" ] ;
+     fhir:definition [ fhir:v "Antibody test for HIV performed with a rapid diagnostic (RDT)" ]
+  ] [
+     fhir:code [ fhir:v "DE170" ] ;
+     fhir:display [ fhir:v "Enzyme immunoassay for HIV" ] ;
+     fhir:definition [ fhir:v "Antibody test for HIV performed with an enzyme immunoassay (EIA)" ]
+  ] [
+     fhir:code [ fhir:v "DE171" ] ;
+     fhir:display [ fhir:v "Nucleic acid test for HIV" ] ;
+     fhir:definition [ fhir:v "Virological test, which includes testing for early infant diagnosis" ]
+  ] [
+     fhir:code [ fhir:v "DE172" ] ;
+     fhir:display [ fhir:v "Dual HIV/syphilis rapid diagnostic test" ] ;
+     fhir:definition [ fhir:v "Antibody test for HIV and syphilis performed with a rapid diagnostic" ]
+  ] [
+     fhir:code [ fhir:v "DE173" ] ;
+     fhir:display [ fhir:v "Maternal and child health service visit" ] ;
+     fhir:definition [ fhir:v "Maternal and child health service visit attended by an HIV-exposed infant" ]
+  ] [
+     fhir:code [ fhir:v "DE174" ] ;
+     fhir:display [ fhir:v "12-month visit" ] ;
+     fhir:definition [ fhir:v "HIV-exposed infant attending MCH services for a 12-month visit" ]
+  ] [
+     fhir:code [ fhir:v "DE175" ] ;
+     fhir:display [ fhir:v "24-month visit" ] ;
+     fhir:definition [ fhir:v "HIV-exposed infants attending MCH services for a 24-month visit" ]
+  ] [
+     fhir:code [ fhir:v "DE176" ] ;
+     fhir:display [ fhir:v "First visit after the end of breastfeeding" ] ;
+     fhir:definition [ fhir:v "HIV-exposed infant attending MCH services for a first visit after the end of breastfeeding" ]
+  ] [
+     fhir:code [ fhir:v "DE177" ] ;
+     fhir:display [ fhir:v "Weeks postpartum" ] ;
+     fhir:definition [ fhir:v "Number of weeks postpartum on this visit date" ]
+  ] [
+     fhir:code [ fhir:v "DE178" ] ;
+     fhir:display [ fhir:v "Birth cohort" ] ;
+     fhir:definition [ fhir:v "Month and year of infant's birth, which the infant is registered into. The cohort is a group of infants born in the same month, whose status is followed over time." ]
+  ] [
+     fhir:code [ fhir:v "DE179" ] ;
+     fhir:display [ fhir:v "Registered in birth cohort" ] ;
+     fhir:definition [ fhir:v "Whether the infant has been registered in a birth cohort" ]
+  ] [
+     fhir:code [ fhir:v "DE180" ] ;
+     fhir:display [ fhir:v "EID sample number" ] ;
+     fhir:definition [ fhir:v "Early infant diagnosis (EID) sample number" ]
+  ] [
+     fhir:code [ fhir:v "DE181" ] ;
+     fhir:display [ fhir:v "EID sample 1" ] ;
+     fhir:definition [ fhir:v "First sample used to test an infant for HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE182" ] ;
+     fhir:display [ fhir:v "EID sample 2" ] ;
+     fhir:definition [ fhir:v "Second sample used to test an infant for HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE183" ] ;
+     fhir:display [ fhir:v "EID test number" ] ;
+     fhir:definition [ fhir:v "Early infant diagnosis (EID) HIV test number using the same sample" ]
+  ] [
+     fhir:code [ fhir:v "DE184" ] ;
+     fhir:display [ fhir:v "EID test number 1" ] ;
+     fhir:definition [ fhir:v "First test on a sample to test an infant for HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE185" ] ;
+     fhir:display [ fhir:v "EID test number 2" ] ;
+     fhir:definition [ fhir:v "Second test on a sample to test an infant for HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE186" ] ;
+     fhir:display [ fhir:v "EID test number 1 test result" ] ;
+     fhir:definition [ fhir:v "Early infant diagnosis test number 1 test result" ]
+  ] [
+     fhir:code [ fhir:v "DE187" ] ;
+     fhir:display [ fhir:v "Positive" ] ;
+     fhir:definition [ fhir:v "Positive HIV test result from the nucleic acid test" ]
+  ] [
+     fhir:code [ fhir:v "DE188" ] ;
+     fhir:display [ fhir:v "Negative" ] ;
+     fhir:definition [ fhir:v "Negative HIV test result from the nucleic acid test" ]
+  ] [
+     fhir:code [ fhir:v "DE189" ] ;
+     fhir:display [ fhir:v "Indeterminate" ] ;
+     fhir:definition [ fhir:v "Indeterminate HIV test result from the nucleic acid test" ]
+  ] [
+     fhir:code [ fhir:v "DE190" ] ;
+     fhir:display [ fhir:v "EID test number 2 test result" ] ;
+     fhir:definition [ fhir:v "Early infant diagnosis test number 2 test result" ]
+  ] [
+     fhir:code [ fhir:v "DE191" ] ;
+     fhir:display [ fhir:v "Positive" ] ;
+     fhir:definition [ fhir:v "Positive HIV test result from the nucleic acid test" ]
+  ] [
+     fhir:code [ fhir:v "DE192" ] ;
+     fhir:display [ fhir:v "Negative" ] ;
+     fhir:definition [ fhir:v "Negative HIV test result from the nucleic acid test" ]
+  ] [
+     fhir:code [ fhir:v "DE193" ] ;
+     fhir:display [ fhir:v "Indeterminate" ] ;
+     fhir:definition [ fhir:v "Indeterminate HIV test result from the nucleic acid test" ]
+  ] [
+     fhir:code [ fhir:v "DE194" ] ;
+     fhir:display [ fhir:v "Assay number in testing strategy" ] ;
+     fhir:definition [ fhir:v "The number of the assay (test kit) in the HIV testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE195" ] ;
+     fhir:display [ fhir:v "Assay 0" ] ;
+     fhir:definition [ fhir:v "A community outreach test-for-triage or self-test which is not included in the HIV testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE196" ] ;
+     fhir:display [ fhir:v "Assay 1" ] ;
+     fhir:definition [ fhir:v "The first test in the HIV testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE197" ] ;
+     fhir:display [ fhir:v "Assay 2" ] ;
+     fhir:definition [ fhir:v "The second test in the HIV testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE198" ] ;
+     fhir:display [ fhir:v "Assay 3" ] ;
+     fhir:definition [ fhir:v "The third test in the HIV testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE199" ] ;
+     fhir:display [ fhir:v "Assay 1 repeated" ] ;
+     fhir:definition [ fhir:v "The first test in the HIV testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE200" ] ;
+     fhir:display [ fhir:v "Test result of HIV assay 1" ] ;
+     fhir:definition [ fhir:v "The result of the first HIV assay in the testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE201" ] ;
+     fhir:display [ fhir:v "Reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE202" ] ;
+     fhir:display [ fhir:v "Non-reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was non-reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE203" ] ;
+     fhir:display [ fhir:v "Invalid" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was invalid" ]
+  ] [
+     fhir:code [ fhir:v "DE204" ] ;
+     fhir:display [ fhir:v "Test result of HIV assay 2" ] ;
+     fhir:definition [ fhir:v "The result of the second HIV assay in the testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE205" ] ;
+     fhir:display [ fhir:v "Reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE206" ] ;
+     fhir:display [ fhir:v "Non-reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was non-reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE207" ] ;
+     fhir:display [ fhir:v "Invalid" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was invalid" ]
+  ] [
+     fhir:code [ fhir:v "DE208" ] ;
+     fhir:display [ fhir:v "Test result of HIV assay 3" ] ;
+     fhir:definition [ fhir:v "The result of the third HIV assay in the testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE209" ] ;
+     fhir:display [ fhir:v "Reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE210" ] ;
+     fhir:display [ fhir:v "Non-reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was non-reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE211" ] ;
+     fhir:display [ fhir:v "Invalid" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was invalid" ]
+  ] [
+     fhir:code [ fhir:v "DE212" ] ;
+     fhir:display [ fhir:v "Test result of HIV assay 1 repeated" ] ;
+     fhir:definition [ fhir:v "The result of the repeated first HIV assay in the testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE213" ] ;
+     fhir:display [ fhir:v "Reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE214" ] ;
+     fhir:display [ fhir:v "Non-reactive" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was non-reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE215" ] ;
+     fhir:display [ fhir:v "Invalid" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was invalid" ]
+  ] [
+     fhir:code [ fhir:v "DE216" ] ;
+     fhir:display [ fhir:v "Test result of syphilis assay 1" ] ;
+     fhir:definition [ fhir:v "The result of the first syphilis assay in the testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE217" ] ;
+     fhir:display [ fhir:v "Reactive" ] ;
+     fhir:definition [ fhir:v "The result of the first syphilis assay in the testing strategy was reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE218" ] ;
+     fhir:display [ fhir:v "Non-reactive" ] ;
+     fhir:definition [ fhir:v "The result of the first syphilis assay in the testing strategy was non-reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE219" ] ;
+     fhir:display [ fhir:v "Invalid" ] ;
+     fhir:definition [ fhir:v "The result of the HIV assay in the testing strategy was invalid" ]
+  ] [
+     fhir:code [ fhir:v "DE220" ] ;
+     fhir:display [ fhir:v "Test result of syphilis assay 1 repeated" ] ;
+     fhir:definition [ fhir:v "The result of the first syphilis assay repeated in the testing strategy" ]
+  ] [
+     fhir:code [ fhir:v "DE221" ] ;
+     fhir:display [ fhir:v "Reactive" ] ;
+     fhir:definition [ fhir:v "The result of the first syphilis assay repeated in the testing strategy was reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE222" ] ;
+     fhir:display [ fhir:v "Non-reactive" ] ;
+     fhir:definition [ fhir:v "The result of the first syphilis assay repeated in the testing strategy was non-reactive" ]
+  ] [
+     fhir:code [ fhir:v "DE223" ] ;
+     fhir:display [ fhir:v "Invalid" ] ;
+     fhir:definition [ fhir:v "The result of the first syphilis assay repeated in the testing strategy was invalid" ]
+  ] [
+     fhir:code [ fhir:v "DE224" ] ;
+     fhir:display [ fhir:v "HIV test date" ] ;
+     fhir:definition [ fhir:v "Date of the HIV test" ]
+  ] [
+     fhir:code [ fhir:v "DE225" ] ;
+     fhir:display [ fhir:v "Infant HIV status" ] ;
+     fhir:definition [ fhir:v "HIV status reported after applying the HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis." ]
+  ] [
+     fhir:code [ fhir:v "DE226" ] ;
+     fhir:display [ fhir:v "HIV-positive" ] ;
+     fhir:definition [ fhir:v "Infant is HIV-positive" ]
+  ] [
+     fhir:code [ fhir:v "DE227" ] ;
+     fhir:display [ fhir:v "HIV-negative" ] ;
+     fhir:definition [ fhir:v "Infant is HIV-negative" ]
+  ] [
+     fhir:code [ fhir:v "DE228" ] ;
+     fhir:display [ fhir:v "Unknown" ] ;
+     fhir:definition [ fhir:v "Infant has unknown HIV status" ]
+  ] [
+     fhir:code [ fhir:v "DE229" ] ;
+     fhir:display [ fhir:v "Infant ART start date" ] ;
+     fhir:definition [ fhir:v "The date on which the infant was started or restarted on antiretroviral therapy (ART)" ]
+  ] [
+     fhir:code [ fhir:v "DE230" ] ;
+     fhir:display [ fhir:v "Final diagnosis of HIV-exposed infant" ] ;
+     fhir:definition [ fhir:v "HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later)." ]
+  ] [
+     fhir:code [ fhir:v "DE231" ] ;
+     fhir:display [ fhir:v "HIV-positive" ] ;
+     fhir:definition [ fhir:v "The infant is HIV-positive" ]
+  ] [
+     fhir:code [ fhir:v "DE232" ] ;
+     fhir:display [ fhir:v "HIV-negative and no longer breastfeeding" ] ;
+     fhir:definition [ fhir:v "The infant is HIV-negative and the mother has quit breastfeeding" ]
+  ] [
+     fhir:code [ fhir:v "DE233" ] ;
+     fhir:display [ fhir:v "HIV status unknown" ] ;
+     fhir:definition [ fhir:v "The final HIV status of the child is unknown because the infant died, was lost to follow-up or transferred out without ever having an HIV-positive diagnosis or is active in care but was not tested at 18 months" ]
+  ] [
+     fhir:code [ fhir:v "DE234" ] ;
+     fhir:display [ fhir:v "HIV-exposed infant reason for unknown final status" ] ;
+     fhir:definition [ fhir:v "The outcome for the infant does not have a final outcome, which may because of death, stopped treatment or lost to follow-up." ]
+  ] [
+     fhir:code [ fhir:v "DE235" ] ;
+     fhir:display [ fhir:v "Lost to follow-up" ] ;
+     fhir:definition [ fhir:v "Twenty-eight days or more since last missed appointment" ]
+  ] [
+     fhir:code [ fhir:v "DE236" ] ;
+     fhir:display [ fhir:v "Transferred out" ] ;
+     fhir:definition [ fhir:v "The client transferred to another facility" ]
+  ] [
+     fhir:code [ fhir:v "DE237" ] ;
+     fhir:display [ fhir:v "Death (documented)" ] ;
+     fhir:definition [ fhir:v "People living with HIV previously on ART who are confirmed to have died from any cause" ]
+  ] [
+     fhir:code [ fhir:v "DE238" ] ;
+     fhir:display [ fhir:v "Refused (stopped) treatment" ] ;
+     fhir:definition [ fhir:v "Client was contacted and confirmed to have stopped ART" ]
+  ] [
+     fhir:code [ fhir:v "DE239" ] ;
+     fhir:display [ fhir:v "Date of death of infant" ] ;
+     fhir:definition [ fhir:v "Date that the infant died" ]
+  ] [
+     fhir:code [ fhir:v "DE240" ] ;
+     fhir:display [ fhir:v "Cause of death of infant" ] ;
+     fhir:definition [ fhir:v "The infant's cause of death" ]
+  ] [
+     fhir:code [ fhir:v "DE241" ] ;
+     fhir:display [ fhir:v "Infant died within 24 hours of childbirth" ] ;
+     fhir:definition [ fhir:v "The infant died within 24 hours of childbirth" ]
+  ] [
+     fhir:code [ fhir:v "DE242" ] ;
+     fhir:display [ fhir:v "Action(s) needed during infant follow-up visit" ] ;
+     fhir:definition [ fhir:v "Any actions needed during infant follow-up visit" ]
+  ] [
+     fhir:code [ fhir:v "DE243" ] ;
+     fhir:display [ fhir:v "Timing of additional infant HIV test" ] ;
+     fhir:definition [ fhir:v "Age in months when additional infant HIV test is performed" ]
+  ] [
+     fhir:code [ fhir:v "DE244" ] ;
+     fhir:display [ fhir:v "Date of sample collection of additional infant HIV test" ] ;
+     fhir:definition [ fhir:v "Date of sample collection of additional infant HIV test" ]
+  ] [
+     fhir:code [ fhir:v "DE245" ] ;
+     fhir:display [ fhir:v "Haemoglobin (Hb) result" ] ;
+     fhir:definition [ fhir:v "Result of woman's haemoglobin test during ANC, labour or delivery. Full blood count testing is recommended, and if not available, use of  haemoglobinometer over haemoglobin colour scale. " ]
+  ] [
+     fhir:code [ fhir:v "DE246" ] ;
+     fhir:display [ fhir:v "Blood group and Rh factor" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor" ]
+  ] [
+     fhir:code [ fhir:v "DE247" ] ;
+     fhir:display [ fhir:v "A+" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is A+" ]
+  ] [
+     fhir:code [ fhir:v "DE248" ] ;
+     fhir:display [ fhir:v "A-" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is A-" ]
+  ] [
+     fhir:code [ fhir:v "DE249" ] ;
+     fhir:display [ fhir:v "B+" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is B+" ]
+  ] [
+     fhir:code [ fhir:v "DE250" ] ;
+     fhir:display [ fhir:v "B-" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is B-" ]
+  ] [
+     fhir:code [ fhir:v "DE251" ] ;
+     fhir:display [ fhir:v "O+" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is O+" ]
+  ] [
+     fhir:code [ fhir:v "DE252" ] ;
+     fhir:display [ fhir:v "O-" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is O-" ]
+  ] [
+     fhir:code [ fhir:v "DE253" ] ;
+     fhir:display [ fhir:v "AB+" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is AB+" ]
+  ] [
+     fhir:code [ fhir:v "DE254" ] ;
+     fhir:display [ fhir:v "AB-" ] ;
+     fhir:definition [ fhir:v "Mother's blood type and blood Rh factor is AB-" ]
+  ] [
+     fhir:code [ fhir:v "DE255" ] ;
+     fhir:display [ fhir:v "Asymptomatic bacteriuria (ASB) test result" ] ;
+     fhir:definition [ fhir:v "Result of urine culture (or urine Gram-staining if not available over dipstick tests) for diagnosing asymptomatic bacteriuria" ]
+  ] [
+     fhir:code [ fhir:v "DE256" ] ;
+     fhir:display [ fhir:v "Positive" ] ;
+     fhir:definition [ fhir:v "Result of test for asymptomatic bacteriuria is positive" ]
+  ] [
+     fhir:code [ fhir:v "DE257" ] ;
+     fhir:display [ fhir:v "Negative" ] ;
+     fhir:definition [ fhir:v "Result of test for asymptomatic bacteriuria is negative" ]
+  ] [
+     fhir:code [ fhir:v "DE258" ] ;
+     fhir:display [ fhir:v "Unknown" ] ;
+     fhir:definition [ fhir:v "Result of test for asymptomatic bacteriuria is unknown" ]
+  ] [
+     fhir:code [ fhir:v "DE259" ] ;
+     fhir:display [ fhir:v "Urine protein test result" ] ;
+     fhir:definition [ fhir:v "Results of urine protein test of mother during ANC visit" ]
+  ] [
+     fhir:code [ fhir:v "DE260" ] ;
+     fhir:display [ fhir:v "0" ] ;
+     fhir:definition [ fhir:v "Result of urine protein test of mother during ANC visit is '0'" ]
+  ] [
+     fhir:code [ fhir:v "DE261" ] ;
+     fhir:display [ fhir:v "+" ] ;
+     fhir:definition [ fhir:v "Result of urine protein test of mother during ANC visit is '+'" ]
+  ] [
+     fhir:code [ fhir:v "DE262" ] ;
+     fhir:display [ fhir:v "++" ] ;
+     fhir:definition [ fhir:v "Result of urine protein test of mother during ANC visit is '++'" ]
+  ] [
+     fhir:code [ fhir:v "DE263" ] ;
+     fhir:display [ fhir:v "+++" ] ;
+     fhir:definition [ fhir:v "Result of urine protein test of mother during ANC visit is '+++'" ]
+  ] [
+     fhir:code [ fhir:v "DE264" ] ;
+     fhir:display [ fhir:v "Type of hypertensive disorder" ] ;
+     fhir:definition [ fhir:v "Type of hypertensive disorder of the mother" ]
+  ] [
+     fhir:code [ fhir:v "DE265" ] ;
+     fhir:display [ fhir:v "Chronic hypertension" ] ;
+     fhir:definition [ fhir:v "Hypertension detected pre-pregnancy or before 20 weeks' gestation" ]
+  ] [
+     fhir:code [ fhir:v "DE266" ] ;
+     fhir:display [ fhir:v "Essential" ] ;
+     fhir:definition [ fhir:v "Hypertension without a known secondary cause (pre-pregnancy or at less than 20 weeks)" ]
+  ] [
+     fhir:code [ fhir:v "DE267" ] ;
+     fhir:display [ fhir:v "Secondary" ] ;
+     fhir:definition [ fhir:v "Hypertension with a known secondary cause (e.g. renal disease; detected pre-pregnancy or at less than 20 weeks)" ]
+  ] [
+     fhir:code [ fhir:v "DE268" ] ;
+     fhir:display [ fhir:v "White-coat hypertension" ] ;
+     fhir:definition [ fhir:v "sBP greater than or equal to 140 and/or dBP greater than or equal to 90 mmHg when measured in the office or clinic, and BP less than 135/85 mmHg using HBPM or ABPM readings (pre-pregnancy or at less than 20 weeks)" ]
+  ] [
+     fhir:code [ fhir:v "DE269" ] ;
+     fhir:display [ fhir:v "Masked hypertension" ] ;
+     fhir:definition [ fhir:v "BP that is less than 140/90 mmHg at a clinic/office visit, but greater then or equal to 135/85 mmHg at other times outside the clinic/ office (pre-pregnancy or at less than 20 weeks)" ]
+  ] [
+     fhir:code [ fhir:v "DE270" ] ;
+     fhir:display [ fhir:v "Gestational hypertension" ] ;
+     fhir:definition [ fhir:v "Hypertension arising de novo at greater than or equal to 20 weeks' gestation in the absence of proteinuria or other findings suggestive of pre-eclampsia" ]
+  ] [
+     fhir:code [ fhir:v "DE271" ] ;
+     fhir:display [ fhir:v "Transient gestational hypertension" ] ;
+     fhir:definition [ fhir:v "Hypertension arising at greater than or equal to 20 weeks' gestation in the clinic, which resolves with repeated BP readings" ]
+  ] [
+     fhir:code [ fhir:v "DE272" ] ;
+     fhir:display [ fhir:v "Pre-eclampsia" ] ;
+     fhir:definition [ fhir:v "Pre-eclampsia" ]
+  ] [
+     fhir:code [ fhir:v "DE273" ] ;
+     fhir:display [ fhir:v "Superimposed on chronic hypertension" ] ;
+     fhir:definition [ fhir:v "Among women with chronic hypertension, development of new proteinuria, another maternal organ dysfunction(s), or evidence of uteroplacental dysfunction." ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

@@ -1,0 +1,1819 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://worldhealthorganization.github.io/smart-hiv/StructureDefinition/HIVA> a fhir:StructureDefinition ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "HIVA"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;\"><tr style=\"border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top\"><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"The logical name of the element\">Name</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Information about the use of the element\">Flags</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Minimum and Maximum # of times the the element can appear in the instance\">Card.</a></th><th style=\"width: 100px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Reference to the type of the element\">Type</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Additional information about the element\">Description &amp; Constraints</a><span style=\"float: right\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Legend for this format\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3goXBCwdPqAP0wAAAldJREFUOMuNk0tIlFEYhp9z/vE2jHkhxXA0zJCMitrUQlq4lnSltEqCFhFG2MJFhIvIFpkEWaTQqjaWZRkp0g26URZkTpbaaOJkDqk10szoODP//7XIMUe0elcfnPd9zsfLOYplGrpRwZaqTtw3K7PtGem7Q6FoidbGgqHVy/HRb669R+56zx7eRV1L31JGxYbBtjKK93cxeqfyQHbehkZbUkK20goELEuIzEd+dHS+qz/Y8PTSif0FnGkbiwcAjHaU1+QWOptFiyCLp/LnKptpqIuXHx6rbR26kJcBX3yLgBfnd7CxwJmflpP2wUg0HIAoUUpZBmKzELGWcN8nAr6Gpu7tLU/CkwAaoKTWRSQyt89Q8w6J+oVQkKnBoblH7V0PPvUOvDYXfopE/SJmALsxnVm6LbkotrUtNowMeIrVrBcBpaMmdS0j9df7abpSuy7HWehwJdt1lhVwi/J58U5beXGAF6c3UXLycw1wdFklArBn87xdh0ZsZtArghBdAA3+OEDVubG4UEzP6x1FOWneHh2VDAHBAt80IbdXDcesNoCvs3E5AFyNSU5nbrDPZpcUEQQTFZiEVx+51fxMhhyJEAgvlriadIJZZksRuwBYMOPBbO3hePVVqgEJhFeUuFLhIPkRP6BQLIBrmMenujm/3g4zc398awIe90Zb5A1vREALqneMcYgP/xVQWlG+Ncu5vgwwlaUNx+3799rfe96u9K0JSDXcOzOTJg4B6IgmXfsygc7/Bvg9g9E58/cDVmGIBOP/zT8Bz1zqWqpbXIsd0O9hajXfL6u4BaOS6SeWAAAAAElFTkSuQmCC\" alt=\"doco\" style=\"background-color: inherit\"/></a></span></th></tr><tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck1.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_element.gif\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Element\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA\" title=\"Logical Model for HIV.A Registration data elements.\">HIVA</a><a name=\"HIVA\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"opacity: 0.5\">0</span><span style=\"opacity: 0.5\">..</span><span style=\"opacity: 0.5\">*</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://build.fhir.org/types.html#Base\">Base</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">HIV.A Registration Logical Model<br/><span style=\"font-weight:bold\">Instances of this logical model are not marked to be the target of a Reference</span></td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.firstName\" title=\"Clients first or given name\">firstName</a><a name=\"HIVA.firstName\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">First name</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.familyName\" title=\"Clients family name or last name\">familyName</a><a name=\"HIVA.familyName\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Family name</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.visitDate\" title=\"The date and time of the clients visit\">visitDate</a><a name=\"HIVA.visitDate\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Visit date</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.referral\" title=\"If client was referred for care\">referral</a><a name=\"HIVA.referral\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Referral</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.referredBy\" title=\"How the client was referred\">referredBy</a><a name=\"HIVA.referredBy\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Referred by</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.community\" title=\"Referred by the community level services\">community</a><a name=\"HIVA.community\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Community</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.facility\" title=\"Referred by the health facility\">facility</a><a name=\"HIVA.facility\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Facility</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.uniqueIdentifier\" title=\"Unique identifier generated for new clients or a universal ID, if used in the country\">uniqueIdentifier</a><a name=\"HIVA.uniqueIdentifier\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Unique identifier</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.nationalId\" title=\"National unique identifier assigned to the client, if used in the country\">nationalId</a><a name=\"HIVA.nationalId\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">National ID</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.nationalHealthId\" title=\"National health unique identifier assigned to the client, if used in the country\">nationalHealthId</a><a name=\"HIVA.nationalHealthId\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">National health ID</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.nationalProgrammeId\" title=\"National programme unique identifier assigned to the client, if used in the country\">nationalProgrammeId</a><a name=\"HIVA.nationalProgrammeId\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">National programme ID</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.nationalHealthInsuranceId\" title=\"National health insurance unique identifier assigned to the client, if used in the country\">nationalHealthInsuranceId</a><a name=\"HIVA.nationalHealthInsuranceId\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">National health insurance ID</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.countryOfBirth\" title=\"Country where the client was born\">countryOfBirth</a><a name=\"HIVA.countryOfBirth\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Country of birth</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.dateOfBirth\" title=\"The clients date of birth (DOB) if known\">dateOfBirth</a><a name=\"HIVA.dateOfBirth\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date of birth</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.dateOfBirthUnknown\" title=\"Is the clients DOB is unknown?\">dateOfBirthUnknown</a><a name=\"HIVA.dateOfBirthUnknown\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date of birth unknown</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.estimatedAge\" title=\"If DOB is unknown, enter the clients estimated age. Display clients age in number of years.\">estimatedAge</a><a name=\"HIVA.estimatedAge\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Estimated age</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.age\" title=\"Calculated age (number of years) of the client based on date of birth\">age</a><a name=\"HIVA.age\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Age</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.gender\" title=\"Gender of the client*\">gender</a><a name=\"HIVA.gender\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Gender*</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.genderFemale\" title=\"Client identifies as female\">genderFemale</a><a name=\"HIVA.genderFemale\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Female</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.genderMale\" title=\"Client identifies as male\">genderMale</a><a name=\"HIVA.genderMale\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Male</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.genderTransgenderMale\" title=\"Client identifies as transgender male\">genderTransgenderMale</a><a name=\"HIVA.genderTransgenderMale\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Transgender male</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.genderTransgenderFemale\" title=\"Client identifies as transgender female\">genderTransgenderFemale</a><a name=\"HIVA.genderTransgenderFemale\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Transgender female</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.genderOther\" title=\"Additional category\">genderOther</a><a name=\"HIVA.genderOther\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Other</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.genderOtherSpecify\" title=\"Additional category (please specify)\">genderOtherSpecify</a><a name=\"HIVA.genderOtherSpecify\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Other (specify)</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.sex\" title=\"Sex of the client assigned at birth\">sex</a><a name=\"HIVA.sex\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Sex</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.sexFemale\" title=\"Client identifies as female\">sexFemale</a><a name=\"HIVA.sexFemale\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Female</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.sexMale\" title=\"Client identifies as male\">sexMale</a><a name=\"HIVA.sexMale\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Male</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.sexOther\" title=\"Client identifies in non-binary way or as a sexual and gender minority (or minorities)\">sexOther</a><a name=\"HIVA.sexOther\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Other</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.address\" title=\"Clients home address or address which the client is consenting to disclose\">address</a><a name=\"HIVA.address\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Address</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.maritalStatus\" title=\"Clients current marital status \">maritalStatus</a><a name=\"HIVA.maritalStatus\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Marital Status</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.unmarried\" title=\"Client does not have an active marriage contract\">unmarried</a><a name=\"HIVA.unmarried\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Unmarried</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.neverMarried\" title=\"Client has never entered into a marriage contract\">neverMarried</a><a name=\"HIVA.neverMarried\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Never married</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.married\" title=\"A current marriage contract is active\">married</a><a name=\"HIVA.married\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Married</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.polygamous\" title=\"Client is in a polygamous union\">polygamous</a><a name=\"HIVA.polygamous\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Polygamous</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.divorced\" title=\"Client is divorced, whereby marriage contract has been declared dissolved and inactive\">divorced</a><a name=\"HIVA.divorced\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Divorced </td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.widowed\" title=\"Clients spouse has died\">widowed</a><a name=\"HIVA.widowed\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Widowed</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.unknown\" title=\"Client does not wish to disclose marital status\">unknown</a><a name=\"HIVA.unknown\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Unknown</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.domesticPartner\" title=\"Client reports that they are in a domestic partnership\">domesticPartner</a><a name=\"HIVA.domesticPartner\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Domestic partner</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.annulled\" title=\"Clients marriage contract has been declared null and to have not existed\">annulled</a><a name=\"HIVA.annulled\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Annulled</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.legallySeparated\" title=\"Client is legally separated from their spouse\">legallySeparated</a><a name=\"HIVA.legallySeparated\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Legally separated</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.interlocutory\" title=\"Client is subject to an interlocutory decree\">interlocutory</a><a name=\"HIVA.interlocutory\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Interlocutory</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.telephoneNumber\" title=\"Clients telephone number (a landline or a mobile phone number)\">telephoneNumber</a><a name=\"HIVA.telephoneNumber\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Telephone number</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.administrativeArea\" title=\"This should be a context-specific list of administrative areas, such as villages, districts, etc. The purpose of this data element is to allow for grouping and flagging of client data to a particular facilitys catchment area. This can be input into the system by the end user OR it can be automated in the database based on the end users attributes.\">administrativeArea</a><a name=\"HIVA.administrativeArea\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">[Administrative Area]</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.communicationConsent\" title=\"Indication that client gave consent to be contacted\">communicationConsent</a><a name=\"HIVA.communicationConsent\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Communication consent</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.reminderMessages\" title=\"Whether client wants to receive text or other messages as follow-up for HIV services\">reminderMessages</a><a name=\"HIVA.reminderMessages\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Reminder messages</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.communicationPreferenceS\" title=\"How the client would like to receive family planning communications\">communicationPreferenceS</a><a name=\"HIVA.communicationPreferenceS\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Communication preference(s)</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.textMessageSms\" title=\"The client would like to receive communications via Text message/SMS\">textMessageSms</a><a name=\"HIVA.textMessageSms\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Text message/SMS</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.voiceCall\" title=\"Client would like to receive communications via voice call\">voiceCall</a><a name=\"HIVA.voiceCall\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Voice call</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.clientsEmail\" title=\"Clients primary email account where the client can be contacted\">clientsEmail</a><a name=\"HIVA.clientsEmail\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Clients email</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.alternateContactsName\" title=\"Name of an alternate contact, which could be next of kin (e.g. partner, husband, mother, sibling, etc.). The alternate contact would be used in the case of an emergency situation.\">alternateContactsName</a><a name=\"HIVA.alternateContactsName\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Alternate contacts name</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.alternateContactsPhoneNumber\" title=\"Phone number of the alternate contact\">alternateContactsPhoneNumber</a><a name=\"HIVA.alternateContactsPhoneNumber\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Alternate contacts phone number</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.alternateContactsAddress\" title=\"Alternate contacts home address or address which the client is consenting to disclose\">alternateContactsAddress</a><a name=\"HIVA.alternateContactsAddress\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Alternate contacts address</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck00.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin_end.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVA-definitions.html#HIVA.alternateContactRelationship\" title=\"The alternate contacts relationship to the client (e.g. partner, husband, mother, sibling, etc.)\">alternateContactRelationship</a><a name=\"HIVA.alternateContactRelationship\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Alternate contact relationship</td></tr>\r\n<tr><td colspan=\"5\" class=\"hierarchy\"><br/><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Legend for this format\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3goXBCwdPqAP0wAAAldJREFUOMuNk0tIlFEYhp9z/vE2jHkhxXA0zJCMitrUQlq4lnSltEqCFhFG2MJFhIvIFpkEWaTQqjaWZRkp0g26URZkTpbaaOJkDqk10szoODP//7XIMUe0elcfnPd9zsfLOYplGrpRwZaqTtw3K7PtGem7Q6FoidbGgqHVy/HRb669R+56zx7eRV1L31JGxYbBtjKK93cxeqfyQHbehkZbUkK20goELEuIzEd+dHS+qz/Y8PTSif0FnGkbiwcAjHaU1+QWOptFiyCLp/LnKptpqIuXHx6rbR26kJcBX3yLgBfnd7CxwJmflpP2wUg0HIAoUUpZBmKzELGWcN8nAr6Gpu7tLU/CkwAaoKTWRSQyt89Q8w6J+oVQkKnBoblH7V0PPvUOvDYXfopE/SJmALsxnVm6LbkotrUtNowMeIrVrBcBpaMmdS0j9df7abpSuy7HWehwJdt1lhVwi/J58U5beXGAF6c3UXLycw1wdFklArBn87xdh0ZsZtArghBdAA3+OEDVubG4UEzP6x1FOWneHh2VDAHBAt80IbdXDcesNoCvs3E5AFyNSU5nbrDPZpcUEQQTFZiEVx+51fxMhhyJEAgvlriadIJZZksRuwBYMOPBbO3hePVVqgEJhFeUuFLhIPkRP6BQLIBrmMenujm/3g4zc398awIe90Zb5A1vREALqneMcYgP/xVQWlG+Ncu5vgwwlaUNx+3799rfe96u9K0JSDXcOzOTJg4B6IgmXfsygc7/Bvg9g9E58/cDVmGIBOP/zT8Bz1zqWqpbXIsd0O9hajXfL6u4BaOS6SeWAAAAAElFTkSuQmCC\" alt=\"doco\" style=\"background-color: inherit\"/> Documentation for this format</a></td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/StructureDefinition/HIVA"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "HIVA"] ; # 
+  fhir:title [ fhir:v "HIV.A Registration Logical Model"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2023-12-11T00:15:06+00:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "WHO"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "WHO" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "http://who.int" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Logical Model for HIV.A Registration data elements."] ; # 
+  fhir:fhirVersion [ fhir:v "4.3.0"] ; # 
+  fhir:mapping ( [
+     fhir:identity [ fhir:v "rim" ] ;
+     fhir:uri [ fhir:v "http://hl7.org/v3"^^xsd:anyURI ] ;
+     fhir:name [ fhir:v "RIM Mapping" ]
+  ] ) ; # 
+  fhir:kind [ fhir:v "logical"] ; # 
+  fhir:abstract [ fhir:v "false"^^xsd:boolean] ; # 
+  fhir:type [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/StructureDefinition/HIVA"^^xsd:anyURI] ; # 
+  fhir:baseDefinition [
+     fhir:v "http://hl7.org/fhir/StructureDefinition/Base"^^xsd:anyURI ;
+     fhir:link <http://hl7.org/fhir/StructureDefinition/Base>
+  ] ; # 
+  fhir:derivation [ fhir:v "specialization"] ; # 
+  fhir:snapshot [
+     fhir:element ( [
+       fhir:id [ fhir:v "HIVA" ] ;
+       fhir:path [ fhir:v "HIVA" ] ;
+       fhir:short [ fhir:v "HIV.A Registration Logical Model" ] ;
+       fhir:definition [ fhir:v "Logical Model for HIV.A Registration data elements." ] ;
+       fhir:min [ fhir:v "0"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "*" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "Base" ] ;
+         fhir:min [ fhir:v "0"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "*" ]
+       ] ;
+       fhir:isModifier [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:id [ fhir:v "HIVA.firstName" ] ;
+       fhir:path [ fhir:v "HIVA.firstName" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE1" ]
+       ] ) ;
+       fhir:short [ fhir:v "First name" ] ;
+       fhir:definition [ fhir:v "Clients first or given name" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.firstName" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.familyName" ] ;
+       fhir:path [ fhir:v "HIVA.familyName" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE2" ]
+       ] ) ;
+       fhir:short [ fhir:v "Family name" ] ;
+       fhir:definition [ fhir:v "Clients family name or last name" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.familyName" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.visitDate" ] ;
+       fhir:path [ fhir:v "HIVA.visitDate" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE3" ]
+       ] ) ;
+       fhir:short [ fhir:v "Visit date" ] ;
+       fhir:definition [ fhir:v "The date and time of the clients visit" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.visitDate" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.referral" ] ;
+       fhir:path [ fhir:v "HIVA.referral" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE4" ]
+       ] ) ;
+       fhir:short [ fhir:v "Referral" ] ;
+       fhir:definition [ fhir:v "If client was referred for care" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.referral" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.referredBy" ] ;
+       fhir:path [ fhir:v "HIVA.referredBy" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE5" ]
+       ] ) ;
+       fhir:short [ fhir:v "Referred by" ] ;
+       fhir:definition [ fhir:v "How the client was referred" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.referredBy" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.community" ] ;
+       fhir:path [ fhir:v "HIVA.community" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE6" ]
+       ] ) ;
+       fhir:short [ fhir:v "Community" ] ;
+       fhir:definition [ fhir:v "Referred by the community level services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.community" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.facility" ] ;
+       fhir:path [ fhir:v "HIVA.facility" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE7" ]
+       ] ) ;
+       fhir:short [ fhir:v "Facility" ] ;
+       fhir:definition [ fhir:v "Referred by the health facility" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.facility" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.uniqueIdentifier" ] ;
+       fhir:path [ fhir:v "HIVA.uniqueIdentifier" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE8" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unique identifier" ] ;
+       fhir:definition [ fhir:v "Unique identifier generated for new clients or a universal ID, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.uniqueIdentifier" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE9" ]
+       ] ) ;
+       fhir:short [ fhir:v "National ID" ] ;
+       fhir:definition [ fhir:v "National unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.nationalId" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalHealthId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalHealthId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE10" ]
+       ] ) ;
+       fhir:short [ fhir:v "National health ID" ] ;
+       fhir:definition [ fhir:v "National health unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.nationalHealthId" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalProgrammeId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalProgrammeId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE11" ]
+       ] ) ;
+       fhir:short [ fhir:v "National programme ID" ] ;
+       fhir:definition [ fhir:v "National programme unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.nationalProgrammeId" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalHealthInsuranceId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalHealthInsuranceId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE12" ]
+       ] ) ;
+       fhir:short [ fhir:v "National health insurance ID" ] ;
+       fhir:definition [ fhir:v "National health insurance unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.nationalHealthInsuranceId" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.countryOfBirth" ] ;
+       fhir:path [ fhir:v "HIVA.countryOfBirth" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE13" ]
+       ] ) ;
+       fhir:short [ fhir:v "Country of birth" ] ;
+       fhir:definition [ fhir:v "Country where the client was born" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.countryOfBirth" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.dateOfBirth" ] ;
+       fhir:path [ fhir:v "HIVA.dateOfBirth" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE14" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date of birth" ] ;
+       fhir:definition [ fhir:v "The clients date of birth (DOB) if known" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.dateOfBirth" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.dateOfBirthUnknown" ] ;
+       fhir:path [ fhir:v "HIVA.dateOfBirthUnknown" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE15" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date of birth unknown" ] ;
+       fhir:definition [ fhir:v "Is the clients DOB is unknown?" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.dateOfBirthUnknown" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.estimatedAge" ] ;
+       fhir:path [ fhir:v "HIVA.estimatedAge" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE16" ]
+       ] ) ;
+       fhir:short [ fhir:v "Estimated age" ] ;
+       fhir:definition [ fhir:v "If DOB is unknown, enter the clients estimated age. Display clients age in number of years." ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.estimatedAge" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.age" ] ;
+       fhir:path [ fhir:v "HIVA.age" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE17" ]
+       ] ) ;
+       fhir:short [ fhir:v "Age" ] ;
+       fhir:definition [ fhir:v "Calculated age (number of years) of the client based on date of birth" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.age" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.gender" ] ;
+       fhir:path [ fhir:v "HIVA.gender" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE18" ]
+       ] ) ;
+       fhir:short [ fhir:v "Gender*" ] ;
+       fhir:definition [ fhir:v "Gender of the client*" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.gender" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderFemale" ] ;
+       fhir:path [ fhir:v "HIVA.genderFemale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE19" ]
+       ] ) ;
+       fhir:short [ fhir:v "Female" ] ;
+       fhir:definition [ fhir:v "Client identifies as female" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.genderFemale" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderMale" ] ;
+       fhir:path [ fhir:v "HIVA.genderMale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE20" ]
+       ] ) ;
+       fhir:short [ fhir:v "Male" ] ;
+       fhir:definition [ fhir:v "Client identifies as male" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.genderMale" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderTransgenderMale" ] ;
+       fhir:path [ fhir:v "HIVA.genderTransgenderMale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE21" ]
+       ] ) ;
+       fhir:short [ fhir:v "Transgender male" ] ;
+       fhir:definition [ fhir:v "Client identifies as transgender male" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.genderTransgenderMale" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderTransgenderFemale" ] ;
+       fhir:path [ fhir:v "HIVA.genderTransgenderFemale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE22" ]
+       ] ) ;
+       fhir:short [ fhir:v "Transgender female" ] ;
+       fhir:definition [ fhir:v "Client identifies as transgender female" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.genderTransgenderFemale" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderOther" ] ;
+       fhir:path [ fhir:v "HIVA.genderOther" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE23" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other" ] ;
+       fhir:definition [ fhir:v "Additional category" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.genderOther" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderOtherSpecify" ] ;
+       fhir:path [ fhir:v "HIVA.genderOtherSpecify" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE24" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other (specify)" ] ;
+       fhir:definition [ fhir:v "Additional category (please specify)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.genderOtherSpecify" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sex" ] ;
+       fhir:path [ fhir:v "HIVA.sex" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE25" ]
+       ] ) ;
+       fhir:short [ fhir:v "Sex" ] ;
+       fhir:definition [ fhir:v "Sex of the client assigned at birth" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.sex" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sexFemale" ] ;
+       fhir:path [ fhir:v "HIVA.sexFemale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE26" ]
+       ] ) ;
+       fhir:short [ fhir:v "Female" ] ;
+       fhir:definition [ fhir:v "Client identifies as female" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.sexFemale" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sexMale" ] ;
+       fhir:path [ fhir:v "HIVA.sexMale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE27" ]
+       ] ) ;
+       fhir:short [ fhir:v "Male" ] ;
+       fhir:definition [ fhir:v "Client identifies as male" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.sexMale" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sexOther" ] ;
+       fhir:path [ fhir:v "HIVA.sexOther" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE28" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other" ] ;
+       fhir:definition [ fhir:v "Client identifies in non-binary way or as a sexual and gender minority (or minorities)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.sexOther" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.address" ] ;
+       fhir:path [ fhir:v "HIVA.address" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE29" ]
+       ] ) ;
+       fhir:short [ fhir:v "Address" ] ;
+       fhir:definition [ fhir:v "Clients home address or address which the client is consenting to disclose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.address" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.maritalStatus" ] ;
+       fhir:path [ fhir:v "HIVA.maritalStatus" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE30" ]
+       ] ) ;
+       fhir:short [ fhir:v "Marital Status" ] ;
+       fhir:definition [ fhir:v "Clients current marital status" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.maritalStatus" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.unmarried" ] ;
+       fhir:path [ fhir:v "HIVA.unmarried" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE31" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unmarried" ] ;
+       fhir:definition [ fhir:v "Client does not have an active marriage contract" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.unmarried" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.neverMarried" ] ;
+       fhir:path [ fhir:v "HIVA.neverMarried" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE32" ]
+       ] ) ;
+       fhir:short [ fhir:v "Never married" ] ;
+       fhir:definition [ fhir:v "Client has never entered into a marriage contract" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.neverMarried" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.married" ] ;
+       fhir:path [ fhir:v "HIVA.married" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE33" ]
+       ] ) ;
+       fhir:short [ fhir:v "Married" ] ;
+       fhir:definition [ fhir:v "A current marriage contract is active" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.married" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.polygamous" ] ;
+       fhir:path [ fhir:v "HIVA.polygamous" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE34" ]
+       ] ) ;
+       fhir:short [ fhir:v "Polygamous" ] ;
+       fhir:definition [ fhir:v "Client is in a polygamous union" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.polygamous" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.divorced" ] ;
+       fhir:path [ fhir:v "HIVA.divorced" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE35" ]
+       ] ) ;
+       fhir:short [ fhir:v "Divorced " ] ;
+       fhir:definition [ fhir:v "Client is divorced, whereby marriage contract has been declared dissolved and inactive" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.divorced" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.widowed" ] ;
+       fhir:path [ fhir:v "HIVA.widowed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE36" ]
+       ] ) ;
+       fhir:short [ fhir:v "Widowed" ] ;
+       fhir:definition [ fhir:v "Clients spouse has died" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.widowed" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.unknown" ] ;
+       fhir:path [ fhir:v "HIVA.unknown" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE37" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unknown" ] ;
+       fhir:definition [ fhir:v "Client does not wish to disclose marital status" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.unknown" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.domesticPartner" ] ;
+       fhir:path [ fhir:v "HIVA.domesticPartner" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE38" ]
+       ] ) ;
+       fhir:short [ fhir:v "Domestic partner" ] ;
+       fhir:definition [ fhir:v "Client reports that they are in a domestic partnership" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.domesticPartner" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.annulled" ] ;
+       fhir:path [ fhir:v "HIVA.annulled" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE39" ]
+       ] ) ;
+       fhir:short [ fhir:v "Annulled" ] ;
+       fhir:definition [ fhir:v "Clients marriage contract has been declared null and to have not existed" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.annulled" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.legallySeparated" ] ;
+       fhir:path [ fhir:v "HIVA.legallySeparated" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE40" ]
+       ] ) ;
+       fhir:short [ fhir:v "Legally separated" ] ;
+       fhir:definition [ fhir:v "Client is legally separated from their spouse" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.legallySeparated" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.interlocutory" ] ;
+       fhir:path [ fhir:v "HIVA.interlocutory" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE41" ]
+       ] ) ;
+       fhir:short [ fhir:v "Interlocutory" ] ;
+       fhir:definition [ fhir:v "Client is subject to an interlocutory decree" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.interlocutory" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.telephoneNumber" ] ;
+       fhir:path [ fhir:v "HIVA.telephoneNumber" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE42" ]
+       ] ) ;
+       fhir:short [ fhir:v "Telephone number" ] ;
+       fhir:definition [ fhir:v "Clients telephone number (a landline or a mobile phone number)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.telephoneNumber" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.administrativeArea" ] ;
+       fhir:path [ fhir:v "HIVA.administrativeArea" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE43" ]
+       ] ) ;
+       fhir:short [ fhir:v "[Administrative Area]" ] ;
+       fhir:definition [ fhir:v "This should be a context-specific list of administrative areas, such as villages, districts, etc. The purpose of this data element is to allow for grouping and flagging of client data to a particular facilitys catchment area. This can be input into the system by the end user OR it can be automated in the database based on the end users attributes." ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.administrativeArea" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.communicationConsent" ] ;
+       fhir:path [ fhir:v "HIVA.communicationConsent" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE44" ]
+       ] ) ;
+       fhir:short [ fhir:v "Communication consent" ] ;
+       fhir:definition [ fhir:v "Indication that client gave consent to be contacted" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.communicationConsent" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.reminderMessages" ] ;
+       fhir:path [ fhir:v "HIVA.reminderMessages" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE45" ]
+       ] ) ;
+       fhir:short [ fhir:v "Reminder messages" ] ;
+       fhir:definition [ fhir:v "Whether client wants to receive text or other messages as follow-up for HIV services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.reminderMessages" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.communicationPreferenceS" ] ;
+       fhir:path [ fhir:v "HIVA.communicationPreferenceS" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE46" ]
+       ] ) ;
+       fhir:short [ fhir:v "Communication preference(s)" ] ;
+       fhir:definition [ fhir:v "How the client would like to receive family planning communications" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.communicationPreferenceS" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.textMessageSms" ] ;
+       fhir:path [ fhir:v "HIVA.textMessageSms" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE47" ]
+       ] ) ;
+       fhir:short [ fhir:v "Text message/SMS" ] ;
+       fhir:definition [ fhir:v "The client would like to receive communications via Text message/SMS" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.textMessageSms" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.voiceCall" ] ;
+       fhir:path [ fhir:v "HIVA.voiceCall" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE48" ]
+       ] ) ;
+       fhir:short [ fhir:v "Voice call" ] ;
+       fhir:definition [ fhir:v "Client would like to receive communications via voice call" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.voiceCall" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.clientsEmail" ] ;
+       fhir:path [ fhir:v "HIVA.clientsEmail" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE49" ]
+       ] ) ;
+       fhir:short [ fhir:v "Clients email" ] ;
+       fhir:definition [ fhir:v "Clients primary email account where the client can be contacted" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.clientsEmail" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactsName" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactsName" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE50" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contacts name" ] ;
+       fhir:definition [ fhir:v "Name of an alternate contact, which could be next of kin (e.g. partner, husband, mother, sibling, etc.). The alternate contact would be used in the case of an emergency situation." ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.alternateContactsName" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactsPhoneNumber" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactsPhoneNumber" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE51" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contacts phone number" ] ;
+       fhir:definition [ fhir:v "Phone number of the alternate contact" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.alternateContactsPhoneNumber" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactsAddress" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactsAddress" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE52" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contacts address" ] ;
+       fhir:definition [ fhir:v "Alternate contacts home address or address which the client is consenting to disclose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.alternateContactsAddress" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactRelationship" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactRelationship" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE53" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contact relationship" ] ;
+       fhir:definition [ fhir:v "The alternate contacts relationship to the client (e.g. partner, husband, mother, sibling, etc.)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVA.alternateContactRelationship" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] )
+  ] ; # 
+  fhir:differential [
+     fhir:element ( [
+       fhir:id [ fhir:v "HIVA" ] ;
+       fhir:path [ fhir:v "HIVA" ] ;
+       fhir:short [ fhir:v "HIV.A Registration Logical Model" ] ;
+       fhir:definition [ fhir:v "Logical Model for HIV.A Registration data elements." ]
+     ] [
+       fhir:id [ fhir:v "HIVA.firstName" ] ;
+       fhir:path [ fhir:v "HIVA.firstName" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE1" ]
+       ] ) ;
+       fhir:short [ fhir:v "First name" ] ;
+       fhir:definition [ fhir:v "Clients first or given name" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.familyName" ] ;
+       fhir:path [ fhir:v "HIVA.familyName" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE2" ]
+       ] ) ;
+       fhir:short [ fhir:v "Family name" ] ;
+       fhir:definition [ fhir:v "Clients family name or last name" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.visitDate" ] ;
+       fhir:path [ fhir:v "HIVA.visitDate" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE3" ]
+       ] ) ;
+       fhir:short [ fhir:v "Visit date" ] ;
+       fhir:definition [ fhir:v "The date and time of the clients visit" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.referral" ] ;
+       fhir:path [ fhir:v "HIVA.referral" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE4" ]
+       ] ) ;
+       fhir:short [ fhir:v "Referral" ] ;
+       fhir:definition [ fhir:v "If client was referred for care" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.referredBy" ] ;
+       fhir:path [ fhir:v "HIVA.referredBy" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE5" ]
+       ] ) ;
+       fhir:short [ fhir:v "Referred by" ] ;
+       fhir:definition [ fhir:v "How the client was referred" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.community" ] ;
+       fhir:path [ fhir:v "HIVA.community" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE6" ]
+       ] ) ;
+       fhir:short [ fhir:v "Community" ] ;
+       fhir:definition [ fhir:v "Referred by the community level services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.facility" ] ;
+       fhir:path [ fhir:v "HIVA.facility" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE7" ]
+       ] ) ;
+       fhir:short [ fhir:v "Facility" ] ;
+       fhir:definition [ fhir:v "Referred by the health facility" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.uniqueIdentifier" ] ;
+       fhir:path [ fhir:v "HIVA.uniqueIdentifier" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE8" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unique identifier" ] ;
+       fhir:definition [ fhir:v "Unique identifier generated for new clients or a universal ID, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE9" ]
+       ] ) ;
+       fhir:short [ fhir:v "National ID" ] ;
+       fhir:definition [ fhir:v "National unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalHealthId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalHealthId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE10" ]
+       ] ) ;
+       fhir:short [ fhir:v "National health ID" ] ;
+       fhir:definition [ fhir:v "National health unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalProgrammeId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalProgrammeId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE11" ]
+       ] ) ;
+       fhir:short [ fhir:v "National programme ID" ] ;
+       fhir:definition [ fhir:v "National programme unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.nationalHealthInsuranceId" ] ;
+       fhir:path [ fhir:v "HIVA.nationalHealthInsuranceId" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE12" ]
+       ] ) ;
+       fhir:short [ fhir:v "National health insurance ID" ] ;
+       fhir:definition [ fhir:v "National health insurance unique identifier assigned to the client, if used in the country" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.countryOfBirth" ] ;
+       fhir:path [ fhir:v "HIVA.countryOfBirth" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE13" ]
+       ] ) ;
+       fhir:short [ fhir:v "Country of birth" ] ;
+       fhir:definition [ fhir:v "Country where the client was born" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.dateOfBirth" ] ;
+       fhir:path [ fhir:v "HIVA.dateOfBirth" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE14" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date of birth" ] ;
+       fhir:definition [ fhir:v "The clients date of birth (DOB) if known" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.dateOfBirthUnknown" ] ;
+       fhir:path [ fhir:v "HIVA.dateOfBirthUnknown" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE15" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date of birth unknown" ] ;
+       fhir:definition [ fhir:v "Is the clients DOB is unknown?" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.estimatedAge" ] ;
+       fhir:path [ fhir:v "HIVA.estimatedAge" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE16" ]
+       ] ) ;
+       fhir:short [ fhir:v "Estimated age" ] ;
+       fhir:definition [ fhir:v "If DOB is unknown, enter the clients estimated age. Display clients age in number of years." ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.age" ] ;
+       fhir:path [ fhir:v "HIVA.age" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE17" ]
+       ] ) ;
+       fhir:short [ fhir:v "Age" ] ;
+       fhir:definition [ fhir:v "Calculated age (number of years) of the client based on date of birth" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.gender" ] ;
+       fhir:path [ fhir:v "HIVA.gender" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE18" ]
+       ] ) ;
+       fhir:short [ fhir:v "Gender*" ] ;
+       fhir:definition [ fhir:v "Gender of the client*" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderFemale" ] ;
+       fhir:path [ fhir:v "HIVA.genderFemale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE19" ]
+       ] ) ;
+       fhir:short [ fhir:v "Female" ] ;
+       fhir:definition [ fhir:v "Client identifies as female" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderMale" ] ;
+       fhir:path [ fhir:v "HIVA.genderMale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE20" ]
+       ] ) ;
+       fhir:short [ fhir:v "Male" ] ;
+       fhir:definition [ fhir:v "Client identifies as male" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderTransgenderMale" ] ;
+       fhir:path [ fhir:v "HIVA.genderTransgenderMale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE21" ]
+       ] ) ;
+       fhir:short [ fhir:v "Transgender male" ] ;
+       fhir:definition [ fhir:v "Client identifies as transgender male" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderTransgenderFemale" ] ;
+       fhir:path [ fhir:v "HIVA.genderTransgenderFemale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE22" ]
+       ] ) ;
+       fhir:short [ fhir:v "Transgender female" ] ;
+       fhir:definition [ fhir:v "Client identifies as transgender female" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderOther" ] ;
+       fhir:path [ fhir:v "HIVA.genderOther" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE23" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other" ] ;
+       fhir:definition [ fhir:v "Additional category" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.genderOtherSpecify" ] ;
+       fhir:path [ fhir:v "HIVA.genderOtherSpecify" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE24" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other (specify)" ] ;
+       fhir:definition [ fhir:v "Additional category (please specify)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sex" ] ;
+       fhir:path [ fhir:v "HIVA.sex" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE25" ]
+       ] ) ;
+       fhir:short [ fhir:v "Sex" ] ;
+       fhir:definition [ fhir:v "Sex of the client assigned at birth" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sexFemale" ] ;
+       fhir:path [ fhir:v "HIVA.sexFemale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE26" ]
+       ] ) ;
+       fhir:short [ fhir:v "Female" ] ;
+       fhir:definition [ fhir:v "Client identifies as female" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sexMale" ] ;
+       fhir:path [ fhir:v "HIVA.sexMale" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE27" ]
+       ] ) ;
+       fhir:short [ fhir:v "Male" ] ;
+       fhir:definition [ fhir:v "Client identifies as male" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.sexOther" ] ;
+       fhir:path [ fhir:v "HIVA.sexOther" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE28" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other" ] ;
+       fhir:definition [ fhir:v "Client identifies in non-binary way or as a sexual and gender minority (or minorities)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.address" ] ;
+       fhir:path [ fhir:v "HIVA.address" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE29" ]
+       ] ) ;
+       fhir:short [ fhir:v "Address" ] ;
+       fhir:definition [ fhir:v "Clients home address or address which the client is consenting to disclose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.maritalStatus" ] ;
+       fhir:path [ fhir:v "HIVA.maritalStatus" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE30" ]
+       ] ) ;
+       fhir:short [ fhir:v "Marital Status" ] ;
+       fhir:definition [ fhir:v "Clients current marital status " ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.unmarried" ] ;
+       fhir:path [ fhir:v "HIVA.unmarried" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE31" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unmarried" ] ;
+       fhir:definition [ fhir:v "Client does not have an active marriage contract" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.neverMarried" ] ;
+       fhir:path [ fhir:v "HIVA.neverMarried" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE32" ]
+       ] ) ;
+       fhir:short [ fhir:v "Never married" ] ;
+       fhir:definition [ fhir:v "Client has never entered into a marriage contract" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.married" ] ;
+       fhir:path [ fhir:v "HIVA.married" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE33" ]
+       ] ) ;
+       fhir:short [ fhir:v "Married" ] ;
+       fhir:definition [ fhir:v "A current marriage contract is active" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.polygamous" ] ;
+       fhir:path [ fhir:v "HIVA.polygamous" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE34" ]
+       ] ) ;
+       fhir:short [ fhir:v "Polygamous" ] ;
+       fhir:definition [ fhir:v "Client is in a polygamous union" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.divorced" ] ;
+       fhir:path [ fhir:v "HIVA.divorced" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE35" ]
+       ] ) ;
+       fhir:short [ fhir:v "Divorced " ] ;
+       fhir:definition [ fhir:v "Client is divorced, whereby marriage contract has been declared dissolved and inactive" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.widowed" ] ;
+       fhir:path [ fhir:v "HIVA.widowed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE36" ]
+       ] ) ;
+       fhir:short [ fhir:v "Widowed" ] ;
+       fhir:definition [ fhir:v "Clients spouse has died" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.unknown" ] ;
+       fhir:path [ fhir:v "HIVA.unknown" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE37" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unknown" ] ;
+       fhir:definition [ fhir:v "Client does not wish to disclose marital status" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.domesticPartner" ] ;
+       fhir:path [ fhir:v "HIVA.domesticPartner" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE38" ]
+       ] ) ;
+       fhir:short [ fhir:v "Domestic partner" ] ;
+       fhir:definition [ fhir:v "Client reports that they are in a domestic partnership" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.annulled" ] ;
+       fhir:path [ fhir:v "HIVA.annulled" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE39" ]
+       ] ) ;
+       fhir:short [ fhir:v "Annulled" ] ;
+       fhir:definition [ fhir:v "Clients marriage contract has been declared null and to have not existed" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.legallySeparated" ] ;
+       fhir:path [ fhir:v "HIVA.legallySeparated" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE40" ]
+       ] ) ;
+       fhir:short [ fhir:v "Legally separated" ] ;
+       fhir:definition [ fhir:v "Client is legally separated from their spouse" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.interlocutory" ] ;
+       fhir:path [ fhir:v "HIVA.interlocutory" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE41" ]
+       ] ) ;
+       fhir:short [ fhir:v "Interlocutory" ] ;
+       fhir:definition [ fhir:v "Client is subject to an interlocutory decree" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.telephoneNumber" ] ;
+       fhir:path [ fhir:v "HIVA.telephoneNumber" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE42" ]
+       ] ) ;
+       fhir:short [ fhir:v "Telephone number" ] ;
+       fhir:definition [ fhir:v "Clients telephone number (a landline or a mobile phone number)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.administrativeArea" ] ;
+       fhir:path [ fhir:v "HIVA.administrativeArea" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE43" ]
+       ] ) ;
+       fhir:short [ fhir:v "[Administrative Area]" ] ;
+       fhir:definition [ fhir:v "This should be a context-specific list of administrative areas, such as villages, districts, etc. The purpose of this data element is to allow for grouping and flagging of client data to a particular facilitys catchment area. This can be input into the system by the end user OR it can be automated in the database based on the end users attributes." ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.communicationConsent" ] ;
+       fhir:path [ fhir:v "HIVA.communicationConsent" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE44" ]
+       ] ) ;
+       fhir:short [ fhir:v "Communication consent" ] ;
+       fhir:definition [ fhir:v "Indication that client gave consent to be contacted" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.reminderMessages" ] ;
+       fhir:path [ fhir:v "HIVA.reminderMessages" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE45" ]
+       ] ) ;
+       fhir:short [ fhir:v "Reminder messages" ] ;
+       fhir:definition [ fhir:v "Whether client wants to receive text or other messages as follow-up for HIV services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.communicationPreferenceS" ] ;
+       fhir:path [ fhir:v "HIVA.communicationPreferenceS" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE46" ]
+       ] ) ;
+       fhir:short [ fhir:v "Communication preference(s)" ] ;
+       fhir:definition [ fhir:v "How the client would like to receive family planning communications" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.textMessageSms" ] ;
+       fhir:path [ fhir:v "HIVA.textMessageSms" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE47" ]
+       ] ) ;
+       fhir:short [ fhir:v "Text message/SMS" ] ;
+       fhir:definition [ fhir:v "The client would like to receive communications via Text message/SMS" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.voiceCall" ] ;
+       fhir:path [ fhir:v "HIVA.voiceCall" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE48" ]
+       ] ) ;
+       fhir:short [ fhir:v "Voice call" ] ;
+       fhir:definition [ fhir:v "Client would like to receive communications via voice call" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.clientsEmail" ] ;
+       fhir:path [ fhir:v "HIVA.clientsEmail" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE49" ]
+       ] ) ;
+       fhir:short [ fhir:v "Clients email" ] ;
+       fhir:definition [ fhir:v "Clients primary email account where the client can be contacted" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactsName" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactsName" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE50" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contacts name" ] ;
+       fhir:definition [ fhir:v "Name of an alternate contact, which could be next of kin (e.g. partner, husband, mother, sibling, etc.). The alternate contact would be used in the case of an emergency situation." ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactsPhoneNumber" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactsPhoneNumber" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE51" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contacts phone number" ] ;
+       fhir:definition [ fhir:v "Phone number of the alternate contact" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactsAddress" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactsAddress" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE52" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contacts address" ] ;
+       fhir:definition [ fhir:v "Alternate contacts home address or address which the client is consenting to disclose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVA.alternateContactRelationship" ] ;
+       fhir:path [ fhir:v "HIVA.alternateContactRelationship" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/CodeSystem/HIV.A"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE53" ]
+       ] ) ;
+       fhir:short [ fhir:v "Alternate contact relationship" ] ;
+       fhir:definition [ fhir:v "The alternate contacts relationship to the client (e.g. partner, husband, mother, sibling, etc.)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

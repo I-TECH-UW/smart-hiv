@@ -1,0 +1,994 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://worldhealthorganization.github.io/smart/StructureDefinition/HIVPrevention> a fhir:StructureDefinition ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "HIVPrevention"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border: 0px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top;\"><tr style=\"border: 1px #F0F0F0 solid; font-size: 11px; font-family: verdana; vertical-align: top\"><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"The logical name of the element\">Name</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Information about the use of the element\">Flags</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Minimum and Maximum # of times the the element can appear in the instance\">Card.</a></th><th style=\"width: 100px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Reference to the type of the element\">Type</a></th><th style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Additional information about the element\">Description &amp; Constraints</a><span style=\"float: right\"><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Legend for this format\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3goXBCwdPqAP0wAAAldJREFUOMuNk0tIlFEYhp9z/vE2jHkhxXA0zJCMitrUQlq4lnSltEqCFhFG2MJFhIvIFpkEWaTQqjaWZRkp0g26URZkTpbaaOJkDqk10szoODP//7XIMUe0elcfnPd9zsfLOYplGrpRwZaqTtw3K7PtGem7Q6FoidbGgqHVy/HRb669R+56zx7eRV1L31JGxYbBtjKK93cxeqfyQHbehkZbUkK20goELEuIzEd+dHS+qz/Y8PTSif0FnGkbiwcAjHaU1+QWOptFiyCLp/LnKptpqIuXHx6rbR26kJcBX3yLgBfnd7CxwJmflpP2wUg0HIAoUUpZBmKzELGWcN8nAr6Gpu7tLU/CkwAaoKTWRSQyt89Q8w6J+oVQkKnBoblH7V0PPvUOvDYXfopE/SJmALsxnVm6LbkotrUtNowMeIrVrBcBpaMmdS0j9df7abpSuy7HWehwJdt1lhVwi/J58U5beXGAF6c3UXLycw1wdFklArBn87xdh0ZsZtArghBdAA3+OEDVubG4UEzP6x1FOWneHh2VDAHBAt80IbdXDcesNoCvs3E5AFyNSU5nbrDPZpcUEQQTFZiEVx+51fxMhhyJEAgvlriadIJZZksRuwBYMOPBbO3hePVVqgEJhFeUuFLhIPkRP6BQLIBrmMenujm/3g4zc398awIe90Zb5A1vREALqneMcYgP/xVQWlG+Ncu5vgwwlaUNx+3799rfe96u9K0JSDXcOzOTJg4B6IgmXfsygc7/Bvg9g9E58/cDVmGIBOP/zT8Bz1zqWqpbXIsd0O9hajXfL6u4BaOS6SeWAAAAAElFTkSuQmCC\" alt=\"doco\" style=\"background-color: inherit\"/></a></span></th></tr><tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck1.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_element.gif\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Element\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention\" title=\"Logical Model for HIV.Prevention data elements.\">HIVPrevention</a><a name=\"HIVPrevention\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><span style=\"opacity: 0.5\">0</span><span style=\"opacity: 0.5\">..</span><span style=\"opacity: 0.5\">*</span></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://build.fhir.org/types.html#Base\">Base</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">HIV.Prevention Logical Model<br/><span style=\"font-weight:bold\">Instances of this logical model are not marked to be the target of a Reference</span></td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.atElevatedRiskForHivAcquisition\" title=\"Client is at elevated risk for HIV acquisition, defined according to country/programme context\">atElevatedRiskForHivAcquisition</a><a name=\"HIVPrevention.atElevatedRiskForHivAcquisition\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">At elevated risk for HIV acquisition</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.hivPreventionIntervention\" title=\"HIV prevention intervention that client accessed\">hivPreventionIntervention</a><a name=\"HIVPrevention.hivPreventionIntervention\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">HIV prevention intervention</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.prepService\" title=\"Client accessed PrEP services\">prepService</a><a name=\"HIVPrevention.prepService\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">PrEP service</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.oamt\" title=\"Client accessed opioid agonist maintenance treatment (OAMT) services\">oamt</a><a name=\"HIVPrevention.oamt\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">OAMT</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.nsp\" title=\"Client accessed needle-syringe programme (NSP) services\">nsp</a><a name=\"HIVPrevention.nsp\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">NSP</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.stiServices\" title=\"Client accessed sexually transmitted infection (STI) services\">stiServices</a><a name=\"HIVPrevention.stiServices\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">STI services</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.vmmc\" title=\"Client accessed voluntary medical male circumcision (VMMC) services\">vmmc</a><a name=\"HIVPrevention.vmmc\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">VMMC</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.hpsOther\" title=\"Client accessed other HIV prevention services\">hpsOther</a><a name=\"HIVPrevention.hpsOther\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Other</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.hpsOtherSpecify\" title=\"Client accessed other HIV prevention services (specify)\">hpsOtherSpecify</a><a name=\"HIVPrevention.hpsOtherSpecify\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Other (specify)</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateAccessedHivPreventionIntervention\" title=\"Date the client accessed HIV prevention intervention\">dateAccessedHivPreventionIntervention</a><a name=\"HIVPrevention.dateAccessedHivPreventionIntervention\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date accessed HIV prevention intervention</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.hivStatusOfContact\" title=\"The HIV status of the clients contact\">hivStatusOfContact</a><a name=\"HIVPrevention.hivStatusOfContact\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">HIV status of contact</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.ccHivPositive\" title=\"Clients contact is HIV-positive\">ccHivPositive</a><a name=\"HIVPrevention.ccHivPositive\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">HIV-positive</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.ccHivNegative\" title=\"Clients contact is HIV-negative\">ccHivNegative</a><a name=\"HIVPrevention.ccHivNegative\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">HIV-negative</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.ccUnknown\" title=\"Client does not know contacts HIV status\">ccUnknown</a><a name=\"HIVPrevention.ccUnknown\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Unknown</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateInjectingEquipmentProvided\" title=\"Date client was provided with injecting equipment\">dateInjectingEquipmentProvided</a><a name=\"HIVPrevention.dateInjectingEquipmentProvided\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date injecting equipment provided</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.numberOfNeedlesSyringesProvided\" title=\"Number of needles-syringes provided to client\">numberOfNeedlesSyringesProvided</a><a name=\"HIVPrevention.numberOfNeedlesSyringesProvided\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Number of needles-syringes provided</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateOamtInitiated\" title=\"Date client initiated opioid agonist maintenance treatment (OAMT)\">dateOamtInitiated</a><a name=\"HIVPrevention.dateOamtInitiated\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date OAMT initiated</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateOamtDoseReceived\" title=\"Date client received opioid agonist maintenance treatment (OAMT) dose\">dateOamtDoseReceived</a><a name=\"HIVPrevention.dateOamtDoseReceived\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date OAMT dose received</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateOamtTakeAwayDoseSDispensed\" title=\"Date the client was dispensed opioid agonist maintenance treatment (OAMT) take-away dose(s)\">dateOamtTakeAwayDoseSDispensed</a><a name=\"HIVPrevention.dateOamtTakeAwayDoseSDispensed\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date OAMT take-away dose(s) dispensed</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.currentlyOnOamt\" title=\"Client is currently on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion\">currentlyOnOamt</a><a name=\"HIVPrevention.currentlyOnOamt\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Currently on OAMT</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.retainedOnOamt\" title=\"Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion\">retainedOnOamt</a><a name=\"HIVPrevention.retainedOnOamt\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Retained on OAMT</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.clientBeingInductedOnOamt\" title=\"Client is currently being inducted on opioid agonist maintenance treatment (OAMT), defined according to country/program\">clientBeingInductedOnOamt</a><a name=\"HIVPrevention.clientBeingInductedOnOamt\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Client being inducted on OAMT</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.clientOnReducingDosesOfOamt\" title=\"Client is current on reducing doses of opioid agonist maintenance treatment (OAMT), defined according to country/program\">clientOnReducingDosesOfOamt</a><a name=\"HIVPrevention.clientOnReducingDosesOfOamt\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Client on reducing doses of OAMT</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateFirstMaintenanceDoseReceived\" title=\"First date on which client received maintenance dose\">dateFirstMaintenanceDoseReceived</a><a name=\"HIVPrevention.dateFirstMaintenanceDoseReceived\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date first maintenance dose received</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateOfLossToFollowUpOrOamtStopped\" title=\"Date of loss to follow-up or opioid agonist maintenance treatment (OAMT) stopped\">dateOfLossToFollowUpOrOamtStopped</a><a name=\"HIVPrevention.dateOfLossToFollowUpOrOamtStopped\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date of loss to follow-up or OAMT stopped</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateMedicationsDispensed\" title=\"Date the client was dispensed medications\">dateMedicationsDispensed</a><a name=\"HIVPrevention.dateMedicationsDispensed\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date medications dispensed</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: #F7F7F7\"><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck10.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: #F7F7F7; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.dateMedicationsPrescribed\" title=\"Date the client was prescribed medications\">dateMedicationsPrescribed</a><a name=\"HIVPrevention.dateMedicationsPrescribed\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: #F7F7F7; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Date medications prescribed</td></tr>\r\n<tr style=\"border: 0px #F0F0F0 solid; padding:0px; vertical-align: top; background-color: white\"><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px; white-space: nowrap; background-image: url(tbl_bck00.png)\" class=\"hierarchy\"><img src=\"tbl_spacer.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"tbl_vjoin_end.png\" alt=\".\" style=\"background-color: inherit\" class=\"hierarchy\"/><img src=\"icon_primitive.png\" alt=\".\" style=\"background-color: white; background-color: inherit\" title=\"Primitive Data Type\" class=\"hierarchy\"/> <a href=\"StructureDefinition-HIVPrevention-definitions.html#HIVPrevention.numberOfDaysPrescribed\" title=\"Days of medication client has been prescribed\">numberOfDaysPrescribed</a><a name=\"HIVPrevention.numberOfDaysPrescribed\"> </a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"/><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">1..1</td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\"><a href=\"http://hl7.org/fhir/R4B/datatypes.html#string\">string</a></td><td style=\"vertical-align: top; text-align : left; background-color: white; border: 0px #F0F0F0 solid; padding:0px 4px 0px 4px\" class=\"hierarchy\">Number of days prescribed</td></tr>\r\n<tr><td colspan=\"5\" class=\"hierarchy\"><br/><a href=\"https://build.fhir.org/ig/FHIR/ig-guidance/readingIgs.html#table-views\" title=\"Legend for this format\"><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3goXBCwdPqAP0wAAAldJREFUOMuNk0tIlFEYhp9z/vE2jHkhxXA0zJCMitrUQlq4lnSltEqCFhFG2MJFhIvIFpkEWaTQqjaWZRkp0g26URZkTpbaaOJkDqk10szoODP//7XIMUe0elcfnPd9zsfLOYplGrpRwZaqTtw3K7PtGem7Q6FoidbGgqHVy/HRb669R+56zx7eRV1L31JGxYbBtjKK93cxeqfyQHbehkZbUkK20goELEuIzEd+dHS+qz/Y8PTSif0FnGkbiwcAjHaU1+QWOptFiyCLp/LnKptpqIuXHx6rbR26kJcBX3yLgBfnd7CxwJmflpP2wUg0HIAoUUpZBmKzELGWcN8nAr6Gpu7tLU/CkwAaoKTWRSQyt89Q8w6J+oVQkKnBoblH7V0PPvUOvDYXfopE/SJmALsxnVm6LbkotrUtNowMeIrVrBcBpaMmdS0j9df7abpSuy7HWehwJdt1lhVwi/J58U5beXGAF6c3UXLycw1wdFklArBn87xdh0ZsZtArghBdAA3+OEDVubG4UEzP6x1FOWneHh2VDAHBAt80IbdXDcesNoCvs3E5AFyNSU5nbrDPZpcUEQQTFZiEVx+51fxMhhyJEAgvlriadIJZZksRuwBYMOPBbO3hePVVqgEJhFeUuFLhIPkRP6BQLIBrmMenujm/3g4zc398awIe90Zb5A1vREALqneMcYgP/xVQWlG+Ncu5vgwwlaUNx+3799rfe96u9K0JSDXcOzOTJg4B6IgmXfsygc7/Bvg9g9E58/cDVmGIBOP/zT8Bz1zqWqpbXIsd0O9hajXfL6u4BaOS6SeWAAAAAElFTkSuQmCC\" alt=\"doco\" style=\"background-color: inherit\"/> Documentation for this format</a></td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://worldhealthorganization.github.io/smart/StructureDefinition/HIVPrevention"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "HIVPrevention"] ; # 
+  fhir:title [ fhir:v "HIV.Prevention Logical Model"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:date [ fhir:v "2023-12-10T22:15:09+00:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "WHO"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "WHO" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "http://who.int" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Logical Model for HIV.Prevention data elements."] ; # 
+  fhir:fhirVersion [ fhir:v "4.3.0"] ; # 
+  fhir:mapping ( [
+     fhir:identity [ fhir:v "rim" ] ;
+     fhir:uri [ fhir:v "http://hl7.org/v3"^^xsd:anyURI ] ;
+     fhir:name [ fhir:v "RIM Mapping" ]
+  ] ) ; # 
+  fhir:kind [ fhir:v "logical"] ; # 
+  fhir:abstract [ fhir:v "false"^^xsd:boolean] ; # 
+  fhir:type [ fhir:v "http://worldhealthorganization.github.io/smart/StructureDefinition/HIVPrevention"^^xsd:anyURI] ; # 
+  fhir:baseDefinition [
+     fhir:v "http://hl7.org/fhir/StructureDefinition/Base"^^xsd:anyURI ;
+     fhir:link <http://hl7.org/fhir/StructureDefinition/Base>
+  ] ; # 
+  fhir:derivation [ fhir:v "specialization"] ; # 
+  fhir:snapshot [
+     fhir:element ( [
+       fhir:id [ fhir:v "HIVPrevention" ] ;
+       fhir:path [ fhir:v "HIVPrevention" ] ;
+       fhir:short [ fhir:v "HIV.Prevention Logical Model" ] ;
+       fhir:definition [ fhir:v "Logical Model for HIV.Prevention data elements." ] ;
+       fhir:min [ fhir:v "0"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "*" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "Base" ] ;
+         fhir:min [ fhir:v "0"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "*" ]
+       ] ;
+       fhir:isModifier [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.atElevatedRiskForHivAcquisition" ] ;
+       fhir:path [ fhir:v "HIVPrevention.atElevatedRiskForHivAcquisition" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE1" ]
+       ] ) ;
+       fhir:short [ fhir:v "At elevated risk for HIV acquisition" ] ;
+       fhir:definition [ fhir:v "Client is at elevated risk for HIV acquisition, defined according to country/programme context" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.atElevatedRiskForHivAcquisition" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hivPreventionIntervention" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hivPreventionIntervention" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE2" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV prevention intervention" ] ;
+       fhir:definition [ fhir:v "HIV prevention intervention that client accessed" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.hivPreventionIntervention" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.prepService" ] ;
+       fhir:path [ fhir:v "HIVPrevention.prepService" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE3" ]
+       ] ) ;
+       fhir:short [ fhir:v "PrEP service" ] ;
+       fhir:definition [ fhir:v "Client accessed PrEP services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.prepService" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.oamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.oamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE4" ]
+       ] ) ;
+       fhir:short [ fhir:v "OAMT" ] ;
+       fhir:definition [ fhir:v "Client accessed opioid agonist maintenance treatment (OAMT) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.oamt" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.nsp" ] ;
+       fhir:path [ fhir:v "HIVPrevention.nsp" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE5" ]
+       ] ) ;
+       fhir:short [ fhir:v "NSP" ] ;
+       fhir:definition [ fhir:v "Client accessed needle-syringe programme (NSP) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.nsp" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.stiServices" ] ;
+       fhir:path [ fhir:v "HIVPrevention.stiServices" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE6" ]
+       ] ) ;
+       fhir:short [ fhir:v "STI services" ] ;
+       fhir:definition [ fhir:v "Client accessed sexually transmitted infection (STI) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.stiServices" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.vmmc" ] ;
+       fhir:path [ fhir:v "HIVPrevention.vmmc" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE7" ]
+       ] ) ;
+       fhir:short [ fhir:v "VMMC" ] ;
+       fhir:definition [ fhir:v "Client accessed voluntary medical male circumcision (VMMC) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.vmmc" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hpsOther" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hpsOther" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE8" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other" ] ;
+       fhir:definition [ fhir:v "Client accessed other HIV prevention services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.hpsOther" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hpsOtherSpecify" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hpsOtherSpecify" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE9" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other (specify)" ] ;
+       fhir:definition [ fhir:v "Client accessed other HIV prevention services (specify)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.hpsOtherSpecify" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateAccessedHivPreventionIntervention" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateAccessedHivPreventionIntervention" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE10" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date accessed HIV prevention intervention" ] ;
+       fhir:definition [ fhir:v "Date the client accessed HIV prevention intervention" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateAccessedHivPreventionIntervention" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hivStatusOfContact" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hivStatusOfContact" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE11" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV status of contact" ] ;
+       fhir:definition [ fhir:v "The HIV status of the clients contact" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.hivStatusOfContact" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.ccHivPositive" ] ;
+       fhir:path [ fhir:v "HIVPrevention.ccHivPositive" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE12" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV-positive" ] ;
+       fhir:definition [ fhir:v "Clients contact is HIV-positive" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.ccHivPositive" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.ccHivNegative" ] ;
+       fhir:path [ fhir:v "HIVPrevention.ccHivNegative" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE13" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV-negative" ] ;
+       fhir:definition [ fhir:v "Clients contact is HIV-negative" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.ccHivNegative" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.ccUnknown" ] ;
+       fhir:path [ fhir:v "HIVPrevention.ccUnknown" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE14" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unknown" ] ;
+       fhir:definition [ fhir:v "Client does not know contacts HIV status" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.ccUnknown" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateInjectingEquipmentProvided" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateInjectingEquipmentProvided" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE15" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date injecting equipment provided" ] ;
+       fhir:definition [ fhir:v "Date client was provided with injecting equipment" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateInjectingEquipmentProvided" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.numberOfNeedlesSyringesProvided" ] ;
+       fhir:path [ fhir:v "HIVPrevention.numberOfNeedlesSyringesProvided" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE16" ]
+       ] ) ;
+       fhir:short [ fhir:v "Number of needles-syringes provided" ] ;
+       fhir:definition [ fhir:v "Number of needles-syringes provided to client" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.numberOfNeedlesSyringesProvided" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOamtInitiated" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOamtInitiated" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE17" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date OAMT initiated" ] ;
+       fhir:definition [ fhir:v "Date client initiated opioid agonist maintenance treatment (OAMT)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateOamtInitiated" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOamtDoseReceived" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOamtDoseReceived" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE18" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date OAMT dose received" ] ;
+       fhir:definition [ fhir:v "Date client received opioid agonist maintenance treatment (OAMT) dose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateOamtDoseReceived" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOamtTakeAwayDoseSDispensed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOamtTakeAwayDoseSDispensed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE19" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date OAMT take-away dose(s) dispensed" ] ;
+       fhir:definition [ fhir:v "Date the client was dispensed opioid agonist maintenance treatment (OAMT) take-away dose(s)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateOamtTakeAwayDoseSDispensed" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.currentlyOnOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.currentlyOnOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE20" ]
+       ] ) ;
+       fhir:short [ fhir:v "Currently on OAMT" ] ;
+       fhir:definition [ fhir:v "Client is currently on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.currentlyOnOamt" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.retainedOnOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.retainedOnOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE21" ]
+       ] ) ;
+       fhir:short [ fhir:v "Retained on OAMT" ] ;
+       fhir:definition [ fhir:v "Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.retainedOnOamt" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.clientBeingInductedOnOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.clientBeingInductedOnOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE22" ]
+       ] ) ;
+       fhir:short [ fhir:v "Client being inducted on OAMT" ] ;
+       fhir:definition [ fhir:v "Client is currently being inducted on opioid agonist maintenance treatment (OAMT), defined according to country/program" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.clientBeingInductedOnOamt" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.clientOnReducingDosesOfOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.clientOnReducingDosesOfOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE23" ]
+       ] ) ;
+       fhir:short [ fhir:v "Client on reducing doses of OAMT" ] ;
+       fhir:definition [ fhir:v "Client is current on reducing doses of opioid agonist maintenance treatment (OAMT), defined according to country/program" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.clientOnReducingDosesOfOamt" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateFirstMaintenanceDoseReceived" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateFirstMaintenanceDoseReceived" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE24" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date first maintenance dose received" ] ;
+       fhir:definition [ fhir:v "First date on which client received maintenance dose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateFirstMaintenanceDoseReceived" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOfLossToFollowUpOrOamtStopped" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOfLossToFollowUpOrOamtStopped" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE25" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date of loss to follow-up or OAMT stopped" ] ;
+       fhir:definition [ fhir:v "Date of loss to follow-up or opioid agonist maintenance treatment (OAMT) stopped" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateOfLossToFollowUpOrOamtStopped" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateMedicationsDispensed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateMedicationsDispensed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE26" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date medications dispensed" ] ;
+       fhir:definition [ fhir:v "Date the client was dispensed medications" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateMedicationsDispensed" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateMedicationsPrescribed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateMedicationsPrescribed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE27" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date medications prescribed" ] ;
+       fhir:definition [ fhir:v "Date the client was prescribed medications" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.dateMedicationsPrescribed" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.numberOfDaysPrescribed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.numberOfDaysPrescribed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE28" ]
+       ] ) ;
+       fhir:short [ fhir:v "Number of days prescribed" ] ;
+       fhir:definition [ fhir:v "Days of medication client has been prescribed" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:base [
+         fhir:path [ fhir:v "HIVPrevention.numberOfDaysPrescribed" ] ;
+         fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+         fhir:max [ fhir:v "1" ]
+       ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] )
+  ] ; # 
+  fhir:differential [
+     fhir:element ( [
+       fhir:id [ fhir:v "HIVPrevention" ] ;
+       fhir:path [ fhir:v "HIVPrevention" ] ;
+       fhir:short [ fhir:v "HIV.Prevention Logical Model" ] ;
+       fhir:definition [ fhir:v "Logical Model for HIV.Prevention data elements." ]
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.atElevatedRiskForHivAcquisition" ] ;
+       fhir:path [ fhir:v "HIVPrevention.atElevatedRiskForHivAcquisition" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE1" ]
+       ] ) ;
+       fhir:short [ fhir:v "At elevated risk for HIV acquisition" ] ;
+       fhir:definition [ fhir:v "Client is at elevated risk for HIV acquisition, defined according to country/programme context" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hivPreventionIntervention" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hivPreventionIntervention" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE2" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV prevention intervention" ] ;
+       fhir:definition [ fhir:v "HIV prevention intervention that client accessed" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.prepService" ] ;
+       fhir:path [ fhir:v "HIVPrevention.prepService" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE3" ]
+       ] ) ;
+       fhir:short [ fhir:v "PrEP service" ] ;
+       fhir:definition [ fhir:v "Client accessed PrEP services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.oamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.oamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE4" ]
+       ] ) ;
+       fhir:short [ fhir:v "OAMT" ] ;
+       fhir:definition [ fhir:v "Client accessed opioid agonist maintenance treatment (OAMT) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.nsp" ] ;
+       fhir:path [ fhir:v "HIVPrevention.nsp" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE5" ]
+       ] ) ;
+       fhir:short [ fhir:v "NSP" ] ;
+       fhir:definition [ fhir:v "Client accessed needle-syringe programme (NSP) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.stiServices" ] ;
+       fhir:path [ fhir:v "HIVPrevention.stiServices" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE6" ]
+       ] ) ;
+       fhir:short [ fhir:v "STI services" ] ;
+       fhir:definition [ fhir:v "Client accessed sexually transmitted infection (STI) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.vmmc" ] ;
+       fhir:path [ fhir:v "HIVPrevention.vmmc" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE7" ]
+       ] ) ;
+       fhir:short [ fhir:v "VMMC" ] ;
+       fhir:definition [ fhir:v "Client accessed voluntary medical male circumcision (VMMC) services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hpsOther" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hpsOther" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE8" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other" ] ;
+       fhir:definition [ fhir:v "Client accessed other HIV prevention services" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hpsOtherSpecify" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hpsOtherSpecify" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE9" ]
+       ] ) ;
+       fhir:short [ fhir:v "Other (specify)" ] ;
+       fhir:definition [ fhir:v "Client accessed other HIV prevention services (specify)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateAccessedHivPreventionIntervention" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateAccessedHivPreventionIntervention" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE10" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date accessed HIV prevention intervention" ] ;
+       fhir:definition [ fhir:v "Date the client accessed HIV prevention intervention" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.hivStatusOfContact" ] ;
+       fhir:path [ fhir:v "HIVPrevention.hivStatusOfContact" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE11" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV status of contact" ] ;
+       fhir:definition [ fhir:v "The HIV status of the clients contact" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.ccHivPositive" ] ;
+       fhir:path [ fhir:v "HIVPrevention.ccHivPositive" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE12" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV-positive" ] ;
+       fhir:definition [ fhir:v "Clients contact is HIV-positive" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.ccHivNegative" ] ;
+       fhir:path [ fhir:v "HIVPrevention.ccHivNegative" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE13" ]
+       ] ) ;
+       fhir:short [ fhir:v "HIV-negative" ] ;
+       fhir:definition [ fhir:v "Clients contact is HIV-negative" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.ccUnknown" ] ;
+       fhir:path [ fhir:v "HIVPrevention.ccUnknown" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE14" ]
+       ] ) ;
+       fhir:short [ fhir:v "Unknown" ] ;
+       fhir:definition [ fhir:v "Client does not know contacts HIV status" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateInjectingEquipmentProvided" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateInjectingEquipmentProvided" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE15" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date injecting equipment provided" ] ;
+       fhir:definition [ fhir:v "Date client was provided with injecting equipment" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.numberOfNeedlesSyringesProvided" ] ;
+       fhir:path [ fhir:v "HIVPrevention.numberOfNeedlesSyringesProvided" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE16" ]
+       ] ) ;
+       fhir:short [ fhir:v "Number of needles-syringes provided" ] ;
+       fhir:definition [ fhir:v "Number of needles-syringes provided to client" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOamtInitiated" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOamtInitiated" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE17" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date OAMT initiated" ] ;
+       fhir:definition [ fhir:v "Date client initiated opioid agonist maintenance treatment (OAMT)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOamtDoseReceived" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOamtDoseReceived" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE18" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date OAMT dose received" ] ;
+       fhir:definition [ fhir:v "Date client received opioid agonist maintenance treatment (OAMT) dose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOamtTakeAwayDoseSDispensed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOamtTakeAwayDoseSDispensed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE19" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date OAMT take-away dose(s) dispensed" ] ;
+       fhir:definition [ fhir:v "Date the client was dispensed opioid agonist maintenance treatment (OAMT) take-away dose(s)" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.currentlyOnOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.currentlyOnOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE20" ]
+       ] ) ;
+       fhir:short [ fhir:v "Currently on OAMT" ] ;
+       fhir:definition [ fhir:v "Client is currently on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.retainedOnOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.retainedOnOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE21" ]
+       ] ) ;
+       fhir:short [ fhir:v "Retained on OAMT" ] ;
+       fhir:definition [ fhir:v "Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.clientBeingInductedOnOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.clientBeingInductedOnOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE22" ]
+       ] ) ;
+       fhir:short [ fhir:v "Client being inducted on OAMT" ] ;
+       fhir:definition [ fhir:v "Client is currently being inducted on opioid agonist maintenance treatment (OAMT), defined according to country/program" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.clientOnReducingDosesOfOamt" ] ;
+       fhir:path [ fhir:v "HIVPrevention.clientOnReducingDosesOfOamt" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE23" ]
+       ] ) ;
+       fhir:short [ fhir:v "Client on reducing doses of OAMT" ] ;
+       fhir:definition [ fhir:v "Client is current on reducing doses of opioid agonist maintenance treatment (OAMT), defined according to country/program" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateFirstMaintenanceDoseReceived" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateFirstMaintenanceDoseReceived" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE24" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date first maintenance dose received" ] ;
+       fhir:definition [ fhir:v "First date on which client received maintenance dose" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateOfLossToFollowUpOrOamtStopped" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateOfLossToFollowUpOrOamtStopped" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE25" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date of loss to follow-up or OAMT stopped" ] ;
+       fhir:definition [ fhir:v "Date of loss to follow-up or opioid agonist maintenance treatment (OAMT) stopped" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateMedicationsDispensed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateMedicationsDispensed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE26" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date medications dispensed" ] ;
+       fhir:definition [ fhir:v "Date the client was dispensed medications" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.dateMedicationsPrescribed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.dateMedicationsPrescribed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE27" ]
+       ] ) ;
+       fhir:short [ fhir:v "Date medications prescribed" ] ;
+       fhir:definition [ fhir:v "Date the client was prescribed medications" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIVPrevention.numberOfDaysPrescribed" ] ;
+       fhir:path [ fhir:v "HIVPrevention.numberOfDaysPrescribed" ] ;
+       fhir:code ( [
+         fhir:system [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.Prevention"^^xsd:anyURI ] ;
+         fhir:code [ fhir:v "DE28" ]
+       ] ) ;
+       fhir:short [ fhir:v "Number of days prescribed" ] ;
+       fhir:definition [ fhir:v "Days of medication client has been prescribed" ] ;
+       fhir:min [ fhir:v "1"^^xsd:nonNegativeInteger ] ;
+       fhir:max [ fhir:v "1" ] ;
+       fhir:type ( [
+         fhir:code [ fhir:v "string"^^xsd:anyURI ]
+       ] )
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

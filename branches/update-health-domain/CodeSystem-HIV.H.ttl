@@ -1,0 +1,361 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://worldhealthorganization.github.io/smart/CodeSystem/HIV.H> a fhir:CodeSystem ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "HIV.H"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This case-insensitive code system <code>http://worldhealthorganization.github.io/smart/CodeSystem/HIV.H</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">DE1<a name=\"HIV.H-DE1\"> </a></td><td>Reason for follow-up</td><td>The reason why the client is being followed up</td></tr><tr><td style=\"white-space:nowrap\">DE2<a name=\"HIV.H-DE2\"> </a></td><td>Missed care visit</td><td>Client did not present for a care appointment as scheduled / as expected</td></tr><tr><td style=\"white-space:nowrap\">DE3<a name=\"HIV.H-DE3\"> </a></td><td>Missed medication pickup</td><td>Client did not pick up medication as scheduled from pharmacy or other drug distribution point</td></tr><tr><td style=\"white-space:nowrap\">DE4<a name=\"HIV.H-DE4\"> </a></td><td>Did not initiate ART</td><td>Client did not initiate ART at the same time as diagnosis (e.g., because they required additional counselling) and required follow-up for ART initiation</td></tr><tr><td style=\"white-space:nowrap\">DE5<a name=\"HIV.H-DE5\"> </a></td><td>Incomplete visit</td><td>Client presented for care, but left before services were completed, e.g., due to long wait times or not staying to have labs taken</td></tr><tr><td style=\"white-space:nowrap\">DE6<a name=\"HIV.H-DE6\"> </a></td><td>Inconclusive HIV status</td><td>Client has not returned for a follow-up test after an inconclusive test result</td></tr><tr><td style=\"white-space:nowrap\">DE7<a name=\"HIV.H-DE7\"> </a></td><td>Test results received</td><td>Client needs to be informed of test results (e.g., viral load)</td></tr><tr><td style=\"white-space:nowrap\">DE8<a name=\"HIV.H-DE8\"> </a></td><td>Other follow-up reason</td><td>Client was followed up for another reason</td></tr><tr><td style=\"white-space:nowrap\">DE9<a name=\"HIV.H-DE9\"> </a></td><td>Other follow-up reason (specify)</td><td>Client was followed up for another reason (specify)</td></tr><tr><td style=\"white-space:nowrap\">DE10<a name=\"HIV.H-DE10\"> </a></td><td>Client contact attempted</td><td>An attempt to locate the client was made</td></tr><tr><td style=\"white-space:nowrap\">DE11<a name=\"HIV.H-DE11\"> </a></td><td>Date of contact attempt</td><td>Date of attempt to contact client</td></tr><tr><td style=\"white-space:nowrap\">DE12<a name=\"HIV.H-DE12\"> </a></td><td>Contact attempted by</td><td>Who attempted to reach out to the client</td></tr><tr><td style=\"white-space:nowrap\">DE13<a name=\"HIV.H-DE13\"> </a></td><td>Contact method</td><td>Method used to try to reach out to the client</td></tr><tr><td style=\"white-space:nowrap\">DE14<a name=\"HIV.H-DE14\"> </a></td><td>Home visit</td><td>Contacted client at home</td></tr><tr><td style=\"white-space:nowrap\">DE15<a name=\"HIV.H-DE15\"> </a></td><td>Text message</td><td>Contacted client by short message service (SMS) text</td></tr><tr><td style=\"white-space:nowrap\">DE16<a name=\"HIV.H-DE16\"> </a></td><td>Phone</td><td>Contacted client by phone call</td></tr><tr><td style=\"white-space:nowrap\">DE17<a name=\"HIV.H-DE17\"> </a></td><td>Source of information</td><td>Source of information about the client</td></tr><tr><td style=\"white-space:nowrap\">DE18<a name=\"HIV.H-DE18\"> </a></td><td>Client</td><td>The client was the source of information</td></tr><tr><td style=\"white-space:nowrap\">DE19<a name=\"HIV.H-DE19\"> </a></td><td>Informed by treatment provider</td><td>Source of information was a treatment provider of the client</td></tr><tr><td style=\"white-space:nowrap\">DE20<a name=\"HIV.H-DE20\"> </a></td><td>Informed by family or partner</td><td>Source of information was a family member of partner</td></tr><tr><td style=\"white-space:nowrap\">DE21<a name=\"HIV.H-DE21\"> </a></td><td>Other source of information</td><td>Information about the client's status was provided by someone else</td></tr><tr><td style=\"white-space:nowrap\">DE22<a name=\"HIV.H-DE22\"> </a></td><td>Other source of information (specify)</td><td>Information about the client's status was provided by someone else (specify)</td></tr><tr><td style=\"white-space:nowrap\">DE23<a name=\"HIV.H-DE23\"> </a></td><td>Outcome from outreach attempt</td><td>Detailed outcome from the attempt to locate the client</td></tr><tr><td style=\"white-space:nowrap\">DE24<a name=\"HIV.H-DE24\"> </a></td><td>Returning to clinic</td><td>Client was located and agreed to return to clinic</td></tr><tr><td style=\"white-space:nowrap\">DE25<a name=\"HIV.H-DE25\"> </a></td><td>Self-transferred out</td><td>Client transferred to another facility for care (client-initiated transfer, not provider-initiated transfer)</td></tr><tr><td style=\"white-space:nowrap\">DE26<a name=\"HIV.H-DE26\"> </a></td><td>Hospitalized</td><td>Client was hospitalized</td></tr><tr><td style=\"white-space:nowrap\">DE27<a name=\"HIV.H-DE27\"> </a></td><td>Refused to return</td><td>Client was found but declined to return to treatment</td></tr><tr><td style=\"white-space:nowrap\">DE28<a name=\"HIV.H-DE28\"> </a></td><td>Not located </td><td>Attempt was made to locate client, but client was not found</td></tr><tr><td style=\"white-space:nowrap\">DE29<a name=\"HIV.H-DE29\"> </a></td><td>Died (reported)</td><td>The client was reported as having died</td></tr><tr><td style=\"white-space:nowrap\">DE30<a name=\"HIV.H-DE30\"> </a></td><td>Moved from catchment area</td><td>The client moved from the catchment area (may be reported from the community level)</td></tr><tr><td style=\"white-space:nowrap\">DE31<a name=\"HIV.H-DE31\"> </a></td><td>Date client moved from catchment area</td><td>The date on which the client moved from the catchment area, if known</td></tr><tr><td style=\"white-space:nowrap\">DE32<a name=\"HIV.H-DE32\"> </a></td><td>New catchment area</td><td>New catchment area where the client resides</td></tr><tr><td style=\"white-space:nowrap\">DE33<a name=\"HIV.H-DE33\"> </a></td><td>Partner or contact of index case</td><td>The client was identified by an index case as a partner or contact</td></tr><tr><td style=\"white-space:nowrap\">DE34<a name=\"HIV.H-DE34\"> </a></td><td>HIV status of partner or contact</td><td>HIV status of the partner or contact given by the index case</td></tr><tr><td style=\"white-space:nowrap\">DE35<a name=\"HIV.H-DE35\"> </a></td><td>Already knew positive</td><td>The partner or contact of the index case already knew they are HIV-positive</td></tr><tr><td style=\"white-space:nowrap\">DE36<a name=\"HIV.H-DE36\"> </a></td><td>Newly diagnosed</td><td>The partner or contact of the index case is newly diagnosed as HIV-positive</td></tr><tr><td style=\"white-space:nowrap\">DE37<a name=\"HIV.H-DE37\"> </a></td><td>Negative</td><td>The partner or contact of the index case is newly diagnosed is HIV-negative</td></tr><tr><td style=\"white-space:nowrap\">DE38<a name=\"HIV.H-DE38\"> </a></td><td>Date of death </td><td>If deceased, the date that the client died</td></tr><tr><td style=\"white-space:nowrap\">DE39<a name=\"HIV.H-DE39\"> </a></td><td>Cause of death</td><td>Cause of death, if known</td></tr><tr><td style=\"white-space:nowrap\">DE40<a name=\"HIV.H-DE40\"> </a></td><td>Place of death</td><td>Where the client died, if known</td></tr><tr><td style=\"white-space:nowrap\">DE41<a name=\"HIV.H-DE41\"> </a></td><td>HIV treatment outcome</td><td>The outcome for the client which is used for reporting retention/attrition.</td></tr><tr><td style=\"white-space:nowrap\">DE42<a name=\"HIV.H-DE42\"> </a></td><td>Lost to follow-up</td><td>Twenty-eight days or more since last missed appointment </td></tr><tr><td style=\"white-space:nowrap\">DE43<a name=\"HIV.H-DE43\"> </a></td><td>Transferred out</td><td>The client transferred to another facility</td></tr><tr><td style=\"white-space:nowrap\">DE44<a name=\"HIV.H-DE44\"> </a></td><td>Death (documented)</td><td>People living with HIV previously on ART who are confirmed to have died from any cause</td></tr><tr><td style=\"white-space:nowrap\">DE45<a name=\"HIV.H-DE45\"> </a></td><td>Refused (stopped) treatment</td><td>Client was contacted and confirmed to have stopped ART (reasons may include stigma and discrimination, faith healing, etc.)</td></tr><tr><td style=\"white-space:nowrap\">DE46<a name=\"HIV.H-DE46\"> </a></td><td>Date patient lost to follow-up</td><td>Date patient was lost to follow-up (LTFU)</td></tr><tr><td style=\"white-space:nowrap\">DE47<a name=\"HIV.H-DE47\"> </a></td><td>On ART</td><td>Client is currently taking ART </td></tr><tr><td style=\"white-space:nowrap\">DE48<a name=\"HIV.H-DE48\"> </a></td><td>Date HIV treatment outcome changed</td><td>The date on which the client's outcome (lost to follow-up, transferred out, death (documented), or refused (stopped) treatment) changed</td></tr><tr><td style=\"white-space:nowrap\">DE49<a name=\"HIV.H-DE49\"> </a></td><td>Transfer confirmed</td><td>Select if transfer to another facility is confirmed</td></tr><tr><td style=\"white-space:nowrap\">DE50<a name=\"HIV.H-DE50\"> </a></td><td>Transfer to facility</td><td>Name of health facility client was transferred to</td></tr><tr><td style=\"white-space:nowrap\">DE51<a name=\"HIV.H-DE51\"> </a></td><td>Date of transfer out</td><td>The date the client transferred out of the facility to be provided with care at another facility</td></tr><tr><td style=\"white-space:nowrap\">DE52<a name=\"HIV.H-DE52\"> </a></td><td>Adherence assessment</td><td>Whether client is adherent or not to ART regimen per national guidelines (immunological or virological monitoring)</td></tr><tr><td style=\"white-space:nowrap\">DE53<a name=\"HIV.H-DE53\"> </a></td><td>Reason(s) for adherence problem</td><td>Reason why client is not adherent</td></tr><tr><td style=\"white-space:nowrap\">DE54<a name=\"HIV.H-DE54\"> </a></td><td>Forgot</td><td>Client reported not being adherent because they forgot</td></tr><tr><td style=\"white-space:nowrap\">DE55<a name=\"HIV.H-DE55\"> </a></td><td>Toxicity/side effects</td><td>Client reported not being adherent because of toxicity/side effects</td></tr><tr><td style=\"white-space:nowrap\">DE56<a name=\"HIV.H-DE56\"> </a></td><td>Busy</td><td>Client reported not being adherent because they were busy</td></tr><tr><td style=\"white-space:nowrap\">DE57<a name=\"HIV.H-DE57\"> </a></td><td>Change of routine</td><td>Client reported not being adherent because of a change of routine</td></tr><tr><td style=\"white-space:nowrap\">DE58<a name=\"HIV.H-DE58\"> </a></td><td>Travel cost</td><td>Client reported not being adherent because of travel cost</td></tr><tr><td style=\"white-space:nowrap\">DE59<a name=\"HIV.H-DE59\"> </a></td><td>Distance to clinic</td><td>Client reported not being adherent because of distance to clinic </td></tr><tr><td style=\"white-space:nowrap\">DE60<a name=\"HIV.H-DE60\"> </a></td><td>Client lost/ran out of pills</td><td>Client reported not being adherent because of client lost/ran out of pills</td></tr><tr><td style=\"white-space:nowrap\">DE61<a name=\"HIV.H-DE61\"> </a></td><td>Stock-out</td><td>Client reported not being adherent because of a stock-out</td></tr><tr><td style=\"white-space:nowrap\">DE62<a name=\"HIV.H-DE62\"> </a></td><td>Too ill</td><td>Client reported not being adherent because of being too ill</td></tr><tr><td style=\"white-space:nowrap\">DE63<a name=\"HIV.H-DE63\"> </a></td><td>Pill burden</td><td>Client reported not being adherent because of the pill burden</td></tr><tr><td style=\"white-space:nowrap\">DE64<a name=\"HIV.H-DE64\"> </a></td><td>Felt well</td><td>Client reported not being adherent because they felt well</td></tr><tr><td style=\"white-space:nowrap\">DE65<a name=\"HIV.H-DE65\"> </a></td><td>Depression</td><td>Client reported not being adherent because of depression</td></tr><tr><td style=\"white-space:nowrap\">DE66<a name=\"HIV.H-DE66\"> </a></td><td>Alcohol use</td><td>Client reported not being adherent because of alcohol use</td></tr><tr><td style=\"white-space:nowrap\">DE67<a name=\"HIV.H-DE67\"> </a></td><td>Substance use</td><td>Client reported not being adherent because of substance use (i.e., drugs)</td></tr><tr><td style=\"white-space:nowrap\">DE68<a name=\"HIV.H-DE68\"> </a></td><td>Stigma/disclosure concerns</td><td>Client reported not being adherent because of stigma/disclosure concerns</td></tr><tr><td style=\"white-space:nowrap\">DE69<a name=\"HIV.H-DE69\"> </a></td><td>Lack of food</td><td>Client reported not being adherent because of a lack of food</td></tr><tr><td style=\"white-space:nowrap\">DE70<a name=\"HIV.H-DE70\"> </a></td><td>Poor palatability</td><td>Client reported not being adherent because of poor palatability</td></tr><tr><td style=\"white-space:nowrap\">DE71<a name=\"HIV.H-DE71\"> </a></td><td>Other</td><td>Client reported not being adherent because of other reason</td></tr><tr><td style=\"white-space:nowrap\">DE72<a name=\"HIV.H-DE72\"> </a></td><td>Other (specify)</td><td>Client reported not being adherent because of other reason (specify)</td></tr><tr><td style=\"white-space:nowrap\">DE73<a name=\"HIV.H-DE73\"> </a></td><td>Date ART stopped</td><td>Date on which client stopped ART</td></tr><tr><td style=\"white-space:nowrap\">DE74<a name=\"HIV.H-DE74\"> </a></td><td>Reason ART stopped</td><td>Reason why client intentionally stopped ART</td></tr><tr><td style=\"white-space:nowrap\">DE75<a name=\"HIV.H-DE75\"> </a></td><td>Toxicity/side effects</td><td>Client stopped ART because of toxicity/side effects</td></tr><tr><td style=\"white-space:nowrap\">DE76<a name=\"HIV.H-DE76\"> </a></td><td>Severe illness, hospitalization</td><td>Client stopped ART because of severe illness, hospitalization</td></tr><tr><td style=\"white-space:nowrap\">DE77<a name=\"HIV.H-DE77\"> </a></td><td>Drugs out of stock </td><td>Client stopped ART because of drugs being out of stock </td></tr><tr><td style=\"white-space:nowrap\">DE78<a name=\"HIV.H-DE78\"> </a></td><td>Client lacks finances </td><td>Client stopped ART because client lacked finances </td></tr><tr><td style=\"white-space:nowrap\">DE79<a name=\"HIV.H-DE79\"> </a></td><td>Excluded HIV infection in infant</td><td>Client stopped ART because the infant was determined to not have HIV</td></tr><tr><td style=\"white-space:nowrap\">DE80<a name=\"HIV.H-DE80\"> </a></td><td>Other reason for stopping ART</td><td>Client stopped ART for other reason</td></tr><tr><td style=\"white-space:nowrap\">DE81<a name=\"HIV.H-DE81\"> </a></td><td>Other reason for stopping ART (specify)</td><td>Client stopped ART for other reason (specify)</td></tr></table></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://worldhealthorganization.github.io/smart/CodeSystem/HIV.H"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:name [ fhir:v "HIV_M"] ; # 
+  fhir:title [ fhir:v "HIV.H Follow-up  CodeSystem"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v "false"^^xsd:boolean] ; # 
+  fhir:date [ fhir:v "2023-12-10T23:25:54+00:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "WHO"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "WHO" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "http://who.int" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "CodeSystem for HIV.H Follow-up  Data Elements"] ; # 
+  fhir:caseSensitive [ fhir:v "false"^^xsd:boolean] ; # 
+  fhir:content [ fhir:v "complete"] ; # 
+  fhir:count [ fhir:v "81"^^xsd:nonNegativeInteger] ; # 
+  fhir:concept ( [
+     fhir:code [ fhir:v "DE1" ] ;
+     fhir:display [ fhir:v "Reason for follow-up" ] ;
+     fhir:definition [ fhir:v "The reason why the client is being followed up" ]
+  ] [
+     fhir:code [ fhir:v "DE2" ] ;
+     fhir:display [ fhir:v "Missed care visit" ] ;
+     fhir:definition [ fhir:v "Client did not present for a care appointment as scheduled / as expected" ]
+  ] [
+     fhir:code [ fhir:v "DE3" ] ;
+     fhir:display [ fhir:v "Missed medication pickup" ] ;
+     fhir:definition [ fhir:v "Client did not pick up medication as scheduled from pharmacy or other drug distribution point" ]
+  ] [
+     fhir:code [ fhir:v "DE4" ] ;
+     fhir:display [ fhir:v "Did not initiate ART" ] ;
+     fhir:definition [ fhir:v "Client did not initiate ART at the same time as diagnosis (e.g., because they required additional counselling) and required follow-up for ART initiation" ]
+  ] [
+     fhir:code [ fhir:v "DE5" ] ;
+     fhir:display [ fhir:v "Incomplete visit" ] ;
+     fhir:definition [ fhir:v "Client presented for care, but left before services were completed, e.g., due to long wait times or not staying to have labs taken" ]
+  ] [
+     fhir:code [ fhir:v "DE6" ] ;
+     fhir:display [ fhir:v "Inconclusive HIV status" ] ;
+     fhir:definition [ fhir:v "Client has not returned for a follow-up test after an inconclusive test result" ]
+  ] [
+     fhir:code [ fhir:v "DE7" ] ;
+     fhir:display [ fhir:v "Test results received" ] ;
+     fhir:definition [ fhir:v "Client needs to be informed of test results (e.g., viral load)" ]
+  ] [
+     fhir:code [ fhir:v "DE8" ] ;
+     fhir:display [ fhir:v "Other follow-up reason" ] ;
+     fhir:definition [ fhir:v "Client was followed up for another reason" ]
+  ] [
+     fhir:code [ fhir:v "DE9" ] ;
+     fhir:display [ fhir:v "Other follow-up reason (specify)" ] ;
+     fhir:definition [ fhir:v "Client was followed up for another reason (specify)" ]
+  ] [
+     fhir:code [ fhir:v "DE10" ] ;
+     fhir:display [ fhir:v "Client contact attempted" ] ;
+     fhir:definition [ fhir:v "An attempt to locate the client was made" ]
+  ] [
+     fhir:code [ fhir:v "DE11" ] ;
+     fhir:display [ fhir:v "Date of contact attempt" ] ;
+     fhir:definition [ fhir:v "Date of attempt to contact client" ]
+  ] [
+     fhir:code [ fhir:v "DE12" ] ;
+     fhir:display [ fhir:v "Contact attempted by" ] ;
+     fhir:definition [ fhir:v "Who attempted to reach out to the client" ]
+  ] [
+     fhir:code [ fhir:v "DE13" ] ;
+     fhir:display [ fhir:v "Contact method" ] ;
+     fhir:definition [ fhir:v "Method used to try to reach out to the client" ]
+  ] [
+     fhir:code [ fhir:v "DE14" ] ;
+     fhir:display [ fhir:v "Home visit" ] ;
+     fhir:definition [ fhir:v "Contacted client at home" ]
+  ] [
+     fhir:code [ fhir:v "DE15" ] ;
+     fhir:display [ fhir:v "Text message" ] ;
+     fhir:definition [ fhir:v "Contacted client by short message service (SMS) text" ]
+  ] [
+     fhir:code [ fhir:v "DE16" ] ;
+     fhir:display [ fhir:v "Phone" ] ;
+     fhir:definition [ fhir:v "Contacted client by phone call" ]
+  ] [
+     fhir:code [ fhir:v "DE17" ] ;
+     fhir:display [ fhir:v "Source of information" ] ;
+     fhir:definition [ fhir:v "Source of information about the client" ]
+  ] [
+     fhir:code [ fhir:v "DE18" ] ;
+     fhir:display [ fhir:v "Client" ] ;
+     fhir:definition [ fhir:v "The client was the source of information" ]
+  ] [
+     fhir:code [ fhir:v "DE19" ] ;
+     fhir:display [ fhir:v "Informed by treatment provider" ] ;
+     fhir:definition [ fhir:v "Source of information was a treatment provider of the client" ]
+  ] [
+     fhir:code [ fhir:v "DE20" ] ;
+     fhir:display [ fhir:v "Informed by family or partner" ] ;
+     fhir:definition [ fhir:v "Source of information was a family member of partner" ]
+  ] [
+     fhir:code [ fhir:v "DE21" ] ;
+     fhir:display [ fhir:v "Other source of information" ] ;
+     fhir:definition [ fhir:v "Information about the client's status was provided by someone else" ]
+  ] [
+     fhir:code [ fhir:v "DE22" ] ;
+     fhir:display [ fhir:v "Other source of information (specify)" ] ;
+     fhir:definition [ fhir:v "Information about the client's status was provided by someone else (specify)" ]
+  ] [
+     fhir:code [ fhir:v "DE23" ] ;
+     fhir:display [ fhir:v "Outcome from outreach attempt" ] ;
+     fhir:definition [ fhir:v "Detailed outcome from the attempt to locate the client" ]
+  ] [
+     fhir:code [ fhir:v "DE24" ] ;
+     fhir:display [ fhir:v "Returning to clinic" ] ;
+     fhir:definition [ fhir:v "Client was located and agreed to return to clinic" ]
+  ] [
+     fhir:code [ fhir:v "DE25" ] ;
+     fhir:display [ fhir:v "Self-transferred out" ] ;
+     fhir:definition [ fhir:v "Client transferred to another facility for care (client-initiated transfer, not provider-initiated transfer)" ]
+  ] [
+     fhir:code [ fhir:v "DE26" ] ;
+     fhir:display [ fhir:v "Hospitalized" ] ;
+     fhir:definition [ fhir:v "Client was hospitalized" ]
+  ] [
+     fhir:code [ fhir:v "DE27" ] ;
+     fhir:display [ fhir:v "Refused to return" ] ;
+     fhir:definition [ fhir:v "Client was found but declined to return to treatment" ]
+  ] [
+     fhir:code [ fhir:v "DE28" ] ;
+     fhir:display [ fhir:v "Not located " ] ;
+     fhir:definition [ fhir:v "Attempt was made to locate client, but client was not found" ]
+  ] [
+     fhir:code [ fhir:v "DE29" ] ;
+     fhir:display [ fhir:v "Died (reported)" ] ;
+     fhir:definition [ fhir:v "The client was reported as having died" ]
+  ] [
+     fhir:code [ fhir:v "DE30" ] ;
+     fhir:display [ fhir:v "Moved from catchment area" ] ;
+     fhir:definition [ fhir:v "The client moved from the catchment area (may be reported from the community level)" ]
+  ] [
+     fhir:code [ fhir:v "DE31" ] ;
+     fhir:display [ fhir:v "Date client moved from catchment area" ] ;
+     fhir:definition [ fhir:v "The date on which the client moved from the catchment area, if known" ]
+  ] [
+     fhir:code [ fhir:v "DE32" ] ;
+     fhir:display [ fhir:v "New catchment area" ] ;
+     fhir:definition [ fhir:v "New catchment area where the client resides" ]
+  ] [
+     fhir:code [ fhir:v "DE33" ] ;
+     fhir:display [ fhir:v "Partner or contact of index case" ] ;
+     fhir:definition [ fhir:v "The client was identified by an index case as a partner or contact" ]
+  ] [
+     fhir:code [ fhir:v "DE34" ] ;
+     fhir:display [ fhir:v "HIV status of partner or contact" ] ;
+     fhir:definition [ fhir:v "HIV status of the partner or contact given by the index case" ]
+  ] [
+     fhir:code [ fhir:v "DE35" ] ;
+     fhir:display [ fhir:v "Already knew positive" ] ;
+     fhir:definition [ fhir:v "The partner or contact of the index case already knew they are HIV-positive" ]
+  ] [
+     fhir:code [ fhir:v "DE36" ] ;
+     fhir:display [ fhir:v "Newly diagnosed" ] ;
+     fhir:definition [ fhir:v "The partner or contact of the index case is newly diagnosed as HIV-positive" ]
+  ] [
+     fhir:code [ fhir:v "DE37" ] ;
+     fhir:display [ fhir:v "Negative" ] ;
+     fhir:definition [ fhir:v "The partner or contact of the index case is newly diagnosed is HIV-negative" ]
+  ] [
+     fhir:code [ fhir:v "DE38" ] ;
+     fhir:display [ fhir:v "Date of death " ] ;
+     fhir:definition [ fhir:v "If deceased, the date that the client died" ]
+  ] [
+     fhir:code [ fhir:v "DE39" ] ;
+     fhir:display [ fhir:v "Cause of death" ] ;
+     fhir:definition [ fhir:v "Cause of death, if known" ]
+  ] [
+     fhir:code [ fhir:v "DE40" ] ;
+     fhir:display [ fhir:v "Place of death" ] ;
+     fhir:definition [ fhir:v "Where the client died, if known" ]
+  ] [
+     fhir:code [ fhir:v "DE41" ] ;
+     fhir:display [ fhir:v "HIV treatment outcome" ] ;
+     fhir:definition [ fhir:v "The outcome for the client which is used for reporting retention/attrition." ]
+  ] [
+     fhir:code [ fhir:v "DE42" ] ;
+     fhir:display [ fhir:v "Lost to follow-up" ] ;
+     fhir:definition [ fhir:v "Twenty-eight days or more since last missed appointment " ]
+  ] [
+     fhir:code [ fhir:v "DE43" ] ;
+     fhir:display [ fhir:v "Transferred out" ] ;
+     fhir:definition [ fhir:v "The client transferred to another facility" ]
+  ] [
+     fhir:code [ fhir:v "DE44" ] ;
+     fhir:display [ fhir:v "Death (documented)" ] ;
+     fhir:definition [ fhir:v "People living with HIV previously on ART who are confirmed to have died from any cause" ]
+  ] [
+     fhir:code [ fhir:v "DE45" ] ;
+     fhir:display [ fhir:v "Refused (stopped) treatment" ] ;
+     fhir:definition [ fhir:v "Client was contacted and confirmed to have stopped ART (reasons may include stigma and discrimination, faith healing, etc.)" ]
+  ] [
+     fhir:code [ fhir:v "DE46" ] ;
+     fhir:display [ fhir:v "Date patient lost to follow-up" ] ;
+     fhir:definition [ fhir:v "Date patient was lost to follow-up (LTFU)" ]
+  ] [
+     fhir:code [ fhir:v "DE47" ] ;
+     fhir:display [ fhir:v "On ART" ] ;
+     fhir:definition [ fhir:v "Client is currently taking ART " ]
+  ] [
+     fhir:code [ fhir:v "DE48" ] ;
+     fhir:display [ fhir:v "Date HIV treatment outcome changed" ] ;
+     fhir:definition [ fhir:v "The date on which the client's outcome (lost to follow-up, transferred out, death (documented), or refused (stopped) treatment) changed" ]
+  ] [
+     fhir:code [ fhir:v "DE49" ] ;
+     fhir:display [ fhir:v "Transfer confirmed" ] ;
+     fhir:definition [ fhir:v "Select if transfer to another facility is confirmed" ]
+  ] [
+     fhir:code [ fhir:v "DE50" ] ;
+     fhir:display [ fhir:v "Transfer to facility" ] ;
+     fhir:definition [ fhir:v "Name of health facility client was transferred to" ]
+  ] [
+     fhir:code [ fhir:v "DE51" ] ;
+     fhir:display [ fhir:v "Date of transfer out" ] ;
+     fhir:definition [ fhir:v "The date the client transferred out of the facility to be provided with care at another facility" ]
+  ] [
+     fhir:code [ fhir:v "DE52" ] ;
+     fhir:display [ fhir:v "Adherence assessment" ] ;
+     fhir:definition [ fhir:v "Whether client is adherent or not to ART regimen per national guidelines (immunological or virological monitoring)" ]
+  ] [
+     fhir:code [ fhir:v "DE53" ] ;
+     fhir:display [ fhir:v "Reason(s) for adherence problem" ] ;
+     fhir:definition [ fhir:v "Reason why client is not adherent" ]
+  ] [
+     fhir:code [ fhir:v "DE54" ] ;
+     fhir:display [ fhir:v "Forgot" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because they forgot" ]
+  ] [
+     fhir:code [ fhir:v "DE55" ] ;
+     fhir:display [ fhir:v "Toxicity/side effects" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of toxicity/side effects" ]
+  ] [
+     fhir:code [ fhir:v "DE56" ] ;
+     fhir:display [ fhir:v "Busy" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because they were busy" ]
+  ] [
+     fhir:code [ fhir:v "DE57" ] ;
+     fhir:display [ fhir:v "Change of routine" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of a change of routine" ]
+  ] [
+     fhir:code [ fhir:v "DE58" ] ;
+     fhir:display [ fhir:v "Travel cost" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of travel cost" ]
+  ] [
+     fhir:code [ fhir:v "DE59" ] ;
+     fhir:display [ fhir:v "Distance to clinic" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of distance to clinic " ]
+  ] [
+     fhir:code [ fhir:v "DE60" ] ;
+     fhir:display [ fhir:v "Client lost/ran out of pills" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of client lost/ran out of pills" ]
+  ] [
+     fhir:code [ fhir:v "DE61" ] ;
+     fhir:display [ fhir:v "Stock-out" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of a stock-out" ]
+  ] [
+     fhir:code [ fhir:v "DE62" ] ;
+     fhir:display [ fhir:v "Too ill" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of being too ill" ]
+  ] [
+     fhir:code [ fhir:v "DE63" ] ;
+     fhir:display [ fhir:v "Pill burden" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of the pill burden" ]
+  ] [
+     fhir:code [ fhir:v "DE64" ] ;
+     fhir:display [ fhir:v "Felt well" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because they felt well" ]
+  ] [
+     fhir:code [ fhir:v "DE65" ] ;
+     fhir:display [ fhir:v "Depression" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of depression" ]
+  ] [
+     fhir:code [ fhir:v "DE66" ] ;
+     fhir:display [ fhir:v "Alcohol use" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of alcohol use" ]
+  ] [
+     fhir:code [ fhir:v "DE67" ] ;
+     fhir:display [ fhir:v "Substance use" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of substance use (i.e., drugs)" ]
+  ] [
+     fhir:code [ fhir:v "DE68" ] ;
+     fhir:display [ fhir:v "Stigma/disclosure concerns" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of stigma/disclosure concerns" ]
+  ] [
+     fhir:code [ fhir:v "DE69" ] ;
+     fhir:display [ fhir:v "Lack of food" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of a lack of food" ]
+  ] [
+     fhir:code [ fhir:v "DE70" ] ;
+     fhir:display [ fhir:v "Poor palatability" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of poor palatability" ]
+  ] [
+     fhir:code [ fhir:v "DE71" ] ;
+     fhir:display [ fhir:v "Other" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of other reason" ]
+  ] [
+     fhir:code [ fhir:v "DE72" ] ;
+     fhir:display [ fhir:v "Other (specify)" ] ;
+     fhir:definition [ fhir:v "Client reported not being adherent because of other reason (specify)" ]
+  ] [
+     fhir:code [ fhir:v "DE73" ] ;
+     fhir:display [ fhir:v "Date ART stopped" ] ;
+     fhir:definition [ fhir:v "Date on which client stopped ART" ]
+  ] [
+     fhir:code [ fhir:v "DE74" ] ;
+     fhir:display [ fhir:v "Reason ART stopped" ] ;
+     fhir:definition [ fhir:v "Reason why client intentionally stopped ART" ]
+  ] [
+     fhir:code [ fhir:v "DE75" ] ;
+     fhir:display [ fhir:v "Toxicity/side effects" ] ;
+     fhir:definition [ fhir:v "Client stopped ART because of toxicity/side effects" ]
+  ] [
+     fhir:code [ fhir:v "DE76" ] ;
+     fhir:display [ fhir:v "Severe illness, hospitalization" ] ;
+     fhir:definition [ fhir:v "Client stopped ART because of severe illness, hospitalization" ]
+  ] [
+     fhir:code [ fhir:v "DE77" ] ;
+     fhir:display [ fhir:v "Drugs out of stock " ] ;
+     fhir:definition [ fhir:v "Client stopped ART because of drugs being out of stock " ]
+  ] [
+     fhir:code [ fhir:v "DE78" ] ;
+     fhir:display [ fhir:v "Client lacks finances " ] ;
+     fhir:definition [ fhir:v "Client stopped ART because client lacked finances " ]
+  ] [
+     fhir:code [ fhir:v "DE79" ] ;
+     fhir:display [ fhir:v "Excluded HIV infection in infant" ] ;
+     fhir:definition [ fhir:v "Client stopped ART because the infant was determined to not have HIV" ]
+  ] [
+     fhir:code [ fhir:v "DE80" ] ;
+     fhir:display [ fhir:v "Other reason for stopping ART" ] ;
+     fhir:definition [ fhir:v "Client stopped ART for other reason" ]
+  ] [
+     fhir:code [ fhir:v "DE81" ] ;
+     fhir:display [ fhir:v "Other reason for stopping ART (specify)" ] ;
+     fhir:definition [ fhir:v "Client stopped ART for other reason (specify)" ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

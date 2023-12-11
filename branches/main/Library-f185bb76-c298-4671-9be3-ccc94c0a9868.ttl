@@ -1,0 +1,45 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://worldhealthorganization.github.io/smart-hiv/Library/f185bb76-c298-4671-9be3-ccc94c0a9868> a fhir:Library ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "f185bb76-c298-4671-9be3-ccc94c0a9868"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://worldhealthorganization.github.io/smart-hiv/StructureDefinition/HIVIND27-library"^^xsd:anyURI ;
+       fhir:link <http://worldhealthorganization.github.io/smart-hiv/StructureDefinition/HIVIND27-library>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Contents</h2><p><code>text/cql</code></p><pre><code class=\"language-sql\">/*\n * Library: HIV.IND.27\n * People living with HIV on ART\n * Number and % of people on ART among all people living with HIV at the end of the reporting period\n * \n * Numerator: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True at reporting period end date\n * Numerator Exclusions: Clients with an &quot;HIV treatment outcome&quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period\n * Definition: Number of people on ART at the end of the reporting period (HIV patient monitoring data from, for example, ART registers, patient records or EMRs). For key populations survey data may be required.\n * \n * Denominator: For treatment coverage: *Estimated number of people living with HIV\n * For progress towards 2nd 95 target: *Estimated number of people living with HIV who know their status\n * Denominator exclusions: Clients with an &quot;HIV treatment outcome&quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period\n * Definition: 1. To determine treatment coverage: estimated number of people living with HIV (from models, such as Spectrum AIM)\n * 2. To gauge progress toward the second 95 target: number of people living with HIV who know their HIV status (from surveys or models)\n * \n * Disaggregation:\n *   - Gender\n *   - Age\n *   - Key population member type\n * Description:\n *   - Gender (female, male, other*)\n *   - Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)**\n *   - Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)***\n *   - Cities and other administrative regions of epidemiologic importance\n * \n *      * The category of other includes trans and gender diverse people who choose an identity other than male or female.\n *      ** Recommended in settings with robust electronic health information systems.\n *      *** Where feasible and data security and confidentiality can be ensured (see monitoring considerations in section 3.8 of WHO's 2022 HIV SI Guidelines on key\n *          populations for further guidance and section 6.4 on maintaining data privacy, security and confidential).\n * \n * Data Elements: \n *   - HIV status\n *   - On ART\n * \n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022 \n */\n\n library HIVIND27\n\n using FHIR version '4.0.1'\n\n include /* include concepts and referenced librares*/\n\n parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-01-31]\n context Unfiltered\n\n define &quot;numerator&quot;:\n   PatientData.&quot;PLHIV&quot; and PatientData.&quot;On ART&quot;\n</code></pre></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://worldhealthorganization.github.io/smart-hiv/Library/f185bb76-c298-4671-9be3-ccc94c0a9868"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.1.0"] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:type [
+     fhir:coding ( [
+       fhir:code [ fhir:v "logic" ] ;
+       fhir:display [ fhir:v "HIV Library" ]
+     ] )
+  ] ; # 
+  fhir:date [ fhir:v "2023-12-11T21:45:59+00:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "WHO"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "WHO" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "http://who.int" ]
+     ] )
+  ] ) ; # 
+  fhir:content ( [
+     fhir:contentType [ fhir:v "text/cql" ] ;
+     fhir:data [ fhir:v "LyoKICogTGlicmFyeTogSElWLklORC4yNwogKiBQZW9wbGUgbGl2aW5nIHdpdGggSElWIG9uIEFSVAogKiBOdW1iZXIgYW5kICUgb2YgcGVvcGxlIG9uIEFSVCBhbW9uZyBhbGwgcGVvcGxlIGxpdmluZyB3aXRoIEhJViBhdCB0aGUgZW5kIG9mIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIAogKiBOdW1lcmF0b3I6IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiSElWIHN0YXR1cyI9J0hJVi1wb3NpdGl2ZScgQU5EICJPbiBBUlQiPVRydWUgYXQgcmVwb3J0aW5nIHBlcmlvZCBlbmQgZGF0ZQogKiBOdW1lcmF0b3IgRXhjbHVzaW9uczogQ2xpZW50cyB3aXRoIGFuICJISVYgdHJlYXRtZW50IG91dGNvbWUiIElOICdMb3N0IHRvIGZvbGxvdyB1cCcsICdUcmFuc2ZlcnJlZCBvdXQnLCAnRGVhdGggKGRvY3VtZW50ZWQpJyBhdCB0aGUgZW5kIG9mIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlZmluaXRpb246IE51bWJlciBvZiBwZW9wbGUgb24gQVJUIGF0IHRoZSBlbmQgb2YgdGhlIHJlcG9ydGluZyBwZXJpb2QgKEhJViBwYXRpZW50IG1vbml0b3JpbmcgZGF0YSBmcm9tLCBmb3IgZXhhbXBsZSwgQVJUIHJlZ2lzdGVycywgcGF0aWVudCByZWNvcmRzIG9yIEVNUnMpLiBGb3Iga2V5IHBvcHVsYXRpb25zIHN1cnZleSBkYXRhIG1heSBiZSByZXF1aXJlZC4KICogCiAqIERlbm9taW5hdG9yOiBGb3IgdHJlYXRtZW50IGNvdmVyYWdlOiAqRXN0aW1hdGVkIG51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWCiAqIEZvciBwcm9ncmVzcyB0b3dhcmRzIDJuZCA5NSB0YXJnZXQ6ICpFc3RpbWF0ZWQgbnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgd2hvIGtub3cgdGhlaXIgc3RhdHVzCiAqIERlbm9taW5hdG9yIGV4Y2x1c2lvbnM6IENsaWVudHMgd2l0aCBhbiAiSElWIHRyZWF0bWVudCBvdXRjb21lIiBJTiAnTG9zdCB0byBmb2xsb3cgdXAnLCAnVHJhbnNmZXJyZWQgb3V0JywgJ0RlYXRoIChkb2N1bWVudGVkKScgYXQgdGhlIGVuZCBvZiB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBEZWZpbml0aW9uOiAxLiBUbyBkZXRlcm1pbmUgdHJlYXRtZW50IGNvdmVyYWdlOiBlc3RpbWF0ZWQgbnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgKGZyb20gbW9kZWxzLCBzdWNoIGFzIFNwZWN0cnVtIEFJTSkKICogMi4gVG8gZ2F1Z2UgcHJvZ3Jlc3MgdG93YXJkIHRoZSBzZWNvbmQgOTUgdGFyZ2V0OiBudW1iZXIgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViB3aG8ga25vdyB0aGVpciBISVYgc3RhdHVzIChmcm9tIHN1cnZleXMgb3IgbW9kZWxzKQogKiAKICogRGlzYWdncmVnYXRpb246CiAqICAgLSBHZW5kZXIKICogICAtIEFnZQogKiAgIC0gS2V5IHBvcHVsYXRpb24gbWVtYmVyIHR5cGUKICogRGVzY3JpcHRpb246CiAqICAgLSBHZW5kZXIgKGZlbWFsZSwgbWFsZSwgb3RoZXIqKQogKiAgIC0gQWdlICgw4oCTNCwgNeKAkzksIDEw4oCTMTQsIDE14oCTMTksIDIw4oCTMjQsIDI14oCTMjksIDMw4oCTMzQsIDM14oCTMzksIDQw4oCTNDQsIDQ14oCTNDksIDUwKyB5ZWFycykqKgogKiAgIC0gS2V5IHBvcHVsYXRpb25zIChtZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuLCBwZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncywgcGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MsIHNleCB3b3JrZXJzLCB0cmFucyBhbmQgZ2VuZGVyIGRpdmVyc2UgcGVvcGxlKSoqKgogKiAgIC0gQ2l0aWVzIGFuZCBvdGhlciBhZG1pbmlzdHJhdGl2ZSByZWdpb25zIG9mIGVwaWRlbWlvbG9naWMgaW1wb3J0YW5jZQogKiAKICogICAgICAqIFRoZSBjYXRlZ29yeSBvZiBvdGhlciBpbmNsdWRlcyB0cmFucyBhbmQgZ2VuZGVyIGRpdmVyc2UgcGVvcGxlIHdobyBjaG9vc2UgYW4gaWRlbnRpdHkgb3RoZXIgdGhhbiBtYWxlIG9yIGZlbWFsZS4KICogICAgICAqKiBSZWNvbW1lbmRlZCBpbiBzZXR0aW5ncyB3aXRoIHJvYnVzdCBlbGVjdHJvbmljIGhlYWx0aCBpbmZvcm1hdGlvbiBzeXN0ZW1zLgogKiAgICAgICoqKiBXaGVyZSBmZWFzaWJsZSBhbmQgZGF0YSBzZWN1cml0eSBhbmQgY29uZmlkZW50aWFsaXR5IGNhbiBiZSBlbnN1cmVkIChzZWUgbW9uaXRvcmluZyBjb25zaWRlcmF0aW9ucyBpbiBzZWN0aW9uIDMuOCBvZiBXSE8ncyAyMDIyIEhJViBTSSBHdWlkZWxpbmVzIG9uIGtleQogKiAgICAgICAgICBwb3B1bGF0aW9ucyBmb3IgZnVydGhlciBndWlkYW5jZSBhbmQgc2VjdGlvbiA2LjQgb24gbWFpbnRhaW5pbmcgZGF0YSBwcml2YWN5LCBzZWN1cml0eSBhbmQgY29uZmlkZW50aWFsKS4KICogCiAqIERhdGEgRWxlbWVudHM6IAogKiAgIC0gSElWIHN0YXR1cwogKiAgIC0gT24gQVJUCiAqIAogKiBSZWZlcmVuY2U6IENvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIHBlcnNvbi1jZW50cmVkIEhJViBzdHJhdGVnaWMgaW5mb3JtYXRpb246IHN0cmVuZ3RoZW5pbmcgcm91dGluZSBkYXRhIGZvciBpbXBhY3QuIEdlbmV2YTogV29ybGQgSGVhbHRoIE9yZ2FuaXphdGlvbjsgMjAyMiAKICovCgogbGlicmFyeSBISVZJTkQyNwoKIHVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCgogaW5jbHVkZSAvKiBpbmNsdWRlIGNvbmNlcHRzIGFuZCByZWZlcmVuY2VkIGxpYnJhcmVzKi8KCiBwYXJhbWV0ZXIgIk1lYXN1cmVtZW50IFBlcmlvZCIgSW50ZXJ2YWw8RGF0ZT4gZGVmYXVsdCBJbnRlcnZhbFtAMjAyMC0wMS0wMSwgQDIwMjAtMDEtMzFdCiBjb250ZXh0IFVuZmlsdGVyZWQKCiBkZWZpbmUgIm51bWVyYXRvciI6CiAgIFBhdGllbnREYXRhLiJQTEhJViIgYW5kIFBhdGllbnREYXRhLiJPbiBBUlQiCg=="^^xsd:base64Binary ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+
