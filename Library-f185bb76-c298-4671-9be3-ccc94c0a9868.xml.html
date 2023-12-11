@@ -246,7 +246,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide, published by WHO. This guide is not an authorized publication; it is the continuous build for version 0.1.0 built by the FHIR (HL7® FHIR® Standard) CI Build. This version is based on the current content of <a href="https://github.com/I-TECH-UW/smart-hiv">https://github.com/I-TECH-UW/smart-hiv</a> and changes regularly. See the <a href="http://worldhealthorganization.github.io/smart-hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://worldhealthorganization.github.io/smart-hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -327,7 +327,55 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4B/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4B/narrative.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;&lt;a href=&quot;./input/cql/HIVIND27.cql&quot;&gt;./input/cql/HIVIND27.cql&lt;/a&gt;&lt;/code&gt; (&lt;code&gt;text/cql&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.27
+ * People living with HIV on ART
+ * Number and % of people on ART among all people living with HIV at the end of the reporting period
+ * 
+ * Numerator: COUNT of clients with &amp;quot;HIV status&amp;quot;='HIV-positive' AND &amp;quot;On ART&amp;quot;=True at reporting period end date
+ * Numerator Exclusions: Clients with an &amp;quot;HIV treatment outcome&amp;quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period
+ * Definition: Number of people on ART at the end of the reporting period (HIV patient monitoring data from, for example, ART registers, patient records or EMRs). For key populations survey data may be required.
+ * 
+ * Denominator: For treatment coverage: *Estimated number of people living with HIV
+ * For progress towards 2nd 95 target: *Estimated number of people living with HIV who know their status
+ * Denominator exclusions: Clients with an &amp;quot;HIV treatment outcome&amp;quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period
+ * Definition: 1. To determine treatment coverage: estimated number of people living with HIV (from models, such as Spectrum AIM)
+ * 2. To gauge progress toward the second 95 target: number of people living with HIV who know their HIV status (from surveys or models)
+ * 
+ * Disaggregation:
+ *   - Gender
+ *   - Age
+ *   - Key population member type
+ * Description:
+ *   - Gender (female, male, other*)
+ *   - Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)**
+ *   - Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)***
+ *   - Cities and other administrative regions of epidemiologic importance
+ * 
+ *      * The category of other includes trans and gender diverse people who choose an identity other than male or female.
+ *      ** Recommended in settings with robust electronic health information systems.
+ *      *** Where feasible and data security and confidentiality can be ensured (see monitoring considerations in section 3.8 of WHO's 2022 HIV SI Guidelines on key
+ *          populations for further guidance and section 6.4 on maintaining data privacy, security and confidential).
+ * 
+ * Data Elements: 
+ *   - HIV status
+ *   - On ART
+ * 
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022 
+ */
+
+ library HIVIND27
+
+ using FHIR version '4.0.1'
+
+ include /* include concepts and referenced librares*/
+
+ parameter &amp;quot;Measurement Period&amp;quot; Interval&amp;lt;Date&amp;gt; default Interval[@2020-01-01, @2020-01-31]
+ context Unfiltered
+
+ define &amp;quot;numerator&amp;quot;:
+   PatientData.&amp;quot;PLHIV&amp;quot; and PatientData.&amp;quot;On ART&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4B/library.html#Library.url">url</a>
        <a href="http://hl7.org/fhir/R4B/datatypes.html#uri">value</a>=&quot;http://worldhealthorganization.github.io/smart-hiv/Library/f185bb76-c298-4671-9be3-ccc94c0a9868&quot;/&gt;
@@ -339,7 +387,7 @@
       &lt;<a href="http://hl7.org/fhir/R4B/datatypes.html#Coding#Coding.display">display</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#string">value</a>=&quot;HIV Library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4B/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#dateTime">value</a>=&quot;2023-12-11T21:03:18+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4B/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#dateTime">value</a>=&quot;2023-12-11T21:45:51+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4B/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4B/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4B/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -350,7 +398,8 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4B/library.html#Library.content">content</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4B/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
-    &lt;<a href="http://hl7.org/fhir/R4B/datatypes.html#Attachment#Attachment.url">url</a> <a href="http://hl7.org/fhir/R4B/datatypes.html#url">value</a>=&quot;./input/cql/HIVIND27.cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4B/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4B/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC4yNwogKiBQZW9wbGUgbGl2aW5nIHdpdGggSElWIG9uIEFSVAogKiBOdW1iZXIgYW5kICUgb2YgcGVvcGxlIG9uIEFSVCBhbW9uZyBhbGwgcGVvcGxlIGxpdmluZyB3aXRoIEhJViBhdCB0aGUgZW5kIG9mIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIAogKiBOdW1lcmF0b3I6IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiSElWIHN0YXR1cyI9J0hJVi1wb3NpdGl2ZScgQU5EICJPbiBBUlQiPVRydWUgYXQgcmVwb3J0aW5nIHBlcmlvZCBlbmQgZGF0ZQogKiBOdW1lcmF0b3IgRXhjbHVzaW9uczogQ2xpZW50cyB3aXRoIGFuICJISVYgdHJlYXRtZW50IG91dGNvbWUiIElOICdMb3N0IHRvIGZvbGxvdyB1cCcsICdUcmFuc2ZlcnJlZCBvdXQnLCAnRGVhdGggKGRvY3VtZW50ZWQpJyBhdCB0aGUgZW5kIG9mIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlZmluaXRpb246IE51bWJlciBvZiBwZW9wbGUgb24gQVJUIGF0IHRoZSBlbmQgb2YgdGhlIHJlcG9ydGluZyBwZXJpb2QgKEhJViBwYXRpZW50IG1vbml0b3JpbmcgZGF0YSBmcm9tLCBmb3IgZXhhbXBsZSwgQVJUIHJlZ2lzdGVycywgcGF0aWVudCByZWNvcmRzIG9yIEVNUnMpLiBGb3Iga2V5IHBvcHVsYXRpb25zIHN1cnZleSBkYXRhIG1heSBiZSByZXF1aXJlZC4KICogCiAqIERlbm9taW5hdG9yOiBGb3IgdHJlYXRtZW50IGNvdmVyYWdlOiAqRXN0aW1hdGVkIG51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWCiAqIEZvciBwcm9ncmVzcyB0b3dhcmRzIDJuZCA5NSB0YXJnZXQ6ICpFc3RpbWF0ZWQgbnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgd2hvIGtub3cgdGhlaXIgc3RhdHVzCiAqIERlbm9taW5hdG9yIGV4Y2x1c2lvbnM6IENsaWVudHMgd2l0aCBhbiAiSElWIHRyZWF0bWVudCBvdXRjb21lIiBJTiAnTG9zdCB0byBmb2xsb3cgdXAnLCAnVHJhbnNmZXJyZWQgb3V0JywgJ0RlYXRoIChkb2N1bWVudGVkKScgYXQgdGhlIGVuZCBvZiB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBEZWZpbml0aW9uOiAxLiBUbyBkZXRlcm1pbmUgdHJlYXRtZW50IGNvdmVyYWdlOiBlc3RpbWF0ZWQgbnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgKGZyb20gbW9kZWxzLCBzdWNoIGFzIFNwZWN0cnVtIEFJTSkKICogMi4gVG8gZ2F1Z2UgcHJvZ3Jlc3MgdG93YXJkIHRoZSBzZWNvbmQgOTUgdGFyZ2V0OiBudW1iZXIgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViB3aG8ga25vdyB0aGVpciBISVYgc3RhdHVzIChmcm9tIHN1cnZleXMgb3IgbW9kZWxzKQogKiAKICogRGlzYWdncmVnYXRpb246CiAqICAgLSBHZW5kZXIKICogICAtIEFnZQogKiAgIC0gS2V5IHBvcHVsYXRpb24gbWVtYmVyIHR5cGUKICogRGVzY3JpcHRpb246CiAqICAgLSBHZW5kZXIgKGZlbWFsZSwgbWFsZSwgb3RoZXIqKQogKiAgIC0gQWdlICgw4oCTNCwgNeKAkzksIDEw4oCTMTQsIDE14oCTMTksIDIw4oCTMjQsIDI14oCTMjksIDMw4oCTMzQsIDM14oCTMzksIDQw4oCTNDQsIDQ14oCTNDksIDUwKyB5ZWFycykqKgogKiAgIC0gS2V5IHBvcHVsYXRpb25zIChtZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuLCBwZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncywgcGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MsIHNleCB3b3JrZXJzLCB0cmFucyBhbmQgZ2VuZGVyIGRpdmVyc2UgcGVvcGxlKSoqKgogKiAgIC0gQ2l0aWVzIGFuZCBvdGhlciBhZG1pbmlzdHJhdGl2ZSByZWdpb25zIG9mIGVwaWRlbWlvbG9naWMgaW1wb3J0YW5jZQogKiAKICogICAgICAqIFRoZSBjYXRlZ29yeSBvZiBvdGhlciBpbmNsdWRlcyB0cmFucyBhbmQgZ2VuZGVyIGRpdmVyc2UgcGVvcGxlIHdobyBjaG9vc2UgYW4gaWRlbnRpdHkgb3RoZXIgdGhhbiBtYWxlIG9yIGZlbWFsZS4KICogICAgICAqKiBSZWNvbW1lbmRlZCBpbiBzZXR0aW5ncyB3aXRoIHJvYnVzdCBlbGVjdHJvbmljIGhlYWx0aCBpbmZvcm1hdGlvbiBzeXN0ZW1zLgogKiAgICAgICoqKiBXaGVyZSBmZWFzaWJsZSBhbmQgZGF0YSBzZWN1cml0eSBhbmQgY29uZmlkZW50aWFsaXR5IGNhbiBiZSBlbnN1cmVkIChzZWUgbW9uaXRvcmluZyBjb25zaWRlcmF0aW9ucyBpbiBzZWN0aW9uIDMuOCBvZiBXSE8ncyAyMDIyIEhJViBTSSBHdWlkZWxpbmVzIG9uIGtleQogKiAgICAgICAgICBwb3B1bGF0aW9ucyBmb3IgZnVydGhlciBndWlkYW5jZSBhbmQgc2VjdGlvbiA2LjQgb24gbWFpbnRhaW5pbmcgZGF0YSBwcml2YWN5LCBzZWN1cml0eSBhbmQgY29uZmlkZW50aWFsKS4KICogCiAqIERhdGEgRWxlbWVudHM6IAogKiAgIC0gSElWIHN0YXR1cwogKiAgIC0gT24gQVJUCiAqIAogKiBSZWZlcmVuY2U6IENvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIHBlcnNvbi1jZW50cmVkIEhJViBzdHJhdGVnaWMgaW5mb3JtYXRpb246IHN0cmVuZ3RoZW5pbmcgcm91dGluZSBkYXRhIGZvciBpbXBhY3QuIEdlbmV2YTogV29ybGQgSGVhbHRoIE9yZ2FuaXphdGlvbjsgMjAyMiAKICovCgogbGlicmFyeSBISVZJTkQyNwoKIHVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCgogaW5jbHVkZSAvKiBpbmNsdWRlIGNvbmNlcHRzIGFuZCByZWZlcmVuY2VkIGxpYnJhcmVzKi8KCiBwYXJhbWV0ZXIgIk1lYXN1cmVtZW50IFBlcmlvZCIgSW50ZXJ2YWw8RGF0ZT4gZGVmYXVsdCBJbnRlcnZhbFtAMjAyMC0wMS0wMSwgQDIwMjAtMDEtMzFdCiBjb250ZXh0IFVuZmlsdGVyZWQKCiBkZWZpbmUgIm51bWVyYXRvciI6CiAgIFBhdGllbnREYXRhLiJQTEhJViIgYW5kIFBhdGllbnREYXRhLiJPbiBBUlQiCg==&quot;/&gt;
   &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
@@ -382,7 +431,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package who.fhir.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 4.3.0</a>. Generated <span title="Mon, Dec 11, 2023 21:03+0000">2023-12-11</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package who.fhir.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R5/">FHIR 4.3.0</a>. Generated <span title="Mon, Dec 11, 2023 21:45+0000">2023-12-11</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
