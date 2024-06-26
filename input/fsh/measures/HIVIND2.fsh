@@ -1,5 +1,5 @@
 Instance: HIVIND2
-InstanceOf: http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+InstanceOf: http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cv-measure-cqfm
 Title: "HIV.IND.2 Total PrEP recipients"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablemeasure"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
@@ -13,14 +13,29 @@ Title: "HIV.IND.2 Total PrEP recipients"
 * title = "HIV.IND.2 Total PrEP recipients"
 * publisher = "World Health Organization (WHO)"
 * library = "http://smart.who.int/immunizations-measles/Library/HIVIND2Logic"
-* scoring = $measure-scoring#proportion "Proportion"
+* scoring = $measure-scoring#continuous-variable "Proportion"
 * group[+]
-  * population[numerator]
+  * population[initialPopulation]
     * id = "HIV.IND.2.NUM"
     * description = "Number of people prescribed or dispensed any form of PrEP at least once during the reporting period. Individuals prescribed different PrEP products or regimens at different times during the reporting period should be counted only once."
-    * code = $measure-population#numerator "Numerator"
+    * code = $measure-population#initial-population "Initial Population"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"
+  * population[measurePopulation]
+    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
+    * id = "IMMZ.IND.02.MP"
+    * description = "Measure Population"
+    * code = $measure-population#measure-population "Measure Population"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Numerator"
+  * population[measureObservation]
+    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-criteriaReference].valueString = "measure-population"
+    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-aggregateMethod].valueCode = #count
+    * id = "IMMZ.IND.02.MO"
+    * description = "Measure Observation"
+    * code = $measure-population#measure-observation
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Measure Observation"
   * stratifier[+]
     * id = "HIV.IND.2.S.AG"
     * criteria.language = #text/cql-identifier

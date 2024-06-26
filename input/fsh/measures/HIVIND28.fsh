@@ -15,6 +15,14 @@ Title: "HIV.IND.28 Total attrition from ART"
 * library = "http://smart.who.int/immunizations-measles/Library/HIVIND28Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
+  * population[initialPopulation]
+    * id = "HIV.IND.28.initialPopulation"
+    * description = "Number of people reported on ART at the end of the last reporting period
+plus
+those newly initiated on ART during the current reporting period"
+    * code = $measure-population#initial-population "Initial Population"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Denominator"
   * population[denominator]
     * id = "HIV.IND.28.DEN"
     * description = "Number of people reported on ART at the end of the last reporting period
