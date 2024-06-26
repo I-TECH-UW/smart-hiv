@@ -15,6 +15,12 @@ Title: "HIV.IND.21 Linkage to ART"
 * library = "http://smart.who.int/immunizations-measles/Library/HIVIND21Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
+  * population[initialPopulation]
+    * id = "HIV.IND.21.initialPopulation"
+    * description = "Number of people newly diagnosed with HIV during the reporting period"
+    * code = $measure-population#initial-population "Initial Population"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Denominator"
   * population[denominator]
     * id = "HIV.IND.21.DEN"
     * description = "Number of people newly diagnosed with HIV during the reporting period"

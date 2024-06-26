@@ -15,6 +15,13 @@ Title: "HIV.IND.3 PrEP coverage"
 * library = "http://smart.who.int/immunizations-measles/Library/HIVIND3Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
+  * population[initialPopulation]
+    * id = "HIV.IND.3.initialPopulation"
+    * description = "a) Programme/service provider level: number of individuals who received a negative HIV test during the reporting period and identified as being at elevated risk for HIV acquisition (includes people requesting/receiving any HIV prevention intervention, people from key populations, people with known risk factors or assessed as being at risk of HIV acquisition)
+b) Population level: population-level estimate of the number of people who would benefit from PrEP, for example as derived from a PrEP need estimator tool"
+    * code = $measure-population#initial-population "Initial Population"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Denominator"
   * population[denominator]
     * id = "HIV.IND.3.DEN"
     * description = "a) Programme/service provider level: number of individuals who received a negative HIV test during the reporting period and identified as being at elevated risk for HIV acquisition (includes people requesting/receiving any HIV prevention intervention, people from key populations, people with known risk factors or assessed as being at risk of HIV acquisition)
