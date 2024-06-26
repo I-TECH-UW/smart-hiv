@@ -42,6 +42,9 @@ codesystem ARTCodes: 'http://example.org/fhir/CodeSystem/art-codes'
 
 code "Currently on PrEP": 'HIV.C.DE10' from HIV_DAK_Codes
 code "Oral PrEP": 'HIV.C.DE12' from HIV_DAK_Codes
+code "TDF + FTC": 'HIV.C.DE18' from HIV_DAK_Codes
+code "TDF": 'HIV.C.DE19' from HIV_DAK_Codes
+code "TDF + 3TC": 'HIV.C.DE20' from HIV_DAK_Codes
 code "Dapivirine vaginal ring (DVR)": 'HIV.C.DE22' from HIV_DAK_Codes
 code "CAB-LA": 'HIV.C.DE23' from HIV_DAK_Codes
 
@@ -54,6 +57,9 @@ valueset "Continuing user": 'http://example.org/fhir/ValueSet/continuing'
 valueset "Restarting following a period of not taking medication": 'http://example.org/fhir/ValueSet/restarting'
 
 valueset "Daily oral PrEP": 'http://example.org/fhir/ValueSet/dailyPrEP'
+//valueset "TDF + FTC": 'http://example.org/fhir/ValueSet/dailyPrEP'
+//valueset "TDF": 'http://example.org/fhir/ValueSet/dailyPrEP'
+//valueset "TDF + 3TC": 'http://example.org/fhir/ValueSet/dailyPrEP'
 valueset "Event-driven PrEP (2+1+1)": 'http://example.org/fhir/ValueSet/eventprep'
 valueset "Other PrEP dosing type": 'http://example.org/fhir/ValueSet/otherprep'
 
@@ -169,9 +175,9 @@ define "Patient Deceased during Measurement Period":
     else false
   end
 
-/* End of care because of transferring out, death, lost to follow up, or stopped treatment*/
+/* End of care because of transferring out*/
 
-define "Stopped ART at Facility during the measurement period":
+define "Transfer Out at Facility during the measurement period":
     exists(
     [EpisodeOfCare] EOC
     where exists(EOC.type T where T ~ "On ART") 
@@ -186,6 +192,13 @@ define "Stopped ART at Facility during the measurement period":
     )
     )
     )
+
+define "Lost to Follow Up during the measurement period":
+    exists("HIV Treatment Active" H
+   where H.effective starts before end of "Measurement Period"
+    and H.effective ends after start of "Measurement Period"
+	and not (H.effective ends after (end of "Measurement Period" - 28 days))
+   )
 
 /*
  * By Age Stratifiers
@@ -359,21 +372,23 @@ exists(
   exists([MedicationStatement] MS
     where MS.status = 'recorded'
     and exists(MS.reasonCode C where C ~ "Currently on PrEP")
-    and exists(MS.medication M where M ~ "Oral PrEP")  
+    and (MS.medication ~ "TDF + FTC" or
+    MS.medication ~ "TDF + 3TC" or
+    MS.medication ~ "TDF")
   )
 
   define "PREP Product long-acting device":
   exists([MedicationStatement] MS
     where MS.status = 'recorded'
     and exists(MS.reasonCode C where C ~ "Currently on PrEP")
-    and MS.medication in "Dapivirine vaginal ring (DVR)"
+    and MS.medication ~ "Dapivirine vaginal ring (DVR)"
   )
 
   define "PREP Product long-acting injectable":
   exists([MedicationStatement] MS
     where MS.status = 'recorded'
     and exists(MS.reasonCode C where C ~ "Currently on PrEP")
-    and MS.medication in "CAB-LA"
+    and MS.medication ~ "CAB-LA"
   )
   
   define "PREP first time":

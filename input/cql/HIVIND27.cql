@@ -66,12 +66,11 @@ define "numerator":
 	))
    and exists(HIC."HIV Treatment Active" H
    where H.effective starts before end of "Measurement Period"
-    and (H.effective ends after start of "Measurement Period"
-    or end of H.effective  ~  null)
-	and (H.effective ends after (end of "Measurement Period" - 28 days))
+    and (H.effective ends after start of "Measurement Period")
    )
    and not exists (HIC."Patient Deceased before end of Measurement Period")
-   and not exists (HIC."Stopped ART at Facility during the measurement period")
+   and not exists (HIC."Transfer Out at Facility during the measurement period")
+   and not exists (HIC."Lost to Follow Up during the measurement period")
 
 
 define "denominator":
@@ -82,7 +81,8 @@ define "denominator":
 	where (O.issued before end of "Measurement Period")
 	))
    and not exists (HIC."Patient Deceased before end of Measurement Period")
-   and not exists (HIC."Stopped ART at Facility during the measurement period")
+   and not exists (HIC."Transfer Out at Facility during the measurement period")
+   and not exists (HIC."Lost to Follow Up during the measurement period")
 
 /*
  * Disaggregators
@@ -99,3 +99,8 @@ define "Geographic Region Stratifier":
 
 define "patientGroups Stratifier":
 	HIC."patientGroups"
+
+//define "Stratification":
+ //HIC."By Administrative Gender Stratifier".code 
+  //+ ':' + HIC."By Age Stratifier"
+//+ ':' + HIC."By Geographic Region Stratifier"
