@@ -6,6 +6,7 @@ Description: "Value set of symptoms that could suggest an acute HIV infection"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE46"
 
 * HIVConcepts#HIV.C.DE47 "Fever"
 * HIVConcepts#HIV.C.DE48 "Sore throat"

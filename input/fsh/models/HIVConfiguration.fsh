@@ -77,7 +77,7 @@ Description: "This tab describes data about a facility or region that are used i
   * ^code[+] = HIVConcepts#HIV.Config.DE11
 * hivBurdenOfTheSetting 1..1 Coding "HIV burden of the setting" "HIV burden of the setting (high or low) based on the national HIV prevalence or where the HIV prevalence and/or incidence in a geographical setting is higher than national prevalence and, therefore, needs priority in the HIV response"
   * ^code[+] = HIVConcepts#HIV.Config.DE12
-  * hivBurdenOfTheSetting from HIV.Config.DE12
+* hivBurdenOfTheSetting from HIV.Config.DE12
 * hpvDnaTestingOperationalAtTheHealthFacility 1..1 boolean "HPV DNA testing operational at the health facility" "Is HPV DNA testing operational at the health facility for cervical cancer screening?"
   * ^code[+] = HIVConcepts#HIV.Config.DE15
 * routineViralLoadTestingIsAvailable 1..1 boolean "Routine viral load testing is available" "Routine viral load testing is available in the facility"
@@ -88,7 +88,7 @@ Description: "This tab describes data about a facility or region that are used i
   * ^code[+] = HIVConcepts#HIV.Config.DE18
 * otherPriorityPopulations 0..1 Coding "Other priority populations" "Other populations of priority of HIV prevention and care in local context (provided during adaptation)"
   * ^code[+] = HIVConcepts#HIV.Config.DE19
-  * otherPriorityPopulations from HIV.Config.DE19
+* otherPriorityPopulations from HIV.Config.DE19
 * reportingPeriodEndDate 0..1 date "Reporting period end date" "End date of the reporting period"
   * ^code[+] = HIVConcepts#HIV.Config.DE20
 * reportingPeriodStartDate 0..1 date "Reporting period start date" "Start date of the reporting period"

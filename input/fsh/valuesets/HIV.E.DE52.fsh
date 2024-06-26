@@ -6,6 +6,7 @@ Description: "Value set of mode of delivery for current pregnancy"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE52"
 
 * HIVConcepts#HIV.E.DE53 "Spontaneous vaginal delivery"
 * HIVConcepts#HIV.E.DE54 "Assisted vaginal delivery"

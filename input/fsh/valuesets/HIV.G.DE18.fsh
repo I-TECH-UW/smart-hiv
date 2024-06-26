@@ -6,6 +6,7 @@ Description: "Value set of hepatitis B virus test result (HBsAg)"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVGDE18"
 
 * HIVConcepts#HIV.G.DE19 "Positive"
 * HIVConcepts#HIV.G.DE20 "Negative"

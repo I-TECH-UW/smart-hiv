@@ -6,6 +6,7 @@ Description: "Value set of result from Gonorrhoea test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE808"
 
 * HIVConcepts#HIV.D.DE809 "Positive"
 * HIVConcepts#HIV.D.DE810 "Negative"

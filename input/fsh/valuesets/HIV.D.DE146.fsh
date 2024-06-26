@@ -6,6 +6,7 @@ Description: "Value set of drug class of current ART regimen"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE146"
 
 * HIVConcepts#HIV.D.DE147 "NRTI"
 * HIVConcepts#HIV.D.DE148 "NtRTI"

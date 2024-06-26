@@ -6,6 +6,7 @@ Description: "Value set of new or recurrent clinical events used to categorize H
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE289"
 
 * HIVConcepts#HIV.D.DE290 "Asymptomatic"
 * HIVConcepts#HIV.D.DE291 "Persistent generalized lymphadenopathy"

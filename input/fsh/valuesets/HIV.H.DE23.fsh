@@ -6,6 +6,7 @@ Description: "Value set of detailed outcome from the attempt to locate the clien
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE23"
 
 * HIVConcepts#HIV.H.DE24 "Returning to clinic"
 * HIVConcepts#HIV.H.DE25 "Self-transferred out"

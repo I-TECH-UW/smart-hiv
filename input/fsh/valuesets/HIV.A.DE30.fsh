@@ -6,6 +6,7 @@ Description: "Value set of client's current marital status "
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVADE30"
 
 * HIVConcepts#HIV.A.DE31 "Unmarried"
 * HIVConcepts#HIV.A.DE32 "Never married"

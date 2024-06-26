@@ -6,6 +6,7 @@ Description: "Value set of HIV pre-exposure prophylaxis (PrEP) regimen"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE17"
 
 * HIVConcepts#HIV.C.DE18 "TDF + FTC"
 * HIVConcepts#HIV.C.DE19 "TDF"

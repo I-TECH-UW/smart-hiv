@@ -6,6 +6,7 @@ Description: "Value set of the HIV test result of the client's partner"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE132"
 
 * HIVConcepts#HIV.B.DE133 "HIV-positive"
 * HIVConcepts#HIV.B.DE134 "HIV-negative"

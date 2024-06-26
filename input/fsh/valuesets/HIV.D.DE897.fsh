@@ -6,6 +6,7 @@ Description: "Value set of functional status of people with advanced HIV disease
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE897"
 
 * HIVConcepts#HIV.D.DE898 "Working, able to perform usual work inside and outside the home"
 * HIVConcepts#HIV.D.DE899 "Ambulatory, able to perform activity of daily living (ADL), not able to work"

@@ -6,6 +6,7 @@ Description: "Value set of does the client have any current chronic health condi
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE65"
 
 * HIVConcepts#HIV.D.DE66 "No chronic or past health conditions"
 * HIVConcepts#HIV.D.DE67 "Don't know"

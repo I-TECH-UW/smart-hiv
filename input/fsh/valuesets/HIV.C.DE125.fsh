@@ -6,6 +6,7 @@ Description: "Value set of type of follow-up appointment for testing services"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE125"
 
 * HIVConcepts#HIV.C.DE126 "Retesting for HIV"
 * HIVConcepts#HIV.C.DE127 "Follow-up appointment for PrEP"

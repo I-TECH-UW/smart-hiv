@@ -6,6 +6,7 @@ Description: "Value set of how the client would like to receive family planning 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVADE46"
 
 * HIVConcepts#HIV.A.DE47 "Text message/SMS"
 * HIVConcepts#HIV.A.DE48 "Voice call"

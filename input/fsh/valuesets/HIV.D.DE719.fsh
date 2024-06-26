@@ -6,6 +6,7 @@ Description: "Value set of treatment method for cervical precancer lesions"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE719"
 
 * HIVConcepts#HIV.D.DE720 "Cryotherapy"
 * HIVConcepts#HIV.D.DE721 "Thermal ablation"

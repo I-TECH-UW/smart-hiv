@@ -6,6 +6,7 @@ Description: "Value set of alternative backbone regimen for PEP"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE95"
 
 * HIVConcepts#HIV.C.DE96 "ABC + 3TC"
 * HIVConcepts#HIV.C.DE97 "TDF + 3TC"

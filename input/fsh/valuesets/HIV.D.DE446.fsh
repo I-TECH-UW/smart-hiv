@@ -6,6 +6,7 @@ Description: "Value set of clients status of coinfections at the time when ART w
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE446"
 
 * HIVConcepts#HIV.D.DE447 "Hepatitis B"
 * HIVConcepts#HIV.D.DE448 "Hepatitis C"

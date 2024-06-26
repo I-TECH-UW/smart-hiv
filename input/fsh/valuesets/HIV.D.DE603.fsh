@@ -6,4 +6,4 @@ Description: "Value set of the brand or trade name used to refer to the vaccine 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
-
+* ^name = "HIVDDE603"

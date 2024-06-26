@@ -6,6 +6,7 @@ Description: "Value set of aRT treatment failure"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE225"
 
 * HIVConcepts#HIV.D.DE226 "Clinical failure"
 * HIVConcepts#HIV.D.DE227 "Immunological failure"

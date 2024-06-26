@@ -6,6 +6,7 @@ Description: "Value set of indicates patient's TB treatment outcome"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE1002"
 
 * HIVConcepts#HIV.D.DE1003 "Treatment failed"
 * HIVConcepts#HIV.D.DE1004 "Cured"

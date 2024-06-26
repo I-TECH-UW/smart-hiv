@@ -6,6 +6,7 @@ Description: "Value set of early infant diagnosis test number 1 test result"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE186"
 
 * HIVConcepts#HIV.E.DE187 "Positive"
 * HIVConcepts#HIV.E.DE188 "Negative"

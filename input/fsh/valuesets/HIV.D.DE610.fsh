@@ -6,6 +6,7 @@ Description: "Value set of vaccine preventable disease being targeted by vaccine
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE610"
 
 * HIVConcepts#HIV.D.DE611 "Hepatitis A"
 * HIVConcepts#HIV.D.DE612 "Hepatitis B"

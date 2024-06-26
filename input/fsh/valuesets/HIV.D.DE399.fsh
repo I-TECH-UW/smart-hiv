@@ -6,6 +6,7 @@ Description: "Value set of name of examinations, test and results for any releva
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE399"
 
 * HIVConcepts#HIV.D.DE400 "Haemoglobin (Hb)"
 * HIVConcepts#HIV.D.DE401 "Pregnancy test"

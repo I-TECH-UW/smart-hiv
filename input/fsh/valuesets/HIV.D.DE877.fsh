@@ -6,6 +6,7 @@ Description: "Value set of result from confirmatory STI test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE877"
 
 * HIVConcepts#HIV.D.DE878 "Positive"
 * HIVConcepts#HIV.D.DE879 "Negative"

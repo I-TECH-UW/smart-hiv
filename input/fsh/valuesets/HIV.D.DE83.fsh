@@ -6,6 +6,7 @@ Description: "Value set of aRT regimen for treating clients living with HIV, bas
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE83"
 
 * HIVConcepts#HIV.D.DE84 "First-line ART regimen for adults and adolescents"
 * HIVConcepts#HIV.D.DE85 "First-line ART regimen for children"

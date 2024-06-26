@@ -6,6 +6,7 @@ Description: "Value set of result of urine culture (or urine Gram-staining if no
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE255"
 
 * HIVConcepts#HIV.E.DE256 "Positive"
 * HIVConcepts#HIV.E.DE257 "Negative"

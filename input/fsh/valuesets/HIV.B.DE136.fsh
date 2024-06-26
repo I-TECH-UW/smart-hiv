@@ -6,6 +6,7 @@ Description: "Value set of the HIV status of a sexual or drug-injecting partner 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE136"
 
 * HIVConcepts#HIV.B.DE137 "HIV-positive"
 * HIVConcepts#HIV.B.DE138 "HIV-negative"

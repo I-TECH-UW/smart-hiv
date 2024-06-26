@@ -6,6 +6,7 @@ Description: "Value set of listing of tests for clients on or starting pre-expos
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE63"
 
 * HIVConcepts#HIV.C.DE64 "Serum creatinine test"
 * HIVConcepts#HIV.C.DE65 "Hepatitis B test"

@@ -6,6 +6,7 @@ Description: "Value set of reason the vaccine dose was not given"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE636"
 
 * HIVConcepts#HIV.D.DE637 "Stock-out"
 * HIVConcepts#HIV.D.DE638 "Client is ill"

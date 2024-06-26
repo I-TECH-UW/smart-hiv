@@ -6,6 +6,7 @@ Description: "Value set of indicates the current status of TB preventive treatme
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE1034"
 
 * HIVConcepts#HIV.D.DE1035 "Not started"
 * HIVConcepts#HIV.D.DE1036 "On TPT"

@@ -6,6 +6,7 @@ Description: "Value set of whether the visit will be clinical only, ARV drug pic
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE525"
 
 * HIVConcepts#HIV.D.DE526 "Clinical visit"
 * HIVConcepts#HIV.D.DE527 "Antiretroviral drug pick up"

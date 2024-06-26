@@ -6,6 +6,7 @@ Description: "Value set of reason why ART was not initiated at diagnosis or with
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE370"
 
 * HIVConcepts#HIV.D.DE371 "Patient self-reported as not ready/willing"
 * HIVConcepts#HIV.D.DE372 "Not completed education, support and preparation for ART"

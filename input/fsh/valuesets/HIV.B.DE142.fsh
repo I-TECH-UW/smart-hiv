@@ -6,6 +6,7 @@ Description: "Value set of whether counselling was provided to a client during t
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE142"
 
 * HIVConcepts#HIV.B.DE143 "HIV-positive counselling conducted"
 * HIVConcepts#HIV.B.DE144 "Hepatitis B positive counselling conducted"

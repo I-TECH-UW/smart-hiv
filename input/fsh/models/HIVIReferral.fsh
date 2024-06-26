@@ -17,10 +17,10 @@ Description: "This tab describes the data that are collected during the referral
   * ^code[+] = HIVConcepts#HIV.I.DE1
 * reasonForReferral 1..* Coding "Reason for referral" "Reason why the client is being referred. If diagnosed, this may include the reason for the diagnosis."
   * ^code[+] = HIVConcepts#HIV.I.DE2
-  * reasonForReferral from HIV.I.DE2
-* referralForOtherGeneralServices 0..1 string "Referral for other general services (specify)" "If none of the reasons above apply, specify the reason(s)"
+* reasonForReferral from HIV.I.DE2
+* referralForOtherGeneralServicesSpecify 0..1 string "Referral for other general services (specify)" "If none of the reasons above apply, specify the reason(s)"
   * ^code[+] = HIVConcepts#HIV.I.DE8
-* anyTreatmentGivenBeforeReferral? 1..1 boolean "Any treatment given before referral?" "If client was referred, was any treatment provided before referral?"
+* anyTreatmentGivenBeforeReferral 1..1 boolean "Any treatment given before referral?" "If client was referred, was any treatment provided before referral?"
   * ^code[+] = HIVConcepts#HIV.I.DE9
 * dateOfScheduledReferralAppointment 1..1 dateTime "Date of scheduled referral appointment" "When the referral is scheduled"
   * ^code[+] = HIVConcepts#HIV.I.DE10

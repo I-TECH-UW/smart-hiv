@@ -6,6 +6,7 @@ Description: "Value set of type of diagnostic test used for herpes simplex virus
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE301"
 
 * HIVConcepts#HIV.B.DE302 "NAAT"
 * HIVConcepts#HIV.B.DE303 "Antibody test"

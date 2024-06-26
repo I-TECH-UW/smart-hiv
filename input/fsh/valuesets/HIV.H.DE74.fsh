@@ -6,6 +6,7 @@ Description: "Value set of reason why client intentionally stopped ART"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE74"
 
 * HIVConcepts#HIV.H.DE75 "Toxicity/side effects"
 * HIVConcepts#HIV.H.DE76 "Severe illness, hospitalization"

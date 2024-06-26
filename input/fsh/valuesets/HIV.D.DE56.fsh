@@ -6,6 +6,7 @@ Description: "Value set of whether or not the client received ARV drugs prior to
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE56"
 
 * HIVConcepts#HIV.D.DE57 "No prior ARVs"
 * HIVConcepts#HIV.D.DE58 "Received ARVs prior without records/documentation"

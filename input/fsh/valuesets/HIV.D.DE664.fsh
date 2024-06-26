@@ -6,6 +6,7 @@ Description: "Value set of hPV-DNA cervical cancer screening test result"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE664"
 
 * HIVConcepts#HIV.D.DE665 "Negative"
 * HIVConcepts#HIV.D.DE666 "Positive"

@@ -6,6 +6,7 @@ Description: "Value set of prEP product that the client was prescribed"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE80"
 
 * HIVConcepts#HIV.C.DE81 "Oral PrEP"
 * HIVConcepts#HIV.C.DE82 "Dapivirine vaginal ring (DVR)"

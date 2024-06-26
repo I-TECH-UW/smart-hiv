@@ -6,6 +6,7 @@ Description: "Value set of type of TPT regimen the client is currently on"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE1028"
 
 * HIVConcepts#HIV.D.DE1029 "3HP"
 * HIVConcepts#HIV.D.DE1030 "1HP"

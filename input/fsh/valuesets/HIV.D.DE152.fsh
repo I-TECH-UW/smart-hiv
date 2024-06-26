@@ -6,6 +6,7 @@ Description: "Value set of offer or refer for prevention services"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE152"
 
 * HIVConcepts#HIV.D.DE153 "Offer male and female condoms and condom-compatible lubricants"
 * HIVConcepts#HIV.D.DE154 "Harm reduction for people who inject drugs"

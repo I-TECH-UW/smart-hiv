@@ -6,6 +6,7 @@ Description: "Value set of results of urine protein test of mother during ANC vi
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE259"
 
 * HIVConcepts#HIV.E.DE260 "0"
 * HIVConcepts#HIV.E.DE261 "+"

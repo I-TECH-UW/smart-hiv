@@ -6,6 +6,7 @@ Description: "Value set of reason for HIV testing services visit"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE1"
 
 * HIVConcepts#HIV.B.DE2 "First-time HIV test"
 * HIVConcepts#HIV.B.DE3 "Retesting for HIV"

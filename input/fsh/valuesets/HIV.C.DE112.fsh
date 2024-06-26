@@ -6,6 +6,7 @@ Description: "Value set of listing of contraindications to pre-exposure prophyla
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE112"
 
 * HIVConcepts#HIV.C.DE113 "Tenofovir disoproxil fumarate (TDF) allergy or contraindication"
 * HIVConcepts#HIV.C.DE114 "HIV-positive"

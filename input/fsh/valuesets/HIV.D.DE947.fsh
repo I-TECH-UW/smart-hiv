@@ -6,6 +6,7 @@ Description: "Value set of history of previous TB treatment"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE947"
 
 * HIVConcepts#HIV.D.DE948 "New"
 * HIVConcepts#HIV.D.DE949 "Recurrent"

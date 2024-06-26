@@ -6,6 +6,7 @@ Description: "Value set of drug composition of client's current ART regimen"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE128"
 
 * HIVConcepts#HIV.D.DE129 "ABC"
 * HIVConcepts#HIV.D.DE130 "FTC"

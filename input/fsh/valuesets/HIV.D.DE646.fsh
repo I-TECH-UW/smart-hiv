@@ -6,6 +6,7 @@ Description: "Value set of reason why the treatment was not given"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE646"
 
 * HIVConcepts#HIV.D.DE647 "Client was referred"
 * HIVConcepts#HIV.D.DE648 "Stock out"

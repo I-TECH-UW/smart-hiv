@@ -6,6 +6,7 @@ Description: "Value set of final result of the TB investigation (bacteriological
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE939"
 
 * HIVConcepts#HIV.D.DE940 "Diagnosed TB"
 * HIVConcepts#HIV.D.DE941 "TB excluded"

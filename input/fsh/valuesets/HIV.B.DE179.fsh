@@ -6,6 +6,7 @@ Description: "Value set of result of medical inquiry for intimate partner violen
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE179"
 
 * HIVConcepts#HIV.B.DE180 "Client received treatment and/or counselling as needed"
 * HIVConcepts#HIV.B.DE181 "Client was referred"

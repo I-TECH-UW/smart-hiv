@@ -6,6 +6,7 @@ Description: "Value set of syndrome or STI for which client is diagnosed"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE226"
 
 * HIVConcepts#HIV.B.DE227 "Urethral discharge syndrome"
 * HIVConcepts#HIV.B.DE228 "Vaginal discharge syndrome"

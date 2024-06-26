@@ -6,6 +6,7 @@ Description: "Value set of type of DSD ART model client is enrolled in (country-
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE764"
 
 * HIVConcepts#HIV.D.DE765 "Fast track ART refill"
 * HIVConcepts#HIV.D.DE766 "Facility adherence club"

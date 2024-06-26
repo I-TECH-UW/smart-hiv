@@ -6,6 +6,7 @@ Description: "Value set of whether visit was scheduled or unscheduled, clinical 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE1"
 
 * HIVConcepts#HIV.D.DE2 "First clinical visit"
 * HIVConcepts#HIV.D.DE3 "Clinical visit"

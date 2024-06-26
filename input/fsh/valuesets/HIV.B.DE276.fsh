@@ -6,6 +6,7 @@ Description: "Value set of type of diagnostic test used for Neisseria gonorrhoea
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE276"
 
 * HIVConcepts#HIV.B.DE277 "NAAT"
 * HIVConcepts#HIV.B.DE278 "POC Test"

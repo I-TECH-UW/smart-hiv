@@ -6,6 +6,7 @@ Description: "Value set of the result of the third HIV assay in the testing stra
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE208"
 
 * HIVConcepts#HIV.E.DE209 "Reactive"
 * HIVConcepts#HIV.E.DE210 "Non-reactive"

@@ -6,6 +6,7 @@ Description: "Value set of list of ART regimens"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE90"
 
 * HIVConcepts#HIV.D.DE91 "ABC + 3TC + ATV/r"
 * HIVConcepts#HIV.D.DE92 "ABC + 3TC + DTG"

@@ -6,6 +6,7 @@ Description: "Value set of gestational age can be calculated multiple ways. This
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE6"
 
 * HIVConcepts#HIV.E.DE7 "Last menstrual period (LMP)"
 * HIVConcepts#HIV.E.DE8 "Ultrasound"

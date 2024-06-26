@@ -6,6 +6,7 @@ Description: "Value set of record the result of the tuberculosis (TB) screening"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE986"
 
 * HIVConcepts#HIV.D.DE987 "Screen positive for TB"
 * HIVConcepts#HIV.D.DE988 "Screen negative for TB"

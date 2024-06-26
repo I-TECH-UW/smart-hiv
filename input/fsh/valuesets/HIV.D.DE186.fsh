@@ -6,6 +6,7 @@ Description: "Value set of wHO clinical stage of client based on signs and sympt
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE186"
 
 * HIVConcepts#HIV.D.DE187 "WHO HIV clinical stage 1"
 * HIVConcepts#HIV.D.DE188 "WHO HIV clinical stage 2"

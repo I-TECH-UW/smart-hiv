@@ -6,6 +6,7 @@ Description: "Value set of client's partner is a member of a key population, tha
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE37"
 
 * HIVConcepts#HIV.B.DE38 "Sex worker"
 * HIVConcepts#HIV.B.DE39 "Men who have sex with men"

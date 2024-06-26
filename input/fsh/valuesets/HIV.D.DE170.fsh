@@ -6,6 +6,7 @@ Description: "Value set of hepatitis C virus test result (HCV antibody, HCV RNA 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE170"
 
 * HIVConcepts#HIV.D.DE171 "Positive"
 * HIVConcepts#HIV.D.DE172 "Negative"

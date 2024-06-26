@@ -6,6 +6,7 @@ Description: "Value set of gender of the infant"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE91"
 
 * HIVConcepts#HIV.E.DE92 "Female"
 * HIVConcepts#HIV.E.DE93 "Male"

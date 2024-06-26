@@ -6,6 +6,7 @@ Description: "Value set of HIV status reported after applying the HIV testing al
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE225"
 
 * HIVConcepts#HIV.E.DE226 "HIV-positive"
 * HIVConcepts#HIV.E.DE227 "HIV-negative"

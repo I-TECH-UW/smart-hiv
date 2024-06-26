@@ -6,6 +6,7 @@ Description: "Value set of current or considered medication/drug, for the purpos
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE903"
 
 * HIVConcepts#HIV.D.DE904 "Rifampicin"
 * HIVConcepts#HIV.D.DE905 "Halofantrine"

@@ -6,6 +6,7 @@ Description: "Value set of the outcome for the client which is used for reportin
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE41"
 
 * HIVConcepts#HIV.H.DE42 "Lost to follow-up"
 * HIVConcepts#HIV.H.DE43 "Transferred out"

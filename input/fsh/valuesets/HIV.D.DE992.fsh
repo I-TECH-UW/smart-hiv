@@ -6,6 +6,7 @@ Description: "Value set of the type of diagnostic test performed to detect tuber
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE992"
 
 * HIVConcepts#HIV.D.DE993 "LF-LAM"
 * HIVConcepts#HIV.D.DE994 "mWRD test for TB"

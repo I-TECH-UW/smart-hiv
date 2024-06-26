@@ -6,6 +6,7 @@ Description: "Value set of result of cervical cancer histopathology"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE697"
 
 * HIVConcepts#HIV.D.DE698 "Normal"
 * HIVConcepts#HIV.D.DE699 "LSIL (inclusive of LSIL-CIN1)"

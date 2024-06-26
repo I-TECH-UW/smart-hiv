@@ -6,6 +6,7 @@ Description: "Value set of signs the client is at a substantial risk of HIV infe
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE36"
 
 * HIVConcepts#HIV.C.DE37 "No condom use during sex with more than one partner in the past 6 months"
 * HIVConcepts#HIV.C.DE38 "STI in the past 6 months"

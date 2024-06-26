@@ -6,6 +6,7 @@ Description: "Value set of signs that may indicate the client has a serious illn
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE17"
 
 * HIVConcepts#HIV.D.DE18 "Fever of 39 C or greater"
 * HIVConcepts#HIV.D.DE19 "Tachycardia"

@@ -6,6 +6,7 @@ Description: "Value set of result from STI test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE312"
 
 * HIVConcepts#HIV.B.DE313 "Positive"
 * HIVConcepts#HIV.B.DE314 "Negative"

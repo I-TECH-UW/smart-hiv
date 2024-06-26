@@ -6,6 +6,7 @@ Description: "Value set of signs and symptoms of opportunistic infections or oth
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE259"
 
 * HIVConcepts#HIV.D.DE260 "Oral candidiasis"
 * HIVConcepts#HIV.D.DE261 "Vaginal candidiasis"

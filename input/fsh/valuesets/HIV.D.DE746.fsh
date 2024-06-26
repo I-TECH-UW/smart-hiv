@@ -6,6 +6,7 @@ Description: "Value set of specific point where testing is happening at a facili
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE746"
 
 * HIVConcepts#HIV.D.DE747 "Provider-initiated tested in a clinic or emergency facility"
 * HIVConcepts#HIV.D.DE748 "Antenatal care clinic"

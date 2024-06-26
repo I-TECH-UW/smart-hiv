@@ -6,6 +6,7 @@ Description: "Value set of the reason why the client is being followed up"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE1"
 
 * HIVConcepts#HIV.H.DE2 "Missed care visit"
 * HIVConcepts#HIV.H.DE3 "Missed medication pickup"

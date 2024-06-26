@@ -6,6 +6,7 @@ Description: "Value set of time from HIV diagnosis to when client started ART"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE383"
 
 * HIVConcepts#HIV.D.DE384 "Within 7 days of HIV diagnosis"
 * HIVConcepts#HIV.D.DE385 "Within 30 days of HIV diagnosis"

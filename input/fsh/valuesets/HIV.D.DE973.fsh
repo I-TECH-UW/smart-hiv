@@ -6,6 +6,7 @@ Description: "Value set of symptoms that may indicate TB disease in clients livi
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE973"
 
 * HIVConcepts#HIV.D.DE974 "Current cough"
 * HIVConcepts#HIV.D.DE975 "Prolonged cough (>=2w)"

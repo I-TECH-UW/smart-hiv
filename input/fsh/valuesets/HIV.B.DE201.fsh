@@ -6,4 +6,4 @@ Description: "Value set of severity of the adverse event associated with volunta
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
-
+* ^name = "HIVBDE201"

@@ -6,6 +6,7 @@ Description: "Value set of result of cervical cancer colposcopy"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE691"
 
 * HIVConcepts#HIV.D.DE692 "Normal colposcopic findings"
 * HIVConcepts#HIV.D.DE693 "Abnormal colposcopic findings"

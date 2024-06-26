@@ -6,4 +6,4 @@ Description: "Value set of results from the reported HIV self-test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
-
+* ^name = "HIVBDE44"

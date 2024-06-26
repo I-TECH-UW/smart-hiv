@@ -6,6 +6,7 @@ Description: "Value set of type of adverse event associated with voluntary medic
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE207"
 
 * HIVConcepts#HIV.B.DE208 "Abnormal pain"
 * HIVConcepts#HIV.B.DE209 "Anaesthesia-related effects"

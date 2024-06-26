@@ -6,6 +6,7 @@ Description: "Value set of general care activities to be performed during the ca
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE229"
 
 * HIVConcepts#HIV.D.DE230 "Determine WHO clinical stage"
 * HIVConcepts#HIV.D.DE231 "Determine if advanced disease"

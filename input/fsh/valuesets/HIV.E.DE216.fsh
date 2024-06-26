@@ -6,6 +6,7 @@ Description: "Value set of the result of the first syphilis assay in the testing
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE216"
 
 * HIVConcepts#HIV.E.DE217 "Reactive"
 * HIVConcepts#HIV.E.DE218 "Non-reactive"

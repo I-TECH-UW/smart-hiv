@@ -6,6 +6,7 @@ Description: "Value set of other clinical services offered or referrals given to
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE165"
 
 * HIVConcepts#HIV.B.DE166 "Assessment and provision of vaccinations"
 * HIVConcepts#HIV.B.DE167 "Hepatitis B (HBV) and hepatitis C virus (HCV) testing and treatment provided"

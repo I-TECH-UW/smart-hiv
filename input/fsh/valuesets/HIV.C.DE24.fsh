@@ -6,6 +6,7 @@ Description: "Value set of the client's experience in taking PrEP"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE24"
 
 * HIVConcepts#HIV.C.DE25 "First-time user"
 * HIVConcepts#HIV.C.DE26 "Continuing user"

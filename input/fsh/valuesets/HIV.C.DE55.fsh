@@ -6,6 +6,7 @@ Description: "Value set of treatment adherence of client's sex partner for partn
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE55"
 
 * HIVConcepts#HIV.C.DE56 "Not on ART"
 * HIVConcepts#HIV.C.DE57 "On ART less than 6 months"

@@ -6,6 +6,7 @@ Description: "Value set of reason why a switch to a second- or third-line regime
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE430"
 
 * HIVConcepts#HIV.D.DE431 "Clinical treatment failure"
 * HIVConcepts#HIV.D.DE432 "Immunological failure"

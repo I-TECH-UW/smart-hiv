@@ -6,6 +6,7 @@ Description: "Value set of gender of the client"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVADE18"
 
 * HIVConcepts#HIV.A.DE19 "Female"
 * HIVConcepts#HIV.A.DE20 "Male"

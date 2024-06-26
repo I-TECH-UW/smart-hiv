@@ -6,6 +6,7 @@ Description: "Value set of type of medicine client is prescribed"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE182"
 
 * HIVConcepts#HIV.D.DE183 "Interferon"
 * HIVConcepts#HIV.D.DE184 "Direct acting antivirals"

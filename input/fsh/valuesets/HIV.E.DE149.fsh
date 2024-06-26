@@ -6,6 +6,7 @@ Description: "Value set of result from maternal syphilis test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE149"
 
 * HIVConcepts#HIV.E.DE150 "Positive"
 * HIVConcepts#HIV.E.DE151 "Negative"

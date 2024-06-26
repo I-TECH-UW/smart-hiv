@@ -6,6 +6,7 @@ Description: "Value set of type of diagnostic test used for syphilis (treponema 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE269"
 
 * HIVConcepts#HIV.B.DE270 "Treponemal"
 * HIVConcepts#HIV.B.DE271 "Non-treponemal"

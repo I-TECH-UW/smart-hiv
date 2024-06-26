@@ -6,6 +6,7 @@ Description: "Value set of method used to try to reach out to the client"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE13"
 
 * HIVConcepts#HIV.H.DE14 "Home visit"
 * HIVConcepts#HIV.H.DE15 "Text message"

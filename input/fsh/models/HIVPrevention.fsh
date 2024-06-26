@@ -17,14 +17,14 @@ Description: "This tab describes the data that are collected during HIV preventi
   * ^code[+] = HIVConcepts#HIV.PRV.DE1
 * hivPreventionIntervention 0..* Coding "HIV prevention intervention" "HIV prevention intervention that client accessed"
   * ^code[+] = HIVConcepts#HIV.PRV.DE2
-  * hivPreventionIntervention from HIV.PRV.DE2
-* other 0..1 string "Other (specify)" "Client accessed other HIV prevention services (specify)"
+* hivPreventionIntervention from HIV.PRV.DE2
+* otherHivPreventionIntervention 0..1 string "Other (specify)" "Client accessed other HIV prevention services (specify)"
   * ^code[+] = HIVConcepts#HIV.PRV.DE9
 * dateAccessedHivPreventionIntervention 0..1 date "Date accessed HIV prevention intervention" "Date the client accessed HIV prevention intervention"
   * ^code[+] = HIVConcepts#HIV.PRV.DE10
 * hivStatusOfContact 0..1 Coding "HIV status of contact" "The HIV status of the client's contact"
   * ^code[+] = HIVConcepts#HIV.PRV.DE11
-  * hivStatusOfContact from HIV.PRV.DE11
+* hivStatusOfContact from HIV.PRV.DE11
 * dateInjectingEquipmentProvided 0..1 date "Date injecting equipment provided" "Date client was provided with injecting equipment"
   * ^code[+] = HIVConcepts#HIV.PRV.DE15
 * numberOfNeedlesSyringesProvided 0..1 integer "Number of needles-syringes provided" "Number of needles-syringes provided to client"
@@ -33,7 +33,7 @@ Description: "This tab describes the data that are collected during HIV preventi
   * ^code[+] = HIVConcepts#HIV.PRV.DE17
 * dateOamtDoseReceived 0..1 date "Date OAMT dose received" "Date client received opioid agonist maintenance treatment (OAMT) dose"
   * ^code[+] = HIVConcepts#HIV.PRV.DE18
-* dateOamtTakeAwayDos)Dispensed 0..1 date "Date OAMT take-away dose(s) dispensed" "Date the client was dispensed opioid agonist maintenance treatment (OAMT) take-away dose(s)"
+* dateOamtTakeAwayDosesDispensed 0..1 date "Date OAMT take-away dose(s) dispensed" "Date the client was dispensed opioid agonist maintenance treatment (OAMT) take-away dose(s)"
   * ^code[+] = HIVConcepts#HIV.PRV.DE19
 * currentlyOnOamt 0..1 boolean "Currently on OAMT" "Client is currently on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion"
   * ^code[+] = HIVConcepts#HIV.PRV.DE20

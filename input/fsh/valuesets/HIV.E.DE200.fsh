@@ -6,6 +6,7 @@ Description: "Value set of the result of the first HIV assay in the testing stra
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE200"
 
 * HIVConcepts#HIV.E.DE201 "Reactive"
 * HIVConcepts#HIV.E.DE202 "Non-reactive"

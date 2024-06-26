@@ -6,6 +6,7 @@ Description: "Value set of client reported coming to the facility after receivin
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE5"
 
 * HIVConcepts#HIV.B.DE6 "Partner or contact of an index case"
 * HIVConcepts#HIV.B.DE7 "Partner or contact of an HIV testing client (non-index case)"

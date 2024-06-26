@@ -6,6 +6,7 @@ Description: "Value set of the type of key population that the client is include
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE50"
 
 * HIVConcepts#HIV.B.DE51 "Sex worker"
 * HIVConcepts#HIV.B.DE52 "Men who have sex with men"

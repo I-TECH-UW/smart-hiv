@@ -6,6 +6,7 @@ Description: "Value set of reason why a syphilis test was not done"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVGDE62"
 
 * HIVConcepts#HIV.G.DE63 "Test delayed to next contact or referred"
 * HIVConcepts#HIV.G.DE64 "Stock-out or expired"

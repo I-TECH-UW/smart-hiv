@@ -6,6 +6,7 @@ Description: "Value set of offer or refer to sexual and reproductive health serv
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE149"
 
 * HIVConcepts#HIV.C.DE150 "Contraception and family planning"
 * HIVConcepts#HIV.C.DE151 "Check pregnancy status"

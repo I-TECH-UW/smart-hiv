@@ -6,6 +6,7 @@ Description: "Value set of reason why a hepatitis C test was not done"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVGDE35"
 
 * HIVConcepts#HIV.G.DE36 "Test delayed to next contact or referred"
 * HIVConcepts#HIV.G.DE37 "Stock-out or expired"

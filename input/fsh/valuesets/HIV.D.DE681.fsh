@@ -6,6 +6,7 @@ Description: "Value set of type of triage test for cervical cancer"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE681"
 
 * HIVConcepts#HIV.D.DE682 "VIA"
 * HIVConcepts#HIV.D.DE683 "Colposcopy"

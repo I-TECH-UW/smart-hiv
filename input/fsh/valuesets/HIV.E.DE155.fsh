@@ -6,12 +6,9 @@ Description: "Value set of signs the client is at a substantial risk of HIV infe
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE155"
 
 * HIVConcepts#HIV.E.DE156 "No condom use during sex with more than one partner in the past 6 months"
 * HIVConcepts#HIV.E.DE157 "STI in the past 6 months"
 * HIVConcepts#HIV.E.DE158 "A sexual partner in the past 6 months had one or more HIV risk factors"
 * HIVConcepts#HIV.E.DE159 "PrEP requested by client"
-* HIVConcepts#HIV.E.DE169 "Rapid diagnostic test for HIV"
-* HIVConcepts#HIV.E.DE170 "Enzyme immunoassay for HIV"
-* HIVConcepts#HIV.E.DE171 "Nucleic acid test for HIV"
-* HIVConcepts#HIV.E.DE172 "Dual HIV/syphilis rapid diagnostic test"

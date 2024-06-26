@@ -6,6 +6,7 @@ Description: "Value set of offer or refer for other support services"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE164"
 
 * HIVConcepts#HIV.C.DE165 "Mental health services"
 * HIVConcepts#HIV.C.DE166 "Psychosocial counselling, support and treatment adherence counselling"

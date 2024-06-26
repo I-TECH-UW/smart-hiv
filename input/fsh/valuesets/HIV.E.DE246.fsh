@@ -6,6 +6,7 @@ Description: "Value set of mother's blood type and blood Rh factor"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE246"
 
 * HIVConcepts#HIV.E.DE247 "A+"
 * HIVConcepts#HIV.E.DE248 "A-"

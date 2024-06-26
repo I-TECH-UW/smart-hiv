@@ -6,6 +6,7 @@ Description: "Value set of HIV prevention intervention that client accessed"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVPRVDE2"
 
 * HIVConcepts#HIV.PRV.DE3 "PrEP service"
 * HIVConcepts#HIV.PRV.DE4 "OAMT"

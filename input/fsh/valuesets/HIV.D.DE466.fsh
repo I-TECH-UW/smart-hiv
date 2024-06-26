@@ -6,6 +6,7 @@ Description: "Value set of type of treatment-limiting toxicity experienced by cl
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE466"
 
 * HIVConcepts#HIV.D.DE467 "Gastrointestinal"
 * HIVConcepts#HIV.D.DE468 "Skin issues"

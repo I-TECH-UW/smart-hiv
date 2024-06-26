@@ -6,6 +6,7 @@ Description: "Value set of type of specimen to be collected"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE813"
 
 * HIVConcepts#HIV.D.DE814 "Blood"
 * HIVConcepts#HIV.D.DE815 "Urine"

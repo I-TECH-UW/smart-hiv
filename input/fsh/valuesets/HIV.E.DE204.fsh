@@ -6,6 +6,7 @@ Description: "Value set of the result of the second HIV assay in the testing str
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE204"
 
 * HIVConcepts#HIV.E.DE205 "Reactive"
 * HIVConcepts#HIV.E.DE206 "Non-reactive"

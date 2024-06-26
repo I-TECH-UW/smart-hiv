@@ -6,10 +6,9 @@ Description: "Value set of alternative third drug for PEP"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE101"
 
 * HIVConcepts#HIV.C.DE102 "ATV/r"
 * HIVConcepts#HIV.C.DE103 "DRV/r"
 * HIVConcepts#HIV.C.DE104 "LPV/r"
 * HIVConcepts#HIV.C.DE105 "RAL"
-* HIVConcepts#HIV.C.DE108 "Male"
-* HIVConcepts#HIV.C.DE109 "Female"

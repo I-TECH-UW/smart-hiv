@@ -6,6 +6,7 @@ Description: "Value set of reason why the client is being referred. If diagnosed
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVIDE2"
 
 * HIVConcepts#HIV.I.DE3 "Hospital"
 * HIVConcepts#HIV.I.DE4 "Referral for screening including diagnostics and lab testing"

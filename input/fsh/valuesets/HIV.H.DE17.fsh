@@ -6,6 +6,7 @@ Description: "Value set of source of information about the client"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE17"
 
 * HIVConcepts#HIV.H.DE18 "Client"
 * HIVConcepts#HIV.H.DE19 "Informed by treatment provider"

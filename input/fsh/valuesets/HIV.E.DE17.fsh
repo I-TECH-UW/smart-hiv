@@ -6,6 +6,7 @@ Description: "Value set of whether the woman has had any complications or proble
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE17"
 
 * HIVConcepts#HIV.E.DE18 "No past pregnancy complications"
 * HIVConcepts#HIV.E.DE19 "Does not know of any past pregnancy complications"

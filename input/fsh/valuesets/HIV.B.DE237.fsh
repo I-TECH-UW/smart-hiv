@@ -6,6 +6,7 @@ Description: "Value set of sTI for which the client was tested"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE237"
 
 * HIVConcepts#HIV.B.DE238 "Neisseria gonorrhoeae"
 * HIVConcepts#HIV.B.DE239 "Chlamydia trachomatis"

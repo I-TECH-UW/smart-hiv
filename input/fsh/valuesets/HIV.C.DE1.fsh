@@ -6,6 +6,7 @@ Description: "Value set of client's reason for the prevention visit"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE1"
 
 * HIVConcepts#HIV.C.DE2 "First time counselling on PrEP"
 * HIVConcepts#HIV.C.DE3 "Follow-up appointment for PrEP or PEP"

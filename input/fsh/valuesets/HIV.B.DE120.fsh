@@ -6,4 +6,4 @@ Description: "Value set of name or identifier of health facility where HIV test 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
-
+* ^name = "HIVBDE120"

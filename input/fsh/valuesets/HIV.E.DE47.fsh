@@ -6,6 +6,7 @@ Description: "Value set of outcome of current pregnancy"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE47"
 
 * HIVConcepts#HIV.E.DE48 "Live birth"
 * HIVConcepts#HIV.E.DE49 "Early fetal loss/miscarriage"

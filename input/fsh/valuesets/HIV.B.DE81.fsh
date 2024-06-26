@@ -6,6 +6,7 @@ Description: "Value set of type of HIV test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE81"
 
 * HIVConcepts#HIV.B.DE82 "Rapid diagnostic test for HIV"
 * HIVConcepts#HIV.B.DE83 "Enzyme immunoassay for HIV"

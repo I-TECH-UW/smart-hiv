@@ -6,6 +6,7 @@ Description: "Value set of type of hypertensive disorder of the mother"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE264"
 
 * HIVConcepts#HIV.E.DE265 "Chronic hypertension"
 * HIVConcepts#HIV.E.DE266 "Essential"

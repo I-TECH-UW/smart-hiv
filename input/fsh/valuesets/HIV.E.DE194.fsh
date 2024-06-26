@@ -6,4 +6,4 @@ Description: "Value set of the number of the assay (test kit) in the HIV testing
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
-
+* ^name = "HIVEDE194"

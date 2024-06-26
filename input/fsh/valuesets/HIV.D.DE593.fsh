@@ -6,6 +6,7 @@ Description: "Value set of current state of the client's taking of the medicatio
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE593"
 
 * HIVConcepts#HIV.D.DE594 "Currently taking"
 * HIVConcepts#HIV.D.DE595 "Completed"

@@ -6,6 +6,7 @@ Description: "Value set of the client's history in taking post-exposure prophyla
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE31"
 
 * HIVConcepts#HIV.C.DE32 "First-time user"
 * HIVConcepts#HIV.C.DE33 "Repeat user"

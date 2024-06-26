@@ -6,6 +6,7 @@ Description: "Value set of whether testing is happening in the community or at a
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE15"
 
 * HIVConcepts#HIV.B.DE16 "Community-level testing"
 * HIVConcepts#HIV.B.DE17 "Facility-level testing"

@@ -6,6 +6,7 @@ Description: "Value set of type of test ued for confirmatory syphilis test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE869"
 
 * HIVConcepts#HIV.D.DE870 "Treponemal"
 * HIVConcepts#HIV.D.DE871 "Non-treponemal"

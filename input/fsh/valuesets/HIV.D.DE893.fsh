@@ -6,6 +6,7 @@ Description: "Value set of staging of liver disease in client"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE893"
 
 * HIVConcepts#HIV.D.DE894 "F0-4, fibrosis staging"
 * HIVConcepts#HIV.D.DE895 "F4 or cirrhosis, presence of cirrhosis"

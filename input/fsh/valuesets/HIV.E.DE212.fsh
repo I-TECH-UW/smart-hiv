@@ -6,6 +6,7 @@ Description: "Value set of the result of the repeated first HIV assay in the tes
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE212"
 
 * HIVConcepts#HIV.E.DE213 "Reactive"
 * HIVConcepts#HIV.E.DE214 "Non-reactive"

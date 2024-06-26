@@ -6,6 +6,7 @@ Description: "Value set of specific point in the community where testing is happ
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE18"
 
 * HIVConcepts#HIV.B.DE19 "Mobile testing (e.g. through vans or temporary testing facilities)"
 * HIVConcepts#HIV.B.DE20 "Voluntary counselling and testing centres (not within a health facility setting)"

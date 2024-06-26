@@ -6,6 +6,7 @@ Description: "Value set of screening test result for VIA"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE668"
 
 * HIVConcepts#HIV.D.DE669 "Negative"
 * HIVConcepts#HIV.D.DE670 "Positive"

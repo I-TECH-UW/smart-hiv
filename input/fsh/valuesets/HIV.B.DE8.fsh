@@ -6,6 +6,7 @@ Description: "Value set of client's relationship to the person that referred the
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE8"
 
 * HIVConcepts#HIV.B.DE9 "Biological child"
 * HIVConcepts#HIV.B.DE10 "Drug-injecting partner"

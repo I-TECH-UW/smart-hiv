@@ -6,6 +6,7 @@ Description: "Value set of whether the viral load is being tested for routine mo
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE391"
 
 * HIVConcepts#HIV.D.DE392 "Routine viral load test"
 * HIVConcepts#HIV.D.DE393 "Targeted viral load monitoring"

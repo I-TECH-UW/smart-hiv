@@ -6,6 +6,7 @@ Description: "Value set of reason why client is not adherent"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE53"
 
 * HIVConcepts#HIV.H.DE54 "Forgot"
 * HIVConcepts#HIV.H.DE55 "Toxicity/side effects"

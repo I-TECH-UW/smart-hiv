@@ -6,6 +6,7 @@ Description: "Value set of type of diagnostic test used for Chlamydia trachomati
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE284"
 
 * HIVConcepts#HIV.B.DE285 "NAAT"
 * HIVConcepts#HIV.B.DE286 "POC Test"

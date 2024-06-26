@@ -6,6 +6,7 @@ Description: "Value set of HIV burden of the setting (high or low) based on the 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVConfigDE12"
 
 * HIVConcepts#HIV.Config.DE13 "High HIV burden setting"
 * HIVConcepts#HIV.Config.DE14 "Low HIV burden setting"

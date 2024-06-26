@@ -6,5 +6,6 @@ Description: "Value set of preferred third drug for PEP"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE99"
 
 * HIVConcepts#HIV.C.DE100 "DTG"

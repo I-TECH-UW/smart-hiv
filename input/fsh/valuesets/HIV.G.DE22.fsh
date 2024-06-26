@@ -6,6 +6,7 @@ Description: "Value set of reason why a hepatitis B test was not done"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVGDE22"
 
 * HIVConcepts#HIV.G.DE23 "Test delayed to next contact or referred"
 * HIVConcepts#HIV.G.DE24 "Stock-out or expired"

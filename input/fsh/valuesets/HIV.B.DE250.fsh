@@ -6,6 +6,7 @@ Description: "Value set of result from syphilis test"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE250"
 
 * HIVConcepts#HIV.B.DE251 "Positive"
 * HIVConcepts#HIV.B.DE252 "Negative"

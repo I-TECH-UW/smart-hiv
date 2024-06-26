@@ -6,6 +6,7 @@ Description: "Value set of client's intention or desire in the next year to eith
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVCDE41"
 
 * HIVConcepts#HIV.C.DE42 "Yes, I want to become pregnant"
 * HIVConcepts#HIV.C.DE43 "I'm OK either way"

@@ -6,6 +6,7 @@ Description: "Value set of HIV status of the partner or contact given by the ind
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVHDE34"
 
 * HIVConcepts#HIV.H.DE35 "Already knew positive"
 * HIVConcepts#HIV.H.DE36 "Newly diagnosed"

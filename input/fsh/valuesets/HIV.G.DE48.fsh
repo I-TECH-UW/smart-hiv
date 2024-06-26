@@ -6,6 +6,7 @@ Description: "Value set of hepatitis C viral load test result (qualitative)"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVGDE48"
 
 * HIVConcepts#HIV.G.DE49 "Detected"
 * HIVConcepts#HIV.G.DE50 "Not detected"

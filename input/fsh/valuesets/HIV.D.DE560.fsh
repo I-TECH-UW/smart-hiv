@@ -6,6 +6,7 @@ Description: "Value set of does the client have any allergies?"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE560"
 
 * HIVConcepts#HIV.D.DE561 "No known allergies"
 * HIVConcepts#HIV.D.DE562 "Don't know of any allergies"

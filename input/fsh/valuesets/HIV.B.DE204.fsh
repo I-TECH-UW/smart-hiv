@@ -6,6 +6,7 @@ Description: "Value set of when the adverse event associated with VMMC procedure
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVBDE204"
 
 * HIVConcepts#HIV.B.DE205 "Intraoperative"
 * HIVConcepts#HIV.B.DE206 "Postoperative"

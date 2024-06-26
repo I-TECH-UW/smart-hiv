@@ -6,6 +6,7 @@ Description: "Value set of infant feeding practice"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE127"
 
 * HIVConcepts#HIV.E.DE128 "Exclusively breastfeeding"
 * HIVConcepts#HIV.E.DE129 "Replacement feeding"

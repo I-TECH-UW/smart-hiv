@@ -6,6 +6,7 @@ Description: "Value set of screening result for cervical cytology"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE673"
 
 * HIVConcepts#HIV.D.DE674 "NILM"
 * HIVConcepts#HIV.D.DE675 "ASCUS"

@@ -6,6 +6,7 @@ Description: "Value set of method used to set the TB diagnosis"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVDDE942"
 
 * HIVConcepts#HIV.D.DE943 "Bacteriologically confirmed"
 * HIVConcepts#HIV.D.DE944 "Clinically diagnosed"

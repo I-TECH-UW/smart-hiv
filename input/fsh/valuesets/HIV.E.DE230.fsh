@@ -6,6 +6,7 @@ Description: "Value set of HIV-exposed infant final status at 18 months or 3 mon
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"
 * ^status = #active
 * ^experimental = true
+* ^name = "HIVEDE230"
 
 * HIVConcepts#HIV.E.DE231 "HIV-positive"
 * HIVConcepts#HIV.E.DE232 "HIV-negative and no longer breastfeeding"
