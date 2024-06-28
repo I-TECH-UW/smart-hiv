@@ -1,8 +1,8 @@
 Instance: immz-e-fxnreq
 InstanceOf: Requirements
 Usage: #example
-Title: "IMMUNIZATION - Business Process E: Register Client - Functional requirements"
-Description: "IMMUNIZATION - Business Process E: Register Client - Functional requirements"
+Title: "HIV - Business Process E: Register Client - Functional requirements"
+Description: "HIV - Business Process E: Register Client - Functional requirements"
 * status = #active
 * statement[0]
   * key = "HIV.FXNREQ.001"
