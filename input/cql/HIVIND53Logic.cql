@@ -64,4 +64,12 @@
 
 library HIVIND53Logic
 
+// Included Libraries
 using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
