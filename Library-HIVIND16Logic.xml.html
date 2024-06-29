@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.16 Logic - XML Representation - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.16 Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -247,7 +247,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -334,7 +334,85 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND16Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND16Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND16Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND16Logic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND16Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND16Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND16Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND16Logic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.16 Logic
+ * Ref No: PRV.16
+ * Short Name: VMMC adverse events
+ *
+ * Definition: a) Number or (b) % of adverse events during the reporting period
+ *
+ * Numerator: Number of people experiencing at least one moderate or severe adverse event during or following circumcision surgery during the reporting period
+ * Numerator Calculation: COUNT of clients with &amp;quot;VMMC procedure date&amp;quot; in the reporting period AND &amp;quot;Adverse event severity&amp;quot; IN 'Moderate', 'Severe' AND &amp;quot;Timing of adverse event&amp;quot; LESS THAN 30 days from &amp;quot;VMMC procedure date&amp;quot;
+ * Numerator Exclusions: 
+ *
+ * Denominator: a) 1 | b) Total number of individuals under going VMMC performed according to national standard during the reporting period
+ * Denominator Calculation: a) 1 | b) COUNT of clients with a &amp;quot;VMMC procedure date&amp;quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
+ * • Type and seriousness of adverse event
+ * • Timing of adverse event (intraoperative, postoperative)
+ * • Service site
+ * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith- based, international, nongovernmental)
+ * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * 
+ * Disaggregation Elements: Age | Adverse event severity | Timing of adverse event | Type of adverse VMMC event
+ *
+ * Numerator and Denominator Elements:
+ * Adverse event severity | Timing of adverse event | VMMC procedure date
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.B.DE198: VMMC procedure date | Date on which a voluntary medical male circumcision procedure was performed 
+ * HIV.B.DE201: Adverse event severity | Severity of the adverse event associated with voluntary medical male circumcision (VMMC) procedure 
+ * HIV.B.DE202: Moderate | Severity of the adverse event associated with VMMC procedure was moderate 
+ * HIV.B.DE203: Severe | Severity of the adverse event associated with VMMC procedure was severe 
+ * HIV.B.DE204: Timing of adverse event | When the adverse event associated with VMMC procedure occurred 
+ * HIV.B.DE205: Intraoperative | The adverse event associated with VMMC procedure occurred during the procedure 
+ * HIV.B.DE206: Postoperative | The adverse event associated with VMMC procedure occurred within the first 30 days after the procedure 
+ * HIV.B.DE207: Type of adverse VMMC event | Type of adverse event associated with voluntary medical male circumcision (VMMC) procedure 
+ * HIV.B.DE208: Abnormal pain | Client experienced abnormal pain 
+ * HIV.B.DE209: Anaesthesia-related effects | Client had anaesthesia-related effects 
+ * HIV.B.DE210: Bleeding | Client had bleeding 
+ * HIV.B.DE211: Damage to the penis | Client had damage to the penis 
+ * HIV.B.DE212: Difficulty urinating | Client had difficulty urinating 
+ * HIV.B.DE213: Excessive bleeding | Client experienced excessive bleeding 
+ * HIV.B.DE214: Excessive skin removal | Client experienced excessive skin removal 
+ * HIV.B.DE215: Excessive swelling | Client experienced excessive swelling 
+ * HIV.B.DE216: Haematoma | Client experienced haematoma 
+ * HIV.B.DE217: Infection | Client experienced infection 
+ * HIV.B.DE218: Injury to glans | Client experienced injury to glans 
+ * HIV.B.DE219: Scar or disfigurement | Client experienced scar or disfigurement 
+ * HIV.B.DE220: Sharps injury to personnel | During VMMC procedure there was sharps injury to personnel 
+ * HIV.B.DE221: Wound disruption | Client experienced wound disruption 
+ * HIV.B.DE222: Other | Client experienced other adverse VMMC event
+ *
+ * Additional Context
+ * - what it measures: • This indicator measures whether VMMC services meet national standards of safety and effectiveness.
+ * - rationale: • Staff conducting medical circumcisions must have appropriate training and access to proper equipment. | • Trends in adverse events may indicate where service providers need additional support. | • Intraoperative adverse events may include pain, excessive bleeding, anaesthesia-related effects, excessive skin removal, damage to the penis, sharps injury to personnel. Postoperative adverse events may include abnormal pain, excessive swelling, infection, haematoma, bleeding, difficulty urinating, wound disruption, scar or disfigurement, injury to glans, excessive skin removal. | • Moderate or severe adverse events include complications resulting in death or hospitalization within 30 days or permanent disability.
+ * - method: Individual-level data obtained from programme records |  | This indicator can be reported as simply the absolute number of men experiencing adverse events occurring in the reporting period or can be reported as a proportion of the number of procedures conducted.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND16Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
@@ -352,7 +430,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T06:31:00+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T07:09:27+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -363,6 +441,14 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a>
                <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;a) Number or (b) % of adverse events during the reporting period&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC4xNiBMb2dpYwogKiBSZWYgTm86IFBSVi4xNgogKiBTaG9ydCBOYW1lOiBWTU1DIGFkdmVyc2UgZXZlbnRzCiAqCiAqIERlZmluaXRpb246IGEpIE51bWJlciBvciAoYikgJSBvZiBhZHZlcnNlIGV2ZW50cyBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICoKICogTnVtZXJhdG9yOiBOdW1iZXIgb2YgcGVvcGxlIGV4cGVyaWVuY2luZyBhdCBsZWFzdCBvbmUgbW9kZXJhdGUgb3Igc2V2ZXJlIGFkdmVyc2UgZXZlbnQgZHVyaW5nIG9yIGZvbGxvd2luZyBjaXJjdW1jaXNpb24gc3VyZ2VyeSBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICogTnVtZXJhdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiBjbGllbnRzIHdpdGggIlZNTUMgcHJvY2VkdXJlIGRhdGUiIGluIHRoZSByZXBvcnRpbmcgcGVyaW9kIEFORCAiQWR2ZXJzZSBldmVudCBzZXZlcml0eSIgSU4gJ01vZGVyYXRlJywgJ1NldmVyZScgQU5EICJUaW1pbmcgb2YgYWR2ZXJzZSBldmVudCIgTEVTUyBUSEFOIDMwIGRheXMgZnJvbSAiVk1NQyBwcm9jZWR1cmUgZGF0ZSIKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogYSkgMSB8IGIpIFRvdGFsIG51bWJlciBvZiBpbmRpdmlkdWFscyB1bmRlciBnb2luZyBWTU1DIHBlcmZvcm1lZCBhY2NvcmRpbmcgdG8gbmF0aW9uYWwgc3RhbmRhcmQgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIENhbGN1bGF0aW9uOiBhKSAxIHwgYikgQ09VTlQgb2YgY2xpZW50cyB3aXRoIGEgIlZNTUMgcHJvY2VkdXJlIGRhdGUiIGluIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAoiBBZ2UgKDDigJM0LCA14oCTOSwgMTDigJMxNCwgMTXigJMxOSwgMjDigJMyNCwgMjXigJM0OSwgNTArIHllYXJzKQogKiDigKLCoFR5cGUgYW5kIHNlcmlvdXNuZXNzIG9mIGFkdmVyc2UgZXZlbnQKICog4oCiIFRpbWluZyBvZiBhZHZlcnNlIGV2ZW50IChpbnRyYW9wZXJhdGl2ZSwgcG9zdG9wZXJhdGl2ZSkKICog4oCiIFNlcnZpY2Ugc2l0ZQogKiDigKLCoFByb3ZpZGVyIHR5cGUgKGtleSBwb3B1bGF0aW9uLWxlZCBvciBjb21tdW5pdHktbGVkIG9yZ2FuaXphdGlvbiwgcHVibGljIHNlY3RvciBwcm92aWRlciwgb3RoZXIgZW50aXRpZXMgc3VjaCBhcyBwcml2YXRlIGZvci1wcm9maXQgYW5kIG5vdC1mb3ItcHJvZml0IG9yZ2FuaXphdGlvbnMsIGluY2x1ZGluZyBmYWl0aC0gYmFzZWQsIGludGVybmF0aW9uYWwsIG5vbmdvdmVybm1lbnRhbCkKICog4oCiwqBTZXR0aW5nOiBmYWNpbGl0eS1iYXNlZCBzZXJ2aWNlIChpbmNsdWRpbmcgaG9zcGl0YWxzLCBoZWFsdGggY2xpbmljcywgZ2VuZXJhbCBwcmFjdGljZSBvZmZpY2VzLCBldGMuKSBvciBjb21tdW5pdHktYmFzZWQgc2VydmljZSAoaW5jbHVkaW5nIGRyb3AtaW4gY2VudHJlcywgY29tbXVuaXR5IHNlcnZpY2UgZGVsaXZlcnkgcG9pbnRzLCBtb2JpbGUgY2xpbmljcyBvciB2YW5zLCBvdXRyZWFjaCB0ZWFtcywgY29tbXVuaXR5IHN1cHBvcnQgZ3JvdXBzLCBldGMuKQogKiDigKLCoENpdGllcyBhbmQgb3RoZXIgYWRtaW5pc3RyYXRpdmUgcmVnaW9ucyBvZiBlcGlkZW1pb2xvZ2ljIGltcG9ydGFuY2UKICogCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogQWdlIHwgQWR2ZXJzZSBldmVudCBzZXZlcml0eSB8IFRpbWluZyBvZiBhZHZlcnNlIGV2ZW50IHwgVHlwZSBvZiBhZHZlcnNlIFZNTUMgZXZlbnQKICoKICogTnVtZXJhdG9yIGFuZCBEZW5vbWluYXRvciBFbGVtZW50czoKICogQWR2ZXJzZSBldmVudCBzZXZlcml0eSB8IFRpbWluZyBvZiBhZHZlcnNlIGV2ZW50IHwgVk1NQyBwcm9jZWR1cmUgZGF0ZQogKgogKiBSZWZlcmVuY2U6IENvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIHBlcnNvbi1jZW50cmVkIEhJViBzdHJhdGVnaWMgaW5mb3JtYXRpb246IHN0cmVuZ3RoZW5pbmcgcm91dGluZSBkYXRhIGZvciBpbXBhY3QuIEdlbmV2YTogV29ybGQgSGVhbHRoIE9yZ2FuaXphdGlvbjsgMjAyMgogKiAKICogRGF0YSBDb25jZXB0czoKICogIAogKiBISVYuQS5ERTE3OiBBZ2UgfCBDYWxjdWxhdGVkIGFnZSAobnVtYmVyIG9mIHllYXJzKSBvZiB0aGUgY2xpZW50IGJhc2VkIG9uIGRhdGUgb2YgYmlydGggCiAqIEhJVi5CLkRFMTk4OiBWTU1DIHByb2NlZHVyZSBkYXRlIHwgRGF0ZSBvbiB3aGljaCBhIHZvbHVudGFyeSBtZWRpY2FsIG1hbGUgY2lyY3VtY2lzaW9uIHByb2NlZHVyZSB3YXMgcGVyZm9ybWVkIAogKiBISVYuQi5ERTIwMTogQWR2ZXJzZSBldmVudCBzZXZlcml0eSB8IFNldmVyaXR5IG9mIHRoZSBhZHZlcnNlIGV2ZW50IGFzc29jaWF0ZWQgd2l0aCB2b2x1bnRhcnkgbWVkaWNhbCBtYWxlIGNpcmN1bWNpc2lvbiAoVk1NQykgcHJvY2VkdXJlIAogKiBISVYuQi5ERTIwMjogTW9kZXJhdGUgfCBTZXZlcml0eSBvZiB0aGUgYWR2ZXJzZSBldmVudCBhc3NvY2lhdGVkIHdpdGggVk1NQyBwcm9jZWR1cmUgd2FzIG1vZGVyYXRlIAogKiBISVYuQi5ERTIwMzogU2V2ZXJlIHwgU2V2ZXJpdHkgb2YgdGhlIGFkdmVyc2UgZXZlbnQgYXNzb2NpYXRlZCB3aXRoIFZNTUMgcHJvY2VkdXJlIHdhcyBzZXZlcmUgCiAqIEhJVi5CLkRFMjA0OiBUaW1pbmcgb2YgYWR2ZXJzZSBldmVudCB8IFdoZW4gdGhlIGFkdmVyc2UgZXZlbnQgYXNzb2NpYXRlZCB3aXRoIFZNTUMgcHJvY2VkdXJlIG9jY3VycmVkIAogKiBISVYuQi5ERTIwNTogSW50cmFvcGVyYXRpdmUgfCBUaGUgYWR2ZXJzZSBldmVudCBhc3NvY2lhdGVkIHdpdGggVk1NQyBwcm9jZWR1cmUgb2NjdXJyZWQgZHVyaW5nIHRoZSBwcm9jZWR1cmUgCiAqIEhJVi5CLkRFMjA2OiBQb3N0b3BlcmF0aXZlIHwgVGhlIGFkdmVyc2UgZXZlbnQgYXNzb2NpYXRlZCB3aXRoIFZNTUMgcHJvY2VkdXJlIG9jY3VycmVkIHdpdGhpbiB0aGUgZmlyc3QgMzAgZGF5cyBhZnRlciB0aGUgcHJvY2VkdXJlIAogKiBISVYuQi5ERTIwNzogVHlwZSBvZiBhZHZlcnNlIFZNTUMgZXZlbnQgfCBUeXBlIG9mIGFkdmVyc2UgZXZlbnQgYXNzb2NpYXRlZCB3aXRoIHZvbHVudGFyeSBtZWRpY2FsIG1hbGUgY2lyY3VtY2lzaW9uIChWTU1DKSBwcm9jZWR1cmUgCiAqIEhJVi5CLkRFMjA4OiBBYm5vcm1hbCBwYWluIHwgQ2xpZW50IGV4cGVyaWVuY2VkIGFibm9ybWFsIHBhaW4gCiAqIEhJVi5CLkRFMjA5OiBBbmFlc3RoZXNpYS1yZWxhdGVkIGVmZmVjdHMgfCBDbGllbnQgaGFkIGFuYWVzdGhlc2lhLXJlbGF0ZWQgZWZmZWN0cyAKICogSElWLkIuREUyMTA6IEJsZWVkaW5nIHwgQ2xpZW50IGhhZCBibGVlZGluZyAKICogSElWLkIuREUyMTE6IERhbWFnZSB0byB0aGUgcGVuaXMgfCBDbGllbnQgaGFkIGRhbWFnZSB0byB0aGUgcGVuaXMgCiAqIEhJVi5CLkRFMjEyOiBEaWZmaWN1bHR5IHVyaW5hdGluZyB8IENsaWVudCBoYWQgZGlmZmljdWx0eSB1cmluYXRpbmcgCiAqIEhJVi5CLkRFMjEzOiBFeGNlc3NpdmUgYmxlZWRpbmcgfCBDbGllbnQgZXhwZXJpZW5jZWQgZXhjZXNzaXZlIGJsZWVkaW5nIAogKiBISVYuQi5ERTIxNDogRXhjZXNzaXZlIHNraW4gcmVtb3ZhbCB8IENsaWVudCBleHBlcmllbmNlZCBleGNlc3NpdmUgc2tpbiByZW1vdmFsIAogKiBISVYuQi5ERTIxNTogRXhjZXNzaXZlIHN3ZWxsaW5nIHwgQ2xpZW50IGV4cGVyaWVuY2VkIGV4Y2Vzc2l2ZSBzd2VsbGluZyAKICogSElWLkIuREUyMTY6IEhhZW1hdG9tYSB8IENsaWVudCBleHBlcmllbmNlZCBoYWVtYXRvbWEgCiAqIEhJVi5CLkRFMjE3OiBJbmZlY3Rpb24gfCBDbGllbnQgZXhwZXJpZW5jZWQgaW5mZWN0aW9uIAogKiBISVYuQi5ERTIxODogSW5qdXJ5IHRvIGdsYW5zIHwgQ2xpZW50IGV4cGVyaWVuY2VkIGluanVyeSB0byBnbGFucyAKICogSElWLkIuREUyMTk6IFNjYXIgb3IgZGlzZmlndXJlbWVudCB8IENsaWVudCBleHBlcmllbmNlZCBzY2FyIG9yIGRpc2ZpZ3VyZW1lbnQgCiAqIEhJVi5CLkRFMjIwOiBTaGFycHMgaW5qdXJ5IHRvIHBlcnNvbm5lbCB8IER1cmluZyBWTU1DIHByb2NlZHVyZSB0aGVyZSB3YXMgc2hhcnBzIGluanVyeSB0byBwZXJzb25uZWwgCiAqIEhJVi5CLkRFMjIxOiBXb3VuZCBkaXNydXB0aW9uIHwgQ2xpZW50IGV4cGVyaWVuY2VkIHdvdW5kIGRpc3J1cHRpb24gCiAqIEhJVi5CLkRFMjIyOiBPdGhlciB8IENsaWVudCBleHBlcmllbmNlZCBvdGhlciBhZHZlcnNlIFZNTUMgZXZlbnQKICoKICogQWRkaXRpb25hbCBDb250ZXh0CiAqIC0gd2hhdCBpdCBtZWFzdXJlczog4oCiwqBUaGlzIGluZGljYXRvciBtZWFzdXJlcyB3aGV0aGVyIFZNTUMgc2VydmljZXMgbWVldCBuYXRpb25hbCBzdGFuZGFyZHMgb2Ygc2FmZXR5IGFuZCBlZmZlY3RpdmVuZXNzLgogKiAtIHJhdGlvbmFsZTog4oCiIFN0YWZmIGNvbmR1Y3RpbmcgbWVkaWNhbCBjaXJjdW1jaXNpb25zIG11c3QgaGF2ZSBhcHByb3ByaWF0ZSB0cmFpbmluZyBhbmQgYWNjZXNzIHRvIHByb3BlciBlcXVpcG1lbnQuIHwg4oCiwqBUcmVuZHMgaW4gYWR2ZXJzZSBldmVudHMgbWF5IGluZGljYXRlIHdoZXJlIHNlcnZpY2UgcHJvdmlkZXJzIG5lZWQgYWRkaXRpb25hbCBzdXBwb3J0LiB8IOKAosKgSW50cmFvcGVyYXRpdmUgYWR2ZXJzZSBldmVudHMgbWF5IGluY2x1ZGUgcGFpbiwgZXhjZXNzaXZlIGJsZWVkaW5nLCBhbmFlc3RoZXNpYS1yZWxhdGVkIGVmZmVjdHMsIGV4Y2Vzc2l2ZSBza2luIHJlbW92YWwsIGRhbWFnZSB0byB0aGUgcGVuaXMsIHNoYXJwcyBpbmp1cnkgdG8gcGVyc29ubmVsLiBQb3N0b3BlcmF0aXZlIGFkdmVyc2UgZXZlbnRzIG1heSBpbmNsdWRlIGFibm9ybWFsIHBhaW4sIGV4Y2Vzc2l2ZSBzd2VsbGluZywgaW5mZWN0aW9uLCBoYWVtYXRvbWEsIGJsZWVkaW5nLCBkaWZmaWN1bHR5IHVyaW5hdGluZywgd291bmQgZGlzcnVwdGlvbiwgc2NhciBvciBkaXNmaWd1cmVtZW50LCBpbmp1cnkgdG8gZ2xhbnMsIGV4Y2Vzc2l2ZSBza2luIHJlbW92YWwuIHwg4oCiwqBNb2RlcmF0ZSBvciBzZXZlcmUgYWR2ZXJzZSBldmVudHMgaW5jbHVkZSBjb21wbGljYXRpb25zIHJlc3VsdGluZyBpbiBkZWF0aCBvciBob3NwaXRhbGl6YXRpb24gd2l0aGluIDMwIGRheXMgb3IgcGVybWFuZW50IGRpc2FiaWxpdHkuCiAqIC0gbWV0aG9kOiBJbmRpdmlkdWFsLWxldmVsIGRhdGEgb2J0YWluZWQgZnJvbSBwcm9ncmFtbWUgcmVjb3JkcyB8ICB8IFRoaXMgaW5kaWNhdG9yIGNhbiBiZSByZXBvcnRlZCBhcyBzaW1wbHkgdGhlIGFic29sdXRlIG51bWJlciBvZiBtZW4gZXhwZXJpZW5jaW5nIGFkdmVyc2UgZXZlbnRzIG9jY3VycmluZyBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZCBvciBjYW4gYmUgcmVwb3J0ZWQgYXMgYSBwcm9wb3J0aW9uIG9mIHRoZSBudW1iZXIgb2YgcHJvY2VkdXJlcyBjb25kdWN0ZWQuCiAqIAogKiBTdWdnZXN0ZWQgU2NvcmluZyBNZXRob2Q6IHByb3BvcnRpb24gfCBodHRwOi8vaGw3Lm9yZy9maGlyL3VzL2NxZm1lYXN1cmVzL1N0cnVjdHVyZURlZmluaXRpb24vcHJvcG9ydGlvbi1tZWFzdXJlLWNxZm0KICovCgpsaWJyYXJ5IEhJVklORDE2TG9naWMKCi8vIEluY2x1ZGVkIExpYnJhcmllcwp1c2luZyBGSElSIHZlcnNpb24gJzQuMC4xJwoKaW5jbHVkZSBISVZJbmRpY2F0b3JDb21tb24gdmVyc2lvbiAnMC4wLjEnIGNhbGxlZCBISUMKaW5jbHVkZSBGSElSSGVscGVycyB2ZXJzaW9uICc0LjAuMScKaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KaW5jbHVkZSBGSElSQ29tbW9uIGNhbGxlZCBGQwoKLy8gSW5kaWNhdG9yIERlZmluaXRpb24K&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -387,7 +473,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

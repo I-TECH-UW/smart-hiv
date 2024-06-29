@@ -3,7 +3,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.13 Logic - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.13 Logic - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -215,7 +215,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -245,7 +245,7 @@
           <div class="inner-wrapper">
 
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
   
 
 
@@ -349,7 +349,67 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND13Logic</b></p><a name="HIVIND13Logic"> </a><a name="hcHIVIND13Logic"> </a><a name="hcHIVIND13Logic-en-US"> </a></div>
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND13Logic</b></p><a name="HIVIND13Logic"> </a><a name="hcHIVIND13Logic"> </a><a name="hcHIVIND13Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.13 Logic
+ * Ref No: PRV.13
+ * Short Name: OAMT minimum duration
+ *
+ * Definition: % of OAMT recipients who received treatment for at least six months
+ *
+ * Numerator: Number of people in cohort retained in OAMT for at least six months
+ * Numerator Calculation: COUNT of clients within cohort &quot;Retained on OAMT&quot;=True 6 months after &quot;Date OAMT initiated&quot;
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people starting OAMT during defined cohort recruitment period
+ * Denominator Calculation: COUNT of clients within cohort with &quot;Date OAMT initiated&quot; in cohort recruitment period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (15–19, 20–24, 25–49, 50+ years)
+ * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
+ * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age
+ *
+ * Numerator and Denominator Elements:
+ * Date OAMT initiated | Retained on OAMT
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.PRV.DE17: Date OAMT initiated | Date client initiated opioid agonist maintenance treatment (OAMT) 
+ * HIV.PRV.DE21: Retained on OAMT | Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion
+ *
+ * Additional Context
+ * - what it measures: This indicator uses a cohort analysis to measure the proportion of OAMT recipients retained on treatment for at least six months and is a measure of how OAMT is prescribed and of retention in the OAMT programme.
+ * - rationale: Evidence demonstrates that maximum benefit from OAMT is gained when treatment lasts at least six months.
+ * - method: Individual-level data obtained from programme records
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND13Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -374,7 +434,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

@@ -9,7 +9,87 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND87Logic</b></p><a name="HIVIND87Logic"> </a><a name="hcHIVIND87Logic"> </a><a name="hcHIVIND87Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND87Logic</b></p><a name="HIVIND87Logic"> </a><a name="hcHIVIND87Logic"> </a><a name="hcHIVIND87Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.87 Logic
+ * Ref No: HEP.3C
+ * Short Name: HBsAg positivity, pregnant women
+ *
+ * Definition: Percentage of pregnant women who were tested for HBsAg and had a positive HBsAg test during the reporting period
+ *
+ * Numerator: Number of pregnant women who tested positive for HBsAg during the reporting period
+ * Numerator Calculation: COUNT of &quot;Currently pregnant&quot; women with &quot;HBsAg test date&quot; on an &quot;ANC contact date&quot; in the reporting period AND &quot;HBsAg test result&quot;='HBsAg positive'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of pregnant women tested for HBsAg during the reporting period
+ * Denominator Calculation: COUNT of &quot;Currently pregnant&quot; women with &quot;HBsAg test date&quot; on an &quot;ANC contact date&quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years)
+ * • HIV status (HIV-positive, HIV-negative, unknown status)
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**
+ * • Provider type (key population-led or community-led organization, public-sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Age | HIV status | Key population member type
+ *
+ * Numerator and Denominator Elements:
+ * ANC contact date | Currently pregnant | HBsAg test date | HBsAg test result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.B.DE29: Currently pregnant | Client is currently pregnant 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE31: Currently pregnant | Client is currently pregnant 
+ * HIV.D.DE161: HBsAg test date | Date client was tested for hepatitis B virus (HBV) 
+ * HIV.D.DE162: HBsAg test result | Hepatitis B virus test result (HBsAg) 
+ * HIV.D.DE163: Positive | HBsAg test result was positive 
+ * HIV.D.DE164: Negative | HBsAg test result was negative 
+ * HIV.D.DE165: Indeterminate | HBsAg test result was indeterminate 
+ * HIV.E.DE85: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date') 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.G.DE17: HBsAg test date | Date client was tested for hepatitis B virus (HBV) 
+ * HIV.G.DE18: HBsAg test result | Hepatitis B virus test result (HBsAg) 
+ * HIV.G.DE19: Positive | HBsAg test result was positive 
+ * HIV.G.DE20: Negative | HBsAg test result was negative 
+ * HIV.G.DE21: Indeterminate | HBsAg test result was indeterminate
+ *
+ * Additional Context
+ * - what it measures: A: % of people attending HIV prevention services who were tested for HBsAg and had a positive HBsAg test result during the reporting period (laboratory-based test or rapid test) | B: % of people living with HIV who were tested for HBsAg and had a positive HBsAg test result during the reporting period (laboratory-based test or rapid test) | C: % of pregnant women who were tested for HBsAg and had a positive HBsAg test result during the reporting period (laboratory-based test or rapid test)
+ * - rationale: • Testing for HBV identifies HIV and HBV co-infection so that HIV treatment regimens can be adjusted to treat chronic hepatitis B infection as well. | • The HBsAg positivity rate in ANC attendees can be used to monitor the prevalence of HBV in the population and give an indication of the HBV burden.
+ * - method: Patient monitoring tools (electronic or paper), for example, hepatitis and HIV testing service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/electronic information systems
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND87Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +106,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +116,11 @@
     </telecom>
   </contact>
   <description value="Percentage of pregnant women who were tested for HBsAg and had a positive HBsAg test during the reporting period"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC44NyBMb2dpYwogKiBSZWYgTm86IEhFUC4zQwogKiBTaG9ydCBOYW1lOiBIQnNBZyBwb3NpdGl2aXR5LCBwcmVnbmFudCB3b21lbgogKgogKiBEZWZpbml0aW9uOiBQZXJjZW50YWdlIG9mIHByZWduYW50IHdvbWVuIHdobyB3ZXJlIHRlc3RlZCBmb3IgSEJzQWcgYW5kIGhhZCBhIHBvc2l0aXZlIEhCc0FnIHRlc3QgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqCiAqIE51bWVyYXRvcjogTnVtYmVyIG9mIHByZWduYW50IHdvbWVuIHdobyB0ZXN0ZWQgcG9zaXRpdmUgZm9yIEhCc0FnIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBOdW1lcmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mICJDdXJyZW50bHkgcHJlZ25hbnQiIHdvbWVuIHdpdGggIkhCc0FnIHRlc3QgZGF0ZSIgb24gYW4gIkFOQyBjb250YWN0IGRhdGUiIGluIHRoZSByZXBvcnRpbmcgcGVyaW9kIEFORCAiSEJzQWcgdGVzdCByZXN1bHQiPSdIQnNBZyBwb3NpdGl2ZScKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogTnVtYmVyIG9mIHByZWduYW50IHdvbWVuIHRlc3RlZCBmb3IgSEJzQWcgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiAiQ3VycmVudGx5IHByZWduYW50IiB3b21lbiB3aXRoICJIQnNBZyB0ZXN0IGRhdGUiIG9uIGFuICJBTkMgY29udGFjdCBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBEZW5vbWluYXRvciBFeGNsdXNpb25zOiAKICoKICogRGlzYWdncmVnYXRpb25zOgogKiDigKLCoEFnZSAoMTXigJMxOSwgMjDigJMyNCwgMjXigJMyOSwgMzDigJM0OSwgNTArIHllYXJzKQogKiDigKLCoEhJViBzdGF0dXMgKEhJVi1wb3NpdGl2ZSwgSElWLW5lZ2F0aXZlLCB1bmtub3duIHN0YXR1cykKICog4oCiwqBLZXkgcG9wdWxhdGlvbnMgKG1lbiB3aG8gaGF2ZSBzZXggd2l0aCBtZW4sIHBlb3BsZSBsaXZpbmcgaW4gcHJpc29ucyBhbmQgb3RoZXIgY2xvc2VkIHNldHRpbmdzLCBwZW9wbGUgd2hvIGluamVjdCBkcnVncywgc2V4IHdvcmtlcnMsIHRyYW5zIGFuZCBnZW5kZXIgZGl2ZXJzZSBwZW9wbGUpKioKICog4oCiwqBQcm92aWRlciB0eXBlIChrZXkgcG9wdWxhdGlvbi1sZWQgb3IgY29tbXVuaXR5LWxlZCBvcmdhbml6YXRpb24sIHB1YmxpYy1zZWN0b3IgcHJvdmlkZXIsIG90aGVyIGVudGl0aWVzIHN1Y2ggYXMgcHJpdmF0ZSBmb3ItcHJvZml0IGFuZCBub3QtZm9yLXByb2ZpdCBvcmdhbml6YXRpb25zLCBpbmNsdWRpbmcgZmFpdGgtYmFzZWQsIGludGVybmF0aW9uYWwsIG5vbmdvdmVybm1lbnRhbCkKICog4oCiwqBDaXRpZXMgYW5kIG90aGVyIGFkbWluaXN0cmF0aXZlIHJlZ2lvbnMgb2YgZXBpZGVtaW9sb2dpYyBpbXBvcnRhbmNlCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogQWdlIHwgSElWIHN0YXR1cyB8IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlCiAqCiAqIE51bWVyYXRvciBhbmQgRGVub21pbmF0b3IgRWxlbWVudHM6CiAqIEFOQyBjb250YWN0IGRhdGUgfCBDdXJyZW50bHkgcHJlZ25hbnQgfCBIQnNBZyB0ZXN0IGRhdGUgfCBIQnNBZyB0ZXN0IHJlc3VsdAogKgogKiBSZWZlcmVuY2U6IENvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIHBlcnNvbi1jZW50cmVkIEhJViBzdHJhdGVnaWMgaW5mb3JtYXRpb246IHN0cmVuZ3RoZW5pbmcgcm91dGluZSBkYXRhIGZvciBpbXBhY3QuIEdlbmV2YTogV29ybGQgSGVhbHRoIE9yZ2FuaXphdGlvbjsgMjAyMgogKiAKICogRGF0YSBDb25jZXB0czoKICogIAogKiBISVYuQS5ERTE3OiBBZ2UgfCBDYWxjdWxhdGVkIGFnZSAobnVtYmVyIG9mIHllYXJzKSBvZiB0aGUgY2xpZW50IGJhc2VkIG9uIGRhdGUgb2YgYmlydGggCiAqIEhJVi5CLkRFMjk6IEN1cnJlbnRseSBwcmVnbmFudCB8IENsaWVudCBpcyBjdXJyZW50bHkgcHJlZ25hbnQgCiAqIEhJVi5CLkRFNTA6IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlKiB8IFRoZSB0eXBlIG9mIGtleSBwb3B1bGF0aW9uIHRoYXQgdGhlIGNsaWVudCBpcyBpbmNsdWRlZCBpbiAKICogSElWLkIuREU1MTogU2V4IHdvcmtlciB8IENsaWVudCBpcyBhIHNleCB3b3JrZXIgCiAqIEhJVi5CLkRFNTI6IE1lbiB3aG8gaGF2ZSBzZXggd2l0aCBtZW4gfCBDbGllbnQgaXMgYSBtYW4gd2hvIGhhcyBzZXggd2l0aCBtZW4gCiAqIEhJVi5CLkRFNTM6IFRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSBwZW9wbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyB0cmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgCiAqIEhJVi5CLkRFNTQ6IFBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIHwgQ2xpZW50IGlzIGEgcGVyc29uIHdobyBpbmplY3RzIGRydWdzIAogKiBISVYuQi5ERTU1OiBQZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncyB8IENsaWVudCBsaXZlcyBpbiBhIHByaXNvbiBvciBhbm90aGVyIGNsb3NlZCBzZXR0aW5nIAogKiBISVYuQi5ERTExNTogSElWIHN0YXR1cyB8IEhJViBzdGF0dXMgcmVwb3J0ZWQgYWZ0ZXIgYXBwbHlpbmcgdGhlIG5hdGlvbmFsIEhJViB0ZXN0aW5nIGFsZ29yaXRobS4gTm8gc2luZ2xlIEhJViB0ZXN0IGNhbiBwcm92aWRlIGFuIEhJVi1wb3NpdGl2ZSBkaWFnbm9zaXMuIAogKiBISVYuQi5ERTExNjogSElWLXBvc2l0aXZlIHwgQ2xpZW50IGlzIEhJVi1wb3NpdGl2ZSAKICogSElWLkIuREUxMTc6IEhJVi1uZWdhdGl2ZSB8IENsaWVudCBpcyBISVYtbmVnYXRpdmUgCiAqIEhJVi5CLkRFMTE4OiBVbmtub3duIHwgQ2xpZW50IGhhcyB1bmtub3duIEhJViBzdGF0dXMgCiAqIEhJVi5ELkRFMzE6IEN1cnJlbnRseSBwcmVnbmFudCB8IENsaWVudCBpcyBjdXJyZW50bHkgcHJlZ25hbnQgCiAqIEhJVi5ELkRFMTYxOiBIQnNBZyB0ZXN0IGRhdGUgfCBEYXRlIGNsaWVudCB3YXMgdGVzdGVkIGZvciBoZXBhdGl0aXMgQiB2aXJ1cyAoSEJWKSAKICogSElWLkQuREUxNjI6IEhCc0FnIHRlc3QgcmVzdWx0IHwgSGVwYXRpdGlzIEIgdmlydXMgdGVzdCByZXN1bHQgKEhCc0FnKSAKICogSElWLkQuREUxNjM6IFBvc2l0aXZlIHwgSEJzQWcgdGVzdCByZXN1bHQgd2FzIHBvc2l0aXZlIAogKiBISVYuRC5ERTE2NDogTmVnYXRpdmUgfCBIQnNBZyB0ZXN0IHJlc3VsdCB3YXMgbmVnYXRpdmUgCiAqIEhJVi5ELkRFMTY1OiBJbmRldGVybWluYXRlIHwgSEJzQWcgdGVzdCByZXN1bHQgd2FzIGluZGV0ZXJtaW5hdGUgCiAqIEhJVi5FLkRFODU6IEFOQyBjb250YWN0IGRhdGUgfCBUaGUgZGF0ZSBhbmQgdGltZSBvZiB0aGUgY2xpZW50J3MgQU5DIGNvbnRhY3QgKGluIHRoZSBBTkMgREFLIHRoaXMgaXMgY2FsbGVkICdDb250YWN0IGRhdGUnKSAKICogSElWLkUuREUxMTQ6IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlKiB8IFRoZSB0eXBlIG9mIGtleSBwb3B1bGF0aW9uIHRoYXQgdGhlIGluZmFudCdzIG1vdGhlciBpcyBpbmNsdWRlZCBpbiAKICogSElWLkUuREUxMTU6IFNleCB3b3JrZXIgfCBJbmZhbnQncyBtb3RoZXIgaXMgYSBzZXggd29ya2VyIAogKiBISVYuRS5ERTExNjogUGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MgfCBJbmZhbnQncyBtb3RoZXIgaXMgYSBwZXJzb24gd2hvIGluamVjdHMgZHJ1Z3MgCiAqIEhJVi5FLkRFMTE3OiBUcmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgcGVvcGxlIHwgSW5mYW50J3MgbW90aGVyIGlkZW50aWZpZXMgYXMgdHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIAogKiBISVYuRS5ERTExODogUGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZyB8IEluZmFudCdzIG1vdGhlciBpcyBpbiBhIHByaXNvbiBvciBjbG9zZWQgc2V0dGluZyAKICogSElWLkcuREUxNzogSEJzQWcgdGVzdCBkYXRlIHwgRGF0ZSBjbGllbnQgd2FzIHRlc3RlZCBmb3IgaGVwYXRpdGlzIEIgdmlydXMgKEhCVikgCiAqIEhJVi5HLkRFMTg6IEhCc0FnIHRlc3QgcmVzdWx0IHwgSGVwYXRpdGlzIEIgdmlydXMgdGVzdCByZXN1bHQgKEhCc0FnKSAKICogSElWLkcuREUxOTogUG9zaXRpdmUgfCBIQnNBZyB0ZXN0IHJlc3VsdCB3YXMgcG9zaXRpdmUgCiAqIEhJVi5HLkRFMjA6IE5lZ2F0aXZlIHwgSEJzQWcgdGVzdCByZXN1bHQgd2FzIG5lZ2F0aXZlIAogKiBISVYuRy5ERTIxOiBJbmRldGVybWluYXRlIHwgSEJzQWcgdGVzdCByZXN1bHQgd2FzIGluZGV0ZXJtaW5hdGUKICoKICogQWRkaXRpb25hbCBDb250ZXh0CiAqIC0gd2hhdCBpdCBtZWFzdXJlczogQTogJSBvZiBwZW9wbGUgYXR0ZW5kaW5nIEhJViBwcmV2ZW50aW9uIHNlcnZpY2VzIHdobyB3ZXJlIHRlc3RlZCBmb3IgSEJzQWcgYW5kIGhhZCBhIHBvc2l0aXZlIEhCc0FnIHRlc3QgcmVzdWx0IGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZCAobGFib3JhdG9yeS1iYXNlZCB0ZXN0IG9yIHJhcGlkIHRlc3QpIHwgQjogJSBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIHdobyB3ZXJlIHRlc3RlZCBmb3IgSEJzQWcgYW5kIGhhZCBhIHBvc2l0aXZlIEhCc0FnIHRlc3QgcmVzdWx0IGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZCAobGFib3JhdG9yeS1iYXNlZCB0ZXN0IG9yIHJhcGlkIHRlc3QpIHwgQzogJSBvZiBwcmVnbmFudCB3b21lbiB3aG8gd2VyZSB0ZXN0ZWQgZm9yIEhCc0FnIGFuZCBoYWQgYSBwb3NpdGl2ZSBIQnNBZyB0ZXN0IHJlc3VsdCBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QgKGxhYm9yYXRvcnktYmFzZWQgdGVzdCBvciByYXBpZCB0ZXN0KQogKiAtIHJhdGlvbmFsZTog4oCiIFRlc3RpbmcgZm9yIEhCViBpZGVudGlmaWVzIEhJViBhbmQgSEJWIGNvLWluZmVjdGlvbiBzbyB0aGF0IEhJViB0cmVhdG1lbnQgcmVnaW1lbnMgY2FuIGJlIGFkanVzdGVkIHRvIHRyZWF0IGNocm9uaWMgaGVwYXRpdGlzIEIgaW5mZWN0aW9uIGFzIHdlbGwuIHwg4oCiwqBUaGUgSEJzQWcgcG9zaXRpdml0eSByYXRlIGluIEFOQyBhdHRlbmRlZXMgY2FuIGJlIHVzZWQgdG8gbW9uaXRvciB0aGUgcHJldmFsZW5jZSBvZiBIQlYgaW4gdGhlIHBvcHVsYXRpb24gYW5kIGdpdmUgYW4gaW5kaWNhdGlvbiBvZiB0aGUgSEJWIGJ1cmRlbi4KICogLSBtZXRob2Q6IFBhdGllbnQgbW9uaXRvcmluZyB0b29scyAoZWxlY3Ryb25pYyBvciBwYXBlciksIGZvciBleGFtcGxlLCBoZXBhdGl0aXMgYW5kIEhJViB0ZXN0aW5nIHNlcnZpY2UgcmVjb3JkcywgbGFiIHJlZ2lzdGVycywgbG9nYm9va3MgYW5kIHJlcG9ydGluZyBmb3JtcyBhdCBmYWNpbGl0eSBhbmQgY29tbXVuaXR5IGxldmVscywgRU1SL2VsZWN0cm9uaWMgaW5mb3JtYXRpb24gc3lzdGVtcwogKiAKICogU3VnZ2VzdGVkIFNjb3JpbmcgTWV0aG9kOiBwcm9wb3J0aW9uIHwgaHR0cDovL2hsNy5vcmcvZmhpci91cy9jcWZtZWFzdXJlcy9TdHJ1Y3R1cmVEZWZpbml0aW9uL3Byb3BvcnRpb24tbWVhc3VyZS1jcWZtCiAqLwoKbGlicmFyeSBISVZJTkQ4N0xvZ2ljCgovLyBJbmNsdWRlZCBMaWJyYXJpZXMKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgSElWSW5kaWNhdG9yQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjEnCmluY2x1ZGUgV0hPQ29tbW9uIGNhbGxlZCBXQ29tCmluY2x1ZGUgRkhJUkNvbW1vbiBjYWxsZWQgRkMKCi8vIEluZGljYXRvciBEZWZpbml0aW9uCg=="/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

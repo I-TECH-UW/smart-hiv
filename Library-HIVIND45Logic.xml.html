@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.45 Logic - XML Representation - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.45 Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -247,7 +247,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -334,7 +334,86 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND45Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND45Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND45Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND45Logic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND45Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND45Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND45Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND45Logic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.45 Logic
+ * Ref No: TBH.2
+ * Short Name: TPT completion
+ *
+ * Definition: Number and % of people living with HIV on ART who completed a course of TB preventive treatment among those who initiated TPT
+ *
+ * Numerator: Number of ART patients who completed a course of TPT during the reporting period
+ * Numerator Calculation: COUNT of clients with &amp;quot;HIV status&amp;quot;='HIV-positive' AND &amp;quot;On ART&amp;quot;=True AND &amp;quot;TB preventive treatment (TPT) start date&amp;quot; in the previous period AND &amp;quot;TB preventive treatment (TPT) status&amp;quot;='Completed'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of ART patients who initiated any course of TPT during the previous reporting period
+ * Denominator Calculation: COUNT of clients with &amp;quot;HIV status&amp;quot;='HIV-positive' AND &amp;quot;On ART&amp;quot;=True AND &amp;quot;TB preventive treatment (TPT) start date&amp;quot; in the prior reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)**
+ * • Type of TPT regimen
+ * • ART initiation (&amp;lt;12 months on ART, 12+ months on ART)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | TPT regimen type | ART start date (&amp;lt;12 months on ART, ≥12 months on ART)
+ *
+ * Numerator and Denominator Elements:
+ * HIV status | On ART | TB preventive treatment (TPT) start date | TB preventive treatment (TPT) status
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART) 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE38: On ART | Client is currently taking ART 
+ * HIV.D.DE39: ART start date | The date on which the client started or restarted ART 
+ * HIV.D.DE954: TB preventive treatment (TPT) start date | The date on which the client began taking TPT 
+ * HIV.D.DE1028: TPT regimen type | Type of TPT regimen the client is currently on 
+ * HIV.D.DE1029: 3HP | The client's current TPT regimen is 3HP 
+ * HIV.D.DE1030: 1HP | The client's current TPT regimen is 1HP 
+ * HIV.D.DE1031: 6H | The client's current TPT regimen is 6H 
+ * HIV.D.DE1032: Six months of levofloxacin daily | The client's current TPT regimen is six months of levofloxacin daily 
+ * HIV.D.DE1033: Other TB preventive treatment (TPT) regimen | The client's current TPT regimen is another regimen than those listed above 
+ * HIV.D.DE1034: TB preventive treatment (TPT) status | Indicates the current status of TB preventive treatment (TPT) 
+ * HIV.D.DE1035: Not started | The client did not start the TB preventive treatment (TPT) 
+ * HIV.D.DE1036: On TPT | The client started the TB preventive treatment (TPT) and is currently taking the medication, without treatment interruptions 
+ * HIV.D.DE1037: On TPT with interruptions | The client started the TB preventive treatment (TPT) and is currently taking the medication, with treatment interruptions 
+ * HIV.D.DE1038: On hold | The health care worker has temporarily stopped the TB preventive treatment (TPT), but TPT is expected to continue again later. May also be called &amp;quot;suspended&amp;quot;. 
+ * HIV.D.DE1039: Completed | TB preventive treatment (TPT) was completed 
+ * HIV.H.DE47: On ART | Client is currently taking ART 
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the effectiveness of scaled-up TPT programmes by assessing the proportion of patients who completed the recommended course of TPT.
+ * - rationale: • Many countries have made progress in initiating eligible people living with HIV on TPT. However, rates of TPT completion remain poor or unknown. | • Assessment of TPT completion is a critical element of the TB/HIV cascade of services.
+ * - method: For the numerator and denominator: Programme records (for example, ART registers) |  | Defining &amp;quot;previous reporting period&amp;quot;: For example, for annual reporting of January to December 2021, the previous reporting period is January to December 2020 (except for programmes with 1HP-exclusive national guidelines and implementation, in which case they may use January to December 2021). For quarterly or semi-annual reporting to the national level, the previous reporting period will depend on the TPT regimen and duration defined by national guidelines. |  | Note: For programmes using continuous isoniazid preventive therapy (IPT), TPT completion is defined as six months of treatment. | 
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND45Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
@@ -352,7 +431,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T06:31:00+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T07:09:27+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -363,6 +442,14 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a>
                <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;Number and % of people living with HIV on ART who completed a course of TB preventive treatment among those who initiated TPT&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC40NSBMb2dpYwogKiBSZWYgTm86IFRCSC4yCiAqIFNob3J0IE5hbWU6IFRQVCBjb21wbGV0aW9uCiAqCiAqIERlZmluaXRpb246IE51bWJlciBhbmQgJSBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIG9uIEFSVCB3aG8gY29tcGxldGVkIGEgY291cnNlIG9mIFRCIHByZXZlbnRpdmUgdHJlYXRtZW50IGFtb25nIHRob3NlIHdobyBpbml0aWF0ZWQgVFBUCiAqCiAqIE51bWVyYXRvcjogTnVtYmVyIG9mIEFSVCBwYXRpZW50cyB3aG8gY29tcGxldGVkIGEgY291cnNlIG9mIFRQVCBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICogTnVtZXJhdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiBjbGllbnRzIHdpdGggIkhJViBzdGF0dXMiPSdISVYtcG9zaXRpdmUnIEFORCAiT24gQVJUIj1UcnVlIEFORCAiVEIgcHJldmVudGl2ZSB0cmVhdG1lbnQgKFRQVCkgc3RhcnQgZGF0ZSIgaW4gdGhlIHByZXZpb3VzIHBlcmlvZCBBTkQgIlRCIHByZXZlbnRpdmUgdHJlYXRtZW50IChUUFQpIHN0YXR1cyI9J0NvbXBsZXRlZCcKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogTnVtYmVyIG9mIEFSVCBwYXRpZW50cyB3aG8gaW5pdGlhdGVkIGFueSBjb3Vyc2Ugb2YgVFBUIGR1cmluZyB0aGUgcHJldmlvdXMgcmVwb3J0aW5nIHBlcmlvZAogKiBEZW5vbWluYXRvciBDYWxjdWxhdGlvbjogQ09VTlQgb2YgY2xpZW50cyB3aXRoICJISVYgc3RhdHVzIj0nSElWLXBvc2l0aXZlJyBBTkQgIk9uIEFSVCI9VHJ1ZSBBTkQgIlRCIHByZXZlbnRpdmUgdHJlYXRtZW50IChUUFQpIHN0YXJ0IGRhdGUiIGluIHRoZSBwcmlvciByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAosKgR2VuZGVyIChmZW1hbGUsIG1hbGUsIG90aGVyKikKICog4oCiIEFnZSAoMOKAkzQsIDXigJM5LCAxMOKAkzE0LCAxNeKAkzE5LCAyMOKAkzI0LCAyNeKAkzI5LCAzMOKAkzM0LCAzNeKAkzM5LCA0MOKAkzQ0LCA0NeKAkzQ5LCA1MCsgeWVhcnMpKioKICog4oCiwqBUeXBlIG9mIFRQVCByZWdpbWVuCiAqIOKAoiBBUlQgaW5pdGlhdGlvbiAoPDEyIG1vbnRocyBvbiBBUlQsIDEyKyBtb250aHMgb24gQVJUKQogKiDigKIgQ2l0aWVzIGFuZCBvdGhlciBhZG1pbmlzdHJhdGl2ZSByZWdpb25zIG9mIGVwaWRlbWlvbG9naWMgaW1wb3J0YW5jZQogKiAKICogRGlzYWdncmVnYXRpb24gRWxlbWVudHM6IEdlbmRlciB8IEFnZSB8IFRQVCByZWdpbWVuIHR5cGUgfCBBUlQgc3RhcnQgZGF0ZSAoPDEyIG1vbnRocyBvbiBBUlQsIOKJpTEyIG1vbnRocyBvbiBBUlQpCiAqCiAqIE51bWVyYXRvciBhbmQgRGVub21pbmF0b3IgRWxlbWVudHM6CiAqIEhJViBzdGF0dXMgfCBPbiBBUlQgfCBUQiBwcmV2ZW50aXZlIHRyZWF0bWVudCAoVFBUKSBzdGFydCBkYXRlIHwgVEIgcHJldmVudGl2ZSB0cmVhdG1lbnQgKFRQVCkgc3RhdHVzCiAqCiAqIFJlZmVyZW5jZTogQ29uc29saWRhdGVkIGd1aWRlbGluZXMgb24gcGVyc29uLWNlbnRyZWQgSElWIHN0cmF0ZWdpYyBpbmZvcm1hdGlvbjogc3RyZW5ndGhlbmluZyByb3V0aW5lIGRhdGEgZm9yIGltcGFjdC4gR2VuZXZhOiBXb3JsZCBIZWFsdGggT3JnYW5pemF0aW9uOyAyMDIyCiAqIAogKiBEYXRhIENvbmNlcHRzOgogKiAgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkEuREUxODogR2VuZGVyKiB8IEdlbmRlciBvZiB0aGUgY2xpZW50KiAKICogSElWLkEuREUxOTogRmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgZmVtYWxlIAogKiBISVYuQS5ERTIwOiBNYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgbWFsZSAKICogSElWLkEuREUyMTogVHJhbnNnZW5kZXIgbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIG1hbGUgCiAqIEhJVi5BLkRFMjI6IFRyYW5zZ2VuZGVyIGZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIGZlbWFsZSAKICogSElWLkEuREUyMzogT3RoZXIgfCBBZGRpdGlvbmFsIGNhdGVnb3J5IAogKiBISVYuQi5ERTcyOiBBUlQgc3RhcnQgZGF0ZSB8IFRoZSBkYXRlIG9uIHdoaWNoIHRoZSBjbGllbnQgc3RhcnRlZCBvciByZXN0YXJ0ZWQgYW50aXJldHJvdmlyYWwgdGhlcmFweSAoQVJUKSAKICogSElWLkIuREUxMTU6IEhJViBzdGF0dXMgfCBISVYgc3RhdHVzIHJlcG9ydGVkIGFmdGVyIGFwcGx5aW5nIHRoZSBuYXRpb25hbCBISVYgdGVzdGluZyBhbGdvcml0aG0uIE5vIHNpbmdsZSBISVYgdGVzdCBjYW4gcHJvdmlkZSBhbiBISVYtcG9zaXRpdmUgZGlhZ25vc2lzLiAKICogSElWLkIuREUxMTY6IEhJVi1wb3NpdGl2ZSB8IENsaWVudCBpcyBISVYtcG9zaXRpdmUgCiAqIEhJVi5CLkRFMTE3OiBISVYtbmVnYXRpdmUgfCBDbGllbnQgaXMgSElWLW5lZ2F0aXZlIAogKiBISVYuQi5ERTExODogVW5rbm93biB8IENsaWVudCBoYXMgdW5rbm93biBISVYgc3RhdHVzIAogKiBISVYuRC5ERTM4OiBPbiBBUlQgfCBDbGllbnQgaXMgY3VycmVudGx5IHRha2luZyBBUlQgCiAqIEhJVi5ELkRFMzk6IEFSVCBzdGFydCBkYXRlIHwgVGhlIGRhdGUgb24gd2hpY2ggdGhlIGNsaWVudCBzdGFydGVkIG9yIHJlc3RhcnRlZCBBUlQgCiAqIEhJVi5ELkRFOTU0OiBUQiBwcmV2ZW50aXZlIHRyZWF0bWVudCAoVFBUKSBzdGFydCBkYXRlIHwgVGhlIGRhdGUgb24gd2hpY2ggdGhlIGNsaWVudCBiZWdhbiB0YWtpbmcgVFBUIAogKiBISVYuRC5ERTEwMjg6IFRQVCByZWdpbWVuIHR5cGUgfCBUeXBlIG9mIFRQVCByZWdpbWVuIHRoZSBjbGllbnQgaXMgY3VycmVudGx5IG9uIAogKiBISVYuRC5ERTEwMjk6IDNIUCB8IFRoZSBjbGllbnQncyBjdXJyZW50IFRQVCByZWdpbWVuIGlzIDNIUCAKICogSElWLkQuREUxMDMwOiAxSFAgfCBUaGUgY2xpZW50J3MgY3VycmVudCBUUFQgcmVnaW1lbiBpcyAxSFAgCiAqIEhJVi5ELkRFMTAzMTogNkggfCBUaGUgY2xpZW50J3MgY3VycmVudCBUUFQgcmVnaW1lbiBpcyA2SCAKICogSElWLkQuREUxMDMyOiBTaXggbW9udGhzIG9mIGxldm9mbG94YWNpbiBkYWlseSB8IFRoZSBjbGllbnQncyBjdXJyZW50IFRQVCByZWdpbWVuIGlzIHNpeCBtb250aHMgb2YgbGV2b2Zsb3hhY2luIGRhaWx5IAogKiBISVYuRC5ERTEwMzM6IE90aGVyIFRCIHByZXZlbnRpdmUgdHJlYXRtZW50IChUUFQpIHJlZ2ltZW4gfCBUaGUgY2xpZW50J3MgY3VycmVudCBUUFQgcmVnaW1lbiBpcyBhbm90aGVyIHJlZ2ltZW4gdGhhbiB0aG9zZSBsaXN0ZWQgYWJvdmUgCiAqIEhJVi5ELkRFMTAzNDogVEIgcHJldmVudGl2ZSB0cmVhdG1lbnQgKFRQVCkgc3RhdHVzIHwgSW5kaWNhdGVzIHRoZSBjdXJyZW50IHN0YXR1cyBvZiBUQiBwcmV2ZW50aXZlIHRyZWF0bWVudCAoVFBUKSAKICogSElWLkQuREUxMDM1OiBOb3Qgc3RhcnRlZCB8IFRoZSBjbGllbnQgZGlkIG5vdCBzdGFydCB0aGUgVEIgcHJldmVudGl2ZSB0cmVhdG1lbnQgKFRQVCkgCiAqIEhJVi5ELkRFMTAzNjogT24gVFBUIHwgVGhlIGNsaWVudCBzdGFydGVkIHRoZSBUQiBwcmV2ZW50aXZlIHRyZWF0bWVudCAoVFBUKSBhbmQgaXMgY3VycmVudGx5IHRha2luZyB0aGUgbWVkaWNhdGlvbiwgd2l0aG91dCB0cmVhdG1lbnQgaW50ZXJydXB0aW9ucyAKICogSElWLkQuREUxMDM3OiBPbiBUUFQgd2l0aCBpbnRlcnJ1cHRpb25zIHwgVGhlIGNsaWVudCBzdGFydGVkIHRoZSBUQiBwcmV2ZW50aXZlIHRyZWF0bWVudCAoVFBUKSBhbmQgaXMgY3VycmVudGx5IHRha2luZyB0aGUgbWVkaWNhdGlvbiwgd2l0aCB0cmVhdG1lbnQgaW50ZXJydXB0aW9ucyAKICogSElWLkQuREUxMDM4OiBPbiBob2xkIHwgVGhlIGhlYWx0aCBjYXJlIHdvcmtlciBoYXMgdGVtcG9yYXJpbHkgc3RvcHBlZCB0aGUgVEIgcHJldmVudGl2ZSB0cmVhdG1lbnQgKFRQVCksIGJ1dCBUUFQgaXMgZXhwZWN0ZWQgdG8gY29udGludWUgYWdhaW4gbGF0ZXIuIE1heSBhbHNvIGJlIGNhbGxlZCAic3VzcGVuZGVkIi4gCiAqIEhJVi5ELkRFMTAzOTogQ29tcGxldGVkIHwgVEIgcHJldmVudGl2ZSB0cmVhdG1lbnQgKFRQVCkgd2FzIGNvbXBsZXRlZCAKICogSElWLkguREU0NzogT24gQVJUIHwgQ2xpZW50IGlzIGN1cnJlbnRseSB0YWtpbmcgQVJUIAogKgogKiBBZGRpdGlvbmFsIENvbnRleHQKICogLSB3aGF0IGl0IG1lYXN1cmVzOiBUaGlzIGluZGljYXRvciBtZWFzdXJlcyB0aGUgZWZmZWN0aXZlbmVzcyBvZiBzY2FsZWQtdXAgVFBUIHByb2dyYW1tZXMgYnkgYXNzZXNzaW5nIHRoZSBwcm9wb3J0aW9uIG9mIHBhdGllbnRzIHdobyBjb21wbGV0ZWQgdGhlIHJlY29tbWVuZGVkIGNvdXJzZSBvZiBUUFQuCiAqIC0gcmF0aW9uYWxlOiDigKLCoE1hbnkgY291bnRyaWVzIGhhdmUgbWFkZSBwcm9ncmVzcyBpbiBpbml0aWF0aW5nIGVsaWdpYmxlIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgb24gVFBULiBIb3dldmVyLCByYXRlcyBvZiBUUFQgY29tcGxldGlvbiByZW1haW4gcG9vciBvciB1bmtub3duLiB8IOKAosKgQXNzZXNzbWVudCBvZiBUUFQgY29tcGxldGlvbiBpcyBhIGNyaXRpY2FsIGVsZW1lbnQgb2YgdGhlIFRCL0hJViBjYXNjYWRlIG9mIHNlcnZpY2VzLgogKiAtIG1ldGhvZDogRm9yIHRoZSBudW1lcmF0b3IgYW5kIGRlbm9taW5hdG9yOiBQcm9ncmFtbWUgcmVjb3JkcyAoZm9yIGV4YW1wbGUsIEFSVCByZWdpc3RlcnMpIHwgIHwgRGVmaW5pbmcgInByZXZpb3VzIHJlcG9ydGluZyBwZXJpb2QiOiBGb3IgZXhhbXBsZSwgZm9yIGFubnVhbCByZXBvcnRpbmcgb2YgSmFudWFyeSB0byBEZWNlbWJlciAyMDIxLCB0aGUgcHJldmlvdXMgcmVwb3J0aW5nIHBlcmlvZCBpcyBKYW51YXJ5IHRvIERlY2VtYmVyIDIwMjAgKGV4Y2VwdCBmb3IgcHJvZ3JhbW1lcyB3aXRoIDFIUC1leGNsdXNpdmUgbmF0aW9uYWwgZ3VpZGVsaW5lcyBhbmQgaW1wbGVtZW50YXRpb24sIGluIHdoaWNoIGNhc2UgdGhleSBtYXkgdXNlIEphbnVhcnkgdG8gRGVjZW1iZXIgMjAyMSkuIEZvciBxdWFydGVybHkgb3Igc2VtaS1hbm51YWwgcmVwb3J0aW5nIHRvIHRoZSBuYXRpb25hbCBsZXZlbCwgdGhlIHByZXZpb3VzIHJlcG9ydGluZyBwZXJpb2Qgd2lsbCBkZXBlbmQgb24gdGhlIFRQVCByZWdpbWVuIGFuZCBkdXJhdGlvbiBkZWZpbmVkIGJ5IG5hdGlvbmFsIGd1aWRlbGluZXMuIHwgIHwgTm90ZTogRm9yIHByb2dyYW1tZXMgdXNpbmcgY29udGludW91cyBpc29uaWF6aWQgcHJldmVudGl2ZSB0aGVyYXB5IChJUFQpLCBUUFQgY29tcGxldGlvbiBpcyBkZWZpbmVkIGFzIHNpeCBtb250aHMgb2YgdHJlYXRtZW50LiB8IAogKiAKICogU3VnZ2VzdGVkIFNjb3JpbmcgTWV0aG9kOiBwcm9wb3J0aW9uIHwgaHR0cDovL2hsNy5vcmcvZmhpci91cy9jcWZtZWFzdXJlcy9TdHJ1Y3R1cmVEZWZpbml0aW9uL3Byb3BvcnRpb24tbWVhc3VyZS1jcWZtCiAqLwoKbGlicmFyeSBISVZJTkQ0NUxvZ2ljCgovLyBJbmNsdWRlZCBMaWJyYXJpZXMKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgSElWSW5kaWNhdG9yQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjEnCmluY2x1ZGUgV0hPQ29tbW9uIGNhbGxlZCBXQ29tCmluY2x1ZGUgRkhJUkNvbW1vbiBjYWxsZWQgRkMKCi8vIEluZGljYXRvciBEZWZpbml0aW9uCg==&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -387,7 +474,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

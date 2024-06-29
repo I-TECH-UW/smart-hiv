@@ -3,7 +3,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.96 Logic - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.96 Logic - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -215,7 +215,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -245,7 +245,7 @@
           <div class="inner-wrapper">
 
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
   
 
 
@@ -349,7 +349,71 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND96Logic</b></p><a name="HIVIND96Logic"> </a><a name="hcHIVIND96Logic"> </a><a name="hcHIVIND96Logic-en-US"> </a></div>
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND96Logic</b></p><a name="HIVIND96Logic"> </a><a name="hcHIVIND96Logic"> </a><a name="hcHIVIND96Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.96 Logic
+ * Ref No: CCA.4
+ * Short Name: Cervical cancer survival
+ *
+ * Definition: Crude probability of surviving 1 year after a diagnosis of cervical cancer
+ *
+ * Numerator: Number of women living with HIV still alive 12 months after receiving a diagnosis of invasive cervical cancer
+ * Numerator Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; in previous 12 month reporting period
+ * Numerator Exclusions: &quot;Date of death&quot; less than 12 months after &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; for &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer'
+ *
+ * Denominator: Number of women living with HIV who received a diagnosis of invasive cervical cancer within a 12-month cohort observation period
+ * Denominator Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; in previous 12 month reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years)
+ * • Cervical cancer stage at diagnosis (0, I, II, III, IV)
+ * • Cities and other administrative areas of epidemiologic importance
+ * 
+ * Disaggregation Elements: Age | Cervical cancer stage at diagnosis
+ *
+ * Numerator and Denominator Elements:
+ * Cervical cancer diagnosis | Date of diagnosis of cervical precancer lesions or invasive cervical cancer | HIV status
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE705: Date of diagnosis of cervical precancer lesions or invasive cervical cancer | Date of diagnosis of cervical precancer lesions or invasive cervical cancer 
+ * HIV.D.DE709: Cervical cancer diagnosis | Type of cervical cancer diagnosis 
+ * HIV.D.DE710: Cervical precancer lesions | Client is diagnosed with cervical precancer lesions 
+ * HIV.D.DE711: Invasive cervical cancer | Client is diagnosed with invasive cervical cancer disease 
+ * HIV.D.DE712: Cervical cancer stage at diagnosis | Cervical cancer stage at diagnosis of cervical cancer 
+ * HIV.D.DE713: Stage 0 | Stage 0 cervical cancer at diagnosis of cervical cancer 
+ * HIV.D.DE714: Stage I | Stage I cervical cancer at diagnosis of cervical cancer 
+ * HIV.D.DE715: Stage II | Stage II cervical cancer at diagnosis of cervical cancer 
+ * HIV.D.DE716: Stage III | Stage III cervical cancer at diagnosis of cervical cancer 
+ * HIV.D.DE717: Stage IV | Stage IV cervical cancer at diagnosis of cervical cancer
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the effectiveness of cervical cancer treatment for women diagnosed with cervical cancer.
+ * - rationale: • Surveillance of cervical cancer survival among women living with HIV is essential in monitoring the access and effectiveness of treatment and follow-up to support the needs of cancer survivors. Adequate and complete follow-up is a prerequisite to conducting a survival study. | • It is calculated by assessing the percentage of women living with HIV who were diagnosed with invasive cervical cancer who were still alive 12 months after their cervical cancer diagnosis. It excludes those who were not followed for the 12-month period. In places with good retention and follow-up, 5-year survival can also be calculated, including only those individuals under observation with complete follow-up five years after their diagnosis of cervical cancer.
+ * - method: This indicator uses a cohort analysis to measure the proportion of women living with HIV who are still alive 12 months after their diagnosis with cervical cancer. |  | The source of data is Individual-level data obtained from programme records.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND96Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -374,7 +438,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

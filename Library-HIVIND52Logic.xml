@@ -9,7 +9,85 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND52Logic</b></p><a name="HIVIND52Logic"> </a><a name="hcHIVIND52Logic"> </a><a name="hcHIVIND52Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND52Logic</b></p><a name="HIVIND52Logic"> </a><a name="hcHIVIND52Logic"> </a><a name="hcHIVIND52Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.52 Logic
+ * Ref No: DFT.5
+ * Short Name: TB treatment initiation among diagnosed
+ *
+ * Definition: % of people living with HIV newly initiated on ART and diagnosed with active TB who initiated TB treatment
+ *
+ * Numerator: Number of people living with HIV newly initiated on ART who were diagnosed with TB and who started treatment for active TB disease
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB' AND a &quot;TB diagnostic test category&quot; is NOT NULL AND with a &quot;TB diagnostic test date&quot; in the reporting period AND &quot;Date of TB diagnosis&quot; AND &quot;TB treatment start date&quot; in the reporting period
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people living with HIV newly initiated on ART who were diagnosed with active TB disease
+ * Denominator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB' AND a &quot;TB diagnostic test category&quot; is NOT NULL AND with a &quot;TB diagnostic test date&quot; in the reporting period AND &quot;Date of TB diagnosis&quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)**
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age
+ *
+ * Numerator and Denominator Elements:
+ * ART start date | ART start type | Date of TB diagnosis | HIV status | TB diagnostic test category | TB diagnostic test date | TB screening date | TB screening result | TB treatment start date
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART) 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE39: ART start date | The date on which the client started or restarted ART 
+ * HIV.D.DE43: ART start type | Whether the client is ART naive or is restarting ART 
+ * HIV.D.DE44: First-time user of ART | Client is ART naive, having never taken ART to treat HIV before 
+ * HIV.D.DE45: Restarting ART | Client is restarting ART after stopping treatment for any reason 
+ * HIV.D.DE952: Date of TB diagnosis | The date when the diagnosis was established 
+ * HIV.D.DE986: TB screening result | Record the result of the tuberculosis (TB) screening 
+ * HIV.D.DE987: Screen positive for TB | Screening result was positive for tuberculosis (TB) 
+ * HIV.D.DE988: Screen negative for TB | Screening result was negative for tuberculosis (TB) 
+ * HIV.D.DE989: Inconclusive | Screening result was inconclusive for tuberculosis (TB) 
+ * HIV.D.DE990: TB screening date | Date the TB screening was conducted 
+ * HIV.D.DE992: TB diagnostic test category | The type of diagnostic test performed to detect tuberculosis (TB) disease 
+ * HIV.D.DE993: LF-LAM | Client tested for tuberculosis with a lateral flow urine lipoarabinomannan assay 
+ * HIV.D.DE994: mWRD test for TB | Client tested with a WHO-recommended molecular diagnostic test to detect Mycobacterium tuberculosis (MTB) 
+ * HIV.D.DE995: Microscopy - Sputum acid-fast bacilli (AFB) | Client tested for tuberculosis with a sputum acid-fast bacilli (AFB) 
+ * HIV.D.DE996: TB Culture | Client tested for tuberculosis (TB) with a culture 
+ * HIV.D.DE997: TB diagnostic test date | The date when TB diagnostic test was performed 
+ * HIV.D.DE1001: TB treatment start date | The date on which the client start or restarted tuberculosis (TB) treatment
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the percentage of people living with HIV newly initiated on ART and, having screened positive for TB symptoms and had appropriate TB diagnostic testing that confirmed a diagnosis of active TB disease, then initiated TB treatment.
+ * - rationale: • Once active TB disease is diagnosed, it is essential that TB treatment is promptly initiated and that quality clinical monitoring is provided (according to national clinical guidelines) to ensure treatment completion. | • It is important to understand the cascade from screening to treatment of active TB disease; this indicator will highlight any barriers between diagnosis and treatment. | • This is the fifth of five &quot;screening cascade&quot; indicators considered priority for high burden TB/HIV settings.
+ * - method: &quot;Newly initiated&quot; is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period. | For the numerator and denominator: Programme records (for example, ART registers, EMRs)
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND52Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +104,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +114,11 @@
     </telecom>
   </contact>
   <description value="% of people living with HIV newly initiated on ART and diagnosed with active TB who initiated TB treatment"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC41MiBMb2dpYwogKiBSZWYgTm86IERGVC41CiAqIFNob3J0IE5hbWU6IFRCIHRyZWF0bWVudCBpbml0aWF0aW9uIGFtb25nIGRpYWdub3NlZAogKgogKiBEZWZpbml0aW9uOiAlIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgbmV3bHkgaW5pdGlhdGVkIG9uIEFSVCBhbmQgZGlhZ25vc2VkIHdpdGggYWN0aXZlIFRCIHdobyBpbml0aWF0ZWQgVEIgdHJlYXRtZW50CiAqCiAqIE51bWVyYXRvcjogTnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgbmV3bHkgaW5pdGlhdGVkIG9uIEFSVCB3aG8gd2VyZSBkaWFnbm9zZWQgd2l0aCBUQiBhbmQgd2hvIHN0YXJ0ZWQgdHJlYXRtZW50IGZvciBhY3RpdmUgVEIgZGlzZWFzZQogKiBOdW1lcmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiSElWIHN0YXR1cyI9J0hJVi1wb3NpdGl2ZScgQU5EIHdpdGggIkFSVCBzdGFydCB0eXBlIj0nRmlyc3QtdGltZSB1c2VyIG9mIEFSVCcgQU5EIHdpdGggIkFSVCBzdGFydCBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZCBBTkQgIlRCIHNjcmVlbmluZyBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZCBBTkQgIlRCIHNjcmVlbmluZyByZXN1bHQiPSdTY3JlZW4gcG9zaXRpdmUgZm9yIFRCJyBBTkQgYSAiVEIgZGlhZ25vc3RpYyB0ZXN0IGNhdGVnb3J5IiBpcyBOT1QgTlVMTCBBTkQgd2l0aCBhICJUQiBkaWFnbm9zdGljIHRlc3QgZGF0ZSIgaW4gdGhlIHJlcG9ydGluZyBwZXJpb2QgQU5EICJEYXRlIG9mIFRCIGRpYWdub3NpcyIgQU5EICJUQiB0cmVhdG1lbnQgc3RhcnQgZGF0ZSIgaW4gdGhlIHJlcG9ydGluZyBwZXJpb2QKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogTnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgbmV3bHkgaW5pdGlhdGVkIG9uIEFSVCB3aG8gd2VyZSBkaWFnbm9zZWQgd2l0aCBhY3RpdmUgVEIgZGlzZWFzZQogKiBEZW5vbWluYXRvciBDYWxjdWxhdGlvbjogQ09VTlQgb2YgY2xpZW50cyB3aXRoICJISVYgc3RhdHVzIj0nSElWLXBvc2l0aXZlJyBBTkQgd2l0aCAiQVJUIHN0YXJ0IHR5cGUiPSdGaXJzdC10aW1lIHVzZXIgb2YgQVJUJyBBTkQgd2l0aCAiQVJUIHN0YXJ0IGRhdGUiIGluIHRoZSByZXBvcnRpbmcgcGVyaW9kIEFORCAiVEIgc2NyZWVuaW5nIGRhdGUiIGluIHRoZSByZXBvcnRpbmcgcGVyaW9kIEFORCAiVEIgc2NyZWVuaW5nIHJlc3VsdCI9J1NjcmVlbiBwb3NpdGl2ZSBmb3IgVEInIEFORCBhICJUQiBkaWFnbm9zdGljIHRlc3QgY2F0ZWdvcnkiIGlzIE5PVCBOVUxMIEFORCB3aXRoIGEgIlRCIGRpYWdub3N0aWMgdGVzdCBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZCBBTkQgIkRhdGUgb2YgVEIgZGlhZ25vc2lzIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBEZW5vbWluYXRvciBFeGNsdXNpb25zOiAKICoKICogRGlzYWdncmVnYXRpb25zOgogKiDigKLCoEdlbmRlciAoZmVtYWxlLCBtYWxlLCBvdGhlciopCiAqIOKAosKgQWdlICgw4oCTNCwgNeKAkzksIDEw4oCTMTQsIDE14oCTMTksIDIw4oCTMjQsIDI14oCTNDksIDUwKyB5ZWFycykqKgogKiDigKIgQ2l0aWVzIGFuZCBvdGhlciBhZG1pbmlzdHJhdGl2ZSByZWdpb25zIG9mIGVwaWRlbWlvbG9naWMgaW1wb3J0YW5jZQogKiAKICogRGlzYWdncmVnYXRpb24gRWxlbWVudHM6IEdlbmRlciB8IEFnZQogKgogKiBOdW1lcmF0b3IgYW5kIERlbm9taW5hdG9yIEVsZW1lbnRzOgogKiBBUlQgc3RhcnQgZGF0ZSB8IEFSVCBzdGFydCB0eXBlIHwgRGF0ZSBvZiBUQiBkaWFnbm9zaXMgfCBISVYgc3RhdHVzIHwgVEIgZGlhZ25vc3RpYyB0ZXN0IGNhdGVnb3J5IHwgVEIgZGlhZ25vc3RpYyB0ZXN0IGRhdGUgfCBUQiBzY3JlZW5pbmcgZGF0ZSB8IFRCIHNjcmVlbmluZyByZXN1bHQgfCBUQiB0cmVhdG1lbnQgc3RhcnQgZGF0ZQogKgogKiBSZWZlcmVuY2U6IENvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIHBlcnNvbi1jZW50cmVkIEhJViBzdHJhdGVnaWMgaW5mb3JtYXRpb246IHN0cmVuZ3RoZW5pbmcgcm91dGluZSBkYXRhIGZvciBpbXBhY3QuIEdlbmV2YTogV29ybGQgSGVhbHRoIE9yZ2FuaXphdGlvbjsgMjAyMgogKiAKICogRGF0YSBDb25jZXB0czoKICogIAogKiBISVYuQS5ERTE3OiBBZ2UgfCBDYWxjdWxhdGVkIGFnZSAobnVtYmVyIG9mIHllYXJzKSBvZiB0aGUgY2xpZW50IGJhc2VkIG9uIGRhdGUgb2YgYmlydGggCiAqIEhJVi5BLkRFMTg6IEdlbmRlciogfCBHZW5kZXIgb2YgdGhlIGNsaWVudCogCiAqIEhJVi5BLkRFMTk6IEZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIGZlbWFsZSAKICogSElWLkEuREUyMDogTWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIG1hbGUgCiAqIEhJVi5BLkRFMjE6IFRyYW5zZ2VuZGVyIG1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyB0cmFuc2dlbmRlciBtYWxlIAogKiBISVYuQS5ERTIyOiBUcmFuc2dlbmRlciBmZW1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyB0cmFuc2dlbmRlciBmZW1hbGUgCiAqIEhJVi5BLkRFMjM6IE90aGVyIHwgQWRkaXRpb25hbCBjYXRlZ29yeSAKICogSElWLkIuREU3MjogQVJUIHN0YXJ0IGRhdGUgfCBUaGUgZGF0ZSBvbiB3aGljaCB0aGUgY2xpZW50IHN0YXJ0ZWQgb3IgcmVzdGFydGVkIGFudGlyZXRyb3ZpcmFsIHRoZXJhcHkgKEFSVCkgCiAqIEhJVi5CLkRFMTE1OiBISVYgc3RhdHVzIHwgSElWIHN0YXR1cyByZXBvcnRlZCBhZnRlciBhcHBseWluZyB0aGUgbmF0aW9uYWwgSElWIHRlc3RpbmcgYWxnb3JpdGhtLiBObyBzaW5nbGUgSElWIHRlc3QgY2FuIHByb3ZpZGUgYW4gSElWLXBvc2l0aXZlIGRpYWdub3Npcy4gCiAqIEhJVi5CLkRFMTE2OiBISVYtcG9zaXRpdmUgfCBDbGllbnQgaXMgSElWLXBvc2l0aXZlIAogKiBISVYuQi5ERTExNzogSElWLW5lZ2F0aXZlIHwgQ2xpZW50IGlzIEhJVi1uZWdhdGl2ZSAKICogSElWLkIuREUxMTg6IFVua25vd24gfCBDbGllbnQgaGFzIHVua25vd24gSElWIHN0YXR1cyAKICogSElWLkQuREUzOTogQVJUIHN0YXJ0IGRhdGUgfCBUaGUgZGF0ZSBvbiB3aGljaCB0aGUgY2xpZW50IHN0YXJ0ZWQgb3IgcmVzdGFydGVkIEFSVCAKICogSElWLkQuREU0MzogQVJUIHN0YXJ0IHR5cGUgfCBXaGV0aGVyIHRoZSBjbGllbnQgaXMgQVJUIG5haXZlIG9yIGlzIHJlc3RhcnRpbmcgQVJUIAogKiBISVYuRC5ERTQ0OiBGaXJzdC10aW1lIHVzZXIgb2YgQVJUIHwgQ2xpZW50IGlzIEFSVCBuYWl2ZSwgaGF2aW5nIG5ldmVyIHRha2VuIEFSVCB0byB0cmVhdCBISVYgYmVmb3JlIAogKiBISVYuRC5ERTQ1OiBSZXN0YXJ0aW5nIEFSVCB8IENsaWVudCBpcyByZXN0YXJ0aW5nIEFSVCBhZnRlciBzdG9wcGluZyB0cmVhdG1lbnQgZm9yIGFueSByZWFzb24gCiAqIEhJVi5ELkRFOTUyOiBEYXRlIG9mIFRCIGRpYWdub3NpcyB8IFRoZSBkYXRlIHdoZW4gdGhlIGRpYWdub3NpcyB3YXMgZXN0YWJsaXNoZWQgCiAqIEhJVi5ELkRFOTg2OiBUQiBzY3JlZW5pbmcgcmVzdWx0IHwgUmVjb3JkIHRoZSByZXN1bHQgb2YgdGhlIHR1YmVyY3Vsb3NpcyAoVEIpIHNjcmVlbmluZyAKICogSElWLkQuREU5ODc6IFNjcmVlbiBwb3NpdGl2ZSBmb3IgVEIgfCBTY3JlZW5pbmcgcmVzdWx0IHdhcyBwb3NpdGl2ZSBmb3IgdHViZXJjdWxvc2lzIChUQikgCiAqIEhJVi5ELkRFOTg4OiBTY3JlZW4gbmVnYXRpdmUgZm9yIFRCIHwgU2NyZWVuaW5nIHJlc3VsdCB3YXMgbmVnYXRpdmUgZm9yIHR1YmVyY3Vsb3NpcyAoVEIpIAogKiBISVYuRC5ERTk4OTogSW5jb25jbHVzaXZlIHwgU2NyZWVuaW5nIHJlc3VsdCB3YXMgaW5jb25jbHVzaXZlIGZvciB0dWJlcmN1bG9zaXMgKFRCKSAKICogSElWLkQuREU5OTA6IFRCIHNjcmVlbmluZyBkYXRlIHwgRGF0ZSB0aGUgVEIgc2NyZWVuaW5nIHdhcyBjb25kdWN0ZWQgCiAqIEhJVi5ELkRFOTkyOiBUQiBkaWFnbm9zdGljIHRlc3QgY2F0ZWdvcnkgfCBUaGUgdHlwZSBvZiBkaWFnbm9zdGljIHRlc3QgcGVyZm9ybWVkIHRvIGRldGVjdCB0dWJlcmN1bG9zaXMgKFRCKSBkaXNlYXNlIAogKiBISVYuRC5ERTk5MzogTEYtTEFNIHwgQ2xpZW50IHRlc3RlZCBmb3IgdHViZXJjdWxvc2lzIHdpdGggYSBsYXRlcmFsIGZsb3cgdXJpbmUgbGlwb2FyYWJpbm9tYW5uYW4gYXNzYXkgCiAqIEhJVi5ELkRFOTk0OiBtV1JEIHRlc3QgZm9yIFRCIHwgQ2xpZW50IHRlc3RlZCB3aXRoIGEgV0hPLXJlY29tbWVuZGVkIG1vbGVjdWxhciBkaWFnbm9zdGljIHRlc3QgdG8gZGV0ZWN0IE15Y29iYWN0ZXJpdW0gdHViZXJjdWxvc2lzIChNVEIpIAogKiBISVYuRC5ERTk5NTogTWljcm9zY29weSAtIFNwdXR1bSBhY2lkLWZhc3QgYmFjaWxsaSAoQUZCKSB8IENsaWVudCB0ZXN0ZWQgZm9yIHR1YmVyY3Vsb3NpcyB3aXRoIGEgc3B1dHVtIGFjaWQtZmFzdCBiYWNpbGxpIChBRkIpIAogKiBISVYuRC5ERTk5NjogVEIgQ3VsdHVyZSB8IENsaWVudCB0ZXN0ZWQgZm9yIHR1YmVyY3Vsb3NpcyAoVEIpIHdpdGggYSBjdWx0dXJlIAogKiBISVYuRC5ERTk5NzogVEIgZGlhZ25vc3RpYyB0ZXN0IGRhdGUgfCBUaGUgZGF0ZSB3aGVuIFRCIGRpYWdub3N0aWMgdGVzdCB3YXMgcGVyZm9ybWVkIAogKiBISVYuRC5ERTEwMDE6IFRCIHRyZWF0bWVudCBzdGFydCBkYXRlIHwgVGhlIGRhdGUgb24gd2hpY2ggdGhlIGNsaWVudCBzdGFydCBvciByZXN0YXJ0ZWQgdHViZXJjdWxvc2lzIChUQikgdHJlYXRtZW50CiAqCiAqIEFkZGl0aW9uYWwgQ29udGV4dAogKiAtIHdoYXQgaXQgbWVhc3VyZXM6IFRoaXMgaW5kaWNhdG9yIG1lYXN1cmVzIHRoZSBwZXJjZW50YWdlIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgbmV3bHkgaW5pdGlhdGVkIG9uIEFSVCBhbmQsIGhhdmluZyBzY3JlZW5lZCBwb3NpdGl2ZSBmb3IgVEIgc3ltcHRvbXMgYW5kIGhhZCBhcHByb3ByaWF0ZSBUQiBkaWFnbm9zdGljIHRlc3RpbmcgdGhhdCBjb25maXJtZWQgYSBkaWFnbm9zaXMgb2YgYWN0aXZlIFRCIGRpc2Vhc2UsIHRoZW4gaW5pdGlhdGVkIFRCIHRyZWF0bWVudC4KICogLSByYXRpb25hbGU6IOKAosKgT25jZSBhY3RpdmUgVEIgZGlzZWFzZSBpcyBkaWFnbm9zZWQsIGl0IGlzIGVzc2VudGlhbCB0aGF0IFRCIHRyZWF0bWVudCBpcyBwcm9tcHRseSBpbml0aWF0ZWQgYW5kIHRoYXQgcXVhbGl0eSBjbGluaWNhbCBtb25pdG9yaW5nIGlzIHByb3ZpZGVkIChhY2NvcmRpbmcgdG8gbmF0aW9uYWwgY2xpbmljYWwgZ3VpZGVsaW5lcykgdG8gZW5zdXJlIHRyZWF0bWVudCBjb21wbGV0aW9uLiB8IOKAosKgSXQgaXMgaW1wb3J0YW50IHRvIHVuZGVyc3RhbmQgdGhlIGNhc2NhZGUgZnJvbSBzY3JlZW5pbmcgdG8gdHJlYXRtZW50IG9mIGFjdGl2ZSBUQiBkaXNlYXNlOyB0aGlzIGluZGljYXRvciB3aWxsIGhpZ2hsaWdodCBhbnkgYmFycmllcnMgYmV0d2VlbiBkaWFnbm9zaXMgYW5kIHRyZWF0bWVudC4gfCDigKLCoFRoaXMgaXMgdGhlIGZpZnRoIG9mIGZpdmUgInNjcmVlbmluZyBjYXNjYWRlIiBpbmRpY2F0b3JzIGNvbnNpZGVyZWQgcHJpb3JpdHkgZm9yIGhpZ2ggYnVyZGVuIFRCL0hJViBzZXR0aW5ncy4KICogLSBtZXRob2Q6ICJOZXdseSBpbml0aWF0ZWQiIGlzIGRlZmluZWQgYXMgdGhlIG51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIHdobyBzdGFydCBBUlQgaW4gYWNjb3JkYW5jZSB3aXRoIG5hdGlvbmFsIHRyZWF0bWVudCBndWlkZWxpbmVzIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZC4gfCBGb3IgdGhlIG51bWVyYXRvciBhbmQgZGVub21pbmF0b3I6IFByb2dyYW1tZSByZWNvcmRzIChmb3IgZXhhbXBsZSwgQVJUIHJlZ2lzdGVycywgRU1ScykKICogCiAqIFN1Z2dlc3RlZCBTY29yaW5nIE1ldGhvZDogcHJvcG9ydGlvbiB8IGh0dHA6Ly9obDcub3JnL2ZoaXIvdXMvY3FmbWVhc3VyZXMvU3RydWN0dXJlRGVmaW5pdGlvbi9wcm9wb3J0aW9uLW1lYXN1cmUtY3FmbQogKi8KCmxpYnJhcnkgSElWSU5ENTJMb2dpYwoKLy8gSW5jbHVkZWQgTGlicmFyaWVzCnVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCgppbmNsdWRlIEhJVkluZGljYXRvckNvbW1vbiB2ZXJzaW9uICcwLjAuMScgY2FsbGVkIEhJQwppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwppbmNsdWRlIFdIT0NvbW1vbiBjYWxsZWQgV0NvbQppbmNsdWRlIEZISVJDb21tb24gY2FsbGVkIEZDCgovLyBJbmRpY2F0b3IgRGVmaW5pdGlvbgo="/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.55 Logic - XML Representation - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.55 Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -247,7 +247,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -318,7 +318,7 @@
 
 
 
-  <pre class="xml" style="white-space: pre; text-wrap: nowrap;"><code class="language-xml" style="white-space: pre; text-wrap: nowrap;">
+  <pre class="xml" style="white-space: pre; text-wrap: nowrap;"><code style="white-space: pre; text-wrap: nowrap;">
 
 &lt;<a href="http://hl7.org/fhir/R4/library.html#Library">Library</a> xmlns=&quot;http://hl7.org/fhir&quot;&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.id">id</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;HIVIND55Logic&quot;/&gt;
@@ -334,7 +334,92 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND55Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND55Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND55Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND55Logic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND55Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND55Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND55Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND55Logic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.55 Logic
+ * Ref No: DSD.3
+ * Short Name: Coverage of DSD ART models among people living with HIV on ART
+ *
+ * Definition: % of people living with HIV enrolled in DSD ART models among those eligible for DSD ART (for facilities with electronic HIS) or among people living with HIV On ART (facilities with paper-based systems) during the reporting period
+ *
+ * Numerator: Number of people living with HIV enrolled in DSD ART models during the reporting period
+ * Numerator Calculation: COUNT of clients with &amp;quot;HIV status&amp;quot;='HIV-positive' AND &amp;quot;On ART&amp;quot;=True AND &amp;quot;Currently enrolled in DSD ART model&amp;quot;=True
+ * Numerator Exclusions: 
+ *
+ * Denominator: Facilities with electronic health information systems: Number of people living with HIV on ART eligible for DSD ART models during the reporting period |  | Facilities with paper-based systems: Number of people living with HIV receiving ART at the end of the reporting period
+ * Denominator Calculation: COUNT of clients with &amp;quot;HIV status&amp;quot;='HIV-positive' AND &amp;quot;On ART&amp;quot;=True AND &amp;quot;Date DSD ART eligibility assessed&amp;quot; within the reporting period AND &amp;quot;Eligible for DSD ART&amp;quot;=True
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (0–4, 5–14, 15–24, 25+ years)
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**
+ * • Category of DSD model (group models managed by health care workers, group models managed by clients, individual models based at facilities, and individual models not based at facilities). This requires each DSD ART model of care to be assigned to one of these categories to enable disaggregation.
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | Key population member type | DSD ART model(s)
+ *
+ * Numerator and Denominator Elements:
+ * Currently enrolled in DSD ART model | Date DSD ART eligibility assessed | Eligible for DSD ART | HIV status | On ART
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE38: On ART | Client is currently taking ART 
+ * HIV.D.DE760: Eligible for DSD ART | Client is eligible for differentiated service delivery (DSD) for ART 
+ * HIV.D.DE761: Date DSD ART eligibility assessed | Date client was assessed for eligibility for differentiated service delivery (DSD) for ART 
+ * HIV.D.DE762: Currently enrolled in DSD ART model | Client currently enrolled in differentiated service delivery (DSD) ART model 
+ * HIV.D.DE764: DSD ART model(s) | Type of DSD ART model client is enrolled in (country-specific) 
+ * HIV.D.DE765: Fast track ART refill | Client is enrolled in fast track ART refill (DSD ART model) 
+ * HIV.D.DE766: Facility adherence club | Client is enrolled in facility adherence club (DSD ART model) 
+ * HIV.D.DE767: Community ART distribution point | Client is enrolled in community ART distribution point (DSD ART model) 
+ * HIV.D.DE768: CHW/peer educator community ART group | Client is enrolled in community health worker/peer educator community ART group (DSD ART model) 
+ * HIV.D.DE769: Patient/client community ART group | Client is enrolled in patient/client community ART group (DSD ART model) 
+ * HIV.D.DE770: Other DSD ART model | Client is enrolled in another DSD ART model 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.H.DE47: On ART | Client is currently taking ART 
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the rollout and implementation of DSD models of ART during the reporting period.
+ * - rationale: • WHO recommends DSD models of care for eligible individuals to ensure that care meets the diversity of needs among people living with HIV. | • This indicator measures whether individuals who are eligible for DSD ART are receiving such services.
+ * - method: Patient monitoring tools (electronic or paper), for example ART register/EMR |  | Coverage measures all people living with HIV currently enrolled in DSD ART models, | including those newly enrolled and those enrolled in prior reporting periods. For facilities with paper-based reporting, a proxy for the denominator of number of people eligible for DSD ART can be used. |  | Measurement frequency: quarterly
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND55Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
@@ -352,7 +437,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T06:31:00+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T07:09:27+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -363,6 +448,14 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a>
                <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;% of people living with HIV enrolled in DSD ART models among those eligible for DSD ART (for facilities with electronic HIS) or among people living with HIV On ART (facilities with paper-based systems) during the reporting period&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC41NSBMb2dpYwogKiBSZWYgTm86IERTRC4zCiAqIFNob3J0IE5hbWU6IENvdmVyYWdlIG9mIERTRCBBUlQgbW9kZWxzIGFtb25nIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgb24gQVJUCiAqCiAqIERlZmluaXRpb246ICUgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViBlbnJvbGxlZCBpbiBEU0QgQVJUIG1vZGVscyBhbW9uZyB0aG9zZSBlbGlnaWJsZSBmb3IgRFNEIEFSVCAoZm9yIGZhY2lsaXRpZXMgd2l0aCBlbGVjdHJvbmljIEhJUykgb3IgYW1vbmcgcGVvcGxlIGxpdmluZyB3aXRoIEhJViBPbiBBUlQgKGZhY2lsaXRpZXMgd2l0aCBwYXBlci1iYXNlZCBzeXN0ZW1zKSBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICoKICogTnVtZXJhdG9yOiBOdW1iZXIgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViBlbnJvbGxlZCBpbiBEU0QgQVJUIG1vZGVscyBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICogTnVtZXJhdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiBjbGllbnRzIHdpdGggIkhJViBzdGF0dXMiPSdISVYtcG9zaXRpdmUnIEFORCAiT24gQVJUIj1UcnVlIEFORCAiQ3VycmVudGx5IGVucm9sbGVkIGluIERTRCBBUlQgbW9kZWwiPVRydWUKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogRmFjaWxpdGllcyB3aXRoIGVsZWN0cm9uaWMgaGVhbHRoIGluZm9ybWF0aW9uIHN5c3RlbXM6IE51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIG9uIEFSVCBlbGlnaWJsZSBmb3IgRFNEIEFSVCBtb2RlbHMgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kIHwgIHwgRmFjaWxpdGllcyB3aXRoIHBhcGVyLWJhc2VkIHN5c3RlbXM6IE51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIHJlY2VpdmluZyBBUlQgYXQgdGhlIGVuZCBvZiB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBEZW5vbWluYXRvciBDYWxjdWxhdGlvbjogQ09VTlQgb2YgY2xpZW50cyB3aXRoICJISVYgc3RhdHVzIj0nSElWLXBvc2l0aXZlJyBBTkQgIk9uIEFSVCI9VHJ1ZSBBTkQgIkRhdGUgRFNEIEFSVCBlbGlnaWJpbGl0eSBhc3Nlc3NlZCIgd2l0aGluIHRoZSByZXBvcnRpbmcgcGVyaW9kIEFORCAiRWxpZ2libGUgZm9yIERTRCBBUlQiPVRydWUKICogRGVub21pbmF0b3IgRXhjbHVzaW9uczogCiAqCiAqIERpc2FnZ3JlZ2F0aW9uczoKICog4oCiwqBHZW5kZXIgKGZlbWFsZSwgbWFsZSwgb3RoZXIqKQogKiDigKIgQWdlICgw4oCTNCwgNeKAkzE0LCAxNeKAkzI0LCAyNSsgeWVhcnMpCiAqIOKAosKgS2V5IHBvcHVsYXRpb25zIChtZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuLCBwZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncywgcGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MsIHNleCB3b3JrZXJzLCB0cmFucyBhbmQgZ2VuZGVyIGRpdmVyc2UgcGVvcGxlKSoqCiAqIOKAosKgQ2F0ZWdvcnkgb2YgRFNEIG1vZGVsIChncm91cCBtb2RlbHMgbWFuYWdlZCBieSBoZWFsdGggY2FyZSB3b3JrZXJzLCBncm91cCBtb2RlbHMgbWFuYWdlZCBieSBjbGllbnRzLCBpbmRpdmlkdWFsIG1vZGVscyBiYXNlZCBhdCBmYWNpbGl0aWVzLCBhbmQgaW5kaXZpZHVhbCBtb2RlbHMgbm90IGJhc2VkIGF0IGZhY2lsaXRpZXMpLiBUaGlzIHJlcXVpcmVzIGVhY2ggRFNEIEFSVCBtb2RlbCBvZiBjYXJlIHRvIGJlIGFzc2lnbmVkIHRvIG9uZSBvZiB0aGVzZSBjYXRlZ29yaWVzIHRvIGVuYWJsZSBkaXNhZ2dyZWdhdGlvbi4KICog4oCiwqBDaXRpZXMgYW5kIG90aGVyIGFkbWluaXN0cmF0aXZlIHJlZ2lvbnMgb2YgZXBpZGVtaW9sb2dpYyBpbXBvcnRhbmNlCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogR2VuZGVyIHwgQWdlIHwgS2V5IHBvcHVsYXRpb24gbWVtYmVyIHR5cGUgfCBEU0QgQVJUIG1vZGVsKHMpCiAqCiAqIE51bWVyYXRvciBhbmQgRGVub21pbmF0b3IgRWxlbWVudHM6CiAqIEN1cnJlbnRseSBlbnJvbGxlZCBpbiBEU0QgQVJUIG1vZGVsIHwgRGF0ZSBEU0QgQVJUIGVsaWdpYmlsaXR5IGFzc2Vzc2VkIHwgRWxpZ2libGUgZm9yIERTRCBBUlQgfCBISVYgc3RhdHVzIHwgT24gQVJUCiAqCiAqIFJlZmVyZW5jZTogQ29uc29saWRhdGVkIGd1aWRlbGluZXMgb24gcGVyc29uLWNlbnRyZWQgSElWIHN0cmF0ZWdpYyBpbmZvcm1hdGlvbjogc3RyZW5ndGhlbmluZyByb3V0aW5lIGRhdGEgZm9yIGltcGFjdC4gR2VuZXZhOiBXb3JsZCBIZWFsdGggT3JnYW5pemF0aW9uOyAyMDIyCiAqIAogKiBEYXRhIENvbmNlcHRzOgogKiAgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkEuREUxODogR2VuZGVyKiB8IEdlbmRlciBvZiB0aGUgY2xpZW50KiAKICogSElWLkEuREUxOTogRmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgZmVtYWxlIAogKiBISVYuQS5ERTIwOiBNYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgbWFsZSAKICogSElWLkEuREUyMTogVHJhbnNnZW5kZXIgbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIG1hbGUgCiAqIEhJVi5BLkRFMjI6IFRyYW5zZ2VuZGVyIGZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIGZlbWFsZSAKICogSElWLkEuREUyMzogT3RoZXIgfCBBZGRpdGlvbmFsIGNhdGVnb3J5IAogKiBISVYuQi5ERTUwOiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBjbGllbnQgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5CLkRFNTE6IFNleCB3b3JrZXIgfCBDbGllbnQgaXMgYSBzZXggd29ya2VyIAogKiBISVYuQi5ERTUyOiBNZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuIHwgQ2xpZW50IGlzIGEgbWFuIHdobyBoYXMgc2V4IHdpdGggbWVuIAogKiBISVYuQi5ERTUzOiBUcmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgcGVvcGxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIAogKiBISVYuQi5ERTU0OiBQZW9wbGUgd2hvIGluamVjdCBkcnVncyB8IENsaWVudCBpcyBhIHBlcnNvbiB3aG8gaW5qZWN0cyBkcnVncyAKICogSElWLkIuREU1NTogUGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZ3MgfCBDbGllbnQgbGl2ZXMgaW4gYSBwcmlzb24gb3IgYW5vdGhlciBjbG9zZWQgc2V0dGluZyAKICogSElWLkIuREUxMTU6IEhJViBzdGF0dXMgfCBISVYgc3RhdHVzIHJlcG9ydGVkIGFmdGVyIGFwcGx5aW5nIHRoZSBuYXRpb25hbCBISVYgdGVzdGluZyBhbGdvcml0aG0uIE5vIHNpbmdsZSBISVYgdGVzdCBjYW4gcHJvdmlkZSBhbiBISVYtcG9zaXRpdmUgZGlhZ25vc2lzLiAKICogSElWLkIuREUxMTY6IEhJVi1wb3NpdGl2ZSB8IENsaWVudCBpcyBISVYtcG9zaXRpdmUgCiAqIEhJVi5CLkRFMTE3OiBISVYtbmVnYXRpdmUgfCBDbGllbnQgaXMgSElWLW5lZ2F0aXZlIAogKiBISVYuQi5ERTExODogVW5rbm93biB8IENsaWVudCBoYXMgdW5rbm93biBISVYgc3RhdHVzIAogKiBISVYuRC5ERTM4OiBPbiBBUlQgfCBDbGllbnQgaXMgY3VycmVudGx5IHRha2luZyBBUlQgCiAqIEhJVi5ELkRFNzYwOiBFbGlnaWJsZSBmb3IgRFNEIEFSVCB8IENsaWVudCBpcyBlbGlnaWJsZSBmb3IgZGlmZmVyZW50aWF0ZWQgc2VydmljZSBkZWxpdmVyeSAoRFNEKSBmb3IgQVJUIAogKiBISVYuRC5ERTc2MTogRGF0ZSBEU0QgQVJUIGVsaWdpYmlsaXR5IGFzc2Vzc2VkIHwgRGF0ZSBjbGllbnQgd2FzIGFzc2Vzc2VkIGZvciBlbGlnaWJpbGl0eSBmb3IgZGlmZmVyZW50aWF0ZWQgc2VydmljZSBkZWxpdmVyeSAoRFNEKSBmb3IgQVJUIAogKiBISVYuRC5ERTc2MjogQ3VycmVudGx5IGVucm9sbGVkIGluIERTRCBBUlQgbW9kZWwgfCBDbGllbnQgY3VycmVudGx5IGVucm9sbGVkIGluIGRpZmZlcmVudGlhdGVkIHNlcnZpY2UgZGVsaXZlcnkgKERTRCkgQVJUIG1vZGVsIAogKiBISVYuRC5ERTc2NDogRFNEIEFSVCBtb2RlbChzKSB8IFR5cGUgb2YgRFNEIEFSVCBtb2RlbCBjbGllbnQgaXMgZW5yb2xsZWQgaW4gKGNvdW50cnktc3BlY2lmaWMpIAogKiBISVYuRC5ERTc2NTogRmFzdCB0cmFjayBBUlQgcmVmaWxsIHwgQ2xpZW50IGlzIGVucm9sbGVkIGluIGZhc3QgdHJhY2sgQVJUIHJlZmlsbCAoRFNEIEFSVCBtb2RlbCkgCiAqIEhJVi5ELkRFNzY2OiBGYWNpbGl0eSBhZGhlcmVuY2UgY2x1YiB8IENsaWVudCBpcyBlbnJvbGxlZCBpbiBmYWNpbGl0eSBhZGhlcmVuY2UgY2x1YiAoRFNEIEFSVCBtb2RlbCkgCiAqIEhJVi5ELkRFNzY3OiBDb21tdW5pdHkgQVJUIGRpc3RyaWJ1dGlvbiBwb2ludCB8IENsaWVudCBpcyBlbnJvbGxlZCBpbiBjb21tdW5pdHkgQVJUIGRpc3RyaWJ1dGlvbiBwb2ludCAoRFNEIEFSVCBtb2RlbCkgCiAqIEhJVi5ELkRFNzY4OiBDSFcvcGVlciBlZHVjYXRvciBjb21tdW5pdHkgQVJUIGdyb3VwIHwgQ2xpZW50IGlzIGVucm9sbGVkIGluIGNvbW11bml0eSBoZWFsdGggd29ya2VyL3BlZXIgZWR1Y2F0b3IgY29tbXVuaXR5IEFSVCBncm91cCAoRFNEIEFSVCBtb2RlbCkgCiAqIEhJVi5ELkRFNzY5OiBQYXRpZW50L2NsaWVudCBjb21tdW5pdHkgQVJUIGdyb3VwIHwgQ2xpZW50IGlzIGVucm9sbGVkIGluIHBhdGllbnQvY2xpZW50IGNvbW11bml0eSBBUlQgZ3JvdXAgKERTRCBBUlQgbW9kZWwpIAogKiBISVYuRC5ERTc3MDogT3RoZXIgRFNEIEFSVCBtb2RlbCB8IENsaWVudCBpcyBlbnJvbGxlZCBpbiBhbm90aGVyIERTRCBBUlQgbW9kZWwgCiAqIEhJVi5FLkRFMTE0OiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBpbmZhbnQncyBtb3RoZXIgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5FLkRFMTE1OiBTZXggd29ya2VyIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgc2V4IHdvcmtlciAKICogSElWLkUuREUxMTY6IFBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgcGVyc29uIHdobyBpbmplY3RzIGRydWdzIAogKiBISVYuRS5ERTExNzogVHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIHBlb3BsZSB8IEluZmFudCdzIG1vdGhlciBpZGVudGlmaWVzIGFzIHRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSAKICogSElWLkUuREUxMTg6IFBlb3BsZSBsaXZpbmcgaW4gcHJpc29ucyBhbmQgb3RoZXIgY2xvc2VkIHNldHRpbmcgfCBJbmZhbnQncyBtb3RoZXIgaXMgaW4gYSBwcmlzb24gb3IgY2xvc2VkIHNldHRpbmcgCiAqIEhJVi5ILkRFNDc6IE9uIEFSVCB8IENsaWVudCBpcyBjdXJyZW50bHkgdGFraW5nIEFSVCAKICoKICogQWRkaXRpb25hbCBDb250ZXh0CiAqIC0gd2hhdCBpdCBtZWFzdXJlczogVGhpcyBpbmRpY2F0b3IgbWVhc3VyZXMgdGhlIHJvbGxvdXQgYW5kIGltcGxlbWVudGF0aW9uIG9mIERTRCBtb2RlbHMgb2YgQVJUIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZC4KICogLSByYXRpb25hbGU6IOKAoiBXSE8gcmVjb21tZW5kcyBEU0QgbW9kZWxzIG9mIGNhcmUgZm9yIGVsaWdpYmxlIGluZGl2aWR1YWxzIHRvIGVuc3VyZSB0aGF0IGNhcmUgbWVldHMgdGhlIGRpdmVyc2l0eSBvZiBuZWVkcyBhbW9uZyBwZW9wbGUgbGl2aW5nIHdpdGggSElWLiB8IOKAoiBUaGlzIGluZGljYXRvciBtZWFzdXJlcyB3aGV0aGVyIGluZGl2aWR1YWxzIHdobyBhcmUgZWxpZ2libGUgZm9yIERTRCBBUlQgYXJlIHJlY2VpdmluZyBzdWNoIHNlcnZpY2VzLgogKiAtIG1ldGhvZDogUGF0aWVudCBtb25pdG9yaW5nIHRvb2xzIChlbGVjdHJvbmljIG9yIHBhcGVyKSwgZm9yIGV4YW1wbGUgQVJUIHJlZ2lzdGVyL0VNUiB8ICB8IENvdmVyYWdlIG1lYXN1cmVzIGFsbCBwZW9wbGUgbGl2aW5nIHdpdGggSElWIGN1cnJlbnRseSBlbnJvbGxlZCBpbiBEU0QgQVJUIG1vZGVscywgfCBpbmNsdWRpbmcgdGhvc2UgbmV3bHkgZW5yb2xsZWQgYW5kIHRob3NlIGVucm9sbGVkIGluIHByaW9yIHJlcG9ydGluZyBwZXJpb2RzLiBGb3IgZmFjaWxpdGllcyB3aXRoIHBhcGVyLWJhc2VkIHJlcG9ydGluZywgYSBwcm94eSBmb3IgdGhlIGRlbm9taW5hdG9yIG9mIG51bWJlciBvZiBwZW9wbGUgZWxpZ2libGUgZm9yIERTRCBBUlQgY2FuIGJlIHVzZWQuIHwgIHwgTWVhc3VyZW1lbnQgZnJlcXVlbmN5OiBxdWFydGVybHkKICogCiAqIFN1Z2dlc3RlZCBTY29yaW5nIE1ldGhvZDogcHJvcG9ydGlvbiB8IGh0dHA6Ly9obDcub3JnL2ZoaXIvdXMvY3FmbWVhc3VyZXMvU3RydWN0dXJlRGVmaW5pdGlvbi9wcm9wb3J0aW9uLW1lYXN1cmUtY3FmbQogKi8KCmxpYnJhcnkgSElWSU5ENTVMb2dpYwoKLy8gSW5jbHVkZWQgTGlicmFyaWVzCnVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCgppbmNsdWRlIEhJVkluZGljYXRvckNvbW1vbiB2ZXJzaW9uICcwLjAuMScgY2FsbGVkIEhJQwppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwppbmNsdWRlIFdIT0NvbW1vbiBjYWxsZWQgV0NvbQppbmNsdWRlIEZISVJDb21tb24gY2FsbGVkIEZDCgovLyBJbmRpY2F0b3IgRGVmaW5pdGlvbgo=&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -387,7 +480,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

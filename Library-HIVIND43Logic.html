@@ -3,7 +3,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.43 Logic - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.43 Logic - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -215,7 +215,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -245,7 +245,7 @@
           <div class="inner-wrapper">
 
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
   
 
 
@@ -349,7 +349,70 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND43Logic</b></p><a name="HIVIND43Logic"> </a><a name="hcHIVIND43Logic"> </a><a name="hcHIVIND43Logic-en-US"> </a></div>
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND43Logic</b></p><a name="HIVIND43Logic"> </a><a name="hcHIVIND43Logic"> </a><a name="hcHIVIND43Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.43 Logic
+ * Ref No: VER.7
+ * Short Name: HIV prevalence among women attending ANC
+ *
+ * Definition: % of pregnant women who are HIV-positive at the time of their first test during the current pregnancy
+ *
+ * Numerator: Number of ANC attendees who tested HIV-positive at their first test during the current pregnancy plus number of ANC attendees known to be HIV-positive before their first ANC visit
+ * Numerator Calculation: COUNT of &quot;Currently pregnant&quot; clients with &quot;HIV test result&quot;='HIV-positive' AND &quot;HIV test date&quot; on &quot;ANC contact date&quot; is EARLIEST within current pregnancy | PLUS | COUNT of clients with &quot;HIV status&quot;='HIV-positive' on first &quot;ANC contact date&quot;
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of ANC attendees receiving their first HIV test during pregnancy plus number of ANC attendees known to be HIV-positive before first ANC visit
+ * Denominator Calculation: COUNT of &quot;Currently pregnant&quot; clients with &quot;HIV test date&quot; on a &quot;ANC contact date&quot; during current pregnancy | PLUS | COUNT of clients with &quot;HIV status&quot;='HIV-positive' on first &quot;ANC contact date&quot;
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (&lt;15, 15–19, 20–24, 25–29, 30–34, 35–39, 40–49, 50+ years)
+ * • HIV status at first test during current pregnancy (known positive, tested HIV-negative, tested HIV-positive, not tested)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Age | HIV status at first HIV test during current pregnancy
+ *
+ * Numerator and Denominator Elements:
+ * ANC contact date | Currently pregnant | HIV status | HIV test date | HIV test result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.B.DE29: Currently pregnant | Client is currently pregnant 
+ * HIV.B.DE110: HIV test date | Date of the HIV test 
+ * HIV.B.DE111: HIV test result | The result from HIV testing after applying the testing algorithm 
+ * HIV.B.DE112: HIV-positive | Test result is HIV-positive 
+ * HIV.B.DE113: HIV-negative | Test result is HIV-negative 
+ * HIV.B.DE114: HIV-inconclusive | Test result is HIV-inconclusive 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE31: Currently pregnant | Client is currently pregnant 
+ * HIV.E.DE85: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date') 
+ * HIV.E.DE224: HIV test date | Date of the HIV test
+ *
+ * Additional Context
+ * - what it measures: HIV prevalence among pregnant women attending ANC, including those who were diagnosed with HIV before their first ANC visit and those testing positive during their current pregnancy.
+ * - rationale: HIV prevalence among ANC attendees is used for surveillance to measure HIV prevalence and incidence and to monitor trends in HIV infection when the following conditions are met to ensure that HIV prevalence among ANC clients is consistently representative of HIV prevalence among all pregnant women: | • ANC attendance is high and all women are recorded (for example, not missing large private-sector ANC services). | • HIV testing is offered to all pregnant women and not restricted to only higher-risk women or interrupted due to stock-outs of test kits. | • Only the first HIV test result is used to calculate HIV prevalence during a single pregnancy. | • Women who are already known to be HIV-positive and/or are already on ART prior to their first ANC visit during a pregnancy and, therefore, are not tested for HIV, are recorded | and included in routine reporting. All HIV-positive women must be included in both the numerator and denominator when calculating HIV prevalence among pregnant women. |  | See section 5.2 4 on WHO's 2022 HIV SI Guidelines on routine antenatal HIV testing for more detail. | This indicator is also useful for estimating the number of women in need of PMTCT services for programme planning purposes.
+ * - method: ANC registers, patient monitoring tools, EMRs (for example, patient records). |  | The recommended reporting period is 12 months.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND43Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -374,7 +437,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

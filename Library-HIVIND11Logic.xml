@@ -9,7 +9,78 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND11Logic</b></p><a name="HIVIND11Logic"> </a><a name="hcHIVIND11Logic"> </a><a name="hcHIVIND11Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND11Logic</b></p><a name="HIVIND11Logic"> </a><a name="hcHIVIND11Logic"> </a><a name="hcHIVIND11Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.11 Logic
+ * Ref No: PRV.11
+ * Short Name: OAMT coverage
+ *
+ * Definition: % of opioid dependent people receiving opioid agonist maintenance treatment (OAMT) at a specified date
+ *
+ * Numerator: Number of people on OAMT at specified census date
+ * Numerator Calculation: Number of clients with &quot;Key population member type&quot;='People who inject drugs' AND &quot;Currently on OAMT&quot;=True for a specific &quot;Reporting date&quot;
+ * Numerator Exclusions: 
+ *
+ * Denominator: a) Programme/service provider level: number of opioid dependent people accessing service | b) Population level: population size estimate of opioid dependent people in relevant geographic area
+ * Denominator Calculation: Programme/service provider level: | COUNT of opioid dependent people accessing service |  | Population level:  | *Estimated population size of opioid dependent people in relevant geographic area
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (&lt;25, 25+ years)
+ * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
+ * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age (&lt;25, 25+ years)
+ *
+ * Numerator and Denominator Elements:
+ * Currently on OAMT | Key population member type | Reporting date
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.PRV.DE20: Currently on OAMT | Client is currently on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion 
+ * HIV.Config.DE22: Reporting date | Reporting date, for surveys performed on a specific date
+ *
+ * Additional Context
+ * - what it measures: Measure of the coverage of OAMT among people who are opioid dependent. Measured at either the service provider or population level.
+ * - rationale: By providing a direct method of reducing the number of injection risk acts per person who inject drugs, OAMT is a critical component of effective harm reduction services.
+ * - method: Individual-level data obtained from programme records. |  | The total population of people who are opioid dependent includes both people who inject drugs as well as people who consume opioids by other routes of administration. Not all OAMT recipients will have a history of injecting and not all people who inject drugs will use or be dependent on opioids.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND11Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +97,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +107,11 @@
     </telecom>
   </contact>
   <description value="% of opioid dependent people receiving opioid agonist maintenance treatment (OAMT) at a specified date"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC4xMSBMb2dpYwogKiBSZWYgTm86IFBSVi4xMQogKiBTaG9ydCBOYW1lOiBPQU1UIGNvdmVyYWdlCiAqCiAqIERlZmluaXRpb246ICUgb2Ygb3Bpb2lkIGRlcGVuZGVudCBwZW9wbGUgcmVjZWl2aW5nIG9waW9pZCBhZ29uaXN0IG1haW50ZW5hbmNlIHRyZWF0bWVudCAoT0FNVCkgYXQgYSBzcGVjaWZpZWQgZGF0ZQogKgogKiBOdW1lcmF0b3I6IE51bWJlciBvZiBwZW9wbGUgb24gT0FNVCBhdCBzcGVjaWZpZWQgY2Vuc3VzIGRhdGUKICogTnVtZXJhdG9yIENhbGN1bGF0aW9uOiBOdW1iZXIgb2YgY2xpZW50cyB3aXRoICJLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSI9J1Blb3BsZSB3aG8gaW5qZWN0IGRydWdzJyBBTkQgIkN1cnJlbnRseSBvbiBPQU1UIj1UcnVlIGZvciBhIHNwZWNpZmljICJSZXBvcnRpbmcgZGF0ZSIKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogYSkgUHJvZ3JhbW1lL3NlcnZpY2UgcHJvdmlkZXIgbGV2ZWw6IG51bWJlciBvZiBvcGlvaWQgZGVwZW5kZW50IHBlb3BsZSBhY2Nlc3Npbmcgc2VydmljZSB8IGIpIFBvcHVsYXRpb24gbGV2ZWw6IHBvcHVsYXRpb24gc2l6ZSBlc3RpbWF0ZSBvZiBvcGlvaWQgZGVwZW5kZW50IHBlb3BsZSBpbiByZWxldmFudCBnZW9ncmFwaGljIGFyZWEKICogRGVub21pbmF0b3IgQ2FsY3VsYXRpb246IFByb2dyYW1tZS9zZXJ2aWNlIHByb3ZpZGVyIGxldmVsOiB8IENPVU5UIG9mIG9waW9pZCBkZXBlbmRlbnQgcGVvcGxlIGFjY2Vzc2luZyBzZXJ2aWNlIHwgIHwgUG9wdWxhdGlvbiBsZXZlbDogIHwgKkVzdGltYXRlZCBwb3B1bGF0aW9uIHNpemUgb2Ygb3Bpb2lkIGRlcGVuZGVudCBwZW9wbGUgaW4gcmVsZXZhbnQgZ2VvZ3JhcGhpYyBhcmVhCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAoiBHZW5kZXIgKGZlbWFsZSwgbWFsZSwgb3RoZXIqKQogKiDigKIgQWdlICg8MjUsIDI1KyB5ZWFycykKICog4oCiIFByb3ZpZGVyIHR5cGUgKGtleSBwb3B1bGF0aW9uLWxlZCBvciBjb21tdW5pdHktbGVkIG9yZ2FuaXphdGlvbiwgcHVibGljIHNlY3RvciBwcm92aWRlciwgb3RoZXIgZW50aXRpZXMgc3VjaCBhcyBwcml2YXRlIGZvci1wcm9maXQgYW5kIG5vdC1mb3ItcHJvZml0IG9yZ2FuaXphdGlvbnMsIGluY2x1ZGluZyBmYWl0aC1iYXNlZCwgaW50ZXJuYXRpb25hbCwgbm9uZ292ZXJubWVudGFsKQogKiDigKIgU2V0dGluZzogZmFjaWxpdHktYmFzZWQgc2VydmljZSAoaW5jbHVkaW5nIGhvc3BpdGFscywgaGVhbHRoIGNsaW5pY3MsIGdlbmVyYWwgcHJhY3RpY2Ugb2ZmaWNlcywgZXRjLikgb3IgY29tbXVuaXR5LWJhc2VkIHNlcnZpY2UgKGluY2x1ZGluZyBkcm9wLWluIGNlbnRyZXMsIGNvbW11bml0eSBzZXJ2aWNlIGRlbGl2ZXJ5IHBvaW50cywgbW9iaWxlIGNsaW5pY3Mgb3IgdmFucywgb3V0cmVhY2ggdGVhbXMsIGNvbW11bml0eSBzdXBwb3J0IGdyb3VwcywgZXRjLikKICog4oCiwqBDaXRpZXMgYW5kIG90aGVyIGFkbWluaXN0cmF0aXZlIHJlZ2lvbnMgb2YgZXBpZGVtaW9sb2dpYyBpbXBvcnRhbmNlCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogR2VuZGVyIHwgQWdlICg8MjUsIDI1KyB5ZWFycykKICoKICogTnVtZXJhdG9yIGFuZCBEZW5vbWluYXRvciBFbGVtZW50czoKICogQ3VycmVudGx5IG9uIE9BTVQgfCBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSB8IFJlcG9ydGluZyBkYXRlCiAqCiAqIFJlZmVyZW5jZTogQ29uc29saWRhdGVkIGd1aWRlbGluZXMgb24gcGVyc29uLWNlbnRyZWQgSElWIHN0cmF0ZWdpYyBpbmZvcm1hdGlvbjogc3RyZW5ndGhlbmluZyByb3V0aW5lIGRhdGEgZm9yIGltcGFjdC4gR2VuZXZhOiBXb3JsZCBIZWFsdGggT3JnYW5pemF0aW9uOyAyMDIyCiAqIAogKiBEYXRhIENvbmNlcHRzOgogKiAgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkEuREUxODogR2VuZGVyKiB8IEdlbmRlciBvZiB0aGUgY2xpZW50KiAKICogSElWLkEuREUxOTogRmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgZmVtYWxlIAogKiBISVYuQS5ERTIwOiBNYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgbWFsZSAKICogSElWLkEuREUyMTogVHJhbnNnZW5kZXIgbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIG1hbGUgCiAqIEhJVi5BLkRFMjI6IFRyYW5zZ2VuZGVyIGZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIGZlbWFsZSAKICogSElWLkEuREUyMzogT3RoZXIgfCBBZGRpdGlvbmFsIGNhdGVnb3J5IAogKiBISVYuQi5ERTUwOiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBjbGllbnQgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5CLkRFNTE6IFNleCB3b3JrZXIgfCBDbGllbnQgaXMgYSBzZXggd29ya2VyIAogKiBISVYuQi5ERTUyOiBNZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuIHwgQ2xpZW50IGlzIGEgbWFuIHdobyBoYXMgc2V4IHdpdGggbWVuIAogKiBISVYuQi5ERTUzOiBUcmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgcGVvcGxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIAogKiBISVYuQi5ERTU0OiBQZW9wbGUgd2hvIGluamVjdCBkcnVncyB8IENsaWVudCBpcyBhIHBlcnNvbiB3aG8gaW5qZWN0cyBkcnVncyAKICogSElWLkIuREU1NTogUGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZ3MgfCBDbGllbnQgbGl2ZXMgaW4gYSBwcmlzb24gb3IgYW5vdGhlciBjbG9zZWQgc2V0dGluZyAKICogSElWLkUuREUxMTQ6IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlKiB8IFRoZSB0eXBlIG9mIGtleSBwb3B1bGF0aW9uIHRoYXQgdGhlIGluZmFudCdzIG1vdGhlciBpcyBpbmNsdWRlZCBpbiAKICogSElWLkUuREUxMTU6IFNleCB3b3JrZXIgfCBJbmZhbnQncyBtb3RoZXIgaXMgYSBzZXggd29ya2VyIAogKiBISVYuRS5ERTExNjogUGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MgfCBJbmZhbnQncyBtb3RoZXIgaXMgYSBwZXJzb24gd2hvIGluamVjdHMgZHJ1Z3MgCiAqIEhJVi5FLkRFMTE3OiBUcmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgcGVvcGxlIHwgSW5mYW50J3MgbW90aGVyIGlkZW50aWZpZXMgYXMgdHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIAogKiBISVYuRS5ERTExODogUGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZyB8IEluZmFudCdzIG1vdGhlciBpcyBpbiBhIHByaXNvbiBvciBjbG9zZWQgc2V0dGluZyAKICogSElWLlBSVi5ERTIwOiBDdXJyZW50bHkgb24gT0FNVCB8IENsaWVudCBpcyBjdXJyZW50bHkgb24gb3Bpb2lkIGFnb25pc3QgbWFpbnRlbmFuY2UgdHJlYXRtZW50IChPQU1UKSBhdCByZXBvcnRpbmcgZGF0ZSwgZGVmaW5lZCBhY2NvcmRpbmcgdG8gY291bnRyeS9wcm9ncmFtIHRvIGFjY291bnQgZm9yIG1lZGljYXRpb24gZGlzcGVuc2VkIGFuZCBMVEZVIGNyaXRlcmlvbiAKICogSElWLkNvbmZpZy5ERTIyOiBSZXBvcnRpbmcgZGF0ZSB8IFJlcG9ydGluZyBkYXRlLCBmb3Igc3VydmV5cyBwZXJmb3JtZWQgb24gYSBzcGVjaWZpYyBkYXRlCiAqCiAqIEFkZGl0aW9uYWwgQ29udGV4dAogKiAtIHdoYXQgaXQgbWVhc3VyZXM6IE1lYXN1cmUgb2YgdGhlIGNvdmVyYWdlIG9mIE9BTVQgYW1vbmcgcGVvcGxlIHdobyBhcmUgb3Bpb2lkIGRlcGVuZGVudC4gTWVhc3VyZWQgYXQgZWl0aGVyIHRoZSBzZXJ2aWNlIHByb3ZpZGVyIG9yIHBvcHVsYXRpb24gbGV2ZWwuCiAqIC0gcmF0aW9uYWxlOiBCeSBwcm92aWRpbmcgYSBkaXJlY3QgbWV0aG9kIG9mIHJlZHVjaW5nIHRoZSBudW1iZXIgb2YgaW5qZWN0aW9uIHJpc2sgYWN0cyBwZXIgcGVyc29uIHdobyBpbmplY3QgZHJ1Z3MsIE9BTVQgaXMgYSBjcml0aWNhbCBjb21wb25lbnQgb2YgZWZmZWN0aXZlIGhhcm0gcmVkdWN0aW9uIHNlcnZpY2VzLgogKiAtIG1ldGhvZDogSW5kaXZpZHVhbC1sZXZlbCBkYXRhIG9idGFpbmVkIGZyb20gcHJvZ3JhbW1lIHJlY29yZHMuIHwgIHwgVGhlIHRvdGFsIHBvcHVsYXRpb24gb2YgcGVvcGxlIHdobyBhcmUgb3Bpb2lkIGRlcGVuZGVudCBpbmNsdWRlcyBib3RoIHBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIGFzIHdlbGwgYXMgcGVvcGxlIHdobyBjb25zdW1lIG9waW9pZHMgYnkgb3RoZXIgcm91dGVzIG9mIGFkbWluaXN0cmF0aW9uLiBOb3QgYWxsIE9BTVQgcmVjaXBpZW50cyB3aWxsIGhhdmUgYSBoaXN0b3J5IG9mIGluamVjdGluZyBhbmQgbm90IGFsbCBwZW9wbGUgd2hvIGluamVjdCBkcnVncyB3aWxsIHVzZSBvciBiZSBkZXBlbmRlbnQgb24gb3Bpb2lkcy4KICogCiAqIFN1Z2dlc3RlZCBTY29yaW5nIE1ldGhvZDogcHJvcG9ydGlvbiB8IGh0dHA6Ly9obDcub3JnL2ZoaXIvdXMvY3FmbWVhc3VyZXMvU3RydWN0dXJlRGVmaW5pdGlvbi9wcm9wb3J0aW9uLW1lYXN1cmUtY3FmbQogKi8KCmxpYnJhcnkgSElWSU5EMTFMb2dpYwoKLy8gSW5jbHVkZWQgTGlicmFyaWVzCnVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCgppbmNsdWRlIEhJVkluZGljYXRvckNvbW1vbiB2ZXJzaW9uICcwLjAuMScgY2FsbGVkIEhJQwppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwppbmNsdWRlIFdIT0NvbW1vbiBjYWxsZWQgV0NvbQppbmNsdWRlIEZISVJDb21tb24gY2FsbGVkIEZDCgovLyBJbmRpY2F0b3IgRGVmaW5pdGlvbgo="/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

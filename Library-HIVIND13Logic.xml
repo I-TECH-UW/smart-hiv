@@ -9,7 +9,67 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND13Logic</b></p><a name="HIVIND13Logic"> </a><a name="hcHIVIND13Logic"> </a><a name="hcHIVIND13Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND13Logic</b></p><a name="HIVIND13Logic"> </a><a name="hcHIVIND13Logic"> </a><a name="hcHIVIND13Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.13 Logic
+ * Ref No: PRV.13
+ * Short Name: OAMT minimum duration
+ *
+ * Definition: % of OAMT recipients who received treatment for at least six months
+ *
+ * Numerator: Number of people in cohort retained in OAMT for at least six months
+ * Numerator Calculation: COUNT of clients within cohort &quot;Retained on OAMT&quot;=True 6 months after &quot;Date OAMT initiated&quot;
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people starting OAMT during defined cohort recruitment period
+ * Denominator Calculation: COUNT of clients within cohort with &quot;Date OAMT initiated&quot; in cohort recruitment period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (15–19, 20–24, 25–49, 50+ years)
+ * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
+ * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age
+ *
+ * Numerator and Denominator Elements:
+ * Date OAMT initiated | Retained on OAMT
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.PRV.DE17: Date OAMT initiated | Date client initiated opioid agonist maintenance treatment (OAMT) 
+ * HIV.PRV.DE21: Retained on OAMT | Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion
+ *
+ * Additional Context
+ * - what it measures: This indicator uses a cohort analysis to measure the proportion of OAMT recipients retained on treatment for at least six months and is a measure of how OAMT is prescribed and of retention in the OAMT programme.
+ * - rationale: Evidence demonstrates that maximum benefit from OAMT is gained when treatment lasts at least six months.
+ * - method: Individual-level data obtained from programme records
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND13Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +86,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +96,11 @@
     </telecom>
   </contact>
   <description value="% of OAMT recipients who received treatment for at least six months"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC4xMyBMb2dpYwogKiBSZWYgTm86IFBSVi4xMwogKiBTaG9ydCBOYW1lOiBPQU1UIG1pbmltdW0gZHVyYXRpb24KICoKICogRGVmaW5pdGlvbjogJSBvZiBPQU1UIHJlY2lwaWVudHMgd2hvIHJlY2VpdmVkIHRyZWF0bWVudCBmb3IgYXQgbGVhc3Qgc2l4IG1vbnRocwogKgogKiBOdW1lcmF0b3I6IE51bWJlciBvZiBwZW9wbGUgaW4gY29ob3J0IHJldGFpbmVkIGluIE9BTVQgZm9yIGF0IGxlYXN0IHNpeCBtb250aHMKICogTnVtZXJhdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiBjbGllbnRzIHdpdGhpbiBjb2hvcnQgIlJldGFpbmVkIG9uIE9BTVQiPVRydWUgNiBtb250aHMgYWZ0ZXIgIkRhdGUgT0FNVCBpbml0aWF0ZWQiCiAqIE51bWVyYXRvciBFeGNsdXNpb25zOiAKICoKICogRGVub21pbmF0b3I6IE51bWJlciBvZiBwZW9wbGUgc3RhcnRpbmcgT0FNVCBkdXJpbmcgZGVmaW5lZCBjb2hvcnQgcmVjcnVpdG1lbnQgcGVyaW9kCiAqIERlbm9taW5hdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiBjbGllbnRzIHdpdGhpbiBjb2hvcnQgd2l0aCAiRGF0ZSBPQU1UIGluaXRpYXRlZCIgaW4gY29ob3J0IHJlY3J1aXRtZW50IHBlcmlvZAogKiBEZW5vbWluYXRvciBFeGNsdXNpb25zOiAKICoKICogRGlzYWdncmVnYXRpb25zOgogKiDigKIgR2VuZGVyIChmZW1hbGUsIG1hbGUsIG90aGVyKikKICog4oCiIEFnZSAoMTXigJMxOSwgMjDigJMyNCwgMjXigJM0OSwgNTArIHllYXJzKQogKiDigKIgUHJvdmlkZXIgdHlwZSAoa2V5IHBvcHVsYXRpb24tbGVkIG9yIGNvbW11bml0eS1sZWQgb3JnYW5pemF0aW9uLCBwdWJsaWMgc2VjdG9yIHByb3ZpZGVyLCBvdGhlciBlbnRpdGllcyBzdWNoIGFzIHByaXZhdGUgZm9yLXByb2ZpdCBhbmQgbm90LWZvci1wcm9maXQgb3JnYW5pemF0aW9ucywgaW5jbHVkaW5nIGZhaXRoLWJhc2VkLCBpbnRlcm5hdGlvbmFsLCBub25nb3Zlcm5tZW50YWwpCiAqIOKAoiBTZXR0aW5nOiBmYWNpbGl0eS1iYXNlZCBzZXJ2aWNlIChpbmNsdWRpbmcgaG9zcGl0YWxzLCBoZWFsdGggY2xpbmljcywgZ2VuZXJhbCBwcmFjdGljZSBvZmZpY2VzLCBldGMuKSBvciBjb21tdW5pdHktYmFzZWQgc2VydmljZSAoaW5jbHVkaW5nIGRyb3AtaW4gY2VudHJlcywgY29tbXVuaXR5IHNlcnZpY2UgZGVsaXZlcnkgcG9pbnRzLCBtb2JpbGUgY2xpbmljcyBvciB2YW5zLCBvdXRyZWFjaCB0ZWFtcywgY29tbXVuaXR5IHN1cHBvcnQgZ3JvdXBzLCBldGMuKQogKiDigKLCoENpdGllcyBhbmQgb3RoZXIgYWRtaW5pc3RyYXRpdmUgcmVnaW9ucyBvZiBlcGlkZW1pb2xvZ2ljIGltcG9ydGFuY2UKICogCiAqIERpc2FnZ3JlZ2F0aW9uIEVsZW1lbnRzOiBHZW5kZXIgfCBBZ2UKICoKICogTnVtZXJhdG9yIGFuZCBEZW5vbWluYXRvciBFbGVtZW50czoKICogRGF0ZSBPQU1UIGluaXRpYXRlZCB8IFJldGFpbmVkIG9uIE9BTVQKICoKICogUmVmZXJlbmNlOiBDb25zb2xpZGF0ZWQgZ3VpZGVsaW5lcyBvbiBwZXJzb24tY2VudHJlZCBISVYgc3RyYXRlZ2ljIGluZm9ybWF0aW9uOiBzdHJlbmd0aGVuaW5nIHJvdXRpbmUgZGF0YSBmb3IgaW1wYWN0LiBHZW5ldmE6IFdvcmxkIEhlYWx0aCBPcmdhbml6YXRpb247IDIwMjIKICogCiAqIERhdGEgQ29uY2VwdHM6CiAqICAKICogSElWLkEuREUxNzogQWdlIHwgQ2FsY3VsYXRlZCBhZ2UgKG51bWJlciBvZiB5ZWFycykgb2YgdGhlIGNsaWVudCBiYXNlZCBvbiBkYXRlIG9mIGJpcnRoIAogKiBISVYuQS5ERTE4OiBHZW5kZXIqIHwgR2VuZGVyIG9mIHRoZSBjbGllbnQqIAogKiBISVYuQS5ERTE5OiBGZW1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyBmZW1hbGUgCiAqIEhJVi5BLkRFMjA6IE1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyBtYWxlIAogKiBISVYuQS5ERTIxOiBUcmFuc2dlbmRlciBtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnNnZW5kZXIgbWFsZSAKICogSElWLkEuREUyMjogVHJhbnNnZW5kZXIgZmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnNnZW5kZXIgZmVtYWxlIAogKiBISVYuQS5ERTIzOiBPdGhlciB8IEFkZGl0aW9uYWwgY2F0ZWdvcnkgCiAqIEhJVi5QUlYuREUxNzogRGF0ZSBPQU1UIGluaXRpYXRlZCB8IERhdGUgY2xpZW50IGluaXRpYXRlZCBvcGlvaWQgYWdvbmlzdCBtYWludGVuYW5jZSB0cmVhdG1lbnQgKE9BTVQpIAogKiBISVYuUFJWLkRFMjE6IFJldGFpbmVkIG9uIE9BTVQgfCBDbGllbnQgaXMgcmV0YWluZWQgb24gb3Bpb2lkIGFnb25pc3QgbWFpbnRlbmFuY2UgdHJlYXRtZW50IChPQU1UKSBhdCByZXBvcnRpbmcgZGF0ZSwgZGVmaW5lZCBhY2NvcmRpbmcgdG8gY291bnRyeS9wcm9ncmFtIHRvIGFjY291bnQgZm9yIG1lZGljYXRpb24gZGlzcGVuc2VkIGFuZCBMVEZVIGNyaXRlcmlvbgogKgogKiBBZGRpdGlvbmFsIENvbnRleHQKICogLSB3aGF0IGl0IG1lYXN1cmVzOiBUaGlzIGluZGljYXRvciB1c2VzIGEgY29ob3J0IGFuYWx5c2lzIHRvIG1lYXN1cmUgdGhlIHByb3BvcnRpb24gb2YgT0FNVCByZWNpcGllbnRzIHJldGFpbmVkIG9uIHRyZWF0bWVudCBmb3IgYXQgbGVhc3Qgc2l4IG1vbnRocyBhbmQgaXMgYSBtZWFzdXJlIG9mIGhvdyBPQU1UIGlzIHByZXNjcmliZWQgYW5kIG9mIHJldGVudGlvbiBpbiB0aGUgT0FNVCBwcm9ncmFtbWUuCiAqIC0gcmF0aW9uYWxlOiBFdmlkZW5jZSBkZW1vbnN0cmF0ZXMgdGhhdCBtYXhpbXVtIGJlbmVmaXQgZnJvbSBPQU1UIGlzIGdhaW5lZCB3aGVuIHRyZWF0bWVudCBsYXN0cyBhdCBsZWFzdCBzaXggbW9udGhzLgogKiAtIG1ldGhvZDogSW5kaXZpZHVhbC1sZXZlbCBkYXRhIG9idGFpbmVkIGZyb20gcHJvZ3JhbW1lIHJlY29yZHMKICogCiAqIFN1Z2dlc3RlZCBTY29yaW5nIE1ldGhvZDogcHJvcG9ydGlvbiB8IGh0dHA6Ly9obDcub3JnL2ZoaXIvdXMvY3FmbWVhc3VyZXMvU3RydWN0dXJlRGVmaW5pdGlvbi9wcm9wb3J0aW9uLW1lYXN1cmUtY3FmbQogKi8KCmxpYnJhcnkgSElWSU5EMTNMb2dpYwoKLy8gSW5jbHVkZWQgTGlicmFyaWVzCnVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCgppbmNsdWRlIEhJVkluZGljYXRvckNvbW1vbiB2ZXJzaW9uICcwLjAuMScgY2FsbGVkIEhJQwppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwppbmNsdWRlIFdIT0NvbW1vbiBjYWxsZWQgV0NvbQppbmNsdWRlIEZISVJDb21tb24gY2FsbGVkIEZDCgovLyBJbmRpY2F0b3IgRGVmaW5pdGlvbgo="/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

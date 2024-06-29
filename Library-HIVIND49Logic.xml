@@ -9,7 +9,77 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND49Logic</b></p><a name="HIVIND49Logic"> </a><a name="hcHIVIND49Logic"> </a><a name="hcHIVIND49Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND49Logic</b></p><a name="HIVIND49Logic"> </a><a name="hcHIVIND49Logic"> </a><a name="hcHIVIND49Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.49 Logic
+ * Ref No: DFT.2
+ * Short Name: TB symptom-screened positive among new ART patients
+ *
+ * Definition: % of people living with HIV newly initiated on ART who were screened for TB symptoms and who screened positive
+ *
+ * Numerator: Number of people living with HIV newly initiated on ART who screened positive for TB symptoms
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people living with HIV newly initiated on ART during the reporting period who were screened for TB symptoms
+ * Denominator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age 0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)**
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age
+ *
+ * Numerator and Denominator Elements:
+ * ART start date | ART start type | HIV status | TB screening date | TB screening result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART) 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE39: ART start date | The date on which the client started or restarted ART 
+ * HIV.D.DE43: ART start type | Whether the client is ART naive or is restarting ART 
+ * HIV.D.DE44: First-time user of ART | Client is ART naive, having never taken ART to treat HIV before 
+ * HIV.D.DE45: Restarting ART | Client is restarting ART after stopping treatment for any reason 
+ * HIV.D.DE986: TB screening result | Record the result of the tuberculosis (TB) screening 
+ * HIV.D.DE987: Screen positive for TB | Screening result was positive for tuberculosis (TB) 
+ * HIV.D.DE988: Screen negative for TB | Screening result was negative for tuberculosis (TB) 
+ * HIV.D.DE989: Inconclusive | Screening result was inconclusive for tuberculosis (TB) 
+ * HIV.D.DE990: TB screening date | Date the TB screening was conducted
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the percentage of people living with HIV newly initiated on ART and screened for symptoms of active TB disease who screen positive.
+ * - rationale: • Routine TB screening among people living with HIV newly initiated on ART and those who are already on ART is essential to identifying presumptive TB cases in need of confirmatory diagnostic testing and to determine eligibility for TPT if active TB disease is ruled out. | • Screening positivity rates vary based on background TB prevalence and other epidemiological and environmental factors. However, low screening positivity rates can signal inadequate or poor-quality TB screening, particularly in high burden settings. | • It is important to understand the cascade from ART enrolment to treatment of active | TB disease; this indicator will highlight obstacles between ART enrolment and screening for TB symptoms. | • This is the second of five &quot;screening cascade&quot; indicators considered priority for high burden TB/HIV settings.
+ * - method: &quot;Newly initiated&quot; is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period. |  | For the numerator and denominator: Programme records (for example, ART registers, EMR)
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND49Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +96,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +106,11 @@
     </telecom>
   </contact>
   <description value="% of people living with HIV newly initiated on ART who were screened for TB symptoms and who screened positive"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC40OSBMb2dpYwogKiBSZWYgTm86IERGVC4yCiAqIFNob3J0IE5hbWU6IFRCIHN5bXB0b20tc2NyZWVuZWQgcG9zaXRpdmUgYW1vbmcgbmV3IEFSVCBwYXRpZW50cwogKgogKiBEZWZpbml0aW9uOiAlIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgbmV3bHkgaW5pdGlhdGVkIG9uIEFSVCB3aG8gd2VyZSBzY3JlZW5lZCBmb3IgVEIgc3ltcHRvbXMgYW5kIHdobyBzY3JlZW5lZCBwb3NpdGl2ZQogKgogKiBOdW1lcmF0b3I6IE51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIG5ld2x5IGluaXRpYXRlZCBvbiBBUlQgd2hvIHNjcmVlbmVkIHBvc2l0aXZlIGZvciBUQiBzeW1wdG9tcwogKiBOdW1lcmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiSElWIHN0YXR1cyI9J0hJVi1wb3NpdGl2ZScgQU5EIHdpdGggIkFSVCBzdGFydCB0eXBlIj0nRmlyc3QtdGltZSB1c2VyIG9mIEFSVCcgQU5EIHdpdGggIkFSVCBzdGFydCBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZCBBTkQgIlRCIHNjcmVlbmluZyBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZCBBTkQgIlRCIHNjcmVlbmluZyByZXN1bHQiPSdTY3JlZW4gcG9zaXRpdmUgZm9yIFRCJwogKiBOdW1lcmF0b3IgRXhjbHVzaW9uczogCiAqCiAqIERlbm9taW5hdG9yOiBOdW1iZXIgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViBuZXdseSBpbml0aWF0ZWQgb24gQVJUIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZCB3aG8gd2VyZSBzY3JlZW5lZCBmb3IgVEIgc3ltcHRvbXMKICogRGVub21pbmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiSElWIHN0YXR1cyI9J0hJVi1wb3NpdGl2ZScgQU5EIHdpdGggIkFSVCBzdGFydCB0eXBlIj0nRmlyc3QtdGltZSB1c2VyIG9mIEFSVCcgQU5EIHdpdGggIkFSVCBzdGFydCBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZCBBTkQgIlRCIHNjcmVlbmluZyBkYXRlIiBpbiB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBEZW5vbWluYXRvciBFeGNsdXNpb25zOiAKICoKICogRGlzYWdncmVnYXRpb25zOgogKiDigKLCoEdlbmRlciAoZmVtYWxlLCBtYWxlLCBvdGhlciopCiAqIOKAoiBBZ2UgMOKAkzQsIDXigJM5LCAxMOKAkzE0LCAxNeKAkzE5LCAyMOKAkzI0LCAyNeKAkzQ5LCA1MCsgeWVhcnMpKioKICog4oCiwqBDaXRpZXMgYW5kIG90aGVyIGFkbWluaXN0cmF0aXZlIHJlZ2lvbnMgb2YgZXBpZGVtaW9sb2dpYyBpbXBvcnRhbmNlCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogR2VuZGVyIHwgQWdlCiAqCiAqIE51bWVyYXRvciBhbmQgRGVub21pbmF0b3IgRWxlbWVudHM6CiAqIEFSVCBzdGFydCBkYXRlIHwgQVJUIHN0YXJ0IHR5cGUgfCBISVYgc3RhdHVzIHwgVEIgc2NyZWVuaW5nIGRhdGUgfCBUQiBzY3JlZW5pbmcgcmVzdWx0CiAqCiAqIFJlZmVyZW5jZTogQ29uc29saWRhdGVkIGd1aWRlbGluZXMgb24gcGVyc29uLWNlbnRyZWQgSElWIHN0cmF0ZWdpYyBpbmZvcm1hdGlvbjogc3RyZW5ndGhlbmluZyByb3V0aW5lIGRhdGEgZm9yIGltcGFjdC4gR2VuZXZhOiBXb3JsZCBIZWFsdGggT3JnYW5pemF0aW9uOyAyMDIyCiAqIAogKiBEYXRhIENvbmNlcHRzOgogKiAgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkEuREUxODogR2VuZGVyKiB8IEdlbmRlciBvZiB0aGUgY2xpZW50KiAKICogSElWLkEuREUxOTogRmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgZmVtYWxlIAogKiBISVYuQS5ERTIwOiBNYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgbWFsZSAKICogSElWLkEuREUyMTogVHJhbnNnZW5kZXIgbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIG1hbGUgCiAqIEhJVi5BLkRFMjI6IFRyYW5zZ2VuZGVyIGZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIGZlbWFsZSAKICogSElWLkEuREUyMzogT3RoZXIgfCBBZGRpdGlvbmFsIGNhdGVnb3J5IAogKiBISVYuQi5ERTcyOiBBUlQgc3RhcnQgZGF0ZSB8IFRoZSBkYXRlIG9uIHdoaWNoIHRoZSBjbGllbnQgc3RhcnRlZCBvciByZXN0YXJ0ZWQgYW50aXJldHJvdmlyYWwgdGhlcmFweSAoQVJUKSAKICogSElWLkIuREUxMTU6IEhJViBzdGF0dXMgfCBISVYgc3RhdHVzIHJlcG9ydGVkIGFmdGVyIGFwcGx5aW5nIHRoZSBuYXRpb25hbCBISVYgdGVzdGluZyBhbGdvcml0aG0uIE5vIHNpbmdsZSBISVYgdGVzdCBjYW4gcHJvdmlkZSBhbiBISVYtcG9zaXRpdmUgZGlhZ25vc2lzLiAKICogSElWLkIuREUxMTY6IEhJVi1wb3NpdGl2ZSB8IENsaWVudCBpcyBISVYtcG9zaXRpdmUgCiAqIEhJVi5CLkRFMTE3OiBISVYtbmVnYXRpdmUgfCBDbGllbnQgaXMgSElWLW5lZ2F0aXZlIAogKiBISVYuQi5ERTExODogVW5rbm93biB8IENsaWVudCBoYXMgdW5rbm93biBISVYgc3RhdHVzIAogKiBISVYuRC5ERTM5OiBBUlQgc3RhcnQgZGF0ZSB8IFRoZSBkYXRlIG9uIHdoaWNoIHRoZSBjbGllbnQgc3RhcnRlZCBvciByZXN0YXJ0ZWQgQVJUIAogKiBISVYuRC5ERTQzOiBBUlQgc3RhcnQgdHlwZSB8IFdoZXRoZXIgdGhlIGNsaWVudCBpcyBBUlQgbmFpdmUgb3IgaXMgcmVzdGFydGluZyBBUlQgCiAqIEhJVi5ELkRFNDQ6IEZpcnN0LXRpbWUgdXNlciBvZiBBUlQgfCBDbGllbnQgaXMgQVJUIG5haXZlLCBoYXZpbmcgbmV2ZXIgdGFrZW4gQVJUIHRvIHRyZWF0IEhJViBiZWZvcmUgCiAqIEhJVi5ELkRFNDU6IFJlc3RhcnRpbmcgQVJUIHwgQ2xpZW50IGlzIHJlc3RhcnRpbmcgQVJUIGFmdGVyIHN0b3BwaW5nIHRyZWF0bWVudCBmb3IgYW55IHJlYXNvbiAKICogSElWLkQuREU5ODY6IFRCIHNjcmVlbmluZyByZXN1bHQgfCBSZWNvcmQgdGhlIHJlc3VsdCBvZiB0aGUgdHViZXJjdWxvc2lzIChUQikgc2NyZWVuaW5nIAogKiBISVYuRC5ERTk4NzogU2NyZWVuIHBvc2l0aXZlIGZvciBUQiB8IFNjcmVlbmluZyByZXN1bHQgd2FzIHBvc2l0aXZlIGZvciB0dWJlcmN1bG9zaXMgKFRCKSAKICogSElWLkQuREU5ODg6IFNjcmVlbiBuZWdhdGl2ZSBmb3IgVEIgfCBTY3JlZW5pbmcgcmVzdWx0IHdhcyBuZWdhdGl2ZSBmb3IgdHViZXJjdWxvc2lzIChUQikgCiAqIEhJVi5ELkRFOTg5OiBJbmNvbmNsdXNpdmUgfCBTY3JlZW5pbmcgcmVzdWx0IHdhcyBpbmNvbmNsdXNpdmUgZm9yIHR1YmVyY3Vsb3NpcyAoVEIpIAogKiBISVYuRC5ERTk5MDogVEIgc2NyZWVuaW5nIGRhdGUgfCBEYXRlIHRoZSBUQiBzY3JlZW5pbmcgd2FzIGNvbmR1Y3RlZAogKgogKiBBZGRpdGlvbmFsIENvbnRleHQKICogLSB3aGF0IGl0IG1lYXN1cmVzOiBUaGlzIGluZGljYXRvciBtZWFzdXJlcyB0aGUgcGVyY2VudGFnZSBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIG5ld2x5IGluaXRpYXRlZCBvbiBBUlQgYW5kIHNjcmVlbmVkIGZvciBzeW1wdG9tcyBvZiBhY3RpdmUgVEIgZGlzZWFzZSB3aG8gc2NyZWVuIHBvc2l0aXZlLgogKiAtIHJhdGlvbmFsZTog4oCiIFJvdXRpbmUgVEIgc2NyZWVuaW5nIGFtb25nIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgbmV3bHkgaW5pdGlhdGVkIG9uIEFSVCBhbmQgdGhvc2Ugd2hvIGFyZSBhbHJlYWR5IG9uIEFSVCBpcyBlc3NlbnRpYWwgdG8gaWRlbnRpZnlpbmcgcHJlc3VtcHRpdmUgVEIgY2FzZXMgaW4gbmVlZCBvZiBjb25maXJtYXRvcnkgZGlhZ25vc3RpYyB0ZXN0aW5nIGFuZCB0byBkZXRlcm1pbmUgZWxpZ2liaWxpdHkgZm9yIFRQVCBpZiBhY3RpdmUgVEIgZGlzZWFzZSBpcyBydWxlZCBvdXQuIHwg4oCiwqBTY3JlZW5pbmcgcG9zaXRpdml0eSByYXRlcyB2YXJ5IGJhc2VkIG9uIGJhY2tncm91bmQgVEIgcHJldmFsZW5jZSBhbmQgb3RoZXIgZXBpZGVtaW9sb2dpY2FsIGFuZCBlbnZpcm9ubWVudGFsIGZhY3RvcnMuIEhvd2V2ZXIsIGxvdyBzY3JlZW5pbmcgcG9zaXRpdml0eSByYXRlcyBjYW4gc2lnbmFsIGluYWRlcXVhdGUgb3IgcG9vci1xdWFsaXR5IFRCIHNjcmVlbmluZywgcGFydGljdWxhcmx5IGluIGhpZ2ggYnVyZGVuIHNldHRpbmdzLiB8IOKAosKgSXQgaXMgaW1wb3J0YW50IHRvIHVuZGVyc3RhbmQgdGhlIGNhc2NhZGUgZnJvbSBBUlQgZW5yb2xtZW50IHRvIHRyZWF0bWVudCBvZiBhY3RpdmUgfCBUQiBkaXNlYXNlOyB0aGlzIGluZGljYXRvciB3aWxsIGhpZ2hsaWdodCBvYnN0YWNsZXMgYmV0d2VlbiBBUlQgZW5yb2xtZW50IGFuZCBzY3JlZW5pbmcgZm9yIFRCIHN5bXB0b21zLiB8IOKAosKgVGhpcyBpcyB0aGUgc2Vjb25kIG9mIGZpdmUgInNjcmVlbmluZyBjYXNjYWRlIiBpbmRpY2F0b3JzIGNvbnNpZGVyZWQgcHJpb3JpdHkgZm9yIGhpZ2ggYnVyZGVuIFRCL0hJViBzZXR0aW5ncy4KICogLSBtZXRob2Q6ICJOZXdseSBpbml0aWF0ZWQiIGlzIGRlZmluZWQgYXMgdGhlIG51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIHdobyBzdGFydCBBUlQgaW4gYWNjb3JkYW5jZSB3aXRoIG5hdGlvbmFsIHRyZWF0bWVudCBndWlkZWxpbmVzIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZC4gfCAgfCBGb3IgdGhlIG51bWVyYXRvciBhbmQgZGVub21pbmF0b3I6IFByb2dyYW1tZSByZWNvcmRzIChmb3IgZXhhbXBsZSwgQVJUIHJlZ2lzdGVycywgRU1SKQogKiAKICogU3VnZ2VzdGVkIFNjb3JpbmcgTWV0aG9kOiBwcm9wb3J0aW9uIHwgaHR0cDovL2hsNy5vcmcvZmhpci91cy9jcWZtZWFzdXJlcy9TdHJ1Y3R1cmVEZWZpbml0aW9uL3Byb3BvcnRpb24tbWVhc3VyZS1jcWZtCiAqLwoKbGlicmFyeSBISVZJTkQ0OUxvZ2ljCgovLyBJbmNsdWRlZCBMaWJyYXJpZXMKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgSElWSW5kaWNhdG9yQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjEnCmluY2x1ZGUgV0hPQ29tbW9uIGNhbGxlZCBXQ29tCmluY2x1ZGUgRkhJUkNvbW1vbiBjYWxsZWQgRkMKCi8vIEluZGljYXRvciBEZWZpbml0aW9uCg=="/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

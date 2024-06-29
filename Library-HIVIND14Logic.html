@@ -3,7 +3,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.14 Logic - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.14 Logic - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -215,7 +215,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -245,7 +245,7 @@
           <div class="inner-wrapper">
 
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
   
 
 
@@ -349,7 +349,72 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND14Logic</b></p><a name="HIVIND14Logic"> </a><a name="hcHIVIND14Logic"> </a><a name="hcHIVIND14Logic-en-US"> </a></div>
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND14Logic</b></p><a name="HIVIND14Logic"> </a><a name="hcHIVIND14Logic"> </a><a name="hcHIVIND14Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.14 Logic
+ * Ref No: PRV.14
+ * Short Name: OAMT minimum dose
+ *
+ * Definition: % of OAMT recipients receiving a maintenance dose greater than or equal to the recommended minimum dose
+ *
+ * Numerator: Number of people, at a specified date, maintained on methadone or buprenorphine receiving recommended minimum maintenance dose (WHO guidance recommends doses of ≥60 mg of methadone or ≥8 mg of buprenorphine*)
+ * Numerator Calculation: COUNT of clients with (&quot;Medications prescribed&quot;='Methadone' AND &quot;Dose of medications prescribed&quot; GREATER THAN OR EQUAL TO 60mg) OR (&quot;Medications prescribed&quot;='Buprenorphine' AND &quot;Dose of medications prescribed&quot; GREATER THAN OR EQUAL TO 8mg) for a specified &quot;Reporting date&quot;
+ * Numerator Exclusions: &quot;Client being inducted on OAMT&quot; OR &quot;Client on reducing doses of OAMT&quot;
+ *
+ * Denominator: Number of people receiving maintenance dose of methadone or buprenorphine at a specified date, excluding: a) individuals currently being inducted on OAMT and yet to reach the maintenance dose and b) individuals on reducing doses of OAMT.
+ * Denominator Calculation: COUNT of clients with &quot;Medications prescribed&quot; IN 'Methadone', 'Buprenorphine' for a specified &quot;Reporting date&quot;
+ * Denominator Exclusions: &quot;Client being inducted on OAMT&quot; OR &quot;Client on reducing doses of OAMT&quot;
+ *
+ * Disaggregations:
+ * • Gender (female, male, other**)
+ * • Age (15–19, 20–24, 25–49, 50+ years)
+ * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
+ * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age
+ *
+ * Numerator and Denominator Elements:
+ * Dose of medications prescribed | Medications prescribed | Reporting date
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.C.DE75: Medications prescribed | Medications the client was prescribed 
+ * HIV.C.DE76: PrEP for HIV prevention | Client was prescribed pre-exposure prophylaxis (PrEP) for HIV prevention 
+ * HIV.C.DE77: PEP for HIV prevention | Client was prescribed post-exposure prophylaxis (PEP) for HIV prevention 
+ * HIV.C.DE78: Other | Client was prescribed other medications 
+ * HIV.D.DE457: Medications prescribed | Name or regimen code of all other medications prescribed during the visit 
+ * HIV.D.DE459: Dose of medications prescribed | Number of doses (quantity taken at a single point in time) of drugs prescribed/dispensed 
+ * HIV.Config.DE22: Reporting date | Reporting date, for surveys performed on a specific date
+ *
+ * Additional Context
+ * - what it measures: Measures the proportion of OAMT recipients receiving the recommended minimum maintenance dose.
+ * - rationale: Evidence demonstrates that maximum benefit from OAMT is gained when individuals receive at least the recommended minimum maintenance dose.
+ * - method: Individual-level data obtained from programme records
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND14Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -374,7 +439,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

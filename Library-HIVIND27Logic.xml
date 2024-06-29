@@ -9,7 +9,141 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND27Logic</b></p><a name="HIVIND27Logic"> </a><a name="hcHIVIND27Logic"> </a><a name="hcHIVIND27Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND27Logic</b></p><a name="HIVIND27Logic"> </a><a name="hcHIVIND27Logic"> </a><a name="hcHIVIND27Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.27 Logic
+ * Ref No: ART.1
+ * Short Name: People living with HIV on ART
+ *
+ * Definition: Number and % of people on ART among all people living with HIV at the end of the reporting period
+ *
+ * Numerator: Number of people on ART at the end of the reporting period (HIV patient monitoring data from, for example, ART registers, patient records or EMRs). For key populations survey data may be required.
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True at reporting period end date
+ * Numerator Exclusions: Clients with an &quot;HIV treatment outcome&quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period
+ *
+ * Denominator: 1. To determine treatment coverage: estimated number of people living with HIV (from models, such as Spectrum AIM) | 2. To gauge progress toward the second 95 target: number of people living with HIV who know their HIV status (from surveys or models)
+ * Denominator Calculation: For treatment coverage: *Estimated number of people living with HIV |  | For progress towards 2nd 95 target: *Estimated number of people living with HIV who know their status
+ * Denominator Exclusions: Clients with an &quot;HIV treatment outcome&quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)**
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)***
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | Key population member type | 
+ *
+ * Numerator and Denominator Elements:
+ * HIV status | On ART
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE38: On ART | Client is currently taking ART 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.H.DE47: On ART | Client is currently taking ART 
+ *
+ * Additional Context
+ * - what it measures: Measures progress towards providing ART to all people living with HIV, that is, treatment coverage, taking into account total attrition during the reporting period.
+ * - rationale: • WHO currently recommends treatment for all people living with HIV to achieve viral suppression. | • This indicator is central to accountability for national health sector strategic plans, effective programme management and donor programming. | • This indicator is essential to measurement of the second 95 target: that 95% of the people who know their HIV-positive status are accessing ART by 2025.
+ * - method: For the numerator: Generated by determining the number of people living with HIV on ART at the end of the last reporting period plus the number of people living with HIV initiated on ART during the current reporting period, taking into account retention/attrition status by the end of the reporting period. Retention and attrition analysis should be conducted as part of reporting on this indicator. The numerator should NOT INCLUDE people who have stopped treatment, died or were otherwise lost to follow-up during this period. Consistent with methods for defining the total attrition from ART indicator (see ART.2), these status classification categories should be reported separately to the national level and used to calculate the number of people living with HIV who are on ART. |  | For the denominator: Epidemiological models such as Spectrum AIM are the preferred source for estimating the number of people living with HIV. Denominator 2 should be consistent with the numerator used for indicator HTS.1 People living with HIV who know their HIV status (first 95 target). The recommended maximum reporting frequency is 12 months. Shorter reporting intervals, for example, three months, are recommended where feasible.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND27Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-01-31]
+ 
+context Patient
+
+/*
+* Many indicator specifications in ANC and Immunization have context as patient. 
+* I believe these should be unfiltered to get all observations not just those related to a current patient
+* Should discuss.
+*/
+
+define &quot;Measure Population&quot;:
+   (exists(HIC.&quot;HIV Positive Condition&quot; C
+	where C.onset before end of &quot;Measurement Period&quot;)
+	or 
+	exists(HIC.&quot;HIV Positive Observation&quot; O
+	where (O.issued before end of &quot;Measurement Period&quot;)
+	))
+   and exists(HIC.&quot;HIV Treatment Active&quot; H
+   where H.effective starts before end of &quot;Measurement Period&quot;
+    and (H.effective ends after start of &quot;Measurement Period&quot;)
+   )
+   and not HIC.&quot;Patient Deceased before end of Measurement Period&quot;
+   and not HIC.&quot;Transfer Out at Facility during the measurement period&quot;
+   and not HIC.&quot;Lost to Follow Up during the measurement period&quot;
+
+/*
+ * As defined by Member States
+ */
+define &quot;Initial Population&quot;:
+  true
+
+/*
+ * NOTE: Modeled as a Continuous Variable measure because this is an estimated denominator proportion measure
+ */
+
+define function &quot;Measure Observation&quot;(Patient &quot;Patient&quot;):
+  1
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIC.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIC.&quot;By Age Stratifier&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIC.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;patientGroups Stratifier&quot;:
+	HIC.&quot;patientGroups&quot;
+
+define &quot;Stratification&quot;:
+ HIC.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIC.&quot;By Age Stratifier&quot;
++ ':' + HIC.&quot;By Geographic Region Stratifier&quot;
+//Need to discuss how to add list
+//+ ':' +HIC.&quot;patientGroups&quot;</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +160,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +170,11 @@
     </telecom>
   </contact>
   <description value="Number and % of people on ART among all people living with HIV at the end of the reporting period"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC4yNyBMb2dpYwogKiBSZWYgTm86IEFSVC4xCiAqIFNob3J0IE5hbWU6IFBlb3BsZSBsaXZpbmcgd2l0aCBISVYgb24gQVJUCiAqCiAqIERlZmluaXRpb246IE51bWJlciBhbmQgJSBvZiBwZW9wbGUgb24gQVJUIGFtb25nIGFsbCBwZW9wbGUgbGl2aW5nIHdpdGggSElWIGF0IHRoZSBlbmQgb2YgdGhlIHJlcG9ydGluZyBwZXJpb2QKICoKICogTnVtZXJhdG9yOiBOdW1iZXIgb2YgcGVvcGxlIG9uIEFSVCBhdCB0aGUgZW5kIG9mIHRoZSByZXBvcnRpbmcgcGVyaW9kIChISVYgcGF0aWVudCBtb25pdG9yaW5nIGRhdGEgZnJvbSwgZm9yIGV4YW1wbGUsIEFSVCByZWdpc3RlcnMsIHBhdGllbnQgcmVjb3JkcyBvciBFTVJzKS4gRm9yIGtleSBwb3B1bGF0aW9ucyBzdXJ2ZXkgZGF0YSBtYXkgYmUgcmVxdWlyZWQuCiAqIE51bWVyYXRvciBDYWxjdWxhdGlvbjogQ09VTlQgb2YgY2xpZW50cyB3aXRoICJISVYgc3RhdHVzIj0nSElWLXBvc2l0aXZlJyBBTkQgIk9uIEFSVCI9VHJ1ZSBhdCByZXBvcnRpbmcgcGVyaW9kIGVuZCBkYXRlCiAqIE51bWVyYXRvciBFeGNsdXNpb25zOiBDbGllbnRzIHdpdGggYW4gIkhJViB0cmVhdG1lbnQgb3V0Y29tZSIgSU4gJ0xvc3QgdG8gZm9sbG93IHVwJywgJ1RyYW5zZmVycmVkIG91dCcsICdEZWF0aCAoZG9jdW1lbnRlZCknIGF0IHRoZSBlbmQgb2YgdGhlIHJlcG9ydGluZyBwZXJpb2QKICoKICogRGVub21pbmF0b3I6IDEuIFRvIGRldGVybWluZSB0cmVhdG1lbnQgY292ZXJhZ2U6IGVzdGltYXRlZCBudW1iZXIgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViAoZnJvbSBtb2RlbHMsIHN1Y2ggYXMgU3BlY3RydW0gQUlNKSB8IDIuIFRvIGdhdWdlIHByb2dyZXNzIHRvd2FyZCB0aGUgc2Vjb25kIDk1IHRhcmdldDogbnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgd2hvIGtub3cgdGhlaXIgSElWIHN0YXR1cyAoZnJvbSBzdXJ2ZXlzIG9yIG1vZGVscykKICogRGVub21pbmF0b3IgQ2FsY3VsYXRpb246IEZvciB0cmVhdG1lbnQgY292ZXJhZ2U6ICpFc3RpbWF0ZWQgbnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgfCAgfCBGb3IgcHJvZ3Jlc3MgdG93YXJkcyAybmQgOTUgdGFyZ2V0OiAqRXN0aW1hdGVkIG51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIHdobyBrbm93IHRoZWlyIHN0YXR1cwogKiBEZW5vbWluYXRvciBFeGNsdXNpb25zOiBDbGllbnRzIHdpdGggYW4gIkhJViB0cmVhdG1lbnQgb3V0Y29tZSIgSU4gJ0xvc3QgdG8gZm9sbG93IHVwJywgJ1RyYW5zZmVycmVkIG91dCcsICdEZWF0aCAoZG9jdW1lbnRlZCknIGF0IHRoZSBlbmQgb2YgdGhlIHJlcG9ydGluZyBwZXJpb2QKICoKICogRGlzYWdncmVnYXRpb25zOgogKiDigKLCoEdlbmRlciAoZmVtYWxlLCBtYWxlLCBvdGhlciopCiAqIOKAoiBBZ2UgKDDigJM0LCA14oCTOSwgMTDigJMxNCwgMTXigJMxOSwgMjDigJMyNCwgMjXigJMyOSwgMzDigJMzNCwgMzXigJMzOSwgNDDigJM0NCwgNDXigJM0OSwgNTArIHllYXJzKSoqCiAqIOKAosKgS2V5IHBvcHVsYXRpb25zIChtZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuLCBwZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncywgcGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MsIHNleCB3b3JrZXJzLCB0cmFucyBhbmQgZ2VuZGVyIGRpdmVyc2UgcGVvcGxlKSoqKgogKiDigKLCoENpdGllcyBhbmQgb3RoZXIgYWRtaW5pc3RyYXRpdmUgcmVnaW9ucyBvZiBlcGlkZW1pb2xvZ2ljIGltcG9ydGFuY2UKICogCiAqIERpc2FnZ3JlZ2F0aW9uIEVsZW1lbnRzOiBHZW5kZXIgfCBBZ2UgfCBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSB8IAogKgogKiBOdW1lcmF0b3IgYW5kIERlbm9taW5hdG9yIEVsZW1lbnRzOgogKiBISVYgc3RhdHVzIHwgT24gQVJUCiAqCiAqIFJlZmVyZW5jZTogQ29uc29saWRhdGVkIGd1aWRlbGluZXMgb24gcGVyc29uLWNlbnRyZWQgSElWIHN0cmF0ZWdpYyBpbmZvcm1hdGlvbjogc3RyZW5ndGhlbmluZyByb3V0aW5lIGRhdGEgZm9yIGltcGFjdC4gR2VuZXZhOiBXb3JsZCBIZWFsdGggT3JnYW5pemF0aW9uOyAyMDIyCiAqIAogKiBEYXRhIENvbmNlcHRzOgogKiAgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkEuREUxODogR2VuZGVyKiB8IEdlbmRlciBvZiB0aGUgY2xpZW50KiAKICogSElWLkEuREUxOTogRmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgZmVtYWxlIAogKiBISVYuQS5ERTIwOiBNYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgbWFsZSAKICogSElWLkEuREUyMTogVHJhbnNnZW5kZXIgbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIG1hbGUgCiAqIEhJVi5BLkRFMjI6IFRyYW5zZ2VuZGVyIGZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIGZlbWFsZSAKICogSElWLkEuREUyMzogT3RoZXIgfCBBZGRpdGlvbmFsIGNhdGVnb3J5IAogKiBISVYuQi5ERTUwOiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBjbGllbnQgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5CLkRFNTE6IFNleCB3b3JrZXIgfCBDbGllbnQgaXMgYSBzZXggd29ya2VyIAogKiBISVYuQi5ERTUyOiBNZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuIHwgQ2xpZW50IGlzIGEgbWFuIHdobyBoYXMgc2V4IHdpdGggbWVuIAogKiBISVYuQi5ERTUzOiBUcmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgcGVvcGxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIAogKiBISVYuQi5ERTU0OiBQZW9wbGUgd2hvIGluamVjdCBkcnVncyB8IENsaWVudCBpcyBhIHBlcnNvbiB3aG8gaW5qZWN0cyBkcnVncyAKICogSElWLkIuREU1NTogUGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZ3MgfCBDbGllbnQgbGl2ZXMgaW4gYSBwcmlzb24gb3IgYW5vdGhlciBjbG9zZWQgc2V0dGluZyAKICogSElWLkIuREUxMTU6IEhJViBzdGF0dXMgfCBISVYgc3RhdHVzIHJlcG9ydGVkIGFmdGVyIGFwcGx5aW5nIHRoZSBuYXRpb25hbCBISVYgdGVzdGluZyBhbGdvcml0aG0uIE5vIHNpbmdsZSBISVYgdGVzdCBjYW4gcHJvdmlkZSBhbiBISVYtcG9zaXRpdmUgZGlhZ25vc2lzLiAKICogSElWLkIuREUxMTY6IEhJVi1wb3NpdGl2ZSB8IENsaWVudCBpcyBISVYtcG9zaXRpdmUgCiAqIEhJVi5CLkRFMTE3OiBISVYtbmVnYXRpdmUgfCBDbGllbnQgaXMgSElWLW5lZ2F0aXZlIAogKiBISVYuQi5ERTExODogVW5rbm93biB8IENsaWVudCBoYXMgdW5rbm93biBISVYgc3RhdHVzIAogKiBISVYuRC5ERTM4OiBPbiBBUlQgfCBDbGllbnQgaXMgY3VycmVudGx5IHRha2luZyBBUlQgCiAqIEhJVi5FLkRFMTE0OiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBpbmZhbnQncyBtb3RoZXIgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5FLkRFMTE1OiBTZXggd29ya2VyIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgc2V4IHdvcmtlciAKICogSElWLkUuREUxMTY6IFBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgcGVyc29uIHdobyBpbmplY3RzIGRydWdzIAogKiBISVYuRS5ERTExNzogVHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIHBlb3BsZSB8IEluZmFudCdzIG1vdGhlciBpZGVudGlmaWVzIGFzIHRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSAKICogSElWLkUuREUxMTg6IFBlb3BsZSBsaXZpbmcgaW4gcHJpc29ucyBhbmQgb3RoZXIgY2xvc2VkIHNldHRpbmcgfCBJbmZhbnQncyBtb3RoZXIgaXMgaW4gYSBwcmlzb24gb3IgY2xvc2VkIHNldHRpbmcgCiAqIEhJVi5ILkRFNDc6IE9uIEFSVCB8IENsaWVudCBpcyBjdXJyZW50bHkgdGFraW5nIEFSVCAKICoKICogQWRkaXRpb25hbCBDb250ZXh0CiAqIC0gd2hhdCBpdCBtZWFzdXJlczogTWVhc3VyZXMgcHJvZ3Jlc3MgdG93YXJkcyBwcm92aWRpbmcgQVJUIHRvIGFsbCBwZW9wbGUgbGl2aW5nIHdpdGggSElWLCB0aGF0IGlzLCB0cmVhdG1lbnQgY292ZXJhZ2UsIHRha2luZyBpbnRvIGFjY291bnQgdG90YWwgYXR0cml0aW9uIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZC4KICogLSByYXRpb25hbGU6IOKAosKgV0hPIGN1cnJlbnRseSByZWNvbW1lbmRzIHRyZWF0bWVudCBmb3IgYWxsIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgdG8gYWNoaWV2ZSB2aXJhbCBzdXBwcmVzc2lvbi4gfCDigKLCoFRoaXMgaW5kaWNhdG9yIGlzIGNlbnRyYWwgdG8gYWNjb3VudGFiaWxpdHkgZm9yIG5hdGlvbmFsIGhlYWx0aCBzZWN0b3Igc3RyYXRlZ2ljIHBsYW5zLCBlZmZlY3RpdmUgcHJvZ3JhbW1lIG1hbmFnZW1lbnQgYW5kIGRvbm9yIHByb2dyYW1taW5nLiB8IOKAosKgVGhpcyBpbmRpY2F0b3IgaXMgZXNzZW50aWFsIHRvIG1lYXN1cmVtZW50IG9mIHRoZSBzZWNvbmQgOTUgdGFyZ2V0OiB0aGF0IDk1JSBvZiB0aGUgcGVvcGxlIHdobyBrbm93IHRoZWlyIEhJVi1wb3NpdGl2ZSBzdGF0dXMgYXJlIGFjY2Vzc2luZyBBUlQgYnkgMjAyNS4KICogLSBtZXRob2Q6IEZvciB0aGUgbnVtZXJhdG9yOiBHZW5lcmF0ZWQgYnkgZGV0ZXJtaW5pbmcgdGhlIG51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIG9uIEFSVCBhdCB0aGUgZW5kIG9mIHRoZSBsYXN0IHJlcG9ydGluZyBwZXJpb2QgcGx1cyB0aGUgbnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgaW5pdGlhdGVkIG9uIEFSVCBkdXJpbmcgdGhlIGN1cnJlbnQgcmVwb3J0aW5nIHBlcmlvZCwgdGFraW5nIGludG8gYWNjb3VudCByZXRlbnRpb24vYXR0cml0aW9uIHN0YXR1cyBieSB0aGUgZW5kIG9mIHRoZSByZXBvcnRpbmcgcGVyaW9kLiBSZXRlbnRpb24gYW5kIGF0dHJpdGlvbiBhbmFseXNpcyBzaG91bGQgYmUgY29uZHVjdGVkIGFzIHBhcnQgb2YgcmVwb3J0aW5nIG9uIHRoaXMgaW5kaWNhdG9yLiBUaGUgbnVtZXJhdG9yIHNob3VsZCBOT1QgSU5DTFVERSBwZW9wbGUgd2hvIGhhdmUgc3RvcHBlZCB0cmVhdG1lbnQsIGRpZWQgb3Igd2VyZSBvdGhlcndpc2UgbG9zdCB0byBmb2xsb3ctdXAgZHVyaW5nIHRoaXMgcGVyaW9kLiBDb25zaXN0ZW50IHdpdGggbWV0aG9kcyBmb3IgZGVmaW5pbmcgdGhlIHRvdGFsIGF0dHJpdGlvbiBmcm9tIEFSVCBpbmRpY2F0b3IgKHNlZSBBUlQuMiksIHRoZXNlIHN0YXR1cyBjbGFzc2lmaWNhdGlvbiBjYXRlZ29yaWVzIHNob3VsZCBiZSByZXBvcnRlZCBzZXBhcmF0ZWx5IHRvIHRoZSBuYXRpb25hbCBsZXZlbCBhbmQgdXNlZCB0byBjYWxjdWxhdGUgdGhlIG51bWJlciBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIHdobyBhcmUgb24gQVJULiB8ICB8IEZvciB0aGUgZGVub21pbmF0b3I6IEVwaWRlbWlvbG9naWNhbCBtb2RlbHMgc3VjaCBhcyBTcGVjdHJ1bSBBSU0gYXJlIHRoZSBwcmVmZXJyZWQgc291cmNlIGZvciBlc3RpbWF0aW5nIHRoZSBudW1iZXIgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJVi4gRGVub21pbmF0b3IgMiBzaG91bGQgYmUgY29uc2lzdGVudCB3aXRoIHRoZSBudW1lcmF0b3IgdXNlZCBmb3IgaW5kaWNhdG9yIEhUUy4xIFBlb3BsZSBsaXZpbmcgd2l0aCBISVYgd2hvIGtub3cgdGhlaXIgSElWIHN0YXR1cyAoZmlyc3QgOTUgdGFyZ2V0KS4gVGhlIHJlY29tbWVuZGVkIG1heGltdW0gcmVwb3J0aW5nIGZyZXF1ZW5jeSBpcyAxMiBtb250aHMuIFNob3J0ZXIgcmVwb3J0aW5nIGludGVydmFscywgZm9yIGV4YW1wbGUsIHRocmVlIG1vbnRocywgYXJlIHJlY29tbWVuZGVkIHdoZXJlIGZlYXNpYmxlLgogKiAKICogU3VnZ2VzdGVkIFNjb3JpbmcgTWV0aG9kOiBwcm9wb3J0aW9uIHwgaHR0cDovL2hsNy5vcmcvZmhpci91cy9jcWZtZWFzdXJlcy9TdHJ1Y3R1cmVEZWZpbml0aW9uL3Byb3BvcnRpb24tbWVhc3VyZS1jcWZtCiAqLwoKbGlicmFyeSBISVZJTkQyN0xvZ2ljCgovLyBJbmNsdWRlZCBMaWJyYXJpZXMKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgSElWSW5kaWNhdG9yQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjEnCmluY2x1ZGUgV0hPQ29tbW9uIGNhbGxlZCBXQ29tCmluY2x1ZGUgRkhJUkNvbW1vbiBjYWxsZWQgRkMKCi8vIEluZGljYXRvciBEZWZpbml0aW9uCgpwYXJhbWV0ZXIgIk1lYXN1cmVtZW50IFBlcmlvZCIgSW50ZXJ2YWw8RGF0ZT4gZGVmYXVsdCBJbnRlcnZhbFtAMjAyMC0wMS0wMSwgQDIwMjAtMDEtMzFdCiAKY29udGV4dCBQYXRpZW50CgovKgoqIE1hbnkgaW5kaWNhdG9yIHNwZWNpZmljYXRpb25zIGluIEFOQyBhbmQgSW1tdW5pemF0aW9uIGhhdmUgY29udGV4dCBhcyBwYXRpZW50LiAKKiBJIGJlbGlldmUgdGhlc2Ugc2hvdWxkIGJlIHVuZmlsdGVyZWQgdG8gZ2V0IGFsbCBvYnNlcnZhdGlvbnMgbm90IGp1c3QgdGhvc2UgcmVsYXRlZCB0byBhIGN1cnJlbnQgcGF0aWVudAoqIFNob3VsZCBkaXNjdXNzLgoqLwoKZGVmaW5lICJNZWFzdXJlIFBvcHVsYXRpb24iOgogICAoZXhpc3RzKEhJQy4iSElWIFBvc2l0aXZlIENvbmRpdGlvbiIgQwoJd2hlcmUgQy5vbnNldCBiZWZvcmUgZW5kIG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKQoJb3IgCglleGlzdHMoSElDLiJISVYgUG9zaXRpdmUgT2JzZXJ2YXRpb24iIE8KCXdoZXJlIChPLmlzc3VlZCBiZWZvcmUgZW5kIG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKQoJKSkKICAgYW5kIGV4aXN0cyhISUMuIkhJViBUcmVhdG1lbnQgQWN0aXZlIiBICiAgIHdoZXJlIEguZWZmZWN0aXZlIHN0YXJ0cyBiZWZvcmUgZW5kIG9mICJNZWFzdXJlbWVudCBQZXJpb2QiCiAgICBhbmQgKEguZWZmZWN0aXZlIGVuZHMgYWZ0ZXIgc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpCiAgICkKICAgYW5kIG5vdCBISUMuIlBhdGllbnQgRGVjZWFzZWQgYmVmb3JlIGVuZCBvZiBNZWFzdXJlbWVudCBQZXJpb2QiCiAgIGFuZCBub3QgSElDLiJUcmFuc2ZlciBPdXQgYXQgRmFjaWxpdHkgZHVyaW5nIHRoZSBtZWFzdXJlbWVudCBwZXJpb2QiCiAgIGFuZCBub3QgSElDLiJMb3N0IHRvIEZvbGxvdyBVcCBkdXJpbmcgdGhlIG1lYXN1cmVtZW50IHBlcmlvZCIKCi8qCiAqIEFzIGRlZmluZWQgYnkgTWVtYmVyIFN0YXRlcwogKi8KZGVmaW5lICJJbml0aWFsIFBvcHVsYXRpb24iOgogIHRydWUKCi8qCiAqIE5PVEU6IE1vZGVsZWQgYXMgYSBDb250aW51b3VzIFZhcmlhYmxlIG1lYXN1cmUgYmVjYXVzZSB0aGlzIGlzIGFuIGVzdGltYXRlZCBkZW5vbWluYXRvciBwcm9wb3J0aW9uIG1lYXN1cmUKICovCgpkZWZpbmUgZnVuY3Rpb24gIk1lYXN1cmUgT2JzZXJ2YXRpb24iKFBhdGllbnQgIlBhdGllbnQiKToKICAxCgovKgogKiBEaXNhZ2dyZWdhdG9ycwogKi8KCmRlZmluZSAiQWRtaW5pc3RyYXRpdmUgR2VuZGVyIFN0cmF0aWZpZXIiOgoJSElDLiJCeSBBZG1pbmlzdHJhdGl2ZSBHZW5kZXIgU3RyYXRpZmllciIKCmRlZmluZSAiQWdlIFN0cmF0aWZpZXIiOgoJSElDLiJCeSBBZ2UgU3RyYXRpZmllciIKCmRlZmluZSAiR2VvZ3JhcGhpYyBSZWdpb24gU3RyYXRpZmllciI6CglISUMuIkJ5IEdlb2dyYXBoaWMgUmVnaW9uIFN0cmF0aWZpZXIiCgpkZWZpbmUgInBhdGllbnRHcm91cHMgU3RyYXRpZmllciI6CglISUMuInBhdGllbnRHcm91cHMiCgpkZWZpbmUgIlN0cmF0aWZpY2F0aW9uIjoKIEhJQy4iQnkgQWRtaW5pc3RyYXRpdmUgR2VuZGVyIFN0cmF0aWZpZXIiLmNvZGUgCiAgKyAnOicgKyBISUMuIkJ5IEFnZSBTdHJhdGlmaWVyIgorICc6JyArIEhJQy4iQnkgR2VvZ3JhcGhpYyBSZWdpb24gU3RyYXRpZmllciIKLy9OZWVkIHRvIGRpc2N1c3MgaG93IHRvIGFkZCBsaXN0Ci8vKyAnOicgK0hJQy4icGF0aWVudEdyb3VwcyI="/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

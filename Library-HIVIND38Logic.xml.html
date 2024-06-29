@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.38 Logic - XML Representation - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.38 Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -247,7 +247,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -334,7 +334,74 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND38Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND38Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND38Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND38Logic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND38Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND38Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND38Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND38Logic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.38 Logic
+ * Ref No: VER.2
+ * Short Name: Early infant diagnosis (EID) coverage
+ *
+ * Definition: % of HIV-exposed infants who receive a virological test for HIV within two months (and 12 months) of birth
+ *
+ * Numerator: Number of HIV-exposed infants born during the reporting period who received a virological HIV test within two months (and 12 months) of birth
+ * Numerator Calculation: COUNT of infants who are an &amp;quot;HIV-exposed infant or child&amp;quot; with &amp;quot;Infant date of birth&amp;quot; within the reporting period AND with &amp;quot;Date of viral load sample collection&amp;quot; LESS THAN 2 months AFTER &amp;quot;Infant date of birth&amp;quot; AND &amp;quot;HIV test type&amp;quot;='Nucleic acid test for HIV'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women.
+ * Denominator Calculation: *Estimated number of HIV-positive women who delivered during the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Test result (HIV-positive, HIV-negative, indeterminate, other) to enable calculation of the percentage positive and the percentage with an indeterminate result among HIV-exposed infants receiving a virological test
+ * • Age of infant (&amp;lt;2 months, 2-12 months) to allow the separate calculation of the proportion of exposed infants receiving virological testing within two months of birth and within 12 months of birth
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: HIV test date (at 2 months, at 12 months) | Age of infant (&amp;lt;2 months, 2-12 months)
+ *
+ * Numerator and Denominator Elements:
+ * Date of viral load sample collection | HIV test type | HIV-exposed infant or child | Infant date of birth
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.B.DE81: HIV test type | Type of HIV test 
+ * HIV.B.DE82: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic 
+ * HIV.B.DE83: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay 
+ * HIV.B.DE84: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis 
+ * HIV.B.DE85: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic 
+ * HIV.B.DE86: HIV self-test | Antibody test for HIV performed by self-tester using a rapid diagnostic 
+ * HIV.B.DE110: HIV test date | Date of the HIV test 
+ * HIV.D.DE194: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load 
+ * HIV.E.DE87: Infant date of birth | The infant's date of birth (DOB) if known 
+ * HIV.E.DE90: Age of infant | Infant age calculated using date of birth 
+ * HIV.E.DE112: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure 
+ * HIV.E.DE168: HIV test type | Type of HIV test 
+ * HIV.E.DE169: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic (RDT) 
+ * HIV.E.DE170: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay (EIA) 
+ * HIV.E.DE171: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis 
+ * HIV.E.DE172: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic 
+ * HIV.E.DE224: HIV test date | Date of the HIV test 
+ * HIV.G.DE8: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ *
+ * Additional Context
+ * - what it measures: This indicator measures early HIV diagnosis in infants.
+ * - rationale: • High coverage of early virological testing of infants helps initiate ART early in children with confirmed HIV infection and supports counselling on efforts to prevent seroconversion of those with a negative early test result. | • Current PMTCT guidelines recommend virological testing for HIV-exposed infants within two months of birth.
+ * - method: For the numerator: Programme records (for example, PMTCT registers, laboratory records). |  | For the denominator: Modelling-based estimates (for example, Spectrum AIM) |  | The recommended reporting period is 12 months.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND38Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
@@ -352,7 +419,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T06:31:00+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T07:09:27+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -363,6 +430,14 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a>
                <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;% of HIV-exposed infants who receive a virological test for HIV within two months (and 12 months) of birth&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC4zOCBMb2dpYwogKiBSZWYgTm86IFZFUi4yCiAqIFNob3J0IE5hbWU6IEVhcmx5IGluZmFudCBkaWFnbm9zaXMgKEVJRCkgY292ZXJhZ2UKICoKICogRGVmaW5pdGlvbjogJSBvZiBISVYtZXhwb3NlZCBpbmZhbnRzIHdobyByZWNlaXZlIGEgdmlyb2xvZ2ljYWwgdGVzdCBmb3IgSElWIHdpdGhpbiB0d28gbW9udGhzIChhbmQgMTIgbW9udGhzKSBvZiBiaXJ0aAogKgogKiBOdW1lcmF0b3I6IE51bWJlciBvZiBISVYtZXhwb3NlZCBpbmZhbnRzIGJvcm4gZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kIHdobyByZWNlaXZlZCBhIHZpcm9sb2dpY2FsIEhJViB0ZXN0IHdpdGhpbiB0d28gbW9udGhzIChhbmQgMTIgbW9udGhzKSBvZiBiaXJ0aAogKiBOdW1lcmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mIGluZmFudHMgd2hvIGFyZSBhbiAiSElWLWV4cG9zZWQgaW5mYW50IG9yIGNoaWxkIiB3aXRoICJJbmZhbnQgZGF0ZSBvZiBiaXJ0aCIgd2l0aGluIHRoZSByZXBvcnRpbmcgcGVyaW9kIEFORCB3aXRoICJEYXRlIG9mIHZpcmFsIGxvYWQgc2FtcGxlIGNvbGxlY3Rpb24iIExFU1MgVEhBTiAyIG1vbnRocyBBRlRFUiAiSW5mYW50IGRhdGUgb2YgYmlydGgiIEFORCAiSElWIHRlc3QgdHlwZSI9J051Y2xlaWMgYWNpZCB0ZXN0IGZvciBISVYnCiAqIE51bWVyYXRvciBFeGNsdXNpb25zOiAKICoKICogRGVub21pbmF0b3I6IEVzdGltYXRlZCBudW1iZXIgb2YgSElWLXBvc2l0aXZlIHdvbWVuIHdobyBkZWxpdmVyZWQgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kLiAgIHwgIHwgTm90ZTogVGhlIGRlbm9taW5hdG9yIGlzIGEgcHJveHkgbWVhc3VyZSBmb3IgdGhlIG51bWJlciBvZiBpbmZhbnRzIGJvcm4gdG8gSElWLWluZmVjdGVkIHdvbWVuLgogKiBEZW5vbWluYXRvciBDYWxjdWxhdGlvbjogKkVzdGltYXRlZCBudW1iZXIgb2YgSElWLXBvc2l0aXZlIHdvbWVuIHdobyBkZWxpdmVyZWQgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAosKgVGVzdCByZXN1bHQgKEhJVi1wb3NpdGl2ZSwgSElWLW5lZ2F0aXZlLCBpbmRldGVybWluYXRlLCBvdGhlcikgdG8gZW5hYmxlIGNhbGN1bGF0aW9uIG9mIHRoZSBwZXJjZW50YWdlIHBvc2l0aXZlIGFuZCB0aGUgcGVyY2VudGFnZSB3aXRoIGFuIGluZGV0ZXJtaW5hdGUgcmVzdWx0IGFtb25nIEhJVi1leHBvc2VkIGluZmFudHMgcmVjZWl2aW5nIGEgdmlyb2xvZ2ljYWwgdGVzdAogKiDigKLCoEFnZSBvZiBpbmZhbnQgKDwyIG1vbnRocywgMi0xMiBtb250aHMpIHRvIGFsbG93IHRoZSBzZXBhcmF0ZSBjYWxjdWxhdGlvbiBvZiB0aGUgcHJvcG9ydGlvbiBvZiBleHBvc2VkIGluZmFudHMgcmVjZWl2aW5nIHZpcm9sb2dpY2FsIHRlc3Rpbmcgd2l0aGluIHR3byBtb250aHMgb2YgYmlydGggYW5kIHdpdGhpbiAxMiBtb250aHMgb2YgYmlydGgKICog4oCiwqBDaXRpZXMgYW5kIG90aGVyIGFkbWluaXN0cmF0aXZlIHJlZ2lvbnMgb2YgZXBpZGVtaW9sb2dpYyBpbXBvcnRhbmNlCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogSElWIHRlc3QgZGF0ZSAoYXQgMiBtb250aHMsIGF0IDEyIG1vbnRocykgfCBBZ2Ugb2YgaW5mYW50ICg8MiBtb250aHMsIDItMTIgbW9udGhzKQogKgogKiBOdW1lcmF0b3IgYW5kIERlbm9taW5hdG9yIEVsZW1lbnRzOgogKiBEYXRlIG9mIHZpcmFsIGxvYWQgc2FtcGxlIGNvbGxlY3Rpb24gfCBISVYgdGVzdCB0eXBlIHwgSElWLWV4cG9zZWQgaW5mYW50IG9yIGNoaWxkIHwgSW5mYW50IGRhdGUgb2YgYmlydGgKICoKICogUmVmZXJlbmNlOiBDb25zb2xpZGF0ZWQgZ3VpZGVsaW5lcyBvbiBwZXJzb24tY2VudHJlZCBISVYgc3RyYXRlZ2ljIGluZm9ybWF0aW9uOiBzdHJlbmd0aGVuaW5nIHJvdXRpbmUgZGF0YSBmb3IgaW1wYWN0LiBHZW5ldmE6IFdvcmxkIEhlYWx0aCBPcmdhbml6YXRpb247IDIwMjIKICogCiAqIERhdGEgQ29uY2VwdHM6CiAqICAKICogSElWLkIuREU4MTogSElWIHRlc3QgdHlwZSB8IFR5cGUgb2YgSElWIHRlc3QgCiAqIEhJVi5CLkRFODI6IFJhcGlkIGRpYWdub3N0aWMgdGVzdCBmb3IgSElWIHwgQW50aWJvZHkgdGVzdCBmb3IgSElWIHBlcmZvcm1lZCB3aXRoIGEgcmFwaWQgZGlhZ25vc3RpYyAKICogSElWLkIuREU4MzogRW56eW1lIGltbXVub2Fzc2F5IGZvciBISVYgfCBBbnRpYm9keSB0ZXN0IGZvciBISVYgcGVyZm9ybWVkIHdpdGggYW4gZW56eW1lIGltbXVub2Fzc2F5IAogKiBISVYuQi5ERTg0OiBOdWNsZWljIGFjaWQgdGVzdCBmb3IgSElWIHwgVmlyb2xvZ2ljYWwgdGVzdCwgd2hpY2ggaW5jbHVkZXMgdGVzdGluZyBmb3IgZWFybHkgaW5mYW50IGRpYWdub3NpcyAKICogSElWLkIuREU4NTogRHVhbCBISVYvc3lwaGlsaXMgcmFwaWQgZGlhZ25vc3RpYyB0ZXN0IHwgQW50aWJvZHkgdGVzdCBmb3IgSElWIGFuZCBzeXBoaWxpcyBwZXJmb3JtZWQgd2l0aCBhIHJhcGlkIGRpYWdub3N0aWMgCiAqIEhJVi5CLkRFODY6IEhJViBzZWxmLXRlc3QgfCBBbnRpYm9keSB0ZXN0IGZvciBISVYgcGVyZm9ybWVkIGJ5IHNlbGYtdGVzdGVyIHVzaW5nIGEgcmFwaWQgZGlhZ25vc3RpYyAKICogSElWLkIuREUxMTA6IEhJViB0ZXN0IGRhdGUgfCBEYXRlIG9mIHRoZSBISVYgdGVzdCAKICogSElWLkQuREUxOTQ6IERhdGUgb2YgdmlyYWwgbG9hZCBzYW1wbGUgY29sbGVjdGlvbiB8IERhdGUgYW5kIHRpbWUgd2hlbiB0aGUgc2FtcGxlIHdhcyBjb2xsZWN0ZWQgdG8gdGVzdCB0aGUgY2xpZW50J3MgSElWIHZpcmFsIGxvYWQgCiAqIEhJVi5FLkRFODc6IEluZmFudCBkYXRlIG9mIGJpcnRoIHwgVGhlIGluZmFudCdzIGRhdGUgb2YgYmlydGggKERPQikgaWYga25vd24gCiAqIEhJVi5FLkRFOTA6IEFnZSBvZiBpbmZhbnQgfCBJbmZhbnQgYWdlIGNhbGN1bGF0ZWQgdXNpbmcgZGF0ZSBvZiBiaXJ0aCAKICogSElWLkUuREUxMTI6IEhJVi1leHBvc2VkIGluZmFudCBvciBjaGlsZCB8IFdoZXRoZXIgdGhlIGluZmFudCBvciBjaGlsZCB3YXMgZGV0ZXJtaW5lZCB0byBoYXZlIGhhZCBISVYgZXhwb3N1cmUgCiAqIEhJVi5FLkRFMTY4OiBISVYgdGVzdCB0eXBlIHwgVHlwZSBvZiBISVYgdGVzdCAKICogSElWLkUuREUxNjk6IFJhcGlkIGRpYWdub3N0aWMgdGVzdCBmb3IgSElWIHwgQW50aWJvZHkgdGVzdCBmb3IgSElWIHBlcmZvcm1lZCB3aXRoIGEgcmFwaWQgZGlhZ25vc3RpYyAoUkRUKSAKICogSElWLkUuREUxNzA6IEVuenltZSBpbW11bm9hc3NheSBmb3IgSElWIHwgQW50aWJvZHkgdGVzdCBmb3IgSElWIHBlcmZvcm1lZCB3aXRoIGFuIGVuenltZSBpbW11bm9hc3NheSAoRUlBKSAKICogSElWLkUuREUxNzE6IE51Y2xlaWMgYWNpZCB0ZXN0IGZvciBISVYgfCBWaXJvbG9naWNhbCB0ZXN0LCB3aGljaCBpbmNsdWRlcyB0ZXN0aW5nIGZvciBlYXJseSBpbmZhbnQgZGlhZ25vc2lzIAogKiBISVYuRS5ERTE3MjogRHVhbCBISVYvc3lwaGlsaXMgcmFwaWQgZGlhZ25vc3RpYyB0ZXN0IHwgQW50aWJvZHkgdGVzdCBmb3IgSElWIGFuZCBzeXBoaWxpcyBwZXJmb3JtZWQgd2l0aCBhIHJhcGlkIGRpYWdub3N0aWMgCiAqIEhJVi5FLkRFMjI0OiBISVYgdGVzdCBkYXRlIHwgRGF0ZSBvZiB0aGUgSElWIHRlc3QgCiAqIEhJVi5HLkRFODogRGF0ZSBvZiB2aXJhbCBsb2FkIHNhbXBsZSBjb2xsZWN0aW9uIHwgRGF0ZSBhbmQgdGltZSB3aGVuIHRoZSBzYW1wbGUgd2FzIGNvbGxlY3RlZCB0byB0ZXN0IHRoZSBjbGllbnQncyBISVYgdmlyYWwgbG9hZAogKgogKiBBZGRpdGlvbmFsIENvbnRleHQKICogLSB3aGF0IGl0IG1lYXN1cmVzOiBUaGlzIGluZGljYXRvciBtZWFzdXJlcyBlYXJseSBISVYgZGlhZ25vc2lzIGluIGluZmFudHMuCiAqIC0gcmF0aW9uYWxlOiDigKLCoEhpZ2ggY292ZXJhZ2Ugb2YgZWFybHkgdmlyb2xvZ2ljYWwgdGVzdGluZyBvZiBpbmZhbnRzIGhlbHBzIGluaXRpYXRlIEFSVCBlYXJseSBpbiBjaGlsZHJlbiB3aXRoIGNvbmZpcm1lZCBISVYgaW5mZWN0aW9uIGFuZCBzdXBwb3J0cyBjb3Vuc2VsbGluZyBvbiBlZmZvcnRzIHRvIHByZXZlbnQgc2Vyb2NvbnZlcnNpb24gb2YgdGhvc2Ugd2l0aCBhIG5lZ2F0aXZlIGVhcmx5IHRlc3QgcmVzdWx0LiB8IOKAoiBDdXJyZW50IFBNVENUIGd1aWRlbGluZXMgcmVjb21tZW5kIHZpcm9sb2dpY2FsIHRlc3RpbmcgZm9yIEhJVi1leHBvc2VkIGluZmFudHMgd2l0aGluIHR3byBtb250aHMgb2YgYmlydGguCiAqIC0gbWV0aG9kOiBGb3IgdGhlIG51bWVyYXRvcjogUHJvZ3JhbW1lIHJlY29yZHMgKGZvciBleGFtcGxlLCBQTVRDVCByZWdpc3RlcnMsIGxhYm9yYXRvcnkgcmVjb3JkcykuIHwgIHwgRm9yIHRoZSBkZW5vbWluYXRvcjogTW9kZWxsaW5nLWJhc2VkIGVzdGltYXRlcyAoZm9yIGV4YW1wbGUsIFNwZWN0cnVtIEFJTSkgfCAgfCBUaGUgcmVjb21tZW5kZWQgcmVwb3J0aW5nIHBlcmlvZCBpcyAxMiBtb250aHMuCiAqIAogKiBTdWdnZXN0ZWQgU2NvcmluZyBNZXRob2Q6IHByb3BvcnRpb24gfCBodHRwOi8vaGw3Lm9yZy9maGlyL3VzL2NxZm1lYXN1cmVzL1N0cnVjdHVyZURlZmluaXRpb24vcHJvcG9ydGlvbi1tZWFzdXJlLWNxZm0KICovCgpsaWJyYXJ5IEhJVklORDM4TG9naWMKCi8vIEluY2x1ZGVkIExpYnJhcmllcwp1c2luZyBGSElSIHZlcnNpb24gJzQuMC4xJwoKaW5jbHVkZSBISVZJbmRpY2F0b3JDb21tb24gdmVyc2lvbiAnMC4wLjEnIGNhbGxlZCBISUMKaW5jbHVkZSBGSElSSGVscGVycyB2ZXJzaW9uICc0LjAuMScKaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KaW5jbHVkZSBGSElSQ29tbW9uIGNhbGxlZCBGQwoKLy8gSW5kaWNhdG9yIERlZmluaXRpb24K&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -387,7 +462,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

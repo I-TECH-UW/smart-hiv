@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.95 Logic - XML Representation - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.95 Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -247,7 +247,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -334,7 +334,76 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND95Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND95Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND95Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND95Logic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND95Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND95Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND95Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND95Logic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.95 Logic
+ * Ref No: CCA.3
+ * Short Name: Invasive cervical cancer treatment
+ *
+ * Definition: % of women living with HIV diagnosed with invasive cancer who were treated
+ *
+ * Numerator: Number of women living with HIV who received treatment after being diagnosed with invasive cervical cancer
+ * Numerator Calculation: COUNT of women with &amp;quot;HIV status&amp;quot;='HIV-positive' AND &amp;quot;Cervical cancer diagnosis&amp;quot;='Invasive cervical cancer' for a &amp;quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&amp;quot; within the reporting period AND &amp;quot;Invasive cervical cancer treatment method&amp;quot; is NOT NULL
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of women living with HIV who were diagnosed with invasive cervical cancer
+ * Denominator Calculation: COUNT of women with &amp;quot;HIV status&amp;quot;='HIV-positive' AND &amp;quot;Cervical cancer diagnosis&amp;quot;='Invasive cervical cancer' for a &amp;quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&amp;quot; within the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years)
+ * • Invasive cervical cancer treatment episode (1st in lifetime, 2nd, 3rd, 4th, etc.)
+ * • Treatment type (medical, surgical)
+ * • Cities and other administrative areas of epidemiologic importance
+ * 
+ * Disaggregation Elements: Age | Invasive cervical cancer treatment episode | Invasive cervical cancer treatment method
+ *
+ * Numerator and Denominator Elements:
+ * Cervical cancer diagnosis | Date of diagnosis of cervical precancer lesions or invasive cervical cancer | HIV status | Invasive cervical cancer treatment method
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE705: Date of diagnosis of cervical precancer lesions or invasive cervical cancer | Date of diagnosis of cervical precancer lesions or invasive cervical cancer 
+ * HIV.D.DE709: Cervical cancer diagnosis | Type of cervical cancer diagnosis 
+ * HIV.D.DE710: Cervical precancer lesions | Client is diagnosed with cervical precancer lesions 
+ * HIV.D.DE711: Invasive cervical cancer | Client is diagnosed with invasive cervical cancer disease 
+ * HIV.D.DE730: Invasive cervical cancer treatment episode | Client's lifetime number of treatments for invasive cervical cancer 
+ * HIV.D.DE731: Invasive cervical cancer treatment method | Invasive cervical cancer treatment method 
+ * HIV.D.DE732: Conization | Invasive cervical cancer treatment method is a conization 
+ * HIV.D.DE733: Trachelectomy | Invasive cervical cancer treatment method is a trachelectomy 
+ * HIV.D.DE734: Hysterectomy | Invasive cervical cancer treatment method is a hysterectomy 
+ * HIV.D.DE735: Management of invasive cervical cancer | Invasive cervical cancer treatment method is management of invasive cervical cancer 
+ * HIV.D.DE736: Radiotherapy | Invasive cervical cancer treatment method is a radiotherapy 
+ * HIV.D.DE737: Chemotherapy | Invasive cervical cancer treatment method is a chemotherapy 
+ * HIV.D.DE738: Chemoradiation | Invasive cervical cancer treatment method is a chemoradiation 
+ * HIV.D.DE739: Other | Invasive cervical cancer treatment method is a not in list
+ *
+ * Additional Context
+ * - what it measures: Progress towards increasing access to treatment for invasive cervical cancer for women living with HIV
+ * - rationale: The purpose of this indicator is to assess trends in availability and access to treatment services for invasive cervical cancer for women living with HIV. In the longer run, it is expected that the number of women living with HIV who received treatment for invasive cervical cancer will plateau and slowly decrease, as screening programmes expand detection and treatment of precancerous lesions, and coverage of human papillomavirus (HPV) vaccination increases in line with the WHO Global Strategy 90–70–90 elimination targets.
+ * - method: The number is generated from programmatic data from HIV or cervical cancer programmes, or from a national cancer registry, if HIV status is recorded there.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND95Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
@@ -352,7 +421,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T06:31:00+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T07:09:27+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -363,6 +432,14 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a>
                <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;% of women living with HIV diagnosed with invasive cancer who were treated&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC45NSBMb2dpYwogKiBSZWYgTm86IENDQS4zCiAqIFNob3J0IE5hbWU6IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQKICoKICogRGVmaW5pdGlvbjogJSBvZiB3b21lbiBsaXZpbmcgd2l0aCBISVYgZGlhZ25vc2VkIHdpdGggaW52YXNpdmUgY2FuY2VyIHdobyB3ZXJlIHRyZWF0ZWQKICoKICogTnVtZXJhdG9yOiBOdW1iZXIgb2Ygd29tZW4gbGl2aW5nIHdpdGggSElWIHdobyByZWNlaXZlZCB0cmVhdG1lbnQgYWZ0ZXIgYmVpbmcgZGlhZ25vc2VkIHdpdGggaW52YXNpdmUgY2VydmljYWwgY2FuY2VyCiAqIE51bWVyYXRvciBDYWxjdWxhdGlvbjogQ09VTlQgb2Ygd29tZW4gd2l0aCAiSElWIHN0YXR1cyI9J0hJVi1wb3NpdGl2ZScgQU5EICJDZXJ2aWNhbCBjYW5jZXIgZGlhZ25vc2lzIj0nSW52YXNpdmUgY2VydmljYWwgY2FuY2VyJyBmb3IgYSAiRGF0ZSBvZiBkaWFnbm9zaXMgb2YgY2VydmljYWwgcHJlY2FuY2VyIGxlc2lvbnMgb3IgaW52YXNpdmUgY2VydmljYWwgY2FuY2VyIiB3aXRoaW4gdGhlIHJlcG9ydGluZyBwZXJpb2QgQU5EICJJbnZhc2l2ZSBjZXJ2aWNhbCBjYW5jZXIgdHJlYXRtZW50IG1ldGhvZCIgaXMgTk9UIE5VTEwKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogTnVtYmVyIG9mIHdvbWVuIGxpdmluZyB3aXRoIEhJViB3aG8gd2VyZSBkaWFnbm9zZWQgd2l0aCBpbnZhc2l2ZSBjZXJ2aWNhbCBjYW5jZXIKICogRGVub21pbmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mIHdvbWVuIHdpdGggIkhJViBzdGF0dXMiPSdISVYtcG9zaXRpdmUnIEFORCAiQ2VydmljYWwgY2FuY2VyIGRpYWdub3NpcyI9J0ludmFzaXZlIGNlcnZpY2FsIGNhbmNlcicgZm9yIGEgIkRhdGUgb2YgZGlhZ25vc2lzIG9mIGNlcnZpY2FsIHByZWNhbmNlciBsZXNpb25zIG9yIGludmFzaXZlIGNlcnZpY2FsIGNhbmNlciIgd2l0aGluIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAosKgQWdlICgxNeKAkzE5LCAyMOKAkzI0LCAyNeKAkzI5LCAzMOKAkzQ5LCA1MCsgeWVhcnMpCiAqIOKAoiBJbnZhc2l2ZSBjZXJ2aWNhbCBjYW5jZXIgdHJlYXRtZW50IGVwaXNvZGUgKDFzdCBpbiBsaWZldGltZSwgMm5kLCAzcmQsIDR0aCwgZXRjLikKICog4oCiwqBUcmVhdG1lbnQgdHlwZSAobWVkaWNhbCwgc3VyZ2ljYWwpCiAqIOKAosKgQ2l0aWVzIGFuZCBvdGhlciBhZG1pbmlzdHJhdGl2ZSBhcmVhcyBvZiBlcGlkZW1pb2xvZ2ljIGltcG9ydGFuY2UKICogCiAqIERpc2FnZ3JlZ2F0aW9uIEVsZW1lbnRzOiBBZ2UgfCBJbnZhc2l2ZSBjZXJ2aWNhbCBjYW5jZXIgdHJlYXRtZW50IGVwaXNvZGUgfCBJbnZhc2l2ZSBjZXJ2aWNhbCBjYW5jZXIgdHJlYXRtZW50IG1ldGhvZAogKgogKiBOdW1lcmF0b3IgYW5kIERlbm9taW5hdG9yIEVsZW1lbnRzOgogKiBDZXJ2aWNhbCBjYW5jZXIgZGlhZ25vc2lzIHwgRGF0ZSBvZiBkaWFnbm9zaXMgb2YgY2VydmljYWwgcHJlY2FuY2VyIGxlc2lvbnMgb3IgaW52YXNpdmUgY2VydmljYWwgY2FuY2VyIHwgSElWIHN0YXR1cyB8IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQgbWV0aG9kCiAqCiAqIFJlZmVyZW5jZTogQ29uc29saWRhdGVkIGd1aWRlbGluZXMgb24gcGVyc29uLWNlbnRyZWQgSElWIHN0cmF0ZWdpYyBpbmZvcm1hdGlvbjogc3RyZW5ndGhlbmluZyByb3V0aW5lIGRhdGEgZm9yIGltcGFjdC4gR2VuZXZhOiBXb3JsZCBIZWFsdGggT3JnYW5pemF0aW9uOyAyMDIyCiAqIAogKiBEYXRhIENvbmNlcHRzOgogKiAgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkIuREUxMTU6IEhJViBzdGF0dXMgfCBISVYgc3RhdHVzIHJlcG9ydGVkIGFmdGVyIGFwcGx5aW5nIHRoZSBuYXRpb25hbCBISVYgdGVzdGluZyBhbGdvcml0aG0uIE5vIHNpbmdsZSBISVYgdGVzdCBjYW4gcHJvdmlkZSBhbiBISVYtcG9zaXRpdmUgZGlhZ25vc2lzLiAKICogSElWLkIuREUxMTY6IEhJVi1wb3NpdGl2ZSB8IENsaWVudCBpcyBISVYtcG9zaXRpdmUgCiAqIEhJVi5CLkRFMTE3OiBISVYtbmVnYXRpdmUgfCBDbGllbnQgaXMgSElWLW5lZ2F0aXZlIAogKiBISVYuQi5ERTExODogVW5rbm93biB8IENsaWVudCBoYXMgdW5rbm93biBISVYgc3RhdHVzIAogKiBISVYuRC5ERTcwNTogRGF0ZSBvZiBkaWFnbm9zaXMgb2YgY2VydmljYWwgcHJlY2FuY2VyIGxlc2lvbnMgb3IgaW52YXNpdmUgY2VydmljYWwgY2FuY2VyIHwgRGF0ZSBvZiBkaWFnbm9zaXMgb2YgY2VydmljYWwgcHJlY2FuY2VyIGxlc2lvbnMgb3IgaW52YXNpdmUgY2VydmljYWwgY2FuY2VyIAogKiBISVYuRC5ERTcwOTogQ2VydmljYWwgY2FuY2VyIGRpYWdub3NpcyB8IFR5cGUgb2YgY2VydmljYWwgY2FuY2VyIGRpYWdub3NpcyAKICogSElWLkQuREU3MTA6IENlcnZpY2FsIHByZWNhbmNlciBsZXNpb25zIHwgQ2xpZW50IGlzIGRpYWdub3NlZCB3aXRoIGNlcnZpY2FsIHByZWNhbmNlciBsZXNpb25zIAogKiBISVYuRC5ERTcxMTogSW52YXNpdmUgY2VydmljYWwgY2FuY2VyIHwgQ2xpZW50IGlzIGRpYWdub3NlZCB3aXRoIGludmFzaXZlIGNlcnZpY2FsIGNhbmNlciBkaXNlYXNlIAogKiBISVYuRC5ERTczMDogSW52YXNpdmUgY2VydmljYWwgY2FuY2VyIHRyZWF0bWVudCBlcGlzb2RlIHwgQ2xpZW50J3MgbGlmZXRpbWUgbnVtYmVyIG9mIHRyZWF0bWVudHMgZm9yIGludmFzaXZlIGNlcnZpY2FsIGNhbmNlciAKICogSElWLkQuREU3MzE6IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQgbWV0aG9kIHwgSW52YXNpdmUgY2VydmljYWwgY2FuY2VyIHRyZWF0bWVudCBtZXRob2QgCiAqIEhJVi5ELkRFNzMyOiBDb25pemF0aW9uIHwgSW52YXNpdmUgY2VydmljYWwgY2FuY2VyIHRyZWF0bWVudCBtZXRob2QgaXMgYSBjb25pemF0aW9uIAogKiBISVYuRC5ERTczMzogVHJhY2hlbGVjdG9teSB8IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQgbWV0aG9kIGlzIGEgdHJhY2hlbGVjdG9teSAKICogSElWLkQuREU3MzQ6IEh5c3RlcmVjdG9teSB8IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQgbWV0aG9kIGlzIGEgaHlzdGVyZWN0b215IAogKiBISVYuRC5ERTczNTogTWFuYWdlbWVudCBvZiBpbnZhc2l2ZSBjZXJ2aWNhbCBjYW5jZXIgfCBJbnZhc2l2ZSBjZXJ2aWNhbCBjYW5jZXIgdHJlYXRtZW50IG1ldGhvZCBpcyBtYW5hZ2VtZW50IG9mIGludmFzaXZlIGNlcnZpY2FsIGNhbmNlciAKICogSElWLkQuREU3MzY6IFJhZGlvdGhlcmFweSB8IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQgbWV0aG9kIGlzIGEgcmFkaW90aGVyYXB5IAogKiBISVYuRC5ERTczNzogQ2hlbW90aGVyYXB5IHwgSW52YXNpdmUgY2VydmljYWwgY2FuY2VyIHRyZWF0bWVudCBtZXRob2QgaXMgYSBjaGVtb3RoZXJhcHkgCiAqIEhJVi5ELkRFNzM4OiBDaGVtb3JhZGlhdGlvbiB8IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQgbWV0aG9kIGlzIGEgY2hlbW9yYWRpYXRpb24gCiAqIEhJVi5ELkRFNzM5OiBPdGhlciB8IEludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB0cmVhdG1lbnQgbWV0aG9kIGlzIGEgbm90IGluIGxpc3QKICoKICogQWRkaXRpb25hbCBDb250ZXh0CiAqIC0gd2hhdCBpdCBtZWFzdXJlczogUHJvZ3Jlc3MgdG93YXJkcyBpbmNyZWFzaW5nIGFjY2VzcyB0byB0cmVhdG1lbnQgZm9yIGludmFzaXZlIGNlcnZpY2FsIGNhbmNlciBmb3Igd29tZW4gbGl2aW5nIHdpdGggSElWCiAqIC0gcmF0aW9uYWxlOiBUaGUgcHVycG9zZSBvZiB0aGlzIGluZGljYXRvciBpcyB0byBhc3Nlc3MgdHJlbmRzIGluIGF2YWlsYWJpbGl0eSBhbmQgYWNjZXNzIHRvIHRyZWF0bWVudCBzZXJ2aWNlcyBmb3IgaW52YXNpdmUgY2VydmljYWwgY2FuY2VyIGZvciB3b21lbiBsaXZpbmcgd2l0aCBISVYuIEluIHRoZSBsb25nZXIgcnVuLCBpdCBpcyBleHBlY3RlZCB0aGF0IHRoZSBudW1iZXIgb2Ygd29tZW4gbGl2aW5nIHdpdGggSElWIHdobyByZWNlaXZlZCB0cmVhdG1lbnQgZm9yIGludmFzaXZlIGNlcnZpY2FsIGNhbmNlciB3aWxsIHBsYXRlYXUgYW5kIHNsb3dseSBkZWNyZWFzZSwgYXMgc2NyZWVuaW5nIHByb2dyYW1tZXMgZXhwYW5kIGRldGVjdGlvbiBhbmQgdHJlYXRtZW50IG9mIHByZWNhbmNlcm91cyBsZXNpb25zLCBhbmQgY292ZXJhZ2Ugb2YgaHVtYW4gcGFwaWxsb21hdmlydXMgKEhQVikgdmFjY2luYXRpb24gaW5jcmVhc2VzIGluIGxpbmUgd2l0aCB0aGUgV0hPIEdsb2JhbCBTdHJhdGVneSA5MOKAkzcw4oCTOTAgZWxpbWluYXRpb24gdGFyZ2V0cy4KICogLSBtZXRob2Q6IFRoZSBudW1iZXIgaXMgZ2VuZXJhdGVkIGZyb20gcHJvZ3JhbW1hdGljIGRhdGEgZnJvbSBISVYgb3IgY2VydmljYWwgY2FuY2VyIHByb2dyYW1tZXMsIG9yIGZyb20gYSBuYXRpb25hbCBjYW5jZXIgcmVnaXN0cnksIGlmIEhJViBzdGF0dXMgaXMgcmVjb3JkZWQgdGhlcmUuCiAqIAogKiBTdWdnZXN0ZWQgU2NvcmluZyBNZXRob2Q6IHByb3BvcnRpb24gfCBodHRwOi8vaGw3Lm9yZy9maGlyL3VzL2NxZm1lYXN1cmVzL1N0cnVjdHVyZURlZmluaXRpb24vcHJvcG9ydGlvbi1tZWFzdXJlLWNxZm0KICovCgpsaWJyYXJ5IEhJVklORDk1TG9naWMKCi8vIEluY2x1ZGVkIExpYnJhcmllcwp1c2luZyBGSElSIHZlcnNpb24gJzQuMC4xJwoKaW5jbHVkZSBISVZJbmRpY2F0b3JDb21tb24gdmVyc2lvbiAnMC4wLjEnIGNhbGxlZCBISUMKaW5jbHVkZSBGSElSSGVscGVycyB2ZXJzaW9uICc0LjAuMScKaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KaW5jbHVkZSBGSElSQ29tbW9uIGNhbGxlZCBGQwoKLy8gSW5kaWNhdG9yIERlZmluaXRpb24K&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -387,7 +464,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

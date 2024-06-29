@@ -9,7 +9,90 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND4Logic</b></p><a name="HIVIND4Logic"> </a><a name="hcHIVIND4Logic"> </a><a name="hcHIVIND4Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND4Logic</b></p><a name="HIVIND4Logic"> </a><a name="hcHIVIND4Logic"> </a><a name="hcHIVIND4Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.4 Logic
+ * Ref No: PRV.4
+ * Short Name: Volume of PrEP prescribed
+ *
+ * Definition: Total volume of PrEP product prescribed
+ *
+ * Numerator: The total sum of the volume of PrEP product prescribed for each PrEP recipient during the reporting period
+ * Numerator Calculation: SUM of &quot;Number of days prescribed&quot; for all clients with &quot;Medications prescribed&quot;='PrEP for HIV prevention'
+ * Numerator Exclusions: 
+ *
+ * Denominator: 1
+ * Denominator Calculation: 1
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (15–19, 20–24, 25–49, 50+ years)
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**
+ * • PrEP product and formulation (oral, long-acting device, long-acting injectable)
+ * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith- based, international, nongovernmental)
+ * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | Key population member type | PrEP product prescribed
+ *
+ * Numerator and Denominator Elements:
+ * Medications prescribed | Number of days prescribed
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.C.DE75: Medications prescribed | Medications the client was prescribed 
+ * HIV.C.DE76: PrEP for HIV prevention | Client was prescribed pre-exposure prophylaxis (PrEP) for HIV prevention 
+ * HIV.C.DE77: PEP for HIV prevention | Client was prescribed post-exposure prophylaxis (PEP) for HIV prevention 
+ * HIV.C.DE78: Other | Client was prescribed other medications 
+ * HIV.C.DE80: PrEP product prescribed | PrEP product that the client was prescribed 
+ * HIV.C.DE81: Oral PrEP | Client was prescribed oral PrEP 
+ * HIV.C.DE82: Dapivirine vaginal ring (DVR) | Client was prescribed dapivirine vaginal ring (DVR) 
+ * HIV.C.DE83: CAB-LA | Client was prescribed long-acting cabotegravir (CAB-LA) 
+ * HIV.C.DE84: Other | Client was prescribed other PrEP product 
+ * HIV.C.DE121: Number of days prescribed | Days of medication client has been prescribed 
+ * HIV.D.DE457: Medications prescribed | Name or regimen code of all other medications prescribed during the visit 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.PRV.DE28: Number of days prescribed | Days of medication client has been prescribed
+ *
+ * Additional Context
+ * - what it measures: The total volume of PrEP product prescribed can be used to forecast future commodity needs.
+ * - rationale: The total volume of PrEP product prescribed or dispensed can be used to calculate the total number of days (or months/years) available for product use, which can be used derive indicators examining the level of PrEP provided relative to need.
+ * - method: Individual-level data obtained from programme records. Either the volume of PrEP prescribed or the volume of product dispensed can be used if this is available, for example from pharmacy data. |  | The total volume of PrEP product prescribed (or dispensed) can then be used to derive the total number of days (or months/years) of product use based on the duration of HIV prevention provided by each unit of product. Such an indicator could be described, for example, as | the number of person-years of PrEP protection provided. This measure can then be used to examine the level of PrEP availability to monitor trends and for modelling the impact of PrEP at the population level. It can also be used to derive the following additional indicators useful for understanding the quantity of PrEP product available relative to need: |  | a) numerator:total number of days available for product use; denominator: total number of PrEP recipients | b) numerator:total number of days available for product use; denominator: estimates of the total number of people who would benefit from PrEP
+ * 
+ * Suggested Scoring Method: continuous-variable | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cv-measure-cqfm
+ */
+
+library HIVIND4Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +109,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +119,11 @@
     </telecom>
   </contact>
   <description value="Total volume of PrEP product prescribed"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC40IExvZ2ljCiAqIFJlZiBObzogUFJWLjQKICogU2hvcnQgTmFtZTogVm9sdW1lIG9mIFByRVAgcHJlc2NyaWJlZAogKgogKiBEZWZpbml0aW9uOiBUb3RhbCB2b2x1bWUgb2YgUHJFUCBwcm9kdWN0IHByZXNjcmliZWQKICoKICogTnVtZXJhdG9yOiBUaGUgdG90YWwgc3VtIG9mIHRoZSB2b2x1bWUgb2YgUHJFUCBwcm9kdWN0IHByZXNjcmliZWQgZm9yIGVhY2ggUHJFUCByZWNpcGllbnQgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIE51bWVyYXRvciBDYWxjdWxhdGlvbjogU1VNIG9mICJOdW1iZXIgb2YgZGF5cyBwcmVzY3JpYmVkIiBmb3IgYWxsIGNsaWVudHMgd2l0aCAiTWVkaWNhdGlvbnMgcHJlc2NyaWJlZCI9J1ByRVAgZm9yIEhJViBwcmV2ZW50aW9uJwogKiBOdW1lcmF0b3IgRXhjbHVzaW9uczogCiAqCiAqIERlbm9taW5hdG9yOiAxCiAqIERlbm9taW5hdG9yIENhbGN1bGF0aW9uOiAxCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAoiBHZW5kZXIgKGZlbWFsZSwgbWFsZSwgb3RoZXIqKQogKiDigKIgQWdlICgxNeKAkzE5LCAyMOKAkzI0LCAyNeKAkzQ5LCA1MCsgeWVhcnMpCiAqIOKAosKgS2V5IHBvcHVsYXRpb25zIChtZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuLCBwZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncywgcGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MsIHNleCB3b3JrZXJzLCB0cmFucyBhbmQgZ2VuZGVyIGRpdmVyc2UgcGVvcGxlKSoqCiAqIOKAosKgUHJFUCBwcm9kdWN0IGFuZCBmb3JtdWxhdGlvbiAob3JhbCwgbG9uZy1hY3RpbmcgZGV2aWNlLCBsb25nLWFjdGluZyBpbmplY3RhYmxlKQogKiDigKLCoFByb3ZpZGVyIHR5cGUgKGtleSBwb3B1bGF0aW9uLWxlZCBvciBjb21tdW5pdHktbGVkIG9yZ2FuaXphdGlvbiwgcHVibGljIHNlY3RvciBwcm92aWRlciwgb3RoZXIgZW50aXRpZXMgc3VjaCBhcyBwcml2YXRlIGZvci1wcm9maXQgYW5kIG5vdC1mb3ItcHJvZml0IG9yZ2FuaXphdGlvbnMsIGluY2x1ZGluZyBmYWl0aC0gYmFzZWQsIGludGVybmF0aW9uYWwsIG5vbmdvdmVybm1lbnRhbCkKICog4oCiwqBTZXR0aW5nOiBmYWNpbGl0eS1iYXNlZCBzZXJ2aWNlIChpbmNsdWRpbmcgaG9zcGl0YWxzLCBoZWFsdGggY2xpbmljcywgZ2VuZXJhbCBwcmFjdGljZSBvZmZpY2VzLCBldGMuKSBvciBjb21tdW5pdHktYmFzZWQgc2VydmljZSAoaW5jbHVkaW5nIGRyb3AtaW4gY2VudHJlcywgY29tbXVuaXR5IHNlcnZpY2UgZGVsaXZlcnkgcG9pbnRzLCBtb2JpbGUgY2xpbmljcyBvciB2YW5zLCBvdXRyZWFjaCB0ZWFtcywgY29tbXVuaXR5IHN1cHBvcnQgZ3JvdXBzLCBldGMuKQogKiDigKLCoENpdGllcyBhbmQgb3RoZXIgYWRtaW5pc3RyYXRpdmUgcmVnaW9ucyBvZiBlcGlkZW1pb2xvZ2ljIGltcG9ydGFuY2UKICogCiAqIERpc2FnZ3JlZ2F0aW9uIEVsZW1lbnRzOiBHZW5kZXIgfCBBZ2UgfCBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSB8IFByRVAgcHJvZHVjdCBwcmVzY3JpYmVkCiAqCiAqIE51bWVyYXRvciBhbmQgRGVub21pbmF0b3IgRWxlbWVudHM6CiAqIE1lZGljYXRpb25zIHByZXNjcmliZWQgfCBOdW1iZXIgb2YgZGF5cyBwcmVzY3JpYmVkCiAqCiAqIFJlZmVyZW5jZTogQ29uc29saWRhdGVkIGd1aWRlbGluZXMgb24gcGVyc29uLWNlbnRyZWQgSElWIHN0cmF0ZWdpYyBpbmZvcm1hdGlvbjogc3RyZW5ndGhlbmluZyByb3V0aW5lIGRhdGEgZm9yIGltcGFjdC4gR2VuZXZhOiBXb3JsZCBIZWFsdGggT3JnYW5pemF0aW9uOyAyMDIyCiAqIAogKiBEYXRhIENvbmNlcHRzOgogKiAgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkEuREUxODogR2VuZGVyKiB8IEdlbmRlciBvZiB0aGUgY2xpZW50KiAKICogSElWLkEuREUxOTogRmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgZmVtYWxlIAogKiBISVYuQS5ERTIwOiBNYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgbWFsZSAKICogSElWLkEuREUyMTogVHJhbnNnZW5kZXIgbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIG1hbGUgCiAqIEhJVi5BLkRFMjI6IFRyYW5zZ2VuZGVyIGZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIGZlbWFsZSAKICogSElWLkEuREUyMzogT3RoZXIgfCBBZGRpdGlvbmFsIGNhdGVnb3J5IAogKiBISVYuQi5ERTUwOiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBjbGllbnQgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5CLkRFNTE6IFNleCB3b3JrZXIgfCBDbGllbnQgaXMgYSBzZXggd29ya2VyIAogKiBISVYuQi5ERTUyOiBNZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuIHwgQ2xpZW50IGlzIGEgbWFuIHdobyBoYXMgc2V4IHdpdGggbWVuIAogKiBISVYuQi5ERTUzOiBUcmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgcGVvcGxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIAogKiBISVYuQi5ERTU0OiBQZW9wbGUgd2hvIGluamVjdCBkcnVncyB8IENsaWVudCBpcyBhIHBlcnNvbiB3aG8gaW5qZWN0cyBkcnVncyAKICogSElWLkIuREU1NTogUGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZ3MgfCBDbGllbnQgbGl2ZXMgaW4gYSBwcmlzb24gb3IgYW5vdGhlciBjbG9zZWQgc2V0dGluZyAKICogSElWLkMuREU3NTogTWVkaWNhdGlvbnMgcHJlc2NyaWJlZCB8IE1lZGljYXRpb25zIHRoZSBjbGllbnQgd2FzIHByZXNjcmliZWQgCiAqIEhJVi5DLkRFNzY6IFByRVAgZm9yIEhJViBwcmV2ZW50aW9uIHwgQ2xpZW50IHdhcyBwcmVzY3JpYmVkIHByZS1leHBvc3VyZSBwcm9waHlsYXhpcyAoUHJFUCkgZm9yIEhJViBwcmV2ZW50aW9uIAogKiBISVYuQy5ERTc3OiBQRVAgZm9yIEhJViBwcmV2ZW50aW9uIHwgQ2xpZW50IHdhcyBwcmVzY3JpYmVkIHBvc3QtZXhwb3N1cmUgcHJvcGh5bGF4aXMgKFBFUCkgZm9yIEhJViBwcmV2ZW50aW9uIAogKiBISVYuQy5ERTc4OiBPdGhlciB8IENsaWVudCB3YXMgcHJlc2NyaWJlZCBvdGhlciBtZWRpY2F0aW9ucyAKICogSElWLkMuREU4MDogUHJFUCBwcm9kdWN0IHByZXNjcmliZWQgfCBQckVQIHByb2R1Y3QgdGhhdCB0aGUgY2xpZW50IHdhcyBwcmVzY3JpYmVkIAogKiBISVYuQy5ERTgxOiBPcmFsIFByRVAgfCBDbGllbnQgd2FzIHByZXNjcmliZWQgb3JhbCBQckVQIAogKiBISVYuQy5ERTgyOiBEYXBpdmlyaW5lIHZhZ2luYWwgcmluZyAoRFZSKSB8IENsaWVudCB3YXMgcHJlc2NyaWJlZCBkYXBpdmlyaW5lIHZhZ2luYWwgcmluZyAoRFZSKSAKICogSElWLkMuREU4MzogQ0FCLUxBIHwgQ2xpZW50IHdhcyBwcmVzY3JpYmVkIGxvbmctYWN0aW5nIGNhYm90ZWdyYXZpciAoQ0FCLUxBKSAKICogSElWLkMuREU4NDogT3RoZXIgfCBDbGllbnQgd2FzIHByZXNjcmliZWQgb3RoZXIgUHJFUCBwcm9kdWN0IAogKiBISVYuQy5ERTEyMTogTnVtYmVyIG9mIGRheXMgcHJlc2NyaWJlZCB8IERheXMgb2YgbWVkaWNhdGlvbiBjbGllbnQgaGFzIGJlZW4gcHJlc2NyaWJlZCAKICogSElWLkQuREU0NTc6IE1lZGljYXRpb25zIHByZXNjcmliZWQgfCBOYW1lIG9yIHJlZ2ltZW4gY29kZSBvZiBhbGwgb3RoZXIgbWVkaWNhdGlvbnMgcHJlc2NyaWJlZCBkdXJpbmcgdGhlIHZpc2l0IAogKiBISVYuRS5ERTExNDogS2V5IHBvcHVsYXRpb24gbWVtYmVyIHR5cGUqIHwgVGhlIHR5cGUgb2Yga2V5IHBvcHVsYXRpb24gdGhhdCB0aGUgaW5mYW50J3MgbW90aGVyIGlzIGluY2x1ZGVkIGluIAogKiBISVYuRS5ERTExNTogU2V4IHdvcmtlciB8IEluZmFudCdzIG1vdGhlciBpcyBhIHNleCB3b3JrZXIgCiAqIEhJVi5FLkRFMTE2OiBQZW9wbGUgd2hvIGluamVjdCBkcnVncyB8IEluZmFudCdzIG1vdGhlciBpcyBhIHBlcnNvbiB3aG8gaW5qZWN0cyBkcnVncyAKICogSElWLkUuREUxMTc6IFRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSBwZW9wbGUgfCBJbmZhbnQncyBtb3RoZXIgaWRlbnRpZmllcyBhcyB0cmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgCiAqIEhJVi5FLkRFMTE4OiBQZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5nIHwgSW5mYW50J3MgbW90aGVyIGlzIGluIGEgcHJpc29uIG9yIGNsb3NlZCBzZXR0aW5nIAogKiBISVYuUFJWLkRFMjg6IE51bWJlciBvZiBkYXlzIHByZXNjcmliZWQgfCBEYXlzIG9mIG1lZGljYXRpb24gY2xpZW50IGhhcyBiZWVuIHByZXNjcmliZWQKICoKICogQWRkaXRpb25hbCBDb250ZXh0CiAqIC0gd2hhdCBpdCBtZWFzdXJlczogVGhlIHRvdGFsIHZvbHVtZSBvZiBQckVQIHByb2R1Y3QgcHJlc2NyaWJlZCBjYW4gYmUgdXNlZCB0byBmb3JlY2FzdCBmdXR1cmUgY29tbW9kaXR5IG5lZWRzLgogKiAtIHJhdGlvbmFsZTogVGhlIHRvdGFsIHZvbHVtZSBvZiBQckVQIHByb2R1Y3QgcHJlc2NyaWJlZCBvciBkaXNwZW5zZWQgY2FuIGJlIHVzZWQgdG8gY2FsY3VsYXRlIHRoZSB0b3RhbCBudW1iZXIgb2YgZGF5cyAob3IgbW9udGhzL3llYXJzKSBhdmFpbGFibGUgZm9yIHByb2R1Y3QgdXNlLCB3aGljaCBjYW4gYmUgdXNlZCBkZXJpdmUgaW5kaWNhdG9ycyBleGFtaW5pbmcgdGhlIGxldmVsIG9mIFByRVAgcHJvdmlkZWQgcmVsYXRpdmUgdG8gbmVlZC4KICogLSBtZXRob2Q6IEluZGl2aWR1YWwtbGV2ZWwgZGF0YSBvYnRhaW5lZCBmcm9tIHByb2dyYW1tZSByZWNvcmRzLiBFaXRoZXIgdGhlIHZvbHVtZSBvZiBQckVQIHByZXNjcmliZWQgb3IgdGhlIHZvbHVtZSBvZiBwcm9kdWN0IGRpc3BlbnNlZCBjYW4gYmUgdXNlZCBpZiB0aGlzIGlzIGF2YWlsYWJsZSwgZm9yIGV4YW1wbGUgZnJvbSBwaGFybWFjeSBkYXRhLiB8ICB8IFRoZSB0b3RhbCB2b2x1bWUgb2YgUHJFUCBwcm9kdWN0IHByZXNjcmliZWQgKG9yIGRpc3BlbnNlZCkgY2FuIHRoZW4gYmUgdXNlZCB0byBkZXJpdmUgdGhlIHRvdGFsIG51bWJlciBvZiBkYXlzIChvciBtb250aHMveWVhcnMpIG9mIHByb2R1Y3QgdXNlIGJhc2VkIG9uIHRoZSBkdXJhdGlvbiBvZiBISVYgcHJldmVudGlvbiBwcm92aWRlZCBieSBlYWNoIHVuaXQgb2YgcHJvZHVjdC4gU3VjaCBhbiBpbmRpY2F0b3IgY291bGQgYmUgZGVzY3JpYmVkLCBmb3IgZXhhbXBsZSwgYXMgfCB0aGUgbnVtYmVyIG9mIHBlcnNvbi15ZWFycyBvZiBQckVQIHByb3RlY3Rpb24gcHJvdmlkZWQuIFRoaXMgbWVhc3VyZSBjYW4gdGhlbiBiZSB1c2VkIHRvIGV4YW1pbmUgdGhlIGxldmVsIG9mIFByRVAgYXZhaWxhYmlsaXR5IHRvIG1vbml0b3IgdHJlbmRzIGFuZCBmb3IgbW9kZWxsaW5nIHRoZSBpbXBhY3Qgb2YgUHJFUCBhdCB0aGUgcG9wdWxhdGlvbiBsZXZlbC4gSXQgY2FuIGFsc28gYmUgdXNlZCB0byBkZXJpdmUgdGhlIGZvbGxvd2luZyBhZGRpdGlvbmFsIGluZGljYXRvcnMgdXNlZnVsIGZvciB1bmRlcnN0YW5kaW5nIHRoZSBxdWFudGl0eSBvZiBQckVQIHByb2R1Y3QgYXZhaWxhYmxlIHJlbGF0aXZlIHRvIG5lZWQ6IHwgIHwgYSkgbnVtZXJhdG9yOnRvdGFsIG51bWJlciBvZiBkYXlzIGF2YWlsYWJsZSBmb3IgcHJvZHVjdCB1c2U7IGRlbm9taW5hdG9yOiB0b3RhbCBudW1iZXIgb2YgUHJFUCByZWNpcGllbnRzIHwgYikgbnVtZXJhdG9yOnRvdGFsIG51bWJlciBvZiBkYXlzIGF2YWlsYWJsZSBmb3IgcHJvZHVjdCB1c2U7IGRlbm9taW5hdG9yOiBlc3RpbWF0ZXMgb2YgdGhlIHRvdGFsIG51bWJlciBvZiBwZW9wbGUgd2hvIHdvdWxkIGJlbmVmaXQgZnJvbSBQckVQCiAqIAogKiBTdWdnZXN0ZWQgU2NvcmluZyBNZXRob2Q6IGNvbnRpbnVvdXMtdmFyaWFibGUgfCBodHRwOi8vaGw3Lm9yZy9maGlyL3VzL2NxZm1lYXN1cmVzL1N0cnVjdHVyZURlZmluaXRpb24vY3YtbWVhc3VyZS1jcWZtCiAqLwoKbGlicmFyeSBISVZJTkQ0TG9naWMKCi8vIEluY2x1ZGVkIExpYnJhcmllcwp1c2luZyBGSElSIHZlcnNpb24gJzQuMC4xJwoKaW5jbHVkZSBISVZJbmRpY2F0b3JDb21tb24gdmVyc2lvbiAnMC4wLjEnIGNhbGxlZCBISUMKaW5jbHVkZSBGSElSSGVscGVycyB2ZXJzaW9uICc0LjAuMScKaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KaW5jbHVkZSBGSElSQ29tbW9uIGNhbGxlZCBGQwoKLy8gSW5kaWNhdG9yIERlZmluaXRpb24K"/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

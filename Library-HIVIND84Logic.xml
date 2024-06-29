@@ -9,7 +9,83 @@
     <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
   </meta>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND84Logic</b></p><a name="HIVIND84Logic"> </a><a name="hcHIVIND84Logic"> </a><a name="hcHIVIND84Logic-en-US"> </a></div>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND84Logic</b></p><a name="HIVIND84Logic"> </a><a name="hcHIVIND84Logic"> </a><a name="hcHIVIND84Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+ * Library: HIV.IND.84 Logic
+ * Ref No: HEP.2B
+ * Short Name: HCV test coverage, HIV-positive clients
+ *
+ * Definition: % of people living with HIV who were tested for HCV (HCV antibody, HCV RNA or HCV core antigen) during the reporting period (laboratory-based test or rapid test)
+ *
+ * Numerator: Number of people living with HIV tested for HCV (HCV antibody, HCV RNA or HCV core antigen) during the reporting period
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' with &quot;HCV test date&quot; in the reporting period
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people living with HIV attending HIV care and treatment services during the reporting period
+ * Denominator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with a &quot;Visit date&quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years)
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**
+ * • Provider type (key population-led or community-led organization, public-sector provider, other entities such as private for-profit and not-for-profit organizations, including faith- based, international, nongovernmental)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | Key population member type
+ *
+ * Numerator and Denominator Elements:
+ * HCV test date | HIV status | Visit date
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE3: Visit date | The date and time of the client's visit 
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE169: HCV test date | Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen) 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.G.DE42: HCV test date | Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen)
+ *
+ * Additional Context
+ * - what it measures: A: % of people attending HIV prevention services who were tested for HCV during the reporting period (laboratory-based test or rapid test) | B: % of people living with HIV who were tested for HCV during the reporting period (laboratory-based test or rapid test)
+ * - rationale: • Measuring the hepatitis burden among people living with HIV and in populations at risk can help national planners determine the resources needed to address both diseases. Testing for HCV co-infection among people living with HIV can inform clinicians on the need for further clinical and laboratory evaluation and the need to adapt treatment. | • Disaggregated estimates can point to gaps in diagnosing people infected with HCV.
+ * - method: Patient monitoring tools (electronic or paper), for example, hepatitis and HIV testing service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/electronic information systems
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND84Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
     <valueCode value="computable"/>
@@ -26,7 +102,7 @@
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-06-29T06:31:00+00:00"/>
+  <date value="2024-06-29T07:09:27+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -36,4 +112,11 @@
     </telecom>
   </contact>
   <description value="% of people living with HIV who were tested for HCV (HCV antibody, HCV RNA or HCV core antigen) during the reporting period (laboratory-based test or rapid test)"/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="LyoKICogTGlicmFyeTogSElWLklORC44NCBMb2dpYwogKiBSZWYgTm86IEhFUC4yQgogKiBTaG9ydCBOYW1lOiBIQ1YgdGVzdCBjb3ZlcmFnZSwgSElWLXBvc2l0aXZlIGNsaWVudHMKICoKICogRGVmaW5pdGlvbjogJSBvZiBwZW9wbGUgbGl2aW5nIHdpdGggSElWIHdobyB3ZXJlIHRlc3RlZCBmb3IgSENWIChIQ1YgYW50aWJvZHksIEhDViBSTkEgb3IgSENWIGNvcmUgYW50aWdlbikgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kIChsYWJvcmF0b3J5LWJhc2VkIHRlc3Qgb3IgcmFwaWQgdGVzdCkKICoKICogTnVtZXJhdG9yOiBOdW1iZXIgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViB0ZXN0ZWQgZm9yIEhDViAoSENWIGFudGlib2R5LCBIQ1YgUk5BIG9yIEhDViBjb3JlIGFudGlnZW4pIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKiBOdW1lcmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiSElWIHN0YXR1cyI9J0hJVi1wb3NpdGl2ZScgd2l0aCAiSENWIHRlc3QgZGF0ZSIgaW4gdGhlIHJlcG9ydGluZyBwZXJpb2QKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogTnVtYmVyIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgYXR0ZW5kaW5nIEhJViBjYXJlIGFuZCB0cmVhdG1lbnQgc2VydmljZXMgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiBjbGllbnRzIHdpdGggIkhJViBzdGF0dXMiPSdISVYtcG9zaXRpdmUnIEFORCB3aXRoIGEgIlZpc2l0IGRhdGUiIGluIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAosKgR2VuZGVyIChmZW1hbGUsIG1hbGUsIG90aGVyKikKICog4oCiwqBBZ2UgKDE14oCTMTksIDIw4oCTMjQsIDI14oCTMjksIDMw4oCTNDksIDUwKyB5ZWFycykKICog4oCiwqBLZXkgcG9wdWxhdGlvbnMgKG1lbiB3aG8gaGF2ZSBzZXggd2l0aCBtZW4sIHBlb3BsZSBsaXZpbmcgaW4gcHJpc29ucyBhbmQgb3RoZXIgY2xvc2VkIHNldHRpbmdzLCBwZW9wbGUgd2hvIGluamVjdCBkcnVncywgc2V4IHdvcmtlcnMsIHRyYW5zIGFuZCBnZW5kZXIgZGl2ZXJzZSBwZW9wbGUpKioKICog4oCiwqBQcm92aWRlciB0eXBlIChrZXkgcG9wdWxhdGlvbi1sZWQgb3IgY29tbXVuaXR5LWxlZCBvcmdhbml6YXRpb24sIHB1YmxpYy1zZWN0b3IgcHJvdmlkZXIsIG90aGVyIGVudGl0aWVzIHN1Y2ggYXMgcHJpdmF0ZSBmb3ItcHJvZml0IGFuZCBub3QtZm9yLXByb2ZpdCBvcmdhbml6YXRpb25zLCBpbmNsdWRpbmcgZmFpdGgtIGJhc2VkLCBpbnRlcm5hdGlvbmFsLCBub25nb3Zlcm5tZW50YWwpCiAqIOKAosKgQ2l0aWVzIGFuZCBvdGhlciBhZG1pbmlzdHJhdGl2ZSByZWdpb25zIG9mIGVwaWRlbWlvbG9naWMgaW1wb3J0YW5jZQogKiAKICogRGlzYWdncmVnYXRpb24gRWxlbWVudHM6IEdlbmRlciB8IEFnZSB8IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlCiAqCiAqIE51bWVyYXRvciBhbmQgRGVub21pbmF0b3IgRWxlbWVudHM6CiAqIEhDViB0ZXN0IGRhdGUgfCBISVYgc3RhdHVzIHwgVmlzaXQgZGF0ZQogKgogKiBSZWZlcmVuY2U6IENvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIHBlcnNvbi1jZW50cmVkIEhJViBzdHJhdGVnaWMgaW5mb3JtYXRpb246IHN0cmVuZ3RoZW5pbmcgcm91dGluZSBkYXRhIGZvciBpbXBhY3QuIEdlbmV2YTogV29ybGQgSGVhbHRoIE9yZ2FuaXphdGlvbjsgMjAyMgogKiAKICogRGF0YSBDb25jZXB0czoKICogIAogKiBISVYuQS5ERTM6IFZpc2l0IGRhdGUgfCBUaGUgZGF0ZSBhbmQgdGltZSBvZiB0aGUgY2xpZW50J3MgdmlzaXQgCiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aCAKICogSElWLkEuREUxODogR2VuZGVyKiB8IEdlbmRlciBvZiB0aGUgY2xpZW50KiAKICogSElWLkEuREUxOTogRmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgZmVtYWxlIAogKiBISVYuQS5ERTIwOiBNYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgbWFsZSAKICogSElWLkEuREUyMTogVHJhbnNnZW5kZXIgbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIG1hbGUgCiAqIEhJVi5BLkRFMjI6IFRyYW5zZ2VuZGVyIGZlbWFsZSB8IENsaWVudCBpZGVudGlmaWVzIGFzIHRyYW5zZ2VuZGVyIGZlbWFsZSAKICogSElWLkEuREUyMzogT3RoZXIgfCBBZGRpdGlvbmFsIGNhdGVnb3J5IAogKiBISVYuQi5ERTUwOiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBjbGllbnQgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5CLkRFNTE6IFNleCB3b3JrZXIgfCBDbGllbnQgaXMgYSBzZXggd29ya2VyIAogKiBISVYuQi5ERTUyOiBNZW4gd2hvIGhhdmUgc2V4IHdpdGggbWVuIHwgQ2xpZW50IGlzIGEgbWFuIHdobyBoYXMgc2V4IHdpdGggbWVuIAogKiBISVYuQi5ERTUzOiBUcmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgcGVvcGxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIAogKiBISVYuQi5ERTU0OiBQZW9wbGUgd2hvIGluamVjdCBkcnVncyB8IENsaWVudCBpcyBhIHBlcnNvbiB3aG8gaW5qZWN0cyBkcnVncyAKICogSElWLkIuREU1NTogUGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZ3MgfCBDbGllbnQgbGl2ZXMgaW4gYSBwcmlzb24gb3IgYW5vdGhlciBjbG9zZWQgc2V0dGluZyAKICogSElWLkIuREUxMTU6IEhJViBzdGF0dXMgfCBISVYgc3RhdHVzIHJlcG9ydGVkIGFmdGVyIGFwcGx5aW5nIHRoZSBuYXRpb25hbCBISVYgdGVzdGluZyBhbGdvcml0aG0uIE5vIHNpbmdsZSBISVYgdGVzdCBjYW4gcHJvdmlkZSBhbiBISVYtcG9zaXRpdmUgZGlhZ25vc2lzLiAKICogSElWLkIuREUxMTY6IEhJVi1wb3NpdGl2ZSB8IENsaWVudCBpcyBISVYtcG9zaXRpdmUgCiAqIEhJVi5CLkRFMTE3OiBISVYtbmVnYXRpdmUgfCBDbGllbnQgaXMgSElWLW5lZ2F0aXZlIAogKiBISVYuQi5ERTExODogVW5rbm93biB8IENsaWVudCBoYXMgdW5rbm93biBISVYgc3RhdHVzIAogKiBISVYuRC5ERTE2OTogSENWIHRlc3QgZGF0ZSB8IERhdGUgY2xpZW50IHdhcyB0ZXN0ZWQgZm9yIGhlcGF0aXRpcyBDIHZpcnVzIChIQ1YgYW50aWJvZHksIEhDViBSTkEgb3IgSENWIGNvcmUgYW50aWdlbikgCiAqIEhJVi5FLkRFMTE0OiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBpbmZhbnQncyBtb3RoZXIgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5FLkRFMTE1OiBTZXggd29ya2VyIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgc2V4IHdvcmtlciAKICogSElWLkUuREUxMTY6IFBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgcGVyc29uIHdobyBpbmplY3RzIGRydWdzIAogKiBISVYuRS5ERTExNzogVHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIHBlb3BsZSB8IEluZmFudCdzIG1vdGhlciBpZGVudGlmaWVzIGFzIHRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSAKICogSElWLkUuREUxMTg6IFBlb3BsZSBsaXZpbmcgaW4gcHJpc29ucyBhbmQgb3RoZXIgY2xvc2VkIHNldHRpbmcgfCBJbmZhbnQncyBtb3RoZXIgaXMgaW4gYSBwcmlzb24gb3IgY2xvc2VkIHNldHRpbmcgCiAqIEhJVi5HLkRFNDI6IEhDViB0ZXN0IGRhdGUgfCBEYXRlIGNsaWVudCB3YXMgdGVzdGVkIGZvciBoZXBhdGl0aXMgQyB2aXJ1cyAoSENWIGFudGlib2R5LCBIQ1YgUk5BIG9yIEhDViBjb3JlIGFudGlnZW4pCiAqCiAqIEFkZGl0aW9uYWwgQ29udGV4dAogKiAtIHdoYXQgaXQgbWVhc3VyZXM6IEE6ICUgb2YgcGVvcGxlIGF0dGVuZGluZyBISVYgcHJldmVudGlvbiBzZXJ2aWNlcyB3aG8gd2VyZSB0ZXN0ZWQgZm9yIEhDViBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QgKGxhYm9yYXRvcnktYmFzZWQgdGVzdCBvciByYXBpZCB0ZXN0KSB8IEI6ICUgb2YgcGVvcGxlIGxpdmluZyB3aXRoIEhJViB3aG8gd2VyZSB0ZXN0ZWQgZm9yIEhDViBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QgKGxhYm9yYXRvcnktYmFzZWQgdGVzdCBvciByYXBpZCB0ZXN0KQogKiAtIHJhdGlvbmFsZTog4oCiwqBNZWFzdXJpbmcgdGhlIGhlcGF0aXRpcyBidXJkZW4gYW1vbmcgcGVvcGxlIGxpdmluZyB3aXRoIEhJViBhbmQgaW4gcG9wdWxhdGlvbnMgYXQgcmlzayBjYW4gaGVscCBuYXRpb25hbCBwbGFubmVycyBkZXRlcm1pbmUgdGhlIHJlc291cmNlcyBuZWVkZWQgdG8gYWRkcmVzcyBib3RoIGRpc2Vhc2VzLiBUZXN0aW5nIGZvciBIQ1YgY28taW5mZWN0aW9uIGFtb25nIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgY2FuIGluZm9ybSBjbGluaWNpYW5zIG9uIHRoZSBuZWVkIGZvciBmdXJ0aGVyIGNsaW5pY2FsIGFuZCBsYWJvcmF0b3J5IGV2YWx1YXRpb24gYW5kIHRoZSBuZWVkIHRvIGFkYXB0IHRyZWF0bWVudC4gfCDigKLCoERpc2FnZ3JlZ2F0ZWQgZXN0aW1hdGVzIGNhbiBwb2ludCB0byBnYXBzIGluIGRpYWdub3NpbmcgcGVvcGxlIGluZmVjdGVkIHdpdGggSENWLgogKiAtIG1ldGhvZDogUGF0aWVudCBtb25pdG9yaW5nIHRvb2xzIChlbGVjdHJvbmljIG9yIHBhcGVyKSwgZm9yIGV4YW1wbGUsIGhlcGF0aXRpcyBhbmQgSElWIHRlc3Rpbmcgc2VydmljZSByZWNvcmRzLCBsYWIgcmVnaXN0ZXJzLCBsb2dib29rcyBhbmQgcmVwb3J0aW5nIGZvcm1zIGF0IGZhY2lsaXR5IGFuZCBjb21tdW5pdHkgbGV2ZWxzLCBFTVIvZWxlY3Ryb25pYyBpbmZvcm1hdGlvbiBzeXN0ZW1zCiAqIAogKiBTdWdnZXN0ZWQgU2NvcmluZyBNZXRob2Q6IHByb3BvcnRpb24gfCBodHRwOi8vaGw3Lm9yZy9maGlyL3VzL2NxZm1lYXN1cmVzL1N0cnVjdHVyZURlZmluaXRpb24vcHJvcG9ydGlvbi1tZWFzdXJlLWNxZm0KICovCgpsaWJyYXJ5IEhJVklORDg0TG9naWMKCi8vIEluY2x1ZGVkIExpYnJhcmllcwp1c2luZyBGSElSIHZlcnNpb24gJzQuMC4xJwoKaW5jbHVkZSBISVZJbmRpY2F0b3JDb21tb24gdmVyc2lvbiAnMC4wLjEnIGNhbGxlZCBISUMKaW5jbHVkZSBGSElSSGVscGVycyB2ZXJzaW9uICc0LjAuMScKaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KaW5jbHVkZSBGSElSQ29tbW9uIGNhbGxlZCBGQwoKLy8gSW5kaWNhdG9yIERlZmluaXRpb24K"/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
 </Library>

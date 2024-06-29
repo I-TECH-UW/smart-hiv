@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="5">
+         <a:s>/*
+ * Library: HIV.IND.89 Logic
+ * Ref No: HEP.4B
+ * Short Name: HCV positivity, HIV-positive clients
+ *
+ * Definition: % of people living with HIV with a positive HCV test result (HCV antibody, HCV RNA (PCR) or HCV core antigen) during the reporting period
+ *
+ * Numerator: Number of people living with HIV newly identified with a positive HCV test (HCV antibody, HCV RNA (PCR) or HCV core antigen) during the reporting period
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;HCV test date&quot; in the reporting period AND &quot;HCV test result&quot;='HCV positive'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people living with HIV who were tested for HCV during the reporting period
+ * Denominator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;HCV test date&quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other**)
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years)
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)***
+ * • Provider type (key population-led or community-led organization, public-sector provider, other entities such as private for-profit and not-for-profit organizations, including faith- based, international, nongovernmental)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | HIV status | Key population member type
+ *
+ * Numerator and Denominator Elements:
+ * HCV test date | HCV test result | HIV status
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE169: HCV test date | Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen) 
+ * HIV.D.DE170: HCV test result | Hepatitis C virus test result (HCV antibody, HCV RNA or HCV core antigen) 
+ * HIV.D.DE171: Positive | HCV test result was positive 
+ * HIV.D.DE172: Negative | HCV test result was negative 
+ * HIV.D.DE173: Indeterminate | HCV test result was indeterminate 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.G.DE42: HCV test date | Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen) 
+ * HIV.G.DE43: HCV test result | Hepatitis C virus test result (HCV antibody, HCV RNA or HCV core antigen) 
+ * HIV.G.DE44: Positive | HCV test result was positive 
+ * HIV.G.DE45: Negative | HCV test result was negative 
+ * HIV.G.DE46: Indeterminate | HCV test result was indeterminate
+ *
+ * Additional Context
+ * - what it measures: A: % of people attending HIV prevention services who were tested for HCV during the | reporting period (laboratory-based test or rapid test) | B: % of people living with HIV who were tested for HCV during the reporting period (laboratory-based test or rapid test)
+ * - rationale: Many people living with HIV and receiving ART die from liver disease resulting from untreated HCV. Testing people living with HIV for HCV identifies HIV and HCV co-infection and allows for adaptation of treatment. Highly effective hepatitis C treatment is newly available; it has a high rate of virus clearance regardless of hepatitis C virus subtype.
+ * - method: Patient monitoring tools (electronic or paper), for example, hepatitis testing and HIV service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/ electronic information systems
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND89Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND89Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="76:1-76:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="78:1-78:53" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVIndicatorCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="79:1-79:35" localIdentifier="FHIRHelpers" path="http://smart.who.int/hiv/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="80:1-80:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="81:1-81:28" localIdentifier="FC" path="http://smart.who.int/hiv/FHIRCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRCommon</a:s>
+               </a:s>
+               <a:s> called FC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+</library>

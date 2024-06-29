@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.8 Logic - XML Representation - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.8 Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -247,7 +247,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -334,7 +334,78 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND8Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND8Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND8Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND8Logic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND8Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND8Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND8Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND8Logic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.8 Logic
+ * Ref No: PRV.8
+ * Short Name: NSP coverage
+ *
+ * Definition: % of people who inject drugs provided with needles-syringes during the reporting period
+ *
+ * Numerator: Number of people receiving needles-syringes during the reporting period
+ * Numerator Calculation: COUNT of clients with &amp;quot;Key population member type&amp;quot;='People who inject drugs' AND with &amp;quot;Date injecting equipment provided&amp;quot; within the reporting period
+ * Numerator Exclusions: 
+ *
+ * Denominator: a) Programme/service provider level: number of people who inject drugs who access the service | b) Population level: population size estimate of people who inject drugs in relevant geographic area
+ * Denominator Calculation: Programme/service level:  | COUNT of clients with &amp;quot;Key population member type&amp;quot;='People who inject drugs' |  | Population level: | *Estimated number of people who inject drugs
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (&amp;lt;25, 25+ years)
+ * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
+ * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * 
+ * Disaggregation Elements: Gender | Age (&amp;lt;25, 25+ years)
+ *
+ * Numerator and Denominator Elements:
+ * Date injecting equipment provided | Key population member type
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.PRV.DE15: Date injecting equipment provided | Date client was provided with injecting equipment
+ *
+ * Additional Context
+ * - what it measures: This indicator measures access to needle–syringe programmes by people who inject drugs, measured either at the programme or service provider level among individuals accessing HIV prevention services, or at the population level using relevant estimates of the population size of people who inject drugs.
+ * - rationale: People who inject drugs require ongoing access to needles–syringes. Needle-syringe programmes should be accessible and achieve good coverage among people who inject drugs.
+ * - method: Individual-level data obtained from programme records
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND8Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
@@ -352,7 +423,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T06:31:00+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T07:09:27+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -363,6 +434,14 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a>
                <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;% of people who inject drugs provided with needles-syringes during the reporting period&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC44IExvZ2ljCiAqIFJlZiBObzogUFJWLjgKICogU2hvcnQgTmFtZTogTlNQIGNvdmVyYWdlCiAqCiAqIERlZmluaXRpb246ICUgb2YgcGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MgcHJvdmlkZWQgd2l0aCBuZWVkbGVzLXN5cmluZ2VzIGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZAogKgogKiBOdW1lcmF0b3I6IE51bWJlciBvZiBwZW9wbGUgcmVjZWl2aW5nIG5lZWRsZXMtc3lyaW5nZXMgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kCiAqIE51bWVyYXRvciBDYWxjdWxhdGlvbjogQ09VTlQgb2YgY2xpZW50cyB3aXRoICJLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSI9J1Blb3BsZSB3aG8gaW5qZWN0IGRydWdzJyBBTkQgd2l0aCAiRGF0ZSBpbmplY3RpbmcgZXF1aXBtZW50IHByb3ZpZGVkIiB3aXRoaW4gdGhlIHJlcG9ydGluZyBwZXJpb2QKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogYSkgUHJvZ3JhbW1lL3NlcnZpY2UgcHJvdmlkZXIgbGV2ZWw6IG51bWJlciBvZiBwZW9wbGUgd2hvIGluamVjdCBkcnVncyB3aG8gYWNjZXNzIHRoZSBzZXJ2aWNlIHwgYikgUG9wdWxhdGlvbiBsZXZlbDogcG9wdWxhdGlvbiBzaXplIGVzdGltYXRlIG9mIHBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIGluIHJlbGV2YW50IGdlb2dyYXBoaWMgYXJlYQogKiBEZW5vbWluYXRvciBDYWxjdWxhdGlvbjogUHJvZ3JhbW1lL3NlcnZpY2UgbGV2ZWw6ICB8IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiS2V5IHBvcHVsYXRpb24gbWVtYmVyIHR5cGUiPSdQZW9wbGUgd2hvIGluamVjdCBkcnVncycgfCAgfCBQb3B1bGF0aW9uIGxldmVsOiB8ICpFc3RpbWF0ZWQgbnVtYmVyIG9mIHBlb3BsZSB3aG8gaW5qZWN0IGRydWdzCiAqIERlbm9taW5hdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEaXNhZ2dyZWdhdGlvbnM6CiAqIOKAosKgR2VuZGVyIChmZW1hbGUsIG1hbGUsIG90aGVyKikKICog4oCiwqBBZ2UgKDwyNSwgMjUrIHllYXJzKQogKiDigKIgUHJvdmlkZXIgdHlwZSAoa2V5IHBvcHVsYXRpb24tbGVkIG9yIGNvbW11bml0eS1sZWQgb3JnYW5pemF0aW9uLCBwdWJsaWMgc2VjdG9yIHByb3ZpZGVyLCBvdGhlciBlbnRpdGllcyBzdWNoIGFzIHByaXZhdGUgZm9yLXByb2ZpdCBhbmQgbm90LWZvci1wcm9maXQgb3JnYW5pemF0aW9ucywgaW5jbHVkaW5nIGZhaXRoLWJhc2VkLCBpbnRlcm5hdGlvbmFsLCBub25nb3Zlcm5tZW50YWwpCiAqIOKAoiBTZXR0aW5nOiBmYWNpbGl0eS1iYXNlZCBzZXJ2aWNlIChpbmNsdWRpbmcgaG9zcGl0YWxzLCBoZWFsdGggY2xpbmljcywgZ2VuZXJhbCBwcmFjdGljZSBvZmZpY2VzLCBldGMuKSBvciBjb21tdW5pdHktYmFzZWQgc2VydmljZSAoaW5jbHVkaW5nIGRyb3AtaW4gY2VudHJlcywgY29tbXVuaXR5IHNlcnZpY2UgZGVsaXZlcnkgcG9pbnRzLCBtb2JpbGUgY2xpbmljcyBvciB2YW5zLCBvdXRyZWFjaCB0ZWFtcywgY29tbXVuaXR5IHN1cHBvcnQgZ3JvdXBzLCBldGMuKQogKiDigKLCoENpdGllcyBhbmQgb3RoZXIgYWRtaW5pc3RyYXRpdmUgcmVnaW9ucyBvZiBlcGlkZW1pb2xvZ2ljIGltcG9ydGFuY2UKICogCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogR2VuZGVyIHwgQWdlICg8MjUsIDI1KyB5ZWFycykKICoKICogTnVtZXJhdG9yIGFuZCBEZW5vbWluYXRvciBFbGVtZW50czoKICogRGF0ZSBpbmplY3RpbmcgZXF1aXBtZW50IHByb3ZpZGVkIHwgS2V5IHBvcHVsYXRpb24gbWVtYmVyIHR5cGUKICoKICogUmVmZXJlbmNlOiBDb25zb2xpZGF0ZWQgZ3VpZGVsaW5lcyBvbiBwZXJzb24tY2VudHJlZCBISVYgc3RyYXRlZ2ljIGluZm9ybWF0aW9uOiBzdHJlbmd0aGVuaW5nIHJvdXRpbmUgZGF0YSBmb3IgaW1wYWN0LiBHZW5ldmE6IFdvcmxkIEhlYWx0aCBPcmdhbml6YXRpb247IDIwMjIKICogCiAqIERhdGEgQ29uY2VwdHM6CiAqICAKICogSElWLkEuREUxNzogQWdlIHwgQ2FsY3VsYXRlZCBhZ2UgKG51bWJlciBvZiB5ZWFycykgb2YgdGhlIGNsaWVudCBiYXNlZCBvbiBkYXRlIG9mIGJpcnRoIAogKiBISVYuQS5ERTE4OiBHZW5kZXIqIHwgR2VuZGVyIG9mIHRoZSBjbGllbnQqIAogKiBISVYuQS5ERTE5OiBGZW1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyBmZW1hbGUgCiAqIEhJVi5BLkRFMjA6IE1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyBtYWxlIAogKiBISVYuQS5ERTIxOiBUcmFuc2dlbmRlciBtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnNnZW5kZXIgbWFsZSAKICogSElWLkEuREUyMjogVHJhbnNnZW5kZXIgZmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnNnZW5kZXIgZmVtYWxlIAogKiBISVYuQS5ERTIzOiBPdGhlciB8IEFkZGl0aW9uYWwgY2F0ZWdvcnkgCiAqIEhJVi5CLkRFNTA6IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlKiB8IFRoZSB0eXBlIG9mIGtleSBwb3B1bGF0aW9uIHRoYXQgdGhlIGNsaWVudCBpcyBpbmNsdWRlZCBpbiAKICogSElWLkIuREU1MTogU2V4IHdvcmtlciB8IENsaWVudCBpcyBhIHNleCB3b3JrZXIgCiAqIEhJVi5CLkRFNTI6IE1lbiB3aG8gaGF2ZSBzZXggd2l0aCBtZW4gfCBDbGllbnQgaXMgYSBtYW4gd2hvIGhhcyBzZXggd2l0aCBtZW4gCiAqIEhJVi5CLkRFNTM6IFRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSBwZW9wbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyB0cmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgCiAqIEhJVi5CLkRFNTQ6IFBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIHwgQ2xpZW50IGlzIGEgcGVyc29uIHdobyBpbmplY3RzIGRydWdzIAogKiBISVYuQi5ERTU1OiBQZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncyB8IENsaWVudCBsaXZlcyBpbiBhIHByaXNvbiBvciBhbm90aGVyIGNsb3NlZCBzZXR0aW5nIAogKiBISVYuRS5ERTExNDogS2V5IHBvcHVsYXRpb24gbWVtYmVyIHR5cGUqIHwgVGhlIHR5cGUgb2Yga2V5IHBvcHVsYXRpb24gdGhhdCB0aGUgaW5mYW50J3MgbW90aGVyIGlzIGluY2x1ZGVkIGluIAogKiBISVYuRS5ERTExNTogU2V4IHdvcmtlciB8IEluZmFudCdzIG1vdGhlciBpcyBhIHNleCB3b3JrZXIgCiAqIEhJVi5FLkRFMTE2OiBQZW9wbGUgd2hvIGluamVjdCBkcnVncyB8IEluZmFudCdzIG1vdGhlciBpcyBhIHBlcnNvbiB3aG8gaW5qZWN0cyBkcnVncyAKICogSElWLkUuREUxMTc6IFRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSBwZW9wbGUgfCBJbmZhbnQncyBtb3RoZXIgaWRlbnRpZmllcyBhcyB0cmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgCiAqIEhJVi5FLkRFMTE4OiBQZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5nIHwgSW5mYW50J3MgbW90aGVyIGlzIGluIGEgcHJpc29uIG9yIGNsb3NlZCBzZXR0aW5nIAogKiBISVYuUFJWLkRFMTU6IERhdGUgaW5qZWN0aW5nIGVxdWlwbWVudCBwcm92aWRlZCB8IERhdGUgY2xpZW50IHdhcyBwcm92aWRlZCB3aXRoIGluamVjdGluZyBlcXVpcG1lbnQKICoKICogQWRkaXRpb25hbCBDb250ZXh0CiAqIC0gd2hhdCBpdCBtZWFzdXJlczogVGhpcyBpbmRpY2F0b3IgbWVhc3VyZXMgYWNjZXNzIHRvIG5lZWRsZeKAk3N5cmluZ2UgcHJvZ3JhbW1lcyBieSBwZW9wbGUgd2hvIGluamVjdCBkcnVncywgbWVhc3VyZWQgZWl0aGVyIGF0IHRoZSBwcm9ncmFtbWUgb3Igc2VydmljZSBwcm92aWRlciBsZXZlbCBhbW9uZyBpbmRpdmlkdWFscyBhY2Nlc3NpbmcgSElWIHByZXZlbnRpb24gc2VydmljZXMsIG9yIGF0IHRoZSBwb3B1bGF0aW9uIGxldmVsIHVzaW5nIHJlbGV2YW50IGVzdGltYXRlcyBvZiB0aGUgcG9wdWxhdGlvbiBzaXplIG9mIHBlb3BsZSB3aG8gaW5qZWN0IGRydWdzLgogKiAtIHJhdGlvbmFsZTogUGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MgcmVxdWlyZSBvbmdvaW5nIGFjY2VzcyB0byBuZWVkbGVz4oCTc3lyaW5nZXMuIE5lZWRsZS1zeXJpbmdlIHByb2dyYW1tZXMgc2hvdWxkIGJlIGFjY2Vzc2libGUgYW5kIGFjaGlldmUgZ29vZCBjb3ZlcmFnZSBhbW9uZyBwZW9wbGUgd2hvIGluamVjdCBkcnVncy4KICogLSBtZXRob2Q6IEluZGl2aWR1YWwtbGV2ZWwgZGF0YSBvYnRhaW5lZCBmcm9tIHByb2dyYW1tZSByZWNvcmRzCiAqIAogKiBTdWdnZXN0ZWQgU2NvcmluZyBNZXRob2Q6IHByb3BvcnRpb24gfCBodHRwOi8vaGw3Lm9yZy9maGlyL3VzL2NxZm1lYXN1cmVzL1N0cnVjdHVyZURlZmluaXRpb24vcHJvcG9ydGlvbi1tZWFzdXJlLWNxZm0KICovCgpsaWJyYXJ5IEhJVklORDhMb2dpYwoKLy8gSW5jbHVkZWQgTGlicmFyaWVzCnVzaW5nIEZISVIgdmVyc2lvbiAnNC4wLjEnCgppbmNsdWRlIEhJVkluZGljYXRvckNvbW1vbiB2ZXJzaW9uICcwLjAuMScgY2FsbGVkIEhJQwppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwppbmNsdWRlIFdIT0NvbW1vbiBjYWxsZWQgV0NvbQppbmNsdWRlIEZISVJDb21tb24gY2FsbGVkIEZDCgovLyBJbmRpY2F0b3IgRGVmaW5pdGlvbgo=&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -387,7 +466,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIV.IND.85 Logic - XML Representation - SMART WHO HIV Implmementation Guide v0.1.0</title>
+    <title>HIV.IND.85 Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
 
 
         <div id="ig-status" class="ig-status-draft">
-          <p><span style="font-size:12pt;font-weight:bold">SMART WHO HIV Implmementation Guide</span>
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
             <span style="display:inline-block;">0.1.0 - ci-build
 
@@ -247,7 +247,7 @@
           <div class="inner-wrapper">
 
 <div style="counter-reset: section 7" class="col-12">
-<!--ReleaseHeader--><p id="publish-box">SMART WHO HIV Implmementation Guide - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+<!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
 
 
 
@@ -334,7 +334,92 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND85Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND85Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND85Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND85Logic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVIND85Logic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVIND85Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND85Logic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVIND85Logic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/*
+ * Library: HIV.IND.85 Logic
+ * Ref No: HEP.3A
+ * Short Name: HBsAg positivity, HIV prevention services
+ *
+ * Definition: Percentage of people attending HIV prevention services who were tested for HBsAg and had a positive HBsAg test during the reporting period
+ *
+ * Numerator: Number of people attending HIV prevention services who tested positive for HBsAg during the reporting period
+ * Numerator Calculation: COUNT of clients with &amp;quot;HBsAg test date&amp;quot; on a &amp;quot;Date accessed HIV prevention intervention&amp;quot; in the reporting period AND &amp;quot;HBsAg test result&amp;quot;='HBsAg positive'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people attending HIV prevention services who were tested for HBsAg during the reporting period
+ * Denominator Calculation: COUNT of clients with &amp;quot;HBsAg test date&amp;quot; on a &amp;quot;Date accessed HIV prevention intervention&amp;quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years)
+ * • HIV status (HIV-positive, HIV-negative, unknown status)
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**
+ * • Provider type (key population-led or community-led organization, public-sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | HIV status | Key population member type
+ *
+ * Numerator and Denominator Elements:
+ * Date accessed HIV prevention intervention | HBsAg test date | HBsAg test result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE161: HBsAg test date | Date client was tested for hepatitis B virus (HBV) 
+ * HIV.D.DE162: HBsAg test result | Hepatitis B virus test result (HBsAg) 
+ * HIV.D.DE163: Positive | HBsAg test result was positive 
+ * HIV.D.DE164: Negative | HBsAg test result was negative 
+ * HIV.D.DE165: Indeterminate | HBsAg test result was indeterminate 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.G.DE17: HBsAg test date | Date client was tested for hepatitis B virus (HBV) 
+ * HIV.G.DE18: HBsAg test result | Hepatitis B virus test result (HBsAg) 
+ * HIV.G.DE19: Positive | HBsAg test result was positive 
+ * HIV.G.DE20: Negative | HBsAg test result was negative 
+ * HIV.G.DE21: Indeterminate | HBsAg test result was indeterminate 
+ * HIV.PRV.DE10: Date accessed HIV prevention intervention | Date the client accessed HIV prevention intervention
+ *
+ * Additional Context
+ * - what it measures: A: % of people attending HIV prevention services who were tested for HBsAg and had a positive HBsAg test result during the reporting period (laboratory-based test or rapid test) | B: % of people living with HIV who were tested for HBsAg and had a positive HBsAg test result during the reporting period (laboratory-based test or rapid test) | C: % of pregnant women who were tested for HBsAg and had a positive HBsAg test result during the reporting period (laboratory-based test or rapid test)
+ * - rationale: • Testing for HBV identifies HIV and HBV co-infection so that HIV treatment regimens can be adjusted to treat chronic hepatitis B infection as well. | • The HBsAg positivity rate in ANC attendees can be used to monitor the prevalence of HBV in the population and give an indication of the HBV burden.
+ * - method: Patient monitoring tools (electronic or paper), for example, hepatitis and HIV testing service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/electronic information systems
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND85Logic
+
+// Included Libraries
+using FHIR version '4.0.1'
+
+include HIVIndicatorCommon version '0.0.1' called HIC
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+// Indicator Definition
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
@@ -352,7 +437,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T06:31:00+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-06-29T07:09:27+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -363,6 +448,14 @@
   &lt;/contact&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a>
                <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;Percentage of people attending HIV prevention services who were tested for HBsAg and had a positive HBsAg test during the reporting period&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoKICogTGlicmFyeTogSElWLklORC44NSBMb2dpYwogKiBSZWYgTm86IEhFUC4zQQogKiBTaG9ydCBOYW1lOiBIQnNBZyBwb3NpdGl2aXR5LCBISVYgcHJldmVudGlvbiBzZXJ2aWNlcwogKgogKiBEZWZpbml0aW9uOiBQZXJjZW50YWdlIG9mIHBlb3BsZSBhdHRlbmRpbmcgSElWIHByZXZlbnRpb24gc2VydmljZXMgd2hvIHdlcmUgdGVzdGVkIGZvciBIQnNBZyBhbmQgaGFkIGEgcG9zaXRpdmUgSEJzQWcgdGVzdCBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICoKICogTnVtZXJhdG9yOiBOdW1iZXIgb2YgcGVvcGxlIGF0dGVuZGluZyBISVYgcHJldmVudGlvbiBzZXJ2aWNlcyB3aG8gdGVzdGVkIHBvc2l0aXZlIGZvciBIQnNBZyBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICogTnVtZXJhdG9yIENhbGN1bGF0aW9uOiBDT1VOVCBvZiBjbGllbnRzIHdpdGggIkhCc0FnIHRlc3QgZGF0ZSIgb24gYSAiRGF0ZSBhY2Nlc3NlZCBISVYgcHJldmVudGlvbiBpbnRlcnZlbnRpb24iIGluIHRoZSByZXBvcnRpbmcgcGVyaW9kIEFORCAiSEJzQWcgdGVzdCByZXN1bHQiPSdIQnNBZyBwb3NpdGl2ZScKICogTnVtZXJhdG9yIEV4Y2x1c2lvbnM6IAogKgogKiBEZW5vbWluYXRvcjogTnVtYmVyIG9mIHBlb3BsZSBhdHRlbmRpbmcgSElWIHByZXZlbnRpb24gc2VydmljZXMgd2hvIHdlcmUgdGVzdGVkIGZvciBIQnNBZyBkdXJpbmcgdGhlIHJlcG9ydGluZyBwZXJpb2QKICogRGVub21pbmF0b3IgQ2FsY3VsYXRpb246IENPVU5UIG9mIGNsaWVudHMgd2l0aCAiSEJzQWcgdGVzdCBkYXRlIiBvbiBhICJEYXRlIGFjY2Vzc2VkIEhJViBwcmV2ZW50aW9uIGludGVydmVudGlvbiIgaW4gdGhlIHJlcG9ydGluZyBwZXJpb2QKICogRGVub21pbmF0b3IgRXhjbHVzaW9uczogCiAqCiAqIERpc2FnZ3JlZ2F0aW9uczoKICog4oCiwqBHZW5kZXIgKGZlbWFsZSwgbWFsZSwgb3RoZXIqKQogKiDigKLCoEFnZSAoMTXigJMxOSwgMjDigJMyNCwgMjXigJMyOSwgMzDigJM0OSwgNTArIHllYXJzKQogKiDigKLCoEhJViBzdGF0dXMgKEhJVi1wb3NpdGl2ZSwgSElWLW5lZ2F0aXZlLCB1bmtub3duIHN0YXR1cykKICog4oCiwqBLZXkgcG9wdWxhdGlvbnMgKG1lbiB3aG8gaGF2ZSBzZXggd2l0aCBtZW4sIHBlb3BsZSBsaXZpbmcgaW4gcHJpc29ucyBhbmQgb3RoZXIgY2xvc2VkIHNldHRpbmdzLCBwZW9wbGUgd2hvIGluamVjdCBkcnVncywgc2V4IHdvcmtlcnMsIHRyYW5zIGFuZCBnZW5kZXIgZGl2ZXJzZSBwZW9wbGUpKioKICog4oCiwqBQcm92aWRlciB0eXBlIChrZXkgcG9wdWxhdGlvbi1sZWQgb3IgY29tbXVuaXR5LWxlZCBvcmdhbml6YXRpb24sIHB1YmxpYy1zZWN0b3IgcHJvdmlkZXIsIG90aGVyIGVudGl0aWVzIHN1Y2ggYXMgcHJpdmF0ZSBmb3ItcHJvZml0IGFuZCBub3QtZm9yLXByb2ZpdCBvcmdhbml6YXRpb25zLCBpbmNsdWRpbmcgZmFpdGgtYmFzZWQsIGludGVybmF0aW9uYWwsIG5vbmdvdmVybm1lbnRhbCkKICog4oCiwqBDaXRpZXMgYW5kIG90aGVyIGFkbWluaXN0cmF0aXZlIHJlZ2lvbnMgb2YgZXBpZGVtaW9sb2dpYyBpbXBvcnRhbmNlCiAqIAogKiBEaXNhZ2dyZWdhdGlvbiBFbGVtZW50czogR2VuZGVyIHwgQWdlIHwgSElWIHN0YXR1cyB8IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlCiAqCiAqIE51bWVyYXRvciBhbmQgRGVub21pbmF0b3IgRWxlbWVudHM6CiAqIERhdGUgYWNjZXNzZWQgSElWIHByZXZlbnRpb24gaW50ZXJ2ZW50aW9uIHwgSEJzQWcgdGVzdCBkYXRlIHwgSEJzQWcgdGVzdCByZXN1bHQKICoKICogUmVmZXJlbmNlOiBDb25zb2xpZGF0ZWQgZ3VpZGVsaW5lcyBvbiBwZXJzb24tY2VudHJlZCBISVYgc3RyYXRlZ2ljIGluZm9ybWF0aW9uOiBzdHJlbmd0aGVuaW5nIHJvdXRpbmUgZGF0YSBmb3IgaW1wYWN0LiBHZW5ldmE6IFdvcmxkIEhlYWx0aCBPcmdhbml6YXRpb247IDIwMjIKICogCiAqIERhdGEgQ29uY2VwdHM6CiAqICAKICogSElWLkEuREUxNzogQWdlIHwgQ2FsY3VsYXRlZCBhZ2UgKG51bWJlciBvZiB5ZWFycykgb2YgdGhlIGNsaWVudCBiYXNlZCBvbiBkYXRlIG9mIGJpcnRoIAogKiBISVYuQS5ERTE4OiBHZW5kZXIqIHwgR2VuZGVyIG9mIHRoZSBjbGllbnQqIAogKiBISVYuQS5ERTE5OiBGZW1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyBmZW1hbGUgCiAqIEhJVi5BLkRFMjA6IE1hbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyBtYWxlIAogKiBISVYuQS5ERTIxOiBUcmFuc2dlbmRlciBtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnNnZW5kZXIgbWFsZSAKICogSElWLkEuREUyMjogVHJhbnNnZW5kZXIgZmVtYWxlIHwgQ2xpZW50IGlkZW50aWZpZXMgYXMgdHJhbnNnZW5kZXIgZmVtYWxlIAogKiBISVYuQS5ERTIzOiBPdGhlciB8IEFkZGl0aW9uYWwgY2F0ZWdvcnkgCiAqIEhJVi5CLkRFNTA6IEtleSBwb3B1bGF0aW9uIG1lbWJlciB0eXBlKiB8IFRoZSB0eXBlIG9mIGtleSBwb3B1bGF0aW9uIHRoYXQgdGhlIGNsaWVudCBpcyBpbmNsdWRlZCBpbiAKICogSElWLkIuREU1MTogU2V4IHdvcmtlciB8IENsaWVudCBpcyBhIHNleCB3b3JrZXIgCiAqIEhJVi5CLkRFNTI6IE1lbiB3aG8gaGF2ZSBzZXggd2l0aCBtZW4gfCBDbGllbnQgaXMgYSBtYW4gd2hvIGhhcyBzZXggd2l0aCBtZW4gCiAqIEhJVi5CLkRFNTM6IFRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSBwZW9wbGUgfCBDbGllbnQgaWRlbnRpZmllcyBhcyB0cmFucyBhbmQgZ2VuZGVyLWRpdmVyc2UgCiAqIEhJVi5CLkRFNTQ6IFBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIHwgQ2xpZW50IGlzIGEgcGVyc29uIHdobyBpbmplY3RzIGRydWdzIAogKiBISVYuQi5ERTU1OiBQZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncyB8IENsaWVudCBsaXZlcyBpbiBhIHByaXNvbiBvciBhbm90aGVyIGNsb3NlZCBzZXR0aW5nIAogKiBISVYuQi5ERTExNTogSElWIHN0YXR1cyB8IEhJViBzdGF0dXMgcmVwb3J0ZWQgYWZ0ZXIgYXBwbHlpbmcgdGhlIG5hdGlvbmFsIEhJViB0ZXN0aW5nIGFsZ29yaXRobS4gTm8gc2luZ2xlIEhJViB0ZXN0IGNhbiBwcm92aWRlIGFuIEhJVi1wb3NpdGl2ZSBkaWFnbm9zaXMuIAogKiBISVYuQi5ERTExNjogSElWLXBvc2l0aXZlIHwgQ2xpZW50IGlzIEhJVi1wb3NpdGl2ZSAKICogSElWLkIuREUxMTc6IEhJVi1uZWdhdGl2ZSB8IENsaWVudCBpcyBISVYtbmVnYXRpdmUgCiAqIEhJVi5CLkRFMTE4OiBVbmtub3duIHwgQ2xpZW50IGhhcyB1bmtub3duIEhJViBzdGF0dXMgCiAqIEhJVi5ELkRFMTYxOiBIQnNBZyB0ZXN0IGRhdGUgfCBEYXRlIGNsaWVudCB3YXMgdGVzdGVkIGZvciBoZXBhdGl0aXMgQiB2aXJ1cyAoSEJWKSAKICogSElWLkQuREUxNjI6IEhCc0FnIHRlc3QgcmVzdWx0IHwgSGVwYXRpdGlzIEIgdmlydXMgdGVzdCByZXN1bHQgKEhCc0FnKSAKICogSElWLkQuREUxNjM6IFBvc2l0aXZlIHwgSEJzQWcgdGVzdCByZXN1bHQgd2FzIHBvc2l0aXZlIAogKiBISVYuRC5ERTE2NDogTmVnYXRpdmUgfCBIQnNBZyB0ZXN0IHJlc3VsdCB3YXMgbmVnYXRpdmUgCiAqIEhJVi5ELkRFMTY1OiBJbmRldGVybWluYXRlIHwgSEJzQWcgdGVzdCByZXN1bHQgd2FzIGluZGV0ZXJtaW5hdGUgCiAqIEhJVi5FLkRFMTE0OiBLZXkgcG9wdWxhdGlvbiBtZW1iZXIgdHlwZSogfCBUaGUgdHlwZSBvZiBrZXkgcG9wdWxhdGlvbiB0aGF0IHRoZSBpbmZhbnQncyBtb3RoZXIgaXMgaW5jbHVkZWQgaW4gCiAqIEhJVi5FLkRFMTE1OiBTZXggd29ya2VyIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgc2V4IHdvcmtlciAKICogSElWLkUuREUxMTY6IFBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIHwgSW5mYW50J3MgbW90aGVyIGlzIGEgcGVyc29uIHdobyBpbmplY3RzIGRydWdzIAogKiBISVYuRS5ERTExNzogVHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIHBlb3BsZSB8IEluZmFudCdzIG1vdGhlciBpZGVudGlmaWVzIGFzIHRyYW5zIGFuZCBnZW5kZXItZGl2ZXJzZSAKICogSElWLkUuREUxMTg6IFBlb3BsZSBsaXZpbmcgaW4gcHJpc29ucyBhbmQgb3RoZXIgY2xvc2VkIHNldHRpbmcgfCBJbmZhbnQncyBtb3RoZXIgaXMgaW4gYSBwcmlzb24gb3IgY2xvc2VkIHNldHRpbmcgCiAqIEhJVi5HLkRFMTc6IEhCc0FnIHRlc3QgZGF0ZSB8IERhdGUgY2xpZW50IHdhcyB0ZXN0ZWQgZm9yIGhlcGF0aXRpcyBCIHZpcnVzIChIQlYpIAogKiBISVYuRy5ERTE4OiBIQnNBZyB0ZXN0IHJlc3VsdCB8IEhlcGF0aXRpcyBCIHZpcnVzIHRlc3QgcmVzdWx0IChIQnNBZykgCiAqIEhJVi5HLkRFMTk6IFBvc2l0aXZlIHwgSEJzQWcgdGVzdCByZXN1bHQgd2FzIHBvc2l0aXZlIAogKiBISVYuRy5ERTIwOiBOZWdhdGl2ZSB8IEhCc0FnIHRlc3QgcmVzdWx0IHdhcyBuZWdhdGl2ZSAKICogSElWLkcuREUyMTogSW5kZXRlcm1pbmF0ZSB8IEhCc0FnIHRlc3QgcmVzdWx0IHdhcyBpbmRldGVybWluYXRlIAogKiBISVYuUFJWLkRFMTA6IERhdGUgYWNjZXNzZWQgSElWIHByZXZlbnRpb24gaW50ZXJ2ZW50aW9uIHwgRGF0ZSB0aGUgY2xpZW50IGFjY2Vzc2VkIEhJViBwcmV2ZW50aW9uIGludGVydmVudGlvbgogKgogKiBBZGRpdGlvbmFsIENvbnRleHQKICogLSB3aGF0IGl0IG1lYXN1cmVzOiBBOiAlIG9mIHBlb3BsZSBhdHRlbmRpbmcgSElWIHByZXZlbnRpb24gc2VydmljZXMgd2hvIHdlcmUgdGVzdGVkIGZvciBIQnNBZyBhbmQgaGFkIGEgcG9zaXRpdmUgSEJzQWcgdGVzdCByZXN1bHQgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kIChsYWJvcmF0b3J5LWJhc2VkIHRlc3Qgb3IgcmFwaWQgdGVzdCkgfCBCOiAlIG9mIHBlb3BsZSBsaXZpbmcgd2l0aCBISVYgd2hvIHdlcmUgdGVzdGVkIGZvciBIQnNBZyBhbmQgaGFkIGEgcG9zaXRpdmUgSEJzQWcgdGVzdCByZXN1bHQgZHVyaW5nIHRoZSByZXBvcnRpbmcgcGVyaW9kIChsYWJvcmF0b3J5LWJhc2VkIHRlc3Qgb3IgcmFwaWQgdGVzdCkgfCBDOiAlIG9mIHByZWduYW50IHdvbWVuIHdobyB3ZXJlIHRlc3RlZCBmb3IgSEJzQWcgYW5kIGhhZCBhIHBvc2l0aXZlIEhCc0FnIHRlc3QgcmVzdWx0IGR1cmluZyB0aGUgcmVwb3J0aW5nIHBlcmlvZCAobGFib3JhdG9yeS1iYXNlZCB0ZXN0IG9yIHJhcGlkIHRlc3QpCiAqIC0gcmF0aW9uYWxlOiDigKIgVGVzdGluZyBmb3IgSEJWIGlkZW50aWZpZXMgSElWIGFuZCBIQlYgY28taW5mZWN0aW9uIHNvIHRoYXQgSElWIHRyZWF0bWVudCByZWdpbWVucyBjYW4gYmUgYWRqdXN0ZWQgdG8gdHJlYXQgY2hyb25pYyBoZXBhdGl0aXMgQiBpbmZlY3Rpb24gYXMgd2VsbC4gfCDigKLCoFRoZSBIQnNBZyBwb3NpdGl2aXR5IHJhdGUgaW4gQU5DIGF0dGVuZGVlcyBjYW4gYmUgdXNlZCB0byBtb25pdG9yIHRoZSBwcmV2YWxlbmNlIG9mIEhCViBpbiB0aGUgcG9wdWxhdGlvbiBhbmQgZ2l2ZSBhbiBpbmRpY2F0aW9uIG9mIHRoZSBIQlYgYnVyZGVuLgogKiAtIG1ldGhvZDogUGF0aWVudCBtb25pdG9yaW5nIHRvb2xzIChlbGVjdHJvbmljIG9yIHBhcGVyKSwgZm9yIGV4YW1wbGUsIGhlcGF0aXRpcyBhbmQgSElWIHRlc3Rpbmcgc2VydmljZSByZWNvcmRzLCBsYWIgcmVnaXN0ZXJzLCBsb2dib29rcyBhbmQgcmVwb3J0aW5nIGZvcm1zIGF0IGZhY2lsaXR5IGFuZCBjb21tdW5pdHkgbGV2ZWxzLCBFTVIvZWxlY3Ryb25pYyBpbmZvcm1hdGlvbiBzeXN0ZW1zCiAqIAogKiBTdWdnZXN0ZWQgU2NvcmluZyBNZXRob2Q6IHByb3BvcnRpb24gfCBodHRwOi8vaGw3Lm9yZy9maGlyL3VzL2NxZm1lYXN1cmVzL1N0cnVjdHVyZURlZmluaXRpb24vcHJvcG9ydGlvbi1tZWFzdXJlLWNxZm0KICovCgpsaWJyYXJ5IEhJVklORDg1TG9naWMKCi8vIEluY2x1ZGVkIExpYnJhcmllcwp1c2luZyBGSElSIHZlcnNpb24gJzQuMC4xJwoKaW5jbHVkZSBISVZJbmRpY2F0b3JDb21tb24gdmVyc2lvbiAnMC4wLjEnIGNhbGxlZCBISUMKaW5jbHVkZSBGSElSSGVscGVycyB2ZXJzaW9uICc0LjAuMScKaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KaW5jbHVkZSBGSElSQ29tbW9uIGNhbGxlZCBGQwoKLy8gSW5kaWNhdG9yIERlZmluaXRpb24K&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -387,7 +480,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 06:31+0000">2024-06-29</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jun 29, 2024 07:09+0000">2024-06-29</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
