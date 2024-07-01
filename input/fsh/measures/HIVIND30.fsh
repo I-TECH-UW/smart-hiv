@@ -5,35 +5,32 @@ Title: "HIV.IND.30 New ART patients"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "Number of people living with HIV who initiated ART"
-* url = "http://smart.who.int/immunizations-measles/Measure/HIVIND30"
+* url = "http://smart.who.int/HIV/Measure/HIVIND30"
 * status = #draft
 * experimental = true
-* date = "2024-06-15"
+* date = "2024-07-01"
 * name = "HIVIND30"
 * title = "HIV.IND.30 New ART patients"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/immunizations-measles/Library/HIVIND30Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND30Logic"
 * scoring = $measure-scoring#continuous-variable "Continuous Variable"
 * group[+]
   * population[initialPopulation]
-    * id = "HIV.IND.30.initialPopulation"
-    * description = "Number of people living with HIV who initiated ART in accordance with national treatment guidelines during the reporting period"
+    * id = "HIV.IND.30.IP"
+    * description = "Number in target group"
     * code = $measure-population#initial-population "Initial Population"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "Numerator"
+    * criteria.expression = "Initial Population"
   * population[measurePopulation]
-    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
-    * id = "IMMZ.IND.30.MP"
-    * description = "Measure Population"
+    * id = "HIV.IND.30.MP"
+    * description = "Number in target group"
     * code = $measure-population#measure-population "Measure Population"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "Numerator"
+    * criteria.expression = "Measure Population"
   * population[measureObservation]
-    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-criteriaReference].valueString = "measure-population"
-    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-aggregateMethod].valueCode = #count
-    * id = "IMMZ.IND.30.MO"
-    * description = "Measure Observation"
-    * code = $measure-population#measure-observation
+    * id = "HIV.IND.30.MO"
+    * description = "Number in target group"
+    * code = $measure-population#measure-observation "Measure Observation"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Measure Observation"
   * stratifier[+]

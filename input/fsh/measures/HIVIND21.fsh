@@ -5,22 +5,22 @@ Title: "HIV.IND.21 Linkage to ART"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "% of people newly diagnosed with HIV initiated on ART"
-* url = "http://smart.who.int/immunizations-measles/Measure/HIVIND21"
+* url = "http://smart.who.int/HIV/Measure/HIVIND21"
 * status = #draft
 * experimental = true
-* date = "2024-06-15"
+* date = "2024-07-01"
 * name = "HIVIND21"
 * title = "HIV.IND.21 Linkage to ART"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/immunizations-measles/Library/HIVIND21Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND21Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]
-    * id = "HIV.IND.21.initialPopulation"
-    * description = "Number of people newly diagnosed with HIV during the reporting period"
+    * id = "HIV.IND.21.IP"
+    * description = "Number in target group"
     * code = $measure-population#initial-population "Initial Population"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "Denominator"
+    * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.21.DEN"
     * description = "Number of people newly diagnosed with HIV during the reporting period"

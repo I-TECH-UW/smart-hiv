@@ -1,45 +1,55 @@
-Instance: IMMZIND12
+Instance: HIVIND20
 InstanceOf: http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
-Title: "IMMZ.IND.12 Measles indicator for first dose"
+Title: "HIV.IND.20 Individuals testing positive for HIV"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablemeasure"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
-* description = "The percentage in the target population who have received one dose of measles and rubella vaccine during reporting period"
-* url = "http://smart.who.int/immunizations-measles/Measure/IMMZIND12"
+* description = "% testing positive among people who received an HIV test in the reporting period"
+* url = "http://smart.who.int/HIV/Measure/HIVIND20"
 * status = #draft
 * experimental = true
-* date = "2023-10-12"
-* name = "IMMZIND12"
-* title = "IMMZ.IND.12 Measles indicator for first dose"
+* date = "2024-07-01"
+* name = "HIVIND20"
+* title = "HIV.IND.20 Individuals testing positive for HIV"
 * publisher = "World Health Organization (WHO)"
-* relatedArtifact[+]
-  * type = #citation
-  * citation = "WHO Immunization facility analysis guide"
-* relatedArtifact[+]
-  * type = #citation
-  * citation = "WHO Handbook on immunization data"
-* library = "http://smart.who.int/immunizations-measles/Library/IMMZIND12Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND20Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]
-    * id = "IMMZ.IND.12.IP"
+    * id = "HIV.IND.20.IP"
     * description = "Number in target group"
     * code = $measure-population#initial-population "Initial Population"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Initial Population"
   * population[denominator]
-    * id = "IMMZ.IND.12.DEN"
-    * description = "Number in target group"
+    * id = "HIV.IND.20.DEN"
+    * description = "Number of people receiving an HIV test in the reporting period"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"
   * population[numerator]
-    * id = "IMMZ.IND.12.NUM"
-    * description = "Number of measles and rubella doses (1st dose) administered through routine services during reporting period"
+    * id = "HIV.IND.20.NUM"
+    * description = "Number of people who test HIV-positive in the reporting period and have results returned to them*"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"
   * stratifier[+]
-    * id = "IMMZ.IND.12.S"
+    * id = "HIV.IND.20.S.AG"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "Stratification"
+    * criteria.expression = "Administrative Gender Stratifier"
+  * stratifier[+]
+    * id = "HIV.IND.20.S.A"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Age Stratifier"
+  * stratifier[+]
+    * id = "HIV.IND.20.S.GR"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Geographic Region Stratifier"
+  * stratifier[+]
+    * id = "HIV.IND.20.S.P"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "patientGroups Stratifier"
+  * stratifier[+]
+    * id = "HIV.IND.20.S.T"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "TB Stratifier"

@@ -5,24 +5,22 @@ Title: "HIV.IND.28 Total attrition from ART"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "Number and % of people living with HIV on ART at the end of the last reporting period and those newly initiating ART during the current reporting period who were not on ART at the end of the current reporting period"
-* url = "http://smart.who.int/immunizations-measles/Measure/HIVIND28"
+* url = "http://smart.who.int/HIV/Measure/HIVIND28"
 * status = #draft
 * experimental = true
-* date = "2024-06-15"
+* date = "2024-07-01"
 * name = "HIVIND28"
 * title = "HIV.IND.28 Total attrition from ART"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/immunizations-measles/Library/HIVIND28Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND28Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]
-    * id = "HIV.IND.28.initialPopulation"
-    * description = "Number of people reported on ART at the end of the last reporting period
-plus
-those newly initiated on ART during the current reporting period"
+    * id = "HIV.IND.28.IP"
+    * description = "Number in target group"
     * code = $measure-population#initial-population "Initial Population"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "Denominator"
+    * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.28.DEN"
     * description = "Number of people reported on ART at the end of the last reporting period
