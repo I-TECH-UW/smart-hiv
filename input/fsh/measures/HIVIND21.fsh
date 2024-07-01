@@ -17,7 +17,7 @@ Title: "HIV.IND.21 Linkage to ART"
 * group[+]
   * population[initialPopulation]
     * id = "HIV.IND.21.IP"
-    * description = "Number in target group"
+    * description = "Initial Population"
     * code = $measure-population#initial-population "Initial Population"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Initial Population"

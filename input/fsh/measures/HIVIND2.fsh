@@ -17,19 +17,22 @@ Title: "HIV.IND.2 Total PrEP recipients"
 * group[+]
   * population[initialPopulation]
     * id = "HIV.IND.2.IP"
-    * description = "Number in target group"
+    * description = "Initial Population"
     * code = $measure-population#initial-population "Initial Population"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Initial Population"
   * population[measurePopulation]
+    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
     * id = "HIV.IND.2.MP"
-    * description = "Number in target group"
+    * description = "Measure Population"
     * code = $measure-population#measure-population "Measure Population"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Measure Population"
   * population[measureObservation]
+    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-criteriaReference].valueString = "measure-population"
+    * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-aggregateMethod].valueCode = #count
     * id = "HIV.IND.2.MO"
-    * description = "Number in target group"
+    * description = "Measure Observation"
     * code = $measure-population#measure-observation "Measure Observation"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Measure Observation"
