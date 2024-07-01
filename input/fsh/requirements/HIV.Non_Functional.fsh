@@ -1,4 +1,4 @@
-Instance: HIV non Functional Requirements
+Instance: HIVNonFunctionalRequirements
 InstanceOf: Requirements
 Title: "HIV non Functional Requirements"
 Description: "Non Functional Requirements For  for HIV"

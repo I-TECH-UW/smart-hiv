@@ -1,7 +1,7 @@
 Instance: HIV.H.Followingupandcontactingclients
 InstanceOf: Requirements
-Title: "Followingupandcontactingclients"
-Description: "Functional Requirements For  for Followingupandcontactingclients"
+Title: "Following up and contacting clients"
+Description: "Functional Requirements For  for Following up and contacting clients"
 Usage: #example
 * status = #active
 * statement[+]
