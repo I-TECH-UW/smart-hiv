@@ -1,4 +1,3 @@
-
 Instance: HIV.G. Diagnostics
 InstanceOf: Requirements
 Title: "Diagnostics"
@@ -10,5 +9,4 @@ Usage: #example
   * requirement = """
    As a Health worker
    I want the system to be capable to receive diagnosis test results from laboratories or other test centers 
-   So that I can have a faster patient follow-up
-  """ 
+   So that I can have a faster patient follow-up  """
