@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="5">
+         <a:s>/*
+ * Library: HIV.IND.95 Logic
+ * Ref No: CCA.3
+ * Short Name: Invasive cervical cancer treatment
+ *
+ * Definition: % of women living with HIV diagnosed with invasive cancer who were treated
+ *
+ * Numerator: Number of women living with HIV who received treatment after being diagnosed with invasive cervical cancer
+ * Numerator Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; within the reporting period AND &quot;Invasive cervical cancer treatment method&quot; is NOT NULL
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of women living with HIV who were diagnosed with invasive cervical cancer
+ * Denominator Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; within the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years)
+ * • Invasive cervical cancer treatment episode (1st in lifetime, 2nd, 3rd, 4th, etc.)
+ * • Treatment type (medical, surgical)
+ * • Cities and other administrative areas of epidemiologic importance
+ * 
+ * Disaggregation Elements: Age | Invasive cervical cancer treatment episode | Invasive cervical cancer treatment method
+ *
+ * Numerator and Denominator Elements:
+ * Cervical cancer diagnosis | Date of diagnosis of cervical precancer lesions or invasive cervical cancer | HIV status | Invasive cervical cancer treatment method
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE705: Date of diagnosis of cervical precancer lesions or invasive cervical cancer | Date of diagnosis of cervical precancer lesions or invasive cervical cancer 
+ * HIV.D.DE709: Cervical cancer diagnosis | Type of cervical cancer diagnosis 
+ * HIV.D.DE710: Cervical precancer lesions | Client is diagnosed with cervical precancer lesions 
+ * HIV.D.DE711: Invasive cervical cancer | Client is diagnosed with invasive cervical cancer disease 
+ * HIV.D.DE730: Invasive cervical cancer treatment episode | Client's lifetime number of treatments for invasive cervical cancer 
+ * HIV.D.DE731: Invasive cervical cancer treatment method | Invasive cervical cancer treatment method 
+ * HIV.D.DE732: Conization | Invasive cervical cancer treatment method is a conization 
+ * HIV.D.DE733: Trachelectomy | Invasive cervical cancer treatment method is a trachelectomy 
+ * HIV.D.DE734: Hysterectomy | Invasive cervical cancer treatment method is a hysterectomy 
+ * HIV.D.DE735: Management of invasive cervical cancer | Invasive cervical cancer treatment method is management of invasive cervical cancer 
+ * HIV.D.DE736: Radiotherapy | Invasive cervical cancer treatment method is a radiotherapy 
+ * HIV.D.DE737: Chemotherapy | Invasive cervical cancer treatment method is a chemotherapy 
+ * HIV.D.DE738: Chemoradiation | Invasive cervical cancer treatment method is a chemoradiation 
+ * HIV.D.DE739: Other | Invasive cervical cancer treatment method is a not in list
+ *
+ * Additional Context
+ * - what it measures: Progress towards increasing access to treatment for invasive cervical cancer for women living with HIV
+ * - rationale: The purpose of this indicator is to assess trends in availability and access to treatment services for invasive cervical cancer for women living with HIV. In the longer run, it is expected that the number of women living with HIV who received treatment for invasive cervical cancer will plateau and slowly decrease, as screening programmes expand detection and treatment of precancerous lesions, and coverage of human papillomavirus (HPV) vaccination increases in line with the WHO Global Strategy 90–70–90 elimination targets.
+ * - method: The number is generated from programmatic data from HIV or cervical cancer programmes, or from a national cancer registry, if HIV status is recorded there.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND95Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND95Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="62:1-62:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="64:1-64:53" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVIndicatorCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="65:1-65:35" localIdentifier="FHIRHelpers" path="http://smart.who.int/hiv/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="66:1-66:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="67:1-67:28" localIdentifier="FC" path="http://smart.who.int/hiv/FHIRCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRCommon</a:s>
+               </a:s>
+               <a:s> called FC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+</library>

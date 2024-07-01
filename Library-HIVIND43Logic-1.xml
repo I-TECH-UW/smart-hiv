@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="5">
+         <a:s>/*
+ * Library: HIV.IND.43 Logic
+ * Ref No: VER.7
+ * Short Name: HIV prevalence among women attending ANC
+ *
+ * Definition: % of pregnant women who are HIV-positive at the time of their first test during the current pregnancy
+ *
+ * Numerator: Number of ANC attendees who tested HIV-positive at their first test during the current pregnancy plus number of ANC attendees known to be HIV-positive before their first ANC visit
+ * Numerator Calculation: COUNT of &quot;Currently pregnant&quot; clients with &quot;HIV test result&quot;='HIV-positive' AND &quot;HIV test date&quot; on &quot;ANC contact date&quot; is EARLIEST within current pregnancy | PLUS | COUNT of clients with &quot;HIV status&quot;='HIV-positive' on first &quot;ANC contact date&quot;
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of ANC attendees receiving their first HIV test during pregnancy plus number of ANC attendees known to be HIV-positive before first ANC visit
+ * Denominator Calculation: COUNT of &quot;Currently pregnant&quot; clients with &quot;HIV test date&quot; on a &quot;ANC contact date&quot; during current pregnancy | PLUS | COUNT of clients with &quot;HIV status&quot;='HIV-positive' on first &quot;ANC contact date&quot;
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (&lt;15, 15–19, 20–24, 25–29, 30–34, 35–39, 40–49, 50+ years)
+ * • HIV status at first test during current pregnancy (known positive, tested HIV-negative, tested HIV-positive, not tested)
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Age | HIV status at first HIV test during current pregnancy
+ *
+ * Numerator and Denominator Elements:
+ * ANC contact date | Currently pregnant | HIV status | HIV test date | HIV test result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.B.DE29: Currently pregnant | Client is currently pregnant 
+ * HIV.B.DE110: HIV test date | Date of the HIV test 
+ * HIV.B.DE111: HIV test result | The result from HIV testing after applying the testing algorithm 
+ * HIV.B.DE112: HIV-positive | Test result is HIV-positive 
+ * HIV.B.DE113: HIV-negative | Test result is HIV-negative 
+ * HIV.B.DE114: HIV-inconclusive | Test result is HIV-inconclusive 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE31: Currently pregnant | Client is currently pregnant 
+ * HIV.E.DE85: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date') 
+ * HIV.E.DE224: HIV test date | Date of the HIV test
+ *
+ * Additional Context
+ * - what it measures: HIV prevalence among pregnant women attending ANC, including those who were diagnosed with HIV before their first ANC visit and those testing positive during their current pregnancy.
+ * - rationale: HIV prevalence among ANC attendees is used for surveillance to measure HIV prevalence and incidence and to monitor trends in HIV infection when the following conditions are met to ensure that HIV prevalence among ANC clients is consistently representative of HIV prevalence among all pregnant women: | • ANC attendance is high and all women are recorded (for example, not missing large private-sector ANC services). | • HIV testing is offered to all pregnant women and not restricted to only higher-risk women or interrupted due to stock-outs of test kits. | • Only the first HIV test result is used to calculate HIV prevalence during a single pregnancy. | • Women who are already known to be HIV-positive and/or are already on ART prior to their first ANC visit during a pregnancy and, therefore, are not tested for HIV, are recorded | and included in routine reporting. All HIV-positive women must be included in both the numerator and denominator when calculating HIV prevalence among pregnant women. |  | See section 5.2 4 on WHO's 2022 HIV SI Guidelines on routine antenatal HIV testing for more detail. | This indicator is also useful for estimating the number of women in need of PMTCT services for programme planning purposes.
+ * - method: ANC registers, patient monitoring tools, EMRs (for example, patient records). |  | The recommended reporting period is 12 months.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND43Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND43Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="56:1-56:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="58:1-58:53" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVIndicatorCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="59:1-59:35" localIdentifier="FHIRHelpers" path="http://smart.who.int/hiv/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="60:1-60:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="61:1-61:28" localIdentifier="FC" path="http://smart.who.int/hiv/FHIRCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRCommon</a:s>
+               </a:s>
+               <a:s> called FC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+</library>

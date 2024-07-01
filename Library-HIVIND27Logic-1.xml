@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation message="The function FHIRHelpers.ToDateTime has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToDateTime has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="90">
+         <a:s>/*
+ * Library: HIV.IND.27 Logic
+ * Ref No: ART.1
+ * Short Name: People living with HIV on ART
+ *
+ * Definition: Number and % of people on ART among all people living with HIV at the end of the reporting period
+ *
+ * Numerator: Number of people on ART at the end of the reporting period (HIV patient monitoring data from, for example, ART registers, patient records or EMRs). For key populations survey data may be required.
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True at reporting period end date
+ * Numerator Exclusions: Clients with an &quot;HIV treatment outcome&quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period
+ *
+ * Denominator: 1. To determine treatment coverage: estimated number of people living with HIV (from models, such as Spectrum AIM) | 2. To gauge progress toward the second 95 target: number of people living with HIV who know their HIV status (from surveys or models)
+ * Denominator Calculation: For treatment coverage: *Estimated number of people living with HIV |  | For progress towards 2nd 95 target: *Estimated number of people living with HIV who know their status
+ * Denominator Exclusions: Clients with an &quot;HIV treatment outcome&quot; IN 'Lost to follow up', 'Transferred out', 'Death (documented)' at the end of the reporting period
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*)
+ * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)**
+ * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)***
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: Gender | Age | Key population member type | 
+ *
+ * Numerator and Denominator Elements:
+ * HIV status | On ART
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
+ * HIV.A.DE18: Gender* | Gender of the client* 
+ * HIV.A.DE19: Female | Client identifies as female 
+ * HIV.A.DE20: Male | Client identifies as male 
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male 
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female 
+ * HIV.A.DE23: Other | Additional category 
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
+ * HIV.B.DE51: Sex worker | Client is a sex worker 
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive 
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative 
+ * HIV.B.DE118: Unknown | Client has unknown HIV status 
+ * HIV.D.DE38: On ART | Client is currently taking ART 
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.H.DE47: On ART | Client is currently taking ART 
+ *
+ * Additional Context
+ * - what it measures: Measures progress towards providing ART to all people living with HIV, that is, treatment coverage, taking into account total attrition during the reporting period.
+ * - rationale: • WHO currently recommends treatment for all people living with HIV to achieve viral suppression. | • This indicator is central to accountability for national health sector strategic plans, effective programme management and donor programming. | • This indicator is essential to measurement of the second 95 target: that 95% of the people who know their HIV-positive status are accessing ART by 2025.
+ * - method: For the numerator: Generated by determining the number of people living with HIV on ART at the end of the last reporting period plus the number of people living with HIV initiated on ART during the current reporting period, taking into account retention/attrition status by the end of the reporting period. Retention and attrition analysis should be conducted as part of reporting on this indicator. The numerator should NOT INCLUDE people who have stopped treatment, died or were otherwise lost to follow-up during this period. Consistent with methods for defining the total attrition from ART indicator (see ART.2), these status classification categories should be reported separately to the national level and used to calculate the number of people living with HIV who are on ART. |  | For the denominator: Epidemiological models such as Spectrum AIM are the preferred source for estimating the number of people living with HIV. Denominator 2 should be consistent with the numerator used for indicator HTS.1 People living with HIV who know their HIV status (first 95 target). The recommended maximum reporting frequency is 12 months. Shorter reporting intervals, for example, three months, are recommended where feasible.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND27Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND27Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="67:1-67:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="69:1-69:53" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVIndicatorCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="70:1-70:35" localIdentifier="FHIRHelpers" path="http://smart.who.int/hiv/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="71:1-71:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="72:1-72:28" localIdentifier="FC" path="http://smart.who.int/hiv/FHIRCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRCommon</a:s>
+               </a:s>
+               <a:s> called FC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="11" locator="76:1-76:88" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="11">
+               <a:s>// Indicator Definition
+
+parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="10">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="9">
+                     <a:s>Date</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="8">
+                  <a:s r="6">Interval[@2020-01-01, @2020-01-31]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="8" locator="76:55-76:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="6" locator="76:64-76:74" xsi:type="Date">
+               <year valueType="t:Integer" value="2020" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </low>
+            <high localId="7" locator="76:77-76:87" xsi:type="Date">
+               <year valueType="t:Integer" value="2020" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="31" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="10" locator="76:32-76:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="9" locator="76:41-76:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="78:1-78:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="78:1-78:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="78:1-78:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="59" locator="86:1-99:64" name="Measure Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="59">
+               <a:s>/*
+* Many indicator specifications in ANC and Immunization have context as patient. 
+* I believe these should be unfiltered to get all observations not just those related to a current patient
+* Should discuss.
+*/
+
+define &quot;Measure Population&quot;:
+   </a:s>
+               <a:s r="58">
+                  <a:s r="54">
+                     <a:s r="50">
+                        <a:s r="46">
+                           <a:s r="30">
+                              <a:s>(</a:s>
+                              <a:s r="30">
+                                 <a:s r="20">
+                                    <a:s>exists</a:s>
+                                    <a:s r="19">
+                                       <a:s>(</a:s>
+                                       <a:s r="19">
+                                          <a:s>
+                                             <a:s r="13">
+                                                <a:s r="12">
+                                                   <a:s>
+                                                      <a:s>HIC.&quot;HIV Positive Condition&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> C</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+	</a:s>
+                                          <a:s r="18">
+                                             <a:s>where </a:s>
+                                             <a:s r="18">
+                                                <a:s r="15">
+                                                   <a:s r="14">
+                                                      <a:s>C</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="15">
+                                                      <a:s>onset</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s r="18"> before </a:s>
+                                                <a:s r="17">
+                                                   <a:s>end of </a:s>
+                                                   <a:s r="16">
+                                                      <a:s>&quot;Measurement Period&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+	or 
+	</a:s>
+                                 <a:s r="29">
+                                    <a:s>exists</a:s>
+                                    <a:s r="28">
+                                       <a:s>(</a:s>
+                                       <a:s r="28">
+                                          <a:s>
+                                             <a:s r="22">
+                                                <a:s r="21">
+                                                   <a:s>
+                                                      <a:s>HIC.&quot;HIV Positive Observation&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> O</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+	</a:s>
+                                          <a:s r="27">
+                                             <a:s>where </a:s>
+                                             <a:s r="27">
+                                                <a:s>(</a:s>
+                                                <a:s r="27">
+                                                   <a:s r="24">
+                                                      <a:s r="23">
+                                                         <a:s>O</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="24">
+                                                         <a:s>issued</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s r="27"> before </a:s>
+                                                   <a:s r="26">
+                                                      <a:s>end of </a:s>
+                                                      <a:s r="25">
+                                                         <a:s>&quot;Measurement Period&quot;</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>)</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>
+	)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s>
+   and </a:s>
+                           <a:s r="45">
+                              <a:s>exists</a:s>
+                              <a:s r="44">
+                                 <a:s>(</a:s>
+                                 <a:s r="44">
+                                    <a:s>
+                                       <a:s r="32">
+                                          <a:s r="31">
+                                             <a:s>
+                                                <a:s>HIC.&quot;HIV Treatment Active&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> H</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
+   </a:s>
+                                    <a:s r="43">
+                                       <a:s>where </a:s>
+                                       <a:s r="43">
+                                          <a:s r="37">
+                                             <a:s r="34">
+                                                <a:s r="33">
+                                                   <a:s>H</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="34">
+                                                   <a:s>effective</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s r="37"> starts before </a:s>
+                                             <a:s r="36">
+                                                <a:s>end of </a:s>
+                                                <a:s r="35">
+                                                   <a:s>&quot;Measurement Period&quot;</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>
+    and </a:s>
+                                          <a:s r="42">
+                                             <a:s>(</a:s>
+                                             <a:s r="42">
+                                                <a:s r="39">
+                                                   <a:s r="38">
+                                                      <a:s>H</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="39">
+                                                      <a:s>effective</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s r="42"> ends after </a:s>
+                                                <a:s r="41">
+                                                   <a:s>start of </a:s>
+                                                   <a:s r="40">
+                                                      <a:s>&quot;Measurement Period&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+   )</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+   and </a:s>
+                        <a:s r="49">
+                           <a:s>not </a:s>
+                           <a:s r="48">
+                              <a:s r="47">
+                                 <a:s>HIC</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="48">
+                                 <a:s>&quot;Patient Deceased before end of Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+   and </a:s>
+                     <a:s r="53">
+                        <a:s>not </a:s>
+                        <a:s r="52">
+                           <a:s r="51">
+                              <a:s>HIC</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="52">
+                              <a:s>&quot;Transfer Out at Facility during the measurement period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+   and </a:s>
+                  <a:s r="57">
+                     <a:s>not </a:s>
+                     <a:s r="56">
+                        <a:s r="55">
+                           <a:s>HIC</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="56">
+                           <a:s>&quot;Lost to Follow Up during the measurement period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="58" locator="87:4-99:64" xsi:type="And">
+            <operand localId="54" locator="87:4-98:71" xsi:type="And">
+               <operand localId="50" locator="87:4-97:66" xsi:type="And">
+                  <operand localId="46" locator="87:4-96:4" xsi:type="And">
+                     <operand localId="30" locator="87:4-92:3" xsi:type="Or">
+                        <operand localId="20" locator="87:5-88:50" xsi:type="Exists">
+                           <operand localId="19" locator="87:11-88:50" xsi:type="Query">
+                              <source localId="13" locator="87:12-87:41" alias="C">
+                                 <expression localId="12" locator="87:12-87:39" name="HIV Positive Condition" libraryName="HIC" xsi:type="ExpressionRef"/>
+                              </source>
+                              <where localId="18" locator="88:2-88:49" xsi:type="Before">
+                                 <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand asType="fhir:dateTime" xsi:type="As">
+                                       <operand localId="15" locator="88:8-88:14" path="onset" scope="C" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <operand localId="17" locator="88:23-88:49" xsi:type="End">
+                                       <operand localId="16" locator="88:30-88:49" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </operand>
+                              </where>
+                           </operand>
+                        </operand>
+                        <operand localId="29" locator="90:2-92:2" xsi:type="Exists">
+                           <operand localId="28" locator="90:8-92:2" xsi:type="Query">
+                              <source localId="22" locator="90:9-90:40" alias="O">
+                                 <expression localId="21" locator="90:9-90:38" name="HIV Positive Observation" libraryName="HIC" xsi:type="ExpressionRef"/>
+                              </source>
+                              <where localId="27" locator="91:2-91:52" xsi:type="Before">
+                                 <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <operand localId="24" locator="91:9-91:16" path="issued" scope="O" xsi:type="Property"/>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <operand localId="26" locator="91:25-91:51" xsi:type="End">
+                                       <operand localId="25" locator="91:32-91:51" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </operand>
+                              </where>
+                           </operand>
+                        </operand>
+                     </operand>
+                     <operand localId="45" locator="93:8-96:4" xsi:type="Exists">
+                        <operand localId="44" locator="93:14-96:4" xsi:type="Query">
+                           <source localId="32" locator="93:15-93:42" alias="H">
+                              <expression localId="31" locator="93:15-93:40" name="HIV Treatment Active" libraryName="HIC" xsi:type="ExpressionRef"/>
+                           </source>
+                           <where localId="43" locator="94:4-95:62" xsi:type="And">
+                              <operand localId="37" locator="94:10-94:62" xsi:type="Before">
+                                 <operand locator="94:22-94:27" xsi:type="Start">
+                                    <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand asType="fhir:Period" xsi:type="As">
+                                          <operand localId="34" locator="94:10-94:20" path="effective" scope="H" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <operand localId="36" locator="94:36-94:62" xsi:type="End">
+                                       <operand localId="35" locator="94:43-94:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                              <operand localId="42" locator="95:9-95:62" xsi:type="After">
+                                 <operand locator="95:22-95:25" xsi:type="End">
+                                    <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand asType="fhir:Period" xsi:type="As">
+                                          <operand localId="39" locator="95:10-95:20" path="effective" scope="H" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <operand localId="41" locator="95:33-95:61" xsi:type="Start">
+                                       <operand localId="40" locator="95:42-95:61" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </where>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="49" locator="97:8-97:66" xsi:type="Not">
+                     <operand localId="48" locator="97:12-97:66" name="Patient Deceased before end of Measurement Period" libraryName="HIC" xsi:type="ExpressionRef"/>
+                  </operand>
+               </operand>
+               <operand localId="53" locator="98:8-98:71" xsi:type="Not">
+                  <operand localId="52" locator="98:12-98:71" name="Transfer Out at Facility during the measurement period" libraryName="HIC" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="57" locator="99:8-99:64" xsi:type="Not">
+               <operand localId="56" locator="99:12-99:64" name="Lost to Follow Up during the measurement period" libraryName="HIC" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="61" locator="104:1-105:6" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="61">
+               <a:s r="60">/*
+ * As defined by Member States
+ */
+define &quot;Initial Population&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="60" locator="105:3-105:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="64" locator="111:1-112:3" name="Measure Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="64">
+               <a:s>/*
+ * NOTE: Modeled as a Continuous Variable measure because this is an estimated denominator proportion measure
+ */
+
+define function &quot;Measure Observation&quot;(Patient &quot;Patient&quot;):
+  </a:s>
+               <a:s r="63">
+                  <a:s r="63">1</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="63" locator="112:3" valueType="t:Integer" value="1" xsi:type="Literal"/>
+         <operand name="Patient">
+            <operandTypeSpecifier localId="62" locator="111:47-111:55" name="fhir:Patient" xsi:type="NamedTypeSpecifier"/>
+         </operand>
+      </def>
+      <def localId="67" locator="118:1-119:42" name="Administrative Gender Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="67">
+               <a:s>/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	</a:s>
+               <a:s r="66">
+                  <a:s r="65">
+                     <a:s>HIC</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="66">
+                     <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="66" locator="119:2-119:42" name="By Administrative Gender Stratifier" libraryName="HIC" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="70" locator="121:1-122:24" name="Age Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="70">
+               <a:s>define &quot;Age Stratifier&quot;:
+	</a:s>
+               <a:s r="69">
+                  <a:s r="68">
+                     <a:s>HIC</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="69">
+                     <a:s>&quot;By Age Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="69" locator="122:2-122:24" name="By Age Stratifier" libraryName="HIC" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="73" locator="124:1-125:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="73">
+               <a:s>define &quot;Geographic Region Stratifier&quot;:
+	</a:s>
+               <a:s r="72">
+                  <a:s r="71">
+                     <a:s>HIC</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="72">
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="72" locator="125:2-125:38" name="By Geographic Region Stratifier" libraryName="HIC" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="76" locator="127:1-128:20" name="patientGroups Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="76">
+               <a:s>define &quot;patientGroups Stratifier&quot;:
+	</a:s>
+               <a:s r="75">
+                  <a:s r="74">
+                     <a:s>HIC</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="75">
+                     <a:s>&quot;patientGroups&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="75" locator="128:2-128:20" name="patientGroups" libraryName="HIC" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="90" locator="130:1-133:45" name="Stratification" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="90">
+               <a:s>define &quot;Stratification&quot;:
+ </a:s>
+               <a:s r="89">
+                  <a:s r="86">
+                     <a:s r="84">
+                        <a:s r="81">
+                           <a:s r="79">
+                              <a:s r="78">
+                                 <a:s r="77">
+                                    <a:s>HIC</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="78">
+                                    <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="79">
+                                 <a:s>code</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> 
+  + </a:s>
+                           <a:s r="80">
+                              <a:s>':'</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> + </a:s>
+                        <a:s r="83">
+                           <a:s r="82">
+                              <a:s>HIC</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="83">
+                              <a:s>&quot;By Age Stratifier&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
++ </a:s>
+                     <a:s r="85">
+                        <a:s>':'</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> + </a:s>
+                  <a:s r="88">
+                     <a:s r="87">
+                        <a:s>HIC</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="88">
+                        <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="89" locator="131:2-133:45" xsi:type="Concatenate">
+            <operand localId="86" locator="131:2-133:5" xsi:type="Concatenate">
+               <operand localId="84" locator="131:2-132:33" xsi:type="Concatenate">
+                  <operand localId="81" locator="131:2-132:7" xsi:type="Concatenate">
+                     <operand localId="79" locator="131:2-131:47" path="code" xsi:type="Property">
+                        <source localId="78" locator="131:2-131:42" name="By Administrative Gender Stratifier" libraryName="HIC" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="80" locator="132:5-132:7" valueType="t:String" value=":" xsi:type="Literal"/>
+                  </operand>
+                  <operand localId="83" locator="132:11-132:33" name="By Age Stratifier" libraryName="HIC" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="85" locator="133:3-133:5" valueType="t:String" value=":" xsi:type="Literal"/>
+            </operand>
+            <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+               <operand localId="88" locator="133:9-133:45" name="By Geographic Region Stratifier" libraryName="HIC" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>

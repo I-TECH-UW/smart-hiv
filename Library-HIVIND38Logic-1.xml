@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="5">
+         <a:s>/*
+ * Library: HIV.IND.38 Logic
+ * Ref No: VER.2
+ * Short Name: Early infant diagnosis (EID) coverage
+ *
+ * Definition: % of HIV-exposed infants who receive a virological test for HIV within two months (and 12 months) of birth
+ *
+ * Numerator: Number of HIV-exposed infants born during the reporting period who received a virological HIV test within two months (and 12 months) of birth
+ * Numerator Calculation: COUNT of infants who are an &quot;HIV-exposed infant or child&quot; with &quot;Infant date of birth&quot; within the reporting period AND with &quot;Date of viral load sample collection&quot; LESS THAN 2 months AFTER &quot;Infant date of birth&quot; AND &quot;HIV test type&quot;='Nucleic acid test for HIV'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women.
+ * Denominator Calculation: *Estimated number of HIV-positive women who delivered during the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Test result (HIV-positive, HIV-negative, indeterminate, other) to enable calculation of the percentage positive and the percentage with an indeterminate result among HIV-exposed infants receiving a virological test
+ * • Age of infant (&lt;2 months, 2-12 months) to allow the separate calculation of the proportion of exposed infants receiving virological testing within two months of birth and within 12 months of birth
+ * • Cities and other administrative regions of epidemiologic importance
+ * 
+ * Disaggregation Elements: HIV test date (at 2 months, at 12 months) | Age of infant (&lt;2 months, 2-12 months)
+ *
+ * Numerator and Denominator Elements:
+ * Date of viral load sample collection | HIV test type | HIV-exposed infant or child | Infant date of birth
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ *  
+ * HIV.B.DE81: HIV test type | Type of HIV test 
+ * HIV.B.DE82: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic 
+ * HIV.B.DE83: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay 
+ * HIV.B.DE84: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis 
+ * HIV.B.DE85: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic 
+ * HIV.B.DE86: HIV self-test | Antibody test for HIV performed by self-tester using a rapid diagnostic 
+ * HIV.B.DE110: HIV test date | Date of the HIV test 
+ * HIV.D.DE194: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load 
+ * HIV.E.DE87: Infant date of birth | The infant's date of birth (DOB) if known 
+ * HIV.E.DE90: Age of infant | Infant age calculated using date of birth 
+ * HIV.E.DE112: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure 
+ * HIV.E.DE168: HIV test type | Type of HIV test 
+ * HIV.E.DE169: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic (RDT) 
+ * HIV.E.DE170: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay (EIA) 
+ * HIV.E.DE171: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis 
+ * HIV.E.DE172: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic 
+ * HIV.E.DE224: HIV test date | Date of the HIV test 
+ * HIV.G.DE8: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ *
+ * Additional Context
+ * - what it measures: This indicator measures early HIV diagnosis in infants.
+ * - rationale: • High coverage of early virological testing of infants helps initiate ART early in children with confirmed HIV infection and supports counselling on efforts to prevent seroconversion of those with a negative early test result. | • Current PMTCT guidelines recommend virological testing for HIV-exposed infants within two months of birth.
+ * - method: For the numerator: Programme records (for example, PMTCT registers, laboratory records). |  | For the denominator: Modelling-based estimates (for example, Spectrum AIM) |  | The recommended reporting period is 12 months.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND38Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND38Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="60:1-60:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="62:1-62:53" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVIndicatorCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="63:1-63:35" localIdentifier="FHIRHelpers" path="http://smart.who.int/hiv/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="64:1-64:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="65:1-65:28" localIdentifier="FC" path="http://smart.who.int/hiv/FHIRCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRCommon</a:s>
+               </a:s>
+               <a:s> called FC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+</library>
