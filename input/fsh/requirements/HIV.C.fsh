@@ -1,7 +1,7 @@
 Instance: HIV.C.PrEPvisit
 InstanceOf: Requirements
 Title: "PrEP visit"
-Description: "Functional Requirements For  for PrEP visit"
+Description: "Functional Requirements For PrEP visit"
 Usage: #example
 * status = #active
 * statement[+]

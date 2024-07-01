@@ -1,7 +1,7 @@
 Instance: HIV.D.Careandtreatmentclinicalvisit
 InstanceOf: Requirements
 Title: "Care and treatment clinical visit"
-Description: "Functional Requirements For  for Care and treatment clinical visit"
+Description: "Functional Requirements For Care and treatment clinical visit"
 Usage: #example
 * status = #active
 * statement[+]

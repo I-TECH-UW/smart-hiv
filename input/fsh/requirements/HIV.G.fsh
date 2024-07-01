@@ -1,7 +1,7 @@
 Instance: HIV.G.Diagnostics
 InstanceOf: Requirements
 Title: "Diagnostics"
-Description: "Functional Requirements For  for Diagnostics"
+Description: "Functional Requirements For Diagnostics"
 Usage: #example
 * status = #active
 * statement[+]

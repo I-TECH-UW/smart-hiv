@@ -1,7 +1,7 @@
 Instance: HIV.B.HIVtestingservices
 InstanceOf: Requirements
 Title: "HIV testing services"
-Description: "Functional Requirements For  for HIV testing services"
+Description: "Functional Requirements For HIV testing services"
 Usage: #example
 * status = #active
 * statement[+]

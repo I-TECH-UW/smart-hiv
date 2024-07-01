@@ -1,7 +1,7 @@
 Instance: HIV.J.Aggregatereportinganddatause
 InstanceOf: Requirements
 Title: "Aggregate reporting and data use"
-Description: "Functional Requirements For  for Aggregate reporting and data use"
+Description: "Functional Requirements For Aggregate reporting and data use"
 Usage: #example
 * status = #active
 * statement[+]

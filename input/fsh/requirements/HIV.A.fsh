@@ -1,7 +1,7 @@
 Instance: HIV.A.Registration
 InstanceOf: Requirements
 Title: "Registration"
-Description: "Functional Requirements For  for Registration"
+Description: "Functional Requirements For Registration"
 Usage: #example
 * status = #active
 * statement[+]

@@ -1,7 +1,7 @@
 Instance: HIV.I.Referral
 InstanceOf: Requirements
 Title: "Referral"
-Description: "Functional Requirements For  for Referral"
+Description: "Functional Requirements For Referral"
 Usage: #example
 * status = #active
 * statement[+]
