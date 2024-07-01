@@ -1,4 +1,4 @@
-Instance: HIV.A. Registration
+Instance: HIV.A.Registration
 InstanceOf: Requirements
 Title: "Registration"
 Description: "Functional Requirements For  for Registration"

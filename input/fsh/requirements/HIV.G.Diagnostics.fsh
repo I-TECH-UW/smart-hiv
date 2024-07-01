@@ -1,4 +1,4 @@
-Instance: HIV.G. Diagnostics
+Instance: HIV.G.Diagnostics
 InstanceOf: Requirements
 Title: "Diagnostics"
 Description: "Functional Requirements For  for Diagnostics"
