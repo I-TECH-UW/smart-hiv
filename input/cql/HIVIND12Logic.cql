@@ -65,3 +65,15 @@ include WHOCommon called WCom
 include FHIRCommon called FC
 
 // Indicator Definition
+
+
+// Issues:
+// This definition does not align with the definition for HIV.IND.11 in terms of defining the population of 
+// opioid dependent people. For IND.11 we use the key population member type data element, for this indicator
+// the definition seems to use `clients with "Medications prescribed" IN 'Methadone', 'Buprenorphine'`
+
+// Assumptions:
+// Since we are not going to use the denominator definition as part of the DAK, we will report this as the SUM (not %)
+// of PYFU (Person-years of Follup-up) for the population of people dependent on opiods. 
+// 
+// 
