@@ -81,3 +81,7 @@ include WHOCommon called WCom
 include FHIRCommon called FC
 
 // Indicator Definition
+
+parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-01-31]
+ 
+context Patient
