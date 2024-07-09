@@ -105,10 +105,22 @@ define "numerator":
 	and O.issued after start of "Measurement Period")
 	) 
 
+define "numeratorExclusion":
+	exists(HIC."HIV Positive Observation - HIV Self Test" O
+	where (O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
+	) 
+
 define "denominator":
     exists(HIC."HIV test resulted" T
 	where T.issued before end of "Measurement Period"
 	and T.issued after start of "Measurement Period")
+
+define "denominatorExclusion":
+	exists(HIC."HIV Positive Observation - HIV Self Test" O
+	where (O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
+	) 
 
 /*
  * Disaggregators

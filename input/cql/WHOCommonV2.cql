@@ -246,3 +246,27 @@ NOTE: This function assumes resources from the same source server.
 */
 define fluent function references(references List<FHIR.Reference>, resourceId String):
   exists (references R where R.references(resourceId))
+
+define function GetDurationInDays(value FHIR.Duration): // returns Decimal:
+    case value.code.value
+      when 'a' then value.value * 365.0
+      when 'mo' then value.value.value * 30.0
+      when 'wk' then value.value.value * 7.0
+      when 'd' then value.value.value
+      when 'h' then value.value.value / 24.0
+      when 'min' then value.value.value / 60.0 / 24.0
+      when 's' then value.value.value / 60.0 / 60.0 / 24.0
+      when 'ms' then value.value.value / 60.0 / 60.0 / 24.0 / 1000.0
+      else Message(1000, true, 'Undefined', 'Error', 'Unsupported duration unit ' + value.code.value)
+    end
+
+define function "Prescription Relevant Period"(prescription FHIR.MedicationRequest):
+  if (
+    prescription.authoredOn is not null and prescription.dispenseRequest is not null
+      and prescription.dispenseRequest.expectedSupplyDuration is not null
+  )
+  then Interval[
+    date from prescription.authoredOn,
+    date from prescription.authoredOn + System.Quantity{ value: GetDurationInDays(prescription.dispenseRequest.expectedSupplyDuration), unit: 'days' }
+  ]
+  else null

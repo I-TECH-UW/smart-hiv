@@ -4,6 +4,7 @@ using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include WHOCommonV2 called WComV2
 include FHIRCommon called FC
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
@@ -29,7 +30,13 @@ define "HIV Positive Condition":
 define "HIV Positive Observation":
 [Observation] O
     where O.status in {'final', 'amended'}
-    and O.code ~ HC."Rapid diagnostic test for HIV - HIV.B.DE82"
+    and O.code in HC."HIV test type - HIV.B.DE81"
+    and O.value ~ HC."HIV-positive - HIV.B.DE116"
+
+define "HIV Positive Observation - HIV Self Test":
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC."HIV self-test"
     and O.value ~ HC."HIV-positive - HIV.B.DE116"
 
 define "HIV Negative Observation":
@@ -52,13 +59,19 @@ define "HIV Treatment Active":
 define "HIV PREP Active":
 [MedicationStatement] MS
     where MS.status = 'recorded'
-    and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
+    and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
 
  define "Client is at elevated risk for HIV acquisition":
     [Observation] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.code ~ HC."At elevated risk for HIV acquisition - HIV.B.DE225"
+
+define "PREP Prescription":
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC."PrEP for HIV prevention"
 
 
 define "Patient Deceased before end of Measurement Period":
@@ -437,3 +450,20 @@ exists(
  * Should intend to use when patient.deceased FHIR boolean was updated to TRUE if no other date is available
  * Kenya EMR example does not account for when deceased is just a boolean
  */
+
+
+/*
+define "PREP Prescription Days":
+  Sum(
+    (
+      collapse (
+        [MedicationRequest] MR
+          where MR.status = 'completed'
+          and MR.intent = 'order'
+          and MR.medication ~ HC."PrEP for HIV prevention"
+        return WComV2."Prescription Relevant Period"( MR ) intersect "Measurement Period"
+      )
+    ) PREPUseInterval
+      return days between start of PREPUseInterval and end of PREPUseInterval
+  )
+*/

@@ -78,6 +78,7 @@ using FHIR version '4.0.1'
 include HIVIndicatorCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include WHOCommonV2 called WComV2
 include FHIRCommon called FC
 
 // Indicator Definition
@@ -85,3 +86,57 @@ include FHIRCommon called FC
 parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-01-31]
  
 context Patient
+
+define "Measure Population":
+   Sum(
+    (
+      collapse (HIC."PREP Prescription" MR
+      return WComV2."Prescription Relevant Period"( MR ) intersect "Measurement Period"
+      )
+    ) PREPUseInterval
+      return days between start of PREPUseInterval and end of PREPUseInterval
+  )
+
+/*
+ * As defined by Member States
+ */
+define "Initial Population":
+  true
+
+/*
+ * NOTE: Modeled as a Continuous Variable measure because this is an estimated denominator proportion measure
+ */
+
+define function "Measure Observation"(Patient "Patient"):
+  1
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier 3"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "prep product":
+    HIC."prep_product"
+
+define "Setting":
+    HIC."setting"
+
+//provider type not provided?
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
+//Need to discuss how to add list
+//+ ':' +HIC."patientGroups"
