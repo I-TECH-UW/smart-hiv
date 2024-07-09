@@ -69,3 +69,29 @@ include WHOCommon called WCom
 include FHIRCommon called FC
 
 // Indicator Definition
+
+// Assumptions: Look at the B6 capture or update client history.
+
+// 
+// Assumptions: (Not correct)reporting date looks like the date for an annual report generated for a reporing period o
+// 1 year. this is what were currently assuming. In that case, for the data for this indicator, we would look
+// in the reporting period and see if there's a B6 capture or update client history event that includes the key 
+// population member type of `Person who injects drugs`. 
+// We also will only work with the programme/service provider level definition to generate a % (proportion),
+// and for the numerator we will assume the denominator definition means all those who inject drugs but have
+// `Currently on OAMT` either false within this reporting period or missing.
+
+
+
+// We also are counting any instance of an indication that the patient is a member of the `People who inject drugs` 
+// population before the given reporting date as true for that term in the numerator.
+
+// We are counting someone as `Currently on OAMT` if there's an indication that they are taking OAMT medication 
+// at the reporting date, which means there exists a medication statment that overlaps the reporting date.
+
+// We are counting a Patient as `opioid dependent person accessing service` when there exists an episode of care
+// for OAMT that overlaps the reporting date.
+
+// "Everyone who should be recieving OAMT" is the denominator (Episode of Care exists), and the numerator is "Everyone who is actually recieving OAMT" (Medication Statement Exists)
+// We define "Everyone who should be recieving OAMT" for a given reporting date as any Patient that has an 
+// OAMT episode of care that includes the reporting date within the Episode
