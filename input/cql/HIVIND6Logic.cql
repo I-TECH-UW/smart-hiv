@@ -127,6 +127,9 @@ define "prep product":
 define "Setting":
     HIC."setting"
 
+define "hiv_exposure_type":
+    HIC."hiv_exposure_type"
+
 //provider type not provided?
 
 define "Stratification":

@@ -272,6 +272,38 @@ define "By Administrative Gender Stratifier":
     and C.onset during "Measurement Period")
   )
 
+
+define Exposure_Occupational:
+  exists (
+    [Observation: HC."HIV exposure type*"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.value ~ HC."Occupational"
+  )
+
+define Exposure_Non_Occupational_violent:
+  exists (
+    [Observation: HC."HIV exposure type*"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.value ~ HC."Non-occupational violent"
+  )
+
+define Exposure_Non_Occupational_consensual_sex:
+  exists (
+    [Observation: HC."HIV exposure type*"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.value ~ HC."Non-occupational consensual sex"
+  )
+
+define hiv_exposure_type:
+  List<String>{
+    if Exposure_Occupational then 'Occupational' else null,
+    if Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
+    if Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
+  }
+
 /*@triggeredBy Encounter with location = community level testing*/
 
 define "Community_testing":

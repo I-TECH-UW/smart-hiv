@@ -126,6 +126,9 @@ define "prep product":
 define "Setting":
     HIC."setting"
 
+define "hiv_exposure_type":
+    HIC."hiv_exposure_type"
+
 //provider type not provided?
 
 define "Stratification":
@@ -134,5 +137,3 @@ define "Stratification":
 + ':' + HIC."By Geographic Region Stratifier"
 //Need to discuss how to add list
 //+ ':' +HIC."patientGroups"
-
-//Need exposure type
