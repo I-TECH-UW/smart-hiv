@@ -138,5 +138,3 @@ define "Stratification":
 + ':' + HIC."By Geographic Region Stratifier"
 //Need to discuss how to add list
 //+ ':' +HIC."patientGroups"
-
-//Need exposure type

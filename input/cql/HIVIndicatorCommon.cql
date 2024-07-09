@@ -101,6 +101,19 @@ define "PEP Prescribed during Measurement Period and Completed":
   where (MS.status = 'recorded'
   and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
   )
+
+define "HIV Test After PEP Prescribed during Measurement Period":
+  [Observation: HC."HIV test result - HIV.B.DE111"] O
+    with [MedicationRequest] MR
+      such that O.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC."PEP for HIV prevention"
+        and MR.authoredOn after start of "Measurement Period"
+        and MR.authoredOn before end of "Measurement Period"
+  where ( O.status in {'final', 'amended'}
+    and O.value ~ HC."HIV-positive - HIV.B.DE112"
+  )
+  Return {MR.authoredOn,O.issued}
   
 
 define "Patient Deceased before end of Measurement Period":
