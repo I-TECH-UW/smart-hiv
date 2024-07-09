@@ -67,6 +67,11 @@ include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 include FHIRCommon called FC
 
+
+codesystem "HIVConcepts": 'http://smart.who.int/hiv/CodeSystem/HIVConcepts'
+code "Key population member type* - HIV.B.DE50": 'HIV.B.DE50' from  "HIVConcepts" display 'People who inject drugs'
+
+
 // Indicator Definition
 // This indicator measures the frequency that people who inject drugs access a NSP
 // This indicator is part of the HIV Prevention category and related to the DD HIV.Prevention workflow
@@ -81,7 +86,7 @@ include FHIRCommon called FC
 // - This indicator is missing a mapping to the required data element HIV.PRV.DE2
 
 // Underlying data:
-// To be counted as the Measure Population, a patient needs to be part of the estimated number of people who inject drugs in the relevant geographic area.
+// To be counted as the initial Population, a patient needs to be part of the estimated number of people who inject drugs in the relevant geographic area.
 // To be counted as a denominator, a patient needs to have a "Key population member type" of "People who inject drugs"
 // The given patient will need to have a completed activity HIV.B6 Capture or Update Client History. 
 
@@ -94,8 +99,63 @@ include FHIRCommon called FC
 // Test Data:
 // A patient with an entry for HIV.B6 Capture or Update Client history:
 //   * HIV.B.DE50: Key population member type
-//   * HIV.PRV.DE2: HIV Prevention Intervention
+//   * HIV.PRV.DE15: Date client was provided with injection equiptment
+
+// Additional libraries
+include HIVConcepts called HC
+include HIVConceptsCustom called HCC
+
+// Definition Start: (proportion)
+parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-01-31]
+ 
+context Patient
+
+// Populations
+
+/*
+ * Initial Population: As defined by Member State
+ */
+define "Initial Population":
+  true
+
+// CUSTOM CONTENT START
 
 
 
-// 
+// COMMON DEFINITIONS
+
+/*
+ * HIV.B.DE50 Key Population Member Type
+ */
+
+define "HIV.B.DE54 - People who inject drugs":
+exists(
+  [Observation] O
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ HCC."social-history")
+  and O.code ~ "Key population member type* - HIV.B.DE50"
+  and O.value ~ HC."People who inject drugs - HIV.B.DE54"
+)
+
+
+
+  define PWID:
+  exists (
+    [Observation] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.code ~ HC."People who inject drugs - HIV.B.DE54"
+  )
+
+
+// define numerator:
+//   exists(
+
+//   )
+
+// define denominator:
+//   count(
+//     [HIC."Key population member type" K
+//     where K.value = 'People who inject drugs'
+//     ]
+//   )
