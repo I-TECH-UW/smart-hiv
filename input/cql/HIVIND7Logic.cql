@@ -100,15 +100,15 @@ define "Initial Population":
 
 
 define "numerator":
-    exists(HIC."HIV Test After PEP Prescribed during Measurement Period" O
-	where (O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
+    exists(HIC."HIV Test Positive After PEP Prescribed during Measurement Period" O
+	where (O.issued after start of "Measurement Period")
    ) 
 
 
 define "denominator":
-    exists(HIC."PEP Prescribed during Measurement Period and Completed" MS
-	where not (MS.effective ends after end of "Measurement Period")
+    exists(HIC."PEP Prescription" MR
+	where (MR.authoredOn after start of "Measurement Period"
+    and MR.authoredOn before end of "Measurement Period")
    ) 
 
 

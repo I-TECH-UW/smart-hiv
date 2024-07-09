@@ -30,7 +30,7 @@ define "HIV Positive Condition":
 define "HIV Positive Observation":
 [Observation] O
     where O.status in {'final', 'amended'}
-    and O.code in HC."HIV test type - HIV.B.DE81"
+    and O.code ~ HC."HIV status"
     and O.value ~ HC."HIV-positive - HIV.B.DE116"
 
 define "HIV Positive Observation - HIV Self Test":
@@ -102,7 +102,7 @@ define "PEP Prescribed during Measurement Period and Completed":
   and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
   )
 
-define "HIV Test After PEP Prescribed during Measurement Period":
+define "HIV Test Positive After PEP Prescribed during Measurement Period":
   [Observation: HC."HIV test result - HIV.B.DE111"] O
     with [MedicationRequest] MR
       such that O.basedOn.references(MR) and MR.status = 'completed'
@@ -110,10 +110,11 @@ define "HIV Test After PEP Prescribed during Measurement Period":
         and MR.medication ~ HC."PEP for HIV prevention"
         and MR.authoredOn after start of "Measurement Period"
         and MR.authoredOn before end of "Measurement Period"
+        and O.issued before (MR.authoredOn + 3 months)
   where ( O.status in {'final', 'amended'}
     and O.value ~ HC."HIV-positive - HIV.B.DE112"
   )
-  Return {MR.authoredOn,O.issued}
+  
   
 
 define "Patient Deceased before end of Measurement Period":
