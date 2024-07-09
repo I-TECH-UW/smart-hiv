@@ -82,3 +82,58 @@ include WHOCommon called WCom
 include FHIRCommon called FC
 
 // Indicator Definition
+
+parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-01-31]
+ 
+context Patient
+
+/*
+ * As defined by Member State
+ */
+define "Initial Population":
+  true
+
+
+define "numerator":
+    exists(HIC."PEP Prescribed before start of Measurement Period and Completed" MS
+	where (MS.effective ends during "Measurement Period")
+   ) 
+
+
+define "denominator":
+    exists(HIC."PEP Prescribed during Measurement Period and Completed" MS
+	where not (MS.effective ends after end of "Measurement Period")
+   ) 
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier 3"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "prep product":
+    HIC."prep_product"
+
+define "Setting":
+    HIC."setting"
+
+//provider type not provided?
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
+//Need to discuss how to add list
+//+ ':' +HIC."patientGroups"
+
+//Need exposure type

@@ -73,6 +73,35 @@ define "PREP Prescription":
         and MR.intent = 'order'
         and MR.medication ~ HC."PrEP for HIV prevention"
 
+define "PEP Prescription":
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC."PEP for HIV prevention"
+
+define "PEP Prescribed before start of Measurement Period and Completed":
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC."PEP for HIV prevention"
+        and MR.authoredOn before end of "Measurement Period"
+  where (MS.status = 'recorded'
+  and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
+  )
+
+define "PEP Prescribed during Measurement Period and Completed":
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC."PEP for HIV prevention"
+        and MR.authoredOn after start of "Measurement Period"
+        and MR.authoredOn before end of "Measurement Period"
+  where (MS.status = 'recorded'
+  and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
+  )
+  
 
 define "Patient Deceased before end of Measurement Period":
   case 

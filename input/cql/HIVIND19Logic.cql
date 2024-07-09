@@ -95,7 +95,7 @@ define "Initial Population":
   true
 
 
-//Exclusion happens automatically through test type valueset = excludes self test
+
 define "numerator":
     exists(HIC."HIV Positive Condition" C
 	where C.onset during "Measurement Period")
