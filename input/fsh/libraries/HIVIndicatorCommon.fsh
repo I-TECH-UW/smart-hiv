@@ -1,20 +1,20 @@
 
-Instance: HIVIndicatorCommonLogic
+Instance: HIVIndicatorCommon
 InstanceOf: Library
-Title: "HIVIndicatorCommon Logic"
-Description: "Description not yet available for HIVIndicatorCommonLogic."
+Title: "HIVIndicatorCommon"
+Description: "Description not yet available for HIVIndicatorCommon."
 Usage: #definition
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablelibrary"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablelibrary"
 * meta.profile[+] = "http://hl7.org/fhir/uv/cql/StructureDefinition/cql-library"
 * meta.profile[+] = "http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"
-* url = "http://smart.who.int/HIVIndicatorCommon/Library/HIVIndicatorCommonLogic"
+* url = "http://smart.who.int/hiv/Library/HIVIndicatorCommon"
 * extension[+]
   * url = "http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability"
   * valueCode = #computable
-* name = "HIVIndicatorCommonLogic"
+* name = "HIVIndicatorCommon"
 * status = #draft
 * experimental = true
 * publisher = "World Health Organization (WHO)"
 * type = $library-type#logic-library
-* content.id = "ig-loader-HIVIndicatorCommonLogic.cql"
+* content.id = "ig-loader-HIVIndicatorCommon.cql"
