@@ -114,9 +114,23 @@ define "HIV Test Positive After PEP Prescribed during Measurement Period":
   where ( O.status in {'final', 'amended'}
     and O.value ~ HC."HIV-positive - HIV.B.DE112"
   )
-  
-  
 
+define "Needle Syringe Dispensed":  
+  [DeviceUseStatement] DUS
+  with [Observation: HC."Key population member* - HIV.E.DE113"] O
+      such that DUS.reasonReference.references(O) 
+        and O.status in { 'final', 'amended', 'corrected' }
+        and exists(O.category OC where OC ~ HCC."social-history")
+        and O.value ~ HC."People who inject drugs - HIV.B.DE54"
+  where DUS.status = 'completed'
+
+  define PWID_person:
+    [Observation: HC."Key population member* - HIV.E.DE113"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.value ~ HC."People who inject drugs - HIV.B.DE54"
+
+  
 define "Patient Deceased before end of Measurement Period":
   case 
     when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then (Patient.meta.lastUpdated before end of "Measurement Period")
@@ -230,42 +244,42 @@ define "By Administrative Gender Stratifier":
 
  define SW:
   exists (
-    [Observation] O
+    [Observation: HC."Key population member* - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
-    and O.code ~ HC."Sex worker - HIV.B.DE51"
+    and O.value ~ HC."Sex worker - HIV.B.DE51"
   )
 
  define MSM:
   exists (
-    [Observation] O
+    [Observation: HC."Key population member* - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
-    and O.code ~ HC."Men who have sex with men"
+    and O.value ~ HC."Men who have sex with men"
   )
 
   define Trans:
   exists (
-    [Observation] O
+    [Observation: HC."Key population member* - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
-    and O.code ~ HC."Trans and gender-diverse people - HIV.B.DE53"
+    and O.value ~ HC."Trans and gender-diverse people - HIV.B.DE53"
   )
 
   define PWID:
   exists (
-    [Observation] O
+    [Observation: HC."Key population member* - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
-    and O.code ~ HC."People who inject drugs - HIV.B.DE54"
+    and O.value ~ HC."People who inject drugs - HIV.B.DE54"
   )
 
   define Prisoner:
   exists (
-    [Observation] O
+    [Observation: HC."Key population member* - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
-    and O.code ~ HC."People living in prisons and other closed settings"
+    and O.value ~ HC."People living in prisons and other closed settings"
   )
 
   define TB_diagnosed:
