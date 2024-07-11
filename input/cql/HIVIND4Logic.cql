@@ -75,10 +75,9 @@ library HIVIND4Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVIndicatorCommon version '0.0.1' called HIC
+include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-include WHOCommonV2 called WComV2
 include FHIRCommon called FC
 
 // Indicator Definition
@@ -91,7 +90,7 @@ define "Measure Population":
    Sum(
     (
       collapse (HIC."PREP Prescription" MR
-      return WComV2."Prescription Relevant Period"( MR ) intersect "Measurement Period"
+      return HIC."Prescription Relevant Period"( MR ) intersect "Measurement Period"
       )
     ) PREPUseInterval
       return days between start of PREPUseInterval and end of PREPUseInterval

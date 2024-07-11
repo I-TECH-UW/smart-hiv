@@ -1,10 +1,9 @@
-library HIVIndicatorCommon version '0.0.1' 
+library HIVCommon version '0.0.1' 
 
 using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-include WHOCommonV2 called WComV2
 include FHIRCommon called FC
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
@@ -556,3 +555,28 @@ define "PREP Prescription Days":
       return days between start of PREPUseInterval and end of PREPUseInterval
   )
 */
+
+
+define function GetDurationInDays(value FHIR.Duration): // returns Decimal:
+    case value.code.value
+      when 'a' then value.value * 365.0
+      when 'mo' then value.value.value * 30.0
+      when 'wk' then value.value.value * 7.0
+      when 'd' then value.value.value
+      when 'h' then value.value.value / 24.0
+      when 'min' then value.value.value / 60.0 / 24.0
+      when 's' then value.value.value / 60.0 / 60.0 / 24.0
+      when 'ms' then value.value.value / 60.0 / 60.0 / 24.0 / 1000.0
+      else Message(1000, true, 'Undefined', 'Error', 'Unsupported duration unit ' + value.code.value)
+    end
+
+define function "Prescription Relevant Period"(prescription FHIR.MedicationRequest):
+  if (
+    prescription.authoredOn is not null and prescription.dispenseRequest is not null
+      and prescription.dispenseRequest.expectedSupplyDuration is not null
+  )
+  then Interval[
+    date from prescription.authoredOn,
+    date from prescription.authoredOn + System.Quantity{ value: GetDurationInDays(prescription.dispenseRequest.expectedSupplyDuration), unit: 'days' }
+  ]
+  else null
