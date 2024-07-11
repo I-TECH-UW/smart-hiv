@@ -26,13 +26,13 @@ Title: "HIV.IND.19 HTS test volume and positivity"
     * description = "Number of tests performed where results were returned to a person during the reporting period (testing volume)"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "denominator"
+    * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.19.NUM"
     * description = "Number of tests conducted in which a new HIV-positive result or diagnosis was returned to a person during the reporting period (positivity)"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "numerator"
+    * criteria.expression = "Numerator"
   * stratifier[+]
     * id = "HIV.IND.19.S.AG"
     * criteria.language = #text/cql-identifier
