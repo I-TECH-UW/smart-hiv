@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>HIVCommon - WHO SMART Guidelines - HIV v0.1.0</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+    <link href="assets/css/fa-all.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/project.css" rel="stylesheet"/>
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+    <!-- Placeholder for child template CSS declarations -->
+    <link href="assets/css/who.css" rel="stylesheet"/>
+    <link href="assets/css/lforms.min.css" rel="stylesheet"/>
+
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script src="assets/js/prism.js"></script>
+
+    <style type="text/css">h2{--heading-prefix:"5.1.93"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.93"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+
+      <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
+        <div id="stripe"> </div>
+        <div class="container">  <!-- container -->
+          <!-- HEADER CONTENT -->
+  
+          <nav class="navbar navbar-inverse">
+            <!--status-bar-->
+            <div class="container">
+              <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+                <span class="icon-bar"> </span>
+                <span class="icon-bar"> </span>
+                <span class="icon-bar"> </span>
+              </button>
+              <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+              <div class="nav-collapse collapse navbar-inverse-collapse">
+                <!-- menu.xml  -->
+
+<ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Home
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="index.html">Summary</a>
+      </li>
+      <li>
+        <a href="changes.html">Changes</a>
+      </li>
+      <li>
+        <a href="dependencies.html">Dependencies</a>
+      </li>
+      <li>
+        <a href="references.html">References</a>
+      </li>
+      <li>
+        <a href="adapting.html">Adapting Guidelines for Country use</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Business Requirements
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="concepts.html">Concepts</a>
+      </li>
+      <li>
+        <a href="personas.html">Generic Personas</a>
+      </li>
+      <li>
+        <a href="scenarios.html">User Scenarios</a>
+      </li>
+      <li>
+        <a href="business-processes.html">Business Processes</a>
+      </li>
+      <li>
+        <a href="dictionary.html">Data Dictionary</a>
+      </li>
+      <li>
+        <a href="decision-logic.html">Decision-support Logic</a>
+      </li>
+      <li>
+        <a href="indicators.html">Indicator and Performance Metrics</a>
+      </li>
+      <li>
+        <a href="functional-requirements.html">Functional Requirements</a>
+      </li>
+      <li>
+        <a href="non-functional-requirements.html">Non-functional Requirements</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Data Models and Exchange
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="system-actors.html">System Actors</a>
+      </li>
+      <li>
+        <a href="sequence-diagrams.html">Sequence Diagrams</a>
+      </li>
+      <li>
+        <a href="transactions.html">Transactions</a>
+      </li>
+      <li>
+        <a href="indicators-measures.html">Indicators and Measures</a>
+      </li>
+      <li>
+        <a href="codings.html">Codings</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Deployment
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="security-privacy.html">Security and Privacy Considerations</a>
+      </li>
+      <li>
+        <a href="testing.html">Testing</a>
+      </li>
+      <li>
+        <a href="test-data.html">Test Data</a>
+      </li>
+      <li>
+        <a href="reference-implementations.html">Reference Implementations</a>
+      </li>
+      <li>
+        <a href="downloads.html">Downloads</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Indices
+      <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="artifacts.html">Artifact Index</a>
+      </li>
+      <li>
+        <a href="maps.html">Mappings</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+              </div>  <!-- /.nav-collapse -->
+
+              <div class="sf_colsIn col-md-8  navbar-right-container" data-sf-element="LanguageSelectorSearch" data-placeholder-label="Language Selector and Search" style="display: flex; justify-content: flex-end; align-items: center;">
+                <!-- This div will be pushed to the right -->
+                <div class="language-selector" style="margin-left: auto; background-color: #00477d; color: white;">
+                  <i class="fa fa-language fa-lg"></i>
+                  <label for="language-selector"> </label>
+                  <select onChange="openLink(value)" id="language-selector" name="language-selector">
+                    <option disabled selected>Select language</option>
+                    <option value="en" class="selected">English</option>
+                  </select>
+                  <i class="fas fa-angle-down"></i>
+                </div>
+                <!-- Search Content -->
+              </div>
+            </div>  <!-- /.container -->
+          </nav>  <!-- /.navbar -->
+        <!-- /HEADER CONTENT -->
+        </div>  <!-- /container -->
+      </div>  <!-- /segment-navbar -->
+      
+
+      <div class="container" style=" justify-content: space-between; align-items: left;">
+
+        <!-- Placeholder for child template header declarations -->
+<div id="project-nav">
+    <a id="who-logo" no-external="true" href="index.html">
+        
+    </a>
+</div>
+
+ <div id="family-nav">
+  <a id="fhir-logo" no-external="true" href="http://hl7.org/fhir">  </a>
+</div> 
+
+
+        <div id="ig-status" class="ig-status-draft">
+          <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
+            <br/>
+            <span style="display:inline-block;">0.1.0 - ci-build
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='indices.html'><b>Indices</b></a></li><li><a href='artifacts.html'><b>Artifact Index</b></a></li><li><b>HIVCommon</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.1.0) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+  
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+  <li class="active">
+    <a href="#">Narrative Content</a>
+  </li>
+
+
+
+  
+    <li>
+      <a href="Library-HIVCommon.xml.html">XML</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Library-HIVCommon.json.html">JSON</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Library-HIVCommon.ttl.html">TTL</a>
+    </li>
+  
+
+
+
+</ul>
+
+  <a name="root"> </a>
+
+  <h2 id="root">Library: HIVCommon
+(Experimental)
+  </h2>
+
+  <table class="colsd">
+
+    <tr>
+      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/HIV/Library/HIVCommon<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVCommon"/></span>
+      </td>
+      <td><i>Version</i>:
+      <span class="copy-text">0.1.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVCommon|0.1.0"/></span>
+      </td>
+    </tr>
+
+    <tr>
+
+
+
+
+
+
+
+      <td colspan="4">
+        
+          Draft
+          
+            as of 2024-07-12
+          
+        
+      </td>
+
+
+
+      <td><i>Computable Name</i>: <span style="font-family: monospace;">HIVCommon</span></td>
+    </tr>
+
+
+
+
+  </table>
+
+
+<p>
+<p>Description not yet available for HIVCommon.</p>
+
+</p>
+
+
+  <!-- insert intro if present -->
+  
+
+
+
+<!--  <p>
+  Formats: <a href="Library-HIVCommon.xml.html">XML</a>, <a href="Library-HIVCommon.json.html">JSON</a>, <a href="Library-HIVCommon.ttl.html">Turtle</a>
+  </p>-->
+
+  
+
+
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+
+using FHIR version '4.0.1'
+
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+include HIVConcepts called HC
+include HIVConceptsCustom called HCC
+
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-12-31]
+
+context Patient
+
+/*
+ * HIV Positive during the measurement period
+ * Does issued imply that results returned to tester
+ * or should use communication or encounter resource to specify?
+ */
+
+
+
+define &quot;HIV Positive Condition&quot;:
+[Condition] C
+    where C.clinicalStatus ~ HCC.&quot;active&quot;
+    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
+    and C.code ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
+
+define &quot;HIV Positive Observation&quot;:
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;HIV status&quot;
+    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
+
+define &quot;HIV Positive Observation - HIV Self Test&quot;:
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;HIV self-test&quot;
+    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
+
+define &quot;HIV Negative Observation&quot;:
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+    and O.value ~ HC.&quot;HIV-negative - HIV.B.DE117&quot;
+
+define &quot;HIV test resulted&quot;:
+  [Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+
+define &quot;HIV Treatment Active&quot;:
+[MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;On ART - HIV.H.DE47&quot;)
+
+
+define &quot;HIV PREP Active&quot;:
+[MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
+
+ define &quot;Client is at elevated risk for HIV acquisition&quot;:
+    [Observation] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;At elevated risk for HIV acquisition - HIV.B.DE225&quot;
+
+define &quot;PREP Prescription&quot;:
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PrEP for HIV prevention&quot;
+
+define &quot;PEP Prescription&quot;:
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+
+define &quot;PEP Prescribed before start of Measurement Period and Completed&quot;:
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+        and MR.authoredOn before end of &quot;Measurement Period&quot;
+  where (MS.status = 'recorded'
+  and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
+  )
+
+define &quot;PEP Prescribed during Measurement Period and Completed&quot;:
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+        and MR.authoredOn after start of &quot;Measurement Period&quot;
+        and MR.authoredOn before end of &quot;Measurement Period&quot;
+  where (MS.status = 'recorded'
+  and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
+  )
+
+define &quot;HIV Test Positive After PEP Prescribed during Measurement Period&quot;:
+  [Observation: HC.&quot;HIV test result - HIV.B.DE111&quot;] O
+    with [MedicationRequest] MR
+      such that O.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+        and MR.authoredOn after start of &quot;Measurement Period&quot;
+        and MR.authoredOn before end of &quot;Measurement Period&quot;
+        and O.issued before (MR.authoredOn + 3 months)
+  where ( O.status in {'final', 'amended'}
+    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE112&quot;
+  )
+
+define &quot;Needle Syringe Dispensed&quot;:  
+  [DeviceUseStatement] DUS
+  with [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+      such that DUS.reasonReference.references(O) 
+        and O.status in { 'final', 'amended', 'corrected' }
+        and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+        and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
+  where DUS.status = 'completed'
+
+  define PWID_person:
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
+
+  
+define &quot;Patient Deceased before end of Measurement Period&quot;:
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then (Patient.meta.lastUpdated before end of &quot;Measurement Period&quot;)
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of &quot;Measurement Period&quot;
+    else false
+  end
+
+define &quot;Patient Deceased during Measurement Period&quot;:
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  &quot;Measurement Period&quot; and  Patient.meta.lastUpdated after start of &quot;Measurement Period&quot;
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  &quot;Measurement Period&quot; and Patient.deceased as FHIR.dateTime after start of &quot;Measurement Period&quot;
+    else false
+  end
+
+/* End of care because of transferring out*/
+
+define &quot;Transfer Out at Facility during the measurement period&quot;:
+    exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ HC.&quot;On ART - HIV.H.DE47&quot;) 
+    and (exists (
+      EOC.statusHistory H
+      where H.status = 'finished'
+      and H.period ends during &quot;Measurement Period&quot;
+    ) 
+    or (
+      EOC.status = 'finished'
+      and EOC.period ends during &quot;Measurement Period&quot;
+    )
+    )
+    )
+
+define &quot;Lost to Follow Up during the measurement period&quot;:
+    exists(&quot;HIV Treatment Active&quot; H
+   where H.effective starts before end of &quot;Measurement Period&quot;
+    and H.effective ends after start of &quot;Measurement Period&quot;
+	and not (H.effective ends after (end of &quot;Measurement Period&quot; - 28 days))
+   )
+
+/*
+ * By Age Stratifiers
+ * (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)
+ * 
+ */
+define &quot;By Age Stratifier&quot;:
+    case 
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 4 then '0-4'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 9 then '5-9'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 14 then '10–14'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15–19'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20–24'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 29 then '25–29'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 34 then '30–34'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 39 then '35–39'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 44 then '40–44'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '45–49'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
+        else null
+    end
+  
+  /*
+ * By Age Stratifiers
+ * Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
+ * 
+ */
+define &quot;By Age Stratifier 2&quot;:
+    case 
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 4 then '0-4'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 9 then '5-9'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 14 then '10–14'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15–19'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20–24'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '25–49'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
+        else null
+    end
+
+define &quot;By Age Stratifier 3&quot;:
+    case 
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 15 and AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15-19'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20-24'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '25–49'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
+        else null
+    end
+
+/*
+ * By state stratifier
+ */
+
+define &quot;By Geographic Region Stratifier&quot;:
+    First(Patient.address A where A.use in { 'home' }).state
+
+/*
+ * By Administrative Gender of Patient Stratifier
+ * Need to expand codes
+ */
+
+define &quot;By Administrative Gender Stratifier&quot;:
+    case 
+        when Patient.gender = 'male' then HC.&quot;Male&quot;
+        when Patient.gender = 'female' then HC.&quot;Female&quot;
+        when Patient.gender = 'transgender female' then HC.&quot;Transgender female&quot;
+        when Patient.gender = 'transgender male' then HC.&quot;Transgender male&quot;
+        else HC.&quot;Other - HIV.A.DE23&quot;
+    end
+
+/*
+ * Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)
+ */
+
+ define SW:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Sex worker - HIV.B.DE51&quot;
+  )
+
+ define MSM:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Men who have sex with men&quot;
+  )
+
+  define Trans:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Trans and gender-diverse people - HIV.B.DE53&quot;
+  )
+
+  define PWID:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
+  )
+
+  define Prisoner:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;People living in prisons and other closed settings&quot;
+  )
+
+  define TB_diagnosed:
+  exists(
+    ([Condition] C
+    where C.clinicalStatus ~ HCC.&quot;active&quot;
+    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
+    and C.code ~ HC.&quot;Diagnosed TB&quot;
+    and C.onset during &quot;Measurement Period&quot;)
+  )
+  
+  define TB_presumptive:
+  exists(
+    ([Condition] C
+    where C.clinicalStatus ~ HCC.&quot;active&quot;
+    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
+    and C.code ~ HC.&quot;Presumptive TB - HIV.D.DE945&quot;
+    and C.onset during &quot;Measurement Period&quot;)
+  )
+
+
+define Exposure_Occupational:
+  exists (
+    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Occupational&quot;
+  )
+
+define Exposure_Non_Occupational_violent:
+  exists (
+    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Non-occupational violent&quot;
+  )
+
+define Exposure_Non_Occupational_consensual_sex:
+  exists (
+    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Non-occupational consensual sex&quot;
+  )
+
+define hiv_exposure_type:
+  List&lt;String&gt;{
+    if Exposure_Occupational then 'Occupational' else null,
+    if Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
+    if Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
+  }
+
+/*@triggeredBy Encounter with location = community level testing*/
+
+define &quot;Community_testing&quot;:
+  exists([Observation] O
+    with [Encounter] E
+      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Community-level testing&quot;) 
+  where (O.status in { 'final', 'amended' }
+  and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+  and O.issued during &quot;Measurement Period&quot;)
+  )
+
+/*@triggeredBy Encounter with location = facility level testing*/
+define &quot;Facility_testing&quot;:
+  exists([Observation] O
+    with [Encounter] E
+      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Facility-level testing&quot;)
+  where (O.status in { 'final', 'amended' }
+  and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+  and O.issued during &quot;Measurement Period&quot;)
+  )
+
+//lifted this from ANC DAK
+define &quot;ANC_case&quot;:
+exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ HC.&quot;Already on ART at first antenatal care visit&quot;)
+    and (exists (
+      EOC.statusHistory H
+      where H.period overlaps &quot;Measurement Period&quot;
+    ) 
+    or (
+      EOC.period overlaps &quot;Measurement Period&quot;
+    )
+    )
+    )
+  
+
+  define &quot;PREP Product Oral&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and (MS.medication ~ HC.&quot;TDF + FTC - HIV.C.DE18&quot; or
+    MS.medication ~ HC.&quot;TDF - HIV.C.DE19&quot; or
+    MS.medication ~ HC.&quot;TDF + 3TC - HIV.C.DE20&quot; or
+    MS.medication ~ HC.&quot;Other TDF-based regimen&quot;)
+  )
+
+  define &quot;PREP Product long-acting device&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and MS.medication ~ HC.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;
+  )
+
+  define &quot;PREP Product long-acting injectable&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and MS.medication ~ HC.&quot;CAB-LA - HIV.C.DE23&quot;
+  )
+  
+  define &quot;PREP first time&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ HC.&quot;First-time user - HIV.C.DE25&quot;)
+  )
+
+  define &quot;PREP Continuing user&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ HC.&quot;Continuing user&quot;)
+  )
+  
+  define &quot;PREP Restarting&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ HC.&quot;Restarting following a period of not taking PrEP&quot;)
+  )
+
+  define &quot;Daily_oral_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Daily oral PrEP&quot;)
+  )
+
+  define &quot;Event_driven_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Event-driven PrEP 2+1+1&quot;) 
+  )
+
+  define &quot;other_dosing_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Other PrEP dosing type&quot;) 
+  )
+
+
+  define patientGroups:
+  List&lt;String&gt;{
+    if SW then 'SW' else null,
+    if MSM then 'MSM' else null,
+    if Trans then 'Trans' else null,
+    if PWID then 'PWID' else null,
+    if Prisoner then 'Prisoner' else null
+  }
+
+  define setting:
+  List&lt;String&gt;{
+    if Community_testing then 'Community-level testing' else null,
+    if Facility_testing then 'Facility-level testing' else null
+  }
+
+  define anc:
+  List&lt;String&gt;{
+    if ANC_case then 'ANC case' else null
+  }
+
+  define tb:
+  List&lt;String&gt;{
+    if TB_diagnosed then 'Diagnosed TB' else null,
+    if TB_presumptive then 'Presumptive TB' else null
+  }
+
+  define prep_product:
+  List&lt;String&gt;{
+    if `PREP Product Oral` then 'PREP Product Oral' else null,
+    if `PREP Product long-acting device` then 'PREP Product long-acting device' else null,
+    if `PREP Product long-acting injectable` then 'PREP Product long-acting injectable' else null
+  }
+
+  define prep_experience:
+  List&lt;String&gt;{
+    if `PREP first time` then 'PREP first time' else null,
+    if `PREP Continuing user` then 'PREP Continuing user' else null,
+    if `PREP Restarting` then 'PREP Restarting' else null
+  }
+
+  define prep_dosing:
+  List&lt;String&gt;{
+    if `Daily_oral_PrEP` then 'Daily oral PrEP' else null,
+    if `Event_driven_PrEP` then 'Event driven PrEP' else null,
+    if `other_dosing_PrEP` then 'Other PrEP dosing type' else null
+  }
+
+//need to add Time to start ART (within 7, 30 or 90 days of diagnosis, as per country guidelines)
+//need to add Disaggregation by time since diagnosis
+  
+
+
+/* 
+* DAK has codes for HAART misspecified 
+* ICD-10 Z92.2	Other prophylactic chemotherapy		
+* LOINC &quot;54825-5	&quot;	On scheduled pain medication regimen in last 7 days
+*
+* Should discuss 
+*/
+
+
+
+
+
+
+
+/*
+* Kenya EMR defined as HIV positive condition
+* Will need to discuss if produce flags through conditions for concepts to use in indicator calculation such as HIV positive and On ART
+* However, we have moved forward with a more prescriptive approach 
+* Inevitably our approach requires that certain data elements be available
+*/
+
+/*
+ * HIV Treatment during the measurement period
+ * uses dosage and dispensation amount to estimate last day of medication
+ * medication should be dispensed before end of measurement period
+ * medication should last until after 28 days after the end of the measurement period
+ * This takes into account lost to follow up
+ */
+
+/*
+*define &quot;HIV Treatment during the measurement period&quot;:
+*   [MedicationDispense] MD
+*    where MD.status in { 'final', 'amended', 'corrected' }
+*    and MD.medication ~ 'Antiretroviral'
+*    and MD.whenHandedOver before end of &quot;Measurement Period&quot;
+*    and (MD.whenHandedOver + MD.dosageInstruction[0].timing.repeat.duration.value * MedicationDispense.quantity.value) after (measurementPeriod.end - 28 days)
+*/ 
+
+/*
+* Immunization defines HAART as
+*  exists([MedicationAdministration] A where ExtractMedicationCode(A.medication) in IMMZc.&quot;ARV Drugs&quot; and A.status = 'in-progress')
+* I believe this is the incorrect resource unless they mean to say that medication is given during a medical encounter
+* would like to discuss 
+*/ 
+
+/** 
+ * Patient Deceased During Measurement Period
+ * Immunization defines this as true when is a boolean. This may have the effect of deleting a person from indicators in all calculations
+ * Should intend to use when patient.deceased FHIR boolean was updated to TRUE if no other date is available
+ * Kenya EMR example does not account for when deceased is just a boolean
+ */
+
+
+/*
+define &quot;PREP Prescription Days&quot;:
+  Sum(
+    (
+      collapse (
+        [MedicationRequest] MR
+          where MR.status = 'completed'
+          and MR.intent = 'order'
+          and MR.medication ~ HC.&quot;PrEP for HIV prevention&quot;
+        return WComV2.&quot;Prescription Relevant Period&quot;( MR ) intersect &quot;Measurement Period&quot;
+      )
+    ) PREPUseInterval
+      return days between start of PREPUseInterval and end of PREPUseInterval
+  )
+*/
+
+
+define function GetDurationInDays(value FHIR.Duration): // returns Decimal:
+    case value.code.value
+      when 'a' then value.value * 365.0
+      when 'mo' then value.value.value * 30.0
+      when 'wk' then value.value.value * 7.0
+      when 'd' then value.value.value
+      when 'h' then value.value.value / 24.0
+      when 'min' then value.value.value / 60.0 / 24.0
+      when 's' then value.value.value / 60.0 / 60.0 / 24.0
+      when 'ms' then value.value.value / 60.0 / 60.0 / 24.0 / 1000.0
+      else Message(1000, true, 'Undefined', 'Error', 'Unsupported duration unit ' + value.code.value)
+    end
+
+define function &quot;Prescription Relevant Period&quot;(prescription FHIR.MedicationRequest):
+  if (
+    prescription.authoredOn is not null and prescription.dispenseRequest is not null
+      and prescription.dispenseRequest.expectedSupplyDuration is not null
+  )
+  then Interval[
+    date from prescription.authoredOn,
+    date from prescription.authoredOn + System.Quantity{ value: GetDurationInDays(prescription.dispenseRequest.expectedSupplyDuration), unit: 'days' }
+  ]
+  else null</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
+
+  <!-- insert notes if present -->
+  
+
+
+
+  
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="qa.html">QA Report</a>
+                 
+                
+| <a style="color: #81BEF7" target="_blank" href="http://smart.who.int/hiv/history.html">Version History</a> | <a style="color: #81BEF7" rel="license" href="license.html">License</a>
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+  
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

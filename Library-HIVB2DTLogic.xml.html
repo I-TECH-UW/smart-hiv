@@ -5,7 +5,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIVB2DT Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
+    <title>HIV.B2.DT Logic - XML Representation - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -44,8 +44,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.95"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.95"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.1"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.1"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -234,7 +234,7 @@
     <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
       <div class="container">  <!-- container -->
         <ul class="breadcrumb">
-          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='indices.html'><b>Indices</b></a></li><li><a href='artifacts.html'><b>Artifact Index</b></a></li><li><b>HIVB2DT Logic</b></li>
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='indices.html'><b>Indices</b></a></li><li><a href='artifacts.html'><b>Artifact Index</b></a></li><li><b>HIV.B2.DT Logic</b></li>
 
         </ul>
       </div>  <!-- /container -->
@@ -293,7 +293,7 @@
 <a name="root"> </a>
 
 
-<h2 id="root">: HIVB2DT Logic - XML Representation</h2>
+<h2 id="root">: HIV.B2.DT Logic - XML Representation</h2>
 
   <table class="colsd">
     <tr>
@@ -302,7 +302,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -334,16 +334,104 @@
   &lt;/meta&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;generated&quot;/&gt;
-    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVB2DTLogic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVB2DTLogic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVB2DTLogic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVB2DTLogic-en-US&quot;&gt; &lt;/a&gt;&lt;/div&gt;<a name="end-xhtml"></a>
+    &lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;&lt;p class=&quot;res-header-id&quot;&gt;&lt;b&gt;Generated Narrative: Library HIVB2DTLogic&lt;/b&gt;&lt;/p&gt;&lt;a name=&quot;HIVB2DTLogic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;hcHIVB2DTLogic&quot;&gt; &lt;/a&gt;&lt;a name=&quot;HIVB2DTLogic-en-US&quot;&gt; &lt;/a&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot;&gt;/**
+Library: HIV.B2.DT Logic
+
+@DecisionID: HIV.B2.DT
+@BusinessRule:
+@Trigger: 
+@Description: 
+
+Check for signs of serious illness
+Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease.  
+Should this just be for anyone with HIV? 
+Wouldn't other  disease domains also code for general exam?
+*/
+
+library HIVB2DTLogic
+
+ using FHIR version '4.0.1'
+ 
+
+ include HIVCommon version '0.0.1' called HIC
+ include FHIRHelpers version '4.0.1'
+ include WHOCommon called WCom
+ include FHIRCommon called FC
+
+ valueset &amp;quot;Tachycardia&amp;quot;: ''
+ valueset &amp;quot;Tachypnea&amp;quot;: ''
+ valueset &amp;quot;Unable to walk unaided&amp;quot;: ''
+ valueset &amp;quot;Body temperature = ≥ 39 °C&amp;quot;: '' 
+ valueset &amp;quot;Other sign of serious illness (specify)&amp;quot;: ''
+ valueset &amp;quot;Lethargy&amp;quot;: ''
+ valueset &amp;quot;Unconsciousness&amp;quot;: ''
+ valueset &amp;quot;Convulsions&amp;quot;: ''
+ valueset &amp;quot;Unable to breastfeed&amp;quot;: ''
+ valueset &amp;quot;Unable to drink&amp;quot;: ''
+ valueset &amp;quot;Repeated vomiting&amp;quot;: ''
+
+ context Patient
+
+ /*
+  * Age = ≥ 10 years
+  */
+
+define &amp;quot;Age_10_or_more&amp;quot;:
+  AgeInYearsAt(Today()) &amp;gt;= 10
+
+ /*
+  * Age &amp;lt; 10 years
+  */
+
+define &amp;quot;Age_less_than_10&amp;quot;:
+  AgeInYearsAt(Today()) &amp;lt; 10
+
+define &amp;quot;Take action or refer client showing signs of a serious illness&amp;quot;:
+  exists(([Observation: &amp;quot;Tachycardia&amp;quot;]
+  union [Observation: &amp;quot;Tachypnea&amp;quot;]
+  union [Observation: &amp;quot;Unable to walk unaided&amp;quot;]) O
+  where Age_10_or_more
+  and O.status in { 'final', 'amended' })
+  or exists(([Observation: &amp;quot;Lethargy&amp;quot;]
+  union [Observation: &amp;quot;Unconsciousness&amp;quot;]
+  union [Observation: &amp;quot;Convulsions&amp;quot;]
+  union [Observation: &amp;quot;Unable to breastfeed&amp;quot;]
+  union [Observation: &amp;quot;Unable to drink&amp;quot;]
+  union [Observation: &amp;quot;Unconsciousness&amp;quot;]
+  union [Observation: &amp;quot;Repeated vomiting&amp;quot;]) O
+  where Age_less_than_10
+  and O.status in { 'final', 'amended' }
+  )
+
+//plan definition Immediately take action or refer for care if a client is having this issue.
+
+define &amp;quot;Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill&amp;quot;:
+  exists (([Observation: &amp;quot;Body temperature = ≥ 39 °C&amp;quot;]
+  union [Observation: &amp;quot;Other sign of serious illness (specify)&amp;quot;]) O
+  where Age_10_or_more
+  and O.status in { 'final', 'amended' })
+  // Please this condition needs to be fixed
+  // or exists((([Observation: &amp;quot;Body temperature = ≥ 39 °C&amp;quot;]
+  // intersect [Observation: &amp;quot;Tachycardia&amp;quot;])
+  // or ([Observation: &amp;quot;Body temperature = ≥ 39 °C&amp;quot;]
+  // intersect [Observation: &amp;quot;Tachypnea&amp;quot;])
+  // or [Observation: &amp;quot;Other sign of serious illness (specify)&amp;quot;]) O
+  // where Age_less_than_10
+  // and O.status in { 'final', 'amended' })
+  // )
+
+
+//plan definition  Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill. 
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
              <a href="http://hl7.org/fhir/R4/datatypes.html#uri">url</a>=&quot;http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability&quot;&gt;
     &lt;<a href="http://hl7.org/fhir/R4/extensibility.html#Extension#Extension.value[x]">valueCode</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;computable&quot;/&gt;
   &lt;/extension&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.url">url</a> <a href="http://hl7.org/fhir/R4/datatypes.html#uri">value</a>=&quot;http://smart.who.int/HIVB2DT/Library/HIVB2DTLogic&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.url">url</a> <a href="http://hl7.org/fhir/R4/datatypes.html#uri">value</a>=&quot;http://smart.who.int/HIV/Library/HIVB2DTLogic&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.version">version</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;0.1.0&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;HIVB2DTLogic&quot;/&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.title">title</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;HIVB2DT Logic&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.title">title</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;HIV.B2.DT Logic&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.status">status</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;draft&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.experimental">experimental</a> <a href="http://hl7.org/fhir/R4/datatypes.html#boolean">value</a>=&quot;true&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.type">type</a>&gt;
@@ -352,7 +440,7 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-07-08T21:32:57+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-07-12T23:16:48+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -361,7 +449,15 @@
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#ContactPoint#ContactPoint.value">value</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;http://who.int&quot;/&gt;
     &lt;/telecom&gt;
   &lt;/contact&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a> <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;Description not yet available for HIVB2DTLogic.&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a> <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;Description not yet available for HIV.B2.DT Logic.&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoqCkxpYnJhcnk6IEhJVi5CMi5EVCBMb2dpYwoKQERlY2lzaW9uSUQ6IEhJVi5CMi5EVApAQnVzaW5lc3NSdWxlOgpAVHJpZ2dlcjogCkBEZXNjcmlwdGlvbjogCgpDaGVjayBmb3Igc2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzCkNvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIEhJViBwcmV2ZW50aW9uLCB0ZXN0aW5nLCB0cmVhdG1lbnQsIHNlcnZpY2UgZGVsaXZlcnkgYW5kIG1vbml0b3Jpbmc6IHJlY29tbWVuZGF0aW9ucyBmb3IgYSBwdWJsaWMgaGVhbHRoIGFwcHJvYWNoICgyMDIxKSBDaGFwdGVyIDU6IEFkdmFuY2VkIEhJViBEaXNlYXNlLiBGaWd1cmUgNS4xOiBBbGdvcml0aG0gZm9yIHByb3ZpZGluZyBhIHBhY2thZ2Ugb2YgY2FyZSBmb3IgcGVvcGxlIHdpdGggYWR2YW5jZWQgSElWIGRpc2Vhc2UuICAKU2hvdWxkIHRoaXMganVzdCBiZSBmb3IgYW55b25lIHdpdGggSElWPyAKV291bGRuJ3Qgb3RoZXIgIGRpc2Vhc2UgZG9tYWlucyBhbHNvIGNvZGUgZm9yIGdlbmVyYWwgZXhhbT8KKi8KCmxpYnJhcnkgSElWQjJEVExvZ2ljCgogdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKIAoKIGluY2x1ZGUgSElWQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCiBpbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwogaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KIGluY2x1ZGUgRkhJUkNvbW1vbiBjYWxsZWQgRkMKCiB2YWx1ZXNldCAiVGFjaHljYXJkaWEiOiAnJwogdmFsdWVzZXQgIlRhY2h5cG5lYSI6ICcnCiB2YWx1ZXNldCAiVW5hYmxlIHRvIHdhbGsgdW5haWRlZCI6ICcnCiB2YWx1ZXNldCAiQm9keSB0ZW1wZXJhdHVyZSA9IOKJpSAzOSDCsEMiOiAnJyAKIHZhbHVlc2V0ICJPdGhlciBzaWduIG9mIHNlcmlvdXMgaWxsbmVzcyAoc3BlY2lmeSkiOiAnJwogdmFsdWVzZXQgIkxldGhhcmd5IjogJycKIHZhbHVlc2V0ICJVbmNvbnNjaW91c25lc3MiOiAnJwogdmFsdWVzZXQgIkNvbnZ1bHNpb25zIjogJycKIHZhbHVlc2V0ICJVbmFibGUgdG8gYnJlYXN0ZmVlZCI6ICcnCiB2YWx1ZXNldCAiVW5hYmxlIHRvIGRyaW5rIjogJycKIHZhbHVlc2V0ICJSZXBlYXRlZCB2b21pdGluZyI6ICcnCgogY29udGV4dCBQYXRpZW50CgogLyoKICAqIEFnZSA9IOKJpSAxMCB5ZWFycwogICovCgpkZWZpbmUgIkFnZV8xMF9vcl9tb3JlIjoKICBBZ2VJblllYXJzQXQoVG9kYXkoKSkgPj0gMTAKCiAvKgogICogQWdlIDwgMTAgeWVhcnMKICAqLwoKZGVmaW5lICJBZ2VfbGVzc190aGFuXzEwIjoKICBBZ2VJblllYXJzQXQoVG9kYXkoKSkgPCAxMAoKZGVmaW5lICJUYWtlIGFjdGlvbiBvciByZWZlciBjbGllbnQgc2hvd2luZyBzaWducyBvZiBhIHNlcmlvdXMgaWxsbmVzcyI6CiAgZXhpc3RzKChbT2JzZXJ2YXRpb246ICJUYWNoeWNhcmRpYSJdCiAgdW5pb24gW09ic2VydmF0aW9uOiAiVGFjaHlwbmVhIl0KICB1bmlvbiBbT2JzZXJ2YXRpb246ICJVbmFibGUgdG8gd2FsayB1bmFpZGVkIl0pIE8KICB3aGVyZSBBZ2VfMTBfb3JfbW9yZQogIGFuZCBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJyB9KQogIG9yIGV4aXN0cygoW09ic2VydmF0aW9uOiAiTGV0aGFyZ3kiXQogIHVuaW9uIFtPYnNlcnZhdGlvbjogIlVuY29uc2Npb3VzbmVzcyJdCiAgdW5pb24gW09ic2VydmF0aW9uOiAiQ29udnVsc2lvbnMiXQogIHVuaW9uIFtPYnNlcnZhdGlvbjogIlVuYWJsZSB0byBicmVhc3RmZWVkIl0KICB1bmlvbiBbT2JzZXJ2YXRpb246ICJVbmFibGUgdG8gZHJpbmsiXQogIHVuaW9uIFtPYnNlcnZhdGlvbjogIlVuY29uc2Npb3VzbmVzcyJdCiAgdW5pb24gW09ic2VydmF0aW9uOiAiUmVwZWF0ZWQgdm9taXRpbmciXSkgTwogIHdoZXJlIEFnZV9sZXNzX3RoYW5fMTAKICBhbmQgTy5zdGF0dXMgaW4geyAnZmluYWwnLCAnYW1lbmRlZCcgfQogICkKCi8vcGxhbiBkZWZpbml0aW9uIEltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGEgY2xpZW50IGlzIGhhdmluZyB0aGlzIGlzc3VlLgoKZGVmaW5lICJVc2UgY2xpbmljYWwganVkZ2VtZW50IGFuZCBjb25zaWRlciBsb2NhbCBlcGlkZW1pb2xvZ3kgdG8gZGV0ZXJtaW5lIGlmIHN5bXB0b21zIHN1Z2dlc3QgY2xpZW50IGlzIHNlcmlvdXNseSBpbGwiOgogIGV4aXN0cyAoKFtPYnNlcnZhdGlvbjogIkJvZHkgdGVtcGVyYXR1cmUgPSDiiaUgMzkgwrBDIl0KICB1bmlvbiBbT2JzZXJ2YXRpb246ICJPdGhlciBzaWduIG9mIHNlcmlvdXMgaWxsbmVzcyAoc3BlY2lmeSkiXSkgTwogIHdoZXJlIEFnZV8xMF9vcl9tb3JlCiAgYW5kIE8uc3RhdHVzIGluIHsgJ2ZpbmFsJywgJ2FtZW5kZWQnIH0pCiAgLy8gUGxlYXNlIHRoaXMgY29uZGl0aW9uIG5lZWRzIHRvIGJlIGZpeGVkCiAgLy8gb3IgZXhpc3RzKCgoW09ic2VydmF0aW9uOiAiQm9keSB0ZW1wZXJhdHVyZSA9IOKJpSAzOSDCsEMiXQogIC8vIGludGVyc2VjdCBbT2JzZXJ2YXRpb246ICJUYWNoeWNhcmRpYSJdKQogIC8vIG9yIChbT2JzZXJ2YXRpb246ICJCb2R5IHRlbXBlcmF0dXJlID0g4omlIDM5IMKwQyJdCiAgLy8gaW50ZXJzZWN0IFtPYnNlcnZhdGlvbjogIlRhY2h5cG5lYSJdKQogIC8vIG9yIFtPYnNlcnZhdGlvbjogIk90aGVyIHNpZ24gb2Ygc2VyaW91cyBpbGxuZXNzIChzcGVjaWZ5KSJdKSBPCiAgLy8gd2hlcmUgQWdlX2xlc3NfdGhhbl8xMAogIC8vIGFuZCBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJyB9KQogIC8vICkKCgovL3BsYW4gZGVmaW5pdGlvbiAgVXNlIGNsaW5pY2FsIGp1ZGdlbWVudCBhbmQgY29uc2lkZXIgbG9jYWwgZXBpZGVtaW9sb2d5IHRvIGRldGVybWluZSBpZiBzeW1wdG9tcyBzdWdnZXN0IGNsaWVudCBpcyBzZXJpb3VzbHkgaWxsLiAK&quot;/&gt;
+  &lt;/content&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
+    &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
+  &lt;/content&gt;
 &lt;/Library&gt;</code></pre>
 
 
@@ -386,7 +482,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

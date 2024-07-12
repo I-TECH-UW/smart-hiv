@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.7"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.7"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.5"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.5"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND13Logic</b></p><a name="HIVIND13Logic"> </a><a name="hcHIVIND13Logic"> </a><a name="hcHIVIND13Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library FHIRHelpers</td><td><code>http://smart.who.int/hiv/Library/FHIRHelpers|4.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library FC</td><td><code>http://smart.who.int/hiv/Library/FHIRCommon</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND13Logic</b></p><a name="HIVIND13Logic"> </a><a name="hcHIVIND13Logic"> </a><a name="HIVIND13Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.13 Logic
  * Ref No: PRV.13
  * Short Name: OAMT minimum duration
@@ -365,29 +365,29 @@
  * Denominator Exclusions: 
  *
  * Disaggregations:
- * • Gender (female, male, other*)
- * • Age (15–19, 20–24, 25–49, 50+ years)
- * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
- * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
- * • Cities and other administrative regions of epidemiologic importance
- * 
+ * • Gender (female, male, other*) 
+ *  • Age (15–19, 20–24, 25–49, 50+ years) 
+ *  • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental) 
+ *  • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.) 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
  * Disaggregation Elements: Gender | Age
  *
  * Numerator and Denominator Elements:
- * Date OAMT initiated | Retained on OAMT
+ * Date OAMT initiated 
+ *  Retained on OAMT
  *
  * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
  * 
  * Data Concepts:
- *  
- * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
- * HIV.A.DE18: Gender* | Gender of the client* 
- * HIV.A.DE19: Female | Client identifies as female 
- * HIV.A.DE20: Male | Client identifies as male 
- * HIV.A.DE21: Transgender male | Client identifies as transgender male 
- * HIV.A.DE22: Transgender female | Client identifies as transgender female 
- * HIV.A.DE23: Other | Additional category 
- * HIV.PRV.DE17: Date OAMT initiated | Date client initiated opioid agonist maintenance treatment (OAMT) 
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.PRV.DE17: Date OAMT initiated | Date client initiated opioid agonist maintenance treatment (OAMT)
  * HIV.PRV.DE21: Retained on OAMT | Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion
  *
  * Additional Context
@@ -403,13 +403,49 @@ library HIVIND13Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVIndicatorCommon version '0.0.1' called HIC
+include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include WHOCommon called WCom
 include FHIRCommon called FC
+include WHOCommon called WCom
 
 // Indicator Definition
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 5Kb )</p></div>
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
+
+context Patient
+/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true
+
+/**
+ * Numerator
+ * 
+ * Definition: Number of people in cohort retained in OAMT for at least six months
+ * Calculation: COUNT of clients within cohort &quot;Retained on OAMT&quot;=True 6 months after &quot;Date OAMT initiated&quot;
+ */
+
+define &quot;Numerator&quot;:
+  true
+
+
+/**
+ * Denominator
+ *
+ * Definition: Number of people starting OAMT during defined cohort recruitment period
+ * Calculation: COUNT of clients within cohort with &quot;Date OAMT initiated&quot; in cohort recruitment period
+ */
+
+define &quot;Denominator&quot;:
+  true
+    
+
+/* end Populations */
+
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -434,7 +470,7 @@ include FHIRCommon called FC
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

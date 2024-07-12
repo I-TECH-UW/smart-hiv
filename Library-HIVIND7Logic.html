@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.65"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.65"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.63"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.63"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND7Logic</b></p><a name="HIVIND7Logic"> </a><a name="hcHIVIND7Logic"> </a><a name="hcHIVIND7Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library FHIRHelpers</td><td><code>http://smart.who.int/hiv/Library/FHIRHelpers|4.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library FC</td><td><code>http://smart.who.int/hiv/Library/FHIRCommon</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND7Logic</b></p><a name="HIVIND7Logic"> </a><a name="hcHIVIND7Logic"> </a><a name="HIVIND7Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.7 Logic
  * Ref No: PRV.7
  * Short Name: HIV in PEP recipients
@@ -365,59 +365,63 @@
  * Denominator Exclusions: 
  *
  * Disaggregations:
- * • Gender (female, male, other*)
- * • Age (15-19, 20-24, 25-49, 50+ years)
- * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender -diverse people)2
- * • Exposure type (occupational, non-occupational violent, non-occupational consensual sex)
- * • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental)
- * • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.)
- * • Cities and other administrative regions of epidemiologic importance
- * 
+ * • Gender (female, male, other*) 
+ *  • Age (15-19, 20-24, 25-49, 50+ years) 
+ *  • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender -diverse people)2 
+ *  • Exposure type (occupational, non-occupational violent, non-occupational consensual sex) 
+ *  • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental) 
+ *  • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.) 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
  * Disaggregation Elements: Gender | Age | Key population member type | HIV exposure type
  *
  * Numerator and Denominator Elements:
- * Date medications prescribed | HIV test date | HIV test result | Medications prescribed
+ * Date medications prescribed 
+ *  HIV test date 
+ *  HIV test result 
+ *  Medications prescribed
  *
  * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
  * 
  * Data Concepts:
- *  
- * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
- * HIV.A.DE18: Gender* | Gender of the client* 
- * HIV.A.DE19: Female | Client identifies as female 
- * HIV.A.DE20: Male | Client identifies as male 
- * HIV.A.DE21: Transgender male | Client identifies as transgender male 
- * HIV.A.DE22: Transgender female | Client identifies as transgender female 
- * HIV.A.DE23: Other | Additional category 
- * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
- * HIV.B.DE51: Sex worker | Client is a sex worker 
- * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
- * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
- * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
- * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
- * HIV.B.DE61: HIV exposure type* | Ways in which the client was exposed to HIV 
- * HIV.B.DE62: Occupational | Occupational exposure to HIV 
- * HIV.B.DE63: Non-occupational violent | Non-occupational violent exposure to HIV 
- * HIV.B.DE64: Non-occupational consensual sex | Exposure to HIV through non-occupational consensual sex 
- * HIV.B.DE110: HIV test date | Date of the HIV test 
- * HIV.B.DE111: HIV test result | The result from HIV testing after applying the testing algorithm 
- * HIV.B.DE112: HIV-positive | Test result is HIV-positive 
- * HIV.B.DE113: HIV-negative | Test result is HIV-negative 
- * HIV.B.DE114: HIV-inconclusive | Test result is HIV-inconclusive 
- * HIV.C.DE74: Date medications prescribed | Date the client was prescribed medications 
- * HIV.C.DE75: Medications prescribed | Medications the client was prescribed 
- * HIV.C.DE76: PrEP for HIV prevention | Client was prescribed pre-exposure prophylaxis (PrEP) for HIV prevention 
- * HIV.C.DE77: PEP for HIV prevention | Client was prescribed post-exposure prophylaxis (PEP) for HIV prevention 
- * HIV.C.DE78: Other | Client was prescribed other medications 
- * HIV.D.DE457: Medications prescribed | Name or regimen code of all other medications prescribed during the visit 
- * HIV.D.DE458: Date medications prescribed | Date the medications were prescribed 
- * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
- * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
- * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
- * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
- * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
- * HIV.E.DE224: HIV test date | Date of the HIV test 
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in
+ * HIV.B.DE51: Sex worker | Client is a sex worker
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting
+ * HIV.B.DE61: HIV exposure type* | Ways in which the client was exposed to HIV
+ * HIV.B.DE62: Occupational | Occupational exposure to HIV
+ * HIV.B.DE63: Non-occupational violent | Non-occupational violent exposure to HIV
+ * HIV.B.DE64: Non-occupational consensual sex | Exposure to HIV through non-occupational consensual sex
+ * HIV.B.DE110: HIV test date | Date of the HIV test
+ * HIV.B.DE111: HIV test result | The result from HIV testing after applying the testing algorithm
+ * HIV.B.DE112: HIV-positive | Test result is HIV-positive
+ * HIV.B.DE113: HIV-negative | Test result is HIV-negative
+ * HIV.B.DE114: HIV-inconclusive | Test result is HIV-inconclusive
+ * HIV.C.DE74: Date medications prescribed | Date the client was prescribed medications
+ * HIV.C.DE75: Medications prescribed | Medications the client was prescribed
+ * HIV.C.DE76: PrEP for HIV prevention | Client was prescribed pre-exposure prophylaxis (PrEP) for HIV prevention
+ * HIV.C.DE77: PEP for HIV prevention | Client was prescribed post-exposure prophylaxis (PEP) for HIV prevention
+ * HIV.C.DE78: Other | Client was prescribed other medications
+ * HIV.D.DE457: Medications prescribed | Name or regimen code of all other medications prescribed during the visit
+ * HIV.D.DE458: Date medications prescribed | Date the medications were prescribed
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting
+ * HIV.E.DE224: HIV test date | Date of the HIV test
  * HIV.PRV.DE27: Date medications prescribed | Date the client was prescribed medications
+ * HIV.SRV.DE1: HIV test date | Date of the HIV test
+ * HIV.SRV.DE2: HIV test result | The result from HIV testing after applying the testing algorithm
  *
  * Additional Context
  * - what it measures: This indicator measures HIV infection status among individuals after receiving PEP.
@@ -432,13 +436,72 @@ library HIVIND7Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVIndicatorCommon version '0.0.1' called HIC
+include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include WHOCommon called WCom
 include FHIRCommon called FC
+include WHOCommon called WCom
 
 // Indicator Definition
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 8Kb )</p></div>
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
+
+context Patient
+/*
+ * As defined by Member State
+ */
+define &quot;Initial Population&quot;:
+  true
+
+
+define &quot;numerator&quot;:
+    exists(HIC.&quot;HIV Test Positive After PEP Prescribed during Measurement Period&quot; O
+	where (O.issued after start of &quot;Measurement Period&quot;)
+   ) 
+
+
+define &quot;denominator&quot;:
+    exists(HIC.&quot;PEP Prescription&quot; MR
+	where (MR.authoredOn after start of &quot;Measurement Period&quot;
+    and MR.authoredOn before end of &quot;Measurement Period&quot;)
+   ) 
+
+
+
+
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIC.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIC.&quot;By Age Stratifier 3&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIC.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;patientGroups Stratifier&quot;:
+	HIC.&quot;patientGroups&quot;
+
+define &quot;prep product&quot;:
+    HIC.&quot;prep_product&quot;
+
+define &quot;Setting&quot;:
+    HIC.&quot;setting&quot;
+
+define &quot;hiv_exposure_type&quot;:
+    HIC.&quot;hiv_exposure_type&quot;
+
+//provider type not provided?
+
+define &quot;Stratification&quot;:
+ HIC.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIC.&quot;By Age Stratifier&quot;
++ ':' + HIC.&quot;By Geographic Region Stratifier&quot;
+//Need to discuss how to add list
+//+ ':' +HIC.&quot;patientGroups&quot;
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -463,7 +526,7 @@ include FHIRCommon called FC
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.33"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.33"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.31"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.31"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND40Logic</b></p><a name="HIVIND40Logic"> </a><a name="hcHIVIND40Logic"> </a><a name="hcHIVIND40Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library FHIRHelpers</td><td><code>http://smart.who.int/hiv/Library/FHIRHelpers|4.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library FC</td><td><code>http://smart.who.int/hiv/Library/FHIRCommon</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND40Logic</b></p><a name="HIVIND40Logic"> </a><a name="hcHIVIND40Logic"> </a><a name="HIVIND40Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.40 Logic
  * Ref No: VER.4
  * Short Name: ART coverage in pregnant women
@@ -365,36 +365,40 @@
  * Denominator Exclusions: 
  *
  * Disaggregations:
- * Numerator:
- * • Timing of ART initiation (1. already on ART at first ANC visit, 2. newly on ART during pregnancy, 3. newly on ART during labour and delivery, 4. on non-recommended ART regimen)
- * 
- * The primary indicator calculation should include ART status categories 1, 2 and 3. Removing the women in category 1 &quot;already on ART at first ANC visit&quot; from the numerator and denominator gives a measure of ART coverage among HIV-positive pregnant women newly diagnosed during ANC. Dividing category 2 by the sum of categories 2 and 3 gives the proportion of new ART initiations occurring during pregnancy rather than at delivery. Calculating the indicator with those in category 4 (non-recommended ARV regimen) included in the numerator gives a broader measure, that is, coverage of HIV-positive pregnant women receiving any ARV drug.
- * 
+ * Numerator: 
+ *  • Timing of ART initiation (1. already on ART at first ANC visit, 2. newly on ART during pregnancy, 3. newly on ART during labour and delivery, 4. on non-recommended ART regimen) 
+ *   
+ *  The primary indicator calculation should include ART status categories 1, 2 and 3. Removing the women in category 1 &quot;already on ART at first ANC visit&quot; from the numerator and denominator gives a measure of ART coverage among HIV-positive pregnant women newly diagnosed during ANC. Dividing category 2 by the sum of categories 2 and 3 gives the proportion of new ART initiations occurring during pregnancy rather than at delivery. Calculating the indicator with those in category 4 (non-recommended ARV regimen) included in the numerator gives a broader measure, that is, coverage of HIV-positive pregnant women receiving any ARV drug.
+ *
  * Disaggregation Elements: Timing of ART initiation
  *
  * Numerator and Denominator Elements:
- * ANC contact date | Delivery date | HIV status | On ART | Place of delivery
+ * ANC contact date 
+ *  Delivery date 
+ *  HIV status 
+ *  On ART 
+ *  Place of delivery
  *
  * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
  * 
  * Data Concepts:
- *  
- * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
- * HIV.B.DE116: HIV-positive | Client is HIV-positive 
- * HIV.B.DE117: HIV-negative | Client is HIV-negative 
- * HIV.B.DE118: Unknown | Client has unknown HIV status 
- * HIV.D.DE38: On ART | Client is currently taking ART 
- * HIV.E.DE41: Timing of ART initiation | When the pregnant woman or mother initiated ART, for women living with HIV. 
- * HIV.E.DE42: Already on ART at first antenatal care visit | The pregnant woman was already on antiretroviral therapy (ART) at first antenatal care visit 
- * HIV.E.DE43: Newly on ART during pregnancy | The pregnant woman started ART during her pregnancy 
- * HIV.E.DE44: Newly on ART during labour and delivery | The woman started ART during labour and delivery 
- * HIV.E.DE46: Delivery date | Date on which the woman delivered 
- * HIV.E.DE67: Place of delivery | The type of place where the woman delivered 
- * HIV.E.DE68: Health facility | The woman delivered at a health facility 
- * HIV.E.DE69: Home | The woman delivered at home 
- * HIV.E.DE70: Other | The woman delivered at another location that is not at home or at a health facility 
- * HIV.E.DE85: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date') 
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative
+ * HIV.B.DE118: Unknown | Client has unknown HIV status
+ * HIV.D.DE38: On ART | Client is currently taking ART
+ * HIV.E.DE41: Timing of ART initiation | When the pregnant woman or mother initiated ART, for women living with HIV.
+ * HIV.E.DE42: Already on ART at first antenatal care visit | The pregnant woman was already on antiretroviral therapy (ART) at first antenatal care visit
+ * HIV.E.DE43: Newly on ART during pregnancy | The pregnant woman started ART during her pregnancy
+ * HIV.E.DE44: Newly on ART during labour and delivery | The woman started ART during labour and delivery
+ * HIV.E.DE46: Delivery date | Date on which the woman delivered
+ * HIV.E.DE67: Place of delivery | The type of place where the woman delivered
+ * HIV.E.DE68: Health facility | The woman delivered at a health facility
+ * HIV.E.DE69: Home | The woman delivered at home
+ * HIV.E.DE70: Other | The woman delivered at another location that is not at home or at a health facility
+ * HIV.E.DE85: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')
  * HIV.H.DE47: On ART | Client is currently taking ART 
+ * HIV.SRV.DE18: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')
  *
  * Additional Context
  * - what it measures: This indicator measures whether a recommended course of ART has been provided to HIV-positive pregnant women.
@@ -409,13 +413,49 @@ library HIVIND40Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVIndicatorCommon version '0.0.1' called HIC
+include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include WHOCommon called WCom
 include FHIRCommon called FC
+include WHOCommon called WCom
 
 // Indicator Definition
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 7Kb )</p></div>
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
+
+context Patient
+/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true
+
+/**
+ * Numerator
+ * 
+ * Definition: Number of HIV-positive pregnant women who delivered during the reporting period and received ART during pregnancy and/or at labour and delivery
+ * Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Delivery date&quot; in the reporting period AND ((&quot;On ART&quot;=True at labour and delivery) OR (&quot;On ART&quot;=True during pregnancy, for this pregnancy))
+ */
+
+define &quot;Numerator&quot;:
+  true
+
+
+/**
+ * Denominator
+ *
+ * Definition: a) Programme-based/service delivery denominator | Number of HIV-positive pregnant women who delivered during the reporting period and attended ANC or had a facility-based delivery | b) Population-based denominator | Number of HIV-positive pregnant women who delivered during the reporting period
+ * Calculation: Programme-based/service delivery denominator: | COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Delivery date&quot; in the reporting period AND (had an &quot;ANC contact date&quot; during reporting period OR &quot;Place of delivery&quot; was a 'Health facility') |  | Population-based denominator: | *Number of HIV-positive pregnant women who delivered during the reporting period
+ */
+
+define &quot;Denominator&quot;:
+  true
+    
+
+/* end Populations */
+
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -440,7 +480,7 @@ include FHIRCommon called FC
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

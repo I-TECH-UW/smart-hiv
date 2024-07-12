@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.20"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.20"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.18"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.18"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND28Logic</b></p><a name="HIVIND28Logic"> </a><a name="hcHIVIND28Logic"> </a><a name="hcHIVIND28Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library FHIRHelpers</td><td><code>http://smart.who.int/hiv/Library/FHIRHelpers|4.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library FC</td><td><code>http://smart.who.int/hiv/Library/FHIRCommon</code></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND28Logic</b></p><a name="HIVIND28Logic"> </a><a name="hcHIVIND28Logic"> </a><a name="HIVIND28Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.28 Logic
  * Ref No: ART.2
  * Short Name: Total attrition from ART
@@ -365,52 +365,54 @@
  * Denominator Exclusions: 
  *
  * Disaggregations:
- * • Gender (female, male, other**)
- * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)***
- * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)****
- * • Treatment outcome category (died, stopped treatment, lost to follow-up)
- * • Cities and other administrative regions of epidemiologic importance
- * 
+ * • Gender (female, male, other**) 
+ *  • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)*** 
+ *  • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**** 
+ *  • Treatment outcome category (died, stopped treatment, lost to follow-up) 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
  * Disaggregation Elements: Gender | Age | Key population member type | HIV treatment outcome
  *
  * Numerator and Denominator Elements:
- * ART start date | HIV status | On ART
+ * ART start date 
+ *  HIV status 
+ *  On ART
  *
  * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
  * 
  * Data Concepts:
- *  
- * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
- * HIV.A.DE18: Gender* | Gender of the client* 
- * HIV.A.DE19: Female | Client identifies as female 
- * HIV.A.DE20: Male | Client identifies as male 
- * HIV.A.DE21: Transgender male | Client identifies as transgender male 
- * HIV.A.DE22: Transgender female | Client identifies as transgender female 
- * HIV.A.DE23: Other | Additional category 
- * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
- * HIV.B.DE51: Sex worker | Client is a sex worker 
- * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
- * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
- * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
- * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
- * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART) 
- * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
- * HIV.B.DE116: HIV-positive | Client is HIV-positive 
- * HIV.B.DE117: HIV-negative | Client is HIV-negative 
- * HIV.B.DE118: Unknown | Client has unknown HIV status 
- * HIV.D.DE38: On ART | Client is currently taking ART 
- * HIV.D.DE39: ART start date | The date on which the client started or restarted ART 
- * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
- * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
- * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
- * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
- * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
- * HIV.H.DE41: HIV treatment outcome | The outcome for the client which is used for reporting retention/attrition. 
- * HIV.H.DE42: Lost to follow-up | Twenty-eight days or more since last missed appointment  
- * HIV.H.DE43: Transferred out | The client transferred to another facility 
- * HIV.H.DE44: Death (documented) | People living with HIV previously on ART who are confirmed to have died from any cause 
- * HIV.H.DE45: Refused (stopped) treatment | Client was contacted and confirmed to have stopped ART (reasons may include stigma and discrimination, faith healing, etc.) 
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in
+ * HIV.B.DE51: Sex worker | Client is a sex worker
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting
+ * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative
+ * HIV.B.DE118: Unknown | Client has unknown HIV status
+ * HIV.D.DE38: On ART | Client is currently taking ART
+ * HIV.D.DE39: ART start date | The date on which the client started or restarted ART
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting
+ * HIV.H.DE41: HIV treatment outcome | The outcome for the client which is used for reporting retention/attrition.
+ * HIV.H.DE42: Lost to follow-up | Twenty-eight days or more since last missed appointment 
+ * HIV.H.DE43: Transferred out | The client transferred to another facility
+ * HIV.H.DE44: Death (documented) | People living with HIV previously on ART who are confirmed to have died from any cause
+ * HIV.H.DE45: Refused (stopped) treatment | Client was contacted and confirmed to have stopped ART (reasons may include stigma and discrimination, faith healing, etc.)
  * HIV.H.DE47: On ART | Client is currently taking ART 
+ * HIV.SRV.DE6: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
  *
  * Additional Context
  * - what it measures: Measures progress towards promoting retention on ART and mitigating loss, that is, attrition from ART. |  | This indicator is central to understanding total attrition (loss) from ART during a reporting period and to understanding net progress towards reaching the second 95 target.
@@ -425,17 +427,15 @@ library HIVIND28Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVIndicatorCommon version '0.0.1' called HIC
+include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include WHOCommon called WCom
 include FHIRCommon called FC
+include WHOCommon called WCom
 
 // Indicator Definition
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
 
-parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-01-31]
- 
 context Patient
-
 /*
  * As defined by Member State
  */
@@ -531,7 +531,7 @@ define &quot;patientGroups Stratifier&quot;:
 define &quot;Stratification&quot;:
  HIC.&quot;By Administrative Gender Stratifier&quot;.code 
   + ':' + HIC.&quot;By Age Stratifier&quot;
-+ ':' + HIC.&quot;By Geographic Region Stratifier&quot;</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 103Kb )</p></div>
++ ':' + HIC.&quot;By Geographic Region Stratifier&quot;</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -556,7 +556,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

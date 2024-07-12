@@ -3,7 +3,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>HIVB7DT Logic - WHO SMART Guidelines - HIV v0.1.0</title>
+    <title>HIV.B7.DT Logic - WHO SMART Guidelines - HIV v0.1.0</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.96"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.96"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.2"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.2"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -232,7 +232,7 @@
     <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
       <div class="container">  <!-- container -->
         <ul class="breadcrumb">
-          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='indices.html'><b>Indices</b></a></li><li><a href='artifacts.html'><b>Artifact Index</b></a></li><li><b>HIVB7DT Logic</b></li>
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='indices.html'><b>Indices</b></a></li><li><a href='artifacts.html'><b>Artifact Index</b></a></li><li><b>HIV.B7.DT Logic</b></li>
 
         </ul>
       </div>  <!-- /container -->
@@ -289,17 +289,17 @@
 
   <a name="root"> </a>
 
-  <h2 id="root">Library: HIVB7DT Logic
+  <h2 id="root">Library: HIV.B7.DT Logic
 (Experimental)
   </h2>
 
   <table class="colsd">
 
     <tr>
-      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/HIVB7DT/Library/HIVB7DTLogic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIVB7DT/Library/HIVB7DTLogic"/></span>
+      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/HIV/Library/HIVB7DTLogic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVB7DTLogic"/></span>
       </td>
       <td><i>Version</i>:
-      <span class="copy-text">0.1.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIVB7DT/Library/HIVB7DTLogic|0.1.0"/></span>
+      <span class="copy-text">0.1.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVB7DTLogic|0.1.0"/></span>
       </td>
     </tr>
 
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -332,7 +332,7 @@
 
 
 <p>
-<p>Description not yet available for HIVB7DTLogic.</p>
+<p>Description not yet available for HIV.B7.DT Logic.</p>
 
 </p>
 
@@ -349,7 +349,168 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVB7DTLogic</b></p><a name="HIVB7DTLogic"> </a><a name="hcHIVB7DTLogic"> </a><a name="hcHIVB7DTLogic-en-US"> </a></div>
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVB7DTLogic</b></p><a name="HIVB7DTLogic"> </a><a name="hcHIVB7DTLogic"> </a><a name="HIVB7DTLogic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+Library: HIV.B7.DT Logic
+
+@DecisionID: HIV.B7.DT
+@BusinessRule:
+@Trigger: 
+@Description: 
+
+Test Using Algorithm
+
+WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
+HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy
+*/
+
+library HIVB7DTLogic
+
+using FHIR version '4.0.1'
+
+//codesystem &quot;Custom_Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts'
+codesystem &quot;HIV_DAK_Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts'
+//valueset &quot;TestresultofHIVassay1Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95'
+valueset &quot;Assay 1 reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95'
+valueset &quot;Assay 1&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de90'
+valueset &quot;Assay 2&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de91'
+valueset &quot;Assay 2 reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de205'
+valueset &quot;Assay 2 non-reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de206'
+valueset &quot;Assay 3&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de92'
+valueset &quot;Assay 1 repeated&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de93'
+valueset &quot;HIVtesttypeCodes&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de82'
+valueset &quot;Reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de103'
+valueset &quot;Non-reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de104'
+
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+
+//code &quot;Assay 1 Reactive&quot;: 'HIV.B.DE95' from &quot;TestresultofHIVassay1Codes&quot; display 'Assay 1 reactive'
+//code &quot;Reactive&quot;: 'HIV.B.DE103' from &quot;HIV_DAK_Codes&quot; display 'Reactive'
+//code &quot;Non-reactive&quot;: 'HIV.B.DE104' from &quot;HIV_DAK_Codes&quot; display 'Non-reactive'
+code &quot;Rapid diagnostic test for HIV&quot;: 'HIV.B.DE82' from &quot;HIV_DAK_Codes&quot; display 'Rapid diagnostic test for HIV'
+code &quot;Enzyme immunoassay for HIV&quot;: 'HIV.B.DE83' from &quot;HIV_DAK_Codes&quot; display 'Enzyme immunoassay for HIV'
+//code &quot;Assay 1&quot;: 'HIV.B.DE90' from &quot;HIV_DAK_Codes&quot; display 'Assay 1'
+//code &quot;Assay 2&quot;: 'HIV.B.DE91' from &quot;HIV_DAK_Codes&quot; display 'Assay 2'
+//code &quot;Assay 3&quot;: 'HIV.B.DE92' from &quot;HIV_DAK_Codes&quot; display 'Assay 3'
+//code &quot;Assay 1 repeated&quot;: 'HIV.B.DE93' from &quot;HIV_DAK_Codes&quot; display 'Assay 1 repeated'
+//code &quot;Assay 2 reactive&quot;: 'HIV.E.DE205' from &quot;HIV_DAK_Codes&quot; display 'Assay 2 reactive'
+//code &quot;Assay 2 non-reactive&quot;: 'HIV.E.DE206' from &quot;HIV_DAK_Codes&quot; display 'Assay 2 non-reactive'
+//code &quot;Assay 1 reactive&quot;: 'HIV.B.DE95' from &quot;HIV_DAK_Codes&quot; display 'Assay 2 non-reactive'
+
+ /*valueset &quot;Assay 2 reactive&quot;: 'HIV.E.DE205'*/
+  
+context Patient
+
+define &quot;Age_greater_than_18_months&quot;:
+  AgeInMonthsAt(Today()) &gt;= 18
+
+
+define &quot;Report as HIV-negative&quot;:
+  [Observation] O
+  //@triggeredBy order for Assay 1
+  with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.code in &quot;Assay 1&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot;
+  and O.value in &quot;Non-reactive&quot;
+  and &quot;Age_greater_than_18_months&quot;)
+
+/* Output observation as HIV negative */
+/*@triggeredBy Assay 1 */
+
+define &quot;Should Continue with Performing HIV Assay 2&quot;:
+  [Observation] O
+  //@triggeredBy  ~ order for Assay 1
+ with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.code in &quot;Assay 1&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot;
+  and O.value in  &quot;Reactive&quot; 
+  and &quot;Age_greater_than_18_months&quot;)
+
+/* Output Service Request for Assay 2 */
+
+define &quot;Should Continue with Performing HIV Assay 1 repeated&quot;:
+  [Observation] O
+  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 2'&quot;
+  with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 1 reactive&quot; and SR.code in &quot;Assay 2&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot;
+  and O.value in &quot;Non-reactive&quot;
+  and &quot;Age_greater_than_18_months&quot;)
+
+/* Output Service Request for Continue with performing HIV 'Assay 1 repeated' */
+
+  define &quot;Should Continue with Performing HIV Assay 3&quot;:
+  [Observation] O
+  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 2'&quot;
+  with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 1 reactive&quot; and SR.code in &quot;Assay 2&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot; 
+  and O.value in &quot;Reactive&quot;
+  and &quot;Age_greater_than_18_months&quot;)
+
+  /* Output Service Request for Continue with performing Assay 3 */
+
+define &quot;Report as HIV-negative after assay 1 repeated&quot;:
+  [Observation] O
+  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 1 repeated'&quot;
+    with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 non-reactive&quot; and SR.code in &quot;Assay 1 repeated&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot; 
+  and O.value in &quot;Non-reactive&quot;
+  and &quot;Age_greater_than_18_months&quot;)
+
+/* Output observation as HIV negative */
+
+define &quot;Report as HIV-inconclusive after assay 1 repeated&quot;:
+  [Observation] O
+  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 1 repeated'&quot;
+    with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 non-reactive&quot; and SR.code in &quot;Assay 1 repeated&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot;
+  and O.value in &quot;Reactive&quot;
+  and &quot;Age_greater_than_18_months&quot;)
+
+/* Output observation as 'HIV-inconclusive' */
+/* Output PlanDefinition as Schedule retest date on &quot;Visit date&quot; + 14 days */
+
+define &quot;Report as HIV-inconclusive after assay 3&quot;:
+  [Observation] O
+  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 3'&quot;
+      with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 reactive&quot; and SR.code in &quot;Assay 3&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot;
+  and O.value in &quot;Non-reactive&quot;
+  and &quot;Age_greater_than_18_months&quot;)
+
+/* Output observation as 'HIV-inconclusive' */
+/* Output PlanDefinition as Schedule retest date on &quot;Visit date&quot; + 14 days */
+
+define &quot;Report as HIV-positive&quot;:
+  [Observation] O
+  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 3'&quot;
+        with [ServiceRequest] SR
+      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 reactive&quot; and SR.code in &quot;Assay 3&quot;
+  where (O.status in { 'final', 'amended' }
+  and O.code in &quot;HIVtesttypeCodes&quot;
+  and O.value in &quot;Reactive&quot;
+  and &quot;Age_greater_than_18_months&quot;)
+  
+
+/* Output observation as 'HIV-positive' */
+
+/*
+[Observation] needs to have the following codes and elements
+    where O.status ~ {'final', 'amended'}
+    and O.value ~ HIC.&quot;HIV-positive&quot;
+    */</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -374,7 +535,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

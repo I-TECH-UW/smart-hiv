@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Library xmlns="http://hl7.org/fhir">
+  <id value="HIVCommon"/>
+  <meta>
+    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablelibrary"/>
+    <profile value="http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablelibrary"/>
+    <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-library"/>
+    <profile value="http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module"/>
+  </meta>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+
+using FHIR version '4.0.1'
+
+include FHIRHelpers version '4.0.1'
+include WHOCommon called WCom
+include FHIRCommon called FC
+include HIVConcepts called HC
+include HIVConceptsCustom called HCC
+
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-12-31]
+
+context Patient
+
+/*
+ * HIV Positive during the measurement period
+ * Does issued imply that results returned to tester
+ * or should use communication or encounter resource to specify?
+ */
+
+
+
+define &quot;HIV Positive Condition&quot;:
+[Condition] C
+    where C.clinicalStatus ~ HCC.&quot;active&quot;
+    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
+    and C.code ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
+
+define &quot;HIV Positive Observation&quot;:
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;HIV status&quot;
+    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
+
+define &quot;HIV Positive Observation - HIV Self Test&quot;:
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;HIV self-test&quot;
+    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
+
+define &quot;HIV Negative Observation&quot;:
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+    and O.value ~ HC.&quot;HIV-negative - HIV.B.DE117&quot;
+
+define &quot;HIV test resulted&quot;:
+  [Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+
+define &quot;HIV Treatment Active&quot;:
+[MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;On ART - HIV.H.DE47&quot;)
+
+
+define &quot;HIV PREP Active&quot;:
+[MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
+
+ define &quot;Client is at elevated risk for HIV acquisition&quot;:
+    [Observation] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;At elevated risk for HIV acquisition - HIV.B.DE225&quot;
+
+define &quot;PREP Prescription&quot;:
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PrEP for HIV prevention&quot;
+
+define &quot;PEP Prescription&quot;:
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+
+define &quot;PEP Prescribed before start of Measurement Period and Completed&quot;:
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+        and MR.authoredOn before end of &quot;Measurement Period&quot;
+  where (MS.status = 'recorded'
+  and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
+  )
+
+define &quot;PEP Prescribed during Measurement Period and Completed&quot;:
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+        and MR.authoredOn after start of &quot;Measurement Period&quot;
+        and MR.authoredOn before end of &quot;Measurement Period&quot;
+  where (MS.status = 'recorded'
+  and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
+  )
+
+define &quot;HIV Test Positive After PEP Prescribed during Measurement Period&quot;:
+  [Observation: HC.&quot;HIV test result - HIV.B.DE111&quot;] O
+    with [MedicationRequest] MR
+      such that O.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
+        and MR.authoredOn after start of &quot;Measurement Period&quot;
+        and MR.authoredOn before end of &quot;Measurement Period&quot;
+        and O.issued before (MR.authoredOn + 3 months)
+  where ( O.status in {'final', 'amended'}
+    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE112&quot;
+  )
+
+define &quot;Needle Syringe Dispensed&quot;:  
+  [DeviceUseStatement] DUS
+  with [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+      such that DUS.reasonReference.references(O) 
+        and O.status in { 'final', 'amended', 'corrected' }
+        and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+        and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
+  where DUS.status = 'completed'
+
+  define PWID_person:
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
+
+  
+define &quot;Patient Deceased before end of Measurement Period&quot;:
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then (Patient.meta.lastUpdated before end of &quot;Measurement Period&quot;)
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of &quot;Measurement Period&quot;
+    else false
+  end
+
+define &quot;Patient Deceased during Measurement Period&quot;:
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  &quot;Measurement Period&quot; and  Patient.meta.lastUpdated after start of &quot;Measurement Period&quot;
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  &quot;Measurement Period&quot; and Patient.deceased as FHIR.dateTime after start of &quot;Measurement Period&quot;
+    else false
+  end
+
+/* End of care because of transferring out*/
+
+define &quot;Transfer Out at Facility during the measurement period&quot;:
+    exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ HC.&quot;On ART - HIV.H.DE47&quot;) 
+    and (exists (
+      EOC.statusHistory H
+      where H.status = 'finished'
+      and H.period ends during &quot;Measurement Period&quot;
+    ) 
+    or (
+      EOC.status = 'finished'
+      and EOC.period ends during &quot;Measurement Period&quot;
+    )
+    )
+    )
+
+define &quot;Lost to Follow Up during the measurement period&quot;:
+    exists(&quot;HIV Treatment Active&quot; H
+   where H.effective starts before end of &quot;Measurement Period&quot;
+    and H.effective ends after start of &quot;Measurement Period&quot;
+	and not (H.effective ends after (end of &quot;Measurement Period&quot; - 28 days))
+   )
+
+/*
+ * By Age Stratifiers
+ * (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)
+ * 
+ */
+define &quot;By Age Stratifier&quot;:
+    case 
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 4 then '0-4'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 9 then '5-9'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 14 then '10–14'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15–19'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20–24'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 29 then '25–29'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 34 then '30–34'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 39 then '35–39'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 44 then '40–44'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '45–49'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
+        else null
+    end
+  
+  /*
+ * By Age Stratifiers
+ * Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
+ * 
+ */
+define &quot;By Age Stratifier 2&quot;:
+    case 
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 4 then '0-4'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 9 then '5-9'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 14 then '10–14'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15–19'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20–24'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '25–49'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
+        else null
+    end
+
+define &quot;By Age Stratifier 3&quot;:
+    case 
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 15 and AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15-19'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20-24'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '25–49'
+        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
+        else null
+    end
+
+/*
+ * By state stratifier
+ */
+
+define &quot;By Geographic Region Stratifier&quot;:
+    First(Patient.address A where A.use in { 'home' }).state
+
+/*
+ * By Administrative Gender of Patient Stratifier
+ * Need to expand codes
+ */
+
+define &quot;By Administrative Gender Stratifier&quot;:
+    case 
+        when Patient.gender = 'male' then HC.&quot;Male&quot;
+        when Patient.gender = 'female' then HC.&quot;Female&quot;
+        when Patient.gender = 'transgender female' then HC.&quot;Transgender female&quot;
+        when Patient.gender = 'transgender male' then HC.&quot;Transgender male&quot;
+        else HC.&quot;Other - HIV.A.DE23&quot;
+    end
+
+/*
+ * Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)
+ */
+
+ define SW:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Sex worker - HIV.B.DE51&quot;
+  )
+
+ define MSM:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Men who have sex with men&quot;
+  )
+
+  define Trans:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Trans and gender-diverse people - HIV.B.DE53&quot;
+  )
+
+  define PWID:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
+  )
+
+  define Prisoner:
+  exists (
+    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;People living in prisons and other closed settings&quot;
+  )
+
+  define TB_diagnosed:
+  exists(
+    ([Condition] C
+    where C.clinicalStatus ~ HCC.&quot;active&quot;
+    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
+    and C.code ~ HC.&quot;Diagnosed TB&quot;
+    and C.onset during &quot;Measurement Period&quot;)
+  )
+  
+  define TB_presumptive:
+  exists(
+    ([Condition] C
+    where C.clinicalStatus ~ HCC.&quot;active&quot;
+    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
+    and C.code ~ HC.&quot;Presumptive TB - HIV.D.DE945&quot;
+    and C.onset during &quot;Measurement Period&quot;)
+  )
+
+
+define Exposure_Occupational:
+  exists (
+    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Occupational&quot;
+  )
+
+define Exposure_Non_Occupational_violent:
+  exists (
+    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Non-occupational violent&quot;
+  )
+
+define Exposure_Non_Occupational_consensual_sex:
+  exists (
+    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.value ~ HC.&quot;Non-occupational consensual sex&quot;
+  )
+
+define hiv_exposure_type:
+  List&lt;String&gt;{
+    if Exposure_Occupational then 'Occupational' else null,
+    if Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
+    if Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
+  }
+
+/*@triggeredBy Encounter with location = community level testing*/
+
+define &quot;Community_testing&quot;:
+  exists([Observation] O
+    with [Encounter] E
+      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Community-level testing&quot;) 
+  where (O.status in { 'final', 'amended' }
+  and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+  and O.issued during &quot;Measurement Period&quot;)
+  )
+
+/*@triggeredBy Encounter with location = facility level testing*/
+define &quot;Facility_testing&quot;:
+  exists([Observation] O
+    with [Encounter] E
+      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Facility-level testing&quot;)
+  where (O.status in { 'final', 'amended' }
+  and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
+  and O.issued during &quot;Measurement Period&quot;)
+  )
+
+//lifted this from ANC DAK
+define &quot;ANC_case&quot;:
+exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ HC.&quot;Already on ART at first antenatal care visit&quot;)
+    and (exists (
+      EOC.statusHistory H
+      where H.period overlaps &quot;Measurement Period&quot;
+    ) 
+    or (
+      EOC.period overlaps &quot;Measurement Period&quot;
+    )
+    )
+    )
+  
+
+  define &quot;PREP Product Oral&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and (MS.medication ~ HC.&quot;TDF + FTC - HIV.C.DE18&quot; or
+    MS.medication ~ HC.&quot;TDF - HIV.C.DE19&quot; or
+    MS.medication ~ HC.&quot;TDF + 3TC - HIV.C.DE20&quot; or
+    MS.medication ~ HC.&quot;Other TDF-based regimen&quot;)
+  )
+
+  define &quot;PREP Product long-acting device&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and MS.medication ~ HC.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;
+  )
+
+  define &quot;PREP Product long-acting injectable&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and MS.medication ~ HC.&quot;CAB-LA - HIV.C.DE23&quot;
+  )
+  
+  define &quot;PREP first time&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ HC.&quot;First-time user - HIV.C.DE25&quot;)
+  )
+
+  define &quot;PREP Continuing user&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ HC.&quot;Continuing user&quot;)
+  )
+  
+  define &quot;PREP Restarting&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ HC.&quot;Restarting following a period of not taking PrEP&quot;)
+  )
+
+  define &quot;Daily_oral_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Daily oral PrEP&quot;)
+  )
+
+  define &quot;Event_driven_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Event-driven PrEP 2+1+1&quot;) 
+  )
+
+  define &quot;other_dosing_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'recorded'
+    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Other PrEP dosing type&quot;) 
+  )
+
+
+  define patientGroups:
+  List&lt;String&gt;{
+    if SW then 'SW' else null,
+    if MSM then 'MSM' else null,
+    if Trans then 'Trans' else null,
+    if PWID then 'PWID' else null,
+    if Prisoner then 'Prisoner' else null
+  }
+
+  define setting:
+  List&lt;String&gt;{
+    if Community_testing then 'Community-level testing' else null,
+    if Facility_testing then 'Facility-level testing' else null
+  }
+
+  define anc:
+  List&lt;String&gt;{
+    if ANC_case then 'ANC case' else null
+  }
+
+  define tb:
+  List&lt;String&gt;{
+    if TB_diagnosed then 'Diagnosed TB' else null,
+    if TB_presumptive then 'Presumptive TB' else null
+  }
+
+  define prep_product:
+  List&lt;String&gt;{
+    if `PREP Product Oral` then 'PREP Product Oral' else null,
+    if `PREP Product long-acting device` then 'PREP Product long-acting device' else null,
+    if `PREP Product long-acting injectable` then 'PREP Product long-acting injectable' else null
+  }
+
+  define prep_experience:
+  List&lt;String&gt;{
+    if `PREP first time` then 'PREP first time' else null,
+    if `PREP Continuing user` then 'PREP Continuing user' else null,
+    if `PREP Restarting` then 'PREP Restarting' else null
+  }
+
+  define prep_dosing:
+  List&lt;String&gt;{
+    if `Daily_oral_PrEP` then 'Daily oral PrEP' else null,
+    if `Event_driven_PrEP` then 'Event driven PrEP' else null,
+    if `other_dosing_PrEP` then 'Other PrEP dosing type' else null
+  }
+
+//need to add Time to start ART (within 7, 30 or 90 days of diagnosis, as per country guidelines)
+//need to add Disaggregation by time since diagnosis
+  
+
+
+/* 
+* DAK has codes for HAART misspecified 
+* ICD-10 Z92.2	Other prophylactic chemotherapy		
+* LOINC &quot;54825-5	&quot;	On scheduled pain medication regimen in last 7 days
+*
+* Should discuss 
+*/
+
+
+
+
+
+
+
+/*
+* Kenya EMR defined as HIV positive condition
+* Will need to discuss if produce flags through conditions for concepts to use in indicator calculation such as HIV positive and On ART
+* However, we have moved forward with a more prescriptive approach 
+* Inevitably our approach requires that certain data elements be available
+*/
+
+/*
+ * HIV Treatment during the measurement period
+ * uses dosage and dispensation amount to estimate last day of medication
+ * medication should be dispensed before end of measurement period
+ * medication should last until after 28 days after the end of the measurement period
+ * This takes into account lost to follow up
+ */
+
+/*
+*define &quot;HIV Treatment during the measurement period&quot;:
+*   [MedicationDispense] MD
+*    where MD.status in { 'final', 'amended', 'corrected' }
+*    and MD.medication ~ 'Antiretroviral'
+*    and MD.whenHandedOver before end of &quot;Measurement Period&quot;
+*    and (MD.whenHandedOver + MD.dosageInstruction[0].timing.repeat.duration.value * MedicationDispense.quantity.value) after (measurementPeriod.end - 28 days)
+*/ 
+
+/*
+* Immunization defines HAART as
+*  exists([MedicationAdministration] A where ExtractMedicationCode(A.medication) in IMMZc.&quot;ARV Drugs&quot; and A.status = 'in-progress')
+* I believe this is the incorrect resource unless they mean to say that medication is given during a medical encounter
+* would like to discuss 
+*/ 
+
+/** 
+ * Patient Deceased During Measurement Period
+ * Immunization defines this as true when is a boolean. This may have the effect of deleting a person from indicators in all calculations
+ * Should intend to use when patient.deceased FHIR boolean was updated to TRUE if no other date is available
+ * Kenya EMR example does not account for when deceased is just a boolean
+ */
+
+
+/*
+define &quot;PREP Prescription Days&quot;:
+  Sum(
+    (
+      collapse (
+        [MedicationRequest] MR
+          where MR.status = 'completed'
+          and MR.intent = 'order'
+          and MR.medication ~ HC.&quot;PrEP for HIV prevention&quot;
+        return WComV2.&quot;Prescription Relevant Period&quot;( MR ) intersect &quot;Measurement Period&quot;
+      )
+    ) PREPUseInterval
+      return days between start of PREPUseInterval and end of PREPUseInterval
+  )
+*/
+
+
+define function GetDurationInDays(value FHIR.Duration): // returns Decimal:
+    case value.code.value
+      when 'a' then value.value * 365.0
+      when 'mo' then value.value.value * 30.0
+      when 'wk' then value.value.value * 7.0
+      when 'd' then value.value.value
+      when 'h' then value.value.value / 24.0
+      when 'min' then value.value.value / 60.0 / 24.0
+      when 's' then value.value.value / 60.0 / 60.0 / 24.0
+      when 'ms' then value.value.value / 60.0 / 60.0 / 24.0 / 1000.0
+      else Message(1000, true, 'Undefined', 'Error', 'Unsupported duration unit ' + value.code.value)
+    end
+
+define function &quot;Prescription Relevant Period&quot;(prescription FHIR.MedicationRequest):
+  if (
+    prescription.authoredOn is not null and prescription.dispenseRequest is not null
+      and prescription.dispenseRequest.expectedSupplyDuration is not null
+  )
+  then Interval[
+    date from prescription.authoredOn,
+    date from prescription.authoredOn + System.Quantity{ value: GetDurationInDays(prescription.dispenseRequest.expectedSupplyDuration), unit: 'days' }
+  ]
+  else null</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
+  </text>
+  <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
+    <valueCode value="computable"/>
+  </extension>
+  <url value="http://smart.who.int/HIV/Library/HIVCommon"/>
+  <version value="0.1.0"/>
+  <name value="HIVCommon"/>
+  <title value="HIVCommon"/>
+  <status value="draft"/>
+  <experimental value="true"/>
+  <type>
+    <coding>
+      <system value="http://terminology.hl7.org/CodeSystem/library-type"/>
+      <code value="logic-library"/>
+    </coding>
+  </type>
+  <date value="2024-07-12T23:16:48+00:00"/>
+  <publisher value="WHO"/>
+  <contact>
+    <name value="WHO"/>
+    <telecom>
+      <system value="url"/>
+      <value value="http://who.int"/>
+    </telecom>
+  </contact>
+  <description value="Description not yet available for HIVCommon."/>
+  <content>
+    <contentType value="text/cql"/>
+    <data value="bGlicmFyeSBISVZDb21tb24gdmVyc2lvbiAnMC4wLjEnIAoKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjEnCmluY2x1ZGUgV0hPQ29tbW9uIGNhbGxlZCBXQ29tCmluY2x1ZGUgRkhJUkNvbW1vbiBjYWxsZWQgRkMKaW5jbHVkZSBISVZDb25jZXB0cyBjYWxsZWQgSEMKaW5jbHVkZSBISVZDb25jZXB0c0N1c3RvbSBjYWxsZWQgSENDCgpwYXJhbWV0ZXIgIk1lYXN1cmVtZW50IFBlcmlvZCIgSW50ZXJ2YWw8RGF0ZT4gZGVmYXVsdCBJbnRlcnZhbFtAMjAyMC0wMS0wMSwgQDIwMjAtMTItMzFdCgpjb250ZXh0IFBhdGllbnQKCi8qCiAqIEhJViBQb3NpdGl2ZSBkdXJpbmcgdGhlIG1lYXN1cmVtZW50IHBlcmlvZAogKiBEb2VzIGlzc3VlZCBpbXBseSB0aGF0IHJlc3VsdHMgcmV0dXJuZWQgdG8gdGVzdGVyCiAqIG9yIHNob3VsZCB1c2UgY29tbXVuaWNhdGlvbiBvciBlbmNvdW50ZXIgcmVzb3VyY2UgdG8gc3BlY2lmeT8KICovCgoKCmRlZmluZSAiSElWIFBvc2l0aXZlIENvbmRpdGlvbiI6CltDb25kaXRpb25dIEMKICAgIHdoZXJlIEMuY2xpbmljYWxTdGF0dXMgfiBIQ0MuImFjdGl2ZSIKICAgIGFuZCBleGlzdHMoQy5jYXRlZ29yeSBDQyB3aGVyZSBDQyB+IEhDQy4iZW5jb3VudGVyLWRpYWdub3NpcyIpCiAgICBhbmQgQy5jb2RlIH4gSEMuIkhJVi1wb3NpdGl2ZSAtIEhJVi5CLkRFMTE2IgoKZGVmaW5lICJISVYgUG9zaXRpdmUgT2JzZXJ2YXRpb24iOgpbT2JzZXJ2YXRpb25dIE8KICAgIHdoZXJlIE8uc3RhdHVzIGluIHsnZmluYWwnLCAnYW1lbmRlZCd9CiAgICBhbmQgTy5jb2RlIH4gSEMuIkhJViBzdGF0dXMiCiAgICBhbmQgTy52YWx1ZSB+IEhDLiJISVYtcG9zaXRpdmUgLSBISVYuQi5ERTExNiIKCmRlZmluZSAiSElWIFBvc2l0aXZlIE9ic2VydmF0aW9uIC0gSElWIFNlbGYgVGVzdCI6CltPYnNlcnZhdGlvbl0gTwogICAgd2hlcmUgTy5zdGF0dXMgaW4geydmaW5hbCcsICdhbWVuZGVkJ30KICAgIGFuZCBPLmNvZGUgfiBIQy4iSElWIHNlbGYtdGVzdCIKICAgIGFuZCBPLnZhbHVlIH4gSEMuIkhJVi1wb3NpdGl2ZSAtIEhJVi5CLkRFMTE2IgoKZGVmaW5lICJISVYgTmVnYXRpdmUgT2JzZXJ2YXRpb24iOgpbT2JzZXJ2YXRpb25dIE8KICAgIHdoZXJlIE8uc3RhdHVzIGluIHsnZmluYWwnLCAnYW1lbmRlZCd9CiAgICBhbmQgTy5jb2RlIH4gSEMuIlJhcGlkIGRpYWdub3N0aWMgdGVzdCBmb3IgSElWIC0gSElWLkIuREU4MiIKICAgIGFuZCBPLnZhbHVlIH4gSEMuIkhJVi1uZWdhdGl2ZSAtIEhJVi5CLkRFMTE3IgoKZGVmaW5lICJISVYgdGVzdCByZXN1bHRlZCI6CiAgW09ic2VydmF0aW9uXSBPCiAgICB3aGVyZSBPLnN0YXR1cyBpbiB7J2ZpbmFsJywgJ2FtZW5kZWQnfQogICAgYW5kIE8uY29kZSB+IEhDLiJSYXBpZCBkaWFnbm9zdGljIHRlc3QgZm9yIEhJViAtIEhJVi5CLkRFODIiCgpkZWZpbmUgIkhJViBUcmVhdG1lbnQgQWN0aXZlIjoKW01lZGljYXRpb25TdGF0ZW1lbnRdIE1TCiAgICB3aGVyZSBNUy5zdGF0dXMgPSAncmVjb3JkZWQnCiAgICBhbmQgZXhpc3RzKE1TLnJlYXNvbkNvZGUgQyB3aGVyZSBDIH4gSEMuIk9uIEFSVCAtIEhJVi5ILkRFNDciKQoKCmRlZmluZSAiSElWIFBSRVAgQWN0aXZlIjoKW01lZGljYXRpb25TdGF0ZW1lbnRdIE1TCiAgICB3aGVyZSBNUy5zdGF0dXMgPSAncmVjb3JkZWQnCiAgICBhbmQgZXhpc3RzKE1TLnJlYXNvbkNvZGUgQyB3aGVyZSBDIH4gSEMuIlByRVAgZm9yIEhJViBwcmV2ZW50aW9uIikKCiBkZWZpbmUgIkNsaWVudCBpcyBhdCBlbGV2YXRlZCByaXNrIGZvciBISVYgYWNxdWlzaXRpb24iOgogICAgW09ic2VydmF0aW9uXSBPCiAgICB3aGVyZSBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJywgJ2NvcnJlY3RlZCcgfQogICAgYW5kIGV4aXN0cyhPLmNhdGVnb3J5IE9DIHdoZXJlIE9DIH4gSENDLiJzb2NpYWwtaGlzdG9yeSIpCiAgICBhbmQgTy5jb2RlIH4gSEMuIkF0IGVsZXZhdGVkIHJpc2sgZm9yIEhJViBhY3F1aXNpdGlvbiAtIEhJVi5CLkRFMjI1IgoKZGVmaW5lICJQUkVQIFByZXNjcmlwdGlvbiI6CiAgICBbTWVkaWNhdGlvblJlcXVlc3RdIE1SCiAgICAgICAgd2hlcmUgTVIuc3RhdHVzID0gJ2NvbXBsZXRlZCcKICAgICAgICBhbmQgTVIuaW50ZW50ID0gJ29yZGVyJwogICAgICAgIGFuZCBNUi5tZWRpY2F0aW9uIH4gSEMuIlByRVAgZm9yIEhJViBwcmV2ZW50aW9uIgoKZGVmaW5lICJQRVAgUHJlc2NyaXB0aW9uIjoKICAgIFtNZWRpY2F0aW9uUmVxdWVzdF0gTVIKICAgICAgICB3aGVyZSBNUi5zdGF0dXMgPSAnY29tcGxldGVkJwogICAgICAgIGFuZCBNUi5pbnRlbnQgPSAnb3JkZXInCiAgICAgICAgYW5kIE1SLm1lZGljYXRpb24gfiBIQy4iUEVQIGZvciBISVYgcHJldmVudGlvbiIKCmRlZmluZSAiUEVQIFByZXNjcmliZWQgYmVmb3JlIHN0YXJ0IG9mIE1lYXN1cmVtZW50IFBlcmlvZCBhbmQgQ29tcGxldGVkIjoKICBbTWVkaWNhdGlvblN0YXRlbWVudF0gTVMKICAgIHdpdGggW01lZGljYXRpb25SZXF1ZXN0XSBNUgogICAgICBzdWNoIHRoYXQgTVMuYmFzZWRPbi5yZWZlcmVuY2VzKE1SKSBhbmQgTVIuc3RhdHVzID0gJ2NvbXBsZXRlZCcKICAgICAgICBhbmQgTVIuaW50ZW50ID0gJ29yZGVyJwogICAgICAgIGFuZCBNUi5tZWRpY2F0aW9uIH4gSEMuIlBFUCBmb3IgSElWIHByZXZlbnRpb24iCiAgICAgICAgYW5kIE1SLmF1dGhvcmVkT24gYmVmb3JlIGVuZCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIgogIHdoZXJlIChNUy5zdGF0dXMgPSAncmVjb3JkZWQnCiAgYW5kIGV4aXN0cyhNUy5yZWFzb25Db2RlIEMgd2hlcmUgQyB+IEhDLiJQckVQIGZvciBISVYgcHJldmVudGlvbiIpCiAgKQoKZGVmaW5lICJQRVAgUHJlc2NyaWJlZCBkdXJpbmcgTWVhc3VyZW1lbnQgUGVyaW9kIGFuZCBDb21wbGV0ZWQiOgogIFtNZWRpY2F0aW9uU3RhdGVtZW50XSBNUwogICAgd2l0aCBbTWVkaWNhdGlvblJlcXVlc3RdIE1SCiAgICAgIHN1Y2ggdGhhdCBNUy5iYXNlZE9uLnJlZmVyZW5jZXMoTVIpIGFuZCBNUi5zdGF0dXMgPSAnY29tcGxldGVkJwogICAgICAgIGFuZCBNUi5pbnRlbnQgPSAnb3JkZXInCiAgICAgICAgYW5kIE1SLm1lZGljYXRpb24gfiBIQy4iUEVQIGZvciBISVYgcHJldmVudGlvbiIKICAgICAgICBhbmQgTVIuYXV0aG9yZWRPbiBhZnRlciBzdGFydCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIgogICAgICAgIGFuZCBNUi5hdXRob3JlZE9uIGJlZm9yZSBlbmQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIKICB3aGVyZSAoTVMuc3RhdHVzID0gJ3JlY29yZGVkJwogIGFuZCBleGlzdHMoTVMucmVhc29uQ29kZSBDIHdoZXJlIEMgfiBIQy4iUHJFUCBmb3IgSElWIHByZXZlbnRpb24iKQogICkKCmRlZmluZSAiSElWIFRlc3QgUG9zaXRpdmUgQWZ0ZXIgUEVQIFByZXNjcmliZWQgZHVyaW5nIE1lYXN1cmVtZW50IFBlcmlvZCI6CiAgW09ic2VydmF0aW9uOiBIQy4iSElWIHRlc3QgcmVzdWx0IC0gSElWLkIuREUxMTEiXSBPCiAgICB3aXRoIFtNZWRpY2F0aW9uUmVxdWVzdF0gTVIKICAgICAgc3VjaCB0aGF0IE8uYmFzZWRPbi5yZWZlcmVuY2VzKE1SKSBhbmQgTVIuc3RhdHVzID0gJ2NvbXBsZXRlZCcKICAgICAgICBhbmQgTVIuaW50ZW50ID0gJ29yZGVyJwogICAgICAgIGFuZCBNUi5tZWRpY2F0aW9uIH4gSEMuIlBFUCBmb3IgSElWIHByZXZlbnRpb24iCiAgICAgICAgYW5kIE1SLmF1dGhvcmVkT24gYWZ0ZXIgc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIKICAgICAgICBhbmQgTVIuYXV0aG9yZWRPbiBiZWZvcmUgZW5kIG9mICJNZWFzdXJlbWVudCBQZXJpb2QiCiAgICAgICAgYW5kIE8uaXNzdWVkIGJlZm9yZSAoTVIuYXV0aG9yZWRPbiArIDMgbW9udGhzKQogIHdoZXJlICggTy5zdGF0dXMgaW4geydmaW5hbCcsICdhbWVuZGVkJ30KICAgIGFuZCBPLnZhbHVlIH4gSEMuIkhJVi1wb3NpdGl2ZSAtIEhJVi5CLkRFMTEyIgogICkKCmRlZmluZSAiTmVlZGxlIFN5cmluZ2UgRGlzcGVuc2VkIjogIAogIFtEZXZpY2VVc2VTdGF0ZW1lbnRdIERVUwogIHdpdGggW09ic2VydmF0aW9uOiBIQy4iS2V5IHBvcHVsYXRpb24gbWVtYmVyKiAtIEhJVi5FLkRFMTEzIl0gTwogICAgICBzdWNoIHRoYXQgRFVTLnJlYXNvblJlZmVyZW5jZS5yZWZlcmVuY2VzKE8pIAogICAgICAgIGFuZCBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJywgJ2NvcnJlY3RlZCcgfQogICAgICAgIGFuZCBleGlzdHMoTy5jYXRlZ29yeSBPQyB3aGVyZSBPQyB+IEhDQy4ic29jaWFsLWhpc3RvcnkiKQogICAgICAgIGFuZCBPLnZhbHVlIH4gSEMuIlBlb3BsZSB3aG8gaW5qZWN0IGRydWdzIC0gSElWLkIuREU1NCIKICB3aGVyZSBEVVMuc3RhdHVzID0gJ2NvbXBsZXRlZCcKCiAgZGVmaW5lIFBXSURfcGVyc29uOgogICAgW09ic2VydmF0aW9uOiBIQy4iS2V5IHBvcHVsYXRpb24gbWVtYmVyKiAtIEhJVi5FLkRFMTEzIl0gTwogICAgd2hlcmUgTy5zdGF0dXMgaW4geyAnZmluYWwnLCAnYW1lbmRlZCcsICdjb3JyZWN0ZWQnIH0KICAgIGFuZCBleGlzdHMoTy5jYXRlZ29yeSBPQyB3aGVyZSBPQyB+IEhDQy4ic29jaWFsLWhpc3RvcnkiKQogICAgYW5kIE8udmFsdWUgfiBIQy4iUGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MgLSBISVYuQi5ERTU0IgoKICAKZGVmaW5lICJQYXRpZW50IERlY2Vhc2VkIGJlZm9yZSBlbmQgb2YgTWVhc3VyZW1lbnQgUGVyaW9kIjoKICBjYXNlIAogICAgd2hlbiBQYXRpZW50LmRlY2Vhc2VkIGlzIEZISVIuYm9vbGVhbiBhbmQgUGF0aWVudC5kZWNlYXNlZCB+IHRydWUgdGhlbiAoUGF0aWVudC5tZXRhLmxhc3RVcGRhdGVkIGJlZm9yZSBlbmQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpCiAgICB3aGVuIFBhdGllbnQuZGVjZWFzZWQgaXMgRkhJUi5kYXRlVGltZSB0aGVuIFBhdGllbnQuZGVjZWFzZWQgYXMgRkhJUi5kYXRlVGltZSBiZWZvcmUgZW5kIG9mICJNZWFzdXJlbWVudCBQZXJpb2QiCiAgICBlbHNlIGZhbHNlCiAgZW5kCgpkZWZpbmUgIlBhdGllbnQgRGVjZWFzZWQgZHVyaW5nIE1lYXN1cmVtZW50IFBlcmlvZCI6CiAgY2FzZSAKICAgIHdoZW4gUGF0aWVudC5kZWNlYXNlZCBpcyBGSElSLmJvb2xlYW4gYW5kIFBhdGllbnQuZGVjZWFzZWQgfiB0cnVlIHRoZW4gUGF0aWVudC5tZXRhLmxhc3RVcGRhdGVkIGJlZm9yZSBlbmQgb2YgICJNZWFzdXJlbWVudCBQZXJpb2QiIGFuZCAgUGF0aWVudC5tZXRhLmxhc3RVcGRhdGVkIGFmdGVyIHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiCiAgICB3aGVuIFBhdGllbnQuZGVjZWFzZWQgaXMgRkhJUi5kYXRlVGltZSB0aGVuIFBhdGllbnQuZGVjZWFzZWQgYXMgRkhJUi5kYXRlVGltZSBiZWZvcmUgZW5kIG9mICAiTWVhc3VyZW1lbnQgUGVyaW9kIiBhbmQgUGF0aWVudC5kZWNlYXNlZCBhcyBGSElSLmRhdGVUaW1lIGFmdGVyIHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiCiAgICBlbHNlIGZhbHNlCiAgZW5kCgovKiBFbmQgb2YgY2FyZSBiZWNhdXNlIG9mIHRyYW5zZmVycmluZyBvdXQqLwoKZGVmaW5lICJUcmFuc2ZlciBPdXQgYXQgRmFjaWxpdHkgZHVyaW5nIHRoZSBtZWFzdXJlbWVudCBwZXJpb2QiOgogICAgZXhpc3RzKAogICAgW0VwaXNvZGVPZkNhcmVdIEVPQwogICAgd2hlcmUgZXhpc3RzKEVPQy50eXBlIFQgd2hlcmUgVCB+IEhDLiJPbiBBUlQgLSBISVYuSC5ERTQ3IikgCiAgICBhbmQgKGV4aXN0cyAoCiAgICAgIEVPQy5zdGF0dXNIaXN0b3J5IEgKICAgICAgd2hlcmUgSC5zdGF0dXMgPSAnZmluaXNoZWQnCiAgICAgIGFuZCBILnBlcmlvZCBlbmRzIGR1cmluZyAiTWVhc3VyZW1lbnQgUGVyaW9kIgogICAgKSAKICAgIG9yICgKICAgICAgRU9DLnN0YXR1cyA9ICdmaW5pc2hlZCcKICAgICAgYW5kIEVPQy5wZXJpb2QgZW5kcyBkdXJpbmcgIk1lYXN1cmVtZW50IFBlcmlvZCIKICAgICkKICAgICkKICAgICkKCmRlZmluZSAiTG9zdCB0byBGb2xsb3cgVXAgZHVyaW5nIHRoZSBtZWFzdXJlbWVudCBwZXJpb2QiOgogICAgZXhpc3RzKCJISVYgVHJlYXRtZW50IEFjdGl2ZSIgSAogICB3aGVyZSBILmVmZmVjdGl2ZSBzdGFydHMgYmVmb3JlIGVuZCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIgogICAgYW5kIEguZWZmZWN0aXZlIGVuZHMgYWZ0ZXIgc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIKCWFuZCBub3QgKEguZWZmZWN0aXZlIGVuZHMgYWZ0ZXIgKGVuZCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIiAtIDI4IGRheXMpKQogICApCgovKgogKiBCeSBBZ2UgU3RyYXRpZmllcnMKICogKDDigJM0LCA14oCTOSwgMTDigJMxNCwgMTXigJMxOSwgMjDigJMyNCwgMjXigJMyOSwgMzDigJMzNCwgMzXigJMzOSwgNDDigJM0NCwgNDXigJM0OSwgNTArIHllYXJzKQogKiAKICovCmRlZmluZSAiQnkgQWdlIFN0cmF0aWZpZXIiOgogICAgY2FzZSAKICAgICAgICB3aGVuIEFnZUluWWVhcnNBdChzdGFydCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIikgPD0gNCB0aGVuICcwLTQnCiAgICAgICAgd2hlbiBBZ2VJblllYXJzQXQoc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpIDw9IDkgdGhlbiAnNS05JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAxNCB0aGVuICcxMOKAkzE0JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAxOSB0aGVuICcxNeKAkzE5JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAyNCB0aGVuICcyMOKAkzI0JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAyOSB0aGVuICcyNeKAkzI5JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAzNCB0aGVuICczMOKAkzM0JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAzOSB0aGVuICczNeKAkzM5JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSA0NCB0aGVuICc0MOKAkzQ0JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSA0OSB0aGVuICc0NeKAkzQ5JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA+PSA1MCB0aGVuICc1MCsnCiAgICAgICAgZWxzZSBudWxsCiAgICBlbmQKICAKICAvKgogKiBCeSBBZ2UgU3RyYXRpZmllcnMKICogQWdlICgw4oCTNCwgNeKAkzksIDEw4oCTMTQsIDE14oCTMTksIDIw4oCTMjQsIDI14oCTNDksIDUwKyB5ZWFycykKICogCiAqLwpkZWZpbmUgIkJ5IEFnZSBTdHJhdGlmaWVyIDIiOgogICAgY2FzZSAKICAgICAgICB3aGVuIEFnZUluWWVhcnNBdChzdGFydCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIikgPD0gNCB0aGVuICcwLTQnCiAgICAgICAgd2hlbiBBZ2VJblllYXJzQXQoc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpIDw9IDkgdGhlbiAnNS05JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAxNCB0aGVuICcxMOKAkzE0JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAxOSB0aGVuICcxNeKAkzE5JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAyNCB0aGVuICcyMOKAkzI0JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSA0OSB0aGVuICcyNeKAkzQ5JwogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA+PSA1MCB0aGVuICc1MCsnCiAgICAgICAgZWxzZSBudWxsCiAgICBlbmQKCmRlZmluZSAiQnkgQWdlIFN0cmF0aWZpZXIgMyI6CiAgICBjYXNlIAogICAgICAgIHdoZW4gQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA+PSAxNSBhbmQgQWdlSW5ZZWFyc0F0KHN0YXJ0IG9mICJNZWFzdXJlbWVudCBQZXJpb2QiKSA8PSAxOSB0aGVuICcxNS0xOScKICAgICAgICB3aGVuIEFnZUluWWVhcnNBdChzdGFydCBvZiAiTWVhc3VyZW1lbnQgUGVyaW9kIikgPD0gMjQgdGhlbiAnMjAtMjQnCiAgICAgICAgd2hlbiBBZ2VJblllYXJzQXQoc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpIDw9IDQ5IHRoZW4gJzI14oCTNDknCiAgICAgICAgd2hlbiBBZ2VJblllYXJzQXQoc3RhcnQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIpID49IDUwIHRoZW4gJzUwKycKICAgICAgICBlbHNlIG51bGwKICAgIGVuZAoKLyoKICogQnkgc3RhdGUgc3RyYXRpZmllcgogKi8KCmRlZmluZSAiQnkgR2VvZ3JhcGhpYyBSZWdpb24gU3RyYXRpZmllciI6CiAgICBGaXJzdChQYXRpZW50LmFkZHJlc3MgQSB3aGVyZSBBLnVzZSBpbiB7ICdob21lJyB9KS5zdGF0ZQoKLyoKICogQnkgQWRtaW5pc3RyYXRpdmUgR2VuZGVyIG9mIFBhdGllbnQgU3RyYXRpZmllcgogKiBOZWVkIHRvIGV4cGFuZCBjb2RlcwogKi8KCmRlZmluZSAiQnkgQWRtaW5pc3RyYXRpdmUgR2VuZGVyIFN0cmF0aWZpZXIiOgogICAgY2FzZSAKICAgICAgICB3aGVuIFBhdGllbnQuZ2VuZGVyID0gJ21hbGUnIHRoZW4gSEMuIk1hbGUiCiAgICAgICAgd2hlbiBQYXRpZW50LmdlbmRlciA9ICdmZW1hbGUnIHRoZW4gSEMuIkZlbWFsZSIKICAgICAgICB3aGVuIFBhdGllbnQuZ2VuZGVyID0gJ3RyYW5zZ2VuZGVyIGZlbWFsZScgdGhlbiBIQy4iVHJhbnNnZW5kZXIgZmVtYWxlIgogICAgICAgIHdoZW4gUGF0aWVudC5nZW5kZXIgPSAndHJhbnNnZW5kZXIgbWFsZScgdGhlbiBIQy4iVHJhbnNnZW5kZXIgbWFsZSIKICAgICAgICBlbHNlIEhDLiJPdGhlciAtIEhJVi5BLkRFMjMiCiAgICBlbmQKCi8qCiAqIEtleSBwb3B1bGF0aW9ucyAobWVuIHdobyBoYXZlIHNleCB3aXRoIG1lbiwgcGVvcGxlIGxpdmluZyBpbiBwcmlzb25zIGFuZCBvdGhlciBjbG9zZWQgc2V0dGluZ3MsIHBlb3BsZSB3aG8gaW5qZWN0IGRydWdzLCBzZXggd29ya2VycywgdHJhbnMgYW5kIGdlbmRlciBkaXZlcnNlIHBlb3BsZSkKICovCgogZGVmaW5lIFNXOgogIGV4aXN0cyAoCiAgICBbT2JzZXJ2YXRpb246IEhDLiJLZXkgcG9wdWxhdGlvbiBtZW1iZXIqIC0gSElWLkUuREUxMTMiXSBPCiAgICB3aGVyZSBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJywgJ2NvcnJlY3RlZCcgfQogICAgYW5kIGV4aXN0cyhPLmNhdGVnb3J5IE9DIHdoZXJlIE9DIH4gSENDLiJzb2NpYWwtaGlzdG9yeSIpCiAgICBhbmQgTy52YWx1ZSB+IEhDLiJTZXggd29ya2VyIC0gSElWLkIuREU1MSIKICApCgogZGVmaW5lIE1TTToKICBleGlzdHMgKAogICAgW09ic2VydmF0aW9uOiBIQy4iS2V5IHBvcHVsYXRpb24gbWVtYmVyKiAtIEhJVi5FLkRFMTEzIl0gTwogICAgd2hlcmUgTy5zdGF0dXMgaW4geyAnZmluYWwnLCAnYW1lbmRlZCcsICdjb3JyZWN0ZWQnIH0KICAgIGFuZCBleGlzdHMoTy5jYXRlZ29yeSBPQyB3aGVyZSBPQyB+IEhDQy4ic29jaWFsLWhpc3RvcnkiKQogICAgYW5kIE8udmFsdWUgfiBIQy4iTWVuIHdobyBoYXZlIHNleCB3aXRoIG1lbiIKICApCgogIGRlZmluZSBUcmFuczoKICBleGlzdHMgKAogICAgW09ic2VydmF0aW9uOiBIQy4iS2V5IHBvcHVsYXRpb24gbWVtYmVyKiAtIEhJVi5FLkRFMTEzIl0gTwogICAgd2hlcmUgTy5zdGF0dXMgaW4geyAnZmluYWwnLCAnYW1lbmRlZCcsICdjb3JyZWN0ZWQnIH0KICAgIGFuZCBleGlzdHMoTy5jYXRlZ29yeSBPQyB3aGVyZSBPQyB+IEhDQy4ic29jaWFsLWhpc3RvcnkiKQogICAgYW5kIE8udmFsdWUgfiBIQy4iVHJhbnMgYW5kIGdlbmRlci1kaXZlcnNlIHBlb3BsZSAtIEhJVi5CLkRFNTMiCiAgKQoKICBkZWZpbmUgUFdJRDoKICBleGlzdHMgKAogICAgW09ic2VydmF0aW9uOiBIQy4iS2V5IHBvcHVsYXRpb24gbWVtYmVyKiAtIEhJVi5FLkRFMTEzIl0gTwogICAgd2hlcmUgTy5zdGF0dXMgaW4geyAnZmluYWwnLCAnYW1lbmRlZCcsICdjb3JyZWN0ZWQnIH0KICAgIGFuZCBleGlzdHMoTy5jYXRlZ29yeSBPQyB3aGVyZSBPQyB+IEhDQy4ic29jaWFsLWhpc3RvcnkiKQogICAgYW5kIE8udmFsdWUgfiBIQy4iUGVvcGxlIHdobyBpbmplY3QgZHJ1Z3MgLSBISVYuQi5ERTU0IgogICkKCiAgZGVmaW5lIFByaXNvbmVyOgogIGV4aXN0cyAoCiAgICBbT2JzZXJ2YXRpb246IEhDLiJLZXkgcG9wdWxhdGlvbiBtZW1iZXIqIC0gSElWLkUuREUxMTMiXSBPCiAgICB3aGVyZSBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJywgJ2NvcnJlY3RlZCcgfQogICAgYW5kIGV4aXN0cyhPLmNhdGVnb3J5IE9DIHdoZXJlIE9DIH4gSENDLiJzb2NpYWwtaGlzdG9yeSIpCiAgICBhbmQgTy52YWx1ZSB+IEhDLiJQZW9wbGUgbGl2aW5nIGluIHByaXNvbnMgYW5kIG90aGVyIGNsb3NlZCBzZXR0aW5ncyIKICApCgogIGRlZmluZSBUQl9kaWFnbm9zZWQ6CiAgZXhpc3RzKAogICAgKFtDb25kaXRpb25dIEMKICAgIHdoZXJlIEMuY2xpbmljYWxTdGF0dXMgfiBIQ0MuImFjdGl2ZSIKICAgIGFuZCBleGlzdHMoQy5jYXRlZ29yeSBDQyB3aGVyZSBDQyB+IEhDQy4iZW5jb3VudGVyLWRpYWdub3NpcyIpCiAgICBhbmQgQy5jb2RlIH4gSEMuIkRpYWdub3NlZCBUQiIKICAgIGFuZCBDLm9uc2V0IGR1cmluZyAiTWVhc3VyZW1lbnQgUGVyaW9kIikKICApCiAgCiAgZGVmaW5lIFRCX3ByZXN1bXB0aXZlOgogIGV4aXN0cygKICAgIChbQ29uZGl0aW9uXSBDCiAgICB3aGVyZSBDLmNsaW5pY2FsU3RhdHVzIH4gSENDLiJhY3RpdmUiCiAgICBhbmQgZXhpc3RzKEMuY2F0ZWdvcnkgQ0Mgd2hlcmUgQ0MgfiBIQ0MuImVuY291bnRlci1kaWFnbm9zaXMiKQogICAgYW5kIEMuY29kZSB+IEhDLiJQcmVzdW1wdGl2ZSBUQiAtIEhJVi5ELkRFOTQ1IgogICAgYW5kIEMub25zZXQgZHVyaW5nICJNZWFzdXJlbWVudCBQZXJpb2QiKQogICkKCgpkZWZpbmUgRXhwb3N1cmVfT2NjdXBhdGlvbmFsOgogIGV4aXN0cyAoCiAgICBbT2JzZXJ2YXRpb246IEhDLiJISVYgZXhwb3N1cmUgdHlwZSoiXSBPCiAgICB3aGVyZSBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJywgJ2NvcnJlY3RlZCcgfQogICAgYW5kIGV4aXN0cyhPLmNhdGVnb3J5IE9DIHdoZXJlIE9DIH4gSENDLiJzb2NpYWwtaGlzdG9yeSIpCiAgICBhbmQgTy52YWx1ZSB+IEhDLiJPY2N1cGF0aW9uYWwiCiAgKQoKZGVmaW5lIEV4cG9zdXJlX05vbl9PY2N1cGF0aW9uYWxfdmlvbGVudDoKICBleGlzdHMgKAogICAgW09ic2VydmF0aW9uOiBIQy4iSElWIGV4cG9zdXJlIHR5cGUqIl0gTwogICAgd2hlcmUgTy5zdGF0dXMgaW4geyAnZmluYWwnLCAnYW1lbmRlZCcsICdjb3JyZWN0ZWQnIH0KICAgIGFuZCBleGlzdHMoTy5jYXRlZ29yeSBPQyB3aGVyZSBPQyB+IEhDQy4ic29jaWFsLWhpc3RvcnkiKQogICAgYW5kIE8udmFsdWUgfiBIQy4iTm9uLW9jY3VwYXRpb25hbCB2aW9sZW50IgogICkKCmRlZmluZSBFeHBvc3VyZV9Ob25fT2NjdXBhdGlvbmFsX2NvbnNlbnN1YWxfc2V4OgogIGV4aXN0cyAoCiAgICBbT2JzZXJ2YXRpb246IEhDLiJISVYgZXhwb3N1cmUgdHlwZSoiXSBPCiAgICB3aGVyZSBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJywgJ2NvcnJlY3RlZCcgfQogICAgYW5kIGV4aXN0cyhPLmNhdGVnb3J5IE9DIHdoZXJlIE9DIH4gSENDLiJzb2NpYWwtaGlzdG9yeSIpCiAgICBhbmQgTy52YWx1ZSB+IEhDLiJOb24tb2NjdXBhdGlvbmFsIGNvbnNlbnN1YWwgc2V4IgogICkKCmRlZmluZSBoaXZfZXhwb3N1cmVfdHlwZToKICBMaXN0PFN0cmluZz57CiAgICBpZiBFeHBvc3VyZV9PY2N1cGF0aW9uYWwgdGhlbiAnT2NjdXBhdGlvbmFsJyBlbHNlIG51bGwsCiAgICBpZiBFeHBvc3VyZV9Ob25fT2NjdXBhdGlvbmFsX3Zpb2xlbnQgdGhlbiAnTm9uLW9jY3VwYXRpb25hbCB2aW9sZW50JyBlbHNlIG51bGwsCiAgICBpZiBFeHBvc3VyZV9Ob25fT2NjdXBhdGlvbmFsX2NvbnNlbnN1YWxfc2V4IHRoZW4gJ05vbi1vY2N1cGF0aW9uYWwgY29uc2Vuc3VhbCBzZXgnIGVsc2UgbnVsbAogIH0KCi8qQHRyaWdnZXJlZEJ5IEVuY291bnRlciB3aXRoIGxvY2F0aW9uID0gY29tbXVuaXR5IGxldmVsIHRlc3RpbmcqLwoKZGVmaW5lICJDb21tdW5pdHlfdGVzdGluZyI6CiAgZXhpc3RzKFtPYnNlcnZhdGlvbl0gTwogICAgd2l0aCBbRW5jb3VudGVyXSBFCiAgICAgIHN1Y2ggdGhhdCBPLmVuY291bnRlci5yZWZlcmVuY2VzKEUpIGFuZCBleGlzdHMoRS5sb2NhdGlvbi5waHlzaWNhbFR5cGUgUFQgd2hlcmUgUFQgfiAgSEMuIkNvbW11bml0eS1sZXZlbCB0ZXN0aW5nIikgCiAgd2hlcmUgKE8uc3RhdHVzIGluIHsgJ2ZpbmFsJywgJ2FtZW5kZWQnIH0KICBhbmQgTy5jb2RlIH4gSEMuIlJhcGlkIGRpYWdub3N0aWMgdGVzdCBmb3IgSElWIC0gSElWLkIuREU4MiIKICBhbmQgTy5pc3N1ZWQgZHVyaW5nICJNZWFzdXJlbWVudCBQZXJpb2QiKQogICkKCi8qQHRyaWdnZXJlZEJ5IEVuY291bnRlciB3aXRoIGxvY2F0aW9uID0gZmFjaWxpdHkgbGV2ZWwgdGVzdGluZyovCmRlZmluZSAiRmFjaWxpdHlfdGVzdGluZyI6CiAgZXhpc3RzKFtPYnNlcnZhdGlvbl0gTwogICAgd2l0aCBbRW5jb3VudGVyXSBFCiAgICAgIHN1Y2ggdGhhdCBPLmVuY291bnRlci5yZWZlcmVuY2VzKEUpIGFuZCBleGlzdHMoRS5sb2NhdGlvbi5waHlzaWNhbFR5cGUgUFQgd2hlcmUgUFQgfiAgSEMuIkZhY2lsaXR5LWxldmVsIHRlc3RpbmciKQogIHdoZXJlIChPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJyB9CiAgYW5kIE8uY29kZSB+IEhDLiJSYXBpZCBkaWFnbm9zdGljIHRlc3QgZm9yIEhJViAtIEhJVi5CLkRFODIiCiAgYW5kIE8uaXNzdWVkIGR1cmluZyAiTWVhc3VyZW1lbnQgUGVyaW9kIikKICApCgovL2xpZnRlZCB0aGlzIGZyb20gQU5DIERBSwpkZWZpbmUgIkFOQ19jYXNlIjoKZXhpc3RzKAogICAgW0VwaXNvZGVPZkNhcmVdIEVPQwogICAgd2hlcmUgZXhpc3RzKEVPQy50eXBlIFQgd2hlcmUgVCB+IEhDLiJBbHJlYWR5IG9uIEFSVCBhdCBmaXJzdCBhbnRlbmF0YWwgY2FyZSB2aXNpdCIpCiAgICBhbmQgKGV4aXN0cyAoCiAgICAgIEVPQy5zdGF0dXNIaXN0b3J5IEgKICAgICAgd2hlcmUgSC5wZXJpb2Qgb3ZlcmxhcHMgIk1lYXN1cmVtZW50IFBlcmlvZCIKICAgICkgCiAgICBvciAoCiAgICAgIEVPQy5wZXJpb2Qgb3ZlcmxhcHMgIk1lYXN1cmVtZW50IFBlcmlvZCIKICAgICkKICAgICkKICAgICkKICAKCiAgZGVmaW5lICJQUkVQIFByb2R1Y3QgT3JhbCI6CiAgZXhpc3RzKFtNZWRpY2F0aW9uU3RhdGVtZW50XSBNUwogICAgd2hlcmUgTVMuc3RhdHVzID0gJ3JlY29yZGVkJwogICAgYW5kIGV4aXN0cyhNUy5yZWFzb25Db2RlIEMgd2hlcmUgQyB+IEhDLiJDdXJyZW50bHkgb24gUHJFUCIpCiAgICBhbmQgKE1TLm1lZGljYXRpb24gfiBIQy4iVERGICsgRlRDIC0gSElWLkMuREUxOCIgb3IKICAgIE1TLm1lZGljYXRpb24gfiBIQy4iVERGIC0gSElWLkMuREUxOSIgb3IKICAgIE1TLm1lZGljYXRpb24gfiBIQy4iVERGICsgM1RDIC0gSElWLkMuREUyMCIgb3IKICAgIE1TLm1lZGljYXRpb24gfiBIQy4iT3RoZXIgVERGLWJhc2VkIHJlZ2ltZW4iKQogICkKCiAgZGVmaW5lICJQUkVQIFByb2R1Y3QgbG9uZy1hY3RpbmcgZGV2aWNlIjoKICBleGlzdHMoW01lZGljYXRpb25TdGF0ZW1lbnRdIE1TCiAgICB3aGVyZSBNUy5zdGF0dXMgPSAncmVjb3JkZWQnCiAgICBhbmQgZXhpc3RzKE1TLnJlYXNvbkNvZGUgQyB3aGVyZSBDIH4gSEMuIkN1cnJlbnRseSBvbiBQckVQIikKICAgIGFuZCBNUy5tZWRpY2F0aW9uIH4gSEMuIkRhcGl2aXJpbmUgdmFnaW5hbCByaW5nIERWUiAtIEhJVi5DLkRFMjIiCiAgKQoKICBkZWZpbmUgIlBSRVAgUHJvZHVjdCBsb25nLWFjdGluZyBpbmplY3RhYmxlIjoKICBleGlzdHMoW01lZGljYXRpb25TdGF0ZW1lbnRdIE1TCiAgICB3aGVyZSBNUy5zdGF0dXMgPSAncmVjb3JkZWQnCiAgICBhbmQgZXhpc3RzKE1TLnJlYXNvbkNvZGUgQyB3aGVyZSBDIH4gSEMuIkN1cnJlbnRseSBvbiBQckVQIikKICAgIGFuZCBNUy5tZWRpY2F0aW9uIH4gSEMuIkNBQi1MQSAtIEhJVi5DLkRFMjMiCiAgKQogIAogIGRlZmluZSAiUFJFUCBmaXJzdCB0aW1lIjoKICBleGlzdHMoW01lZGljYXRpb25TdGF0ZW1lbnRdIE1TCiAgICB3aGVyZSBNUy5zdGF0dXMgPSAncmVjb3JkZWQnCiAgICBhbmQgZXhpc3RzKE1TLnJlYXNvbkNvZGUgQyB3aGVyZSBDIH4gSEMuIkN1cnJlbnRseSBvbiBQckVQIikKICAgIGFuZCBleGlzdHMoTVMuc3RhdHVzUmVhc29uIFNSIHdoZXJlIFNSIH4gSEMuIkZpcnN0LXRpbWUgdXNlciAtIEhJVi5DLkRFMjUiKQogICkKCiAgZGVmaW5lICJQUkVQIENvbnRpbnVpbmcgdXNlciI6CiAgZXhpc3RzKFtNZWRpY2F0aW9uU3RhdGVtZW50XSBNUwogICAgd2hlcmUgTVMuc3RhdHVzID0gJ3JlY29yZGVkJwogICAgYW5kIGV4aXN0cyhNUy5yZWFzb25Db2RlIEMgd2hlcmUgQyB+IEhDLiJDdXJyZW50bHkgb24gUHJFUCIpCiAgICBhbmQgZXhpc3RzKE1TLnN0YXR1c1JlYXNvbiBTUiB3aGVyZSBTUiB+IEhDLiJDb250aW51aW5nIHVzZXIiKQogICkKICAKICBkZWZpbmUgIlBSRVAgUmVzdGFydGluZyI6CiAgZXhpc3RzKFtNZWRpY2F0aW9uU3RhdGVtZW50XSBNUwogICAgd2hlcmUgTVMuc3RhdHVzID0gJ3JlY29yZGVkJwogICAgYW5kIGV4aXN0cyhNUy5yZWFzb25Db2RlIEMgd2hlcmUgQyB+IEhDLiJDdXJyZW50bHkgb24gUHJFUCIpCiAgICBhbmQgZXhpc3RzKE1TLnN0YXR1c1JlYXNvbiBTUiB3aGVyZSBTUiB+IEhDLiJSZXN0YXJ0aW5nIGZvbGxvd2luZyBhIHBlcmlvZCBvZiBub3QgdGFraW5nIFByRVAiKQogICkKCiAgZGVmaW5lICJEYWlseV9vcmFsX1ByRVAiOgogIGV4aXN0cyhbTWVkaWNhdGlvblN0YXRlbWVudF0gTVMKICAgIHdoZXJlIE1TLnN0YXR1cyA9ICdyZWNvcmRlZCcKICAgIGFuZCBleGlzdHMoTVMucmVhc29uQ29kZSBDIHdoZXJlIEMgfiBIQy4iQ3VycmVudGx5IG9uIFByRVAiKQogICAgYW5kIGV4aXN0cyhNUy5kb3NhZ2UuYWRkaXRpb25hbEluc3RydWN0aW9uIEFJIHdoZXJlIEFJIH4gSEMuIkRhaWx5IG9yYWwgUHJFUCIpCiAgKQoKICBkZWZpbmUgIkV2ZW50X2RyaXZlbl9QckVQIjoKICBleGlzdHMoW01lZGljYXRpb25TdGF0ZW1lbnRdIE1TCiAgICB3aGVyZSBNUy5zdGF0dXMgPSAncmVjb3JkZWQnCiAgICBhbmQgZXhpc3RzKE1TLnJlYXNvbkNvZGUgQyB3aGVyZSBDIH4gSEMuIkN1cnJlbnRseSBvbiBQckVQIikKICAgIGFuZCBleGlzdHMoTVMuZG9zYWdlLmFkZGl0aW9uYWxJbnN0cnVjdGlvbiBBSSB3aGVyZSBBSSB+IEhDLiJFdmVudC1kcml2ZW4gUHJFUCAyKzErMSIpIAogICkKCiAgZGVmaW5lICJvdGhlcl9kb3NpbmdfUHJFUCI6CiAgZXhpc3RzKFtNZWRpY2F0aW9uU3RhdGVtZW50XSBNUwogICAgd2hlcmUgTVMuc3RhdHVzID0gJ3JlY29yZGVkJwogICAgYW5kIGV4aXN0cyhNUy5yZWFzb25Db2RlIEMgd2hlcmUgQyB+IEhDLiJDdXJyZW50bHkgb24gUHJFUCIpCiAgICBhbmQgZXhpc3RzKE1TLmRvc2FnZS5hZGRpdGlvbmFsSW5zdHJ1Y3Rpb24gQUkgd2hlcmUgQUkgfiBIQy4iT3RoZXIgUHJFUCBkb3NpbmcgdHlwZSIpIAogICkKCgogIGRlZmluZSBwYXRpZW50R3JvdXBzOgogIExpc3Q8U3RyaW5nPnsKICAgIGlmIFNXIHRoZW4gJ1NXJyBlbHNlIG51bGwsCiAgICBpZiBNU00gdGhlbiAnTVNNJyBlbHNlIG51bGwsCiAgICBpZiBUcmFucyB0aGVuICdUcmFucycgZWxzZSBudWxsLAogICAgaWYgUFdJRCB0aGVuICdQV0lEJyBlbHNlIG51bGwsCiAgICBpZiBQcmlzb25lciB0aGVuICdQcmlzb25lcicgZWxzZSBudWxsCiAgfQoKICBkZWZpbmUgc2V0dGluZzoKICBMaXN0PFN0cmluZz57CiAgICBpZiBDb21tdW5pdHlfdGVzdGluZyB0aGVuICdDb21tdW5pdHktbGV2ZWwgdGVzdGluZycgZWxzZSBudWxsLAogICAgaWYgRmFjaWxpdHlfdGVzdGluZyB0aGVuICdGYWNpbGl0eS1sZXZlbCB0ZXN0aW5nJyBlbHNlIG51bGwKICB9CgogIGRlZmluZSBhbmM6CiAgTGlzdDxTdHJpbmc+ewogICAgaWYgQU5DX2Nhc2UgdGhlbiAnQU5DIGNhc2UnIGVsc2UgbnVsbAogIH0KCiAgZGVmaW5lIHRiOgogIExpc3Q8U3RyaW5nPnsKICAgIGlmIFRCX2RpYWdub3NlZCB0aGVuICdEaWFnbm9zZWQgVEInIGVsc2UgbnVsbCwKICAgIGlmIFRCX3ByZXN1bXB0aXZlIHRoZW4gJ1ByZXN1bXB0aXZlIFRCJyBlbHNlIG51bGwKICB9CgogIGRlZmluZSBwcmVwX3Byb2R1Y3Q6CiAgTGlzdDxTdHJpbmc+ewogICAgaWYgYFBSRVAgUHJvZHVjdCBPcmFsYCB0aGVuICdQUkVQIFByb2R1Y3QgT3JhbCcgZWxzZSBudWxsLAogICAgaWYgYFBSRVAgUHJvZHVjdCBsb25nLWFjdGluZyBkZXZpY2VgIHRoZW4gJ1BSRVAgUHJvZHVjdCBsb25nLWFjdGluZyBkZXZpY2UnIGVsc2UgbnVsbCwKICAgIGlmIGBQUkVQIFByb2R1Y3QgbG9uZy1hY3RpbmcgaW5qZWN0YWJsZWAgdGhlbiAnUFJFUCBQcm9kdWN0IGxvbmctYWN0aW5nIGluamVjdGFibGUnIGVsc2UgbnVsbAogIH0KCiAgZGVmaW5lIHByZXBfZXhwZXJpZW5jZToKICBMaXN0PFN0cmluZz57CiAgICBpZiBgUFJFUCBmaXJzdCB0aW1lYCB0aGVuICdQUkVQIGZpcnN0IHRpbWUnIGVsc2UgbnVsbCwKICAgIGlmIGBQUkVQIENvbnRpbnVpbmcgdXNlcmAgdGhlbiAnUFJFUCBDb250aW51aW5nIHVzZXInIGVsc2UgbnVsbCwKICAgIGlmIGBQUkVQIFJlc3RhcnRpbmdgIHRoZW4gJ1BSRVAgUmVzdGFydGluZycgZWxzZSBudWxsCiAgfQoKICBkZWZpbmUgcHJlcF9kb3Npbmc6CiAgTGlzdDxTdHJpbmc+ewogICAgaWYgYERhaWx5X29yYWxfUHJFUGAgdGhlbiAnRGFpbHkgb3JhbCBQckVQJyBlbHNlIG51bGwsCiAgICBpZiBgRXZlbnRfZHJpdmVuX1ByRVBgIHRoZW4gJ0V2ZW50IGRyaXZlbiBQckVQJyBlbHNlIG51bGwsCiAgICBpZiBgb3RoZXJfZG9zaW5nX1ByRVBgIHRoZW4gJ090aGVyIFByRVAgZG9zaW5nIHR5cGUnIGVsc2UgbnVsbAogIH0KCi8vbmVlZCB0byBhZGQgVGltZSB0byBzdGFydCBBUlQgKHdpdGhpbiA3LCAzMCBvciA5MCBkYXlzIG9mIGRpYWdub3NpcywgYXMgcGVyIGNvdW50cnkgZ3VpZGVsaW5lcykKLy9uZWVkIHRvIGFkZCBEaXNhZ2dyZWdhdGlvbiBieSB0aW1lIHNpbmNlIGRpYWdub3NpcwogIAoKCi8qIAoqIERBSyBoYXMgY29kZXMgZm9yIEhBQVJUIG1pc3NwZWNpZmllZCAKKiBJQ0QtMTAgWjkyLjIJT3RoZXIgcHJvcGh5bGFjdGljIGNoZW1vdGhlcmFweQkJCiogTE9JTkMgIjU0ODI1LTUJIglPbiBzY2hlZHVsZWQgcGFpbiBtZWRpY2F0aW9uIHJlZ2ltZW4gaW4gbGFzdCA3IGRheXMKKgoqIFNob3VsZCBkaXNjdXNzIAoqLwoKCgoKCgoKLyoKKiBLZW55YSBFTVIgZGVmaW5lZCBhcyBISVYgcG9zaXRpdmUgY29uZGl0aW9uCiogV2lsbCBuZWVkIHRvIGRpc2N1c3MgaWYgcHJvZHVjZSBmbGFncyB0aHJvdWdoIGNvbmRpdGlvbnMgZm9yIGNvbmNlcHRzIHRvIHVzZSBpbiBpbmRpY2F0b3IgY2FsY3VsYXRpb24gc3VjaCBhcyBISVYgcG9zaXRpdmUgYW5kIE9uIEFSVAoqIEhvd2V2ZXIsIHdlIGhhdmUgbW92ZWQgZm9yd2FyZCB3aXRoIGEgbW9yZSBwcmVzY3JpcHRpdmUgYXBwcm9hY2ggCiogSW5ldml0YWJseSBvdXIgYXBwcm9hY2ggcmVxdWlyZXMgdGhhdCBjZXJ0YWluIGRhdGEgZWxlbWVudHMgYmUgYXZhaWxhYmxlCiovCgovKgogKiBISVYgVHJlYXRtZW50IGR1cmluZyB0aGUgbWVhc3VyZW1lbnQgcGVyaW9kCiAqIHVzZXMgZG9zYWdlIGFuZCBkaXNwZW5zYXRpb24gYW1vdW50IHRvIGVzdGltYXRlIGxhc3QgZGF5IG9mIG1lZGljYXRpb24KICogbWVkaWNhdGlvbiBzaG91bGQgYmUgZGlzcGVuc2VkIGJlZm9yZSBlbmQgb2YgbWVhc3VyZW1lbnQgcGVyaW9kCiAqIG1lZGljYXRpb24gc2hvdWxkIGxhc3QgdW50aWwgYWZ0ZXIgMjggZGF5cyBhZnRlciB0aGUgZW5kIG9mIHRoZSBtZWFzdXJlbWVudCBwZXJpb2QKICogVGhpcyB0YWtlcyBpbnRvIGFjY291bnQgbG9zdCB0byBmb2xsb3cgdXAKICovCgovKgoqZGVmaW5lICJISVYgVHJlYXRtZW50IGR1cmluZyB0aGUgbWVhc3VyZW1lbnQgcGVyaW9kIjoKKiAgIFtNZWRpY2F0aW9uRGlzcGVuc2VdIE1ECiogICAgd2hlcmUgTUQuc3RhdHVzIGluIHsgJ2ZpbmFsJywgJ2FtZW5kZWQnLCAnY29ycmVjdGVkJyB9CiogICAgYW5kIE1ELm1lZGljYXRpb24gfiAnQW50aXJldHJvdmlyYWwnCiogICAgYW5kIE1ELndoZW5IYW5kZWRPdmVyIGJlZm9yZSBlbmQgb2YgIk1lYXN1cmVtZW50IFBlcmlvZCIKKiAgICBhbmQgKE1ELndoZW5IYW5kZWRPdmVyICsgTUQuZG9zYWdlSW5zdHJ1Y3Rpb25bMF0udGltaW5nLnJlcGVhdC5kdXJhdGlvbi52YWx1ZSAqIE1lZGljYXRpb25EaXNwZW5zZS5xdWFudGl0eS52YWx1ZSkgYWZ0ZXIgKG1lYXN1cmVtZW50UGVyaW9kLmVuZCAtIDI4IGRheXMpCiovIAoKLyoKKiBJbW11bml6YXRpb24gZGVmaW5lcyBIQUFSVCBhcwoqICBleGlzdHMoW01lZGljYXRpb25BZG1pbmlzdHJhdGlvbl0gQSB3aGVyZSBFeHRyYWN0TWVkaWNhdGlvbkNvZGUoQS5tZWRpY2F0aW9uKSBpbiBJTU1aYy4iQVJWIERydWdzIiBhbmQgQS5zdGF0dXMgPSAnaW4tcHJvZ3Jlc3MnKQoqIEkgYmVsaWV2ZSB0aGlzIGlzIHRoZSBpbmNvcnJlY3QgcmVzb3VyY2UgdW5sZXNzIHRoZXkgbWVhbiB0byBzYXkgdGhhdCBtZWRpY2F0aW9uIGlzIGdpdmVuIGR1cmluZyBhIG1lZGljYWwgZW5jb3VudGVyCiogd291bGQgbGlrZSB0byBkaXNjdXNzIAoqLyAKCi8qKiAKICogUGF0aWVudCBEZWNlYXNlZCBEdXJpbmcgTWVhc3VyZW1lbnQgUGVyaW9kCiAqIEltbXVuaXphdGlvbiBkZWZpbmVzIHRoaXMgYXMgdHJ1ZSB3aGVuIGlzIGEgYm9vbGVhbi4gVGhpcyBtYXkgaGF2ZSB0aGUgZWZmZWN0IG9mIGRlbGV0aW5nIGEgcGVyc29uIGZyb20gaW5kaWNhdG9ycyBpbiBhbGwgY2FsY3VsYXRpb25zCiAqIFNob3VsZCBpbnRlbmQgdG8gdXNlIHdoZW4gcGF0aWVudC5kZWNlYXNlZCBGSElSIGJvb2xlYW4gd2FzIHVwZGF0ZWQgdG8gVFJVRSBpZiBubyBvdGhlciBkYXRlIGlzIGF2YWlsYWJsZQogKiBLZW55YSBFTVIgZXhhbXBsZSBkb2VzIG5vdCBhY2NvdW50IGZvciB3aGVuIGRlY2Vhc2VkIGlzIGp1c3QgYSBib29sZWFuCiAqLwoKCi8qCmRlZmluZSAiUFJFUCBQcmVzY3JpcHRpb24gRGF5cyI6CiAgU3VtKAogICAgKAogICAgICBjb2xsYXBzZSAoCiAgICAgICAgW01lZGljYXRpb25SZXF1ZXN0XSBNUgogICAgICAgICAgd2hlcmUgTVIuc3RhdHVzID0gJ2NvbXBsZXRlZCcKICAgICAgICAgIGFuZCBNUi5pbnRlbnQgPSAnb3JkZXInCiAgICAgICAgICBhbmQgTVIubWVkaWNhdGlvbiB+IEhDLiJQckVQIGZvciBISVYgcHJldmVudGlvbiIKICAgICAgICByZXR1cm4gV0NvbVYyLiJQcmVzY3JpcHRpb24gUmVsZXZhbnQgUGVyaW9kIiggTVIgKSBpbnRlcnNlY3QgIk1lYXN1cmVtZW50IFBlcmlvZCIKICAgICAgKQogICAgKSBQUkVQVXNlSW50ZXJ2YWwKICAgICAgcmV0dXJuIGRheXMgYmV0d2VlbiBzdGFydCBvZiBQUkVQVXNlSW50ZXJ2YWwgYW5kIGVuZCBvZiBQUkVQVXNlSW50ZXJ2YWwKICApCiovCgoKZGVmaW5lIGZ1bmN0aW9uIEdldER1cmF0aW9uSW5EYXlzKHZhbHVlIEZISVIuRHVyYXRpb24pOiAvLyByZXR1cm5zIERlY2ltYWw6CiAgICBjYXNlIHZhbHVlLmNvZGUudmFsdWUKICAgICAgd2hlbiAnYScgdGhlbiB2YWx1ZS52YWx1ZSAqIDM2NS4wCiAgICAgIHdoZW4gJ21vJyB0aGVuIHZhbHVlLnZhbHVlLnZhbHVlICogMzAuMAogICAgICB3aGVuICd3aycgdGhlbiB2YWx1ZS52YWx1ZS52YWx1ZSAqIDcuMAogICAgICB3aGVuICdkJyB0aGVuIHZhbHVlLnZhbHVlLnZhbHVlCiAgICAgIHdoZW4gJ2gnIHRoZW4gdmFsdWUudmFsdWUudmFsdWUgLyAyNC4wCiAgICAgIHdoZW4gJ21pbicgdGhlbiB2YWx1ZS52YWx1ZS52YWx1ZSAvIDYwLjAgLyAyNC4wCiAgICAgIHdoZW4gJ3MnIHRoZW4gdmFsdWUudmFsdWUudmFsdWUgLyA2MC4wIC8gNjAuMCAvIDI0LjAKICAgICAgd2hlbiAnbXMnIHRoZW4gdmFsdWUudmFsdWUudmFsdWUgLyA2MC4wIC8gNjAuMCAvIDI0LjAgLyAxMDAwLjAKICAgICAgZWxzZSBNZXNzYWdlKDEwMDAsIHRydWUsICdVbmRlZmluZWQnLCAnRXJyb3InLCAnVW5zdXBwb3J0ZWQgZHVyYXRpb24gdW5pdCAnICsgdmFsdWUuY29kZS52YWx1ZSkKICAgIGVuZAoKZGVmaW5lIGZ1bmN0aW9uICJQcmVzY3JpcHRpb24gUmVsZXZhbnQgUGVyaW9kIihwcmVzY3JpcHRpb24gRkhJUi5NZWRpY2F0aW9uUmVxdWVzdCk6CiAgaWYgKAogICAgcHJlc2NyaXB0aW9uLmF1dGhvcmVkT24gaXMgbm90IG51bGwgYW5kIHByZXNjcmlwdGlvbi5kaXNwZW5zZVJlcXVlc3QgaXMgbm90IG51bGwKICAgICAgYW5kIHByZXNjcmlwdGlvbi5kaXNwZW5zZVJlcXVlc3QuZXhwZWN0ZWRTdXBwbHlEdXJhdGlvbiBpcyBub3QgbnVsbAogICkKICB0aGVuIEludGVydmFsWwogICAgZGF0ZSBmcm9tIHByZXNjcmlwdGlvbi5hdXRob3JlZE9uLAogICAgZGF0ZSBmcm9tIHByZXNjcmlwdGlvbi5hdXRob3JlZE9uICsgU3lzdGVtLlF1YW50aXR5eyB2YWx1ZTogR2V0RHVyYXRpb25JbkRheXMocHJlc2NyaXB0aW9uLmRpc3BlbnNlUmVxdWVzdC5leHBlY3RlZFN1cHBseUR1cmF0aW9uKSwgdW5pdDogJ2RheXMnIH0KICBdCiAgZWxzZSBudWxs"/>
+  </content>
+  <content>
+    <contentType value="application/elm+xml"/>
+  </content>
+</Library>

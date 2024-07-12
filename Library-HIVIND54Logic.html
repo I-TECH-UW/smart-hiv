@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.48"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.48"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.46"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.46"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND54Logic</b></p><a name="HIVIND54Logic"> </a><a name="hcHIVIND54Logic"> </a><a name="hcHIVIND54Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library FHIRHelpers</td><td><code>http://smart.who.int/hiv/Library/FHIRHelpers|4.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library FC</td><td><code>http://smart.who.int/hiv/Library/FHIRCommon</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND54Logic</b></p><a name="HIVIND54Logic"> </a><a name="hcHIVIND54Logic"> </a><a name="HIVIND54Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.54 Logic
  * Ref No: DSD.2
  * Short Name: Uptake of DSD ART models among people living with HIV
@@ -365,54 +365,57 @@
  * Denominator Exclusions: 
  *
  * Disaggregations:
- * • Gender (female, male, other**)
- * • Age (0–4, 5–14, 15–24, 25+ years)
- * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)***
- * • Category of DSD model (group models managed by health care workers, group models managed by clients, individual models based at facilities, and individual models not based at facilities). This requires each DSD ART model of care to be assigned to one of these categories to enable disaggregation.
- * • Cities and other administrative regions of epidemiologic importance
- * 
+ * • Gender (female, male, other**) 
+ *  • Age (0–4, 5–14, 15–24, 25+ years) 
+ *  • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)*** 
+ *  • Category of DSD model (group models managed by health care workers, group models managed by clients, individual models based at facilities, and individual models not based at facilities). This requires each DSD ART model of care to be assigned to one of these categories to enable disaggregation. 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
  * Disaggregation Elements: Gender | Age | Key population member type | DSD ART model(s)
  *
  * Numerator and Denominator Elements:
- * DSD ART start date | Date DSD ART eligibility assessed | Eligible for DSD ART | HIV status | On ART
+ * DSD ART start date 
+ *  Date DSD ART eligibility assessed 
+ *  Eligible for DSD ART 
+ *  HIV status 
+ *  On ART
  *
  * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
  * 
  * Data Concepts:
- *  
- * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
- * HIV.A.DE18: Gender* | Gender of the client* 
- * HIV.A.DE19: Female | Client identifies as female 
- * HIV.A.DE20: Male | Client identifies as male 
- * HIV.A.DE21: Transgender male | Client identifies as transgender male 
- * HIV.A.DE22: Transgender female | Client identifies as transgender female 
- * HIV.A.DE23: Other | Additional category 
- * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
- * HIV.B.DE51: Sex worker | Client is a sex worker 
- * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
- * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
- * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
- * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
- * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis. 
- * HIV.B.DE116: HIV-positive | Client is HIV-positive 
- * HIV.B.DE117: HIV-negative | Client is HIV-negative 
- * HIV.B.DE118: Unknown | Client has unknown HIV status 
- * HIV.D.DE38: On ART | Client is currently taking ART 
- * HIV.D.DE760: Eligible for DSD ART | Client is eligible for differentiated service delivery (DSD) for ART 
- * HIV.D.DE761: Date DSD ART eligibility assessed | Date client was assessed for eligibility for differentiated service delivery (DSD) for ART 
- * HIV.D.DE763: DSD ART start date | Date client started on differentiated service delivery (DSD) for ART 
- * HIV.D.DE764: DSD ART model(s) | Type of DSD ART model client is enrolled in (country-specific) 
- * HIV.D.DE765: Fast track ART refill | Client is enrolled in fast track ART refill (DSD ART model) 
- * HIV.D.DE766: Facility adherence club | Client is enrolled in facility adherence club (DSD ART model) 
- * HIV.D.DE767: Community ART distribution point | Client is enrolled in community ART distribution point (DSD ART model) 
- * HIV.D.DE768: CHW/peer educator community ART group | Client is enrolled in community health worker/peer educator community ART group (DSD ART model) 
- * HIV.D.DE769: Patient/client community ART group | Client is enrolled in patient/client community ART group (DSD ART model) 
- * HIV.D.DE770: Other DSD ART model | Client is enrolled in another DSD ART model 
- * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
- * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
- * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
- * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
- * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in
+ * HIV.B.DE51: Sex worker | Client is a sex worker
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative
+ * HIV.B.DE118: Unknown | Client has unknown HIV status
+ * HIV.D.DE38: On ART | Client is currently taking ART
+ * HIV.D.DE760: Eligible for DSD ART | Client is eligible for differentiated service delivery (DSD) for ART
+ * HIV.D.DE761: Date DSD ART eligibility assessed | Date client was assessed for eligibility for differentiated service delivery (DSD) for ART
+ * HIV.D.DE763: DSD ART start date | Date client started on differentiated service delivery (DSD) for ART
+ * HIV.D.DE764: DSD ART model(s) | Type of DSD ART model client is enrolled in (country-specific)
+ * HIV.D.DE765: Fast track ART refill | Client is enrolled in fast track ART refill (DSD ART model)
+ * HIV.D.DE766: Facility adherence club | Client is enrolled in facility adherence club (DSD ART model)
+ * HIV.D.DE767: Community ART distribution point | Client is enrolled in community ART distribution point (DSD ART model)
+ * HIV.D.DE768: CHW/peer educator community ART group | Client is enrolled in community health worker/peer educator community ART group (DSD ART model)
+ * HIV.D.DE769: Patient/client community ART group | Client is enrolled in patient/client community ART group (DSD ART model)
+ * HIV.D.DE770: Other DSD ART model | Client is enrolled in another DSD ART model
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting
  * HIV.H.DE47: On ART | Client is currently taking ART 
  *
  * Additional Context
@@ -428,13 +431,49 @@ library HIVIND54Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVIndicatorCommon version '0.0.1' called HIC
+include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include WHOCommon called WCom
 include FHIRCommon called FC
+include WHOCommon called WCom
 
 // Indicator Definition
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 8Kb )</p></div>
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
+
+context Patient
+/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true
+
+/**
+ * Numerator
+ * 
+ * Definition: Number of people on ART newly enrolled in DSD ART models during the reporting period
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True AND &quot;DSD ART start date&quot; within the reporting period
+ */
+
+define &quot;Numerator&quot;:
+  true
+
+
+/**
+ * Denominator
+ *
+ * Definition: Number of people on ART newly eligible* for DSD ART models during the reporting period. For facilities with electronic health information systems, it is possible to measure uptake as a proportion of all people living with HIV eligible for DSD. |  | No denominator for facilities with paper-based reporting systems
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True AND &quot;Date DSD ART eligibility assessed&quot; within the reporting period AND &quot;Eligible for DSD ART&quot;=True
+ */
+
+define &quot;Denominator&quot;:
+  true
+    
+
+/* end Populations */
+
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -459,7 +498,7 @@ include FHIRCommon called FC
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

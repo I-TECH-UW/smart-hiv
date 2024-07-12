@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.16"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.16"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.14"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.14"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-08
+            as of 2024-07-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND22Logic</b></p><a name="HIVIND22Logic"> </a><a name="hcHIVIND22Logic"> </a><a name="hcHIVIND22Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library FHIRHelpers</td><td><code>http://smart.who.int/hiv/Library/FHIRHelpers|4.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library FC</td><td><code>http://smart.who.int/hiv/Library/FHIRCommon</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND22Logic</b></p><a name="HIVIND22Logic"> </a><a name="hcHIVIND22Logic"> </a><a name="HIVIND22Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.22 Logic
  * Ref No: HTS.5
  * Short Name: HTS partner services
@@ -365,52 +365,55 @@
  * Denominator Exclusions: 
  *
  * Disaggregations:
- * • By index case gender (male, female, other**)
- * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)***
- * • HIV status of partner or contact (already known positive, newly diagnosed positive, negative)
- * • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)****
- * • Cities and other administrative regions of epidemiologic importance
- * 
+ * • By index case gender (male, female, other**) 
+ *  • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)*** 
+ *  • HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
+ *  • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**** 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
  * Disaggregation Elements: *Gender [of index case] | Age | Partner HIV status (reported) | HIV status of contact | Key population member type
  *
  * Numerator and Denominator Elements:
- * Date HIV test results returned | HIV test date | Referred through partner services | Type of contact or partner for partner services
+ * Date HIV test results returned 
+ *  HIV test date 
+ *  Referred through partner services 
+ *  Type of contact or partner for partner services
  *
  * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
  * 
  * Data Concepts:
- *  
- * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth 
- * HIV.B.DE5: Referred through partner services | Client reported coming to the facility after receiving a provider-assisted referral or patient referral from a contact or partner 
- * HIV.B.DE6: Partner or contact of an index case | The client is a contact or partner of a person diagnosed with HIV (an index case) 
- * HIV.B.DE7: Partner or contact of an HIV testing client (non-index case) | The client is a contact or partner identified through partner or social network services, but is not known to be a partner of an index-case 
- * HIV.B.DE8: Type of contact or partner for partner services | Client's relationship to the person that referred the client for partner services or family services 
- * HIV.B.DE9: Biological child | Client is the biological child of the person that referred the client for family services 
- * HIV.B.DE10: Drug-injecting partner | Client is a drug-injecting partner of the person that referred the client for partner services 
- * HIV.B.DE11: Sexual partner | Client is a sexual partner of the person that referred the client for partner services 
- * HIV.B.DE12: Social contact | Client is a social contact of the person that referred the client for social-network services 
- * HIV.B.DE33: Partner HIV status (reported) | The HIV status of the client's partner. 
- * HIV.B.DE34: HIV-positive | Client's partner is HIV-positive 
- * HIV.B.DE35: HIV-negative | Client's partner is HIV-negative 
- * HIV.B.DE36: Unknown | Don't know HIV status - client does not know partner's HIV status 
- * HIV.B.DE50: Key population member type* | The type of key population that the client is included in 
- * HIV.B.DE51: Sex worker | Client is a sex worker 
- * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men 
- * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse 
- * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs 
- * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting 
- * HIV.B.DE60: Date HIV test results returned | Date HIV test result returned to client 
- * HIV.B.DE110: HIV test date | Date of the HIV test 
- * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in 
- * HIV.E.DE115: Sex worker | Infant's mother is a sex worker 
- * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs 
- * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse 
- * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting 
- * HIV.E.DE224: HIV test date | Date of the HIV test 
- * HIV.PRV.DE11: HIV status of contact | The HIV status of the client's contact 
- * HIV.PRV.DE12: HIV-positive | Client's contact is HIV-positive 
- * HIV.PRV.DE13: HIV-negative | Client's contact is HIV-negative 
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.B.DE5: Referred through partner services | Client reported coming to the facility after receiving a provider-assisted referral or patient referral from a contact or partner
+ * HIV.B.DE6: Partner or contact of an index case | The client is a contact or partner of a person diagnosed with HIV (an index case)
+ * HIV.B.DE7: Partner or contact of an HIV testing client (non-index case) | The client is a contact or partner identified through partner or social network services, but is not known to be a partner of an index-case
+ * HIV.B.DE8: Type of contact or partner for partner services | Client's relationship to the person that referred the client for partner services or family services
+ * HIV.B.DE9: Biological child | Client is the biological child of the person that referred the client for family services
+ * HIV.B.DE10: Drug-injecting partner | Client is a drug-injecting partner of the person that referred the client for partner services
+ * HIV.B.DE11: Sexual partner | Client is a sexual partner of the person that referred the client for partner services
+ * HIV.B.DE12: Social contact | Client is a social contact of the person that referred the client for social-network services
+ * HIV.B.DE33: Partner HIV status (reported) | The HIV status of the client's partner.
+ * HIV.B.DE34: HIV-positive | Client's partner is HIV-positive
+ * HIV.B.DE35: HIV-negative | Client's partner is HIV-negative
+ * HIV.B.DE36: Unknown | Don't know HIV status - client does not know partner's HIV status
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in
+ * HIV.B.DE51: Sex worker | Client is a sex worker
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting
+ * HIV.B.DE60: Date HIV test results returned | Date HIV test result returned to client
+ * HIV.B.DE110: HIV test date | Date of the HIV test
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting
+ * HIV.E.DE224: HIV test date | Date of the HIV test
+ * HIV.PRV.DE11: HIV status of contact | The HIV status of the client's contact
+ * HIV.PRV.DE12: HIV-positive | Client's contact is HIV-positive
+ * HIV.PRV.DE13: HIV-negative | Client's contact is HIV-negative
  * HIV.PRV.DE14: Unknown | Client does not know contact's HIV status
+ * HIV.SRV.DE1: HIV test date | Date of the HIV test
  *
  * Additional Context
  * - what it measures: This measures the coverage and impact of the testing cascade of services for partners and other contacts* of people living with HIV, including key population members.
@@ -425,13 +428,46 @@ library HIVIND22Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVIndicatorCommon version '0.0.1' called HIC
+include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include WHOCommon called WCom
 include FHIRCommon called FC
+include WHOCommon called WCom
 
 // Indicator Definition
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 9Kb )</p></div>
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
+
+context Patient
+/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true
+
+/**
+ * Measure Population
+ *
+ * Definition: For the general population: Number of elicited partners and other contacts* of people diagnosed with HIV who received HTS |  | Additional cascade data collected: | • Number of people diagnosed with HIV (index cases) offered partner services | • Number of people diagnosed with HIV (index cases) accepting partner services | • Number of contacts/partners of people living with HIV whose information is elicited from people diagnosed with HIV (index cases) |  | For key populations: Number of elicited contacts1 of members of key populations who received HTS. | Additional cascade data collected: | • Number of key population members offered social network-based/partner services | • Number of key population members accepting social network-based/partner services | • Number of contacts of key population members elicited
+ * Calculation: For the general population: Number of elicited partners and other contacts* of people diagnosed with HIV who received HTS |  | Additional cascade data collected: | • Number of people diagnosed with HIV (index cases) offered partner services | • Number of people diagnosed with HIV (index cases) accepting partner services | • Number of contacts/partners of people living with HIV whose information is elicited from people diagnosed with HIV (index cases) |  | For key populations: Number of elicited contacts1 of members of key populations who received HTS. | Additional cascade data collected: | • Number of key population members offered social network-based/partner services | • Number of key population members accepting social network-based/partner services | • Number of contacts of key population members elicited
+ */
+                                                       
+define &quot;Measure Population&quot;:
+  true
+
+
+/**
+ * Measure Observation
+ * Definition: For the general population: Number of elicited partners and other contacts* of people diagnosed with HIV who received HTS |  | Additional cascade data collected: | • Number of people diagnosed with HIV (index cases) offered partner services | • Number of people diagnosed with HIV (index cases) accepting partner services | • Number of contacts/partners of people living with HIV whose information is elicited from people diagnosed with HIV (index cases) |  | For key populations: Number of elicited contacts1 of members of key populations who received HTS. | Additional cascade data collected: | • Number of key population members offered social network-based/partner services | • Number of key population members accepting social network-based/partner services | • Number of contacts of key population members elicited
+ * Calculation: For the general population: Number of elicited partners and other contacts* of people diagnosed with HIV who received HTS |  | Additional cascade data collected: | • Number of people diagnosed with HIV (index cases) offered partner services | • Number of people diagnosed with HIV (index cases) accepting partner services | • Number of contacts/partners of people living with HIV whose information is elicited from people diagnosed with HIV (index cases) |  | For key populations: Number of elicited contacts1 of members of key populations who received HTS. | Additional cascade data collected: | • Number of key population members offered social network-based/partner services | • Number of key population members accepting social network-based/partner services | • Number of contacts of key population members elicited                                                      
+ */     
+
+define function &quot;Measure Observation&quot;(Patient &quot;Patient&quot;):
+  1
+/* end Populations */
+
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -456,7 +492,7 @@ include FHIRCommon called FC
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jul 8, 2024 21:32+0000">2024-07-08</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.1.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Jul 12, 2024 23:16+0000">2024-07-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
