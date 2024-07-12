@@ -29,9 +29,7 @@ Title: "HIV.IND.90 HBV treatment among people living with HIV"
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.90.NUM"
-    * description = "Number of people newly started on HBV treatment (TDF) during the reporting period 
-plus
-Number of people living with HIV who are already on TDF-based ART"
+    * description = "Number of people newly started on HBV treatment (TDF) during the reporting period  | plus | Number of people living with HIV who are already on TDF-based ART"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

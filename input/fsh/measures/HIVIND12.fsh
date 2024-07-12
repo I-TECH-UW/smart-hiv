@@ -23,15 +23,13 @@ Title: "HIV.IND.12 Total person-years on OAMT"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.12.DEN"
-    * description = "a) Programme/service provider level: estimated PYFU for all opioid dependent people accessing service during defined reporting period
-b) Population level: estimated PYFU for total population of opioid dependent people in relevant geographic area during defined reporting period"
+    * description = "a) Programme/service provider level: estimated PYFU for all opioid dependent people accessing service during defined reporting period | b) Population level: estimated PYFU for total population of opioid dependent people in relevant geographic area during defined reporting period"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.12.NUM"
-    * description = "Total PYFU on OAMT during defined reporting period.
-Calculated from the sum of the time on OAMT of each OAMT recipient during the reporting period."
+    * description = "Total PYFU on OAMT during defined reporting period. | Calculated from the sum of the time on OAMT of each OAMT recipient during the reporting period."
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

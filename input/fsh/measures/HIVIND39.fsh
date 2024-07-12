@@ -23,8 +23,7 @@ Title: "HIV.IND.39 Infant ARV prophylaxis coverage"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.39.DEN"
-    * description = "a) Programme-based/service delivery denominator: Number of HIV-positive women who delivered in a facility within the past 12 months.
-B) Population-based denominator: Number of HIV-positive women who delivered within the past 12 months."
+    * description = "a) Programme-based/service delivery denominator: Number of HIV-positive women who delivered in a facility within the past 12 months. |  | B) Population-based denominator: Number of HIV-positive women who delivered within the past 12 months."
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

@@ -23,8 +23,7 @@ Title: "HIV.IND.11 OAMT coverage"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.11.DEN"
-    * description = "a) Programme/service provider level: number of opioid dependent people accessing service
-b) Population level: population size estimate of opioid dependent people in relevant geographic area"
+    * description = "a) Programme/service provider level: number of opioid dependent people accessing service | b) Population level: population size estimate of opioid dependent people in relevant geographic area"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

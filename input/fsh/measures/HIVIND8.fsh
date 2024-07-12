@@ -23,8 +23,7 @@ Title: "HIV.IND.8 NSP coverage"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.8.DEN"
-    * description = "a) Programme/service provider level: number of people who inject drugs who access the service
-b) Population level: population size estimate of people who inject drugs in relevant geographic area"
+    * description = "a) Programme/service provider level: number of people who inject drugs who access the service | b) Population level: population size estimate of people who inject drugs in relevant geographic area"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

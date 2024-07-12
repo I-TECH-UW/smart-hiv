@@ -23,8 +23,7 @@ Title: "HIV.IND.16 VMMC adverse events"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.16.DEN"
-    * description = "a) 1
-b) Total number of individuals under going VMMC performed according to national standard during the reporting period"
+    * description = "a) 1 | b) Total number of individuals under going VMMC performed according to national standard during the reporting period"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

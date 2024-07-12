@@ -29,8 +29,7 @@ Title: "HIV.IND.47 People living with HIV with active TB disease"
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.47.NUM"
-    * description = "Number of people living with HIV newly initiated on ART during the reporting period who have active TB disease.
-"Newly initiated on ART" is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period."
+    * description = "Number of people living with HIV newly initiated on ART during the reporting period who have active TB disease. | 'Newly initiated on ART' is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period."
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

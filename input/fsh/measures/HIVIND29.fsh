@@ -23,8 +23,7 @@ Title: "HIV.IND.29 People living with HIV on ART who have suppressed viral load"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.29.DEN"
-    * description = "Number of people living with HIV on ART at least six months with at least one routine VL result in a medical or laboratory record during the reporting period, to monitor progress towards the third 95 target
-In addition, this can also be presented as the number with suppressed VL among all people living with HIV to calculate population-level viral suppression."
+    * description = "Number of people living with HIV on ART at least six months with at least one routine VL result in a medical or laboratory record during the reporting period, to monitor progress towards the third 95 target |  | In addition, this can also be presented as the number with suppressed VL among all people living with HIV to calculate population-level viral suppression."
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

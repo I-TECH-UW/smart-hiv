@@ -23,8 +23,7 @@ Title: "HIV.IND.54 Uptake of DSD ART models among people living with HIV"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.54.DEN"
-    * description = "Number of people on ART newly eligible* for DSD ART models during the reporting period. For facilities with electronic health information systems, it is possible to measure uptake as a proportion of all people living with HIV eligible for DSD.
-No denominator for facilities with paper-based reporting systems"
+    * description = "Number of people on ART newly eligible* for DSD ART models during the reporting period. For facilities with electronic health information systems, it is possible to measure uptake as a proportion of all people living with HIV eligible for DSD. |  | No denominator for facilities with paper-based reporting systems"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

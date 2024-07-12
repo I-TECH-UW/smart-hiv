@@ -23,15 +23,13 @@ Title: "HIV.IND.62 Syphilis test positivity, HIV prevention services"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.62.DEN"
-    * description = "Number of people attending HIV prevention services tested for syphilis
-"
+    * description = "Number of people attending HIV prevention services tested for syphilis | "
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.62.NUM"
-    * description = "Number of people attending HIV prevention services who tested positive for syphilis during the reporting period (tested positive on both nontreponemal and treponemal tests or tested positive on either nontreponemal or treponemal test)
-"
+    * description = "Number of people attending HIV prevention services who tested positive for syphilis during the reporting period (tested positive on both nontreponemal and treponemal tests or tested positive on either nontreponemal or treponemal test) | "
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

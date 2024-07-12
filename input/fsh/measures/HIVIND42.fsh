@@ -23,12 +23,7 @@ Title: "HIV.IND.42 Final outcome of PMTCT"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.42.DEN"
-    * description = "a) Programme-based/service delivery denominator
-Number of HIV-exposed infants who were born within the 12 months (or 24 months in breastfeeding settings) prior to the reporting period and registered in the birth cohort
-For example, for the reporting period January to December 2021 the denominator would be the number of HIV-exposed infants born between January to December 2020 in non-breast feeding settings and January to December 2019 in breastfeeding settings.
-b) Population-based denominator
-Estimated number of HIV-positive women who delivered within the past 12 months
-(or 24 months in breastfeeding settings)"
+    * description = "a) Programme-based/service delivery denominator | Number of HIV-exposed infants who were born within the 12 months (or 24 months in breastfeeding settings) prior to the reporting period and registered in the birth cohort | For example, for the reporting period January to December 2021 the denominator would be the number of HIV-exposed infants born between January to December 2020 in non-breast feeding settings and January to December 2019 in breastfeeding settings. |  | b) Population-based denominator | Estimated number of HIV-positive women who delivered within the past 12 months | (or 24 months in breastfeeding settings)"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

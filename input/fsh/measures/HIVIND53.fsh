@@ -29,9 +29,7 @@ Title: "HIV.IND.53 Multi-month ARV dispensing"
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.53.NUM"
-    * description = "Number of people living with HIV and On ART who received 3-5 or >6 months of ARV medicine at their most recent ARV medicine pick-up.
-(The number receiving <3 months of ARV supply is also collected, for validation purposes.)
-If countries cannot report on the number of months of ARV medicine dispensed by the disaggregations described above, they could, as an alternative, report the total number of people currently on ARV therapy and receiving ≥3 months of ARV medicine at their last medicine pick-up."
+    * description = "Number of people living with HIV and On ART who received 3-5 or >6 months of ARV medicine at their most recent ARV medicine pick-up. |  | (The number receiving <3 months of ARV supply is also collected, for validation purposes.) |  | If countries cannot report on the number of months of ARV medicine dispensed by the disaggregations described above, they could, as an alternative, report the total number of people currently on ARV therapy and receiving ≥3 months of ARV medicine at their last medicine pick-up."
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

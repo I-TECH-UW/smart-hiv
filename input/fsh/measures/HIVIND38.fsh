@@ -23,8 +23,7 @@ Title: "HIV.IND.38 Early infant diagnosis (EID) coverage"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.38.DEN"
-    * description = "Estimated number of HIV-positive women who delivered during the reporting period.  
-Note: The denominator is a proxy measure for the number of infants born to HIV-infected women."
+    * description = "Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women."
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

@@ -23,19 +23,13 @@ Title: "HIV.IND.28 Total attrition from ART"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.28.DEN"
-    * description = "Number of people reported on ART at the end of the last reporting period
-plus
-those newly initiated on ART during the current reporting period"
+    * description = "Number of people reported on ART at the end of the last reporting period | plus | those newly initiated on ART during the current reporting period"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.28.NUM"
-    * description = "*Number of people living with HIV reported on ART at the end of the last reporting period
-plus
-Number of people living with HIV newly initiated on ART during the current reporting period
-minus
-Total number of people living with HIV on ART at the end of the current reporting period"
+    * description = "*Number of people living with HIV reported on ART at the end of the last reporting period | plus | Number of people living with HIV newly initiated on ART during the current reporting period | minus | Total number of people living with HIV on ART at the end of the current reporting period"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

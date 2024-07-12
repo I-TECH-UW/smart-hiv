@@ -23,8 +23,7 @@ Title: "HIV.IND.55 Coverage of DSD ART models among people living with HIV on AR
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.55.DEN"
-    * description = "Facilities with electronic health information systems: Number of people living with HIV on ART eligible for DSD ART models during the reporting period
-Facilities with paper-based systems: Number of people living with HIV receiving ART at the end of the reporting period"
+    * description = "Facilities with electronic health information systems: Number of people living with HIV on ART eligible for DSD ART models during the reporting period |  | Facilities with paper-based systems: Number of people living with HIV receiving ART at the end of the reporting period"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

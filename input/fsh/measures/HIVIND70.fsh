@@ -29,8 +29,7 @@ Title: "HIV.IND.70 Gonorrhoea testing coverage, HIV prevention services"
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.70.NUM"
-    * description = "Number of people attending HIV prevention services tested for gonorrhoea (using a molecular test, culture or POC test)
-"
+    * description = "Number of people attending HIV prevention services tested for gonorrhoea (using a molecular test, culture or POC test) | "
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

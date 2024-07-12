@@ -23,16 +23,13 @@ Title: "HIV.IND.9 Regular NSP access"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.9.DEN"
-    * description = "a) Programme/service provider level: number of people who inject drugs accessing service
-b) Population level: population-size estimate of people who inject drugs in relevant geographic area"
+    * description = "a) Programme/service provider level: number of people who inject drugs accessing service | b) Population level: population-size estimate of people who inject drugs in relevant geographic area"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.9.NUM"
-    * description = "Total number of people receiving needles-syringes at least once per month during the reporting period, either:
-a) number of people accessing an NSP at least once in each 30-day period of the reporting period
-b) number of people accessing an NSP at least once per month on average during the reporting period"
+    * description = "Total number of people receiving needles-syringes at least once per month during the reporting period, either: | a) number of people accessing an NSP at least once in each 30-day period of the reporting period | b) number of people accessing an NSP at least once per month on average during the reporting period"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

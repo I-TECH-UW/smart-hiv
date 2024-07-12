@@ -29,8 +29,7 @@ Title: "HIV.IND.48 TB screening coverage among new ART patients"
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.48.NUM"
-    * description = "Number of people living with HIV newly initiated on ART who were screened for TB during the reporting period
-"Newly initiated" is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period."
+    * description = "Number of people living with HIV newly initiated on ART who were screened for TB during the reporting period |  | 'Newly initiated' is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period."
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

@@ -23,10 +23,7 @@ Title: "HIV.IND.40 ART coverage in pregnant women"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.40.DEN"
-    * description = "a) Programme-based/service delivery denominator
-Number of HIV-positive pregnant women who delivered during the reporting period and attended ANC or had a facility-based delivery
-b) Population-based denominator
-Number of HIV-positive pregnant women who delivered during the reporting period"
+    * description = "a) Programme-based/service delivery denominator | Number of HIV-positive pregnant women who delivered during the reporting period and attended ANC or had a facility-based delivery | b) Population-based denominator | Number of HIV-positive pregnant women who delivered during the reporting period"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"
