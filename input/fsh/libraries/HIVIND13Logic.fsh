@@ -1,4 +1,3 @@
-
 Instance: HIVIND13Logic
 InstanceOf: Library
 Title: "HIV.IND.13 Logic"

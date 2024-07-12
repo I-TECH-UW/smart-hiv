@@ -1,4 +1,3 @@
-
 Instance: HIVIND89Logic
 InstanceOf: Library
 Title: "HIV.IND.89 Logic"

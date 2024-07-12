@@ -1,4 +1,3 @@
-
 Instance: HIVIND32Logic
 InstanceOf: Library
 Title: "HIV.IND.32 Logic"

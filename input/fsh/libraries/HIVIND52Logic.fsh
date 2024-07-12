@@ -1,4 +1,3 @@
-
 Instance: HIVIND52Logic
 InstanceOf: Library
 Title: "HIV.IND.52 Logic"
