@@ -42,6 +42,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE104
 * item[+]
   * id = "HIV.E.DE168"
   * linkId = "HIV.E.DE168"
@@ -50,6 +51,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE168
 * item[+]
   * id = "HIV.E.DE194"
   * linkId = "HIV.E.DE194"
@@ -58,6 +60,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE194
 * item[+]
   * id = "HIV.E.DE200"
   * linkId = "HIV.E.DE200"
@@ -66,6 +69,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE200
 * item[+]
   * id = "HIV.E.DE204"
   * linkId = "HIV.E.DE204"
@@ -74,6 +78,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE204
 * item[+]
   * id = "HIV.E.DE208"
   * linkId = "HIV.E.DE208"
@@ -82,6 +87,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE208
 * item[+]
   * id = "HIV.E.DE212"
   * linkId = "HIV.E.DE212"
@@ -90,6 +96,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE212
 * item[+]
   * id = "HIV.E.DE216"
   * linkId = "HIV.E.DE216"
@@ -98,6 +105,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE216
 * item[+]
   * id = "HIV.E.DE220"
   * linkId = "HIV.E.DE220"
@@ -106,3 +114,4 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE220

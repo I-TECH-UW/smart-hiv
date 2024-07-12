@@ -26,6 +26,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.D.DE525
 * item[+]
   * id = "HIV.D.DE530"
   * linkId = "HIV.D.DE530"

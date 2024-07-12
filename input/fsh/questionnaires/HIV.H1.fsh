@@ -18,6 +18,7 @@ Usage: #definition
   * required = true
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.H.DE1
 * item[+]
   * id = "HIV.H.DE9"
   * linkId = "HIV.H.DE9"

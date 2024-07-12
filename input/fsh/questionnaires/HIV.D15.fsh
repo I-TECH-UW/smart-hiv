@@ -18,6 +18,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.D.DE289
 * item[+]
   * id = "HIV.D.DE358"
   * linkId = "HIV.D.DE358"
@@ -26,6 +27,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.D.DE358
 * item[+]
   * id = "HIV.D.DE363"
   * linkId = "HIV.D.DE363"
@@ -42,3 +44,4 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.D.DE934

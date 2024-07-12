@@ -106,6 +106,7 @@ Usage: #definition
   * required = false
   * repeats = false
   * readOnly = false
+  * answerValueSet = http://smart.who.int/hiv/ValueSet/HIV.E.DE127
 * item[+]
   * id = "HIV.E.DE131"
   * linkId = "HIV.E.DE131"
