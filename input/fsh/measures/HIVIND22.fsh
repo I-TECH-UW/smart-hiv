@@ -8,7 +8,7 @@ Title: "HIV.IND.22 HTS partner services"
 * url = "http://smart.who.int/HIV/Measure/HIVIND22"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-07-18"
 * name = "HIVIND22"
 * title = "HIV.IND.22 HTS partner services"
 * publisher = "World Health Organization (WHO)"
