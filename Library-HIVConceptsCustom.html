@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-13
+            as of 2024-07-18
           
         
       </td>
@@ -349,13 +349,16 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVConceptsCustom</b></p><a name="HIVConceptsCustom"> </a><a name="hcHIVConceptsCustom"> </a><a name="HIVConceptsCustom-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Code System ConditionCategoryCodes</td><td><a href="http://terminology.hl7.org/5.5.0/CodeSystem-condition-category.html">Condition Category Codes</a></td></tr><tr><td>Depends On</td><td>Code System ConditionClinicalStatusCodes</td><td><a href="http://terminology.hl7.org/5.5.0/CodeSystem-condition-clinical.html">Condition Clinical Status Codes</a></td></tr><tr><td>Depends On</td><td>Code System ObservationCategoryCodes</td><td><a href="http://terminology.hl7.org/5.5.0/CodeSystem-observation-category.html">Observation Category Codes</a></td></tr><tr><td>Depends On</td><td>Code System missing concepts</td><td><code>missing concepts</code></td></tr><tr><td>Depends On</td><td>Code System Devicestatement-status</td><td><a href="http://hl7.org/fhir/R4/valueset-device-statement-status.html">DeviceUseStatementStatus</a></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">library HIVConceptsCustom
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVConceptsCustom</b></p><a name="HIVConceptsCustom"> </a><a name="hcHIVConceptsCustom"> </a><a name="HIVConceptsCustom-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Code System ConditionCategoryCodes</td><td><a href="http://terminology.hl7.org/5.5.0/CodeSystem-condition-category.html">Condition Category Codes</a></td></tr><tr><td>Depends On</td><td>Code System ConditionClinicalStatusCodes</td><td><a href="http://terminology.hl7.org/5.5.0/CodeSystem-condition-clinical.html">Condition Clinical Status Codes</a></td></tr><tr><td>Depends On</td><td>Code System ObservationCategoryCodes</td><td><a href="http://terminology.hl7.org/5.5.0/CodeSystem-observation-category.html">Observation Category Codes</a></td></tr><tr><td>Depends On</td><td>Code System missing concepts</td><td><code>missing concepts</code></td></tr><tr><td>Depends On</td><td>Code System Devicestatement-status</td><td><a href="http://hl7.org/fhir/R4/valueset-device-statement-status.html">DeviceUseStatementStatus</a></td></tr><tr><td>Depends On</td><td>Code System SNOMEDCT:2018-03</td><td><code>urn:oid:2.16.840.1.113883.6.96|urn:hl7:version:2018-03</code></td></tr><tr><td>Depends On</td><td>Code System SNOMEDCT</td><td><code>urn:oid:2.16.840.1.113883.6.96</code></td></tr><tr><td>Depends On</td><td>Code System AdverseEventSeverity</td><td><a href="http://hl7.org/fhir/R4/valueset-adverse-event-severity.html">AdverseEventSeverity</a></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">library HIVConceptsCustom
 
 codesystem &quot;ConditionCategoryCodes&quot;: 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem &quot;ConditionClinicalStatusCodes&quot;: 'http://terminology.hl7.org/CodeSystem/condition-clinical'
 codesystem &quot;ObservationCategoryCodes&quot;: 'http://terminology.hl7.org/CodeSystem/observation-category'
 codesystem &quot;missing concepts&quot;: 'missing concepts'
 codesystem &quot;Devicestatement-status&quot;: 'http://hl7.org/fhir/ValueSet/device-statement-status'
+codesystem &quot;SNOMEDCT:2018-03&quot;: 'urn:oid:2.16.840.1.113883.6.96' version 'urn:hl7:version:2018-03'
+codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'
+codesystem &quot;AdverseEventSeverity&quot;: 'http://hl7.org/fhir/ValueSet/adverse-event-severity'
 
 code &quot;encounter-diagnosis&quot;: 'encounter-diagnosis' from &quot;ConditionCategoryCodes&quot; display 'Encounter Diagnosis'
 
@@ -373,10 +376,41 @@ code &quot;social-history&quot;: 'social-history' from &quot;ObservationCategory
 //Device statement status
 code &quot;completed&quot;: 'completed' from &quot;Devicestatement-status&quot;
 
+//adverse event severity
+code &quot;mild&quot;: 'mild' from &quot;AdverseEventSeverity&quot;
+code &quot;moderate&quot;: 'moderate' from &quot;AdverseEventSeverity&quot;
+code &quot;severe&quot;: 'severe' from &quot;AdverseEventSeverity&quot;
+
+//frequency
+code &quot;Every eight hours (qualifier value)&quot;: '307469008' from &quot;SNOMEDCT:2018-03&quot; display 'Every eight hours (qualifier value)'
+code &quot;Every eight to twelve hours (qualifier value)&quot;: '396140003' from &quot;SNOMEDCT&quot; display 'Every eight to twelve hours (qualifier value)'
+code &quot;Every forty eight hours (qualifier value)&quot;: '396131002' from &quot;SNOMEDCT:2018-03&quot; display 'Every forty eight hours (qualifier value)'
+code &quot;Every four hours (qualifier value)&quot;: '225756002' from &quot;SNOMEDCT&quot; display 'Every four hours (qualifier value)'
+code &quot;Every seventy two hours (qualifier value)&quot;: '396143001' from &quot;SNOMEDCT:2018-03&quot; display 'Every seventy two hours (qualifier value)'
+code &quot;Every six hours (qualifier value)&quot;: '307468000' from &quot;SNOMEDCT:2018-03&quot; display 'Every six hours (qualifier value)'
+code &quot;Every six to eight hours (qualifier value)&quot;: '396139000' from &quot;SNOMEDCT&quot; display 'Every six to eight hours (qualifier value)'
+code &quot;Every thirty six hours (qualifier value)&quot;: '396126004' from &quot;SNOMEDCT:2018-03&quot; display 'Every thirty six hours (qualifier value)'
+code &quot;Every three to four hours (qualifier value)&quot;: '225754004' from &quot;SNOMEDCT&quot; display 'Every three to four hours (qualifier value)'
+code &quot;Every three to six hours (qualifier value)&quot;: '396127008' from &quot;SNOMEDCT&quot; display 'Every three to six hours (qualifier value)'
+code &quot;Every twelve hours (qualifier value)&quot;: '307470009' from &quot;SNOMEDCT:2018-03&quot; display 'Every twelve hours (qualifier value)'
+code &quot;Every twenty four hours (qualifier value)&quot;: '396125000' from &quot;SNOMEDCT:2018-03&quot; display 'Every twenty four hours (qualifier value)'
+code &quot;Every two to four hours (qualifier value)&quot;: '225752000' from &quot;SNOMEDCT&quot; display 'Every two to four hours (qualifier value)'
+code &quot;Four times daily (qualifier value)&quot;: '307439001' from &quot;SNOMEDCT:2018-03&quot; display 'Four times daily (qualifier value)'
+code &quot;Once daily (qualifier value)&quot;: '229797004' from &quot;SNOMEDCT:2018-03&quot; display 'Once daily (qualifier value)'
+code &quot;One to four times a day (qualifier value)&quot;: '396109005' from &quot;SNOMEDCT&quot; display 'One to four times a day (qualifier value)'
+code &quot;One to three times a day (qualifier value)&quot;: '396108002' from &quot;SNOMEDCT&quot; display 'One to three times a day (qualifier value)'
+code &quot;One to two times a day (qualifier value)&quot;: '396107007' from &quot;SNOMEDCT&quot; display 'One to two times a day (qualifier value)'
+code &quot;Three times daily (qualifier value)&quot;: '229798009' from &quot;SNOMEDCT:2018-03&quot; display 'Three times daily (qualifier value)'
+code &quot;Twice a day (qualifier value)&quot;: '229799001' from &quot;SNOMEDCT:2018-03&quot; display 'Twice a day (qualifier value)'
+code &quot;Two to four times a day (qualifier value)&quot;: '396111001' from &quot;SNOMEDCT&quot; display 'Two to four times a day (qualifier value)'
+
+
 //not currently provided
 code &quot;needle-syringe&quot;: 'needle syringe' from &quot;missing concepts&quot;
+code &quot;methadone&quot;: 'methadone' from &quot;missing concepts&quot;
+code &quot;buprenorphine&quot;: 'buprenorphine' from &quot;missing concepts&quot;
 
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 8Kb )</p></div>
+</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 25Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -401,7 +435,7 @@ code &quot;needle-syringe&quot;: 'needle syringe' from &quot;missing concepts&qu
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jul 13, 2024 00:11+0000">2024-07-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Jul 18, 2024 00:40+0000">2024-07-18</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

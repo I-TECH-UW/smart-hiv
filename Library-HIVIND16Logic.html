@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-13
+            as of 2024-07-18
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND16Logic</b></p><a name="HIVIND16Logic"> </a><a name="hcHIVIND16Logic"> </a><a name="HIVIND16Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND16Logic</b></p><a name="HIVIND16Logic"> </a><a name="hcHIVIND16Logic"> </a><a name="HIVIND16Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HCC</td><td><code>http://smart.who.int/hiv/Library/HIVConceptsCustom</code></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Setting</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>VMMC_adverse_event_type</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>VMMC_adverse_event_timing</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.16 Logic
  * Ref No: PRV.16
  * Short Name: VMMC adverse events
@@ -424,8 +424,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVConceptsCustom called HCC
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -448,7 +448,10 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
+  exists(HIC.&quot;VMMC_adverse_event&quot; VMAC
+    where (VMAC.severity = HCC.&quot;severe&quot;
+    or VMAC.severity = HCC.&quot;moderate&quot;)
+  )
 
 
 /**
@@ -459,12 +462,48 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
+  exists(HIC.&quot;VMMC_done&quot; VM
+        where (VM.performed during &quot;Measurement Period&quot;)
+  )
     
 
 /* end Populations */
 
-</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
+
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIC.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIC.&quot;By Age Stratifier 3&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIC.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;Setting&quot;:
+    HIC.&quot;setting&quot;
+
+define &quot;VMMC_adverse_event_type&quot;:
+    HIC.&quot;VMMC_adverse_event_type&quot;
+
+define &quot;VMMC_adverse_event_timing&quot;:
+    HIC.VMMC_adverse_event_timing
+
+
+//provider type not provided?
+//service site not provided?
+
+define &quot;Stratification&quot;:
+ HIC.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIC.&quot;By Age Stratifier&quot;
++ ':' + HIC.&quot;By Geographic Region Stratifier&quot;
++ Combine(HIC.setting, ':')
++ ':' + HIC.&quot;VMMC_adverse_event_type&quot;.code 
++ ':' + HIC.&quot;VMMC_adverse_event_timing&quot;.code </code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 35Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -489,7 +528,7 @@ define &quot;Denominator&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jul 13, 2024 00:11+0000">2024-07-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Jul 18, 2024 00:40+0000">2024-07-18</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

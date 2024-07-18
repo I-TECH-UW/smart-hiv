@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-13
+            as of 2024-07-18
           
         
       </td>
@@ -349,17 +349,18 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HC</td><td><code>http://smart.who.int/hiv/Library/HIVConcepts</code></td></tr><tr><td>Depends On</td><td>Library HCC</td><td><code>http://smart.who.int/hiv/Library/HIVConceptsCustom</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
 
 using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-include FHIRCommon called FC
+//include FHIRCommon called FC
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
 
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-12-31]
+parameter &quot;Measurement Date&quot; Date default @2020-01-01
 
 context Patient
 
@@ -474,12 +475,58 @@ define &quot;Needle Syringe Dispensed&quot;:
         and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
   where DUS.status = 'completed'
 
-  define PWID_person:
-    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+define PWID_person:
+  [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+  where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
 
+define &quot;OAMT_initiated&quot;:
+exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ HC.&quot;OAMT&quot;)
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of &quot;Measurement Period&quot;
+      and H.period starts before end of &quot;Measurement Period&quot;
+    ) 
+    or (
+      EOC.period starts after start of &quot;Measurement Period&quot;
+      and EOC.period starts before end of &quot;Measurement Period&quot;
+    )
+    )
+    )
+
+define &quot;OAMT_retained&quot;:
+exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ HC.&quot;OAMT&quot;)
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of &quot;Measurement Period&quot;
+      and H.period starts before end of &quot;Measurement Period&quot;
+      and H.period ends after (end of &quot;Measurement Period&quot; + 6 months)
+    ) 
+    or (
+      EOC.period starts after start of &quot;Measurement Period&quot;
+      and EOC.period starts before end of &quot;Measurement Period&quot;
+      and (EOC.period ends after (end of &quot;Measurement Period&quot; + 6 months)
+      or end of EOC.period is null)
+    )
+    )
+    )
+
+define &quot;methadone_prescribed&quot;:
+[MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HCC.&quot;methadone&quot;
+
+define &quot;buprenorphine_prescribed&quot;:
+[MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HCC.&quot;buprenorphine&quot;
   
 define &quot;Patient Deceased before end of Measurement Period&quot;:
   case 
@@ -586,6 +633,13 @@ define &quot;By Administrative Gender Stratifier&quot;:
         when Patient.gender = 'transgender female' then HC.&quot;Transgender female&quot;
         when Patient.gender = 'transgender male' then HC.&quot;Transgender male&quot;
         else HC.&quot;Other - HIV.A.DE23&quot;
+    end
+
+define &quot;HIV Status&quot;:
+    case 
+        when exists(&quot;HIV Positive Condition&quot; C where C.onset before end of &quot;Measurement Period&quot;) then HC.&quot;HIV-positive - HIV.B.DE116&quot;
+        when not exists(&quot;HIV Positive Condition&quot; C where C.onset before end of &quot;Measurement Period&quot;) and exists(&quot;HIV Negative Observation&quot; O where O.issued before end of &quot;Measurement Period&quot;) then  HC.&quot;HIV-negative - HIV.B.DE117&quot;
+        else HC.&quot;Unknown - HIV.B.DE118&quot;
     end
 
 /*
@@ -930,7 +984,173 @@ define function &quot;Prescription Relevant Period&quot;(prescription FHIR.Medic
     date from prescription.authoredOn,
     date from prescription.authoredOn + System.Quantity{ value: GetDurationInDays(prescription.dispenseRequest.expectedSupplyDuration), unit: 'days' }
   ]
-  else null</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
+  else null
+
+//System.Integer
+define function ToDaily(frequency System.Integer, period System.Quantity):
+  case period.unit
+    when 'h' then frequency * (24.0 / period.value)
+    when 'min' then frequency * (24.0 / period.value) * 60
+    when 's' then frequency * (24.0 / period.value) * 60 * 60
+    when 'd' then frequency * (24.0 / period.value) / 24
+    when 'wk' then frequency * (24.0 / period.value) / (24 * 7)
+    when 'mo' then frequency * (24.0 / period.value) / (24 * 30) /* assuming 30 days in month */
+    when 'a' then frequency * (24.0 / period.value) / (24 * 365) /* assuming 365 days in year */
+    when 'hour' then frequency * (24.0 / period.value)
+    when 'minute' then frequency * (24.0 / period.value) * 60
+    when 'second' then frequency * (24.0 / period.value) * 60 * 60
+    when 'day' then frequency * (24.0 / period.value) / 24
+    when 'week' then frequency * (24.0 / period.value) / (24 * 7)
+    when 'month' then frequency * (24.0 / period.value) / (24 * 30) /* assuming 30 days in month */
+    when 'year' then frequency * (24.0 / period.value) / (24 * 365) /* assuming 365 days in year */
+    when 'hours' then frequency * (24.0 / period.value)
+    when 'minutes' then frequency * (24.0 / period.value) * 60
+    when 'seconds' then frequency * (24.0 / period.value) * 60 * 60
+    when 'days' then frequency * (24.0 / period.value) / 24
+    when 'weeks' then frequency * (24.0 / period.value) / (24 * 7)
+    when 'months' then frequency * (24.0 / period.value) / (24 * 30) /* assuming 30 days in month */
+    when 'years' then frequency * (24.0 / period.value) / (24 * 365) /* assuming 365 days in year */
+    else null
+  end
+
+  define function &quot;HasEnd&quot;(period Interval&lt;DateTime&gt; ):
+  not (end of period is null
+    or end of period = maximum DateTime
+)
+
+  define function MedicationRequestPeriod(Request &quot;MedicationRequest&quot;):
+  Request R
+    let
+      dosage: singleton from R.dosageInstruction,
+      doseAndRate: singleton from dosage.doseAndRate,
+      doseRange: doseAndRate.dose as Range,
+      doseQuantity: doseAndRate.dose as SimpleQuantity,
+      dose: Coalesce(end of doseRange, doseQuantity),
+      timing: dosage.timing,
+      frequency: Coalesce(timing.repeat.frequencyMax, timing.repeat.frequency),
+      period: System.Quantity { value: timing.repeat.period, unit: timing.repeat.periodUnit.value },
+      dosesPerDay: Coalesce(ToDaily(FHIRHelpers.ToInteger(frequency), period), Count(timing.repeat.timeOfDay), 1.0),
+      boundsPeriod: timing.repeat.bounds as Period,
+      daysSupply: R.dispenseRequest.expectedSupplyDuration,
+      quantity: R.dispenseRequest.quantity,
+      refills: Coalesce(R.dispenseRequest.numberOfRepeatsAllowed, 0),
+      startDate:
+        Coalesce(
+          start of boundsPeriod,
+          start of R.dispenseRequest.validityPeriod,
+          R.authoredOn
+        )
+    return
+      if HasEnd(boundsPeriod) then
+        Interval[startDate, end of boundsPeriod]
+      else
+        (
+          Coalesce(daysSupply, quantity / (dose * dosesPerDay))
+            * (1 + refills)
+        ) durationInDays
+          return Interval[startDate, startDate + durationInDays]
+
+
+define function &quot;DosesPerDay&quot;(frequency Code):
+	/*Calculates the cumulative dose per day for each prescription*/
+	case
+		when frequency ~ HCC.&quot;Once daily (qualifier value)&quot; then 1.0
+		when frequency ~ HCC.&quot;Twice a day (qualifier value)&quot; then 2.0
+		when frequency ~ HCC.&quot;Three times daily (qualifier value)&quot; then 3.0
+		when frequency ~ HCC.&quot;Four times daily (qualifier value)&quot; then 4.0
+		when frequency ~ HCC.&quot;Every twenty four hours (qualifier value)&quot; then 1.0
+		when frequency ~ HCC.&quot;Every twelve hours (qualifier value)&quot; then 2.0
+		when frequency ~ HCC.&quot;Every thirty six hours (qualifier value)&quot; then 0.67
+		when frequency ~ HCC.&quot;Every eight hours (qualifier value)&quot; then 3.0
+		when frequency ~ HCC.&quot;Every four hours (qualifier value)&quot; then 6.0
+		when frequency ~ HCC.&quot;Every six hours (qualifier value)&quot; then 4.0
+		when frequency ~ HCC.&quot;Every seventy two hours (qualifier value)&quot; then 0.34
+		when frequency ~ HCC.&quot;Every forty eight hours (qualifier value)&quot; then 0.5
+		when frequency ~ HCC.&quot;Every eight to twelve hours (qualifier value)&quot; then 2.0
+		when frequency ~ HCC.&quot;Every six to eight hours (qualifier value)&quot; then 3.0
+		when frequency ~ HCC.&quot;Every three to four hours (qualifier value)&quot; then 6.0
+		when frequency ~ HCC.&quot;Every three to six hours (qualifier value)&quot; then 4.0
+		when frequency ~ HCC.&quot;Every two to four hours (qualifier value)&quot; then 6.0
+		when frequency ~ HCC.&quot;One to four times a day (qualifier value)&quot; then 4.0
+		when frequency ~ HCC.&quot;One to three times a day (qualifier value)&quot; then 3.0
+		when frequency ~ HCC.&quot;One to two times a day (qualifier value)&quot; then 2.0
+		else null 
+	end
+
+  //define function &quot;GetMedicationDailyDose&quot;(dosage Quantity, dosesPerDay Decimal):
+  //dosage * Quantity { value: dosesPerDay, unit: '/d' }
+
+
+define &quot;methadone_prescribed at date&quot;:
+[MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ HCC.&quot;methadone&quot;
+        //and &quot;GetMedicationDailyDose&quot;(MR.dosageInstruction, &quot;DosesPerDay&quot;(singleton from MR.dosageInstruction.timing.repeat.frequencyMax)) &gt;= 60 'mg/d'
+        and MedicationRequestPeriod(MR) starts before &quot;Measurement Date&quot;
+        and MedicationRequestPeriod(MR) ends after &quot;Measurement Date&quot;
+
+define &quot;VMMC_done&quot;:
+[Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HC.&quot;Voluntary medical male circumcision VMMC&quot;
+
+define &quot;VMMC_adverse_event&quot;:
+[AdverseEvent] AE 
+  with [Procedure] P
+      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
+      and P.code ~  HC.&quot;Voluntary medical male circumcision VMMC&quot;
+      and P.performed after start of &quot;Measurement Period&quot;
+      and P.performed before end of &quot;Measurement Period&quot;
+      and AE.date &lt;= (P.performed + 30 days)
+      and AE.date &gt;= (P.performed)
+  where AE.actuality = 'actual'
+
+define &quot;VMMC_adverse_event_type&quot;:
+    case 
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Abnormal pain&quot;) then  HC.&quot;Abnormal pain&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Anaesthesia-related effects&quot;) then  HC.&quot;Anaesthesia-related effects&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Damage to the penis&quot;) then  HC.&quot;Damage to the penis&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Difficulty urinating&quot;) then  HC.&quot;Difficulty urinating&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Excessive bleeding&quot;) then  HC.&quot;Excessive bleeding&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Excessive skin removal&quot;) then  HC.&quot;Excessive skin removal&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Excessive swelling&quot;) then  HC.&quot;Excessive swelling&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Haematoma&quot;) then  HC.&quot;Haematoma&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Infection&quot;) then  HC.&quot;Infection&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Injury to glans&quot;) then  HC.&quot;Injury to glans&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Scar or disfigurement&quot;) then  HC.&quot;Scar or disfigurement&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Sharps injury to personnel&quot;) then  HC.&quot;Sharps injury to personnel&quot;
+        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Wound disruption&quot;) then  HC.&quot;Wound disruption&quot;
+        else HC.&quot;Other - HIV.B.DE222&quot;
+    end
+
+define &quot;VMMC_adverse_event_Intraoperative&quot;:
+[AdverseEvent] AE 
+  with [Procedure] P
+      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
+      and P.code ~  HC.&quot;Voluntary medical male circumcision VMMC&quot;
+      and P.performed after start of &quot;Measurement Period&quot;
+      and P.performed before end of &quot;Measurement Period&quot;
+      and AE.date = P.performed
+  where AE.actuality = 'actual'
+
+  define &quot;VMMC_adverse_event_Postoperative&quot;:
+[AdverseEvent] AE 
+  with [Procedure] P
+      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
+      and P.code ~  HC.&quot;Voluntary medical male circumcision VMMC&quot;
+      and P.performed after start of &quot;Measurement Period&quot;
+      and P.performed before end of &quot;Measurement Period&quot;
+      and AE.date &lt;= (P.performed + 30 days)
+      and AE.date &gt; (P.performed)
+  where AE.actuality = 'actual'
+
+  define &quot;VMMC_adverse_event_timing&quot;:
+    case 
+        when exists(VMMC_adverse_event_Intraoperative) then  HC.&quot;Intraoperative&quot;
+        when exists(VMMC_adverse_event_Postoperative) then  HC.&quot;Postoperative&quot;
+        else null
+    end</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 916Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -955,7 +1175,7 @@ define function &quot;Prescription Relevant Period&quot;(prescription FHIR.Medic
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Jul 13, 2024 00:11+0000">2024-07-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Jul 18, 2024 00:40+0000">2024-07-18</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
