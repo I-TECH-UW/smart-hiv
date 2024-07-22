@@ -106,7 +106,7 @@ define "Biological child Observation":
 /* End of Biological child */
 
 /*
-@dataElement: HIV.B.DE10 - Drug-injecting partner B.DE10
+@dataElement: HIV.B.DE10 - Drug-injecting partner
 @activity: HIV.B1 Determine reason for visit
 @description: Client is a drug-injecting partner of the person that referred the client for partner services
 */
@@ -124,7 +124,7 @@ define "Drug-injecting partner B.DE10 Observation":
 /* End of Drug-injecting partner B.DE10 */
 
 /*
-@dataElement: HIV.B.DE11 - Sexual partner B.DE11
+@dataElement: HIV.B.DE11 - Sexual partner
 @activity: HIV.B1 Determine reason for visit
 @description: Client is a sexual partner of the person that referred the client for partner services
 */
@@ -142,7 +142,7 @@ define "Sexual partner B.DE11 Observation":
 /* End of Sexual partner B.DE11 */
 
 /*
-@dataElement: HIV.B.DE12 - Social contact B.DE12
+@dataElement: HIV.B.DE12 - Social contact
 @activity: HIV.B1 Determine reason for visit
 @description: Client is a social contact of the person that referred the client for social-network services
 */
@@ -209,7 +209,7 @@ define "Facility-level testing Observation":
 /* End of Facility-level testing */
 
 /*
-@dataElement: HIV.B.DE32 - Breastfeeding B.DE32
+@dataElement: HIV.B.DE32 - Breastfeeding
 @activity: HIV.B6 Capture or update client history
 @description: Infant is being breastfed by mother
 */
@@ -303,7 +303,7 @@ define "Non-occupational consensual sex Observation":
 /* End of Non-occupational consensual sex */
 
 /*
-@dataElement: HIV.B.DE110 - HIV test date B.DE110
+@dataElement: HIV.B.DE110 - HIV test date
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Date of the HIV test
 */
@@ -438,7 +438,7 @@ define "Vertical Observation":
 /* End of Vertical */
 
 /*
-@dataElement: HIV.B.DE128 - Other B.DE128
+@dataElement: HIV.B.DE128 - Other
 @activity: HIV.B8 Provide post-test counselling
 @description: Probable route of HIV transmission was other and may include needle accidents, blood transfusion, blood products or organ/tissue donations, tattoos, piercings, circumcision, or acupuncture.
 */
@@ -833,7 +833,7 @@ define "Wound disruption Observation":
 /* End of Wound disruption */
 
 /*
-@dataElement: HIV.B.DE222 - Other B.DE222
+@dataElement: HIV.B.DE222 - Other
 @activity: HIV.B21 Offer prevention options
 @description: Client experienced other adverse VMMC event
 */
@@ -851,7 +851,7 @@ define "Other B.DE222 Observation":
 /* End of Other B.DE222 */
 
 /*
-@dataElement: HIV.B.DE226 - Syndrome/STI diagnosed B.DE226
+@dataElement: HIV.B.DE226 - Syndrome/STI diagnosed
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Syndrome or STI for which client is diagnosed
 */
@@ -864,7 +864,7 @@ define "Syndrome/STI diagnosed B.DE226 Observation":
 /* End of Syndrome/STI diagnosed B.DE226 */
 
 /*
-@dataElement: HIV.B.DE227 - Urethral discharge syndrome B.DE227
+@dataElement: HIV.B.DE227 - Urethral discharge syndrome
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with urethral discharge syndrome
 */
@@ -882,7 +882,7 @@ define "Urethral discharge syndrome B.DE227 Observation":
 /* End of Urethral discharge syndrome B.DE227 */
 
 /*
-@dataElement: HIV.B.DE228 - Vaginal discharge syndrome B.DE228
+@dataElement: HIV.B.DE228 - Vaginal discharge syndrome
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with vaginal discharge syndrome
 */
@@ -900,7 +900,7 @@ define "Vaginal discharge syndrome B.DE228 Observation":
 /* End of Vaginal discharge syndrome B.DE228 */
 
 /*
-@dataElement: HIV.B.DE229 - Lower Abdominal pain  B.DE229
+@dataElement: HIV.B.DE229 - Lower Abdominal pain 
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
@@ -918,7 +918,7 @@ define "Lower Abdominal pain  B.DE229 Observation":
 /* End of Lower Abdominal pain  B.DE229 */
 
 /*
-@dataElement: HIV.B.DE230 - Genital ulcer disease syndrome B.DE230
+@dataElement: HIV.B.DE230 - Genital ulcer disease syndrome
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with genital ulcer disease syndrome
 */
@@ -936,7 +936,7 @@ define "Genital ulcer disease syndrome B.DE230 Observation":
 /* End of Genital ulcer disease syndrome B.DE230 */
 
 /*
-@dataElement: HIV.B.DE231 - Anorectal discharge B.DE231
+@dataElement: HIV.B.DE231 - Anorectal discharge
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with anorectal discharge
 */
@@ -954,7 +954,7 @@ define "Anorectal discharge B.DE231 Observation":
 /* End of Anorectal discharge B.DE231 */
 
 /*
-@dataElement: HIV.B.DE232 - Sent for testing B.DE232
+@dataElement: HIV.B.DE232 - Sent for testing
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Specimen sent for testing
 */
@@ -972,7 +972,7 @@ define "Sent for testing B.DE232 Observation":
 /* End of Sent for testing B.DE232 */
 
 /*
-@dataElement: HIV.B.DE233 - Other B.DE233
+@dataElement: HIV.B.DE233 - Other
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other syndrome/STI diagnosed
 */
@@ -990,7 +990,7 @@ define "Other B.DE233 Observation":
 /* End of Other B.DE233 */
 
 /*
-@dataElement: HIV.B.DE235 - Any STI syndrome diagnosed B.DE235
+@dataElement: HIV.B.DE235 - Any STI syndrome diagnosed
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Was the client diagnosed with any of the five STI syndromes during this visit?
 */
@@ -1003,7 +1003,7 @@ define "Any STI syndrome diagnosed B.DE235 Observation":
 /* End of Any STI syndrome diagnosed B.DE235 */
 
 /*
-@dataElement: HIV.B.DE249 - Syphilis test date B.DE249
+@dataElement: HIV.B.DE249 - Syphilis test date
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of syphilis test
 */
@@ -1017,7 +1017,7 @@ define "Syphilis test date B.DE249 Value":
 /* End of Syphilis test date B.DE249 */
 
 /*
-@dataElement: HIV.B.DE254 - Syphilis treatment start date B.DE254
+@dataElement: HIV.B.DE254 - Syphilis treatment start date
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of initiation of syphilis treatment
 */
@@ -1031,7 +1031,7 @@ define "Syphilis treatment start date B.DE254 Value":
 /* End of Syphilis treatment start date B.DE254 */
 
 /*
-@dataElement: HIV.B.DE255 - Gonorrhoea test date B.DE255
+@dataElement: HIV.B.DE255 - Gonorrhoea test date
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of Gonorrhoea test
 */
@@ -1045,7 +1045,7 @@ define "Gonorrhoea test date B.DE255 Value":
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
-@dataElement: HIV.B.DE256 - Gonorrhoea test result B.DE256
+@dataElement: HIV.B.DE256 - Gonorrhoea test result
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Result from Gonorrhoea test
 */
@@ -1058,7 +1058,7 @@ define "Gonorrhoea test result B.DE256 Observation":
 /* End of Gonorrhoea test result B.DE256 */
 
 /*
-@dataElement: HIV.B.DE257 - Positive B.DE257
+@dataElement: HIV.B.DE257 - Positive
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is positive for Neisseria gonorrhoeae
 */
@@ -1076,7 +1076,7 @@ define "Positive B.DE257 Observation":
 /* End of Positive B.DE257 */
 
 /*
-@dataElement: HIV.B.DE258 - Negative B.DE258
+@dataElement: HIV.B.DE258 - Negative
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is negative for Neisseria gonorrhoeae
 */
@@ -1094,7 +1094,7 @@ define "Negative B.DE258 Observation":
 /* End of Negative B.DE258 */
 
 /*
-@dataElement: HIV.B.DE259 - Inconclusive B.DE259
+@dataElement: HIV.B.DE259 - Inconclusive
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is inconclusive
 */
@@ -1112,7 +1112,7 @@ define "Inconclusive B.DE259 Observation":
 /* End of Inconclusive B.DE259 */
 
 /*
-@dataElement: HIV.B.DE260 - Gonorrhoea treatment start date B.DE260
+@dataElement: HIV.B.DE260 - Gonorrhoea treatment start date
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of initiation of Gonorrhoea treatment
 */
@@ -1126,7 +1126,7 @@ define "Gonorrhoea treatment start date B.DE260 Value":
 /* End of Gonorrhoea treatment start date B.DE260 */
 
 /*
-@dataElement: HIV.B.DE261 - Type of specimen B.DE261
+@dataElement: HIV.B.DE261 - Type of specimen
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Type of specimen to be collected
 */
@@ -1139,7 +1139,7 @@ define "Type of specimen B.DE261 Observation":
 /* End of Type of specimen B.DE261 */
 
 /*
-@dataElement: HIV.B.DE262 - Blood B.DE262
+@dataElement: HIV.B.DE262 - Blood
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Blood specimen to be collected
 */
@@ -1157,7 +1157,7 @@ define "Blood B.DE262 Observation":
 /* End of Blood B.DE262 */
 
 /*
-@dataElement: HIV.B.DE263 - Urine B.DE263
+@dataElement: HIV.B.DE263 - Urine
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urine specimen to be collected
 */
@@ -1175,7 +1175,7 @@ define "Urine B.DE263 Observation":
 /* End of Urine B.DE263 */
 
 /*
-@dataElement: HIV.B.DE264 - Cervical or vaginal swab B.DE264
+@dataElement: HIV.B.DE264 - Cervical or vaginal swab
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Cervical or vaginal swab to be collected
 */
@@ -1193,7 +1193,7 @@ define "Cervical or vaginal swab B.DE264 Observation":
 /* End of Cervical or vaginal swab B.DE264 */
 
 /*
-@dataElement: HIV.B.DE265 - Urethral or penile swab B.DE265
+@dataElement: HIV.B.DE265 - Urethral or penile swab
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urethral or penile swab to be collected
 */
@@ -1211,7 +1211,7 @@ define "Urethral or penile swab B.DE265 Observation":
 /* End of Urethral or penile swab B.DE265 */
 
 /*
-@dataElement: HIV.B.DE266 - Rectal swab B.DE266
+@dataElement: HIV.B.DE266 - Rectal swab
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Rectal swab to be collected
 */
@@ -1229,7 +1229,7 @@ define "Rectal swab B.DE266 Observation":
 /* End of Rectal swab B.DE266 */
 
 /*
-@dataElement: HIV.B.DE267 - Other B.DE267
+@dataElement: HIV.B.DE267 - Other
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other specimen type to be collected
 */
@@ -1247,7 +1247,7 @@ define "Other B.DE267 Observation":
 /* End of Other B.DE267 */
 
 /*
-@dataElement: HIV.B.DE276 - Neisseria gonorrhoeae test type B.DE276
+@dataElement: HIV.B.DE276 - Neisseria gonorrhoeae test type
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Type of diagnostic test used for Neisseria gonorrhoeae
 */
@@ -1260,7 +1260,7 @@ define "Neisseria gonorrhoeae test type B.DE276 Observation":
 /* End of Neisseria gonorrhoeae test type B.DE276 */
 
 /*
-@dataElement: HIV.B.DE277 - NAAT B.DE277
+@dataElement: HIV.B.DE277 - NAAT
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Nucleic Acid Amplification Test (NAAT) used
 */
@@ -1278,7 +1278,7 @@ define "NAAT B.DE277 Observation":
 /* End of NAAT B.DE277 */
 
 /*
-@dataElement: HIV.B.DE278 - POC Test B.DE278
+@dataElement: HIV.B.DE278 - POC Test
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Point-of-care (POC) test used
 */
@@ -1296,7 +1296,7 @@ define "POC Test B.DE278 Observation":
 /* End of POC Test B.DE278 */
 
 /*
-@dataElement: HIV.B.DE279 - Culture B.DE279
+@dataElement: HIV.B.DE279 - Culture
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Culture test used
 */
@@ -1314,7 +1314,7 @@ define "Culture B.DE279 Observation":
 /* End of Culture B.DE279 */
 
 /*
-@dataElement: HIV.B.DE280 - Microscopy B.DE280
+@dataElement: HIV.B.DE280 - Microscopy
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Microscopy test used
 */
@@ -1332,7 +1332,7 @@ define "Microscopy B.DE280 Observation":
 /* End of Microscopy B.DE280 */
 
 /*
-@dataElement: HIV.B.DE281 - Other B.DE281
+@dataElement: HIV.B.DE281 - Other
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other type of test used
 */
@@ -1430,7 +1430,7 @@ define "Experience with PrEP Observation":
 /* End of Experience with PrEP */
 
 /*
-@dataElement: HIV.C.DE25 - First-time user C.DE25
+@dataElement: HIV.C.DE25 - First-time user
 @activity: HIV.C3 Capture or update client history
 @description: The client has never used pre-exposure prophylaxis (PrEP) before (naive)
 */
@@ -1498,7 +1498,7 @@ define "Date client completes PEP course Value":
 /* End of Date client completes PEP course */
 
 /*
-@dataElement: HIV.C.DE74 - Date medications prescribed C.DE74
+@dataElement: HIV.C.DE74 - Date medications prescribed
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Date the client was prescribed medications
 */
@@ -1512,7 +1512,7 @@ define "Date medications prescribed C.DE74 Value":
 /* End of Date medications prescribed C.DE74 */
 
 /*
-@dataElement: HIV.C.DE75 - Medications prescribed C.DE75
+@dataElement: HIV.C.DE75 - Medications prescribed
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Medications the client was prescribed
 */
@@ -1561,7 +1561,7 @@ define "PEP for HIV prevention Observation":
 /* End of PEP for HIV prevention */
 
 /*
-@dataElement: HIV.C.DE78 - Other C.DE78
+@dataElement: HIV.C.DE78 - Other
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed other medications
 */
@@ -1610,7 +1610,7 @@ define "Oral PrEP Observation":
 /* End of Oral PrEP */
 
 /*
-@dataElement: HIV.C.DE82 - Dapivirine vaginal ring DVR C.DE82
+@dataElement: HIV.C.DE82 - Dapivirine vaginal ring DVR
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed dapivirine vaginal ring (DVR)
 */
@@ -1628,7 +1628,7 @@ define "Dapivirine vaginal ring DVR C.DE82 Observation":
 /* End of Dapivirine vaginal ring DVR C.DE82 */
 
 /*
-@dataElement: HIV.C.DE83 - CAB-LA C.DE83
+@dataElement: HIV.C.DE83 - CAB-LA
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed long-acting cabotegravir (CAB-LA)
 */
@@ -1646,7 +1646,7 @@ define "CAB-LA C.DE83 Observation":
 /* End of CAB-LA C.DE83 */
 
 /*
-@dataElement: HIV.C.DE84 - Other C.DE84
+@dataElement: HIV.C.DE84 - Other
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed other PrEP product
 */
@@ -1664,7 +1664,7 @@ define "Other C.DE84 Observation":
 /* End of Other C.DE84 */
 
 /*
-@dataElement: HIV.C.DE121 - Number of days prescribed C.DE121
+@dataElement: HIV.C.DE121 - Number of days prescribed
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Days of medication client has been prescribed
 */
@@ -1790,7 +1790,7 @@ define "Family member Observation":
 /* End of Family member */
 
 /*
-@dataElement: HIV.C.DE146 - Drug-injecting partner C.DE146
+@dataElement: HIV.C.DE146 - Drug-injecting partner
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Client plans to give the self-test kit to a drug-injecting partner
 */
@@ -1808,7 +1808,7 @@ define "Drug-injecting partner C.DE146 Observation":
 /* End of Drug-injecting partner C.DE146 */
 
 /*
-@dataElement: HIV.C.DE147 - Sexual partner C.DE147
+@dataElement: HIV.C.DE147 - Sexual partner
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Client plans to give the self-test kit to a sexual partner
 */
@@ -1826,7 +1826,7 @@ define "Sexual partner C.DE147 Observation":
 /* End of Sexual partner C.DE147 */
 
 /*
-@dataElement: HIV.C.DE148 - Social contact C.DE148
+@dataElement: HIV.C.DE148 - Social contact
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Client plans to give the self-test kit to a social contact
 */
@@ -1844,7 +1844,7 @@ define "Social contact C.DE148 Observation":
 /* End of Social contact C.DE148 */
 
 /*
-@dataElement: HIV.D.DE32 - Breastfeeding D.DE32
+@dataElement: HIV.D.DE32 - Breastfeeding
 @activity: HIV.D8 Capture or update client history
 @description: Client is giving infant breast milk
 */
@@ -1857,7 +1857,7 @@ define "Breastfeeding D.DE32 Observation":
 /* End of Breastfeeding D.DE32 */
 
 /*
-@dataElement: HIV.D.DE41 - Date ART stopped D.DE41
+@dataElement: HIV.D.DE41 - Date ART stopped
 @activity: HIV.D8 Capture or update client history
 @description: Date on which client stopped ART
 */
@@ -1871,7 +1871,7 @@ define "Date ART stopped D.DE41 Value":
 /* End of Date ART stopped D.DE41 */
 
 /*
-@dataElement: HIV.D.DE161 - HBsAg test date D.DE161
+@dataElement: HIV.D.DE161 - HBsAg test date
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis B virus (HBV)
 */
@@ -1899,7 +1899,7 @@ define "HBV treatment TDF start date Value":
 /* End of HBV treatment TDF start date */
 
 /*
-@dataElement: HIV.D.DE169 - HCV test date D.DE169
+@dataElement: HIV.D.DE169 - HCV test date
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen)
 */
@@ -1941,7 +1941,7 @@ define "HCV treatment completion date Value":
 /* End of HCV treatment completion date */
 
 /*
-@dataElement: HIV.D.DE178 - HCV viral load test date D.DE178
+@dataElement: HIV.D.DE178 - HCV viral load test date
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C viral load test date
 */
@@ -1955,7 +1955,7 @@ define "HCV viral load test date D.DE178 Value":
 /* End of HCV viral load test date D.DE178 */
 
 /*
-@dataElement: HIV.D.DE179 - HCV viral load test result D.DE179
+@dataElement: HIV.D.DE179 - HCV viral load test result
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C viral load test result (qualitative)
 */
@@ -1968,7 +1968,7 @@ define "HCV viral load test result D.DE179 Observation":
 /* End of HCV viral load test result D.DE179 */
 
 /*
-@dataElement: HIV.D.DE180 - Detected D.DE180
+@dataElement: HIV.D.DE180 - Detected
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV was detected
 */
@@ -1986,7 +1986,7 @@ define "Detected D.DE180 Observation":
 /* End of Detected D.DE180 */
 
 /*
-@dataElement: HIV.D.DE181 - Not detected D.DE181
+@dataElement: HIV.D.DE181 - Not detected
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV was not detected
 */
@@ -2066,7 +2066,7 @@ define "Currently on TDF-based ART Observation":
 /* End of Currently on TDF-based ART */
 
 /*
-@dataElement: HIV.D.DE193 - Date viral load test results received by client D.DE193
+@dataElement: HIV.D.DE193 - Date viral load test results received by client
 @activity: HIV.D10 Counsel returning client
 @description: The date on which the client received results from viral load test
 */
@@ -2080,7 +2080,7 @@ define "Date viral load test results received by client D.DE193 Value":
 /* End of Date viral load test results received by client D.DE193 */
 
 /*
-@dataElement: HIV.D.DE217 - Reason ART stopped D.DE217
+@dataElement: HIV.D.DE217 - Reason ART stopped
 @activity: HIV.D10 Counsel returning client
 @description: Reason client intentionally stopped ART
 */
@@ -2093,7 +2093,7 @@ define "Reason ART stopped D.DE217 Observation":
 /* End of Reason ART stopped D.DE217 */
 
 /*
-@dataElement: HIV.D.DE218 - Toxicity/side effects D.DE218
+@dataElement: HIV.D.DE218 - Toxicity/side effects
 @activity: HIV.D10 Counsel returning client
 @description: Client stopped ART because of toxicity/side effects
 */
@@ -2111,7 +2111,7 @@ define "Toxicity/side effects D.DE218 Observation":
 /* End of Toxicity/side effects D.DE218 */
 
 /*
-@dataElement: HIV.D.DE219 - Severe illness, hospitalization D.DE219
+@dataElement: HIV.D.DE219 - Severe illness, hospitalization
 @activity: HIV.D10 Counsel returning client
 @description: Client stopped ART because of severe illness, hospitalization
 */
@@ -2165,7 +2165,7 @@ define "Client lacks finances Observation":
 /* End of Client lacks finances */
 
 /*
-@dataElement: HIV.D.DE222 - Excluded HIV infection in infant D.DE222
+@dataElement: HIV.D.DE222 - Excluded HIV infection in infant
 @activity: HIV.D10 Counsel returning client
 @description: Client stopped ART because HIV infection in infant was excluded
 */
@@ -2183,7 +2183,7 @@ define "Excluded HIV infection in infant D.DE222 Observation":
 /* End of Excluded HIV infection in infant D.DE222 */
 
 /*
-@dataElement: HIV.D.DE223 - Other reason for stopping ART D.DE223
+@dataElement: HIV.D.DE223 - Other reason for stopping ART
 @activity: HIV.D10 Counsel returning client
 @description: Client stopped ART because of other reason
 */
@@ -2201,7 +2201,7 @@ define "Other reason for stopping ART D.DE223 Observation":
 /* End of Other reason for stopping ART D.DE223 */
 
 /*
-@dataElement: HIV.D.DE367 - Baseline CD4 count D.DE367
+@dataElement: HIV.D.DE367 - Baseline CD4 count
 @activity: HIV.D20 Diagnostics
 @description: CD4 count performed at HIV diagnosis
 */
@@ -2215,7 +2215,7 @@ define "Baseline CD4 count D.DE367 Value":
 /* End of Baseline CD4 count D.DE367 */
 
 /*
-@dataElement: HIV.D.DE368 - Date of baseline CD4 count test D.DE368
+@dataElement: HIV.D.DE368 - Date of baseline CD4 count test
 @activity: HIV.D20 Diagnostics
 @description: Date and time when baseline CD4 count test was conducted
 */
@@ -2296,7 +2296,7 @@ define "Within 90 days of HIV diagnosis Observation":
 /* End of Within 90 days of HIV diagnosis */
 
 /*
-@dataElement: HIV.D.DE417 - Date viral load test results received by client D.DE417
+@dataElement: HIV.D.DE417 - Date viral load test results received by client
 @activity: HIV.D20 Diagnostics
 @description: The date on which the client received results from a viral load test
 */
@@ -2323,7 +2323,7 @@ define "Reason for ARV drug regimen substitution Observation":
 /* End of Reason for ARV drug regimen substitution */
 
 /*
-@dataElement: HIV.D.DE419 - Toxicity/side effects D.DE419
+@dataElement: HIV.D.DE419 - Toxicity/side effects
 @activity: HIV.D21 Determine regimen and treatment options
 @description: A substitution was made to the regimen because of toxicity/side effects
 */
@@ -2449,7 +2449,7 @@ define "Other reason for regimen substitution Observation":
 /* End of Other reason for regimen substitution */
 
 /*
-@dataElement: HIV.D.DE457 - Medications prescribed D.DE457
+@dataElement: HIV.D.DE457 - Medications prescribed
 @activity: HIV.D23 Prescribe
 @description: Name or regimen code of all other medications prescribed during the visit
 */
@@ -2462,7 +2462,7 @@ define "Medications prescribed D.DE457 Observation":
 /* End of Medications prescribed D.DE457 */
 
 /*
-@dataElement: HIV.D.DE458 - Date medications prescribed D.DE458
+@dataElement: HIV.D.DE458 - Date medications prescribed
 @activity: HIV.D23 Prescribe
 @description: Date the medications were prescribed
 */
@@ -2661,7 +2661,7 @@ define "Fatigue Observation":
 /* End of Fatigue */
 
 /*
-@dataElement: HIV.D.DE475 - Headache D.DE475
+@dataElement: HIV.D.DE475 - Headache
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to headache
 */
@@ -3161,7 +3161,7 @@ define "Chemoradiation Observation":
 /* End of Chemoradiation */
 
 /*
-@dataElement: HIV.D.DE739 - Other D.DE739
+@dataElement: HIV.D.DE739 - Other
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method is a not in list
 */
@@ -3354,7 +3354,7 @@ define "Other DSD ART model Observation":
 /* End of Other DSD ART model */
 
 /*
-@dataElement: HIV.D.DE778 - Syndrome/STI diagnosed D.DE778
+@dataElement: HIV.D.DE778 - Syndrome/STI diagnosed
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Syndrome or STI for which client is diagnosed
 */
@@ -3367,7 +3367,7 @@ define "Syndrome/STI diagnosed D.DE778 Observation":
 /* End of Syndrome/STI diagnosed D.DE778 */
 
 /*
-@dataElement: HIV.D.DE779 - Urethral discharge syndrome D.DE779
+@dataElement: HIV.D.DE779 - Urethral discharge syndrome
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Client diagnosed with urethral discharge syndrome
 */
@@ -3385,7 +3385,7 @@ define "Urethral discharge syndrome D.DE779 Observation":
 /* End of Urethral discharge syndrome D.DE779 */
 
 /*
-@dataElement: HIV.D.DE780 - Vaginal discharge syndrome D.DE780
+@dataElement: HIV.D.DE780 - Vaginal discharge syndrome
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Client diagnosed with vaginal discharge syndrome
 */
@@ -3403,7 +3403,7 @@ define "Vaginal discharge syndrome D.DE780 Observation":
 /* End of Vaginal discharge syndrome D.DE780 */
 
 /*
-@dataElement: HIV.D.DE781 - Lower Abdominal pain  D.DE781
+@dataElement: HIV.D.DE781 - Lower Abdominal pain 
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
@@ -3421,7 +3421,7 @@ define "Lower Abdominal pain  D.DE781 Observation":
 /* End of Lower Abdominal pain  D.DE781 */
 
 /*
-@dataElement: HIV.D.DE782 - Genital ulcer disease syndrome D.DE782
+@dataElement: HIV.D.DE782 - Genital ulcer disease syndrome
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Client diagnosed with genital ulcer disease syndrome
 */
@@ -3439,7 +3439,7 @@ define "Genital ulcer disease syndrome D.DE782 Observation":
 /* End of Genital ulcer disease syndrome D.DE782 */
 
 /*
-@dataElement: HIV.D.DE783 - Anorectal discharge D.DE783
+@dataElement: HIV.D.DE783 - Anorectal discharge
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Client diagnosed with anorectal discharge
 */
@@ -3457,7 +3457,7 @@ define "Anorectal discharge D.DE783 Observation":
 /* End of Anorectal discharge D.DE783 */
 
 /*
-@dataElement: HIV.D.DE784 - Sent for testing D.DE784
+@dataElement: HIV.D.DE784 - Sent for testing
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Specimen sent for testing
 */
@@ -3475,7 +3475,7 @@ define "Sent for testing D.DE784 Observation":
 /* End of Sent for testing D.DE784 */
 
 /*
-@dataElement: HIV.D.DE785 - Other D.DE785
+@dataElement: HIV.D.DE785 - Other
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Other syndrome/STI diagnosed
 */
@@ -3493,7 +3493,7 @@ define "Other D.DE785 Observation":
 /* End of Other D.DE785 */
 
 /*
-@dataElement: HIV.D.DE787 - Any STI syndrome diagnosed D.DE787
+@dataElement: HIV.D.DE787 - Any STI syndrome diagnosed
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Was the client diagnosed with any of the five STI syndromes during this visit?
 */
@@ -3506,7 +3506,7 @@ define "Any STI syndrome diagnosed D.DE787 Observation":
 /* End of Any STI syndrome diagnosed D.DE787 */
 
 /*
-@dataElement: HIV.D.DE801 - Syphilis test date D.DE801
+@dataElement: HIV.D.DE801 - Syphilis test date
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Date of syphilis test
 */
@@ -3520,7 +3520,7 @@ define "Syphilis test date D.DE801 Value":
 /* End of Syphilis test date D.DE801 */
 
 /*
-@dataElement: HIV.D.DE806 - Syphilis treatment start date D.DE806
+@dataElement: HIV.D.DE806 - Syphilis treatment start date
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Date of initiation of syphilis treatment
 */
@@ -3534,7 +3534,7 @@ define "Syphilis treatment start date D.DE806 Value":
 /* End of Syphilis treatment start date D.DE806 */
 
 /*
-@dataElement: HIV.D.DE807 - Gonorrhoea test date D.DE807
+@dataElement: HIV.D.DE807 - Gonorrhoea test date
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Date of Gonorrhoea test
 */
@@ -3548,7 +3548,7 @@ define "Gonorrhoea test date D.DE807 Value":
 /* End of Gonorrhoea test date D.DE807 */
 
 /*
-@dataElement: HIV.D.DE808 - Gonorrhoea test result D.DE808
+@dataElement: HIV.D.DE808 - Gonorrhoea test result
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Result from Gonorrhoea test
 */
@@ -3561,7 +3561,7 @@ define "Gonorrhoea test result D.DE808 Observation":
 /* End of Gonorrhoea test result D.DE808 */
 
 /*
-@dataElement: HIV.D.DE809 - Positive D.DE809
+@dataElement: HIV.D.DE809 - Positive
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Test result is positive for Neisseria gonorrhoeae
 */
@@ -3579,7 +3579,7 @@ define "Positive D.DE809 Observation":
 /* End of Positive D.DE809 */
 
 /*
-@dataElement: HIV.D.DE810 - Negative D.DE810
+@dataElement: HIV.D.DE810 - Negative
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Test result is negative for Neisseria gonorrhoeae
 */
@@ -3597,7 +3597,7 @@ define "Negative D.DE810 Observation":
 /* End of Negative D.DE810 */
 
 /*
-@dataElement: HIV.D.DE811 - Inconclusive D.DE811
+@dataElement: HIV.D.DE811 - Inconclusive
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Test result is inconclusive
 */
@@ -3615,7 +3615,7 @@ define "Inconclusive D.DE811 Observation":
 /* End of Inconclusive D.DE811 */
 
 /*
-@dataElement: HIV.D.DE812 - Gonorrhoea treatment start date D.DE812
+@dataElement: HIV.D.DE812 - Gonorrhoea treatment start date
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Date of initiation of Gonorrhoea treatment
 */
@@ -3629,7 +3629,7 @@ define "Gonorrhoea treatment start date D.DE812 Value":
 /* End of Gonorrhoea treatment start date D.DE812 */
 
 /*
-@dataElement: HIV.D.DE813 - Type of specimen D.DE813
+@dataElement: HIV.D.DE813 - Type of specimen
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Type of specimen to be collected
 */
@@ -3642,7 +3642,7 @@ define "Type of specimen D.DE813 Observation":
 /* End of Type of specimen D.DE813 */
 
 /*
-@dataElement: HIV.D.DE814 - Blood D.DE814
+@dataElement: HIV.D.DE814 - Blood
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Blood specimen to be collected
 */
@@ -3660,7 +3660,7 @@ define "Blood D.DE814 Observation":
 /* End of Blood D.DE814 */
 
 /*
-@dataElement: HIV.D.DE815 - Urine D.DE815
+@dataElement: HIV.D.DE815 - Urine
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Urine specimen to be collected
 */
@@ -3678,7 +3678,7 @@ define "Urine D.DE815 Observation":
 /* End of Urine D.DE815 */
 
 /*
-@dataElement: HIV.D.DE816 - Cervical or vaginal swab D.DE816
+@dataElement: HIV.D.DE816 - Cervical or vaginal swab
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Cervical or vaginal swab to be collected
 */
@@ -3696,7 +3696,7 @@ define "Cervical or vaginal swab D.DE816 Observation":
 /* End of Cervical or vaginal swab D.DE816 */
 
 /*
-@dataElement: HIV.D.DE817 - Urethral or penile swab D.DE817
+@dataElement: HIV.D.DE817 - Urethral or penile swab
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Urethral or penile swab to be collected
 */
@@ -3714,7 +3714,7 @@ define "Urethral or penile swab D.DE817 Observation":
 /* End of Urethral or penile swab D.DE817 */
 
 /*
-@dataElement: HIV.D.DE818 - Rectal swab D.DE818
+@dataElement: HIV.D.DE818 - Rectal swab
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Rectal swab to be collected
 */
@@ -3732,7 +3732,7 @@ define "Rectal swab D.DE818 Observation":
 /* End of Rectal swab D.DE818 */
 
 /*
-@dataElement: HIV.D.DE819 - Other D.DE819
+@dataElement: HIV.D.DE819 - Other
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Other specimen type to be collected
 */
@@ -3750,7 +3750,7 @@ define "Other D.DE819 Observation":
 /* End of Other D.DE819 */
 
 /*
-@dataElement: HIV.D.DE828 - Neisseria gonorrhoeae test type D.DE828
+@dataElement: HIV.D.DE828 - Neisseria gonorrhoeae test type
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Type of diagnostic test used for Neisseria gonorrhoeae
 */
@@ -3763,7 +3763,7 @@ define "Neisseria gonorrhoeae test type D.DE828 Observation":
 /* End of Neisseria gonorrhoeae test type D.DE828 */
 
 /*
-@dataElement: HIV.D.DE829 - NAAT D.DE829
+@dataElement: HIV.D.DE829 - NAAT
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Nucleic Acid Amplification Test (NAAT) used
 */
@@ -3781,7 +3781,7 @@ define "NAAT D.DE829 Observation":
 /* End of NAAT D.DE829 */
 
 /*
-@dataElement: HIV.D.DE830 - POC Test D.DE830
+@dataElement: HIV.D.DE830 - POC Test
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Point-of-care (POC) test used
 */
@@ -3799,7 +3799,7 @@ define "POC Test D.DE830 Observation":
 /* End of POC Test D.DE830 */
 
 /*
-@dataElement: HIV.D.DE831 - Culture D.DE831
+@dataElement: HIV.D.DE831 - Culture
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Culture test used
 */
@@ -3817,7 +3817,7 @@ define "Culture D.DE831 Observation":
 /* End of Culture D.DE831 */
 
 /*
-@dataElement: HIV.D.DE832 - Microscopy D.DE832
+@dataElement: HIV.D.DE832 - Microscopy
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Microscopy test used
 */
@@ -3835,7 +3835,7 @@ define "Microscopy D.DE832 Observation":
 /* End of Microscopy D.DE832 */
 
 /*
-@dataElement: HIV.D.DE833 - Other D.DE833
+@dataElement: HIV.D.DE833 - Other
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Other type of test used
 */
@@ -4357,7 +4357,7 @@ define "Home Observation":
 /* End of Home */
 
 /*
-@dataElement: HIV.E.DE70 - Other E.DE70
+@dataElement: HIV.E.DE70 - Other
 @activity: HIV.E1 Capture or update mother's history
 @description: The woman delivered at another location that is not at home or at a health facility
 */
@@ -4403,7 +4403,7 @@ define "Age of infant Value":
 /* End of Age of infant */
 
 /*
-@dataElement: HIV.E.DE112 - HIV-exposed infant or child E.DE112
+@dataElement: HIV.E.DE112 - HIV-exposed infant or child
 @activity: HIV.F6 Check whether infant/child had HIV exposure
 @description: Whether the infant or child was determined to have had HIV exposure
 */
@@ -4496,7 +4496,7 @@ define "Registered in birth cohort Observation":
 /* End of Registered in birth cohort */
 
 /*
-@dataElement: HIV.E.DE224 - HIV test date E.DE224
+@dataElement: HIV.E.DE224 - HIV test date
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Date of the HIV test
 */
@@ -4523,7 +4523,7 @@ define "Infant HIV status Observation":
 /* End of Infant HIV status */
 
 /*
-@dataElement: HIV.E.DE226 - HIV-positive E.DE226
+@dataElement: HIV.E.DE226 - HIV-positive
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Infant is HIV-positive
 */
@@ -4541,7 +4541,7 @@ define "HIV-positive E.DE226 Observation":
 /* End of HIV-positive E.DE226 */
 
 /*
-@dataElement: HIV.E.DE227 - HIV-negative E.DE227
+@dataElement: HIV.E.DE227 - HIV-negative
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Infant is HIV-negative
 */
@@ -4559,7 +4559,7 @@ define "HIV-negative E.DE227 Observation":
 /* End of HIV-negative E.DE227 */
 
 /*
-@dataElement: HIV.E.DE228 - Unknown E.DE228
+@dataElement: HIV.E.DE228 - Unknown
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Infant has unknown HIV status
 */
@@ -4591,7 +4591,7 @@ define "Infant ART start date Value":
 /* End of Infant ART start date */
 
 /*
-@dataElement: HIV.E.DE230 - Final diagnosis of HIV-exposed infant E.DE230
+@dataElement: HIV.E.DE230 - Final diagnosis of HIV-exposed infant
 @activity: HIV.F20 Record infant's/child's final HIV diagnosis
 @description: HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later).
 */
@@ -4604,7 +4604,7 @@ define "Final diagnosis of HIV-exposed infant E.DE230 Observation":
 /* End of Final diagnosis of HIV-exposed infant E.DE230 */
 
 /*
-@dataElement: HIV.E.DE231 - HIV-positive E.DE231
+@dataElement: HIV.E.DE231 - HIV-positive
 @activity: HIV.F20 Record infant's/child's final HIV diagnosis
 @description: The infant is HIV-positive
 */
@@ -4658,7 +4658,7 @@ define "HIV status unknown Observation":
 /* End of HIV status unknown */
 
 /*
-@dataElement: HIV.G.DE3 - Baseline CD4 count G.DE3
+@dataElement: HIV.G.DE3 - Baseline CD4 count
 @activity: HIV.D20 Diagnostics
 @description: CD4 count performed at HIV diagnosis
 */
@@ -4672,7 +4672,7 @@ define "Baseline CD4 count G.DE3 Value":
 /* End of Baseline CD4 count G.DE3 */
 
 /*
-@dataElement: HIV.G.DE17 - HBsAg test date G.DE17
+@dataElement: HIV.G.DE17 - HBsAg test date
 @activity: HIV.D20 Diagnostics
 @description: Date client was tested for hepatitis B virus (HBV)
 */
@@ -4686,7 +4686,7 @@ define "HBsAg test date G.DE17 Value":
 /* End of HBsAg test date G.DE17 */
 
 /*
-@dataElement: HIV.G.DE42 - HCV test date G.DE42
+@dataElement: HIV.G.DE42 - HCV test date
 @activity: HIV.D20 Diagnostics
 @description: Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen)
 */
@@ -4700,7 +4700,7 @@ define "HCV test date G.DE42 Value":
 /* End of HCV test date G.DE42 */
 
 /*
-@dataElement: HIV.G.DE47 - HCV viral load test date G.DE47
+@dataElement: HIV.G.DE47 - HCV viral load test date
 @activity: HIV.D20 Diagnostics
 @description: Hepatitis C viral load test date
 */
@@ -4714,7 +4714,7 @@ define "HCV viral load test date G.DE47 Value":
 /* End of HCV viral load test date G.DE47 */
 
 /*
-@dataElement: HIV.G.DE48 - HCV viral load test result G.DE48
+@dataElement: HIV.G.DE48 - HCV viral load test result
 @activity: HIV.D20 Diagnostics
 @description: Hepatitis C viral load test result (qualitative)
 */
@@ -4727,7 +4727,7 @@ define "HCV viral load test result G.DE48 Observation":
 /* End of HCV viral load test result G.DE48 */
 
 /*
-@dataElement: HIV.G.DE49 - Detected G.DE49
+@dataElement: HIV.G.DE49 - Detected
 @activity: HIV.D20 Diagnostics
 @description: HCV was detected
 */
@@ -4745,7 +4745,7 @@ define "Detected G.DE49 Observation":
 /* End of Detected G.DE49 */
 
 /*
-@dataElement: HIV.G.DE50 - Not detected G.DE50
+@dataElement: HIV.G.DE50 - Not detected
 @activity: HIV.D20 Diagnostics
 @description: HCV was not detected
 */
@@ -4763,7 +4763,7 @@ define "Not detected G.DE50 Observation":
 /* End of Not detected G.DE50 */
 
 /*
-@dataElement: HIV.G.DE69 - Syphilis test date G.DE69
+@dataElement: HIV.G.DE69 - Syphilis test date
 @activity: HIV.D20 Diagnostics
 @description: Date of syphilis test
 */
@@ -4862,7 +4862,7 @@ define "Refused stopped treatment Observation":
 /* End of Refused stopped treatment */
 
 /*
-@dataElement: HIV.H.DE73 - Date ART stopped H.DE73
+@dataElement: HIV.H.DE73 - Date ART stopped
 @activity: HIV.H3 Record outreach and result
 @description: Date on which client stopped ART
 */
@@ -4876,7 +4876,7 @@ define "Date ART stopped H.DE73 Value":
 /* End of Date ART stopped H.DE73 */
 
 /*
-@dataElement: HIV.H.DE74 - Reason ART stopped H.DE74
+@dataElement: HIV.H.DE74 - Reason ART stopped
 @activity: HIV.H3 Record outreach and result
 @description: Reason why client intentionally stopped ART
 */
@@ -4889,7 +4889,7 @@ define "Reason ART stopped H.DE74 Observation":
 /* End of Reason ART stopped H.DE74 */
 
 /*
-@dataElement: HIV.H.DE75 - Toxicity/side effects H.DE75
+@dataElement: HIV.H.DE75 - Toxicity/side effects
 @activity: HIV.H3 Record outreach and result
 @description: Client stopped ART because of toxicity/side effects
 */
@@ -4907,7 +4907,7 @@ define "Toxicity/side effects H.DE75 Observation":
 /* End of Toxicity/side effects H.DE75 */
 
 /*
-@dataElement: HIV.H.DE76 - Severe illness, hospitalization H.DE76
+@dataElement: HIV.H.DE76 - Severe illness, hospitalization
 @activity: HIV.H3 Record outreach and result
 @description: Client stopped ART because of severe illness, hospitalization
 */
@@ -4961,7 +4961,7 @@ define "Client lacks finances  Observation":
 /* End of Client lacks finances  */
 
 /*
-@dataElement: HIV.H.DE79 - Excluded HIV infection in infant H.DE79
+@dataElement: HIV.H.DE79 - Excluded HIV infection in infant
 @activity: HIV.H3 Record outreach and result
 @description: Client stopped ART because the infant was determined to not have HIV
 */
@@ -4979,7 +4979,7 @@ define "Excluded HIV infection in infant H.DE79 Observation":
 /* End of Excluded HIV infection in infant H.DE79 */
 
 /*
-@dataElement: HIV.H.DE80 - Other reason for stopping ART H.DE80
+@dataElement: HIV.H.DE80 - Other reason for stopping ART
 @activity: HIV.H3 Record outreach and result
 @description: Client stopped ART for other reason
 */
@@ -5100,7 +5100,7 @@ define "VMMC Observation":
 /* End of VMMC */
 
 /*
-@dataElement: HIV.PRV.DE8 - Other PRV.DE8
+@dataElement: HIV.PRV.DE8 - Other
 @activity: HIV.B6 Capture or update client history
 @description: Client accessed other HIV prevention services
 */
@@ -5145,7 +5145,7 @@ define "HIV status of contact Observation":
 /* End of HIV status of contact */
 
 /*
-@dataElement: HIV.PRV.DE12 - HIV-positive PRV.DE12
+@dataElement: HIV.PRV.DE12 - HIV-positive
 @activity: HIV.B6 Capture or update client history
 @description: Client's contact is HIV-positive
 */
@@ -5163,7 +5163,7 @@ define "HIV-positive PRV.DE12 Observation":
 /* End of HIV-positive PRV.DE12 */
 
 /*
-@dataElement: HIV.PRV.DE13 - HIV-negative PRV.DE13
+@dataElement: HIV.PRV.DE13 - HIV-negative
 @activity: HIV.B6 Capture or update client history
 @description: Client's contact is HIV-negative
 */
@@ -5181,7 +5181,7 @@ define "HIV-negative PRV.DE13 Observation":
 /* End of HIV-negative PRV.DE13 */
 
 /*
-@dataElement: HIV.PRV.DE14 - Unknown PRV.DE14
+@dataElement: HIV.PRV.DE14 - Unknown
 @activity: HIV.B6 Capture or update client history
 @description: Client does not know contact's HIV status
 */
@@ -5267,7 +5267,7 @@ define "Date of loss to follow-up or OAMT stopped Value":
 /* End of Date of loss to follow-up or OAMT stopped */
 
 /*
-@dataElement: HIV.PRV.DE27 - Date medications prescribed PRV.DE27
+@dataElement: HIV.PRV.DE27 - Date medications prescribed
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Date the client was prescribed medications
 */
@@ -5281,7 +5281,7 @@ define "Date medications prescribed PRV.DE27 Value":
 /* End of Date medications prescribed PRV.DE27 */
 
 /*
-@dataElement: HIV.PRV.DE28 - Number of days prescribed PRV.DE28
+@dataElement: HIV.PRV.DE28 - Number of days prescribed
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Days of medication client has been prescribed
 */
@@ -5295,7 +5295,7 @@ define "Number of days prescribed PRV.DE28 Value":
 /* End of Number of days prescribed PRV.DE28 */
 
 /*
-@dataElement: HIV.SRV.DE1 - HIV test date SRV.DE1
+@dataElement: HIV.SRV.DE1 - HIV test date
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Date of the HIV test
 */
@@ -5309,7 +5309,7 @@ define "HIV test date SRV.DE1 Value":
 /* End of HIV test date SRV.DE1 */
 
 /*
-@dataElement: HIV.SRV.DE3 - Baseline CD4 count SRV.DE3
+@dataElement: HIV.SRV.DE3 - Baseline CD4 count
 @activity: HIV.D20 Diagnostics
 @description: CD4 count performed at HIV diagnosis
 */
@@ -5323,7 +5323,7 @@ define "Baseline CD4 count SRV.DE3 Value":
 /* End of Baseline CD4 count SRV.DE3 */
 
 /*
-@dataElement: HIV.SRV.DE4 - Date of baseline CD4 count test SRV.DE4
+@dataElement: HIV.SRV.DE4 - Date of baseline CD4 count test
 @activity: HIV.D20 Diagnostics
 @description: Date and time when baseline CD4 count test was conducted
 */
@@ -5337,7 +5337,7 @@ define "Date of baseline CD4 count test SRV.DE4 Value":
 /* End of Date of baseline CD4 count test SRV.DE4 */
 
 /*
-@dataElement: HIV.SRV.DE20 - HIV-exposed infant or child SRV.DE20
+@dataElement: HIV.SRV.DE20 - HIV-exposed infant or child
 @activity: HIV.F6 Check whether infant/child had HIV exposure
 @description: Whether the infant or child was determined to have had HIV exposure
 */
@@ -5350,7 +5350,7 @@ define "HIV-exposed infant or child SRV.DE20 Observation":
 /* End of HIV-exposed infant or child SRV.DE20 */
 
 /*
-@dataElement: HIV.SRV.DE22 - Final diagnosis of HIV-exposed infant SRV.DE22
+@dataElement: HIV.SRV.DE22 - Final diagnosis of HIV-exposed infant
 @activity: HIV.F20 Record infant's/child's final HIV diagnosis
 @description: HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later).
 */

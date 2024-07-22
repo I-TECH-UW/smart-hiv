@@ -42,7 +42,7 @@ define "Estimated age Value":
 /* End of Estimated age */
 
 /*
-@dataElement: HIV.B.DE1 - Reason for visit B.DE1
+@dataElement: HIV.B.DE1 - Reason for visit
 @activity: HIV.B1 Determine reason for visit
 @description: Reason for HIV testing services visit
 */
@@ -74,7 +74,7 @@ define "First-time HIV test Observation":
 /* End of First-time HIV test */
 
 /*
-@dataElement: HIV.B.DE3 - Retesting for HIV B.DE3
+@dataElement: HIV.B.DE3 - Retesting for HIV
 @activity: HIV.B1 Determine reason for visit
 @description: Retesting for human immunodeficiency virus
 */
@@ -110,7 +110,7 @@ define "HIV testing services visit Observation":
 /* End of HIV testing services visit */
 
 /*
-@dataElement: HIV.B.DE14 - Date/time of suspected exposure to HIV B.DE14
+@dataElement: HIV.B.DE14 - Date/time of suspected exposure to HIV
 @activity: HIV.B1 Determine reason for visit
 @description: Date and time when the client had suspected exposure to HIV
 */
@@ -125,7 +125,7 @@ define "Date/time of suspected exposure to HIV B.DE14 Value":
 /* End of Date/time of suspected exposure to HIV B.DE14 */
 
 /*
-@dataElement: HIV.B.DE49 - Key population member* B.DE49
+@dataElement: HIV.B.DE49 - Key population member*
 @activity: HIV.B6 Capture or update client history
 @description: Client is a member of a key population that has an increased risk of HIV
 */
@@ -153,7 +153,7 @@ define "HIV test conducted Observation":
 /* End of HIV test conducted */
 
 /*
-@dataElement: HIV.B.DE88 - Assay number in testing strategy B.DE88
+@dataElement: HIV.B.DE88 - Assay number in testing strategy
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The number of the assay (test kit) in the HIV testing strategy
 */
@@ -167,7 +167,7 @@ define "Assay number in testing strategy B.DE88 Observation":
 /* End of Assay number in testing strategy B.DE88 */
 
 /*
-@dataElement: HIV.B.DE89 - Assay 0 B.DE89
+@dataElement: HIV.B.DE89 - Assay 0
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: A community outreach test-for-triage or self-test which is not included in the HIV testing strategy
 */
@@ -185,7 +185,7 @@ define "Assay 0 B.DE89 Observation":
 /* End of Assay 0 B.DE89 */
 
 /*
-@dataElement: HIV.B.DE90 - Assay 1 B.DE90
+@dataElement: HIV.B.DE90 - Assay 1
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The first test in the HIV testing strategy
 */
@@ -203,7 +203,7 @@ define "Assay 1 B.DE90 Observation":
 /* End of Assay 1 B.DE90 */
 
 /*
-@dataElement: HIV.B.DE91 - Assay 2 B.DE91
+@dataElement: HIV.B.DE91 - Assay 2
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The second test in the HIV testing strategy
 */
@@ -221,7 +221,7 @@ define "Assay 2 B.DE91 Observation":
 /* End of Assay 2 B.DE91 */
 
 /*
-@dataElement: HIV.B.DE92 - Assay 3 B.DE92
+@dataElement: HIV.B.DE92 - Assay 3
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The third test in the HIV testing strategy
 */
@@ -239,7 +239,7 @@ define "Assay 3 B.DE92 Observation":
 /* End of Assay 3 B.DE92 */
 
 /*
-@dataElement: HIV.B.DE93 - Assay 1 repeated B.DE93
+@dataElement: HIV.B.DE93 - Assay 1 repeated
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The first test in the HIV testing strategy
 */
@@ -257,7 +257,7 @@ define "Assay 1 repeated B.DE93 Observation":
 /* End of Assay 1 repeated B.DE93 */
 
 /*
-@dataElement: HIV.B.DE94 - Test result of HIV assay 1 B.DE94
+@dataElement: HIV.B.DE94 - Test result of HIV assay 1
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the first HIV assay in the testing strategy
 */
@@ -271,7 +271,7 @@ define "Test result of HIV assay 1 B.DE94 Observation":
 /* End of Test result of HIV assay 1 B.DE94 */
 
 /*
-@dataElement: HIV.B.DE95 - Reactive B.DE95
+@dataElement: HIV.B.DE95 - Reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -289,7 +289,7 @@ define "Reactive B.DE95 Observation":
 /* End of Reactive B.DE95 */
 
 /*
-@dataElement: HIV.B.DE96 - Non-reactive B.DE96
+@dataElement: HIV.B.DE96 - Non-reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -307,7 +307,7 @@ define "Non-reactive B.DE96 Observation":
 /* End of Non-reactive B.DE96 */
 
 /*
-@dataElement: HIV.B.DE97 - Invalid B.DE97
+@dataElement: HIV.B.DE97 - Invalid
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -325,7 +325,7 @@ define "Invalid B.DE97 Observation":
 /* End of Invalid B.DE97 */
 
 /*
-@dataElement: HIV.B.DE98 - Test result of HIV assay 2 B.DE98
+@dataElement: HIV.B.DE98 - Test result of HIV assay 2
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the second HIV assay in the testing strategy
 */
@@ -339,7 +339,7 @@ define "Test result of HIV assay 2 B.DE98 Observation":
 /* End of Test result of HIV assay 2 B.DE98 */
 
 /*
-@dataElement: HIV.B.DE99 - Reactive B.DE99
+@dataElement: HIV.B.DE99 - Reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -357,7 +357,7 @@ define "Reactive B.DE99 Observation":
 /* End of Reactive B.DE99 */
 
 /*
-@dataElement: HIV.B.DE100 - Non-reactive B.DE100
+@dataElement: HIV.B.DE100 - Non-reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -375,7 +375,7 @@ define "Non-reactive B.DE100 Observation":
 /* End of Non-reactive B.DE100 */
 
 /*
-@dataElement: HIV.B.DE101 - Invalid B.DE101
+@dataElement: HIV.B.DE101 - Invalid
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -393,7 +393,7 @@ define "Invalid B.DE101 Observation":
 /* End of Invalid B.DE101 */
 
 /*
-@dataElement: HIV.B.DE102 - Test result of HIV assay 3 B.DE102
+@dataElement: HIV.B.DE102 - Test result of HIV assay 3
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the third HIV assay in the testing strategy
 */
@@ -407,7 +407,7 @@ define "Test result of HIV assay 3 B.DE102 Observation":
 /* End of Test result of HIV assay 3 B.DE102 */
 
 /*
-@dataElement: HIV.B.DE103 - Reactive B.DE103
+@dataElement: HIV.B.DE103 - Reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -425,7 +425,7 @@ define "Reactive B.DE103 Observation":
 /* End of Reactive B.DE103 */
 
 /*
-@dataElement: HIV.B.DE104 - Non-reactive B.DE104
+@dataElement: HIV.B.DE104 - Non-reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -443,7 +443,7 @@ define "Non-reactive B.DE104 Observation":
 /* End of Non-reactive B.DE104 */
 
 /*
-@dataElement: HIV.B.DE105 - Invalid B.DE105
+@dataElement: HIV.B.DE105 - Invalid
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -461,7 +461,7 @@ define "Invalid B.DE105 Observation":
 /* End of Invalid B.DE105 */
 
 /*
-@dataElement: HIV.B.DE106 - Test result of HIV assay 1 repeated B.DE106
+@dataElement: HIV.B.DE106 - Test result of HIV assay 1 repeated
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the repeated first HIV assay in the testing strategy
 */
@@ -475,7 +475,7 @@ define "Test result of HIV assay 1 repeated B.DE106 Observation":
 /* End of Test result of HIV assay 1 repeated B.DE106 */
 
 /*
-@dataElement: HIV.B.DE107 - Reactive B.DE107
+@dataElement: HIV.B.DE107 - Reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -493,7 +493,7 @@ define "Reactive B.DE107 Observation":
 /* End of Reactive B.DE107 */
 
 /*
-@dataElement: HIV.B.DE108 - Non-reactive B.DE108
+@dataElement: HIV.B.DE108 - Non-reactive
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -511,7 +511,7 @@ define "Non-reactive B.DE108 Observation":
 /* End of Non-reactive B.DE108 */
 
 /*
-@dataElement: HIV.B.DE109 - Invalid B.DE109
+@dataElement: HIV.B.DE109 - Invalid
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -665,7 +665,7 @@ define "VMMC counselling provided Observation":
 /* End of VMMC counselling provided */
 
 /*
-@dataElement: HIV.B.DE149 - Prevention services offered and referrals B.DE149
+@dataElement: HIV.B.DE149 - Prevention services offered and referrals
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer to prevention services
 */
@@ -679,7 +679,7 @@ define "Prevention services offered and referrals B.DE149 Observation":
 /* End of Prevention services offered and referrals B.DE149 */
 
 /*
-@dataElement: HIV.B.DE150 - Offer male and female condoms and condom-compatible lubricants B.DE150
+@dataElement: HIV.B.DE150 - Offer male and female condoms and condom-compatible lubricants
 @activity: HIV.B9 Determine recommended services
 @description: Offer male and female condoms and condom-compatible lubricants
 */
@@ -751,7 +751,7 @@ define "Voluntary medical male circumcision VMMC Observation":
 /* End of Voluntary medical male circumcision VMMC */
 
 /*
-@dataElement: HIV.B.DE154 - Harm reduction for people who inject drugs B.DE154
+@dataElement: HIV.B.DE154 - Harm reduction for people who inject drugs
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer to harm reduction services for people who inject drugs (needle and syringe programmes, opioid substitution therapy, other drug-dependence treatment and opioid overdose prevention and management)
 */
@@ -787,7 +787,7 @@ define "Behavioural interventions to support risk reduction, particularly for pe
 /* End of Behavioural interventions to support risk reduction, particularly for people with HIV and members of key populations */
 
 /*
-@dataElement: HIV.B.DE156 - HIV testing for partners and biological children B.DE156
+@dataElement: HIV.B.DE156 - HIV testing for partners and biological children
 @activity: HIV.B9 Determine recommended services
 @description: Offer voluntary testing for all partners and biological children of positive cases (includes partner services and index case testing), as welll as partners and social contacts of people from key populations, where appropriate
 */
@@ -823,7 +823,7 @@ define "HIV testing for partners and social contacts of people from key populati
 /* End of HIV testing for partners and social contacts of people from key populations, where appropriate */
 
 /*
-@dataElement: HIV.B.DE158 - Sexual and reproductive health integrated services B.DE158
+@dataElement: HIV.B.DE158 - Sexual and reproductive health integrated services
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer to sexual and reproductive health services
 */
@@ -837,7 +837,7 @@ define "Sexual and reproductive health integrated services B.DE158 Observation":
 /* End of Sexual and reproductive health integrated services B.DE158 */
 
 /*
-@dataElement: HIV.B.DE159 - Contraception and family planning B.DE159
+@dataElement: HIV.B.DE159 - Contraception and family planning
 @activity: HIV.B9 Determine recommended services
 @description: Offer contraception and family planning services
 */
@@ -855,7 +855,7 @@ define "Contraception and family planning B.DE159 Observation":
 /* End of Contraception and family planning B.DE159 */
 
 /*
-@dataElement: HIV.B.DE160 - Check pregnancy status B.DE160
+@dataElement: HIV.B.DE160 - Check pregnancy status
 @activity: HIV.B9 Determine recommended services
 @description: Check women's pregnancy status
 */
@@ -909,7 +909,7 @@ define "Cervical cancer screening and treatment counselling Observation":
 /* End of Cervical cancer screening and treatment counselling */
 
 /*
-@dataElement: HIV.B.DE163 - Anal cancer screening for men who have sex with men B.DE163
+@dataElement: HIV.B.DE163 - Anal cancer screening for men who have sex with men
 @activity: HIV.B9 Determine recommended services
 @description: Offer services for anal cancer screening (for men who have sex with men)
 */
@@ -945,7 +945,7 @@ define "STI testing and treatment services Observation":
 /* End of STI testing and treatment services */
 
 /*
-@dataElement: HIV.B.DE165 - Offer other clinical services B.DE165
+@dataElement: HIV.B.DE165 - Offer other clinical services
 @activity: HIV.B9 Determine recommended services
 @description: Other clinical services offered or referrals given to the client
 */
@@ -959,7 +959,7 @@ define "Offer other clinical services B.DE165 Observation":
 /* End of Offer other clinical services B.DE165 */
 
 /*
-@dataElement: HIV.B.DE166 - Assessment and provision of vaccinations B.DE166
+@dataElement: HIV.B.DE166 - Assessment and provision of vaccinations
 @activity: HIV.B9 Determine recommended services
 @description: Assessment and provision of vaccinations, such as for people from key populations, pregnant women and infants; and, where appropriate, tetanus vaccination for adolescent boys and men receiving VMMC
 */
@@ -1031,7 +1031,7 @@ define "Intensified TB case finding and linkage to TB treatment provided Observa
 /* End of Intensified TB case finding and linkage to TB treatment provided */
 
 /*
-@dataElement: HIV.B.DE170 - Provision of isoniazid preventive therapy if person does not have TB B.DE170
+@dataElement: HIV.B.DE170 - Provision of isoniazid preventive therapy if person does not have TB
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for provision of isoniazid preventive therapy if person does not have TB
 */
@@ -1049,7 +1049,7 @@ define "Provision of isoniazid preventive therapy if person does not have TB B.D
 /* End of Provision of isoniazid preventive therapy if person does not have TB B.DE170 */
 
 /*
-@dataElement: HIV.B.DE171 - Malaria prevention such as bed nets and prophylaxis, depending on epidemiology B.DE171
+@dataElement: HIV.B.DE171 - Malaria prevention such as bed nets and prophylaxis, depending on epidemiology
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for malaria prevention (such as bed nets and prophylaxis), depending on epidemiology
 */
@@ -1067,7 +1067,7 @@ define "Malaria prevention such as bed nets and prophylaxis, depending on epidem
 /* End of Malaria prevention such as bed nets and prophylaxis, depending on epidemiology B.DE171 */
 
 /*
-@dataElement: HIV.B.DE172 - Other support services B.DE172
+@dataElement: HIV.B.DE172 - Other support services
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for other support services
 */
@@ -1081,7 +1081,7 @@ define "Other support services B.DE172 Observation":
 /* End of Other support services B.DE172 */
 
 /*
-@dataElement: HIV.B.DE173 - Mental health services B.DE173
+@dataElement: HIV.B.DE173 - Mental health services
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for mental health services
 */
@@ -1099,7 +1099,7 @@ define "Mental health services B.DE173 Observation":
 /* End of Mental health services B.DE173 */
 
 /*
-@dataElement: HIV.B.DE174 - Psychosocial counselling, support and treatment adherence counselling B.DE174
+@dataElement: HIV.B.DE174 - Psychosocial counselling, support and treatment adherence counselling
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for psychosocial counselling, support and treatment adherence counselling
 */
@@ -1117,7 +1117,7 @@ define "Psychosocial counselling, support and treatment adherence counselling B.
 /* End of Psychosocial counselling, support and treatment adherence counselling B.DE174 */
 
 /*
-@dataElement: HIV.B.DE175 - Support for disclosure and partner services B.DE175
+@dataElement: HIV.B.DE175 - Support for disclosure and partner services
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for support for disclosure and partner services
 */
@@ -1135,7 +1135,7 @@ define "Support for disclosure and partner services B.DE175 Observation":
 /* End of Support for disclosure and partner services B.DE175 */
 
 /*
-@dataElement: HIV.B.DE176 - Legal and social services B.DE176
+@dataElement: HIV.B.DE176 - Legal and social services
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for legal and social services
 */
@@ -1153,7 +1153,7 @@ define "Legal and social services B.DE176 Observation":
 /* End of Legal and social services B.DE176 */
 
 /*
-@dataElement: HIV.B.DE177 - Services for responding to violence against women B.DE177
+@dataElement: HIV.B.DE177 - Services for responding to violence against women
 @activity: HIV.B9 Determine recommended services
 @description: Offer or refer for services for responding to violence against women, including first-line support and psychosocial support, post-rape care and other support services including shelters, legal services and women and child protection services
 */
@@ -1171,7 +1171,7 @@ define "Services for responding to violence against women B.DE177 Observation":
 /* End of Services for responding to violence against women B.DE177 */
 
 /*
-@dataElement: HIV.B.DE191 - Type of follow-up appointment B.DE191
+@dataElement: HIV.B.DE191 - Type of follow-up appointment
 @activity: HIV.B20 Schedule retest
 @description: Type of follow-up appointment for testing services
 */
@@ -1185,7 +1185,7 @@ define "Type of follow-up appointment B.DE191 Observation":
 /* End of Type of follow-up appointment B.DE191 */
 
 /*
-@dataElement: HIV.B.DE192 - Retesting for HIV B.DE192
+@dataElement: HIV.B.DE192 - Retesting for HIV
 @activity: HIV.B20 Schedule retest
 @description: Retesting follow-up appointment
 */
@@ -1203,7 +1203,7 @@ define "Retesting for HIV B.DE192 Observation":
 /* End of Retesting for HIV B.DE192 */
 
 /*
-@dataElement: HIV.B.DE193 - Other B.DE193
+@dataElement: HIV.B.DE193 - Other
 @activity: HIV.B20 Schedule retest
 @description: Other reason for the follow-up appointment
 */
@@ -1221,7 +1221,7 @@ define "Other B.DE193 Observation":
 /* End of Other B.DE193 */
 
 /*
-@dataElement: HIV.B.DE195 - Date/time of follow-up appointment B.DE195
+@dataElement: HIV.B.DE195 - Date/time of follow-up appointment
 @activity: HIV.B20 Schedule retest
 @description: Date the patient is to return for monitoring, re-supply or any other reason
 */
@@ -1250,7 +1250,7 @@ define "HIV retest prior to starting ART conducted Observation":
 /* End of HIV retest prior to starting ART conducted */
 
 /*
-@dataElement: HIV.C.DE9 - Date/time of suspected exposure to HIV C.DE9
+@dataElement: HIV.C.DE9 - Date/time of suspected exposure to HIV
 @activity: HIV.C3 Capture or update client history
 @description: When the suspect exposure to HIV took place
 */
@@ -1293,7 +1293,7 @@ define "Current PrEP regimen Observation":
 /* End of Current PrEP regimen */
 
 /*
-@dataElement: HIV.C.DE18 - TDF + FTC C.DE18
+@dataElement: HIV.C.DE18 - TDF + FTC
 @activity: HIV.C3 Capture or update client history
 @description: Treated with tenofovir disoproxil fumarate (TDF) and emtricitabine (FTC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
@@ -1311,7 +1311,7 @@ define "TDF + FTC C.DE18 Observation":
 /* End of TDF + FTC C.DE18 */
 
 /*
-@dataElement: HIV.C.DE19 - TDF C.DE19
+@dataElement: HIV.C.DE19 - TDF
 @activity: HIV.C3 Capture or update client history
 @description: Treated with single-agent tenofovir disoproxil fumarate (TDF) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
@@ -1329,7 +1329,7 @@ define "TDF C.DE19 Observation":
 /* End of TDF C.DE19 */
 
 /*
-@dataElement: HIV.C.DE20 - TDF + 3TC C.DE20
+@dataElement: HIV.C.DE20 - TDF + 3TC
 @activity: HIV.C3 Capture or update client history
 @description: Treated with tenofovir disoproxil fumarate (TDF) and lamivudine (3TC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
@@ -1365,7 +1365,7 @@ define "Other TDF-based regimen Observation":
 /* End of Other TDF-based regimen */
 
 /*
-@dataElement: HIV.C.DE22 - Dapivirine vaginal ring DVR C.DE22
+@dataElement: HIV.C.DE22 - Dapivirine vaginal ring DVR
 @activity: HIV.C3 Capture or update client history
 @description: Dapivirine vaginal ring (DVR) for HIV prevention
 */
@@ -1383,7 +1383,7 @@ define "Dapivirine vaginal ring DVR C.DE22 Observation":
 /* End of Dapivirine vaginal ring DVR C.DE22 */
 
 /*
-@dataElement: HIV.C.DE23 - CAB-LA C.DE23
+@dataElement: HIV.C.DE23 - CAB-LA
 @activity: HIV.C3 Capture or update client history
 @description: Long-acting injectable cabotegravir
 */
@@ -1415,7 +1415,7 @@ define "PEP history Observation":
 /* End of PEP history */
 
 /*
-@dataElement: HIV.C.DE32 - First-time user C.DE32
+@dataElement: HIV.C.DE32 - First-time user
 @activity: HIV.C3 Capture or update client history
 @description: The client has never used post-exposure prophylaxis (PEP) before
 */
@@ -1451,7 +1451,7 @@ define "Repeat user Observation":
 /* End of Repeat user */
 
 /*
-@dataElement: HIV.C.DE36 - Signs of substantial risk of HIV infection C.DE36
+@dataElement: HIV.C.DE36 - Signs of substantial risk of HIV infection
 @activity: HIV.C3 Capture or update client history
 @description: Signs the client is at a substantial risk of HIV infection
 */
@@ -1465,7 +1465,7 @@ define "Signs of substantial risk of HIV infection C.DE36 Observation":
 /* End of Signs of substantial risk of HIV infection C.DE36 */
 
 /*
-@dataElement: HIV.C.DE37 - No condom use during sex with more than one partner in the past 6 months C.DE37
+@dataElement: HIV.C.DE37 - No condom use during sex with more than one partner in the past 6 months
 @activity: HIV.C3 Capture or update client history
 @description: Recent vaginal or anal sexual intercourse without a condom with more than one partner
 */
@@ -1483,7 +1483,7 @@ define "No condom use during sex with more than one partner in the past 6 months
 /* End of No condom use during sex with more than one partner in the past 6 months C.DE37 */
 
 /*
-@dataElement: HIV.C.DE38 - STI in the past 6 months C.DE38
+@dataElement: HIV.C.DE38 - STI in the past 6 months
 @activity: HIV.C3 Capture or update client history
 @description: A recent history (in the last 6 months) of a sexually transmitted infection (STI ) by laboratory testing, self-report or syndromic STI treatment
 */
@@ -1501,7 +1501,7 @@ define "STI in the past 6 months C.DE38 Observation":
 /* End of STI in the past 6 months C.DE38 */
 
 /*
-@dataElement: HIV.C.DE39 - A sexual partner in the past 6 months had one or more HIV risk factors C.DE39
+@dataElement: HIV.C.DE39 - A sexual partner in the past 6 months had one or more HIV risk factors
 @activity: HIV.C3 Capture or update client history
 @description: A recent sex partner of the client had HIV risk factors
 */
@@ -1519,7 +1519,7 @@ define "A sexual partner in the past 6 months had one or more HIV risk factors C
 /* End of A sexual partner in the past 6 months had one or more HIV risk factors C.DE39 */
 
 /*
-@dataElement: HIV.C.DE40 - PrEP requested by client C.DE40
+@dataElement: HIV.C.DE40 - PrEP requested by client
 @activity: HIV.C3 Capture or update client history
 @description: Client is requesting PrEP, reflecting a decision-making process has already taken place and suggesting of substantial risk of HIV
 */
@@ -1537,7 +1537,7 @@ define "PrEP requested by client C.DE40 Observation":
 /* End of PrEP requested by client C.DE40 */
 
 /*
-@dataElement: HIV.C.DE46 - Acute HIV infection symptoms C.DE46
+@dataElement: HIV.C.DE46 - Acute HIV infection symptoms
 @activity: HIV.C3 Capture or update client history
 @description: Symptoms that could suggest an acute HIV infection
 */
@@ -1827,7 +1827,7 @@ define "Preferred PEP backbone regimen Observation":
 /* End of Preferred PEP backbone regimen */
 
 /*
-@dataElement: HIV.C.DE92 - TDF + 3TC C.DE92
+@dataElement: HIV.C.DE92 - TDF + 3TC
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Preferred backbone containing tenofovir disoproxil fumarate and lamivudine
 */
@@ -1845,7 +1845,7 @@ define "TDF + 3TC C.DE92 Observation":
 /* End of TDF + 3TC C.DE92 */
 
 /*
-@dataElement: HIV.C.DE93 - TDF + FTC C.DE93
+@dataElement: HIV.C.DE93 - TDF + FTC
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Preferred backbone containing tenofovir disoproxil fumarate and emtricitabine
 */
@@ -1913,7 +1913,7 @@ define "ABC + 3TC Observation":
 /* End of ABC + 3TC */
 
 /*
-@dataElement: HIV.C.DE97 - TDF + 3TC C.DE97
+@dataElement: HIV.C.DE97 - TDF + 3TC
 @activity: HIV.C3 Capture or update client history
 @description: Alternative backbone containing tenofovir disoproxil fumarate and lamivudine
 */
@@ -1931,7 +1931,7 @@ define "TDF + 3TC C.DE97 Observation":
 /* End of TDF + 3TC C.DE97 */
 
 /*
-@dataElement: HIV.C.DE98 - TDF + FTC C.DE98
+@dataElement: HIV.C.DE98 - TDF + FTC
 @activity: HIV.C3 Capture or update client history
 @description: Alternative backbone containing tenofovir disoproxil fumarate and emtricitabine
 */
@@ -1963,7 +1963,7 @@ define "Preferred third PEP drug Observation":
 /* End of Preferred third PEP drug */
 
 /*
-@dataElement: HIV.C.DE100 - DTG C.DE100
+@dataElement: HIV.C.DE100 - DTG
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Preferred third drug of dolutegravir
 */
@@ -1995,7 +1995,7 @@ define "Alternative third PEP drug Observation":
 /* End of Alternative third PEP drug */
 
 /*
-@dataElement: HIV.C.DE102 - ATV/r C.DE102
+@dataElement: HIV.C.DE102 - ATV/r
 @activity: HIV.C3 Capture or update client history
 @description: Alternative third drug of atazanavir/ritonavir (ATV/r)
 */
@@ -2013,7 +2013,7 @@ define "ATV/r C.DE102 Observation":
 /* End of ATV/r C.DE102 */
 
 /*
-@dataElement: HIV.C.DE103 - DRV/r C.DE103
+@dataElement: HIV.C.DE103 - DRV/r
 @activity: HIV.C3 Capture or update client history
 @description: Alternative third drug of darunavir/ritonavir (DRV/r)
 */
@@ -2031,7 +2031,7 @@ define "DRV/r C.DE103 Observation":
 /* End of DRV/r C.DE103 */
 
 /*
-@dataElement: HIV.C.DE104 - LPV/r C.DE104
+@dataElement: HIV.C.DE104 - LPV/r
 @activity: HIV.C3 Capture or update client history
 @description: Alternative third drug of lopinavir/ritonavir (LPV/r)
 */
@@ -2049,7 +2049,7 @@ define "LPV/r C.DE104 Observation":
 /* End of LPV/r C.DE104 */
 
 /*
-@dataElement: HIV.C.DE105 - RAL C.DE105
+@dataElement: HIV.C.DE105 - RAL
 @activity: HIV.C3 Capture or update client history
 @description: Alternative third drug of raltegravir (RAL)
 */
@@ -2114,7 +2114,7 @@ define "Tenofovir disoproxil fumarate TDF allergy or contraindication Observatio
 /* End of Tenofovir disoproxil fumarate TDF allergy or contraindication */
 
 /*
-@dataElement: HIV.C.DE114 - HIV-positive C.DE114
+@dataElement: HIV.C.DE114 - HIV-positive
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client is HIV-positive
 */
@@ -2150,7 +2150,7 @@ define "Low estimated creatinine clearance Observation":
 /* End of Low estimated creatinine clearance */
 
 /*
-@dataElement: HIV.C.DE116 - Acute HIV infection symptoms C.DE116
+@dataElement: HIV.C.DE116 - Acute HIV infection symptoms
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Symptoms that could suggest an acute HIV infection
 */
@@ -2204,7 +2204,7 @@ define "Other allergy or contraindication to a medicine in the PrEP regimen Obse
 /* End of Other allergy or contraindication to a medicine in the PrEP regimen */
 
 /*
-@dataElement: HIV.C.DE123 - Adherence counselling provided C.DE123
+@dataElement: HIV.C.DE123 - Adherence counselling provided
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Whether adherence counselling was provided
 */
@@ -2218,7 +2218,7 @@ define "Adherence counselling provided C.DE123 Observation":
 /* End of Adherence counselling provided C.DE123 */
 
 /*
-@dataElement: HIV.C.DE124 - Date/time of follow-up appointment C.DE124
+@dataElement: HIV.C.DE124 - Date/time of follow-up appointment
 @activity: HIV.C24 Schedule follow-up
 @description: Date the client is to return for monitoring, re-supply, or any other reason
 */
@@ -2233,7 +2233,7 @@ define "Date/time of follow-up appointment C.DE124 Value":
 /* End of Date/time of follow-up appointment C.DE124 */
 
 /*
-@dataElement: HIV.C.DE125 - Type of follow-up appointment C.DE125
+@dataElement: HIV.C.DE125 - Type of follow-up appointment
 @activity: HIV.C24 Schedule follow-up
 @description: Type of follow-up appointment for testing services
 */
@@ -2247,7 +2247,7 @@ define "Type of follow-up appointment C.DE125 Observation":
 /* End of Type of follow-up appointment C.DE125 */
 
 /*
-@dataElement: HIV.C.DE126 - Retesting for HIV C.DE126
+@dataElement: HIV.C.DE126 - Retesting for HIV
 @activity: HIV.C24 Schedule follow-up
 @description: Retesting follow-up appointment
 */
@@ -2283,7 +2283,7 @@ define "Follow-up appointment for PrEP Observation":
 /* End of Follow-up appointment for PrEP */
 
 /*
-@dataElement: HIV.C.DE128 - Other C.DE128
+@dataElement: HIV.C.DE128 - Other
 @activity: HIV.C24 Schedule follow-up
 @description: Other reason for the follow-up appointment
 */
@@ -2301,7 +2301,7 @@ define "Other C.DE128 Observation":
 /* End of Other C.DE128 */
 
 /*
-@dataElement: HIV.C.DE131 - Prevention services offered and referrals C.DE131
+@dataElement: HIV.C.DE131 - Prevention services offered and referrals
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer to prevention services
 */
@@ -2351,7 +2351,7 @@ define "Voluntary medical male circumcision VMMC referral Observation":
 /* End of Voluntary medical male circumcision VMMC referral */
 
 /*
-@dataElement: HIV.C.DE134 - Harm reduction for people who inject drugs C.DE134
+@dataElement: HIV.C.DE134 - Harm reduction for people who inject drugs
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer to harm reduction for people who inject drugs (needle and syringe programmes, opioid substitution therapy, other drug-dependence treatment and opioid overdose prevention and management) services
 */
@@ -2369,7 +2369,7 @@ define "Harm reduction for people who inject drugs C.DE134 Observation":
 /* End of Harm reduction for people who inject drugs C.DE134 */
 
 /*
-@dataElement: HIV.C.DE135 - Behavioural interventions to support risk reduction C.DE135
+@dataElement: HIV.C.DE135 - Behavioural interventions to support risk reduction
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer to services for behavioural interventions to support risk reduction, particularly for people with HIV and members of key populations
 */
@@ -2387,7 +2387,7 @@ define "Behavioural interventions to support risk reduction C.DE135 Observation"
 /* End of Behavioural interventions to support risk reduction C.DE135 */
 
 /*
-@dataElement: HIV.C.DE149 - Sexual and reproductive health integrated services C.DE149
+@dataElement: HIV.C.DE149 - Sexual and reproductive health integrated services
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer to sexual and reproductive health services
 */
@@ -2401,7 +2401,7 @@ define "Sexual and reproductive health integrated services C.DE149 Observation":
 /* End of Sexual and reproductive health integrated services C.DE149 */
 
 /*
-@dataElement: HIV.C.DE150 - Contraception and family planning C.DE150
+@dataElement: HIV.C.DE150 - Contraception and family planning
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer contraception and family planning services
 */
@@ -2419,7 +2419,7 @@ define "Contraception and family planning C.DE150 Observation":
 /* End of Contraception and family planning C.DE150 */
 
 /*
-@dataElement: HIV.C.DE151 - Check pregnancy status C.DE151
+@dataElement: HIV.C.DE151 - Check pregnancy status
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Check woman's pregnancy status
 */
@@ -2473,7 +2473,7 @@ define "Cervical cancer screening and treatment Observation":
 /* End of Cervical cancer screening and treatment */
 
 /*
-@dataElement: HIV.C.DE154 - Anal cancer screening for men who have sex with men C.DE154
+@dataElement: HIV.C.DE154 - Anal cancer screening for men who have sex with men
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer anal cancer screening (for men who have sex with men) services
 */
@@ -2491,7 +2491,7 @@ define "Anal cancer screening for men who have sex with men C.DE154 Observation"
 /* End of Anal cancer screening for men who have sex with men C.DE154 */
 
 /*
-@dataElement: HIV.C.DE155 - STI testing and treatment C.DE155
+@dataElement: HIV.C.DE155 - STI testing and treatment
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer STI testing and treatment services
 */
@@ -2509,7 +2509,7 @@ define "STI testing and treatment C.DE155 Observation":
 /* End of STI testing and treatment C.DE155 */
 
 /*
-@dataElement: HIV.C.DE156 - HIV testing for partners and biological children C.DE156
+@dataElement: HIV.C.DE156 - HIV testing for partners and biological children
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer testing for all partners and biological children of positive cases (includes partner services and index case testing), as well as partners and social contacts of people from key populations, where appropriate
 */
@@ -2527,7 +2527,7 @@ define "HIV testing for partners and biological children C.DE156 Observation":
 /* End of HIV testing for partners and biological children C.DE156 */
 
 /*
-@dataElement: HIV.C.DE157 - Offer other clinical services C.DE157
+@dataElement: HIV.C.DE157 - Offer other clinical services
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Other clinical services offered or referrals given to the client
 */
@@ -2541,7 +2541,7 @@ define "Offer other clinical services C.DE157 Observation":
 /* End of Offer other clinical services C.DE157 */
 
 /*
-@dataElement: HIV.C.DE158 - Assessment and provision of vaccinations C.DE158
+@dataElement: HIV.C.DE158 - Assessment and provision of vaccinations
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Assessment and provision of vaccinations, such as for people from key populations, pregnant women and infants; and, where appropriate, tetanus vaccination for adolescent boys and men receiving VMMC
 */
@@ -2577,7 +2577,7 @@ define "Hepatitis B virus HBV and hepatitis C virus HCV testing and treatment Ob
 /* End of Hepatitis B virus HBV and hepatitis C virus HCV testing and treatment */
 
 /*
-@dataElement: HIV.C.DE160 - Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia C.DE160
+@dataElement: HIV.C.DE160 - Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia
 */
@@ -2595,7 +2595,7 @@ define "Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumoni
 /* End of Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia C.DE160 */
 
 /*
-@dataElement: HIV.C.DE161 - Intensified TB case finding and linkage to TB treatment C.DE161
+@dataElement: HIV.C.DE161 - Intensified TB case finding and linkage to TB treatment
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for TB case finding and linkage to TB treatment
 */
@@ -2613,7 +2613,7 @@ define "Intensified TB case finding and linkage to TB treatment C.DE161 Observat
 /* End of Intensified TB case finding and linkage to TB treatment C.DE161 */
 
 /*
-@dataElement: HIV.C.DE162 - Provision of isoniazid preventive therapy if person does not have TB C.DE162
+@dataElement: HIV.C.DE162 - Provision of isoniazid preventive therapy if person does not have TB
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for provision of isoniazid preventive therapy if person does not have TB
 */
@@ -2631,7 +2631,7 @@ define "Provision of isoniazid preventive therapy if person does not have TB C.D
 /* End of Provision of isoniazid preventive therapy if person does not have TB C.DE162 */
 
 /*
-@dataElement: HIV.C.DE163 - Malaria prevention such as bed nets and prophylaxis, depending on epidemiology C.DE163
+@dataElement: HIV.C.DE163 - Malaria prevention such as bed nets and prophylaxis, depending on epidemiology
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for malaria prevention (such as bed nets and prophylaxis), depending on epidemiology
 */
@@ -2649,7 +2649,7 @@ define "Malaria prevention such as bed nets and prophylaxis, depending on epidem
 /* End of Malaria prevention such as bed nets and prophylaxis, depending on epidemiology C.DE163 */
 
 /*
-@dataElement: HIV.C.DE164 - Other support services C.DE164
+@dataElement: HIV.C.DE164 - Other support services
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for other support services
 */
@@ -2663,7 +2663,7 @@ define "Other support services C.DE164 Observation":
 /* End of Other support services C.DE164 */
 
 /*
-@dataElement: HIV.C.DE165 - Mental health services C.DE165
+@dataElement: HIV.C.DE165 - Mental health services
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for mental health services
 */
@@ -2681,7 +2681,7 @@ define "Mental health services C.DE165 Observation":
 /* End of Mental health services C.DE165 */
 
 /*
-@dataElement: HIV.C.DE166 - Psychosocial counselling, support and treatment adherence counselling C.DE166
+@dataElement: HIV.C.DE166 - Psychosocial counselling, support and treatment adherence counselling
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for psychosocial counselling, support and treatment adherence counselling
 */
@@ -2699,7 +2699,7 @@ define "Psychosocial counselling, support and treatment adherence counselling C.
 /* End of Psychosocial counselling, support and treatment adherence counselling C.DE166 */
 
 /*
-@dataElement: HIV.C.DE167 - Support for disclosure and partner services C.DE167
+@dataElement: HIV.C.DE167 - Support for disclosure and partner services
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for support for disclosure and partner services
 */
@@ -2717,7 +2717,7 @@ define "Support for disclosure and partner services C.DE167 Observation":
 /* End of Support for disclosure and partner services C.DE167 */
 
 /*
-@dataElement: HIV.C.DE168 - Legal and social services C.DE168
+@dataElement: HIV.C.DE168 - Legal and social services
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for legal and social services
 */
@@ -2735,7 +2735,7 @@ define "Legal and social services C.DE168 Observation":
 /* End of Legal and social services C.DE168 */
 
 /*
-@dataElement: HIV.C.DE169 - Services for responding to violence against women C.DE169
+@dataElement: HIV.C.DE169 - Services for responding to violence against women
 @activity: HIV.C10 Counsel on risk and prevention
 @description: Offer or refer for services for responding to violence against women, including first-line support and psychosocial support, post-rape care and other support services including shelters, legal services and women and child protection services
 */
@@ -2753,7 +2753,7 @@ define "Services for responding to violence against women C.DE169 Observation":
 /* End of Services for responding to violence against women C.DE169 */
 
 /*
-@dataElement: HIV.D.DE1 - Reason for visit D.DE1
+@dataElement: HIV.D.DE1 - Reason for visit
 @activity: HIV.D1 Determine reason for visit
 @description: Whether visit was scheduled or unscheduled, clinical only, or for ARV drug pick-up
 */
@@ -2785,7 +2785,7 @@ define "First clinical visit Observation":
 /* End of First clinical visit */
 
 /*
-@dataElement: HIV.D.DE3 - Clinical visit D.DE3
+@dataElement: HIV.D.DE3 - Clinical visit
 @activity: HIV.D1 Determine reason for visit
 @description: Appointment for clinical care by a provider
 */
@@ -2857,7 +2857,7 @@ define "Issues and concerns Observation":
 /* End of Issues and concerns */
 
 /*
-@dataElement: HIV.D.DE7 - Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE7
+@dataElement: HIV.D.DE7 - Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer
 @activity: HIV.D1 Determine reason for visit
 @description: Appointment for a post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer
 */
@@ -2991,7 +2991,7 @@ define "Unable to walk unaided Observation":
 /* End of Unable to walk unaided */
 
 /*
-@dataElement: HIV.D.DE22 - Lethargy D.DE22
+@dataElement: HIV.D.DE22 - Lethargy
 @activity: HIV.D3 Check for signs of serious illness
 @description: Client is exhibiting lethargy as a sign of serious illness
 */
@@ -3099,7 +3099,7 @@ define "Repeated vomiting Observation":
 /* End of Repeated vomiting */
 
 /*
-@dataElement: HIV.D.DE28 - Headache D.DE28
+@dataElement: HIV.D.DE28 - Headache
 @activity: HIV.D3 Check for signs of serious illness
 @description: Client is exhibiting a headache
 */
@@ -3135,7 +3135,7 @@ define "Other sign of serious illness Observation":
 /* End of Other sign of serious illness */
 
 /*
-@dataElement: HIV.D.DE37 - Serodiscordant partner D.DE37
+@dataElement: HIV.D.DE37 - Serodiscordant partner
 @activity: HIV.D8 Capture or update client history
 @description: Client's HIV status is different from a current partner's HIV status
 */
@@ -3491,7 +3491,7 @@ define "D4T Observation":
 /* End of D4T */
 
 /*
-@dataElement: HIV.D.DE135 - TDF D.DE135
+@dataElement: HIV.D.DE135 - TDF
 @activity: HIV.D8 Capture or update client history
 @description: Treated with tenofovir (TDF)
 */
@@ -3581,7 +3581,7 @@ define "RIL Observation":
 /* End of RIL */
 
 /*
-@dataElement: HIV.D.DE140 - ATV/r D.DE140
+@dataElement: HIV.D.DE140 - ATV/r
 @activity: HIV.D8 Capture or update client history
 @description: Treated with atazanavir/ritonavir (ATV/r)
 */
@@ -3599,7 +3599,7 @@ define "ATV/r D.DE140 Observation":
 /* End of ATV/r D.DE140 */
 
 /*
-@dataElement: HIV.D.DE141 - LPV/r D.DE141
+@dataElement: HIV.D.DE141 - LPV/r
 @activity: HIV.D8 Capture or update client history
 @description: Treated with lopinavir/ritonavir (LPV/r)
 */
@@ -3617,7 +3617,7 @@ define "LPV/r D.DE141 Observation":
 /* End of LPV/r D.DE141 */
 
 /*
-@dataElement: HIV.D.DE142 - DRV/r D.DE142
+@dataElement: HIV.D.DE142 - DRV/r
 @activity: HIV.D8 Capture or update client history
 @description: Treated with darunavir/ritonavir (DRV/r)
 */
@@ -3653,7 +3653,7 @@ define "RTV Observation":
 /* End of RTV */
 
 /*
-@dataElement: HIV.D.DE144 - DTG D.DE144
+@dataElement: HIV.D.DE144 - DTG
 @activity: HIV.D8 Capture or update client history
 @description: Treated with dolutegravir (DTG)
 */
@@ -3671,7 +3671,7 @@ define "DTG D.DE144 Observation":
 /* End of DTG D.DE144 */
 
 /*
-@dataElement: HIV.D.DE145 - RAL D.DE145
+@dataElement: HIV.D.DE145 - RAL
 @activity: HIV.D8 Capture or update client history
 @description: Treated with raltegravir (RAL)
 */
@@ -3689,7 +3689,7 @@ define "RAL D.DE145 Observation":
 /* End of RAL D.DE145 */
 
 /*
-@dataElement: HIV.D.DE152 - Prevention services offered and referrals D.DE152
+@dataElement: HIV.D.DE152 - Prevention services offered and referrals
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Offer or refer for prevention services
 */
@@ -3703,7 +3703,7 @@ define "Prevention services offered and referrals D.DE152 Observation":
 /* End of Prevention services offered and referrals D.DE152 */
 
 /*
-@dataElement: HIV.D.DE153 - Offer male and female condoms and condom-compatible lubricants D.DE153
+@dataElement: HIV.D.DE153 - Offer male and female condoms and condom-compatible lubricants
 @activity: HIV.D26 Offer sexual and reproductive health services
 @description: Offer male and female condoms and condom-compatible lubricants
 */
@@ -3721,7 +3721,7 @@ define "Offer male and female condoms and condom-compatible lubricants D.DE153 O
 /* End of Offer male and female condoms and condom-compatible lubricants D.DE153 */
 
 /*
-@dataElement: HIV.D.DE154 - Harm reduction for people who inject drugs D.DE154
+@dataElement: HIV.D.DE154 - Harm reduction for people who inject drugs
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Offer or refer people who inject drugs to harm reduction services (needle and syringe programmes, opioid substitution therapy, other drug-dependence treatment and opioid overdose prevention and management)
 */
@@ -3739,7 +3739,7 @@ define "Harm reduction for people who inject drugs D.DE154 Observation":
 /* End of Harm reduction for people who inject drugs D.DE154 */
 
 /*
-@dataElement: HIV.D.DE155 - Behavioural interventions to support risk reduction D.DE155
+@dataElement: HIV.D.DE155 - Behavioural interventions to support risk reduction
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Offer or refer to services for behavioural interventions to support risk reduction, particularly for people with HIV and members of key populations
 */
@@ -3757,7 +3757,7 @@ define "Behavioural interventions to support risk reduction D.DE155 Observation"
 /* End of Behavioural interventions to support risk reduction D.DE155 */
 
 /*
-@dataElement: HIV.D.DE156 - Sexual and reproductive health integrated services D.DE156
+@dataElement: HIV.D.DE156 - Sexual and reproductive health integrated services
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Offer or refer to sexual and reproductive health services
 */
@@ -3771,7 +3771,7 @@ define "Sexual and reproductive health integrated services D.DE156 Observation":
 /* End of Sexual and reproductive health integrated services D.DE156 */
 
 /*
-@dataElement: HIV.D.DE157 - Contraception and family planning D.DE157
+@dataElement: HIV.D.DE157 - Contraception and family planning
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Offer contraception and family planning services
 */
@@ -3789,7 +3789,7 @@ define "Contraception and family planning D.DE157 Observation":
 /* End of Contraception and family planning D.DE157 */
 
 /*
-@dataElement: HIV.D.DE158 - Check pregnancy status D.DE158
+@dataElement: HIV.D.DE158 - Check pregnancy status
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Check woman's pregnancy status
 */
@@ -3825,7 +3825,7 @@ define "Prevention of mother-to-child transmission Observation":
 /* End of Prevention of mother-to-child transmission */
 
 /*
-@dataElement: HIV.D.DE160 - STI testing and treatment D.DE160
+@dataElement: HIV.D.DE160 - STI testing and treatment
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Offer STI testing and treatment services
 */
@@ -3843,7 +3843,7 @@ define "STI testing and treatment D.DE160 Observation":
 /* End of STI testing and treatment D.DE160 */
 
 /*
-@dataElement: HIV.D.DE186 - HIV clinical stage D.DE186
+@dataElement: HIV.D.DE186 - HIV clinical stage
 @activity: HIV.D8 Capture or update client history
 @description: WHO clinical stage of client based on signs and symptoms. WHO clinical staging is a way to categorize HIV disease severity based on new or recurrent clinical events. There are 4 WHO clinical stages that range from mild symptoms (WHO clinical stage 1) to severe symptoms (WHO clinical stage 4).
 */
@@ -4012,7 +4012,7 @@ define "Virological failure Observation":
 /* End of Virological failure */
 
 /*
-@dataElement: HIV.D.DE289 - WHO HIV clinical stage condition or symptom D.DE289
+@dataElement: HIV.D.DE289 - WHO HIV clinical stage condition or symptom
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: New or recurrent clinical events used to categorize HIV disease severity based at baseline and follow up
 */
@@ -4422,7 +4422,7 @@ define "Oral hairy leukoplakia Observation":
 /* End of Oral hairy leukoplakia */
 
 /*
-@dataElement: HIV.D.DE312 - Pulmonary TB D.DE312
+@dataElement: HIV.D.DE312 - Pulmonary TB
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: Client's symptoms include pulmonary TB
 */
@@ -4440,7 +4440,7 @@ define "Pulmonary TB D.DE312 Observation":
 /* End of Pulmonary TB D.DE312 */
 
 /*
-@dataElement: HIV.D.DE313 - Lymph node TB D.DE313
+@dataElement: HIV.D.DE313 - Lymph node TB
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: Client's symptoms include lymph node TB
 */
@@ -4890,7 +4890,7 @@ define "Oesophageal candidiasis or candidiasis of trachea, bronchi or lungs Obse
 /* End of Oesophageal candidiasis or candidiasis of trachea, bronchi or lungs */
 
 /*
-@dataElement: HIV.D.DE338 - Extrapulmonary TB D.DE338
+@dataElement: HIV.D.DE338 - Extrapulmonary TB
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: Client's symptoms include extrapulmonary tuberculosis
 */
@@ -5250,7 +5250,7 @@ define "Neutropenia Observation":
 /* End of Neutropenia */
 
 /*
-@dataElement: HIV.D.DE364 - CD4 count D.DE364
+@dataElement: HIV.D.DE364 - CD4 count
 @activity: HIV.D20 Diagnostics
 @description: CD4 cell count in cells/mm^3
 */
@@ -5584,7 +5584,7 @@ define "Suspicion of treatment failure or interruption Observation":
 /* End of Suspicion of treatment failure or interruption */
 
 /*
-@dataElement: HIV.D.DE465 - Adherence counselling provided D.DE465
+@dataElement: HIV.D.DE465 - Adherence counselling provided
 @activity: HIV.D24 Counsel
 @description: Counselling was carried out during visit
 */
@@ -5626,7 +5626,7 @@ define "Syphilis counselling and treatment Observation":
 /* End of Syphilis counselling and treatment */
 
 /*
-@dataElement: HIV.D.DE519 - Other support services D.DE519
+@dataElement: HIV.D.DE519 - Other support services
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for other support services
 */
@@ -5640,7 +5640,7 @@ define "Other support services D.DE519 Observation":
 /* End of Other support services D.DE519 */
 
 /*
-@dataElement: HIV.D.DE520 - Mental health services D.DE520
+@dataElement: HIV.D.DE520 - Mental health services
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for mental health services
 */
@@ -5658,7 +5658,7 @@ define "Mental health services D.DE520 Observation":
 /* End of Mental health services D.DE520 */
 
 /*
-@dataElement: HIV.D.DE521 - Psychosocial counselling, support and treatment adherence counselling D.DE521
+@dataElement: HIV.D.DE521 - Psychosocial counselling, support and treatment adherence counselling
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for psychosocial counselling, support and treatment adherence counselling
 */
@@ -5676,7 +5676,7 @@ define "Psychosocial counselling, support and treatment adherence counselling D.
 /* End of Psychosocial counselling, support and treatment adherence counselling D.DE521 */
 
 /*
-@dataElement: HIV.D.DE522 - Legal and social services D.DE522
+@dataElement: HIV.D.DE522 - Legal and social services
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for legal and social services
 */
@@ -5694,7 +5694,7 @@ define "Legal and social services D.DE522 Observation":
 /* End of Legal and social services D.DE522 */
 
 /*
-@dataElement: HIV.D.DE523 - Services for responding to violence against women D.DE523
+@dataElement: HIV.D.DE523 - Services for responding to violence against women
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for services for responding to violence against women, including first-line support and psychosocial support, post-rape care and other support services including shelters, legal services and women and child protection services
 */
@@ -5712,7 +5712,7 @@ define "Services for responding to violence against women D.DE523 Observation":
 /* End of Services for responding to violence against women D.DE523 */
 
 /*
-@dataElement: HIV.D.DE524 - Date/time of follow-up appointment D.DE524
+@dataElement: HIV.D.DE524 - Date/time of follow-up appointment
 @activity: HIV.D29 Schedule follow-up
 @description: Date the client is to return for monitoring, re-supply or any other reason
 */
@@ -5727,7 +5727,7 @@ define "Date/time of follow-up appointment D.DE524 Value":
 /* End of Date/time of follow-up appointment D.DE524 */
 
 /*
-@dataElement: HIV.D.DE525 - Type of follow-up appointment D.DE525
+@dataElement: HIV.D.DE525 - Type of follow-up appointment
 @activity: HIV.D29 Schedule follow-up
 @description: Whether the visit will be clinical only, ARV drug pick-up or other. Client may have multiple follow-ups scheduled.
 */
@@ -5741,7 +5741,7 @@ define "Type of follow-up appointment D.DE525 Observation":
 /* End of Type of follow-up appointment D.DE525 */
 
 /*
-@dataElement: HIV.D.DE526 - Clinical visit D.DE526
+@dataElement: HIV.D.DE526 - Clinical visit
 @activity: HIV.D29 Schedule follow-up
 @description: Appointment for clinical care by a provider
 */
@@ -5777,7 +5777,7 @@ define "Antiretroviral drug pick up Observation":
 /* End of Antiretroviral drug pick up */
 
 /*
-@dataElement: HIV.D.DE528 - Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE528
+@dataElement: HIV.D.DE528 - Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer
 @activity: HIV.D29 Schedule follow-up
 @description: Appointment for a post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer
 */
@@ -5795,7 +5795,7 @@ define "Post-treatment follow-up visit for cervical precancer lesions or invasiv
 /* End of Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE528 */
 
 /*
-@dataElement: HIV.D.DE529 - Other D.DE529
+@dataElement: HIV.D.DE529 - Other
 @activity: HIV.D29 Schedule follow-up
 @description: Other reason for the follow-up appointment
 */
@@ -6094,7 +6094,7 @@ define "Antivirals Observation":
 /* End of Antivirals */
 
 /*
-@dataElement: HIV.D.DE552 - Buprenorphine D.DE552
+@dataElement: HIV.D.DE552 - Buprenorphine
 @activity: HIV.D8 Capture or update client history
 @description: Opioid substitution to treat opioid dependence
 */
@@ -6148,7 +6148,7 @@ define "Hormonal family planning method Observation":
 /* End of Hormonal family planning method */
 
 /*
-@dataElement: HIV.D.DE555 - Methadone D.DE555
+@dataElement: HIV.D.DE555 - Methadone
 @activity: HIV.D8 Capture or update client history
 @description: Opioid substitution to treat opioid dependence
 */
@@ -6288,7 +6288,7 @@ define "Cervical cytology Observation":
 /* End of Cervical cytology */
 
 /*
-@dataElement: HIV.D.DE662 - Other D.DE662
+@dataElement: HIV.D.DE662 - Other
 @activity: HIV.D28 Offer other services
 @description: Screened for cervical cancer using other method
 */
@@ -6321,7 +6321,7 @@ define "Cervical cancer screening interval amongst WLHIV Value":
 /* End of Cervical cancer screening interval amongst WLHIV */
 
 /*
-@dataElement: HIV.D.DE753 - Offer other clinical services D.DE753
+@dataElement: HIV.D.DE753 - Offer other clinical services
 @activity: HIV.D28 Offer other services
 @description: Other clinical services offered or referrals given to the client
 */
@@ -6335,7 +6335,7 @@ define "Offer other clinical services D.DE753 Observation":
 /* End of Offer other clinical services D.DE753 */
 
 /*
-@dataElement: HIV.D.DE754 - Assessment and provision of vaccinations D.DE754
+@dataElement: HIV.D.DE754 - Assessment and provision of vaccinations
 @activity: HIV.D28 Offer other services
 @description: Assessment and provision of vaccinations, such as for people from Key population member type, pregnant women and infants; and, where appropriate, tetanus vaccination for adolescent boys and men receiving VMMC
 */
@@ -6371,7 +6371,7 @@ define "Hepatitis B HBV and hepatitis C virus HCV testing and treatment Observat
 /* End of Hepatitis B HBV and hepatitis C virus HCV testing and treatment */
 
 /*
-@dataElement: HIV.D.DE756 - Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia D.DE756
+@dataElement: HIV.D.DE756 - Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia
 */
@@ -6389,7 +6389,7 @@ define "Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumoni
 /* End of Co-trimoxazole chemoprophylaxis to prevent pneumocystis carinii pneumonia D.DE756 */
 
 /*
-@dataElement: HIV.D.DE757 - Intensified TB case finding and linkage to TB treatment D.DE757
+@dataElement: HIV.D.DE757 - Intensified TB case finding and linkage to TB treatment
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for intensified TB case finding and linkage to TB treatment
 */
@@ -6407,7 +6407,7 @@ define "Intensified TB case finding and linkage to TB treatment D.DE757 Observat
 /* End of Intensified TB case finding and linkage to TB treatment D.DE757 */
 
 /*
-@dataElement: HIV.D.DE758 - Provision of isoniazid preventive therapy if person does not have TB D.DE758
+@dataElement: HIV.D.DE758 - Provision of isoniazid preventive therapy if person does not have TB
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for provision of isoniazid preventive therapy if person does not have TB
 */
@@ -6425,7 +6425,7 @@ define "Provision of isoniazid preventive therapy if person does not have TB D.D
 /* End of Provision of isoniazid preventive therapy if person does not have TB D.DE758 */
 
 /*
-@dataElement: HIV.D.DE759 - Malaria prevention such as bed nets and prophylaxis, depending on epidemiology D.DE759
+@dataElement: HIV.D.DE759 - Malaria prevention such as bed nets and prophylaxis, depending on epidemiology
 @activity: HIV.D28 Offer other services
 @description: Offer or refer for malaria prevention (such as bed nets and prophylaxis), depending on epidemiology
 */
@@ -6601,7 +6601,7 @@ define "Terfenadine Observation":
 /* End of Terfenadine */
 
 /*
-@dataElement: HIV.D.DE912 - TDF D.DE912
+@dataElement: HIV.D.DE912 - TDF
 @activity: HIV.D21 Determine regimen and treatment options
 @description: TDF currently being taken by, or considered for, client
 */
@@ -6655,7 +6655,7 @@ define "Ombitasvir + paritaprevir/ritonavir + dasabuvir Observation":
 /* End of Ombitasvir + paritaprevir/ritonavir + dasabuvir */
 
 /*
-@dataElement: HIV.D.DE915 - Methadone D.DE915
+@dataElement: HIV.D.DE915 - Methadone
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Methadone currently being taken by, or considered for, client
 */
@@ -6673,7 +6673,7 @@ define "Methadone D.DE915 Observation":
 /* End of Methadone D.DE915 */
 
 /*
-@dataElement: HIV.D.DE916 - Buprenorphine D.DE916
+@dataElement: HIV.D.DE916 - Buprenorphine
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Buprenorphine currently being taken by, or considered for, client
 */
@@ -6943,7 +6943,7 @@ define "Peginterferon alfa-2a Observation":
 /* End of Peginterferon alfa-2a */
 
 /*
-@dataElement: HIV.D.DE931 - Other D.DE931
+@dataElement: HIV.D.DE931 - Other
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Other medication currently being taken by, or considered for, client
 */
@@ -6975,7 +6975,7 @@ define "Medication change recommended Observation":
 /* End of Medication change recommended */
 
 /*
-@dataElement: HIV.D.DE934 - WHO HIV clinical stage condition or symptom D.DE934
+@dataElement: HIV.D.DE934 - WHO HIV clinical stage condition or symptom
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: New or recurrent clinical events used to categorize HIV disease severity based at baseline and follow up
 */
@@ -6989,7 +6989,7 @@ define "WHO HIV clinical stage condition or symptom D.DE934 Observation":
 /* End of WHO HIV clinical stage condition or symptom D.DE934 */
 
 /*
-@dataElement: HIV.D.DE935 - Pulmonary TB D.DE935
+@dataElement: HIV.D.DE935 - Pulmonary TB
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: Client's symptoms include pulmonary TB
 */
@@ -7007,7 +7007,7 @@ define "Pulmonary TB D.DE935 Observation":
 /* End of Pulmonary TB D.DE935 */
 
 /*
-@dataElement: HIV.D.DE936 - Lymph node TB D.DE936
+@dataElement: HIV.D.DE936 - Lymph node TB
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: Client's symptoms include lymph node TB
 */
@@ -7025,7 +7025,7 @@ define "Lymph node TB D.DE936 Observation":
 /* End of Lymph node TB D.DE936 */
 
 /*
-@dataElement: HIV.D.DE937 - Extrapulmonary TB D.DE937
+@dataElement: HIV.D.DE937 - Extrapulmonary TB
 @activity: HIV.D15 Determine clinical stage of HIV
 @description: Client's symptoms include extrapulmonary tuberculosis (TB)
 */
@@ -7485,7 +7485,7 @@ define "Haemoptysis Observation":
 /* End of Haemoptysis */
 
 /*
-@dataElement: HIV.D.DE983 - Lethargy D.DE983
+@dataElement: HIV.D.DE983 - Lethargy
 @activity: HIV.D4 Screen for TB
 @description: Client reports lethargy
 */
@@ -7564,7 +7564,7 @@ define "C reactive protein test result Value":
 /* End of C reactive protein test result */
 
 /*
-@dataElement: HIV.E.DE113 - Key population member* E.DE113
+@dataElement: HIV.E.DE113 - Key population member*
 @activity: HIV.E1 Capture or update mother's history
 @description: Mother is a member of a key population which has an increased risk of HIV
 */
@@ -7578,7 +7578,7 @@ define "Key population member* E.DE113 Observation":
 /* End of Key population member* E.DE113 */
 
 /*
-@dataElement: HIV.E.DE155 - Signs of substantial risk of HIV infection E.DE155
+@dataElement: HIV.E.DE155 - Signs of substantial risk of HIV infection
 @activity: HIV.E1 Capture or update mother's history
 @description: Signs the client is at a substantial risk of HIV infection
 */
@@ -7592,7 +7592,7 @@ define "Signs of substantial risk of HIV infection E.DE155 Observation":
 /* End of Signs of substantial risk of HIV infection E.DE155 */
 
 /*
-@dataElement: HIV.E.DE156 - No condom use during sex with more than one partner in the past 6 months E.DE156
+@dataElement: HIV.E.DE156 - No condom use during sex with more than one partner in the past 6 months
 @activity: HIV.E1 Capture or update mother's history
 @description: Recent vaginal or anal sexual intercourse without a condom with more than one partner
 */
@@ -7610,7 +7610,7 @@ define "No condom use during sex with more than one partner in the past 6 months
 /* End of No condom use during sex with more than one partner in the past 6 months E.DE156 */
 
 /*
-@dataElement: HIV.E.DE157 - STI in the past 6 months E.DE157
+@dataElement: HIV.E.DE157 - STI in the past 6 months
 @activity: HIV.E1 Capture or update mother's history
 @description: A recent history (in the last 6 months) of a sexually transmitted infection (STI) by laboratory testing or self-report of syndromic STI treatment
 */
@@ -7628,7 +7628,7 @@ define "STI in the past 6 months E.DE157 Observation":
 /* End of STI in the past 6 months E.DE157 */
 
 /*
-@dataElement: HIV.E.DE158 - A sexual partner in the past 6 months had one or more HIV risk factors E.DE158
+@dataElement: HIV.E.DE158 - A sexual partner in the past 6 months had one or more HIV risk factors
 @activity: HIV.E1 Capture or update mother's history
 @description: A recent sex partner of the client had HIV risk factors
 */
@@ -7646,7 +7646,7 @@ define "A sexual partner in the past 6 months had one or more HIV risk factors E
 /* End of A sexual partner in the past 6 months had one or more HIV risk factors E.DE158 */
 
 /*
-@dataElement: HIV.E.DE159 - PrEP requested by client E.DE159
+@dataElement: HIV.E.DE159 - PrEP requested by client
 @activity: HIV.E1 Capture or update mother's history
 @description: Client is requesting PrEP, reflecting a decision-making process has already taken place and suggesting of substantial risk of HIV
 */
@@ -7664,7 +7664,7 @@ define "PrEP requested by client E.DE159 Observation":
 /* End of PrEP requested by client E.DE159 */
 
 /*
-@dataElement: HIV.E.DE160 - Serodiscordant partner E.DE160
+@dataElement: HIV.E.DE160 - Serodiscordant partner
 @activity: HIV.E1 Capture or update mother's history
 @description: Mother's HIV status is different from a current partner's HIV status
 */
@@ -7792,7 +7792,7 @@ define "EID test number 1 test result Observation":
 /* End of EID test number 1 test result */
 
 /*
-@dataElement: HIV.E.DE187 - Positive E.DE187
+@dataElement: HIV.E.DE187 - Positive
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Positive HIV test result from the nucleic acid test
 */
@@ -7810,7 +7810,7 @@ define "Positive E.DE187 Observation":
 /* End of Positive E.DE187 */
 
 /*
-@dataElement: HIV.E.DE188 - Negative E.DE188
+@dataElement: HIV.E.DE188 - Negative
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Negative HIV test result from the nucleic acid test
 */
@@ -7828,7 +7828,7 @@ define "Negative E.DE188 Observation":
 /* End of Negative E.DE188 */
 
 /*
-@dataElement: HIV.E.DE189 - Indeterminate E.DE189
+@dataElement: HIV.E.DE189 - Indeterminate
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Indeterminate HIV test result from the nucleic acid test
 */
@@ -7860,7 +7860,7 @@ define "EID test number 2 test result Observation":
 /* End of EID test number 2 test result */
 
 /*
-@dataElement: HIV.E.DE191 - Positive E.DE191
+@dataElement: HIV.E.DE191 - Positive
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Positive HIV test result from the nucleic acid test
 */
@@ -7878,7 +7878,7 @@ define "Positive E.DE191 Observation":
 /* End of Positive E.DE191 */
 
 /*
-@dataElement: HIV.E.DE192 - Negative E.DE192
+@dataElement: HIV.E.DE192 - Negative
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Negative HIV test result from the nucleic acid test
 */
@@ -7896,7 +7896,7 @@ define "Negative E.DE192 Observation":
 /* End of Negative E.DE192 */
 
 /*
-@dataElement: HIV.E.DE193 - Indeterminate E.DE193
+@dataElement: HIV.E.DE193 - Indeterminate
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Indeterminate HIV test result from the nucleic acid test
 */
@@ -7914,7 +7914,7 @@ define "Indeterminate E.DE193 Observation":
 /* End of Indeterminate E.DE193 */
 
 /*
-@dataElement: HIV.E.DE194 - Assay number in testing strategy E.DE194
+@dataElement: HIV.E.DE194 - Assay number in testing strategy
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The number of the assay (test kit) in the HIV testing strategy
 */
@@ -7928,7 +7928,7 @@ define "Assay number in testing strategy E.DE194 Observation":
 /* End of Assay number in testing strategy E.DE194 */
 
 /*
-@dataElement: HIV.E.DE195 - Assay 0 E.DE195
+@dataElement: HIV.E.DE195 - Assay 0
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: A community outreach test-for-triage or self-test which is not included in the HIV testing strategy
 */
@@ -7946,7 +7946,7 @@ define "Assay 0 E.DE195 Observation":
 /* End of Assay 0 E.DE195 */
 
 /*
-@dataElement: HIV.E.DE196 - Assay 1 E.DE196
+@dataElement: HIV.E.DE196 - Assay 1
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The first test in the HIV testing strategy
 */
@@ -7964,7 +7964,7 @@ define "Assay 1 E.DE196 Observation":
 /* End of Assay 1 E.DE196 */
 
 /*
-@dataElement: HIV.E.DE197 - Assay 2 E.DE197
+@dataElement: HIV.E.DE197 - Assay 2
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The second test in the HIV testing strategy
 */
@@ -7982,7 +7982,7 @@ define "Assay 2 E.DE197 Observation":
 /* End of Assay 2 E.DE197 */
 
 /*
-@dataElement: HIV.E.DE198 - Assay 3 E.DE198
+@dataElement: HIV.E.DE198 - Assay 3
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The third test in the HIV testing strategy
 */
@@ -8000,7 +8000,7 @@ define "Assay 3 E.DE198 Observation":
 /* End of Assay 3 E.DE198 */
 
 /*
-@dataElement: HIV.E.DE199 - Assay 1 repeated E.DE199
+@dataElement: HIV.E.DE199 - Assay 1 repeated
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The first test in the HIV testing strategy
 */
@@ -8018,7 +8018,7 @@ define "Assay 1 repeated E.DE199 Observation":
 /* End of Assay 1 repeated E.DE199 */
 
 /*
-@dataElement: HIV.E.DE200 - Test result of HIV assay 1 E.DE200
+@dataElement: HIV.E.DE200 - Test result of HIV assay 1
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the first HIV assay in the testing strategy
 */
@@ -8032,7 +8032,7 @@ define "Test result of HIV assay 1 E.DE200 Observation":
 /* End of Test result of HIV assay 1 E.DE200 */
 
 /*
-@dataElement: HIV.E.DE201 - Reactive E.DE201
+@dataElement: HIV.E.DE201 - Reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -8050,7 +8050,7 @@ define "Reactive E.DE201 Observation":
 /* End of Reactive E.DE201 */
 
 /*
-@dataElement: HIV.E.DE202 - Non-reactive E.DE202
+@dataElement: HIV.E.DE202 - Non-reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -8068,7 +8068,7 @@ define "Non-reactive E.DE202 Observation":
 /* End of Non-reactive E.DE202 */
 
 /*
-@dataElement: HIV.E.DE203 - Invalid E.DE203
+@dataElement: HIV.E.DE203 - Invalid
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -8086,7 +8086,7 @@ define "Invalid E.DE203 Observation":
 /* End of Invalid E.DE203 */
 
 /*
-@dataElement: HIV.E.DE204 - Test result of HIV assay 2 E.DE204
+@dataElement: HIV.E.DE204 - Test result of HIV assay 2
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the second HIV assay in the testing strategy
 */
@@ -8100,7 +8100,7 @@ define "Test result of HIV assay 2 E.DE204 Observation":
 /* End of Test result of HIV assay 2 E.DE204 */
 
 /*
-@dataElement: HIV.E.DE205 - Reactive E.DE205
+@dataElement: HIV.E.DE205 - Reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -8118,7 +8118,7 @@ define "Reactive E.DE205 Observation":
 /* End of Reactive E.DE205 */
 
 /*
-@dataElement: HIV.E.DE206 - Non-reactive E.DE206
+@dataElement: HIV.E.DE206 - Non-reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -8136,7 +8136,7 @@ define "Non-reactive E.DE206 Observation":
 /* End of Non-reactive E.DE206 */
 
 /*
-@dataElement: HIV.E.DE207 - Invalid E.DE207
+@dataElement: HIV.E.DE207 - Invalid
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -8154,7 +8154,7 @@ define "Invalid E.DE207 Observation":
 /* End of Invalid E.DE207 */
 
 /*
-@dataElement: HIV.E.DE208 - Test result of HIV assay 3 E.DE208
+@dataElement: HIV.E.DE208 - Test result of HIV assay 3
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the third HIV assay in the testing strategy
 */
@@ -8168,7 +8168,7 @@ define "Test result of HIV assay 3 E.DE208 Observation":
 /* End of Test result of HIV assay 3 E.DE208 */
 
 /*
-@dataElement: HIV.E.DE209 - Reactive E.DE209
+@dataElement: HIV.E.DE209 - Reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -8186,7 +8186,7 @@ define "Reactive E.DE209 Observation":
 /* End of Reactive E.DE209 */
 
 /*
-@dataElement: HIV.E.DE210 - Non-reactive E.DE210
+@dataElement: HIV.E.DE210 - Non-reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -8204,7 +8204,7 @@ define "Non-reactive E.DE210 Observation":
 /* End of Non-reactive E.DE210 */
 
 /*
-@dataElement: HIV.E.DE211 - Invalid E.DE211
+@dataElement: HIV.E.DE211 - Invalid
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -8222,7 +8222,7 @@ define "Invalid E.DE211 Observation":
 /* End of Invalid E.DE211 */
 
 /*
-@dataElement: HIV.E.DE212 - Test result of HIV assay 1 repeated E.DE212
+@dataElement: HIV.E.DE212 - Test result of HIV assay 1 repeated
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the repeated first HIV assay in the testing strategy
 */
@@ -8236,7 +8236,7 @@ define "Test result of HIV assay 1 repeated E.DE212 Observation":
 /* End of Test result of HIV assay 1 repeated E.DE212 */
 
 /*
-@dataElement: HIV.E.DE213 - Reactive E.DE213
+@dataElement: HIV.E.DE213 - Reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was reactive
 */
@@ -8254,7 +8254,7 @@ define "Reactive E.DE213 Observation":
 /* End of Reactive E.DE213 */
 
 /*
-@dataElement: HIV.E.DE214 - Non-reactive E.DE214
+@dataElement: HIV.E.DE214 - Non-reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was non-reactive
 */
@@ -8272,7 +8272,7 @@ define "Non-reactive E.DE214 Observation":
 /* End of Non-reactive E.DE214 */
 
 /*
-@dataElement: HIV.E.DE215 - Invalid E.DE215
+@dataElement: HIV.E.DE215 - Invalid
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -8304,7 +8304,7 @@ define "Test result of syphilis assay 1 Observation":
 /* End of Test result of syphilis assay 1 */
 
 /*
-@dataElement: HIV.E.DE217 - Reactive E.DE217
+@dataElement: HIV.E.DE217 - Reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the first syphilis assay in the testing strategy was reactive
 */
@@ -8322,7 +8322,7 @@ define "Reactive E.DE217 Observation":
 /* End of Reactive E.DE217 */
 
 /*
-@dataElement: HIV.E.DE218 - Non-reactive E.DE218
+@dataElement: HIV.E.DE218 - Non-reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the first syphilis assay in the testing strategy was non-reactive
 */
@@ -8340,7 +8340,7 @@ define "Non-reactive E.DE218 Observation":
 /* End of Non-reactive E.DE218 */
 
 /*
-@dataElement: HIV.E.DE219 - Invalid E.DE219
+@dataElement: HIV.E.DE219 - Invalid
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the HIV assay in the testing strategy was invalid
 */
@@ -8372,7 +8372,7 @@ define "Test result of syphilis assay 1 repeated Observation":
 /* End of Test result of syphilis assay 1 repeated */
 
 /*
-@dataElement: HIV.E.DE221 - Reactive E.DE221
+@dataElement: HIV.E.DE221 - Reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the first syphilis assay repeated in the testing strategy was reactive
 */
@@ -8390,7 +8390,7 @@ define "Reactive E.DE221 Observation":
 /* End of Reactive E.DE221 */
 
 /*
-@dataElement: HIV.E.DE222 - Non-reactive E.DE222
+@dataElement: HIV.E.DE222 - Non-reactive
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the first syphilis assay repeated in the testing strategy was non-reactive
 */
@@ -8408,7 +8408,7 @@ define "Non-reactive E.DE222 Observation":
 /* End of Non-reactive E.DE222 */
 
 /*
-@dataElement: HIV.E.DE223 - Invalid E.DE223
+@dataElement: HIV.E.DE223 - Invalid
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the first syphilis assay repeated in the testing strategy was invalid
 */
@@ -8426,7 +8426,7 @@ define "Invalid E.DE223 Observation":
 /* End of Invalid E.DE223 */
 
 /*
-@dataElement: HIV.G.DE1 - CD4 count G.DE1
+@dataElement: HIV.G.DE1 - CD4 count
 @activity: HIV.D20 Diagnostics
 @description: CD4 cell count in cells/mm^3
 */
@@ -8491,7 +8491,7 @@ define "Newly diagnosed Observation":
 /* End of Newly diagnosed */
 
 /*
-@dataElement: HIV.H.DE37 - Negative H.DE37
+@dataElement: HIV.H.DE37 - Negative
 @activity: HIV.B6 Capture or update client history
 @description: The partner or contact of the index case is newly diagnosed is HIV-negative
 */
@@ -8509,7 +8509,7 @@ define "Negative H.DE37 Observation":
 /* End of Negative H.DE37 */
 
 /*
-@dataElement: HIV.SRV.DE5 - HIV clinical stage SRV.DE5
+@dataElement: HIV.SRV.DE5 - HIV clinical stage
 @activity: HIV.D8 Capture or update client history
 @description: WHO clinical stage of client based on signs and symptoms. WHO clinical staging is a way to categorize HIV disease severity based on new or recurrent clinical events. There are 4 WHO clinical stages that range from mild symptoms (WHO clinical stage 1) to severe symptoms (WHO clinical stage 4).
 */
@@ -8523,7 +8523,7 @@ define "HIV clinical stage SRV.DE5 Observation":
 /* End of HIV clinical stage SRV.DE5 */
 
 /*
-@dataElement: HIV.SRV.DE8 - CD4 count SRV.DE8
+@dataElement: HIV.SRV.DE8 - CD4 count
 @activity: HIV.D20 Diagnostics
 @description: CD4 cell count in cells/mm^3
 */
@@ -8538,7 +8538,7 @@ define "CD4 count SRV.DE8 Value":
 /* End of CD4 count SRV.DE8 */
 
 /*
-@dataElement: HIV.SRV.DE21 - Test result of HIV assay 1 SRV.DE21
+@dataElement: HIV.SRV.DE21 - Test result of HIV assay 1
 @activity: HIV.E4 Test mother for HIV using testing algorithm
 @description: The result of the first HIV assay in the testing strategy
 */
