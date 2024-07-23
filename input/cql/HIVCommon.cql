@@ -10,6 +10,8 @@ include HIVConceptsCustom called HCC
 
 parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
 parameter "Measurement Date" Date default @2020-01-01
+parameter "Testing Interval" System.Quantity default 3 months
+parameter "Intervention Interval" System.Quantity default 7 days
 
 context Patient
 
@@ -52,13 +54,15 @@ define "HIV test resulted":
 
 define "HIV Treatment Active":
 [MedicationStatement] MS
-    where MS.status = 'recorded'
+Sort by MS.effective
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."On ART - HIV.H.DE47")
+    
 
 
 define "HIV PREP Active":
 [MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
 
  define "Client is at elevated risk for HIV acquisition":
@@ -86,7 +90,7 @@ define "PEP Prescribed before start of Measurement Period and Completed":
         and MR.intent = 'order'
         and MR.medication ~ HC."PEP for HIV prevention"
         and MR.authoredOn before end of "Measurement Period"
-  where (MS.status = 'recorded'
+  where (MS.status = 'completed'
   and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
   )
 
@@ -98,7 +102,7 @@ define "PEP Prescribed during Measurement Period and Completed":
         and MR.medication ~ HC."PEP for HIV prevention"
         and MR.authoredOn after start of "Measurement Period"
         and MR.authoredOn before end of "Measurement Period"
-  where (MS.status = 'recorded'
+  where (MS.status = 'completed'
   and exists(MS.reasonCode C where C ~ HC."PrEP for HIV prevention")
   )
 
@@ -424,7 +428,7 @@ exists(
 
   define "PREP Product Oral":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and (MS.medication ~ HC."TDF + FTC - HIV.C.DE18" or
     MS.medication ~ HC."TDF - HIV.C.DE19" or
@@ -434,56 +438,56 @@ exists(
 
   define "PREP Product long-acting device":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and MS.medication ~ HC."Dapivirine vaginal ring DVR - HIV.C.DE22"
   )
 
   define "PREP Product long-acting injectable":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and MS.medication ~ HC."CAB-LA - HIV.C.DE23"
   )
   
   define "PREP first time":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and exists(MS.statusReason SR where SR ~ HC."First-time user - HIV.C.DE25")
   )
 
   define "PREP Continuing user":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and exists(MS.statusReason SR where SR ~ HC."Continuing user")
   )
   
   define "PREP Restarting":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and exists(MS.statusReason SR where SR ~ HC."Restarting following a period of not taking PrEP")
   )
 
   define "Daily_oral_PrEP":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and exists(MS.dosage.additionalInstruction AI where AI ~ HC."Daily oral PrEP")
   )
 
   define "Event_driven_PrEP":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and exists(MS.dosage.additionalInstruction AI where AI ~ HC."Event-driven PrEP 2+1+1") 
   )
 
   define "other_dosing_PrEP":
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."Currently on PrEP")
     and exists(MS.dosage.additionalInstruction AI where AI ~ HC."Other PrEP dosing type") 
   )
@@ -783,7 +787,7 @@ define "VMMC_adverse_event_Intraoperative":
       and AE.date = P.performed
   where AE.actuality = 'actual'
 
-  define "VMMC_adverse_event_Postoperative":
+define "VMMC_adverse_event_Postoperative":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
@@ -800,3 +804,100 @@ define "VMMC_adverse_event_Intraoperative":
         when exists(VMMC_adverse_event_Postoperative) then  HC."Postoperative"
         else null
     end
+
+
+  define "Partner or contact of an index case":
+    [Observation: HC."Referred through partner services"] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.code ~ HC."Partner or contact of an index case"
+  
+  define "Drug-injecting partner":
+    [Observation: HC."Type of contact or partner for partner services"] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.code ~ HC."Drug-injecting partner - HIV.B.DE10"
+  
+  define "Sexual partner":
+    [Observation: HC."Type of contact or partner for partner services"] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.code ~ HC."Sexual partner - HIV.B.DE11" 
+  
+
+  define "First HIV Treatment":
+    First("HIV Treatment Active")
+
+
+  define "Time to start ART":
+    case 
+        when difference in days between "First HIV Treatment".effective and "HIV Positive Condition".onset <= 7 then HC."Within 7 days of HIV diagnosis"
+        when difference in days between "First HIV Treatment".effective and "HIV Positive Condition".onset <= 30 then HC."Within 30 days of HIV diagnosis"
+        when difference in days between "First HIV Treatment".effective and "HIV Positive Condition".onset <= 90 then HC."Within 90 days of HIV diagnosis"
+    else null
+    end
+  
+  //HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
+
+  define "already known positive":
+    [Observation: HC."HIV status of partner or contact"] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.code ~ HC."Already knew positive"
+  
+  define "Newly diagnosed":
+    [Observation: HC."HIV status of partner or contact"] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.code ~ HC."Newly diagnosed"
+
+  define "Negative - HIV.H.DE37":
+    [Observation: HC."HIV status of partner or contact"] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC."social-history")
+    and O.code ~ HC."Negative - HIV.H.DE37"
+  
+  define "HIV status of partner or contact":
+    case 
+        when exists("already known positive") then HC."Already knew positive"
+        when exists("Newly diagnosed") then HC."Newly diagnosed"
+        when exists("Negative - HIV.H.DE37") then HC."Negative - HIV.H.DE37"
+        else null
+    end
+
+
+//need to define
+  define STI_testing:
+    [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HC."STI testing and treatment services"
+
+
+//(including PrEP, OAMT, NSP, STI services, VMMC) 
+  define "HIV prevention intervention":
+  List<String>{
+    if "HIV PREP Active" then 'PrEP' else null,
+    if OAMT_initiated then 'OAMT' else null,
+    if "Needle Syringe Dispensed" then 'NSP' else null,
+    if STI_testing then 'STI services' else null,
+    if VMMC_done then 'VMMC' else null
+  }
+
+define "Negative Tests within Measurement Period":
+HIC."HIV Negative Observation" O
+    with HIC."Client is at elevated risk for HIV acquisition" HIV
+    such that O.hasMember.references(HIV)
+    and O.issued after start of "Measurement Period"
+    and O.issued before end of "Measurement Period"
+Sort by O.issued
+
+define "First Negative Test within Measurement Period":
+( First("Negative Tests within Measurement Period"))
+
+define "Negative Tests after First Negative Test":
+HIC."HIV Negative Observation" O
+    with HIC."Client is at elevated risk for HIV acquisition" HIV
+    such that O.hasMember.references(HIV)
+    and O.issued after "First Negative Test within Measurement Period"
+    and O.issued before ("First Negative Test within Measurement Period" + "Testing Interval")
+Sort by O.issued

@@ -84,11 +84,11 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
+parameter "Intervention Interval" System.Quantity default 7 days
 
 context Patient
 /* Populations */
@@ -100,6 +100,52 @@ context Patient
 define "Initial Population":
   true
 
+
+define "Negative Tests within Measurement Period":
+HIC."HIV Negative Observation" O
+    with HIC."Client is at elevated risk for HIV acquisition" HIV
+    such that O.hasMember.references(HIV)
+    and O.issued after start of "Measurement Period"
+    and O.issued before end of "Measurement Period"
+Sort by O.issued
+
+define "First Negative Test within Measurement Period":
+( First("Negative Tests within Measurement Period"))
+
+define PReP_intervention:
+"PReP Intervention" P 
+  where P.effective starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
+  and P.effective starts after ("First Negative Test within Measurement Period")
+
+define "OAMT_intervention":
+  [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ HC."OAMT")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
+      and H.period starts after ("First Negative Test within Measurement Period")
+    ) 
+    or (
+      EOC.period starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
+      and EOC.period starts after ("First Negative Test within Measurement Period")
+    )
+    )
+
+define NSP_intervention:
+  HIC."Needle Syringe Dispensed" DUS
+	where DUS.timing starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
+  and DUS.timing starts after ("First Negative Test within Measurement Period")
+
+define STI_intervention:
+  HIC.STI_testing STI
+	where STI.performed starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
+  and STI.performed starts after ("First Negative Test within Measurement Period")
+
+define VMMC_intervention:
+  HIC."VMMC_done" VM
+  where VM.performed starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
+  and VM.performed starts after ("First Negative Test within Measurement Period")
+
 /**
  * Numerator
  * 
@@ -108,7 +154,17 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  exists(PReP_intervention
+  )
+  or exists(OAMT_intervention
+  )
+  or exists(NSP_intervention
+  )
+  or exists(STI_intervention
+  )
+  or exists(VMMC_intervention
+  )
+
 
 
 /**
@@ -119,8 +175,35 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  exists(HIC."Negative Tests within Measurement Period")
     
 
 /* end Populations */
 
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "HIV prevention intervention":
+	HIC."HIV prevention intervention"
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier 2"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')
+//need to fix
+//+ Combine(HIC."HIV prevention intervention", ':')
