@@ -125,18 +125,18 @@ define "Date/time of suspected exposure to HIV B.DE14 Value":
 /* End of Date/time of suspected exposure to HIV B.DE14 */
 
 /*
-@dataElement: HIV.B.DE49 - Key population member*
+@dataElement: HIV.B.DE49 - Key population member
 @activity: HIV.B6 Capture or update client history
 @description: Client is a member of a key population that has an increased risk of HIV
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Key population member* B.DE49":
-  exists "Key population member* B.DE49 Observation"
-define "Key population member* B.DE49 Observation":
-  Elements."Key population member* B.DE49 Observation" O
+define "Key population member B.DE49":
+  exists "Key population member B.DE49 Observation"
+define "Key population member B.DE49 Observation":
+  Elements."Key population member B.DE49 Observation" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
-/* End of Key population member* B.DE49 */
+/* End of Key population member B.DE49 */
 
 /*
 @dataElement: HIV.B.DE80 - HIV test conducted
@@ -7564,18 +7564,18 @@ define "C reactive protein test result Value":
 /* End of C reactive protein test result */
 
 /*
-@dataElement: HIV.E.DE113 - Key population member*
+@dataElement: HIV.E.DE113 - Key population member
 @activity: HIV.E1 Capture or update mother's history
 @description: Mother is a member of a key population which has an increased risk of HIV
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Key population member* E.DE113":
-  exists "Key population member* E.DE113 Observation"
-define "Key population member* E.DE113 Observation":
-  Elements."Key population member* E.DE113 Observation" O
+define "Key population member E.DE113":
+  exists "Key population member E.DE113 Observation"
+define "Key population member E.DE113 Observation":
+  Elements."Key population member E.DE113 Observation" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
-/* End of Key population member* E.DE113 */
+/* End of Key population member E.DE113 */
 
 /*
 @dataElement: HIV.E.DE155 - Signs of substantial risk of HIV infection

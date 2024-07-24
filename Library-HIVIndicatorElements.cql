@@ -236,17 +236,17 @@ define "Date HIV test results returned Value":
 /* End of Date HIV test results returned */
 
 /*
-@dataElement: HIV.B.DE61 - HIV exposure type*
+@dataElement: HIV.B.DE61 - HIV exposure type
 @activity: HIV.B6 Capture or update client history
 @description: Ways in which the client was exposed to HIV
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV exposure type*":
-  exists "HIV exposure type* Observation"
-define "HIV exposure type* Observation":
-  Elements."HIV exposure type* Observation" O
+define "HIV exposure type":
+  exists "HIV exposure type Observation"
+define "HIV exposure type Observation":
+  Elements."HIV exposure type Observation" O
     where O.effective.toInterval() during "Measurement Period"
-/* End of HIV exposure type* */
+/* End of HIV exposure type */
 
 /*
 @dataElement: HIV.B.DE62 - Occupational
@@ -317,17 +317,17 @@ define "HIV test date B.DE110 Value":
 /* End of HIV test date B.DE110 */
 
 /*
-@dataElement: HIV.B.DE121 - Probable route of transmission*
+@dataElement: HIV.B.DE121 - Probable route of transmission
 @activity: HIV.B8 Provide post-test counselling
 @description: Probable route(s) of transmission of HIV to client
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Probable route of transmission*":
-  exists "Probable route of transmission* Observation"
-define "Probable route of transmission* Observation":
-  Elements."Probable route of transmission* Observation" O
+define "Probable route of transmission":
+  exists "Probable route of transmission Observation"
+define "Probable route of transmission Observation":
+  Elements."Probable route of transmission Observation" O
     where O.effective.toInterval() during "Measurement Period"
-/* End of Probable route of transmission* */
+/* End of Probable route of transmission */
 
 /*
 @dataElement: HIV.B.DE122 - Heterosexual sex
@@ -4393,15 +4393,23 @@ define "Infant date of birth Value":
 @activity: HIV.E1 Capture or update mother's history
 @description: Infant age calculated using date of birth
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Age of infant":
-  Elements."Age of infant" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Age of infant Value":
-  "Age of infant" O
-  return O.value
-/* End of Age of infant */
 
+/* End of Age of infant */
+define "Age of infant in days":
+  "Infant date of birth Value" bd
+    return CalculateAgeInDaysAt(bd, start of "Measurement Period")
+
+define "Age of infant in hours":
+  "Infant date of birth Value" bd
+    return CalculateAgeInHoursAt(bd, start of "Measurement Period")
+
+define "Age of infant in weeks":
+  "Infant date of birth Value" bd 
+    return CalculateAgeInWeeksAt(bd, start of "Measurement Period")
+
+define "Age of infant in years":
+  "Infant date of birth Value" bd
+    return CalculateAgeInYearsAt(bd, start of "Measurement Period")
 /*
 @dataElement: HIV.E.DE112 - HIV-exposed infant or child
 @activity: HIV.F6 Check whether infant/child had HIV exposure

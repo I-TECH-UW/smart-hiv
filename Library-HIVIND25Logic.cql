@@ -101,20 +101,19 @@ define "Negative Tests within Measurement Period":
 HIC."HIV Negative Observation" O
     with HIC."Client is at elevated risk for HIV acquisition" HIV
     such that O.hasMember.references(HIV)
-    and O.issued after start of "Measurement Period"
-    and O.issued before end of "Measurement Period"
-Sort by O.issued
+    where O.issued.value in "Measurement Period"
+    sort by issued
 
 define "First Negative Test within Measurement Period":
-( First("Negative Tests within Measurement Period"))
+  (First("Negative Tests within Measurement Period"))
 
 define "Negative Tests after First Negative Test":
 HIC."HIV Negative Observation" O
     with HIC."Client is at elevated risk for HIV acquisition" HIV
-    such that O.hasMember.references(HIV)
-    and O.issued after "First Negative Test within Measurement Period"
-    and O.issued before ("First Negative Test within Measurement Period" + "Testing Interval")
-Sort by O.issued
+      such that O.hasMember.references(HIV)
+    where O.issued after "First Negative Test within Measurement Period".issued
+      and O.issued before ("First Negative Test within Measurement Period".issued + "Testing Interval")
+    sort by issued
 
 
 define "Numerator":

@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HC</td><td><code>http://smart.who.int/hiv/Library/HIVConcepts</code></td></tr><tr><td>Depends On</td><td>Library HCC</td><td><code>http://smart.who.int/hiv/Library/HIVConceptsCustom</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
 
 using FHIR version '4.0.1'
 
@@ -379,6 +379,10 @@ define &quot;HIV Positive Condition&quot;:
     where C.clinicalStatus ~ HCC.&quot;active&quot;
     and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
     and C.code ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
+    sort by start of onset.toInterval()
+
+define &quot;First HIV Positive Condition&quot;:
+  First(&quot;HIV Positive Condition&quot;)
 
 define &quot;HIV Positive Observation&quot;:
 [Observation] O
@@ -404,12 +408,10 @@ define &quot;HIV test resulted&quot;:
     and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
 
 define &quot;HIV Treatment Active&quot;:
-[MedicationStatement] MS
-Sort by MS.effective
+  [MedicationStatement] MS
     where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;On ART - HIV.H.DE47&quot;)
-    
-
+    sort by effective
 
 define &quot;HIV PREP Active&quot;:
 [MedicationStatement] MS
@@ -472,7 +474,7 @@ define &quot;HIV Test Positive After PEP Prescribed during Measurement Period&qu
 
 define &quot;Needle Syringe Dispensed&quot;:  
   [DeviceUseStatement] DUS
-  with [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+  with [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
       such that DUS.reasonReference.references(O) 
         and O.status in { 'final', 'amended', 'corrected' }
         and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
@@ -480,7 +482,7 @@ define &quot;Needle Syringe Dispensed&quot;:
   where DUS.status = 'completed'
 
 define PWID_person:
-  [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+  [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
   where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
@@ -652,7 +654,7 @@ define &quot;HIV Status&quot;:
 
  define SW:
   exists (
-    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;Sex worker - HIV.B.DE51&quot;
@@ -660,7 +662,7 @@ define &quot;HIV Status&quot;:
 
  define MSM:
   exists (
-    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;Men who have sex with men&quot;
@@ -668,7 +670,7 @@ define &quot;HIV Status&quot;:
 
   define Trans:
   exists (
-    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;Trans and gender-diverse people - HIV.B.DE53&quot;
@@ -676,7 +678,7 @@ define &quot;HIV Status&quot;:
 
   define PWID:
   exists (
-    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
@@ -684,7 +686,7 @@ define &quot;HIV Status&quot;:
 
   define Prisoner:
   exists (
-    [Observation: HC.&quot;Key population member* - HIV.E.DE113&quot;] O
+    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;People living in prisons and other closed settings&quot;
@@ -711,7 +713,7 @@ define &quot;HIV Status&quot;:
 
 define Exposure_Occupational:
   exists (
-    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    [Observation: HC.&quot;HIV exposure type&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;Occupational&quot;
@@ -719,7 +721,7 @@ define Exposure_Occupational:
 
 define Exposure_Non_Occupational_violent:
   exists (
-    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    [Observation: HC.&quot;HIV exposure type&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;Non-occupational violent&quot;
@@ -727,7 +729,7 @@ define Exposure_Non_Occupational_violent:
 
 define Exposure_Non_Occupational_consensual_sex:
   exists (
-    [Observation: HC.&quot;HIV exposure type*&quot;] O
+    [Observation: HC.&quot;HIV exposure type&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.value ~ HC.&quot;Non-occupational consensual sex&quot;
@@ -1182,9 +1184,9 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
 
   define &quot;Time to start ART&quot;:
     case 
-        when difference in days between &quot;First HIV Treatment&quot;.effective and &quot;HIV Positive Condition&quot;.onset &lt;= 7 then HC.&quot;Within 7 days of HIV diagnosis&quot;
-        when difference in days between &quot;First HIV Treatment&quot;.effective and &quot;HIV Positive Condition&quot;.onset &lt;= 30 then HC.&quot;Within 30 days of HIV diagnosis&quot;
-        when difference in days between &quot;First HIV Treatment&quot;.effective and &quot;HIV Positive Condition&quot;.onset &lt;= 90 then HC.&quot;Within 90 days of HIV diagnosis&quot;
+        when difference in days between start of &quot;First HIV Treatment&quot;.effective.toInterval() and start of &quot;First HIV Positive Condition&quot;.onset.toInterval() &lt;= 7 then HC.&quot;Within 7 days of HIV diagnosis&quot;
+        when difference in days between start of &quot;First HIV Treatment&quot;.effective.toInterval() and start of &quot;First HIV Positive Condition&quot;.onset.toInterval() &lt;= 30 then HC.&quot;Within 30 days of HIV diagnosis&quot;
+        when difference in days between start of &quot;First HIV Treatment&quot;.effective.toInterval() and start of &quot;First HIV Positive Condition&quot;.onset.toInterval() &lt;= 90 then HC.&quot;Within 90 days of HIV diagnosis&quot;
     else null
     end
   
@@ -1227,31 +1229,31 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
 //(including PrEP, OAMT, NSP, STI services, VMMC) 
   define &quot;HIV prevention intervention&quot;:
   List&lt;String&gt;{
-    if &quot;HIV PREP Active&quot; then 'PrEP' else null,
+    if exists(&quot;HIV PREP Active&quot;) then 'PrEP' else null,
     if OAMT_initiated then 'OAMT' else null,
-    if &quot;Needle Syringe Dispensed&quot; then 'NSP' else null,
-    if STI_testing then 'STI services' else null,
-    if VMMC_done then 'VMMC' else null
+    if exists(&quot;Needle Syringe Dispensed&quot;) then 'NSP' else null,
+    if exists(STI_testing) then 'STI services' else null,
+    if exists(VMMC_done) then 'VMMC' else null
   }
 
 define &quot;Negative Tests within Measurement Period&quot;:
-HIC.&quot;HIV Negative Observation&quot; O
-    with HIC.&quot;Client is at elevated risk for HIV acquisition&quot; HIV
+&quot;HIV Negative Observation&quot; O
+    with &quot;Client is at elevated risk for HIV acquisition&quot; HIV
     such that O.hasMember.references(HIV)
     and O.issued after start of &quot;Measurement Period&quot;
     and O.issued before end of &quot;Measurement Period&quot;
-Sort by O.issued
+    sort by issued
 
 define &quot;First Negative Test within Measurement Period&quot;:
 ( First(&quot;Negative Tests within Measurement Period&quot;))
 
 define &quot;Negative Tests after First Negative Test&quot;:
-HIC.&quot;HIV Negative Observation&quot; O
-    with HIC.&quot;Client is at elevated risk for HIV acquisition&quot; HIV
-    such that O.hasMember.references(HIV)
-    and O.issued after &quot;First Negative Test within Measurement Period&quot;
-    and O.issued before (&quot;First Negative Test within Measurement Period&quot; + &quot;Testing Interval&quot;)
-Sort by O.issued</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
+  &quot;HIV Negative Observation&quot; O
+    with &quot;Client is at elevated risk for HIV acquisition&quot; HIV
+      such that O.hasMember.references(HIV)
+    where O.issued after &quot;First Negative Test within Measurement Period&quot;.issued
+      and O.issued before (&quot;First Negative Test within Measurement Period&quot;.issued + &quot;Testing Interval&quot;)
+    sort by issued</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 1Mb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -1276,7 +1278,7 @@ Sort by O.issued</code></pre><p><code>No Content</code> (<code>application/elm+x
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 24, 2024 18:44+0000">2024-07-24</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 24, 2024 22:47+0000">2024-07-24</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

@@ -55,27 +55,37 @@ define "Estimated age Value":
 @activity: HIV.A6.1 Review sociodemographic data with client | HIV.A5 Create new client record
 @description: Calculated age (number of years) of the client based on date of birth
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Age":
-  [Observation: Concepts."Age"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Age Value":
-  "Age" O
-  return O.value
+/** 
+ * @dataElement Patient age in years
+ */
+define "Current Patient Age In Years":
+  AgeInYearsAt(Today())
+
+/** 
+ * @dataElement Patient age in weeks
+ */
+define "Current Patient Age In Weeks":
+  AgeInWeeksAt(Today())
+
+/** 
+ * @dataElement Patient age in months
+ */
+define "Current Patient Age In Months":
+  AgeInMonthsAt(Today())
 /* End of Age */
 
 /*
-@dataElement: HIV.A.DE18 - Gender*
+@dataElement: HIV.A.DE18 - Gender
 @activity: HIV.A6.1 Review sociodemographic data with client | HIV.A5 Create new client record
-@description: Gender of the client*
+@description: Gender of the client
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Gender*":
-  exists "Gender* Observation"
-define "Gender* Observation":
-  [Observation: Concepts."Gender*"] O
+define "Gender":
+  exists "Gender Observation"
+define "Gender Observation":
+  [Observation: Concepts."Gender"] O
     where O.status in { 'final', 'amended', 'corrected' }
-/* End of Gender* */
+/* End of Gender */
 
 /*
 @dataElement: HIV.A.DE19 - Female
@@ -89,7 +99,7 @@ define "Female":
 define "Female Condition":
   [Condition: Concepts."Female"]
 define "Female Observation":
-  "Gender* Observation" O
+  "Gender Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Female"
 /* End of Female */
@@ -106,7 +116,7 @@ define "Male":
 define "Male Condition":
   [Condition: Concepts."Male"]
 define "Male Observation":
-  "Gender* Observation" O
+  "Gender Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Male"
 /* End of Male */
@@ -123,7 +133,7 @@ define "Transgender male":
 define "Transgender male Condition":
   [Condition: Concepts."Transgender male"]
 define "Transgender male Observation":
-  "Gender* Observation" O
+  "Gender Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Transgender male"
 /* End of Transgender male */
@@ -140,7 +150,7 @@ define "Transgender female":
 define "Transgender female Condition":
   [Condition: Concepts."Transgender female"]
 define "Transgender female Observation":
-  "Gender* Observation" O
+  "Gender Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Transgender female"
 /* End of Transgender female */
@@ -157,7 +167,7 @@ define "Other A.DE23":
 define "Other A.DE23 Condition":
   [Condition: Concepts."Other - HIV.A.DE23"]
 define "Other A.DE23 Observation":
-  "Gender* Observation" O
+  "Gender Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Other - HIV.A.DE23"
 /* End of Other A.DE23 */
@@ -508,31 +518,31 @@ define "Unknown B.DE36 Observation":
 /* End of Unknown B.DE36 */
 
 /*
-@dataElement: HIV.B.DE49 - Key population member*
+@dataElement: HIV.B.DE49 - Key population member
 @activity: HIV.B6 Capture or update client history
 @description: Client is a member of a key population that has an increased risk of HIV
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Key population member* B.DE49":
-  exists "Key population member* B.DE49 Observation"
-define "Key population member* B.DE49 Observation":
-  [Observation: Concepts."Key population member* - HIV.B.DE49"] O
+define "Key population member B.DE49":
+  exists "Key population member B.DE49 Observation"
+define "Key population member B.DE49 Observation":
+  [Observation: Concepts."Key population member - HIV.B.DE49"] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
-/* End of Key population member* B.DE49 */
+/* End of Key population member B.DE49 */
 
 /*
-@dataElement: HIV.B.DE50 - Key population member type*
+@dataElement: HIV.B.DE50 - Key population member type
 @activity: HIV.B6 Capture or update client history
 @description: The type of key population that the client is included in
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Key population member type* B.DE50":
-  exists "Key population member type* B.DE50 Observation"
-define "Key population member type* B.DE50 Observation":
-  [Observation: Concepts."Key population member type* - HIV.B.DE50"] O
+define "Key population member type B.DE50":
+  exists "Key population member type B.DE50 Observation"
+define "Key population member type B.DE50 Observation":
+  [Observation: Concepts."Key population member type - HIV.B.DE50"] O
     where O.status in { 'final', 'amended', 'corrected' }
-/* End of Key population member type* B.DE50 */
+/* End of Key population member type B.DE50 */
 
 /*
 @dataElement: HIV.B.DE51 - Sex worker
@@ -546,7 +556,7 @@ define "Sex worker B.DE51":
 define "Sex worker B.DE51 Condition":
   [Condition: Concepts."Sex worker - HIV.B.DE51"]
 define "Sex worker B.DE51 Observation":
-  "Key population member type* B.DE50 Observation" O
+  "Key population member type B.DE50 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Sex worker - HIV.B.DE51"
 /* End of Sex worker B.DE51 */
@@ -563,7 +573,7 @@ define "Men who have sex with men":
 define "Men who have sex with men Condition":
   [Condition: Concepts."Men who have sex with men"]
 define "Men who have sex with men Observation":
-  "Key population member type* B.DE50 Observation" O
+  "Key population member type B.DE50 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Men who have sex with men"
 /* End of Men who have sex with men */
@@ -580,7 +590,7 @@ define "Trans and gender-diverse people B.DE53":
 define "Trans and gender-diverse people B.DE53 Condition":
   [Condition: Concepts."Trans and gender-diverse people - HIV.B.DE53"]
 define "Trans and gender-diverse people B.DE53 Observation":
-  "Key population member type* B.DE50 Observation" O
+  "Key population member type B.DE50 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53"
 /* End of Trans and gender-diverse people B.DE53 */
@@ -597,7 +607,7 @@ define "People who inject drugs B.DE54":
 define "People who inject drugs B.DE54 Condition":
   [Condition: Concepts."People who inject drugs - HIV.B.DE54"]
 define "People who inject drugs B.DE54 Observation":
-  "Key population member type* B.DE50 Observation" O
+  "Key population member type B.DE50 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
 /* End of People who inject drugs B.DE54 */
@@ -614,7 +624,7 @@ define "People living in prisons and other closed settings":
 define "People living in prisons and other closed settings Condition":
   [Condition: Concepts."People living in prisons and other closed settings"]
 define "People living in prisons and other closed settings Observation":
-  "Key population member type* B.DE50 Observation" O
+  "Key population member type B.DE50 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."People living in prisons and other closed settings"
 /* End of People living in prisons and other closed settings */
@@ -634,17 +644,17 @@ define "Date HIV test results returned Value":
 /* End of Date HIV test results returned */
 
 /*
-@dataElement: HIV.B.DE61 - HIV exposure type*
+@dataElement: HIV.B.DE61 - HIV exposure type
 @activity: HIV.B6 Capture or update client history
 @description: Ways in which the client was exposed to HIV
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV exposure type*":
-  exists "HIV exposure type* Observation"
-define "HIV exposure type* Observation":
-  [Observation: Concepts."HIV exposure type*"] O
+define "HIV exposure type":
+  exists "HIV exposure type Observation"
+define "HIV exposure type Observation":
+  [Observation: Concepts."HIV exposure type"] O
     where O.status in { 'final', 'amended', 'corrected' }
-/* End of HIV exposure type* */
+/* End of HIV exposure type */
 
 /*
 @dataElement: HIV.B.DE62 - Occupational
@@ -658,7 +668,7 @@ define "Occupational":
 define "Occupational Condition":
   [Condition: Concepts."Occupational"]
 define "Occupational Observation":
-  "HIV exposure type* Observation" O
+  "HIV exposure type Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Occupational"
 /* End of Occupational */
@@ -675,7 +685,7 @@ define "Non-occupational violent":
 define "Non-occupational violent Condition":
   [Condition: Concepts."Non-occupational violent"]
 define "Non-occupational violent Observation":
-  "HIV exposure type* Observation" O
+  "HIV exposure type Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Non-occupational violent"
 /* End of Non-occupational violent */
@@ -692,7 +702,7 @@ define "Non-occupational consensual sex":
 define "Non-occupational consensual sex Condition":
   [Condition: Concepts."Non-occupational consensual sex"]
 define "Non-occupational consensual sex Observation":
-  "HIV exposure type* Observation" O
+  "HIV exposure type Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Non-occupational consensual sex"
 /* End of Non-occupational consensual sex */
@@ -1348,17 +1358,17 @@ define "Unknown B.DE118 Observation":
 /* End of Unknown B.DE118 */
 
 /*
-@dataElement: HIV.B.DE121 - Probable route of transmission*
+@dataElement: HIV.B.DE121 - Probable route of transmission
 @activity: HIV.B8 Provide post-test counselling
 @description: Probable route(s) of transmission of HIV to client
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Probable route of transmission*":
-  exists "Probable route of transmission* Observation"
-define "Probable route of transmission* Observation":
-  [Observation: Concepts."Probable route of transmission*"] O
+define "Probable route of transmission":
+  exists "Probable route of transmission Observation"
+define "Probable route of transmission Observation":
+  [Observation: Concepts."Probable route of transmission"] O
     where O.status in { 'final', 'amended', 'corrected' }
-/* End of Probable route of transmission* */
+/* End of Probable route of transmission */
 
 /*
 @dataElement: HIV.B.DE122 - Heterosexual sex
@@ -1372,7 +1382,7 @@ define "Heterosexual sex":
 define "Heterosexual sex Condition":
   [Condition: Concepts."Heterosexual sex"]
 define "Heterosexual sex Observation":
-  "Probable route of transmission* Observation" O
+  "Probable route of transmission Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Heterosexual sex"
 /* End of Heterosexual sex */
@@ -1389,7 +1399,7 @@ define "Sex between men":
 define "Sex between men Condition":
   [Condition: Concepts."Sex between men"]
 define "Sex between men Observation":
-  "Probable route of transmission* Observation" O
+  "Probable route of transmission Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Sex between men"
 /* End of Sex between men */
@@ -1406,7 +1416,7 @@ define "Unprotected intercourse during sex work":
 define "Unprotected intercourse during sex work Condition":
   [Condition: Concepts."Unprotected intercourse during sex work"]
 define "Unprotected intercourse during sex work Observation":
-  "Probable route of transmission* Observation" O
+  "Probable route of transmission Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Unprotected intercourse during sex work"
 /* End of Unprotected intercourse during sex work */
@@ -1423,7 +1433,7 @@ define "Injecting drug use with unsterile equipment":
 define "Injecting drug use with unsterile equipment Condition":
   [Condition: Concepts."Injecting drug use with unsterile equipment"]
 define "Injecting drug use with unsterile equipment Observation":
-  "Probable route of transmission* Observation" O
+  "Probable route of transmission Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Injecting drug use with unsterile equipment"
 /* End of Injecting drug use with unsterile equipment */
@@ -1440,7 +1450,7 @@ define "Nosocomial":
 define "Nosocomial Condition":
   [Condition: Concepts."Nosocomial"]
 define "Nosocomial Observation":
-  "Probable route of transmission* Observation" O
+  "Probable route of transmission Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Nosocomial"
 /* End of Nosocomial */
@@ -1457,7 +1467,7 @@ define "Vertical":
 define "Vertical Condition":
   [Condition: Concepts."Vertical"]
 define "Vertical Observation":
-  "Probable route of transmission* Observation" O
+  "Probable route of transmission Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Vertical"
 /* End of Vertical */
@@ -1474,7 +1484,7 @@ define "Other B.DE128":
 define "Other B.DE128 Condition":
   [Condition: Concepts."Other - HIV.B.DE128"]
 define "Other B.DE128 Observation":
-  "Probable route of transmission* Observation" O
+  "Probable route of transmission Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Other - HIV.B.DE128"
 /* End of Other B.DE128 */
@@ -12604,13 +12614,22 @@ define "Infant date of birth Value":
 @activity: HIV.E1 Capture or update mother's history
 @description: Infant age calculated using date of birth
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Age of infant":
-  [Observation: Concepts."Age of infant"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Age of infant Value":
-  "Age of infant" O
-  return O.value
+define "Age of infant in days":
+  "Infant date of birth" O
+    return CalculateAgeInDays(O.value)
+
+define "Age of infant in hours":
+  "Infant date of birth" O
+    return CalculateAgeInHours(O.value)
+
+define "Age of infant in weeks":
+  "Infant date of birth" O
+    return CalculateAgeInWeeks(O.value)
+
+define "Age of infant in years":
+  "Infant date of birth" O
+    return CalculateAgeInYears(O.value)
+    
 /* End of Age of infant */
 
 /*
@@ -12628,31 +12647,31 @@ define "HIV-exposed infant or child E.DE112 Observation":
 /* End of HIV-exposed infant or child E.DE112 */
 
 /*
-@dataElement: HIV.E.DE113 - Key population member*
+@dataElement: HIV.E.DE113 - Key population member
 @activity: HIV.E1 Capture or update mother's history
 @description: Mother is a member of a key population which has an increased risk of HIV
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Key population member* E.DE113":
-  exists "Key population member* E.DE113 Observation"
-define "Key population member* E.DE113 Observation":
-  [Observation: Concepts."Key population member* - HIV.E.DE113"] O
+define "Key population member E.DE113":
+  exists "Key population member E.DE113 Observation"
+define "Key population member E.DE113 Observation":
+  [Observation: Concepts."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
-/* End of Key population member* E.DE113 */
+/* End of Key population member E.DE113 */
 
 /*
-@dataElement: HIV.E.DE114 - Key population member type*
+@dataElement: HIV.E.DE114 - Key population member type
 @activity: HIV.E1 Capture or update mother's history
 @description: The type of key population that the infant's mother is included in
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Key population member type* E.DE114":
-  exists "Key population member type* E.DE114 Observation"
-define "Key population member type* E.DE114 Observation":
-  [Observation: Concepts."Key population member type* - HIV.E.DE114"] O
+define "Key population member type E.DE114":
+  exists "Key population member type E.DE114 Observation"
+define "Key population member type E.DE114 Observation":
+  [Observation: Concepts."Key population member type - HIV.E.DE114"] O
     where O.status in { 'final', 'amended', 'corrected' }
-/* End of Key population member type* E.DE114 */
+/* End of Key population member type E.DE114 */
 
 /*
 @dataElement: HIV.E.DE115 - Sex worker
@@ -12666,7 +12685,7 @@ define "Sex worker E.DE115":
 define "Sex worker E.DE115 Condition":
   [Condition: Concepts."Sex worker - HIV.E.DE115"]
 define "Sex worker E.DE115 Observation":
-  "Key population member type* E.DE114 Observation" O
+  "Key population member type E.DE114 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Sex worker - HIV.E.DE115"
 /* End of Sex worker E.DE115 */
@@ -12683,7 +12702,7 @@ define "People who inject drugs E.DE116":
 define "People who inject drugs E.DE116 Condition":
   [Condition: Concepts."People who inject drugs - HIV.E.DE116"]
 define "People who inject drugs E.DE116 Observation":
-  "Key population member type* E.DE114 Observation" O
+  "Key population member type E.DE114 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."People who inject drugs - HIV.E.DE116"
 /* End of People who inject drugs E.DE116 */
@@ -12700,7 +12719,7 @@ define "Trans and gender-diverse people E.DE117":
 define "Trans and gender-diverse people E.DE117 Condition":
   [Condition: Concepts."Trans and gender-diverse people - HIV.E.DE117"]
 define "Trans and gender-diverse people E.DE117 Observation":
-  "Key population member type* E.DE114 Observation" O
+  "Key population member type E.DE114 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Trans and gender-diverse people - HIV.E.DE117"
 /* End of Trans and gender-diverse people E.DE117 */
@@ -12717,7 +12736,7 @@ define "People living in prisons and other closed setting":
 define "People living in prisons and other closed setting Condition":
   [Condition: Concepts."People living in prisons and other closed setting"]
 define "People living in prisons and other closed setting Observation":
-  "Key population member type* E.DE114 Observation" O
+  "Key population member type E.DE114 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."People living in prisons and other closed setting"
 /* End of People living in prisons and other closed setting */

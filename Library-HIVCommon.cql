@@ -28,6 +28,10 @@ define "HIV Positive Condition":
     where C.clinicalStatus ~ HCC."active"
     and exists(C.category CC where CC ~ HCC."encounter-diagnosis")
     and C.code ~ HC."HIV-positive - HIV.B.DE116"
+    sort by start of onset.toInterval()
+
+define "First HIV Positive Condition":
+  First("HIV Positive Condition")
 
 define "HIV Positive Observation":
 [Observation] O
@@ -53,12 +57,10 @@ define "HIV test resulted":
     and O.code ~ HC."Rapid diagnostic test for HIV - HIV.B.DE82"
 
 define "HIV Treatment Active":
-[MedicationStatement] MS
-Sort by MS.effective
+  [MedicationStatement] MS
     where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC."On ART - HIV.H.DE47")
-    
-
+    sort by effective
 
 define "HIV PREP Active":
 [MedicationStatement] MS
@@ -121,7 +123,7 @@ define "HIV Test Positive After PEP Prescribed during Measurement Period":
 
 define "Needle Syringe Dispensed":  
   [DeviceUseStatement] DUS
-  with [Observation: HC."Key population member* - HIV.E.DE113"] O
+  with [Observation: HC."Key population member - HIV.E.DE113"] O
       such that DUS.reasonReference.references(O) 
         and O.status in { 'final', 'amended', 'corrected' }
         and exists(O.category OC where OC ~ HCC."social-history")
@@ -129,7 +131,7 @@ define "Needle Syringe Dispensed":
   where DUS.status = 'completed'
 
 define PWID_person:
-  [Observation: HC."Key population member* - HIV.E.DE113"] O
+  [Observation: HC."Key population member - HIV.E.DE113"] O
   where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."People who inject drugs - HIV.B.DE54"
@@ -301,7 +303,7 @@ define "HIV Status":
 
  define SW:
   exists (
-    [Observation: HC."Key population member* - HIV.E.DE113"] O
+    [Observation: HC."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."Sex worker - HIV.B.DE51"
@@ -309,7 +311,7 @@ define "HIV Status":
 
  define MSM:
   exists (
-    [Observation: HC."Key population member* - HIV.E.DE113"] O
+    [Observation: HC."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."Men who have sex with men"
@@ -317,7 +319,7 @@ define "HIV Status":
 
   define Trans:
   exists (
-    [Observation: HC."Key population member* - HIV.E.DE113"] O
+    [Observation: HC."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."Trans and gender-diverse people - HIV.B.DE53"
@@ -325,7 +327,7 @@ define "HIV Status":
 
   define PWID:
   exists (
-    [Observation: HC."Key population member* - HIV.E.DE113"] O
+    [Observation: HC."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."People who inject drugs - HIV.B.DE54"
@@ -333,7 +335,7 @@ define "HIV Status":
 
   define Prisoner:
   exists (
-    [Observation: HC."Key population member* - HIV.E.DE113"] O
+    [Observation: HC."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."People living in prisons and other closed settings"
@@ -360,7 +362,7 @@ define "HIV Status":
 
 define Exposure_Occupational:
   exists (
-    [Observation: HC."HIV exposure type*"] O
+    [Observation: HC."HIV exposure type"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."Occupational"
@@ -368,7 +370,7 @@ define Exposure_Occupational:
 
 define Exposure_Non_Occupational_violent:
   exists (
-    [Observation: HC."HIV exposure type*"] O
+    [Observation: HC."HIV exposure type"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."Non-occupational violent"
@@ -376,7 +378,7 @@ define Exposure_Non_Occupational_violent:
 
 define Exposure_Non_Occupational_consensual_sex:
   exists (
-    [Observation: HC."HIV exposure type*"] O
+    [Observation: HC."HIV exposure type"] O
     where O.status in { 'final', 'amended', 'corrected' }
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.value ~ HC."Non-occupational consensual sex"
@@ -831,9 +833,9 @@ define "VMMC_adverse_event_Postoperative":
 
   define "Time to start ART":
     case 
-        when difference in days between "First HIV Treatment".effective and "HIV Positive Condition".onset <= 7 then HC."Within 7 days of HIV diagnosis"
-        when difference in days between "First HIV Treatment".effective and "HIV Positive Condition".onset <= 30 then HC."Within 30 days of HIV diagnosis"
-        when difference in days between "First HIV Treatment".effective and "HIV Positive Condition".onset <= 90 then HC."Within 90 days of HIV diagnosis"
+        when difference in days between start of "First HIV Treatment".effective.toInterval() and start of "First HIV Positive Condition".onset.toInterval() <= 7 then HC."Within 7 days of HIV diagnosis"
+        when difference in days between start of "First HIV Treatment".effective.toInterval() and start of "First HIV Positive Condition".onset.toInterval() <= 30 then HC."Within 30 days of HIV diagnosis"
+        when difference in days between start of "First HIV Treatment".effective.toInterval() and start of "First HIV Positive Condition".onset.toInterval() <= 90 then HC."Within 90 days of HIV diagnosis"
     else null
     end
   
@@ -876,28 +878,28 @@ define "VMMC_adverse_event_Postoperative":
 //(including PrEP, OAMT, NSP, STI services, VMMC) 
   define "HIV prevention intervention":
   List<String>{
-    if "HIV PREP Active" then 'PrEP' else null,
+    if exists("HIV PREP Active") then 'PrEP' else null,
     if OAMT_initiated then 'OAMT' else null,
-    if "Needle Syringe Dispensed" then 'NSP' else null,
-    if STI_testing then 'STI services' else null,
-    if VMMC_done then 'VMMC' else null
+    if exists("Needle Syringe Dispensed") then 'NSP' else null,
+    if exists(STI_testing) then 'STI services' else null,
+    if exists(VMMC_done) then 'VMMC' else null
   }
 
 define "Negative Tests within Measurement Period":
-HIC."HIV Negative Observation" O
-    with HIC."Client is at elevated risk for HIV acquisition" HIV
+"HIV Negative Observation" O
+    with "Client is at elevated risk for HIV acquisition" HIV
     such that O.hasMember.references(HIV)
     and O.issued after start of "Measurement Period"
     and O.issued before end of "Measurement Period"
-Sort by O.issued
+    sort by issued
 
 define "First Negative Test within Measurement Period":
 ( First("Negative Tests within Measurement Period"))
 
 define "Negative Tests after First Negative Test":
-HIC."HIV Negative Observation" O
-    with HIC."Client is at elevated risk for HIV acquisition" HIV
-    such that O.hasMember.references(HIV)
-    and O.issued after "First Negative Test within Measurement Period"
-    and O.issued before ("First Negative Test within Measurement Period" + "Testing Interval")
-Sort by O.issued
+  "HIV Negative Observation" O
+    with "Client is at elevated risk for HIV acquisition" HIV
+      such that O.hasMember.references(HIV)
+    where O.issued after "First Negative Test within Measurement Period".issued
+      and O.issued before ("First Negative Test within Measurement Period".issued + "Testing Interval")
+    sort by issued
