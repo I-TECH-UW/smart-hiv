@@ -74,11 +74,11 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
+parameter "Testing Interval" System.Quantity default 3 months
 
 context Patient
 /* Populations */
@@ -97,8 +97,28 @@ define "Initial Population":
  * Calculation: COUNT of clients with "At elevated risk for HIV acquisition"=True AND with a second "HIV test date" within fixed period after "HIV test date" in the reporting period with "HIV test result"='HIV-negative'
  */
 
+define "Negative Tests within Measurement Period":
+HIC."HIV Negative Observation" O
+    with HIC."Client is at elevated risk for HIV acquisition" HIV
+    such that O.hasMember.references(HIV)
+    and O.issued after start of "Measurement Period"
+    and O.issued before end of "Measurement Period"
+Sort by O.issued
+
+define "First Negative Test within Measurement Period":
+( First("Negative Tests within Measurement Period"))
+
+define "Negative Tests after First Negative Test":
+HIC."HIV Negative Observation" O
+    with HIC."Client is at elevated risk for HIV acquisition" HIV
+    such that O.hasMember.references(HIV)
+    and O.issued after "First Negative Test within Measurement Period"
+    and O.issued before ("First Negative Test within Measurement Period" + "Testing Interval")
+Sort by O.issued
+
+
 define "Numerator":
-  true
+  exists(HIC."Negative Tests after First Negative Test")
 
 
 /**
@@ -109,8 +129,34 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  exists(HIC."Negative Tests within Measurement Period")
     
 
 /* end Populations */
 
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "HIV status of partner or contact":
+  HIC."HIV status of partner or contact"
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+ + ':' + HIC."HIV status of partner or contact".code
+  + ':' + HIC."By Age Stratifier 2"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')

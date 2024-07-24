@@ -79,7 +79,6 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
 
 // Indicator Definition
@@ -103,7 +102,22 @@ define "Initial Population":
  */
                                                        
 define "Measure Population":
-  true
+    exists(HIC."Partner or contact of an index case" IC
+    with HIC."Drug-injecting partner" DIP
+      such that IC.hasMember.references(DIP)
+      with HIC."HIV test resulted" HIV
+      such that IC.hasMember.references(HIV)
+      and HIV.issued after start of "Measurement Period"
+      and HIV.issued before end of "Measurement Period")
+    or 
+    exists(HIC."Partner or contact of an index case" IC
+    with HIC."Sexual partner" SP
+      such that IC.hasMember.references(SP)
+      with HIC."HIV test resulted" HIV
+      such that IC.hasMember.references(HIV)
+      and HIV.issued after start of "Measurement Period"
+      and HIV.issued before end of "Measurement Period")
+
 
 
 /**
@@ -116,3 +130,28 @@ define function "Measure Observation"(Patient "Patient"):
   1
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "HIV status of partner or contact":
+  HIC."HIV status of partner or contact"
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+ + ':' + HIC."HIV status of partner or contact".code
+  + ':' + HIC."By Age Stratifier 2"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')

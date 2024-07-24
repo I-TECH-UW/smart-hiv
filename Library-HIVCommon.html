@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-23
+            as of 2024-07-24
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HC</td><td><code>http://smart.who.int/hiv/Library/HIVConcepts</code></td></tr><tr><td>Depends On</td><td>Library HCC</td><td><code>http://smart.who.int/hiv/Library/HIVConceptsCustom</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
 
 using FHIR version '4.0.1'
 
@@ -361,6 +361,8 @@ include HIVConceptsCustom called HCC
 
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-12-31]
 parameter &quot;Measurement Date&quot; Date default @2020-01-01
+parameter &quot;Testing Interval&quot; System.Quantity default 3 months
+parameter &quot;Intervention Interval&quot; System.Quantity default 7 days
 
 context Patient
 
@@ -403,13 +405,15 @@ define &quot;HIV test resulted&quot;:
 
 define &quot;HIV Treatment Active&quot;:
 [MedicationStatement] MS
-    where MS.status = 'recorded'
+Sort by MS.effective
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;On ART - HIV.H.DE47&quot;)
+    
 
 
 define &quot;HIV PREP Active&quot;:
 [MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
 
  define &quot;Client is at elevated risk for HIV acquisition&quot;:
@@ -437,7 +441,7 @@ define &quot;PEP Prescribed before start of Measurement Period and Completed&quo
         and MR.intent = 'order'
         and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
         and MR.authoredOn before end of &quot;Measurement Period&quot;
-  where (MS.status = 'recorded'
+  where (MS.status = 'completed'
   and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
   )
 
@@ -449,7 +453,7 @@ define &quot;PEP Prescribed during Measurement Period and Completed&quot;:
         and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
         and MR.authoredOn after start of &quot;Measurement Period&quot;
         and MR.authoredOn before end of &quot;Measurement Period&quot;
-  where (MS.status = 'recorded'
+  where (MS.status = 'completed'
   and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
   )
 
@@ -775,7 +779,7 @@ exists(
 
   define &quot;PREP Product Oral&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and (MS.medication ~ HC.&quot;TDF + FTC - HIV.C.DE18&quot; or
     MS.medication ~ HC.&quot;TDF - HIV.C.DE19&quot; or
@@ -785,56 +789,56 @@ exists(
 
   define &quot;PREP Product long-acting device&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and MS.medication ~ HC.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;
   )
 
   define &quot;PREP Product long-acting injectable&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and MS.medication ~ HC.&quot;CAB-LA - HIV.C.DE23&quot;
   )
   
   define &quot;PREP first time&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and exists(MS.statusReason SR where SR ~ HC.&quot;First-time user - HIV.C.DE25&quot;)
   )
 
   define &quot;PREP Continuing user&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and exists(MS.statusReason SR where SR ~ HC.&quot;Continuing user&quot;)
   )
   
   define &quot;PREP Restarting&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and exists(MS.statusReason SR where SR ~ HC.&quot;Restarting following a period of not taking PrEP&quot;)
   )
 
   define &quot;Daily_oral_PrEP&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Daily oral PrEP&quot;)
   )
 
   define &quot;Event_driven_PrEP&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Event-driven PrEP 2+1+1&quot;) 
   )
 
   define &quot;other_dosing_PrEP&quot;:
   exists([MedicationStatement] MS
-    where MS.status = 'recorded'
+    where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
     and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Other PrEP dosing type&quot;) 
   )
@@ -1134,7 +1138,7 @@ define &quot;VMMC_adverse_event_Intraoperative&quot;:
       and AE.date = P.performed
   where AE.actuality = 'actual'
 
-  define &quot;VMMC_adverse_event_Postoperative&quot;:
+define &quot;VMMC_adverse_event_Postoperative&quot;:
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
@@ -1150,7 +1154,104 @@ define &quot;VMMC_adverse_event_Intraoperative&quot;:
         when exists(VMMC_adverse_event_Intraoperative) then  HC.&quot;Intraoperative&quot;
         when exists(VMMC_adverse_event_Postoperative) then  HC.&quot;Postoperative&quot;
         else null
-    end</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 916Kb )</p></div>
+    end
+
+
+  define &quot;Partner or contact of an index case&quot;:
+    [Observation: HC.&quot;Referred through partner services&quot;] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;Partner or contact of an index case&quot;
+  
+  define &quot;Drug-injecting partner&quot;:
+    [Observation: HC.&quot;Type of contact or partner for partner services&quot;] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;Drug-injecting partner - HIV.B.DE10&quot;
+  
+  define &quot;Sexual partner&quot;:
+    [Observation: HC.&quot;Type of contact or partner for partner services&quot;] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;Sexual partner - HIV.B.DE11&quot; 
+  
+
+  define &quot;First HIV Treatment&quot;:
+    First(&quot;HIV Treatment Active&quot;)
+
+
+  define &quot;Time to start ART&quot;:
+    case 
+        when difference in days between &quot;First HIV Treatment&quot;.effective and &quot;HIV Positive Condition&quot;.onset &lt;= 7 then HC.&quot;Within 7 days of HIV diagnosis&quot;
+        when difference in days between &quot;First HIV Treatment&quot;.effective and &quot;HIV Positive Condition&quot;.onset &lt;= 30 then HC.&quot;Within 30 days of HIV diagnosis&quot;
+        when difference in days between &quot;First HIV Treatment&quot;.effective and &quot;HIV Positive Condition&quot;.onset &lt;= 90 then HC.&quot;Within 90 days of HIV diagnosis&quot;
+    else null
+    end
+  
+  //HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
+
+  define &quot;already known positive&quot;:
+    [Observation: HC.&quot;HIV status of partner or contact&quot;] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;Already knew positive&quot;
+  
+  define &quot;Newly diagnosed&quot;:
+    [Observation: HC.&quot;HIV status of partner or contact&quot;] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;Newly diagnosed&quot;
+
+  define &quot;Negative - HIV.H.DE37&quot;:
+    [Observation: HC.&quot;HIV status of partner or contact&quot;] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
+    and O.code ~ HC.&quot;Negative - HIV.H.DE37&quot;
+  
+  define &quot;HIV status of partner or contact&quot;:
+    case 
+        when exists(&quot;already known positive&quot;) then HC.&quot;Already knew positive&quot;
+        when exists(&quot;Newly diagnosed&quot;) then HC.&quot;Newly diagnosed&quot;
+        when exists(&quot;Negative - HIV.H.DE37&quot;) then HC.&quot;Negative - HIV.H.DE37&quot;
+        else null
+    end
+
+
+//need to define
+  define STI_testing:
+    [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HC.&quot;STI testing and treatment services&quot;
+
+
+//(including PrEP, OAMT, NSP, STI services, VMMC) 
+  define &quot;HIV prevention intervention&quot;:
+  List&lt;String&gt;{
+    if &quot;HIV PREP Active&quot; then 'PrEP' else null,
+    if OAMT_initiated then 'OAMT' else null,
+    if &quot;Needle Syringe Dispensed&quot; then 'NSP' else null,
+    if STI_testing then 'STI services' else null,
+    if VMMC_done then 'VMMC' else null
+  }
+
+define &quot;Negative Tests within Measurement Period&quot;:
+HIC.&quot;HIV Negative Observation&quot; O
+    with HIC.&quot;Client is at elevated risk for HIV acquisition&quot; HIV
+    such that O.hasMember.references(HIV)
+    and O.issued after start of &quot;Measurement Period&quot;
+    and O.issued before end of &quot;Measurement Period&quot;
+Sort by O.issued
+
+define &quot;First Negative Test within Measurement Period&quot;:
+( First(&quot;Negative Tests within Measurement Period&quot;))
+
+define &quot;Negative Tests after First Negative Test&quot;:
+HIC.&quot;HIV Negative Observation&quot; O
+    with HIC.&quot;Client is at elevated risk for HIV acquisition&quot; HIV
+    such that O.hasMember.references(HIV)
+    and O.issued after &quot;First Negative Test within Measurement Period&quot;
+    and O.issued before (&quot;First Negative Test within Measurement Period&quot; + &quot;Testing Interval&quot;)
+Sort by O.issued</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -1175,7 +1276,7 @@ define &quot;VMMC_adverse_event_Intraoperative&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Jul 23, 2024 00:54+0000">2024-07-23</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 24, 2024 18:44+0000">2024-07-24</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
