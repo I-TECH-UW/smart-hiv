@@ -69,6 +69,7 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include HIVElements called HE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -81,19 +82,14 @@ context Patient
 */
 
 define "Measure Population":
-   (exists(HIC."HIV Positive Condition" C
-	where C.onset before end of "Measurement Period")
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period")
-	))
-   and exists(HIC."HIV Treatment Active" H
-   where H.effective starts before end of "Measurement Period"
-    and (H.effective ends after start of "Measurement Period")
+   exists(HE."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
+   and exists(HE."On ART H.DE47" ART
+   where ART.effective starts before end of "Measurement Period"
+    and (ART.effective ends after start of "Measurement Period")
    )
-   and not HIC."Patient Deceased before end of Measurement Period"
-   and not HIC."Transfer Out at Facility during the measurement period"
-   and not HIC."Lost to Follow Up during the measurement period"
+   and not (HE."Death documented" before end of "Measurement Period")
+   and not exists(HE."Transferred out" t where t ends during "Measurement Period")
+   and not exists(HE."Lost to follow-up")
 
 /*
  * As defined by Member States

@@ -7,6 +7,7 @@ include WHOCommon called WCom
 //include FHIRCommon called FC
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
+include HIVElements called HE
 
 parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
 parameter "Measurement Date" Date default @2020-01-01
@@ -22,6 +23,12 @@ context Patient
  */
 
 
+define "Patient Deceased during Measurement Period":
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  "Measurement Period" and  Patient.meta.lastUpdated after start of "Measurement Period"
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  "Measurement Period" and Patient.deceased as FHIR.dateTime after start of "Measurement Period"
+    else false
+  end
 
 define "HIV Positive Condition":
 [Condition] C
@@ -55,12 +62,6 @@ define "HIV test resulted":
   [Observation] O
     where O.status in {'final', 'amended'}
     and O.code ~ HC."Rapid diagnostic test for HIV - HIV.B.DE82"
-
-define "HIV Treatment Active":
-  [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC."On ART - HIV.H.DE47")
-    sort by effective
 
 define "HIV PREP Active":
 [MedicationStatement] MS
@@ -183,40 +184,12 @@ define "buprenorphine_prescribed":
         and MR.intent = 'order'
         and MR.medication ~ HCC."buprenorphine"
   
-define "Patient Deceased before end of Measurement Period":
-  case 
-    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then (Patient.meta.lastUpdated before end of "Measurement Period")
-    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of "Measurement Period"
-    else false
-  end
 
-define "Patient Deceased during Measurement Period":
-  case 
-    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  "Measurement Period" and  Patient.meta.lastUpdated after start of "Measurement Period"
-    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  "Measurement Period" and Patient.deceased as FHIR.dateTime after start of "Measurement Period"
-    else false
-  end
 
-/* End of care because of transferring out*/
 
-define "Transfer Out at Facility during the measurement period":
-    exists(
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC."On ART - HIV.H.DE47") 
-    and (exists (
-      EOC.statusHistory H
-      where H.status = 'finished'
-      and H.period ends during "Measurement Period"
-    ) 
-    or (
-      EOC.status = 'finished'
-      and EOC.period ends during "Measurement Period"
-    )
-    )
-    )
 
 define "Lost to Follow Up during the measurement period":
-    exists("HIV Treatment Active" H
+    exists(HE."On ART H.DE47" H
    where H.effective starts before end of "Measurement Period"
     and H.effective ends after start of "Measurement Period"
 	and not (H.effective ends after (end of "Measurement Period" - 28 days))
@@ -828,7 +801,7 @@ define "VMMC_adverse_event_Postoperative":
   
 
   define "First HIV Treatment":
-    First("HIV Treatment Active")
+    First(HE."On ART H.DE47")
 
 
   define "Time to start ART":

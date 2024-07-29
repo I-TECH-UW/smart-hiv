@@ -74,8 +74,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVElements called HE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -88,7 +88,7 @@ context Patient
 	exists(HIC."HIV Positive Observation" O
 	where (O.issued before end of "Measurement Period")
 	)) and 
-	exists(HIC."HIV Treatment Active" H
+	exists(HE."On ART H.DE47" H
    where H.effective starts during "Measurement Period")
 
 /*

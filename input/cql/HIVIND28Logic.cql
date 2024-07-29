@@ -78,8 +78,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVElements called HE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -93,35 +93,26 @@ define "Initial Population":
 
 
 define "numerator":
+//MINUS | COUNT of clients with "HIV status"='HIV-positive' AND "On ART"=True on the reporting period end date
    (
-    HIC."Patient Deceased before end of Measurement Period"
-   and HIC."Transfer Out at Facility during the measurement period"
-   and HIC."Lost to Follow Up during the measurement period"
+    (HE."Death documented" before end of "Measurement Period")
+   and exists(HE."Transferred out" t where t ends during "Measurement Period")
+   and exists(HE."Lost to follow-up")
    )
    and ((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-    (exists(HIC."HIV Positive Condition" C
-	where C.onset before end of "Measurement Period")
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period")
-	))
-   and exists(HIC."HIV Treatment Active" H
-   where H.effective starts before end of "Measurement Period"
-    and H.effective ends after start of "Measurement Period"
+    exists(HE."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
+   and exists(HE."On ART H.DE47" ART
+   where ART.effective starts before end of "Measurement Period"
+    and ART.effective ends after start of "Measurement Period"
    )
    ) or
    (
     //Accounts for end of last period
-    (exists(HIC."HIV Positive Condition" C
-	where C.onset before (end of "Measurement Period" - duration in days of "Measurement Period"))
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period" - duration in days of "Measurement Period")
-	))
-   and exists(HIC."HIV Treatment Active" H
-   where H.effective starts before (end of "Measurement Period" - duration in days of "Measurement Period")
-    and H.effective ends after (start of "Measurement Period" - duration in days of "Measurement Period")
+    exists(HE."HIV-positive B.DE116" HIV where HIV starts before (end of "Measurement Period" - duration in days of "Measurement Period"))
+   and exists(HE."On ART H.DE47" ART
+   where ART.effective starts before (end of "Measurement Period" - duration in days of "Measurement Period")
+    and ART.effective ends after (start of "Measurement Period" - duration in days of "Measurement Period")
    )
    )
    )
@@ -131,28 +122,18 @@ define "numerator":
  define "denominator":
    ((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-    (exists(HIC."HIV Positive Condition" C
-	where C.onset before end of "Measurement Period")
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period")
-	))
-   and exists(HIC."HIV Treatment Active" H
-   where H.effective starts before end of "Measurement Period"
-    and H.effective ends after start of "Measurement Period"
+    exists(HE."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
+   and exists(HE."On ART H.DE47" ART
+   where ART.effective starts before end of "Measurement Period"
+    and ART.effective ends after start of "Measurement Period"
    )
    ) or
    (
     //Accounts for end of last period
-    (exists(HIC."HIV Positive Condition" C
-	where C.onset before (end of "Measurement Period" - duration in days of "Measurement Period"))
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period" - duration in days of "Measurement Period")
-	))
-   and exists(HIC."HIV Treatment Active" H
-   where H.effective starts before (end of "Measurement Period" - duration in days of "Measurement Period")
-    and H.effective ends after (start of "Measurement Period" - duration in days of "Measurement Period")
+    exists(HE."HIV-positive B.DE116" HIV where HIV starts before (end of "Measurement Period" - duration in days of "Measurement Period"))
+   and exists(HE."On ART H.DE47" ART
+   where ART.effective starts before (end of "Measurement Period" - duration in days of "Measurement Period")
+    and ART.effective ends after (start of "Measurement Period" - duration in days of "Measurement Period")
    )
    )
    )
@@ -175,9 +156,8 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIC."patientGroups"
 
-//NEED TO FIGURE OUT Treatment outcome category (died, stopped treatment, lost to follow-up)
-
 define "Stratification":
  HIC."By Administrative Gender Stratifier".code 
   + ':' + HIC."By Age Stratifier"
 + ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')
