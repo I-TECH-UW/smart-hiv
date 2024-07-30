@@ -80,6 +80,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -95,16 +96,14 @@ define "Initial Population":
 define "numerator":
 //MINUS | COUNT of clients with "HIV status"='HIV-positive' AND "On ART"=True on the reporting period end date
    (
-    (HE."Death documented" before end of "Measurement Period")
-   and exists(HE."Transferred out" t where t ends during "Measurement Period")
-   and exists(HE."Lost to follow-up")
+    HIE."Death documented"
+   or HIE."Transferred out"
+   or HIE."Lost to follow-up"
    )
-   and ((
+   and (((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-    exists(HE."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
-   and exists(HE."On ART H.DE47" ART
-   where ART.effective starts before end of "Measurement Period"
-    and ART.effective ends after start of "Measurement Period"
+    HIE."HIV-positive B.DE116"
+   and HIE."On ART H.DE47"
    )
    ) or
    (
@@ -120,12 +119,10 @@ define "numerator":
 
 
  define "denominator":
-   ((
+   (((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-    exists(HE."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
-   and exists(HE."On ART H.DE47" ART
-   where ART.effective starts before end of "Measurement Period"
-    and ART.effective ends after start of "Measurement Period"
+    HIE."HIV-positive B.DE116"
+   and HIE."On ART H.DE47"
    )
    ) or
    (
@@ -156,8 +153,12 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIC."patientGroups"
 
+define "Treatment outcome category Stratifier":
+	HIC."Treatment outcome category"
+
 define "Stratification":
  HIC."By Administrative Gender Stratifier".code 
   + ':' + HIC."By Age Stratifier"
 + ':' + HIC."By Geographic Region Stratifier"
 + Combine(HIC.patientGroups, ':')
++ Combine(HIC."Treatment outcome category", ':')

@@ -85,6 +85,8 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -101,51 +103,6 @@ define "Initial Population":
   true
 
 
-define "Negative Tests within Measurement Period":
-HIC."HIV Negative Observation" O
-    with HIC."Client is at elevated risk for HIV acquisition" HIV
-    such that O.hasMember.references(HIV)
-    and O.issued after start of "Measurement Period"
-    and O.issued before end of "Measurement Period"
-Sort by O.issued
-
-define "First Negative Test within Measurement Period":
-( First("Negative Tests within Measurement Period"))
-
-define PReP_intervention:
-"PReP Intervention" P 
-  where P.effective starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
-  and P.effective starts after ("First Negative Test within Measurement Period")
-
-define "OAMT_intervention":
-  [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC."OAMT")
-    and (exists (
-      EOC.statusHistory H
-      where H.period starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
-      and H.period starts after ("First Negative Test within Measurement Period")
-    ) 
-    or (
-      EOC.period starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
-      and EOC.period starts after ("First Negative Test within Measurement Period")
-    )
-    )
-
-define NSP_intervention:
-  HIC."Needle Syringe Dispensed" DUS
-	where DUS.timing starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
-  and DUS.timing starts after ("First Negative Test within Measurement Period")
-
-define STI_intervention:
-  HIC.STI_testing STI
-	where STI.performed starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
-  and STI.performed starts after ("First Negative Test within Measurement Period")
-
-define VMMC_intervention:
-  HIC."VMMC_done" VM
-  where VM.performed starts before ("First Negative Test within Measurement Period" + "Intervention Interval")
-  and VM.performed starts after ("First Negative Test within Measurement Period")
-
 /**
  * Numerator
  * 
@@ -154,16 +111,28 @@ define VMMC_intervention:
  */
 
 define "Numerator":
-  exists(PReP_intervention
-  )
-  or exists(OAMT_intervention
-  )
-  or exists(NSP_intervention
-  )
-  or exists(STI_intervention
-  )
-  or exists(VMMC_intervention
-  )
+  (exists(HE."PrEP service" prep
+   where prep.effective.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and prep.effective.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval())
+   )
+  or 
+  exists(HE."OAMT" t where t starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+      and t starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  or 
+  exists(HE."NSP" DUS where DUS.timing.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and DUS.timing.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  or 
+  exists(HE."STI services" STI where STI.performed.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and STI.performed.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  or 
+  exists(HE."VMMC" V where V.performed.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and V.performed.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  or
+  exists(HE."Other PRV.DE8" O
+    where O.effective.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+    and O.effective.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval())))
+  and
+  HIE."At elevated risk for HIV acquisition B.DE225"
 
 
 
@@ -176,6 +145,7 @@ define "Numerator":
 
 define "Denominator":
   exists(HIC."Negative Tests within Measurement Period")
+  and HIE."At elevated risk for HIV acquisition B.DE225"
     
 
 /* end Populations */
@@ -205,5 +175,4 @@ define "Stratification":
   + ':' + HIC."By Age Stratifier 2"
 + ':' + HIC."By Geographic Region Stratifier"
 + Combine(HIC.patientGroups, ':')
-//need to fix
-//+ Combine(HIC."HIV prevention intervention", ':')
++ Combine(HIC."HIV prevention intervention", ':')

@@ -70,6 +70,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -82,14 +83,11 @@ context Patient
 */
 
 define "Measure Population":
-   exists(HE."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
-   and exists(HE."On ART H.DE47" ART
-   where ART.effective starts before end of "Measurement Period"
-    and (ART.effective ends after start of "Measurement Period")
-   )
-   and not (HE."Death documented" before end of "Measurement Period")
-   and not exists(HE."Transferred out" t where t ends during "Measurement Period")
-   and not exists(HE."Lost to follow-up")
+   HIE."HIV-positive B.DE116"
+   and HIE."On ART H.DE47"
+   and not HIE."Death documented"
+   and not HIE."Transferred out"
+   and not HIE."Lost to follow-up"
 
 /*
  * As defined by Member States
