@@ -5143,7 +5143,6 @@ define "Body weight Value":
 @activity: HIV.D3 Check for signs of serious illness
 @description: Signs that may indicate the client has a serious illness and needs triage or an emergency referral
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Signs of serious illness":
   exists "Signs of serious illness Observation"
 define "Signs of serious illness Observation":
