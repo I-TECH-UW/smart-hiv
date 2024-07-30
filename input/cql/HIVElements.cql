@@ -5391,13 +5391,12 @@ define "Serodiscordant partner D.DE37 Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is currently taking ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "On ART D.DE38":
-  exists "On ART D.DE38 Observation"
-define "On ART D.DE38 Observation":
-  [Observation: Concepts."On ART - HIV.D.DE38"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+    [MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.D.DE38")
+    sort by start of effective.toInterval()
 /* End of On ART D.DE38 */
 
 /*
@@ -6562,13 +6561,11 @@ define "Date viral load test results received by client D.DE193 Value":
 @activity: HIV.D10 Counsel returning client
 @description: Date and time when the sample was collected to test the client's HIV viral load
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date of viral load sample collection D.DE194":
-  [Observation: Concepts."Date of viral load sample collection - HIV.D.DE194"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date of viral load sample collection D.DE194 Value":
-  "Date of viral load sample collection D.DE194" O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ CustomConcepts."viral load test"
 /* End of Date of viral load sample collection D.DE194 */
 
 /*

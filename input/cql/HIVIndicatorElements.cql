@@ -2489,12 +2489,12 @@ define "Breastfeeding D.DE32 Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is currently taking ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "On ART D.DE38":
-  exists "On ART D.DE38 Observation"
-define "On ART D.DE38 Observation":
-  Elements."On ART D.DE38 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."On ART D.DE38" ART
+   where ART.effective.toInterval() starts before end of "Measurement Period"
+    and (ART.effective.toInterval() ends after start of "Measurement Period")
+   )
 /* End of On ART D.DE38 */
 
 /*
@@ -2935,13 +2935,10 @@ define "Date viral load test results received by client D.DE193 Value":
 @activity: HIV.D10 Counsel returning client
 @description: Date and time when the sample was collected to test the client's HIV viral load
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date of viral load sample collection D.DE194":
-  Elements."Date of viral load sample collection D.DE194" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date of viral load sample collection D.DE194 Value":
-  "Date of viral load sample collection D.DE194" O
-  return O.value
+  exists(Elements."Date of viral load sample collection D.DE194" P
+  where P.performed.toInterval() during "Measurement Period")
 /* End of Date of viral load sample collection D.DE194 */
 
 /*
@@ -6477,8 +6474,8 @@ define "Refused stopped treatment":
 */
 define "On ART H.DE47":
   exists(Elements."On ART H.DE47" ART
-   where ART.effective starts before end of "Measurement Period"
-    and (ART.effective ends after start of "Measurement Period")
+   where ART.effective.toInterval() starts before end of "Measurement Period"
+    and (ART.effective.toInterval() ends after start of "Measurement Period")
    )
 /* End of On ART H.DE47 */
 

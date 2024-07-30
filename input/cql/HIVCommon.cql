@@ -21,6 +21,15 @@ context Patient
 
 //VERIFIED
 
+define "viral load sample collection":
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HCC."viral load test"
+  and exists(P.reasonCode RC where RC ~ HC."Routine viral load test")
+
+define "First On ART":
+  (First(HE."On ART D.DE38"))
+
 define "Negative Tests within Measurement Period":
 HE."HIV-negative B.DE113" O
     with HE."At elevated risk for HIV acquisition B.DE225" HIV
