@@ -1,10 +1,11 @@
 HIV : Validation Results
 =========================================
 
-err = 505, warn = 483, info = 2282
+err = 551, warn = 496, info = 2287
 $--
 Generated $--. FHIR version $-- for smart.who.int.hiv#$-- (canonical = http://smart.who.int/hiv)
  Build Errors : 56 / 4 / 0
+ /github/workspace/fsh-generated/resources/ActivityDefinition-HIVB9DTScheduleFollowUp : 0 / 0 / 1
  /github/workspace/fsh-generated/resources/ActorDefinition-Client : 0 / 1 / 2
  /github/workspace/fsh-generated/resources/ActorDefinition-CommunityHealthWorker : 0 / 1 / 2
  /github/workspace/fsh-generated/resources/ActorDefinition-DataEntryClerk : 0 / 1 / 2
@@ -20,8 +21,9 @@ Generated $--. FHIR version $-- for smart.who.int.hiv#$-- (canonical = http://sm
  /github/workspace/fsh-generated/resources/ActorDefinition-TrainedNonPhysicianClinician : 0 / 1 / 2
  /github/workspace/fsh-generated/resources/CodeSystem-HIVConcepts : 0 / 17 / 4
  /github/workspace/fsh-generated/resources/ImplementationGuide-smart.who.int.hiv : 0 / 0 / 4
- /github/workspace/fsh-generated/resources/Library-HIVB2DTLogic : 5 / 5 / 11
+ /github/workspace/fsh-generated/resources/Library-HIVB2DTLogic : 12 / 3 / 11
  /github/workspace/fsh-generated/resources/Library-HIVB7DTLogic : 5 / 26 / 11
+ /github/workspace/fsh-generated/resources/Library-HIVB9DTLogic : 39 / 3 / 11
  /github/workspace/fsh-generated/resources/Library-HIVCommon : 2 / 157 / 11
  /github/workspace/fsh-generated/resources/Library-HIVConcepts : 2 / 0 / 11
  /github/workspace/fsh-generated/resources/Library-HIVConceptsCustom : 5 / 0 / 11
@@ -212,6 +214,7 @@ Generated $--. FHIR version $-- for smart.who.int.hiv#$-- (canonical = http://sm
  /github/workspace/fsh-generated/resources/Measure-HIVIND94 : 0 / 0 / 9
  /github/workspace/fsh-generated/resources/Measure-HIVIND95 : 0 / 0 / 9
  /github/workspace/fsh-generated/resources/Measure-HIVIND96 : 0 / 0 / 9
+ /github/workspace/fsh-generated/resources/PlanDefinition-HIVB9DT : 0 / 11 / 8
  /github/workspace/fsh-generated/resources/Questionnaire-HIV.A2GatherClientDetails : 0 / 0 / 6
  /github/workspace/fsh-generated/resources/Questionnaire-HIV.A5CreateNewClientRecord : 0 / 0 / 6
  /github/workspace/fsh-generated/resources/Questionnaire-HIV.A6.1ReviewSociodemographicDataWithClient : 0 / 0 / 6
@@ -619,6 +622,7 @@ WARNING: 1: The HTML fragment 'ip-statements.xhtml' is not included anywhere in 
 WARNING: 2: An HTML fragment from the set [cross-version-analysis.xhtml, cross-version-analysis-inline.xhtml] is not included anywhere in the produced implementation guide
 WARNING: 3: An HTML fragment from the set [dependency-table.xhtml, dependency-table-short.xhtml] is not included anywhere in the produced implementation guide
 WARNING: 4: The HTML fragment 'globals-table.xhtml' is not included anywhere in the produced implementation guide
+== fsh-generated/resources/ActivityDefinition-HIVB9DTScheduleFollowUp.json ==
 == fsh-generated/resources/ActorDefinition-Client.json ==
 WARNING: ActorDefinition/Client: ActorDefinition.meta.profile[0]: Profile reference 'http://smart.who.int/smart-base/StructureDefinition/SGPersona' has not been checked because it could not be found, and the validator is set to not fetch unknown profiles
 INFORMATION: Resource: This resource could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
@@ -679,14 +683,21 @@ WARNING: CodeSystem/HIVConcepts: CodeSystem.meta.profile[2]: Profile reference '
 == fsh-generated/resources/ImplementationGuide-smart.who.int.hiv.json ==
 == fsh-generated/resources/Library-HIVB2DTLogic.json ==
 ERROR: Library.where(url = 'http://smart.who.int/HIV/Library/HIVB2DTLogic'): Conformance resource /github/workspace/fsh-generated/resources/Library-HIVB2DTLogic.json - the canonical URL (http://smart.who.int/hiv/Library/HIVB2DTLogic) does not match the URL (http://smart.who.int/HIV/Library/HIVB2DTLogic)
+ERROR: HIVB2DTLogic: Syntax error at ""
 WARNING: /github/workspace/input/cql/HIVB2DTLogic.cql: The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.
 ERROR: HIVB2DTLogic: Could not load source for library FHIRCommon, version null.
-WARNING: /github/workspace/input/cql/HIVB2DTLogic.cql: The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.
-ERROR: HIVB2DTLogic.cql: CQL Processing failed with (1) errors.
+ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
+ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
+ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
+ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
+ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
+ERROR: HIVB2DTLogic: Could not validate reference to expression Immediately take action or refer for care if a client is having this issue because its definition contains errors.
+ERROR: HIVB2DTLogic.cql: CQL Processing failed with (8) errors.
 INFORMATION: Library/HIVB2DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablelibrary|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Library/HIVB2DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cql/StructureDefinition/cql-library|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 ERROR: Library/HIVB2DTLogic: Library.content[1]: Constraint failed: clb-2: 'CQL libraries must have a content element with data or a url (or both)'
 INFORMATION: Library/HIVB2DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
+WARNING: Resource: The URL 'http://smart.who.int/HIV/Library/HIVB2DTLogic' is also used by HIVB9DTLogic in /github/workspace/fsh-generated/resources/Library-HIVB9DTLogic
 ERROR: /github/workspace/fsh-generated/resources/Library-HIVB2DTLogic: URL Mismatch http://smart.who.int/hiv/Library/HIVB2DTLogic vs http://smart.who.int/HIV/Library/HIVB2DTLogic
 == fsh-generated/resources/Library-HIVB7DTLogic.json ==
 ERROR: Library.where(url = 'http://smart.who.int/HIV/Library/HIVB7DTLogic'): Conformance resource /github/workspace/fsh-generated/resources/Library-HIVB7DTLogic.json - the canonical URL (http://smart.who.int/hiv/Library/HIVB7DTLogic) does not match the URL (http://smart.who.int/HIV/Library/HIVB7DTLogic)
@@ -700,6 +711,51 @@ INFORMATION: Library/HIVB7DTLogic: Library.extension[0]: This element does not m
 ERROR: Library/HIVB7DTLogic: Library.content[1]: Constraint failed: clb-2: 'CQL libraries must have a content element with data or a url (or both)'
 INFORMATION: Library/HIVB7DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 ERROR: /github/workspace/fsh-generated/resources/Library-HIVB7DTLogic: URL Mismatch http://smart.who.int/hiv/Library/HIVB7DTLogic vs http://smart.who.int/HIV/Library/HIVB7DTLogic
+== fsh-generated/resources/Library-HIVB9DTLogic.json ==
+ERROR: Library.where(url = 'http://smart.who.int/HIV/Library/HIVB2DTLogic'): Conformance resource /github/workspace/fsh-generated/resources/Library-HIVB9DTLogic.json - the canonical URL (http://smart.who.int/hiv/Library/HIVB9DTLogic) does not match the URL (http://smart.who.int/HIV/Library/HIVB2DTLogic)
+ERROR: HIVB9DTLogic: Syntax error at )
+ERROR: HIVB9DTLogic: Syntax error at )
+ERROR: HIVB9DTLogic: Syntax error at :
+ERROR: HIVB9DTLogic: Syntax error at :
+ERROR: HIVB9DTLogic: Syntax error at :
+ERROR: HIVB9DTLogic: Syntax error at ""
+ERROR: HIVB9DTLogic: Syntax error at ""
+ERROR: HIVB9DTLogic: Syntax error at ""
+ERROR: HIVB9DTLogic: Syntax error at ""
+ERROR: HIVB9DTLogic: Syntax error at :
+ERROR: HIVB9DTLogic: Syntax error at ""
+ERROR: HIVB9DTLogic: Syntax error at case
+ERROR: HIVB9DTLogic: Syntax error at :
+ERROR: HIVB9DTLogic: Syntax error at :
+ERROR: HIVB9DTLogic: Could not load source for library HIVConfig, version null.
+WARNING: /github/workspace/input/cql/HIVB9DTLogic.cql: The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.
+ERROR: HIVB9DTLogic: Could not load source for library FHIRCommon, version null.
+ERROR: HIVB9DTLogic: Could not resolve identifier HIV status Observation in library HIVEncounterElements.
+ERROR: HIVB9DTLogic: Could not resolve identifier Partner HIV status reported Observation in library HIVEncounterElements.
+ERROR: HIVB9DTLogic: Could not resolve identifier Config in the current library.
+ERROR: HIVB9DTLogic: Could not resolve identifier Config in the current library.
+ERROR: HIVB9DTLogic: Could not resolve identifier Key population member* B.DE49 Observation in library HIVEncounterElements.
+ERROR: HIVB9DTLogic: Could not determine signature for invocation of operator System.Exists.
+ERROR: HIVB9DTLogic: Member value not found for type System.Boolean.
+ERROR: HIVB9DTLogic: Could not resolve identifier At elevated risk for HIV acquisition in library HIVEncounterElements.
+ERROR: HIVB9DTLogic: Could not validate reference to expression HIV status negative or unknown because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression Partner HIV positive because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression HIV status negative or unknown because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression HIV status negative or unknown because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression HIV status negative or unknown because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression Pregnant in high HIV burden setting because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression Pregnant in high HIV burden setting because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression HIV status negative or unknown because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression Pregnant in low HIV burden setting because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression Schedule an annual follow-up test because its definition contains errors.
+ERROR: HIVB9DTLogic: Could not validate reference to expression Schedule an annual follow-up test because its definition contains errors.
+ERROR: HIVB9DTLogic.cql: CQL Processing failed with (35) errors.
+INFORMATION: Library/HIVB9DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablelibrary|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
+INFORMATION: Library/HIVB9DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cql/StructureDefinition/cql-library|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
+ERROR: Library/HIVB9DTLogic: Library.content[1]: Constraint failed: clb-2: 'CQL libraries must have a content element with data or a url (or both)'
+INFORMATION: Library/HIVB9DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cql/StructureDefinition/cql-module|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
+WARNING: Resource: The URL 'http://smart.who.int/HIV/Library/HIVB2DTLogic' has already been used by HIVB2DTLogic in /github/workspace/fsh-generated/resources/Library-HIVB2DTLogic
+ERROR: /github/workspace/fsh-generated/resources/Library-HIVB9DTLogic: URL Mismatch http://smart.who.int/hiv/Library/HIVB9DTLogic vs http://smart.who.int/HIV/Library/HIVB2DTLogic
 == fsh-generated/resources/Library-HIVCommon.json ==
 ERROR: Library.where(url = 'http://smart.who.int/HIV/Library/HIVCommon'): Conformance resource /github/workspace/fsh-generated/resources/Library-HIVCommon.json - the canonical URL (http://smart.who.int/hiv/Library/HIVCommon) does not match the URL (http://smart.who.int/HIV/Library/HIVCommon)
 WARNING: /github/workspace/input/cql/HIVCommon.cql: The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.
@@ -2353,6 +2409,20 @@ INFORMATION: Resource: This resource could usefully have an OID assigned (OIDs a
 INFORMATION: Measure/HIVIND96: Measure.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablemeasure|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Measure/HIVIND96: Measure.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Resource: This resource could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
+== fsh-generated/resources/PlanDefinition-HIVB9DT.json ==
+INFORMATION: PlanDefinition/HIVB9DT: PlanDefinition.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-recommendationdefinition|2.0.0-draft (this may not be a problem, but you should check that it's not intended to match a slice)
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+INFORMATION: PlanDefinition/HIVB9DT: PlanDefinition.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableplandefinition|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 == fsh-generated/resources/Questionnaire-HIV.A2GatherClientDetails.json ==
 == fsh-generated/resources/Questionnaire-HIV.A5CreateNewClientRecord.json ==
 == fsh-generated/resources/Questionnaire-HIV.A6.1ReviewSociodemographicDataWithClient.json ==

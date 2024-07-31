@@ -13,90 +13,115 @@
 Library: HIV.B2.DT Logic
 
 @DecisionID: HIV.B2.DT
-@BusinessRule:
-@Trigger: 
-@Description: 
+@BusinessRule: Check for signs of serious illness
+@Trigger: HIV.B2 Check for signs of serious illness
+@Trigger: HIV.D3 Check for signs of serious illness
+@HitPolicy: Rule Order
+@Description: Check for serious illness
 
-Check for signs of serious illness
-Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease.  
-Should this just be for anyone with HIV? 
-Wouldn't other  disease domains also code for general exam?
+Data Concepts:
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.D.DE17: Signs of serious illness | Signs that may indicate the client has a serious illness and needs triage or an emergency referral
+ * HIV.D.DE9: Body temperature | Temperature of the client in Celsius
+
+Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease.
 */
 
 library HIVB2DTLogic
 
- using FHIR version '4.0.1'
- 
+using FHIR version '4.0.1'
 
- include HIVCommon version '0.0.1' called HIC
- include FHIRHelpers version '4.0.1'
- include WHOCommon called WCom
- include FHIRCommon called FC
+include HIVCommon version '0.0.1' called HIC
+include HIVConcepts called HCx
+include HIVEncounterElements called Elements
+include FHIRHelpers version '4.0.1'
+include FHIRCommon called FC
+include WHOCommon called WCom
 
- valueset &quot;Tachycardia&quot;: ''
- valueset &quot;Tachypnea&quot;: ''
- valueset &quot;Unable to walk unaided&quot;: ''
- valueset &quot;Body temperature = ≥ 39 °C&quot;: '' 
- valueset &quot;Other sign of serious illness (specify)&quot;: ''
- valueset &quot;Lethargy&quot;: ''
- valueset &quot;Unconsciousness&quot;: ''
- valueset &quot;Convulsions&quot;: ''
- valueset &quot;Unable to breastfeed&quot;: ''
- valueset &quot;Unable to drink&quot;: ''
- valueset &quot;Repeated vomiting&quot;: ''
-
- context Patient
+context Patient
 
  /*
-  * Age = ≥ 10 years
+  @input: &quot;Age 10 or older&quot;
+  @pseudocode: 'Age' &gt;= 10 years
   */
-
-define &quot;Age_10_or_more&quot;:
+define &quot;Age 10 or older&quot;:
   AgeInYearsAt(Today()) &gt;= 10
 
  /*
-  * Age &lt; 10 years
+  @input: &quot;Age under 10&quot;
+  @pseudocode: 'Age' &lt; 10 years
   */
-
-define &quot;Age_less_than_10&quot;:
+define &quot;Age under 10&quot;:
   AgeInYearsAt(Today()) &lt; 10
 
-define &quot;Take action or refer client showing signs of a serious illness&quot;:
-  exists(([Observation: &quot;Tachycardia&quot;]
-  union [Observation: &quot;Tachypnea&quot;]
-  union [Observation: &quot;Unable to walk unaided&quot;]) O
-  where Age_10_or_more
-  and O.status in { 'final', 'amended' })
-  or exists(([Observation: &quot;Lethargy&quot;]
-  union [Observation: &quot;Unconsciousness&quot;]
-  union [Observation: &quot;Convulsions&quot;]
-  union [Observation: &quot;Unable to breastfeed&quot;]
-  union [Observation: &quot;Unable to drink&quot;]
-  union [Observation: &quot;Unconsciousness&quot;]
-  union [Observation: &quot;Repeated vomiting&quot;]) O
-  where Age_less_than_10
-  and O.status in { 'final', 'amended' }
-  )
+/*
+ @output: &quot;Immediately take action or refer for care if a client is having this issue&quot;
+ */
+define &quot;Immediately take action or refer for care if a client is having this issue&quot;:
+  exists(Elements.&quot;Signs of serious illness&quot; O
+    where &quot;Age 10 or older&quot; 
+      and O.value ~ HCx.&quot;Tachycardia&quot;)
 
-//plan definition Immediately take action or refer for care if a client is having this issue.
+/*
+ @output &quot;Immediately take action or refer for care if client is showing this sign of a serious illness.&quot;
+ */
+define &quot;Immediately take action or refer for care if client is showing this sign of a serious illness&quot;:
+  &quot;Signs of serious illness age 10 or older&quot; or &quot;Signs of serious illness age under 10&quot;
 
+/*
+ @output &quot;Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill&quot;
+ */
 define &quot;Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill&quot;:
-  exists (([Observation: &quot;Body temperature = ≥ 39 °C&quot;]
-  union [Observation: &quot;Other sign of serious illness (specify)&quot;]) O
-  where Age_10_or_more
-  and O.status in { 'final', 'amended' })
-  // Please this condition needs to be fixed
-  // or exists((([Observation: &quot;Body temperature = ≥ 39 °C&quot;]
-  // intersect [Observation: &quot;Tachycardia&quot;])
-  // or ([Observation: &quot;Body temperature = ≥ 39 °C&quot;]
-  // intersect [Observation: &quot;Tachypnea&quot;])
-  // or [Observation: &quot;Other sign of serious illness (specify)&quot;]) O
-  // where Age_less_than_10
-  // and O.status in { 'final', 'amended' })
-  // )
+  &quot;Signs of serious illness requiring clinical judgement age 10 or older&quot; or &quot;Signs of serious illness requiring clinical judgement age under 10&quot;
 
+/*
+ @dynamicValue: Guidance
+ */
+define &quot;Guidance&quot;:
+  case 
+  when &quot;Immediately take action or refer for care if a client is having this issue&quot; 
+    then &quot;Immediately take action or refer for care if a client is having this issue.&quot;
+  when &quot;Immediately take action or refer for care if client is showing this sign of a serious illness&quot; and &quot;Age 10 or older&quot;
+    then &quot;Immediately take action or refer for care if client is showing this sign of a serious illness.&quot;
+  when &quot;Immediately take action or refer for care if client is showing this sign of a serious illness&quot; and &quot;Age under 10&quot;
+    then &quot;&quot;&quot;This is a sign and/or symptom of a serious health condition.
+  
+Immediately take action or refer for care if client is showing this sign of a serious illness.&quot;&quot;&quot;
+  else null
+  end
 
-//plan definition  Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill. 
+/*
+ Supporting Logic
+*/
+define &quot;Signs of serious illness age 10 or older&quot;:
+  &quot;Age 10 or older&quot; and Elements.&quot;Signs of serious illness&quot; O
+    where
+      O.value ~ HCx.&quot;Tachypnea&quot; or
+      O.value ~ HCx.&quot;Unable to walk unaided&quot;
+
+define &quot;Signs of serious illness age under 10&quot;:
+  &quot;Age under 10&quot; and Elements.&quot;Signs of serious illness&quot; O
+    where 
+      O.value in {
+        HCx.&quot;Lethargy - HIV.D.DE22&quot;,
+        HCx.&quot;Unconsciousness&quot;,
+        HCx.&quot;Convulsions&quot;,
+        HCx.&quot;Unable to breastfeed&quot;,
+        HCx.&quot;Unable to drink&quot;,
+        HCx.&quot;Repeated vomiting&quot;
+      } 
+  
+define &quot;Signs of serious illness requiring clinical judgement age 10 or older&quot;:
+  &quot;Age 10 or older&quot; and Elements.&quot;Signs of serious illness&quot; O
+    where
+      O.value ~ HCx.&quot;Fever of 39 C or greater&quot; or
+      O.value ~ HCx.&quot;Other sign of serious illness&quot;
+  
+define &quot;Signs of serious illness requiring clinical judgement age under 10&quot;:
+  &quot;Age under 10&quot; and Elements.&quot;Signs of serious illness&quot; O
+    where 
+      O.value ~ HCx.&quot;Fever of 39 C or greater&quot; or
+      O.value ~ HCx.&quot;Other sign of serious illness&quot;
 </code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
   </text>
   <extension url="http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability">
@@ -114,7 +139,7 @@ define &quot;Use clinical judgement and consider local epidemiology to determine
       <code value="logic-library"/>
     </coding>
   </type>
-  <date value="2024-07-24T22:47:13+00:00"/>
+  <date value="2024-07-31T16:10:46+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -126,7 +151,7 @@ define &quot;Use clinical judgement and consider local epidemiology to determine
   <description value="Description not yet available for HIV.B2.DT Logic."/>
   <content>
     <contentType value="text/cql"/>
-    <data value="LyoqCkxpYnJhcnk6IEhJVi5CMi5EVCBMb2dpYwoKQERlY2lzaW9uSUQ6IEhJVi5CMi5EVApAQnVzaW5lc3NSdWxlOgpAVHJpZ2dlcjogCkBEZXNjcmlwdGlvbjogCgpDaGVjayBmb3Igc2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzCkNvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIEhJViBwcmV2ZW50aW9uLCB0ZXN0aW5nLCB0cmVhdG1lbnQsIHNlcnZpY2UgZGVsaXZlcnkgYW5kIG1vbml0b3Jpbmc6IHJlY29tbWVuZGF0aW9ucyBmb3IgYSBwdWJsaWMgaGVhbHRoIGFwcHJvYWNoICgyMDIxKSBDaGFwdGVyIDU6IEFkdmFuY2VkIEhJViBEaXNlYXNlLiBGaWd1cmUgNS4xOiBBbGdvcml0aG0gZm9yIHByb3ZpZGluZyBhIHBhY2thZ2Ugb2YgY2FyZSBmb3IgcGVvcGxlIHdpdGggYWR2YW5jZWQgSElWIGRpc2Vhc2UuICAKU2hvdWxkIHRoaXMganVzdCBiZSBmb3IgYW55b25lIHdpdGggSElWPyAKV291bGRuJ3Qgb3RoZXIgIGRpc2Vhc2UgZG9tYWlucyBhbHNvIGNvZGUgZm9yIGdlbmVyYWwgZXhhbT8KKi8KCmxpYnJhcnkgSElWQjJEVExvZ2ljCgogdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKIAoKIGluY2x1ZGUgSElWQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCiBpbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwogaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KIGluY2x1ZGUgRkhJUkNvbW1vbiBjYWxsZWQgRkMKCiB2YWx1ZXNldCAiVGFjaHljYXJkaWEiOiAnJwogdmFsdWVzZXQgIlRhY2h5cG5lYSI6ICcnCiB2YWx1ZXNldCAiVW5hYmxlIHRvIHdhbGsgdW5haWRlZCI6ICcnCiB2YWx1ZXNldCAiQm9keSB0ZW1wZXJhdHVyZSA9IOKJpSAzOSDCsEMiOiAnJyAKIHZhbHVlc2V0ICJPdGhlciBzaWduIG9mIHNlcmlvdXMgaWxsbmVzcyAoc3BlY2lmeSkiOiAnJwogdmFsdWVzZXQgIkxldGhhcmd5IjogJycKIHZhbHVlc2V0ICJVbmNvbnNjaW91c25lc3MiOiAnJwogdmFsdWVzZXQgIkNvbnZ1bHNpb25zIjogJycKIHZhbHVlc2V0ICJVbmFibGUgdG8gYnJlYXN0ZmVlZCI6ICcnCiB2YWx1ZXNldCAiVW5hYmxlIHRvIGRyaW5rIjogJycKIHZhbHVlc2V0ICJSZXBlYXRlZCB2b21pdGluZyI6ICcnCgogY29udGV4dCBQYXRpZW50CgogLyoKICAqIEFnZSA9IOKJpSAxMCB5ZWFycwogICovCgpkZWZpbmUgIkFnZV8xMF9vcl9tb3JlIjoKICBBZ2VJblllYXJzQXQoVG9kYXkoKSkgPj0gMTAKCiAvKgogICogQWdlIDwgMTAgeWVhcnMKICAqLwoKZGVmaW5lICJBZ2VfbGVzc190aGFuXzEwIjoKICBBZ2VJblllYXJzQXQoVG9kYXkoKSkgPCAxMAoKZGVmaW5lICJUYWtlIGFjdGlvbiBvciByZWZlciBjbGllbnQgc2hvd2luZyBzaWducyBvZiBhIHNlcmlvdXMgaWxsbmVzcyI6CiAgZXhpc3RzKChbT2JzZXJ2YXRpb246ICJUYWNoeWNhcmRpYSJdCiAgdW5pb24gW09ic2VydmF0aW9uOiAiVGFjaHlwbmVhIl0KICB1bmlvbiBbT2JzZXJ2YXRpb246ICJVbmFibGUgdG8gd2FsayB1bmFpZGVkIl0pIE8KICB3aGVyZSBBZ2VfMTBfb3JfbW9yZQogIGFuZCBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJyB9KQogIG9yIGV4aXN0cygoW09ic2VydmF0aW9uOiAiTGV0aGFyZ3kiXQogIHVuaW9uIFtPYnNlcnZhdGlvbjogIlVuY29uc2Npb3VzbmVzcyJdCiAgdW5pb24gW09ic2VydmF0aW9uOiAiQ29udnVsc2lvbnMiXQogIHVuaW9uIFtPYnNlcnZhdGlvbjogIlVuYWJsZSB0byBicmVhc3RmZWVkIl0KICB1bmlvbiBbT2JzZXJ2YXRpb246ICJVbmFibGUgdG8gZHJpbmsiXQogIHVuaW9uIFtPYnNlcnZhdGlvbjogIlVuY29uc2Npb3VzbmVzcyJdCiAgdW5pb24gW09ic2VydmF0aW9uOiAiUmVwZWF0ZWQgdm9taXRpbmciXSkgTwogIHdoZXJlIEFnZV9sZXNzX3RoYW5fMTAKICBhbmQgTy5zdGF0dXMgaW4geyAnZmluYWwnLCAnYW1lbmRlZCcgfQogICkKCi8vcGxhbiBkZWZpbml0aW9uIEltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGEgY2xpZW50IGlzIGhhdmluZyB0aGlzIGlzc3VlLgoKZGVmaW5lICJVc2UgY2xpbmljYWwganVkZ2VtZW50IGFuZCBjb25zaWRlciBsb2NhbCBlcGlkZW1pb2xvZ3kgdG8gZGV0ZXJtaW5lIGlmIHN5bXB0b21zIHN1Z2dlc3QgY2xpZW50IGlzIHNlcmlvdXNseSBpbGwiOgogIGV4aXN0cyAoKFtPYnNlcnZhdGlvbjogIkJvZHkgdGVtcGVyYXR1cmUgPSDiiaUgMzkgwrBDIl0KICB1bmlvbiBbT2JzZXJ2YXRpb246ICJPdGhlciBzaWduIG9mIHNlcmlvdXMgaWxsbmVzcyAoc3BlY2lmeSkiXSkgTwogIHdoZXJlIEFnZV8xMF9vcl9tb3JlCiAgYW5kIE8uc3RhdHVzIGluIHsgJ2ZpbmFsJywgJ2FtZW5kZWQnIH0pCiAgLy8gUGxlYXNlIHRoaXMgY29uZGl0aW9uIG5lZWRzIHRvIGJlIGZpeGVkCiAgLy8gb3IgZXhpc3RzKCgoW09ic2VydmF0aW9uOiAiQm9keSB0ZW1wZXJhdHVyZSA9IOKJpSAzOSDCsEMiXQogIC8vIGludGVyc2VjdCBbT2JzZXJ2YXRpb246ICJUYWNoeWNhcmRpYSJdKQogIC8vIG9yIChbT2JzZXJ2YXRpb246ICJCb2R5IHRlbXBlcmF0dXJlID0g4omlIDM5IMKwQyJdCiAgLy8gaW50ZXJzZWN0IFtPYnNlcnZhdGlvbjogIlRhY2h5cG5lYSJdKQogIC8vIG9yIFtPYnNlcnZhdGlvbjogIk90aGVyIHNpZ24gb2Ygc2VyaW91cyBpbGxuZXNzIChzcGVjaWZ5KSJdKSBPCiAgLy8gd2hlcmUgQWdlX2xlc3NfdGhhbl8xMAogIC8vIGFuZCBPLnN0YXR1cyBpbiB7ICdmaW5hbCcsICdhbWVuZGVkJyB9KQogIC8vICkKCgovL3BsYW4gZGVmaW5pdGlvbiAgVXNlIGNsaW5pY2FsIGp1ZGdlbWVudCBhbmQgY29uc2lkZXIgbG9jYWwgZXBpZGVtaW9sb2d5IHRvIGRldGVybWluZSBpZiBzeW1wdG9tcyBzdWdnZXN0IGNsaWVudCBpcyBzZXJpb3VzbHkgaWxsLiAK"/>
+    <data value="LyoqCkxpYnJhcnk6IEhJVi5CMi5EVCBMb2dpYwoKQERlY2lzaW9uSUQ6IEhJVi5CMi5EVApAQnVzaW5lc3NSdWxlOiBDaGVjayBmb3Igc2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzCkBUcmlnZ2VyOiBISVYuQjIgQ2hlY2sgZm9yIHNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcwpAVHJpZ2dlcjogSElWLkQzIENoZWNrIGZvciBzaWducyBvZiBzZXJpb3VzIGlsbG5lc3MKQEhpdFBvbGljeTogUnVsZSBPcmRlcgpARGVzY3JpcHRpb246IENoZWNrIGZvciBzZXJpb3VzIGlsbG5lc3MKCkRhdGEgQ29uY2VwdHM6CiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aAogKiBISVYuRC5ERTE3OiBTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgfCBTaWducyB0aGF0IG1heSBpbmRpY2F0ZSB0aGUgY2xpZW50IGhhcyBhIHNlcmlvdXMgaWxsbmVzcyBhbmQgbmVlZHMgdHJpYWdlIG9yIGFuIGVtZXJnZW5jeSByZWZlcnJhbAogKiBISVYuRC5ERTk6IEJvZHkgdGVtcGVyYXR1cmUgfCBUZW1wZXJhdHVyZSBvZiB0aGUgY2xpZW50IGluIENlbHNpdXMKCkNvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIEhJViBwcmV2ZW50aW9uLCB0ZXN0aW5nLCB0cmVhdG1lbnQsIHNlcnZpY2UgZGVsaXZlcnkgYW5kIG1vbml0b3Jpbmc6IHJlY29tbWVuZGF0aW9ucyBmb3IgYSBwdWJsaWMgaGVhbHRoIGFwcHJvYWNoICgyMDIxKSBDaGFwdGVyIDU6IEFkdmFuY2VkIEhJViBEaXNlYXNlLiBGaWd1cmUgNS4xOiBBbGdvcml0aG0gZm9yIHByb3ZpZGluZyBhIHBhY2thZ2Ugb2YgY2FyZSBmb3IgcGVvcGxlIHdpdGggYWR2YW5jZWQgSElWIGRpc2Vhc2UuCiovCgpsaWJyYXJ5IEhJVkIyRFRMb2dpYwoKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgSElWQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCmluY2x1ZGUgSElWQ29uY2VwdHMgY2FsbGVkIEhDeAppbmNsdWRlIEhJVkVuY291bnRlckVsZW1lbnRzIGNhbGxlZCBFbGVtZW50cwppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwppbmNsdWRlIEZISVJDb21tb24gY2FsbGVkIEZDCmluY2x1ZGUgV0hPQ29tbW9uIGNhbGxlZCBXQ29tCgpjb250ZXh0IFBhdGllbnQKCiAvKgogIEBpbnB1dDogIkFnZSAxMCBvciBvbGRlciIKICBAcHNldWRvY29kZTogJ0FnZScgPj0gMTAgeWVhcnMKICAqLwpkZWZpbmUgIkFnZSAxMCBvciBvbGRlciI6CiAgQWdlSW5ZZWFyc0F0KFRvZGF5KCkpID49IDEwCgogLyoKICBAaW5wdXQ6ICJBZ2UgdW5kZXIgMTAiCiAgQHBzZXVkb2NvZGU6ICdBZ2UnIDwgMTAgeWVhcnMKICAqLwpkZWZpbmUgIkFnZSB1bmRlciAxMCI6CiAgQWdlSW5ZZWFyc0F0KFRvZGF5KCkpIDwgMTAKCi8qCiBAb3V0cHV0OiAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgYSBjbGllbnQgaXMgaGF2aW5nIHRoaXMgaXNzdWUiCiAqLwpkZWZpbmUgIkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGEgY2xpZW50IGlzIGhhdmluZyB0aGlzIGlzc3VlIjoKICBleGlzdHMoRWxlbWVudHMuIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyIgTwogICAgd2hlcmUgIkFnZSAxMCBvciBvbGRlciIgCiAgICAgIGFuZCBPLnZhbHVlIH4gSEN4LiJUYWNoeWNhcmRpYSIpCgovKgogQG91dHB1dCAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgY2xpZW50IGlzIHNob3dpbmcgdGhpcyBzaWduIG9mIGEgc2VyaW91cyBpbGxuZXNzLiIKICovCmRlZmluZSAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgY2xpZW50IGlzIHNob3dpbmcgdGhpcyBzaWduIG9mIGEgc2VyaW91cyBpbGxuZXNzIjoKICAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIGFnZSAxMCBvciBvbGRlciIgb3IgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyBhZ2UgdW5kZXIgMTAiCgovKgogQG91dHB1dCAiVXNlIGNsaW5pY2FsIGp1ZGdlbWVudCBhbmQgY29uc2lkZXIgbG9jYWwgZXBpZGVtaW9sb2d5IHRvIGRldGVybWluZSBpZiBzeW1wdG9tcyBzdWdnZXN0IGNsaWVudCBpcyBzZXJpb3VzbHkgaWxsIgogKi8KZGVmaW5lICJVc2UgY2xpbmljYWwganVkZ2VtZW50IGFuZCBjb25zaWRlciBsb2NhbCBlcGlkZW1pb2xvZ3kgdG8gZGV0ZXJtaW5lIGlmIHN5bXB0b21zIHN1Z2dlc3QgY2xpZW50IGlzIHNlcmlvdXNseSBpbGwiOgogICJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgcmVxdWlyaW5nIGNsaW5pY2FsIGp1ZGdlbWVudCBhZ2UgMTAgb3Igb2xkZXIiIG9yICJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgcmVxdWlyaW5nIGNsaW5pY2FsIGp1ZGdlbWVudCBhZ2UgdW5kZXIgMTAiCgovKgogQGR5bmFtaWNWYWx1ZTogR3VpZGFuY2UKICovCmRlZmluZSAiR3VpZGFuY2UiOgogIGNhc2UgCiAgd2hlbiAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgYSBjbGllbnQgaXMgaGF2aW5nIHRoaXMgaXNzdWUiIAogICAgdGhlbiAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgYSBjbGllbnQgaXMgaGF2aW5nIHRoaXMgaXNzdWUuIgogIHdoZW4gIkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGNsaWVudCBpcyBzaG93aW5nIHRoaXMgc2lnbiBvZiBhIHNlcmlvdXMgaWxsbmVzcyIgYW5kICJBZ2UgMTAgb3Igb2xkZXIiCiAgICB0aGVuICJJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBjbGllbnQgaXMgc2hvd2luZyB0aGlzIHNpZ24gb2YgYSBzZXJpb3VzIGlsbG5lc3MuIgogIHdoZW4gIkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGNsaWVudCBpcyBzaG93aW5nIHRoaXMgc2lnbiBvZiBhIHNlcmlvdXMgaWxsbmVzcyIgYW5kICJBZ2UgdW5kZXIgMTAiCiAgICB0aGVuICIiIlRoaXMgaXMgYSBzaWduIGFuZC9vciBzeW1wdG9tIG9mIGEgc2VyaW91cyBoZWFsdGggY29uZGl0aW9uLgogIApJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBjbGllbnQgaXMgc2hvd2luZyB0aGlzIHNpZ24gb2YgYSBzZXJpb3VzIGlsbG5lc3MuIiIiCiAgZWxzZSBudWxsCiAgZW5kCgovKgogU3VwcG9ydGluZyBMb2dpYwoqLwpkZWZpbmUgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyBhZ2UgMTAgb3Igb2xkZXIiOgogICJBZ2UgMTAgb3Igb2xkZXIiIGFuZCBFbGVtZW50cy4iU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIiBPCiAgICB3aGVyZQogICAgICBPLnZhbHVlIH4gSEN4LiJUYWNoeXBuZWEiIG9yCiAgICAgIE8udmFsdWUgfiBIQ3guIlVuYWJsZSB0byB3YWxrIHVuYWlkZWQiCgpkZWZpbmUgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyBhZ2UgdW5kZXIgMTAiOgogICJBZ2UgdW5kZXIgMTAiIGFuZCBFbGVtZW50cy4iU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIiBPCiAgICB3aGVyZSAKICAgICAgTy52YWx1ZSBpbiB7CiAgICAgICAgSEN4LiJMZXRoYXJneSAtIEhJVi5ELkRFMjIiLAogICAgICAgIEhDeC4iVW5jb25zY2lvdXNuZXNzIiwKICAgICAgICBIQ3guIkNvbnZ1bHNpb25zIiwKICAgICAgICBIQ3guIlVuYWJsZSB0byBicmVhc3RmZWVkIiwKICAgICAgICBIQ3guIlVuYWJsZSB0byBkcmluayIsCiAgICAgICAgSEN4LiJSZXBlYXRlZCB2b21pdGluZyIKICAgICAgfSAKICAKZGVmaW5lICJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgcmVxdWlyaW5nIGNsaW5pY2FsIGp1ZGdlbWVudCBhZ2UgMTAgb3Igb2xkZXIiOgogICJBZ2UgMTAgb3Igb2xkZXIiIGFuZCBFbGVtZW50cy4iU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIiBPCiAgICB3aGVyZQogICAgICBPLnZhbHVlIH4gSEN4LiJGZXZlciBvZiAzOSBDIG9yIGdyZWF0ZXIiIG9yCiAgICAgIE8udmFsdWUgfiBIQ3guIk90aGVyIHNpZ24gb2Ygc2VyaW91cyBpbGxuZXNzIgogIApkZWZpbmUgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyByZXF1aXJpbmcgY2xpbmljYWwganVkZ2VtZW50IGFnZSB1bmRlciAxMCI6CiAgIkFnZSB1bmRlciAxMCIgYW5kIEVsZW1lbnRzLiJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MiIE8KICAgIHdoZXJlIAogICAgICBPLnZhbHVlIH4gSEN4LiJGZXZlciBvZiAzOSBDIG9yIGdyZWF0ZXIiIG9yCiAgICAgIE8udmFsdWUgfiBIQ3guIk90aGVyIHNpZ24gb2Ygc2VyaW91cyBpbGxuZXNzIgo="/>
   </content>
   <content>
     <contentType value="application/elm+xml"/>

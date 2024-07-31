@@ -1,0 +1,69 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp> a fhir:ActivityDefinition ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "HIVB9DTScheduleFollowUp"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequestactivity"^^xsd:anyURI ;
+       fhir:link <http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequestactivity>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ActivityDefinition HIVB9DTScheduleFollowUp</b></p><a name=\"HIVB9DTScheduleFollowUp\"> </a><a name=\"hcHIVB9DTScheduleFollowUp\"> </a><a name=\"HIVB9DTScheduleFollowUp-en-US\"> </a><p><b>url</b>: <a href=\"ActivityDefinition-HIVB9DTScheduleFollowUp.html\">ActivityDefinition HIV.B9.DT Schedule Follow-up Test</a></p><p><b>version</b>: 0.2.0</p><p><b>name</b>: HIVB9DTScheduleFollowUp</p><p><b>title</b>: HIV.B9.DT Schedule Follow-up Test</p><p><b>status</b>: Draft</p><p><b>experimental</b>: true</p><p><b>date</b>: 2024-07-25</p><p><b>publisher</b>: WHO</p><p><b>contact</b>: WHO: <a href=\"http://who.int\">http://who.int</a></p><p><b>description</b>: </p><div><p>Schedule Follow-up Test</p>\n</div><p><b>library</b>: <a href=\"Library-HIVB9DTLogic.html\">HIV.B9.DT Logic</a></p><p><b>kind</b>: ServiceRequest</p><p><b>profile</b>: <a href=\"https://build.fhir.org/ig/HL7/cqf-recommendations/StructureDefinition-cpg-servicerequest.html\">CPG Service Request</a></p><p><b>intent</b>: Proposal</p><p><b>doNotPerform</b>: false</p><blockquote><p><b>dynamicValue</b></p><p><b>path</b>: status</p><h3>Expressions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Description</b></td><td><b>Language</b></td><td><b>Expression</b></td></tr><tr><td style=\"display: none\">*</td><td>Status = 'draft'</td><td>CQL</td><td>'draft' from &quot;http://hl7.org/fhir/request-status&quot;</td></tr></table></blockquote><blockquote><p><b>dynamicValue</b></p><p><b>path</b>: priority</p><h3>Expressions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Description</b></td><td><b>Language</b></td><td><b>Expression</b></td></tr><tr><td style=\"display: none\">*</td><td>Priority = 'routine'</td><td>CQL</td><td>'routine' from &quot;http://hl7.org/fhir/request-priority&quot;</td></tr></table></blockquote></div>"
+  ] ; # 
+  fhir:extension ( [
+     fhir:url [ fhir:v "http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability"^^xsd:anyURI ] ;
+     fhir:value [ fhir:v "computable" ]
+  ] ) ; # 
+  fhir:url [ fhir:v "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.2.0"] ; # 
+  fhir:name [ fhir:v "HIVB9DTScheduleFollowUp"] ; # 
+  fhir:title [ fhir:v "HIV.B9.DT Schedule Follow-up Test"] ; # 
+  fhir:status [ fhir:v "draft"] ; # 
+  fhir:experimental [ fhir:v "true"^^xsd:boolean] ; # 
+  fhir:date [ fhir:v "2024-07-25"^^xsd:date] ; # 
+  fhir:publisher [ fhir:v "WHO"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "WHO" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "http://who.int" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "Schedule Follow-up Test"] ; # 
+  fhir:library ( [
+     fhir:v "http://smart.who.int/HIV/Library/HIVB2DTLogic"^^xsd:anyURI ;
+     fhir:link <http://smart.who.int/HIV/Library/HIVB2DTLogic>
+  ] ) ; # 
+  fhir:kind [ fhir:v "ServiceRequest"] ; # 
+  fhir:profile [
+     fhir:v "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest"^^xsd:anyURI ;
+     fhir:link <http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-servicerequest>
+  ] ; # 
+  fhir:intent [ fhir:v "proposal"] ; # 
+  fhir:doNotPerform [ fhir:v "false"^^xsd:boolean] ; # 
+  fhir:dynamicValue ( [
+     fhir:path [ fhir:v "status" ] ;
+     fhir:expression [
+       fhir:description [ fhir:v "Status = 'draft'" ] ;
+       fhir:language [ fhir:v "text/cql" ] ;
+       fhir:expression [ fhir:v "'draft' from \"http://hl7.org/fhir/request-status\"" ]
+     ]
+  ] [
+     fhir:path [ fhir:v "priority" ] ;
+     fhir:expression [
+       fhir:description [ fhir:v "Priority = 'routine'" ] ;
+       fhir:language [ fhir:v "text/cql" ] ;
+       fhir:expression [ fhir:v "'routine' from \"http://hl7.org/fhir/request-priority\"" ]
+     ]
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+
