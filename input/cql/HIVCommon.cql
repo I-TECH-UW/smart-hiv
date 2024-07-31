@@ -74,17 +74,17 @@ HE."HIV-negative B.DE113" O
  */
 define "By Age Stratifier":
     case 
-        when HIE."Age" <= 4 then '0-4'
-        when HIE."Age" <= 9 then '5-9'
-        when HIE."Age" <= 14 then '10–14'
-        when HIE."Age" <= 19 then '15–19'
-        when HIE."Age" <= 24 then '20–24'
-        when HIE."Age" <= 29 then '25–29'
-        when HIE."Age" <= 34 then '30–34'
-        when HIE."Age" <= 39 then '35–39'
-        when HIE."Age" <= 44 then '40–44'
-        when HIE."Age" <= 49 then '45–49'
-        when HIE."Age" >= 50 then '50+'
+        when HIE."Age In Years" <= 4 then '0-4'
+        when HIE."Age In Years" <= 9 then '5-9'
+        when HIE."Age In Years" <= 14 then '10–14'
+        when HIE."Age In Years" <= 19 then '15–19'
+        when HIE."Age In Years" <= 24 then '20–24'
+        when HIE."Age In Years" <= 29 then '25–29'
+        when HIE."Age In Years" <= 34 then '30–34'
+        when HIE."Age In Years" <= 39 then '35–39'
+        when HIE."Age In Years" <= 44 then '40–44'
+        when HIE."Age In Years" <= 49 then '45–49'
+        when HIE."Age In Years" >= 50 then '50+'
         else null
     end
   
@@ -95,22 +95,22 @@ define "By Age Stratifier":
  */
 define "By Age Stratifier 2":
     case 
-        when HIE."Age" <= 4 then '0-4'
-        when HIE."Age" <= 9 then '5-9'
-        when HIE."Age" <= 14 then '10–14'
-        when HIE."Age" <= 19 then '15–19'
-        when HIE."Age" <= 24 then '20–24'
-        when HIE."Age" <= 49 then '25–49'
-        when HIE."Age" >= 50 then '50+'
+        when HIE."Age In Years" <= 4 then '0-4'
+        when HIE."Age In Years" <= 9 then '5-9'
+        when HIE."Age In Years" <= 14 then '10–14'
+        when HIE."Age In Years" <= 19 then '15–19'
+        when HIE."Age In Years" <= 24 then '20–24'
+        when HIE."Age In Years" <= 49 then '25–49'
+        when HIE."Age In Years" >= 50 then '50+'
         else null
     end
 
 define "By Age Stratifier 3":
     case 
-        when HIE."Age" >= 15 and HIE."Age"<= 19 then '15-19'
-        when HIE."Age" <= 24 then '20-24'
-        when HIE."Age" <= 49 then '25–49'
-        when HIE."Age" >= 50 then '50+'
+        when HIE."Age In Years" >= 15 and HIE."Age In Years"<= 19 then '15-19'
+        when HIE."Age In Years" <= 24 then '20-24'
+        when HIE."Age In Years" <= 49 then '25–49'
+        when HIE."Age In Years" >= 50 then '50+'
         else null
     end
 
