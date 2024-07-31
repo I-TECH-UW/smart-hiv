@@ -61,14 +61,23 @@ define "Estimated age Value":
 @activity: HIV.A6.1 Review sociodemographic data with client | HIV.A5 Create new client record
 @description: Calculated age (number of years) of the client based on date of birth
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Age":
-  Elements."Age" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
-define "Age Value":
-  "Age" O
-  return O.value
+/** 
+ * @dataElement Patient age in years
+ */
+define "Current Patient Age In Years":
+  AgeInYearsAt(Today())
+
+/** 
+ * @dataElement Patient age in weeks
+ */
+define "Current Patient Age In Weeks":
+  AgeInWeeksAt(Today())
+
+/** 
+ * @dataElement Patient age in months
+ */
+define "Current Patient Age In Months":
+  AgeInMonthsAt(Today())
 /* End of Age */
 
 /*
@@ -374,14 +383,9 @@ define "Key population member type B.DE50 Observation":
 @description: Client is a sex worker
 */
 // TODO: Replace placeholder with relevant CQL logic
+
 define "Sex worker B.DE51":
-  exists "Sex worker B.DE51 Condition"
-    or exists "Sex worker B.DE51 Observation"
-define "Sex worker B.DE51 Condition":
-  Elements."Sex worker B.DE51 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Sex worker B.DE51 Observation":
-  Elements."Sex worker B.DE51 Observation" O
+  Elements."Sex worker B.DE51" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Sex worker B.DE51 */
@@ -391,15 +395,8 @@ define "Sex worker B.DE51 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a man who has sex with men
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Men who have sex with men":
-  exists "Men who have sex with men Condition"
-    or exists "Men who have sex with men Observation"
-define "Men who have sex with men Condition":
-  Elements."Men who have sex with men Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Men who have sex with men Observation":
-  Elements."Men who have sex with men Observation" O
+  Elements."Men who have sex with men" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Men who have sex with men */
@@ -410,14 +407,8 @@ define "Men who have sex with men Observation":
 @description: Client identifies as trans and gender-diverse
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Trans and gender-diverse people B.DE53":
-  exists "Trans and gender-diverse people B.DE53 Condition"
-    or exists "Trans and gender-diverse people B.DE53 Observation"
-define "Trans and gender-diverse people B.DE53 Condition":
-  Elements."Trans and gender-diverse people B.DE53 Condition" C
-    where C.prevalenceInterval() starts on or before Today
 define "Trans and gender-diverse people B.DE53 Observation":
-  Elements."Trans and gender-diverse people B.DE53 Observation" O
+  Elements."Trans and gender-diverse people B.DE53" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Trans and gender-diverse people B.DE53 */
@@ -429,13 +420,7 @@ define "Trans and gender-diverse people B.DE53 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "People who inject drugs B.DE54":
-  exists "People who inject drugs B.DE54 Condition"
-    or exists "People who inject drugs B.DE54 Observation"
-define "People who inject drugs B.DE54 Condition":
-  Elements."People who inject drugs B.DE54 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "People who inject drugs B.DE54 Observation":
-  Elements."People who inject drugs B.DE54 Observation" O
+  Elements."People who inject drugs B.DE54" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of People who inject drugs B.DE54 */
@@ -445,15 +430,8 @@ define "People who inject drugs B.DE54 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client lives in a prison or another closed setting
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "People living in prisons and other closed settings":
-  exists "People living in prisons and other closed settings Condition"
-    or exists "People living in prisons and other closed settings Observation"
-define "People living in prisons and other closed settings Condition":
-  Elements."People living in prisons and other closed settings Condition" C
-    where C.prevalenceInterval() starts on or before Today
 define "People living in prisons and other closed settings Observation":
-  Elements."People living in prisons and other closed settings Observation" O
+  Elements."People living in prisons and other closed settings" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of People living in prisons and other closed settings */
@@ -1035,14 +1013,8 @@ define "HIV-positive B.DE112 Observation":
 @description: Test result is HIV-negative
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV-negative B.DE113":
-  exists "HIV-negative B.DE113 Condition"
-    or exists "HIV-negative B.DE113 Observation"
-define "HIV-negative B.DE113 Condition":
-  Elements."HIV-negative B.DE113 Condition" C
-    where C.prevalenceInterval() starts on or before Today
 define "HIV-negative B.DE113 Observation":
-  Elements."HIV-negative B.DE113 Observation" O
+  Elements."HIV-negative B.DE113" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of HIV-negative B.DE113 */
@@ -1859,11 +1831,8 @@ define "HIV retest prior to starting ART conducted Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client is at elevated risk for HIV acquisition
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "At elevated risk for HIV acquisition B.DE225":
-  exists "At elevated risk for HIV acquisition B.DE225 Observation"
-define "At elevated risk for HIV acquisition B.DE225 Observation":
-  Elements."At elevated risk for HIV acquisition B.DE225 Observation" O
+  Elements."At elevated risk for HIV acquisition B.DE225" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of At elevated risk for HIV acquisition B.DE225 */
@@ -3856,11 +3825,8 @@ define "Serodiscordant partner D.DE37 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "On ART D.DE38":
-  exists "On ART D.DE38 Observation"
-define "On ART D.DE38 Observation":
-  Elements."On ART D.DE38 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."On ART D.DE38" MS
+      where MS.effective.toInterval() starts on or before Today
 /* End of On ART D.DE38 */
 
 /*
@@ -4865,12 +4831,9 @@ define "WHO HIV clinical stage 4 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Date of viral load sample collection D.DE194":
-  Elements."Date of viral load sample collection D.DE194" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
-define "Date of viral load sample collection D.DE194 Value":
-  "Date of viral load sample collection D.DE194" O
-  return O.value
+  Elements."Date of viral load sample collection D.DE194" P
+    where P.encounter.references(EncounterId)
+      or P.performed.toInterval() starts on or before Today
 /* End of Date of viral load sample collection D.DE194 */
 
 /*
@@ -8933,15 +8896,8 @@ define "Key population member type E.DE114 Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: Infant's mother is a sex worker
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Sex worker E.DE115":
-  exists "Sex worker E.DE115 Condition"
-    or exists "Sex worker E.DE115 Observation"
-define "Sex worker E.DE115 Condition":
-  Elements."Sex worker E.DE115 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Sex worker E.DE115 Observation":
-  Elements."Sex worker E.DE115 Observation" O
+  Elements."Sex worker E.DE115" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Sex worker E.DE115 */
@@ -8951,15 +8907,8 @@ define "Sex worker E.DE115 Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: Infant's mother is a person who injects drugs
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "People who inject drugs E.DE116":
-  exists "People who inject drugs E.DE116 Condition"
-    or exists "People who inject drugs E.DE116 Observation"
-define "People who inject drugs E.DE116 Condition":
-  Elements."People who inject drugs E.DE116 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "People who inject drugs E.DE116 Observation":
-  Elements."People who inject drugs E.DE116 Observation" O
+  Elements."People who inject drugs E.DE116" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of People who inject drugs E.DE116 */
@@ -8971,13 +8920,7 @@ define "People who inject drugs E.DE116 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Trans and gender-diverse people E.DE117":
-  exists "Trans and gender-diverse people E.DE117 Condition"
-    or exists "Trans and gender-diverse people E.DE117 Observation"
-define "Trans and gender-diverse people E.DE117 Condition":
-  Elements."Trans and gender-diverse people E.DE117 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Trans and gender-diverse people E.DE117 Observation":
-  Elements."Trans and gender-diverse people E.DE117 Observation" O
+  Elements."Trans and gender-diverse people E.DE117" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Trans and gender-diverse people E.DE117 */
@@ -8989,13 +8932,7 @@ define "Trans and gender-diverse people E.DE117 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "People living in prisons and other closed setting":
-  exists "People living in prisons and other closed setting Condition"
-    or exists "People living in prisons and other closed setting Observation"
-define "People living in prisons and other closed setting Condition":
-  Elements."People living in prisons and other closed setting Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "People living in prisons and other closed setting Observation":
-  Elements."People living in prisons and other closed setting Observation" O
+  Elements."People living in prisons and other closed setting" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of People living in prisons and other closed setting */
@@ -10204,13 +10141,7 @@ define "HIV status of partner or contact Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Already knew positive":
-  exists "Already knew positive Condition"
-    or exists "Already knew positive Observation"
-define "Already knew positive Condition":
-  Elements."Already knew positive Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Already knew positive Observation":
-  Elements."Already knew positive Observation" O
+  Elements."Already knew positive" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Already knew positive */
@@ -10222,13 +10153,7 @@ define "Already knew positive Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Newly diagnosed":
-  exists "Newly diagnosed Condition"
-    or exists "Newly diagnosed Observation"
-define "Newly diagnosed Condition":
-  Elements."Newly diagnosed Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Newly diagnosed Observation":
-  Elements."Newly diagnosed Observation" O
+  Elements."Newly diagnosed" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Newly diagnosed */
@@ -10239,14 +10164,8 @@ define "Newly diagnosed Observation":
 @description: The partner or contact of the index case is newly diagnosed is HIV-negative
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Negative H.DE37":
-  exists "Negative H.DE37 Condition"
-    or exists "Negative H.DE37 Observation"
-define "Negative H.DE37 Condition":
-  Elements."Negative H.DE37 Condition" C
-    where C.prevalenceInterval() starts on or before Today
 define "Negative H.DE37 Observation":
-  Elements."Negative H.DE37 Observation" O
+  Elements."Negative H.DE37" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Negative H.DE37 */
@@ -10257,12 +10176,10 @@ define "Negative H.DE37 Observation":
 @description: Client is currently taking ART 
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "On ART H.DE47":
-  exists "On ART H.DE47 Observation"
 define "On ART H.DE47 Observation":
-  Elements."On ART H.DE47 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."On ART H.DE47" MS
+    where MS.context.references(EncounterId)
+      or MS.effective.toInterval() starts on or before Today
 /* End of On ART H.DE47 */
 
 /*
@@ -10270,11 +10187,8 @@ define "On ART H.DE47 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client is at elevated risk for HIV acquisition, defined according to country/programme context
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "At elevated risk for HIV acquisition PRV.DE1":
-  exists "At elevated risk for HIV acquisition PRV.DE1 Observation"
 define "At elevated risk for HIV acquisition PRV.DE1 Observation":
-  Elements."At elevated risk for HIV acquisition PRV.DE1 Observation" O
+  Elements."At elevated risk for HIV acquisition PRV.DE1" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of At elevated risk for HIV acquisition PRV.DE1 */

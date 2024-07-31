@@ -2,7 +2,7 @@ library HIVIndicatorElements
 
 using FHIR version '4.0.1'
 
-//include fhir.cqf.common.FHIRCommon called FC
+include fhir.cqf.common.FHIRCommon called FC
 include FHIRHelpers version '4.0.1'
 
 include WHOConcepts
@@ -43,9 +43,15 @@ define "Visit date A.DE3 Value":
 @activity: HIV.A6.1 Review sociodemographic data with client | HIV.A5 Create new client record
 @description: Calculated age (number of years) of the client based on date of birth
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Age":
+define "Age In Years":
   AgeInYearsAt(start of "Measurement Period")
+
+define "Age In Months":
+  AgeInMonthsAt(start of "Measurement Period")
+
+define "Age In Days":
+  AgeInDaysAt(start of "Measurement Period")
+
 /* End of Age */
 
 /*
@@ -5636,9 +5642,21 @@ define "Infant date of birth Value":
 @activity: HIV.E1 Capture or update mother's history
 @description: Infant age calculated using date of birth
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Age of infant":
-  true
+define "Age of infant in days":
+  "Infant date of birth Value" bd
+    return CalculateAgeInDaysAt(bd, start of "Measurement Period")
+
+define "Age of infant in hours":
+  "Infant date of birth Value" bd
+    return CalculateAgeInHoursAt(bd, start of "Measurement Period")
+
+define "Age of infant in weeks":
+  "Infant date of birth Value" bd 
+    return CalculateAgeInWeeksAt(bd, start of "Measurement Period")
+
+define "Age of infant in years":
+  "Infant date of birth Value" bd
+    return CalculateAgeInYearsAt(bd, start of "Measurement Period")
 /* End of Age of infant */
 
 /*
