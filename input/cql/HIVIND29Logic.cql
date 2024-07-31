@@ -115,7 +115,13 @@ define "Numerator":
   and HIE."On ART H.DE47"
   and 
    (months between (end of "Measurement Period") and (date from start of HIC."First On ART".effective.toInterval()) > 6 months)
-   and exists(HIC."viral load sample collection" P where P.performed.toInterval() during "Measurement Period")
+   and 
+   exists(
+    HIE."Viral load test result D.DE387" VL
+    with HIC."viral load sample collection" P 
+    such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
+    where VL.value < 1000 'copies/ml'
+    )
 
 
 /**
@@ -126,8 +132,39 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."HIV-positive B.DE116"
+  and HIE."On ART H.DE47"
+  and 
+   (months between (end of "Measurement Period") and (date from start of HIC."First On ART".effective.toInterval()) > 6 months)
+   and 
+   exists(
+    HIE."Viral load test result D.DE387" VL
+    with HIC."viral load sample collection" P 
+    such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
+    )
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')

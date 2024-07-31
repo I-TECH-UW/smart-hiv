@@ -6547,13 +6547,9 @@ define "WHO HIV clinical stage 4 Observation":
 @activity: HIV.D10 Counsel returning client
 @description: The date on which the client received results from viral load test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date viral load test results received by client D.DE193":
-  [Observation: Concepts."Date viral load test results received by client - HIV.D.DE193"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date viral load test results received by client D.DE193 Value":
-  "Date viral load test results received by client D.DE193" O
-  return O.value
+  "Viral load test result D.DE387"
 /* End of Date viral load test results received by client D.DE193 */
 
 /*
@@ -8071,7 +8067,7 @@ define "Within 90 days of HIV diagnosis Observation":
 @activity: HIV.D20 Diagnostics
 @description: Result from the viral load test in number of copies/mL
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Viral load test result D.DE387":
   [Observation: Concepts."Viral load test result - HIV.D.DE387"] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -14772,7 +14768,7 @@ define "HIV test result SRV.DE2 Observation":
 @activity: HIV.D20 Diagnostics
 @description: CD4 count performed at HIV diagnosis
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Baseline CD4 count SRV.DE3":
   [Observation: Concepts."Baseline CD4 count - HIV.SRV.DE3"] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -14786,13 +14782,10 @@ define "Baseline CD4 count SRV.DE3 Value":
 @activity: HIV.D20 Diagnostics
 @description: Date and time when baseline CD4 count test was conducted
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date of baseline CD4 count test SRV.DE4":
-  [Observation: Concepts."Date of baseline CD4 count test - HIV.SRV.DE4"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date of baseline CD4 count test SRV.DE4 Value":
-  "Date of baseline CD4 count test SRV.DE4" O
-  return O.value
+  "Baseline CD4 count SRV.DE3" O
+  return O.effective.toInterval()
 /* End of Date of baseline CD4 count test SRV.DE4 */
 
 /*
