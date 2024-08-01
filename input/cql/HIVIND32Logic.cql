@@ -115,7 +115,7 @@ define "Numerator":
    and 
    exists(
     HE."Date viral load test results received by client D.DE193" VL
-    with HIC."viral load sample collection" P 
+    with HIC."routine viral load sample collection" P 
     such that VL.partOf.references(P)
     where VL.issued.toInterval() during "Measurement Period"
     )
@@ -157,3 +157,24 @@ define "Denominator Exclusions":
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')

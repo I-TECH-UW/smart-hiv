@@ -21,14 +21,33 @@ context Patient
 
 //VERIFIED
 
-define "viral load sample collection":
+define "routine viral load sample collection":
   [Procedure] P
   where P.status = 'completed'
   and P.code ~ HCC."viral load test"
   and exists(P.reasonCode RC where RC ~ HC."Routine viral load test")
 
+define "viral load sample collection":
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HCC."viral load test"
+
+
 define "First On ART":
   (First(HE."On ART D.DE38"))
+
+define "Viral load tests received after ART intitiation":
+  HE."Viral load test result D.DE387" O
+  where start of O.issued.toInterval() after start of "First On ART".effective.toInterval()
+  sort by start of issued.toInterval()
+
+define "Elevated Viral load test during Measurement Period":
+  HE."Viral load test result D.DE387" VL
+    with "viral load sample collection" P 
+    such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
+    where VL.value > 1000 'copies/ml'
+    sort by start of effective.toInterval()
+
 
 define "Negative Tests within Measurement Period":
 HE."HIV-negative B.DE113" O

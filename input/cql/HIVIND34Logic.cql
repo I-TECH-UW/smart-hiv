@@ -80,8 +80,9 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -104,7 +105,18 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  HIE."HIV-positive B.DE116"
+  and HIE."On ART H.DE47"
+  and 
+    exists(HIC."Elevated Viral load test during Measurement Period")
+  and 
+    exists(
+      HIC."viral load sample collection" VL
+      where (months between (start of First(HIC."Elevated Viral load test during Measurement Period").issued.toInterval()) and (date from start of VL.performed.toInterval() ) < 3 months)
+      
+      
+    )
+
 
 
 /**
@@ -115,8 +127,36 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."HIV-positive B.DE116"
+  and HIE."On ART H.DE47"
+  and 
+    exists(HIC."Elevated Viral load test during Measurement Period")
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')
+
+//Need to add
+// *  • ART regimen 
+ //*  • Receipt of enhanced adherence counselling (yes/no/unknown) 

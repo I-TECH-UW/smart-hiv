@@ -3747,6 +3747,25 @@ define "Unexpected adverse drug reaction Observation":
 /* End of Unexpected adverse drug reaction */
 
 /*
+HIV.D.DE485
+New regimen after switch to second-line regimen
+*/
+
+define "New regimen after switch to second-line regimen":
+  Elements."New regimen after switch to second-line regimen" MS
+  where start of MS.effective.toInterval() during "Measurement Period"
+
+
+/*
+HIV.D.DE491
+New regimen after switch to third-line regimen
+*/
+
+define "New regimen after switch to third-line regimen":
+  Elements."New regimen after switch to third-line regimen" MS
+  where start of MS.effective.toInterval() during "Measurement Period"
+
+/*
 @dataElement: HIV.D.DE487 - Dates of substitution within second-line regimen
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Date on which ARV drug regimen for client was changed within the second-line regimen (substitution)
@@ -6527,17 +6546,13 @@ define "Reason ART stopped H.DE74 Observation":
 @activity: HIV.H3 Record outreach and result
 @description: Client stopped ART because of toxicity/side effects
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Toxicity/side effects H.DE75":
-  exists "Toxicity/side effects H.DE75 Condition"
-    or exists "Toxicity/side effects H.DE75 Observation"
-define "Toxicity/side effects H.DE75 Condition":
-  Elements."Toxicity/side effects H.DE75 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Toxicity/side effects H.DE75 Observation":
-  Elements."Toxicity/side effects H.DE75 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists([MedicationStatement] MS
+    where MS.status in {'stopped'}
+    and exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.H.DE47")
+    and exists(MS.statusReason R where R ~ Concepts."Toxicity/side effects - HIV.H.DE75")
+    and start of MS.effective.toInterval() during "Measurement Period")
 /* End of Toxicity/side effects H.DE75 */
 
 /*

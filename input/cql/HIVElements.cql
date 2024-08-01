@@ -5394,8 +5394,7 @@ define "Serodiscordant partner D.DE37 Observation":
 
 define "On ART D.DE38":
     [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.D.DE38")
+    where exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.D.DE38")
     sort by start of effective.toInterval()
 /* End of On ART D.DE38 */
 
@@ -6549,7 +6548,8 @@ define "WHO HIV clinical stage 4 Observation":
 */
 
 define "Date viral load test results received by client D.DE193":
-  "Viral load test result D.DE387"
+  [Observation: Concepts."Viral load test result - HIV.D.DE387"] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of Date viral load test results received by client D.DE193 */
 
 /*
@@ -8909,6 +8909,47 @@ define "Unexpected adverse drug reaction Observation":
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Unexpected adverse drug reaction"
 /* End of Unexpected adverse drug reaction */
+
+/*
+HIV.D.DE485
+New regimen after switch to second-line regimen
+*/
+
+define "New regimen after switch to second-line regimen":
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts."New regimen after switch to second-line regimen")
+    sort by start of effective.toInterval()
+
+
+/*
+HIV.D.DE491
+New regimen after switch to third-line regimen
+*/
+
+define "New regimen after switch to third-line regimen":
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts."New regimen after switch to third-line regimen")
+    sort by start of effective.toInterval()
+
+
+/*
+HIV.D.DE489	New regimen(s) after substitution within second-line regimen
+*/
+
+define "New regimen after substitution within second-line regimen":
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts."New regimen after switch to second-line regimen")
+    sort by start of effective.toInterval()
+
+
+/*
+HIV.D.DE495	New regimen(s) after substitution within third-line regimen
+*/
+
+define "New regimen after substitution within third-line regimen":
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts."New regimen after switch to third-line regimen")
+    sort by start of effective.toInterval()
 
 /*
 @dataElement: HIV.D.DE487 - Dates of substitution within second-line regimen
@@ -14296,9 +14337,11 @@ define "Death documented":
 */
 
 define "Refused stopped treatment":
-  "HIV treatment outcome" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Refused stopped treatment"
+  [MedicationStatement] MS
+    where MS.status in {'stopped'}
+    and exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.H.DE47")
+    and exists(MS.statusReason R where R ~ Concepts."Refused stopped treatment")
+    sort by start of effective.toInterval()
 /* End of Refused stopped treatment */
 
 /*
@@ -14309,9 +14352,8 @@ define "Refused stopped treatment":
 
 define "On ART H.DE47":
     [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.H.DE47")
-    sort by effective
+    where exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.H.DE47")
+    sort by start of effective.toInterval()
 /* End of On ART H.DE47 */
 
 /*
@@ -14346,16 +14388,13 @@ define "Reason ART stopped H.DE74 Observation":
 @activity: HIV.H3 Record outreach and result
 @description: Client stopped ART because of toxicity/side effects
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Toxicity/side effects H.DE75":
-  exists "Toxicity/side effects H.DE75 Condition"
-    or exists "Toxicity/side effects H.DE75 Observation"
-define "Toxicity/side effects H.DE75 Condition":
-  [Condition: Concepts."Toxicity/side effects - HIV.H.DE75"]
-define "Toxicity/side effects H.DE75 Observation":
-  "Reason ART stopped H.DE74 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Toxicity/side effects - HIV.H.DE75"
+  [MedicationStatement] MS
+    where MS.status in {'stopped'}
+    and exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.H.DE47")
+    and exists(MS.statusReason R where R ~ Concepts."Toxicity/side effects - HIV.H.DE75")
+    sort by start of effective.toInterval()
 /* End of Toxicity/side effects H.DE75 */
 
 /*
@@ -14477,8 +14516,8 @@ define "HIV prevention intervention Observation":
 
 define "PrEP service":
   [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."PrEP for HIV prevention")
+    where exists(MS.reasonCode C where C ~ Concepts."PrEP for HIV prevention")
+    sort by start of effective.toInterval()
 /* End of PrEP service */
 
 /*
