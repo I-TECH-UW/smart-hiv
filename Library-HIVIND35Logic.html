@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-31
+            as of 2024-08-02
           
         
       </td>
@@ -474,8 +474,9 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -498,8 +499,49 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
+  (HIE.&quot;HIV-positive B.DE116&quot;
+  and HIE.&quot;Toxicity/side effects H.DE75&quot;)
+  and ((
+    HIE.&quot;HIV-positive B.DE116&quot;
+    and HIE.&quot;On ART H.DE47&quot;
+    and 
+    (exists(HE.&quot;New regimen after switch to second-line regimen&quot; R
+    with HE.&quot;Toxicity/side effects H.DE75&quot; T
+    such that R.partOf.references(T)
+    where R.effective.toInterval() during &quot;Measurement Period&quot;
+    )
+    or 
+    (
+    exists(HE.&quot;New regimen after switch to third-line regimen&quot; R
+    with HE.&quot;Toxicity/side effects H.DE75&quot; T
+    such that R.partOf.references(T)
+    where R.effective.toInterval() during &quot;Measurement Period&quot;  
+    )
+    )
+  )
+  )
+  or
+  (
+    HIE.&quot;HIV-positive B.DE116&quot;
+    and HIE.&quot;On ART H.DE47&quot;
+    and 
+    (exists(HE.&quot;New regimen after substitution within second-line regimen&quot; R
+    with HE.&quot;Toxicity/side effects H.DE75&quot; T
+    such that R.partOf.references(T)
+    where R.effective.toInterval() during &quot;Measurement Period&quot;
+    )
+    or 
+    (
+    exists(HE.&quot;New regimen after substitution within third-line regimen&quot; R
+    with HE.&quot;Toxicity/side effects H.DE75&quot; T
+    such that R.partOf.references(T)
+    where R.effective.toInterval() during &quot;Measurement Period&quot;  
+    )
+    )
+  )
+  )
 
+  )
 
 /**
  * Denominator
@@ -509,12 +551,41 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
+  HIE.&quot;HIV-positive B.DE116&quot;
+    and HIE.&quot;On ART H.DE47&quot;
     
 
 /* end Populations */
 
-</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIC.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIC.&quot;By Age Stratifier&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIC.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;patientGroups Stratifier&quot;:
+	HIC.&quot;patientGroups&quot;
+
+define &quot;Stratification&quot;:
+ HIC.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIC.&quot;By Age Stratifier&quot;
++ ':' + HIC.&quot;By Geographic Region Stratifier&quot;
++ Combine(HIC.patientGroups, ':')
+
+/*
+need to add
+*  • ART regimen 
+ *  • Pregnancy status 
+ *  • Type of toxicity (gastrointestinal, skin, peripheral neuropathy, central nervous system, weight gain, hepatic dysfunction, haematological, fatigue, headache, bone dysfunction, metabolic, kidney dysfunction) 
+*/</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -539,7 +610,7 @@ define &quot;Denominator&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 31, 2024 16:10+0000">2024-07-31</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 2, 2024 14:11+0000">2024-08-02</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

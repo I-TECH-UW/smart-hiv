@@ -704,6 +704,10 @@ code "Bone dysfunction": 'HIV.D.DE476' from "HIVConcepts" display 'Bone dysfunct
 code "Metabolic symptoms": 'HIV.D.DE477' from "HIVConcepts" display 'Metabolic symptoms'
 code "Kidney dysfunction": 'HIV.D.DE478' from "HIVConcepts" display 'Kidney dysfunction'
 code "Unexpected adverse drug reaction": 'HIV.D.DE479' from "HIVConcepts" display 'Unexpected adverse drug reaction'
+code "New regimen after switch to second-line regimen": 'HIV.D.DE485' from "HIVConcepts"
+code "New regimen after switch to third-line regimen": 'HIV.D.DE491' from "HIVConcepts"
+code "New regimen after substitution within second-line regimen": 'HIV.D.DE489' from "HIVConcepts"
+code "New regimen after substitution within third-line regimen": 'HIV.D.DE495' from "HIVConcepts"
 code "Dates of substitution within second-line regimen": 'HIV.D.DE487' from "HIVConcepts" display 'Dates of substitution within second-line regimen'
 code "Dates of substitution within third-line regimen": 'HIV.D.DE493' from "HIVConcepts" display 'Dates of substitution within third-line regimen'
 code "Enhanced adherence counselling provided": 'HIV.D.DE496' from "HIVConcepts" display 'Enhanced adherence counselling provided'

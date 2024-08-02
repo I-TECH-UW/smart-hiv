@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-31
+            as of 2024-08-02
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND27Logic</b></p><a name="HIVIND27Logic"> </a><a name="hcHIVIND27Logic"> </a><a name="HIVIND27Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Measure Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND27Logic</b></p><a name="HIVIND27Logic"> </a><a name="hcHIVIND27Logic"> </a><a name="HIVIND27Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.27 Logic
  * Ref No: ART.1
  * Short Name: People living with HIV on ART
@@ -420,6 +420,8 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -432,19 +434,11 @@ context Patient
 */
 
 define &quot;Measure Population&quot;:
-   (exists(HIC.&quot;HIV Positive Condition&quot; C
-	where C.onset before end of &quot;Measurement Period&quot;)
-	or 
-	exists(HIC.&quot;HIV Positive Observation&quot; O
-	where (O.issued before end of &quot;Measurement Period&quot;)
-	))
-   and exists(HIC.&quot;HIV Treatment Active&quot; H
-   where H.effective starts before end of &quot;Measurement Period&quot;
-    and (H.effective ends after start of &quot;Measurement Period&quot;)
-   )
-   and not HIC.&quot;Patient Deceased before end of Measurement Period&quot;
-   and not HIC.&quot;Transfer Out at Facility during the measurement period&quot;
-   and not HIC.&quot;Lost to Follow Up during the measurement period&quot;
+   HIE.&quot;HIV-positive B.DE116&quot;
+   and HIE.&quot;On ART H.DE47&quot;
+   and not HIE.&quot;Death documented&quot;
+   and not HIE.&quot;Transferred out&quot;
+   and not HIE.&quot;Lost to follow-up&quot;
 
 /*
  * As defined by Member States
@@ -479,7 +473,7 @@ define &quot;Stratification&quot;:
  HIC.&quot;By Administrative Gender Stratifier&quot;.code 
   + ':' + HIC.&quot;By Age Stratifier&quot;
 + ':' + HIC.&quot;By Geographic Region Stratifier&quot;
-+ Combine(HIC.patientGroups, ':')</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 40Kb )</p></div>
++ Combine(HIC.patientGroups, ':')</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -504,7 +498,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 31, 2024 16:10+0000">2024-07-31</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 2, 2024 14:11+0000">2024-08-02</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

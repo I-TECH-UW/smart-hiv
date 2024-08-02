@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-31
+            as of 2024-08-02
           
         
       </td>
@@ -434,8 +434,9 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -458,7 +459,17 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
+  HIE.&quot;HIV-positive B.DE116&quot;
+  and HIE.&quot;On ART H.DE47&quot;
+  and 
+   (months between (end of &quot;Measurement Period&quot;) and (date from start of HIC.&quot;First On ART&quot;.effective.toInterval()) &gt; 6 months)
+   and 
+   exists(
+    HE.&quot;Date viral load test results received by client D.DE193&quot; VL
+    with HIC.&quot;routine viral load sample collection&quot; P 
+    such that VL.partOf.references(P)
+    where VL.issued.toInterval() during &quot;Measurement Period&quot;
+    )
 
 /**
  * Numerator Exclusions
@@ -467,7 +478,9 @@ define &quot;Numerator&quot;:
  */
     
 define &quot;Numerator Exclusions&quot;:
-  false
+  HIE.&quot;Death documented&quot;
+   and HIE.&quot;Transferred out&quot;
+   and HIE.&quot;Lost to follow-up&quot;
 
 /**
  * Denominator
@@ -477,7 +490,10 @@ define &quot;Numerator Exclusions&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
+  HIE.&quot;HIV-positive B.DE116&quot;
+  and HIE.&quot;On ART H.DE47&quot;
+  and 
+   (months between (end of &quot;Measurement Period&quot;) and (date from start of HIC.&quot;First On ART&quot;.effective.toInterval()) &gt; 6 months)
     
 /**
 * Denominator Exclusions
@@ -486,10 +502,33 @@ define &quot;Denominator&quot;:
 */
 
 define &quot;Denominator Exclusions&quot;:
-  false
+  HIE.&quot;Death documented&quot;
+   and HIE.&quot;Transferred out&quot;
+   and HIE.&quot;Lost to follow-up&quot;
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIC.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIC.&quot;By Age Stratifier&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIC.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;patientGroups Stratifier&quot;:
+	HIC.&quot;patientGroups&quot;
+
+define &quot;Stratification&quot;:
+ HIC.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIC.&quot;By Age Stratifier&quot;
++ ':' + HIC.&quot;By Geographic Region Stratifier&quot;
++ Combine(HIC.patientGroups, ':')
 </code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
@@ -515,7 +554,7 @@ define &quot;Denominator Exclusions&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 31, 2024 16:10+0000">2024-07-31</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 2, 2024 14:11+0000">2024-08-02</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

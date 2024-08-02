@@ -74,22 +74,18 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
 context Patient
- define "Measure Population":
-   (exists(HIC."HIV Positive Condition" C
-	where C.onset before end of "Measurement Period")
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period")
-	)) and 
-	exists(HIC."HIV Treatment Active" H
-   where H.effective starts during "Measurement Period")
+
+define "Measure Population":
+   HIE."HIV-positive B.DE116" 
+   and (date from start of HIC."First On ART".effective.toInterval() during "Measurement Period")
 
 /*
  * As defined by Member States
@@ -125,3 +121,4 @@ define "Stratification":
  HIC."By Administrative Gender Stratifier".code 
   + ':' + HIC."By Age Stratifier"
 + ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')

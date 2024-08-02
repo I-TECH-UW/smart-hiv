@@ -75,6 +75,7 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include HIVElements called HE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -97,23 +98,7 @@ define "Initial Population":
  * Calculation: COUNT of clients with "At elevated risk for HIV acquisition"=True AND with a second "HIV test date" within fixed period after "HIV test date" in the reporting period with "HIV test result"='HIV-negative'
  */
 
-define "Negative Tests within Measurement Period":
-HIC."HIV Negative Observation" O
-    with HIC."Client is at elevated risk for HIV acquisition" HIV
-    such that O.hasMember.references(HIV)
-    where O.issued.value in "Measurement Period"
-    sort by issued
 
-define "First Negative Test within Measurement Period":
-  (First("Negative Tests within Measurement Period"))
-
-define "Negative Tests after First Negative Test":
-HIC."HIV Negative Observation" O
-    with HIC."Client is at elevated risk for HIV acquisition" HIV
-      such that O.hasMember.references(HIV)
-    where O.issued after "First Negative Test within Measurement Period".issued
-      and O.issued before ("First Negative Test within Measurement Period".issued + "Testing Interval")
-    sort by issued
 
 
 define "Numerator":
@@ -149,9 +134,6 @@ define "Geographic Region Stratifier":
 
 define "patientGroups Stratifier":
 	HIC."patientGroups"
-
-define "HIV status of partner or contact":
-  HIC."HIV status of partner or contact"
 
 define "Stratification":
  HIC."By Administrative Gender Stratifier".code 

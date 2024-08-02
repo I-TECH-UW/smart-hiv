@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-31
+            as of 2024-08-02
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HC</td><td><code>http://smart.who.int/hiv/Library/HIVConcepts</code></td></tr><tr><td>Depends On</td><td>Library HCC</td><td><code>http://smart.who.int/hiv/Library/HIVConceptsCustom</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
 
 using FHIR version '4.0.1'
 
@@ -358,6 +358,9 @@ include WHOCommon called WCom
 //include FHIRCommon called FC
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
 
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-12-31]
 parameter &quot;Measurement Date&quot; Date default @2020-01-01
@@ -366,13 +369,169 @@ parameter &quot;Intervention Interval&quot; System.Quantity default 7 days
 
 context Patient
 
+
+//VERIFIED
+
+define &quot;routine viral load sample collection&quot;:
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HCC.&quot;viral load test&quot;
+  and exists(P.reasonCode RC where RC ~ HC.&quot;Routine viral load test&quot;)
+
+define &quot;viral load sample collection&quot;:
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HCC.&quot;viral load test&quot;
+
+
+define &quot;First On ART&quot;:
+  (First(HE.&quot;On ART D.DE38&quot;))
+
+define &quot;Viral load tests received after ART intitiation&quot;:
+  HE.&quot;Viral load test result D.DE387&quot; O
+  where start of O.issued.toInterval() after start of &quot;First On ART&quot;.effective.toInterval()
+  sort by start of issued.toInterval()
+
+define &quot;Elevated Viral load test during Measurement Period&quot;:
+  HE.&quot;Viral load test result D.DE387&quot; VL
+    with &quot;viral load sample collection&quot; P 
+    such that VL.partOf.references(P) and P.performed.toInterval() during &quot;Measurement Period&quot;
+    where VL.value &gt; 1000 'copies/ml'
+    sort by start of effective.toInterval()
+
+
+define &quot;Negative Tests within Measurement Period&quot;:
+HE.&quot;HIV-negative B.DE113&quot; O
+    with HE.&quot;At elevated risk for HIV acquisition B.DE225&quot; HIV
+    such that O.hasMember.references(HIV)
+    where O.effective.toInterval() starts during &quot;Measurement Period&quot;
+    sort by start of effective.toInterval()
+
+define &quot;First Negative Test within Measurement Period&quot;:
+  (First(&quot;Negative Tests within Measurement Period&quot;))
+
+define &quot;Negative Tests after First Negative Test&quot;:
+HE.&quot;HIV-negative B.DE113&quot; O
+    with HE.&quot;At elevated risk for HIV acquisition B.DE225&quot; HIV
+      such that O.hasMember.references(HIV)
+    where  O.effective.toInterval() starts after start of &quot;First Negative Test within Measurement Period&quot;.effective.toInterval()
+      and O.effective.toInterval() starts before (start of &quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Testing Interval&quot;)
+    sort by start of effective.toInterval()
+
+  define patientGroups:
+  List&lt;String&gt;{
+    if HIE.&quot;Sex worker B.DE51&quot; then 'SW' else null,
+    if HIE.&quot;Men who have sex with men&quot; then 'MSM' else null,
+    if HIE.&quot;Trans and gender-diverse people B.DE53&quot; then 'Trans' else null,
+    if HIE.&quot;People who inject drugs B.DE54&quot; then 'PWID' else null,
+    if HIE.&quot;People living in prisons and other closed settings&quot; then 'Prisoner' else null
+  }
+
+  define &quot;Treatment outcome category&quot;:
+  List&lt;String&gt;{
+    if HIE.&quot;Lost to follow-up&quot; then 'LTFU' else null,
+    if HIE.&quot;Transferred out&quot; then 'Transfer Out' else null,
+    if HIE.&quot;Death documented&quot; then 'Death' else null,
+    if HIE.&quot;Refused stopped treatment&quot; then 'Stopped' else null,
+    if HIE.&quot;On ART H.DE47&quot; then 'On ART' else null
+  }
+
+
 /*
- * HIV Positive during the measurement period
- * Does issued imply that results returned to tester
- * or should use communication or encounter resource to specify?
+ * By Age Stratifiers
+ * (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)
+ * 
+ */
+define &quot;By Age Stratifier&quot;:
+    case 
+        when HIE.&quot;Age In Years&quot; &lt;= 4 then '0-4'
+        when HIE.&quot;Age In Years&quot; &lt;= 9 then '5-9'
+        when HIE.&quot;Age In Years&quot; &lt;= 14 then '10–14'
+        when HIE.&quot;Age In Years&quot; &lt;= 19 then '15–19'
+        when HIE.&quot;Age In Years&quot; &lt;= 24 then '20–24'
+        when HIE.&quot;Age In Years&quot; &lt;= 29 then '25–29'
+        when HIE.&quot;Age In Years&quot; &lt;= 34 then '30–34'
+        when HIE.&quot;Age In Years&quot; &lt;= 39 then '35–39'
+        when HIE.&quot;Age In Years&quot; &lt;= 44 then '40–44'
+        when HIE.&quot;Age In Years&quot; &lt;= 49 then '45–49'
+        when HIE.&quot;Age In Years&quot; &gt;= 50 then '50+'
+        else null
+    end
+  
+  /*
+ * By Age Stratifiers
+ * Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
+ * 
+ */
+define &quot;By Age Stratifier 2&quot;:
+    case 
+        when HIE.&quot;Age In Years&quot; &lt;= 4 then '0-4'
+        when HIE.&quot;Age In Years&quot; &lt;= 9 then '5-9'
+        when HIE.&quot;Age In Years&quot; &lt;= 14 then '10–14'
+        when HIE.&quot;Age In Years&quot; &lt;= 19 then '15–19'
+        when HIE.&quot;Age In Years&quot; &lt;= 24 then '20–24'
+        when HIE.&quot;Age In Years&quot; &lt;= 49 then '25–49'
+        when HIE.&quot;Age In Years&quot; &gt;= 50 then '50+'
+        else null
+    end
+
+define &quot;By Age Stratifier 3&quot;:
+    case 
+        when HIE.&quot;Age In Years&quot; &gt;= 15 and HIE.&quot;Age In Years&quot;&lt;= 19 then '15-19'
+        when HIE.&quot;Age In Years&quot; &lt;= 24 then '20-24'
+        when HIE.&quot;Age In Years&quot; &lt;= 49 then '25–49'
+        when HIE.&quot;Age In Years&quot; &gt;= 50 then '50+'
+        else null
+    end
+
+/*
+ * By state stratifier
  */
 
+define &quot;By Geographic Region Stratifier&quot;:
+    First(Patient.address A where A.use in { 'home' }).state
 
+/*
+ * By Administrative Gender of Patient Stratifier
+ * Need to expand codes
+ */
+
+define &quot;By Administrative Gender Stratifier&quot;:
+    case 
+        when Patient.gender = 'male' then HC.&quot;Male&quot;
+        when Patient.gender = 'female' then HC.&quot;Female&quot;
+        when Patient.gender = 'transgender female' then HC.&quot;Transgender female&quot;
+        when Patient.gender = 'transgender male' then HC.&quot;Transgender male&quot;
+        else HC.&quot;Other - HIV.A.DE23&quot;
+    end
+
+
+  define &quot;HIV status of partner or contact&quot;:
+    case 
+        when HIE.&quot;Already knew positive&quot; then HC.&quot;Already knew positive&quot;
+        when HIE.&quot;Newly diagnosed&quot; then HC.&quot;Newly diagnosed&quot;
+        when HIE.&quot;Negative H.DE37&quot; then HC.&quot;Negative - HIV.H.DE37&quot;
+        else null
+    end
+
+//(including PrEP, OAMT, NSP, STI services, VMMC) 
+  define &quot;HIV prevention intervention&quot;:
+  List&lt;String&gt;{
+    if HIE.&quot;PrEP service&quot; then 'PrEP' else null,
+    if HIE.&quot;OAMT&quot; then 'OAMT' else null,
+    if HIE.&quot;NSP&quot; then 'NSP' else null,
+    if HIE.&quot;STI services&quot; then 'STI services' else null,
+    if HIE.&quot;VMMC&quot; then 'VMMC' else null,
+    if HIE.&quot;Other PRV.DE8&quot; then 'other prevention' else null
+  }
+
+//DRAFT
+define &quot;Patient Deceased during Measurement Period&quot;:
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  &quot;Measurement Period&quot; and  Patient.meta.lastUpdated after start of &quot;Measurement Period&quot;
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  &quot;Measurement Period&quot; and Patient.deceased as FHIR.dateTime after start of &quot;Measurement Period&quot;
+    else false
+  end
 
 define &quot;HIV Positive Condition&quot;:
 [Condition] C
@@ -406,12 +565,6 @@ define &quot;HIV test resulted&quot;:
   [Observation] O
     where O.status in {'final', 'amended'}
     and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
-
-define &quot;HIV Treatment Active&quot;:
-  [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;On ART - HIV.H.DE47&quot;)
-    sort by effective
 
 define &quot;HIV PREP Active&quot;:
 [MedicationStatement] MS
@@ -534,112 +687,16 @@ define &quot;buprenorphine_prescribed&quot;:
         and MR.intent = 'order'
         and MR.medication ~ HCC.&quot;buprenorphine&quot;
   
-define &quot;Patient Deceased before end of Measurement Period&quot;:
-  case 
-    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then (Patient.meta.lastUpdated before end of &quot;Measurement Period&quot;)
-    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of &quot;Measurement Period&quot;
-    else false
-  end
 
-define &quot;Patient Deceased during Measurement Period&quot;:
-  case 
-    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  &quot;Measurement Period&quot; and  Patient.meta.lastUpdated after start of &quot;Measurement Period&quot;
-    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  &quot;Measurement Period&quot; and Patient.deceased as FHIR.dateTime after start of &quot;Measurement Period&quot;
-    else false
-  end
 
-/* End of care because of transferring out*/
 
-define &quot;Transfer Out at Facility during the measurement period&quot;:
-    exists(
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC.&quot;On ART - HIV.H.DE47&quot;) 
-    and (exists (
-      EOC.statusHistory H
-      where H.status = 'finished'
-      and H.period ends during &quot;Measurement Period&quot;
-    ) 
-    or (
-      EOC.status = 'finished'
-      and EOC.period ends during &quot;Measurement Period&quot;
-    )
-    )
-    )
 
 define &quot;Lost to Follow Up during the measurement period&quot;:
-    exists(&quot;HIV Treatment Active&quot; H
+    exists(HE.&quot;On ART H.DE47&quot; H
    where H.effective starts before end of &quot;Measurement Period&quot;
     and H.effective ends after start of &quot;Measurement Period&quot;
 	and not (H.effective ends after (end of &quot;Measurement Period&quot; - 28 days))
    )
-
-/*
- * By Age Stratifiers
- * (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)
- * 
- */
-define &quot;By Age Stratifier&quot;:
-    case 
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 4 then '0-4'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 9 then '5-9'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 14 then '10–14'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15–19'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20–24'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 29 then '25–29'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 34 then '30–34'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 39 then '35–39'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 44 then '40–44'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '45–49'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
-        else null
-    end
-  
-  /*
- * By Age Stratifiers
- * Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
- * 
- */
-define &quot;By Age Stratifier 2&quot;:
-    case 
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 4 then '0-4'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 9 then '5-9'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 14 then '10–14'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15–19'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20–24'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '25–49'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
-        else null
-    end
-
-define &quot;By Age Stratifier 3&quot;:
-    case 
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 15 and AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 19 then '15-19'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 24 then '20-24'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &lt;= 49 then '25–49'
-        when AgeInYearsAt(start of &quot;Measurement Period&quot;) &gt;= 50 then '50+'
-        else null
-    end
-
-/*
- * By state stratifier
- */
-
-define &quot;By Geographic Region Stratifier&quot;:
-    First(Patient.address A where A.use in { 'home' }).state
-
-/*
- * By Administrative Gender of Patient Stratifier
- * Need to expand codes
- */
-
-define &quot;By Administrative Gender Stratifier&quot;:
-    case 
-        when Patient.gender = 'male' then HC.&quot;Male&quot;
-        when Patient.gender = 'female' then HC.&quot;Female&quot;
-        when Patient.gender = 'transgender female' then HC.&quot;Transgender female&quot;
-        when Patient.gender = 'transgender male' then HC.&quot;Transgender male&quot;
-        else HC.&quot;Other - HIV.A.DE23&quot;
-    end
 
 define &quot;HIV Status&quot;:
     case 
@@ -750,8 +807,9 @@ define &quot;Community_testing&quot;:
       such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Community-level testing&quot;) 
   where (O.status in { 'final', 'amended' }
   and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
-  and O.issued during &quot;Measurement Period&quot;)
-  )
+  and O.issued after start of &quot;Measurement Period&quot;
+  and O.issued before end of &quot;Measurement Period&quot;))
+  
 
 /*@triggeredBy Encounter with location = facility level testing*/
 define &quot;Facility_testing&quot;:
@@ -760,7 +818,8 @@ define &quot;Facility_testing&quot;:
       such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Facility-level testing&quot;)
   where (O.status in { 'final', 'amended' }
   and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
-  and O.issued during &quot;Measurement Period&quot;)
+  and O.issued after start of &quot;Measurement Period&quot;
+  and O.issued before end of &quot;Measurement Period&quot;)
   )
 
 //lifted this from ANC DAK
@@ -846,14 +905,7 @@ exists(
   )
 
 
-  define patientGroups:
-  List&lt;String&gt;{
-    if SW then 'SW' else null,
-    if MSM then 'MSM' else null,
-    if Trans then 'Trans' else null,
-    if PWID then 'PWID' else null,
-    if Prisoner then 'Prisoner' else null
-  }
+
 
   define setting:
   List&lt;String&gt;{
@@ -1179,7 +1231,7 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
   
 
   define &quot;First HIV Treatment&quot;:
-    First(&quot;HIV Treatment Active&quot;)
+    First(HE.&quot;On ART H.DE47&quot;)
 
 
   define &quot;Time to start ART&quot;:
@@ -1210,13 +1262,6 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
     and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
     and O.code ~ HC.&quot;Negative - HIV.H.DE37&quot;
   
-  define &quot;HIV status of partner or contact&quot;:
-    case 
-        when exists(&quot;already known positive&quot;) then HC.&quot;Already knew positive&quot;
-        when exists(&quot;Newly diagnosed&quot;) then HC.&quot;Newly diagnosed&quot;
-        when exists(&quot;Negative - HIV.H.DE37&quot;) then HC.&quot;Negative - HIV.H.DE37&quot;
-        else null
-    end
 
 
 //need to define
@@ -1226,34 +1271,9 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
   and P.code ~ HC.&quot;STI testing and treatment services&quot;
 
 
-//(including PrEP, OAMT, NSP, STI services, VMMC) 
-  define &quot;HIV prevention intervention&quot;:
-  List&lt;String&gt;{
-    if exists(&quot;HIV PREP Active&quot;) then 'PrEP' else null,
-    if OAMT_initiated then 'OAMT' else null,
-    if exists(&quot;Needle Syringe Dispensed&quot;) then 'NSP' else null,
-    if exists(STI_testing) then 'STI services' else null,
-    if exists(VMMC_done) then 'VMMC' else null
-  }
 
-define &quot;Negative Tests within Measurement Period&quot;:
-&quot;HIV Negative Observation&quot; O
-    with &quot;Client is at elevated risk for HIV acquisition&quot; HIV
-    such that O.hasMember.references(HIV)
-    and O.issued after start of &quot;Measurement Period&quot;
-    and O.issued before end of &quot;Measurement Period&quot;
-    sort by issued
 
-define &quot;First Negative Test within Measurement Period&quot;:
-( First(&quot;Negative Tests within Measurement Period&quot;))
-
-define &quot;Negative Tests after First Negative Test&quot;:
-  &quot;HIV Negative Observation&quot; O
-    with &quot;Client is at elevated risk for HIV acquisition&quot; HIV
-      such that O.hasMember.references(HIV)
-    where O.issued after &quot;First Negative Test within Measurement Period&quot;.issued
-      and O.issued before (&quot;First Negative Test within Measurement Period&quot;.issued + &quot;Testing Interval&quot;)
-    sort by issued</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 1Mb )</p></div>
+</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -1278,7 +1298,7 @@ define &quot;Negative Tests after First Negative Test&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 31, 2024 16:10+0000">2024-07-31</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 2, 2024 14:11+0000">2024-08-02</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

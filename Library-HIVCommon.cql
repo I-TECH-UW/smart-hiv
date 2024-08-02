@@ -7,6 +7,9 @@ include WHOCommon called WCom
 //include FHIRCommon called FC
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
 
 parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
 parameter "Measurement Date" Date default @2020-01-01
@@ -15,13 +18,169 @@ parameter "Intervention Interval" System.Quantity default 7 days
 
 context Patient
 
+
+//VERIFIED
+
+define "routine viral load sample collection":
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HCC."viral load test"
+  and exists(P.reasonCode RC where RC ~ HC."Routine viral load test")
+
+define "viral load sample collection":
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ HCC."viral load test"
+
+
+define "First On ART":
+  (First(HE."On ART D.DE38"))
+
+define "Viral load tests received after ART intitiation":
+  HE."Viral load test result D.DE387" O
+  where start of O.issued.toInterval() after start of "First On ART".effective.toInterval()
+  sort by start of issued.toInterval()
+
+define "Elevated Viral load test during Measurement Period":
+  HE."Viral load test result D.DE387" VL
+    with "viral load sample collection" P 
+    such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
+    where VL.value > 1000 'copies/ml'
+    sort by start of effective.toInterval()
+
+
+define "Negative Tests within Measurement Period":
+HE."HIV-negative B.DE113" O
+    with HE."At elevated risk for HIV acquisition B.DE225" HIV
+    such that O.hasMember.references(HIV)
+    where O.effective.toInterval() starts during "Measurement Period"
+    sort by start of effective.toInterval()
+
+define "First Negative Test within Measurement Period":
+  (First("Negative Tests within Measurement Period"))
+
+define "Negative Tests after First Negative Test":
+HE."HIV-negative B.DE113" O
+    with HE."At elevated risk for HIV acquisition B.DE225" HIV
+      such that O.hasMember.references(HIV)
+    where  O.effective.toInterval() starts after start of "First Negative Test within Measurement Period".effective.toInterval()
+      and O.effective.toInterval() starts before (start of "First Negative Test within Measurement Period".effective.toInterval() + "Testing Interval")
+    sort by start of effective.toInterval()
+
+  define patientGroups:
+  List<String>{
+    if HIE."Sex worker B.DE51" then 'SW' else null,
+    if HIE."Men who have sex with men" then 'MSM' else null,
+    if HIE."Trans and gender-diverse people B.DE53" then 'Trans' else null,
+    if HIE."People who inject drugs B.DE54" then 'PWID' else null,
+    if HIE."People living in prisons and other closed settings" then 'Prisoner' else null
+  }
+
+  define "Treatment outcome category":
+  List<String>{
+    if HIE."Lost to follow-up" then 'LTFU' else null,
+    if HIE."Transferred out" then 'Transfer Out' else null,
+    if HIE."Death documented" then 'Death' else null,
+    if HIE."Refused stopped treatment" then 'Stopped' else null,
+    if HIE."On ART H.DE47" then 'On ART' else null
+  }
+
+
 /*
- * HIV Positive during the measurement period
- * Does issued imply that results returned to tester
- * or should use communication or encounter resource to specify?
+ * By Age Stratifiers
+ * (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)
+ * 
+ */
+define "By Age Stratifier":
+    case 
+        when HIE."Age In Years" <= 4 then '0-4'
+        when HIE."Age In Years" <= 9 then '5-9'
+        when HIE."Age In Years" <= 14 then '10–14'
+        when HIE."Age In Years" <= 19 then '15–19'
+        when HIE."Age In Years" <= 24 then '20–24'
+        when HIE."Age In Years" <= 29 then '25–29'
+        when HIE."Age In Years" <= 34 then '30–34'
+        when HIE."Age In Years" <= 39 then '35–39'
+        when HIE."Age In Years" <= 44 then '40–44'
+        when HIE."Age In Years" <= 49 then '45–49'
+        when HIE."Age In Years" >= 50 then '50+'
+        else null
+    end
+  
+  /*
+ * By Age Stratifiers
+ * Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
+ * 
+ */
+define "By Age Stratifier 2":
+    case 
+        when HIE."Age In Years" <= 4 then '0-4'
+        when HIE."Age In Years" <= 9 then '5-9'
+        when HIE."Age In Years" <= 14 then '10–14'
+        when HIE."Age In Years" <= 19 then '15–19'
+        when HIE."Age In Years" <= 24 then '20–24'
+        when HIE."Age In Years" <= 49 then '25–49'
+        when HIE."Age In Years" >= 50 then '50+'
+        else null
+    end
+
+define "By Age Stratifier 3":
+    case 
+        when HIE."Age In Years" >= 15 and HIE."Age In Years"<= 19 then '15-19'
+        when HIE."Age In Years" <= 24 then '20-24'
+        when HIE."Age In Years" <= 49 then '25–49'
+        when HIE."Age In Years" >= 50 then '50+'
+        else null
+    end
+
+/*
+ * By state stratifier
  */
 
+define "By Geographic Region Stratifier":
+    First(Patient.address A where A.use in { 'home' }).state
 
+/*
+ * By Administrative Gender of Patient Stratifier
+ * Need to expand codes
+ */
+
+define "By Administrative Gender Stratifier":
+    case 
+        when Patient.gender = 'male' then HC."Male"
+        when Patient.gender = 'female' then HC."Female"
+        when Patient.gender = 'transgender female' then HC."Transgender female"
+        when Patient.gender = 'transgender male' then HC."Transgender male"
+        else HC."Other - HIV.A.DE23"
+    end
+
+
+  define "HIV status of partner or contact":
+    case 
+        when HIE."Already knew positive" then HC."Already knew positive"
+        when HIE."Newly diagnosed" then HC."Newly diagnosed"
+        when HIE."Negative H.DE37" then HC."Negative - HIV.H.DE37"
+        else null
+    end
+
+//(including PrEP, OAMT, NSP, STI services, VMMC) 
+  define "HIV prevention intervention":
+  List<String>{
+    if HIE."PrEP service" then 'PrEP' else null,
+    if HIE."OAMT" then 'OAMT' else null,
+    if HIE."NSP" then 'NSP' else null,
+    if HIE."STI services" then 'STI services' else null,
+    if HIE."VMMC" then 'VMMC' else null,
+    if HIE."Other PRV.DE8" then 'other prevention' else null
+  }
+
+//DRAFT
+define "Patient Deceased during Measurement Period":
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  "Measurement Period" and  Patient.meta.lastUpdated after start of "Measurement Period"
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  "Measurement Period" and Patient.deceased as FHIR.dateTime after start of "Measurement Period"
+    else false
+  end
 
 define "HIV Positive Condition":
 [Condition] C
@@ -55,12 +214,6 @@ define "HIV test resulted":
   [Observation] O
     where O.status in {'final', 'amended'}
     and O.code ~ HC."Rapid diagnostic test for HIV - HIV.B.DE82"
-
-define "HIV Treatment Active":
-  [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC."On ART - HIV.H.DE47")
-    sort by effective
 
 define "HIV PREP Active":
 [MedicationStatement] MS
@@ -183,112 +336,16 @@ define "buprenorphine_prescribed":
         and MR.intent = 'order'
         and MR.medication ~ HCC."buprenorphine"
   
-define "Patient Deceased before end of Measurement Period":
-  case 
-    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then (Patient.meta.lastUpdated before end of "Measurement Period")
-    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of "Measurement Period"
-    else false
-  end
 
-define "Patient Deceased during Measurement Period":
-  case 
-    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  "Measurement Period" and  Patient.meta.lastUpdated after start of "Measurement Period"
-    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  "Measurement Period" and Patient.deceased as FHIR.dateTime after start of "Measurement Period"
-    else false
-  end
 
-/* End of care because of transferring out*/
 
-define "Transfer Out at Facility during the measurement period":
-    exists(
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC."On ART - HIV.H.DE47") 
-    and (exists (
-      EOC.statusHistory H
-      where H.status = 'finished'
-      and H.period ends during "Measurement Period"
-    ) 
-    or (
-      EOC.status = 'finished'
-      and EOC.period ends during "Measurement Period"
-    )
-    )
-    )
 
 define "Lost to Follow Up during the measurement period":
-    exists("HIV Treatment Active" H
+    exists(HE."On ART H.DE47" H
    where H.effective starts before end of "Measurement Period"
     and H.effective ends after start of "Measurement Period"
 	and not (H.effective ends after (end of "Measurement Period" - 28 days))
    )
-
-/*
- * By Age Stratifiers
- * (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)
- * 
- */
-define "By Age Stratifier":
-    case 
-        when AgeInYearsAt(start of "Measurement Period") <= 4 then '0-4'
-        when AgeInYearsAt(start of "Measurement Period") <= 9 then '5-9'
-        when AgeInYearsAt(start of "Measurement Period") <= 14 then '10–14'
-        when AgeInYearsAt(start of "Measurement Period") <= 19 then '15–19'
-        when AgeInYearsAt(start of "Measurement Period") <= 24 then '20–24'
-        when AgeInYearsAt(start of "Measurement Period") <= 29 then '25–29'
-        when AgeInYearsAt(start of "Measurement Period") <= 34 then '30–34'
-        when AgeInYearsAt(start of "Measurement Period") <= 39 then '35–39'
-        when AgeInYearsAt(start of "Measurement Period") <= 44 then '40–44'
-        when AgeInYearsAt(start of "Measurement Period") <= 49 then '45–49'
-        when AgeInYearsAt(start of "Measurement Period") >= 50 then '50+'
-        else null
-    end
-  
-  /*
- * By Age Stratifiers
- * Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
- * 
- */
-define "By Age Stratifier 2":
-    case 
-        when AgeInYearsAt(start of "Measurement Period") <= 4 then '0-4'
-        when AgeInYearsAt(start of "Measurement Period") <= 9 then '5-9'
-        when AgeInYearsAt(start of "Measurement Period") <= 14 then '10–14'
-        when AgeInYearsAt(start of "Measurement Period") <= 19 then '15–19'
-        when AgeInYearsAt(start of "Measurement Period") <= 24 then '20–24'
-        when AgeInYearsAt(start of "Measurement Period") <= 49 then '25–49'
-        when AgeInYearsAt(start of "Measurement Period") >= 50 then '50+'
-        else null
-    end
-
-define "By Age Stratifier 3":
-    case 
-        when AgeInYearsAt(start of "Measurement Period") >= 15 and AgeInYearsAt(start of "Measurement Period") <= 19 then '15-19'
-        when AgeInYearsAt(start of "Measurement Period") <= 24 then '20-24'
-        when AgeInYearsAt(start of "Measurement Period") <= 49 then '25–49'
-        when AgeInYearsAt(start of "Measurement Period") >= 50 then '50+'
-        else null
-    end
-
-/*
- * By state stratifier
- */
-
-define "By Geographic Region Stratifier":
-    First(Patient.address A where A.use in { 'home' }).state
-
-/*
- * By Administrative Gender of Patient Stratifier
- * Need to expand codes
- */
-
-define "By Administrative Gender Stratifier":
-    case 
-        when Patient.gender = 'male' then HC."Male"
-        when Patient.gender = 'female' then HC."Female"
-        when Patient.gender = 'transgender female' then HC."Transgender female"
-        when Patient.gender = 'transgender male' then HC."Transgender male"
-        else HC."Other - HIV.A.DE23"
-    end
 
 define "HIV Status":
     case 
@@ -399,8 +456,9 @@ define "Community_testing":
       such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC."Community-level testing") 
   where (O.status in { 'final', 'amended' }
   and O.code ~ HC."Rapid diagnostic test for HIV - HIV.B.DE82"
-  and O.issued during "Measurement Period")
-  )
+  and O.issued after start of "Measurement Period"
+  and O.issued before end of "Measurement Period"))
+  
 
 /*@triggeredBy Encounter with location = facility level testing*/
 define "Facility_testing":
@@ -409,7 +467,8 @@ define "Facility_testing":
       such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC."Facility-level testing")
   where (O.status in { 'final', 'amended' }
   and O.code ~ HC."Rapid diagnostic test for HIV - HIV.B.DE82"
-  and O.issued during "Measurement Period")
+  and O.issued after start of "Measurement Period"
+  and O.issued before end of "Measurement Period")
   )
 
 //lifted this from ANC DAK
@@ -495,14 +554,7 @@ exists(
   )
 
 
-  define patientGroups:
-  List<String>{
-    if SW then 'SW' else null,
-    if MSM then 'MSM' else null,
-    if Trans then 'Trans' else null,
-    if PWID then 'PWID' else null,
-    if Prisoner then 'Prisoner' else null
-  }
+
 
   define setting:
   List<String>{
@@ -828,7 +880,7 @@ define "VMMC_adverse_event_Postoperative":
   
 
   define "First HIV Treatment":
-    First("HIV Treatment Active")
+    First(HE."On ART H.DE47")
 
 
   define "Time to start ART":
@@ -859,13 +911,6 @@ define "VMMC_adverse_event_Postoperative":
     and exists(O.category OC where OC ~ HCC."social-history")
     and O.code ~ HC."Negative - HIV.H.DE37"
   
-  define "HIV status of partner or contact":
-    case 
-        when exists("already known positive") then HC."Already knew positive"
-        when exists("Newly diagnosed") then HC."Newly diagnosed"
-        when exists("Negative - HIV.H.DE37") then HC."Negative - HIV.H.DE37"
-        else null
-    end
 
 
 //need to define
@@ -875,31 +920,5 @@ define "VMMC_adverse_event_Postoperative":
   and P.code ~ HC."STI testing and treatment services"
 
 
-//(including PrEP, OAMT, NSP, STI services, VMMC) 
-  define "HIV prevention intervention":
-  List<String>{
-    if exists("HIV PREP Active") then 'PrEP' else null,
-    if OAMT_initiated then 'OAMT' else null,
-    if exists("Needle Syringe Dispensed") then 'NSP' else null,
-    if exists(STI_testing) then 'STI services' else null,
-    if exists(VMMC_done) then 'VMMC' else null
-  }
 
-define "Negative Tests within Measurement Period":
-"HIV Negative Observation" O
-    with "Client is at elevated risk for HIV acquisition" HIV
-    such that O.hasMember.references(HIV)
-    and O.issued after start of "Measurement Period"
-    and O.issued before end of "Measurement Period"
-    sort by issued
 
-define "First Negative Test within Measurement Period":
-( First("Negative Tests within Measurement Period"))
-
-define "Negative Tests after First Negative Test":
-  "HIV Negative Observation" O
-    with "Client is at elevated risk for HIV acquisition" HIV
-      such that O.hasMember.references(HIV)
-    where O.issued after "First Negative Test within Measurement Period".issued
-      and O.issued before ("First Negative Test within Measurement Period".issued + "Testing Interval")
-    sort by issued

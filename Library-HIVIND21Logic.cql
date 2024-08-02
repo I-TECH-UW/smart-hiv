@@ -80,6 +80,7 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include HIVElements called HE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -101,7 +102,7 @@ define "numerator":
 	where (O.issued before end of "Measurement Period" and
     O.issued after start of "Measurement Period")
 	))
-   and exists(HIC."HIV Treatment Active" H
+   and exists(HE."On ART H.DE47" H
    where H.effective starts before end of "Measurement Period"
     and (H.effective ends after start of "Measurement Period"
     or end of H.effective  ~  null)

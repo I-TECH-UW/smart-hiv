@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-07-31
+            as of 2024-08-02
           
         
       </td>
@@ -436,6 +436,8 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -452,51 +454,6 @@ define &quot;Initial Population&quot;:
   true
 
 
-define &quot;Negative Tests within Measurement Period&quot;:
-HIC.&quot;HIV Negative Observation&quot; O
-    with HIC.&quot;Client is at elevated risk for HIV acquisition&quot; HIV
-    such that O.hasMember.references(HIV)
-    and O.issued after start of &quot;Measurement Period&quot;
-    and O.issued before end of &quot;Measurement Period&quot;
-Sort by O.issued
-
-define &quot;First Negative Test within Measurement Period&quot;:
-( First(&quot;Negative Tests within Measurement Period&quot;))
-
-define PReP_intervention:
-&quot;PReP Intervention&quot; P 
-  where P.effective starts before (&quot;First Negative Test within Measurement Period&quot; + &quot;Intervention Interval&quot;)
-  and P.effective starts after (&quot;First Negative Test within Measurement Period&quot;)
-
-define &quot;OAMT_intervention&quot;:
-  [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC.&quot;OAMT&quot;)
-    and (exists (
-      EOC.statusHistory H
-      where H.period starts before (&quot;First Negative Test within Measurement Period&quot; + &quot;Intervention Interval&quot;)
-      and H.period starts after (&quot;First Negative Test within Measurement Period&quot;)
-    ) 
-    or (
-      EOC.period starts before (&quot;First Negative Test within Measurement Period&quot; + &quot;Intervention Interval&quot;)
-      and EOC.period starts after (&quot;First Negative Test within Measurement Period&quot;)
-    )
-    )
-
-define NSP_intervention:
-  HIC.&quot;Needle Syringe Dispensed&quot; DUS
-	where DUS.timing starts before (&quot;First Negative Test within Measurement Period&quot; + &quot;Intervention Interval&quot;)
-  and DUS.timing starts after (&quot;First Negative Test within Measurement Period&quot;)
-
-define STI_intervention:
-  HIC.STI_testing STI
-	where STI.performed starts before (&quot;First Negative Test within Measurement Period&quot; + &quot;Intervention Interval&quot;)
-  and STI.performed starts after (&quot;First Negative Test within Measurement Period&quot;)
-
-define VMMC_intervention:
-  HIC.&quot;VMMC_done&quot; VM
-  where VM.performed starts before (&quot;First Negative Test within Measurement Period&quot; + &quot;Intervention Interval&quot;)
-  and VM.performed starts after (&quot;First Negative Test within Measurement Period&quot;)
-
 /**
  * Numerator
  * 
@@ -505,16 +462,28 @@ define VMMC_intervention:
  */
 
 define &quot;Numerator&quot;:
-  exists(PReP_intervention
-  )
-  or exists(OAMT_intervention
-  )
-  or exists(NSP_intervention
-  )
-  or exists(STI_intervention
-  )
-  or exists(VMMC_intervention
-  )
+  (exists(HE.&quot;PrEP service&quot; prep
+   where prep.effective.toInterval() starts before (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Intervention Interval&quot;)
+  and prep.effective.toInterval() starts after (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval())
+   )
+  or 
+  exists(HE.&quot;OAMT&quot; t where t starts before (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Intervention Interval&quot;)
+      and t starts after (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval()))
+  or 
+  exists(HE.&quot;NSP&quot; DUS where DUS.timing.toInterval() starts before (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Intervention Interval&quot;)
+  and DUS.timing.toInterval() starts after (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval()))
+  or 
+  exists(HE.&quot;STI services&quot; STI where STI.performed.toInterval() starts before (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Intervention Interval&quot;)
+  and STI.performed.toInterval() starts after (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval()))
+  or 
+  exists(HE.&quot;VMMC&quot; V where V.performed.toInterval() starts before (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Intervention Interval&quot;)
+  and V.performed.toInterval() starts after (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval()))
+  or
+  exists(HE.&quot;Other PRV.DE8&quot; O
+    where O.effective.toInterval() starts before (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Intervention Interval&quot;)
+    and O.effective.toInterval() starts after (start of HIC.&quot;First Negative Test within Measurement Period&quot;.effective.toInterval())))
+  and
+  HIE.&quot;At elevated risk for HIV acquisition B.DE225&quot;
 
 
 
@@ -527,6 +496,7 @@ define &quot;Numerator&quot;:
 
 define &quot;Denominator&quot;:
   exists(HIC.&quot;Negative Tests within Measurement Period&quot;)
+  and HIE.&quot;At elevated risk for HIV acquisition B.DE225&quot;
     
 
 /* end Populations */
@@ -556,8 +526,7 @@ define &quot;Stratification&quot;:
   + ':' + HIC.&quot;By Age Stratifier 2&quot;
 + ':' + HIC.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIC.patientGroups, ':')
-//need to fix
-//+ Combine(HIC.&quot;HIV prevention intervention&quot;, ':')</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
++ Combine(HIC.&quot;HIV prevention intervention&quot;, ':')</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -582,7 +551,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Jul 31, 2024 16:10+0000">2024-07-31</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 2, 2024 14:11+0000">2024-08-02</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

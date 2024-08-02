@@ -58,4 +58,5 @@ code "Two to four times a day (qualifier value)": '396111001' from "SNOMEDCT" di
 code "needle-syringe": 'needle syringe' from "missing concepts"
 code "methadone": 'methadone' from "missing concepts"
 code "buprenorphine": 'buprenorphine' from "missing concepts"
+code "viral load test": 'viral load test' from "missing concepts"
 
