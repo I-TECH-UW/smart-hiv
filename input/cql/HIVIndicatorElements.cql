@@ -179,14 +179,7 @@ define "By Geographic Region Stratifier":
 /*
  * Other Stratifiers
  */
-define patientGroups:
-  List<String>{
-    if "Sex worker B.DE51" then 'SW' else null,
-    if "Men who have sex with men" then 'MSM' else null,
-    if "Trans and gender-diverse people B.DE53" then 'Trans' else null,
-    if "People who inject drugs B.DE54" then 'PWID' else null,
-    if "People living in prisons and other closed settings" then 'Prisoner' else null
-  }
+
 
 define "Treatment outcome category":
   List<String>{
@@ -598,12 +591,17 @@ define "Unknown B.DE36 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: The type of key population that the client is included in
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Key population member type B.DE50":
-  exists "Key population member type B.DE50 Observation"
-define "Key population member type B.DE50 Observation":
-  Elements."Key population member type B.DE50 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+define "Is Key population member":
+  exists "Key population member type Observation"
+
+define "Key population member type Observation":
+  Elements."Key population member type Observation" O
+    where O.effective.toInterval() before end of "Measurement Period"
+    or O.issued before end of "Measurement Period"
+
+// Stratifier
+define patientGroups:
+  "Key population member type Observation".getObservationCodes()
 /* End of Key population member type B.DE50 */
 
 /*
@@ -612,9 +610,9 @@ define "Key population member type B.DE50 Observation":
 @description: Client is a sex worker
 */
 
-define "Sex worker B.DE51":
-    exists(Elements."Sex worker B.DE51" SW
-  where SW.issued before end of "Measurement Period")
+define "Sex worker":
+  exists("Key population member type Observation" O
+    where O.value ~ Concepts."Sex worker - HIV.B.DE51")
 /* End of Sex worker B.DE51 */
 
 /*
@@ -622,10 +620,9 @@ define "Sex worker B.DE51":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a man who has sex with men
 */
-
 define "Men who have sex with men":
-  exists(Elements."Men who have sex with men" MSM
-  where MSM.issued before end of "Measurement Period")
+  exists("Key population member type Observation" O
+    where O.value ~ Concepts."Men who have sex with men")
 /* End of Men who have sex with men */
 
 /*
@@ -633,10 +630,9 @@ define "Men who have sex with men":
 @activity: HIV.B6 Capture or update client history
 @description: Client identifies as trans and gender-diverse
 */
-
-define "Trans and gender-diverse people B.DE53":
-  exists(Elements."Trans and gender-diverse people B.DE53" T
-  where T.issued before end of "Measurement Period")
+define "Trans and gender-diverse people":
+  exists("Key population member type Observation" O
+    where O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53")
 /* End of Trans and gender-diverse people B.DE53 */
 
 /*
@@ -644,10 +640,10 @@ define "Trans and gender-diverse people B.DE53":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a person who injects drugs
 */
-
-define "People who inject drugs B.DE54":
-  exists(Elements."People who inject drugs B.DE54" PWID
-  where PWID.issued before end of "Measurement Period")
+define "People who inject drugs":
+  exists("Key population member type Observation" O
+    where O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
+  )
 /* End of People who inject drugs B.DE54 */
 
 /*
@@ -655,10 +651,9 @@ define "People who inject drugs B.DE54":
 @activity: HIV.B6 Capture or update client history
 @description: Client lives in a prison or another closed setting
 */
-
 define "People living in prisons and other closed settings":
-  exists(Elements."People living in prisons and other closed settings" P
-  where P.issued before end of "Measurement Period")
+  exists("Key population member type Observation" O
+    where O.value ~ Concepts."People living in prisons and other closed settings")
 /* End of People living in prisons and other closed settings */
 
 /*

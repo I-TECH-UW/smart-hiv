@@ -15,9 +15,7 @@ include HIVCommon called Common
 
 // parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
 // parameter "Measurement Date" Date default @2020-01-01
-// parameter "Testing Interval" System.Quantity default 3 months
-// parameter "Intervention Interval" System.Quantity default 7 days
-// parameter "LTFU Days" System.Quantity default 28 days
+
 
 context Patient
 
@@ -678,11 +676,9 @@ define "Key population member type Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a sex worker
 */
-define SW:
-  exists (
-    "Key population member type Observation" O
-    where O.value ~ Concepts."Sex worker - HIV.B.DE51"
-  )
+define "Sex worker":
+  exists("Key population member type Observation" O
+    where O.value ~ Concepts."Sex worker - HIV.B.DE51")
 /* End of Sex worker B.DE51 */
 
 /*
@@ -690,8 +686,8 @@ define SW:
 @activity: HIV.B6 Capture or update client history
 @description: Client is a man who has sex with men
 */
-define MSM:
-  exists ("Key population member type Observation" O
+define "Men who have sex with men":
+  exists("Key population member type Observation" O
     where O.value ~ Concepts."Men who have sex with men"
   )
 /* End of Men who have sex with men */
@@ -701,9 +697,8 @@ define MSM:
 @activity: HIV.B6 Capture or update client history
 @description: Client identifies as trans and gender-diverse
 */
-define Trans:
-  exists (
-    "Key population member type Observation" O
+define "Trans and gender-diverse people":
+  exists("Key population member type Observation" O
     where O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53"
   )
 /* End of Trans and gender-diverse people B.DE53 */
@@ -713,9 +708,8 @@ define Trans:
 @activity: HIV.B6 Capture or update client history
 @description: Client is a person who injects drugs
 */
-define PWID:
-  exists (
-    "Key population member type Observation" O
+define "People who inject drugs":
+  exists("Key population member type Observation" O
     where O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
   )
 /* End of People who inject drugs B.DE54 */
@@ -725,11 +719,9 @@ define PWID:
 @activity: HIV.B6 Capture or update client history
 @description: Client lives in a prison or another closed setting
 */
-define Prisoner:
-  exists (
-    "Key population member type Observation" O
-    where O.value ~ Concepts."People living in prisons and other closed settings"
-  )
+define "People living in prisons and other closed settings":
+  exists("Key population member type Observation" O
+    where O.value ~ Concepts."People living in prisons and other closed settings")
 /* End of People living in prisons and other closed settings */
 
 /*

@@ -546,4 +546,19 @@ define function ExtractMedicationCode(choice Choice<FHIR.CodeableConcept, FHIR.R
       Message(null as FHIR.CodeableConcept, true, '1', 'Error', 'Cannot compute a medication code') // TODO: I'm sure that this is supported somehow?
 	end
 
+/**
+ * @description Returns the code of an Observation CodeableConcept
+ */
+define fluent function getObservationCode(observation FHIR.Observation):
+  case 
+    when observation.code is FHIR.CodeableConcept then (observation.value as CodeableConcept).coding.code
+    else null
+  end
+  
+/**
+ * @description Returns a list of codes of an a list of Observations
+ */
+define fluent function getObservationCodes(obslist List<FHIR.Observation>):
+  obslist obs return obs.getObservationCode()
+
 
