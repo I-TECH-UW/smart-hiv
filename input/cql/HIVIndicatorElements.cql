@@ -2507,13 +2507,6 @@ define "On ART D.DE38":
 @activity: HIV.D8 Capture or update client history
 @description: The date on which the client started or restarted ART
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "ART start date D.DE39":
-  Elements."ART start date D.DE39" O
-    where O.effective.toInterval() during "Measurement Period"
-define "ART start date D.DE39 Value":
-  "ART start date D.DE39" O
-  return O.value
 /* End of ART start date D.DE39 */
 
 /*
