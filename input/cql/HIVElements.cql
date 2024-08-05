@@ -11,9 +11,9 @@ include WHOElements called WE
 
 include HIVConcepts called Concepts
 include HIVConceptsCustom called CustomConcepts
-//include HIVCommon called Common
+include HIVCommon called Common
 
-parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
+// parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
 parameter "Measurement Date" Date default @2020-01-01
 parameter "Testing Interval" System.Quantity default 3 months
 parameter "Intervention Interval" System.Quantity default 7 days
@@ -25,7 +25,20 @@ context Patient
  * HIV Elements
  */
 
-// Umbrella Element Definitions
+/* Umbrella Element Definitions */
+define "HIV Positive Condition":
+[Condition] C
+    where C.clinicalStatus ~ CustomConcepts."active"
+    and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
+    and C.code ~ Concepts."HIV-positive - HIV.B.DE116"
+    sort by start of onset.toInterval()
+
+define "First HIV Treatment":
+  First("On ART H.DE47")
+
+define "First HIV Positive Condition":
+  First("HIV Positive Condition")
+  
 
 /* On ART - includes "On ART - HIV.B.DE47" and "On ART - HIV.B.DE48" */
 define "ART Medication Statement":
@@ -38,6 +51,15 @@ define "On ART":
 define "ART start date":
   "ART Medication Statement" MS
   return start of MS.effective.toInterval()
+
+
+define "First On ART":
+  (First("On ART D.DE38"))
+
+define "Viral load tests received after ART intitiation":
+  "Viral load test result D.DE387" O
+  where start of O.issued.toInterval() after start of "First On ART".effective.toInterval()
+  sort by start of issued.toInterval()
 
 // Auto-generated Elements from DAK Data Dictionary
 //   Entries based on DAK Data Dictionary for Data Elements marked as used
@@ -1295,12 +1317,7 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV status":
-  exists "HIV status Observation"
-define "HIV status Observation":
-  [Observation: Concepts."HIV status"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+
 /* End of HIV status */
 
 /*
@@ -1326,40 +1343,6 @@ define "HIV-positive B.DE116 Observation":
     and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
     sort by start of effective.toInterval()
 /* End of HIV-positive B.DE116 */
-
-/*
-@dataElement: HIV.B.DE117 - HIV-negative
-@activity: HIV.B7 Test for HIV using testing algorithm
-@description: Client is HIV-negative
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV-negative B.DE117":
-  exists "HIV-negative B.DE117 Condition"
-    or exists "HIV-negative B.DE117 Observation"
-define "HIV-negative B.DE117 Condition":
-  [Condition: Concepts."HIV-negative - HIV.B.DE117"]
-define "HIV-negative B.DE117 Observation":
-  "HIV status Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV-negative - HIV.B.DE117"
-/* End of HIV-negative B.DE117 */
-
-/*
-@dataElement: HIV.B.DE118 - Unknown
-@activity: HIV.B7 Test for HIV using testing algorithm
-@description: Client has unknown HIV status
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Unknown B.DE118":
-  exists "Unknown B.DE118 Condition"
-    or exists "Unknown B.DE118 Observation"
-define "Unknown B.DE118 Condition":
-  [Condition: Concepts."Unknown - HIV.B.DE118"]
-define "Unknown B.DE118 Observation":
-  "HIV status Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Unknown - HIV.B.DE118"
-/* End of Unknown B.DE118 */
 
 /*
 @dataElement: HIV.B.DE121 - Probable route of transmission
@@ -8012,64 +7995,14 @@ define "Date of baseline CD4 count test D.DE368 Value":
 @activity: HIV.D8 Capture or update client history
 @description: Time from HIV diagnosis to when client started ART
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Time to start ART":
-  exists "Time to start ART Observation"
-define "Time to start ART Observation":
-  [Observation: Concepts."Time to start ART"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  case 
+      when difference in days between start of "First HIV Treatment".effective.toInterval() and start of "First HIV Positive Condition".onset.toInterval() <= 7 then Concepts."Within 7 days of HIV diagnosis"
+      when difference in days between start of "First HIV Treatment".effective.toInterval() and start of "First HIV Positive Condition".onset.toInterval() <= 30 then Concepts."Within 30 days of HIV diagnosis"
+      when difference in days between start of "First HIV Treatment".effective.toInterval() and start of "First HIV Positive Condition".onset.toInterval() <= 90 then Concepts."Within 90 days of HIV diagnosis"
+  else null
+  end
 /* End of Time to start ART */
-
-/*
-@dataElement: HIV.D.DE384 - Within 7 days of HIV diagnosis
-@activity: HIV.D8 Capture or update client history
-@description: Client started ART within 7 days
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Within 7 days of HIV diagnosis":
-  exists "Within 7 days of HIV diagnosis Condition"
-    or exists "Within 7 days of HIV diagnosis Observation"
-define "Within 7 days of HIV diagnosis Condition":
-  [Condition: Concepts."Within 7 days of HIV diagnosis"]
-define "Within 7 days of HIV diagnosis Observation":
-  "Time to start ART Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Within 7 days of HIV diagnosis"
-/* End of Within 7 days of HIV diagnosis */
-
-/*
-@dataElement: HIV.D.DE385 - Within 30 days of HIV diagnosis
-@activity: HIV.D8 Capture or update client history
-@description: Client started ART within 30 days of ART initiation (but over 7 days)
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Within 30 days of HIV diagnosis":
-  exists "Within 30 days of HIV diagnosis Condition"
-    or exists "Within 30 days of HIV diagnosis Observation"
-define "Within 30 days of HIV diagnosis Condition":
-  [Condition: Concepts."Within 30 days of HIV diagnosis"]
-define "Within 30 days of HIV diagnosis Observation":
-  "Time to start ART Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Within 30 days of HIV diagnosis"
-/* End of Within 30 days of HIV diagnosis */
-
-/*
-@dataElement: HIV.D.DE386 - Within 90 days of HIV diagnosis
-@activity: HIV.D8 Capture or update client history
-@description: Client started ART within 90 days of ART initiation (but over 30 days)
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Within 90 days of HIV diagnosis":
-  exists "Within 90 days of HIV diagnosis Condition"
-    or exists "Within 90 days of HIV diagnosis Observation"
-define "Within 90 days of HIV diagnosis Condition":
-  [Condition: Concepts."Within 90 days of HIV diagnosis"]
-define "Within 90 days of HIV diagnosis Observation":
-  "Time to start ART Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Within 90 days of HIV diagnosis"
-/* End of Within 90 days of HIV diagnosis */
 
 /*
 @dataElement: HIV.D.DE387 - Viral load test result
@@ -12284,7 +12217,7 @@ define "TPT regimen":
 
 define "TPT regimen type":
   "TPT regimen" MS
-  return MS.medication
+  return Common.ExtractMedicationCode(MS.medication)
 /* End of TPT regimen type */
 
 /*
@@ -14204,12 +14137,6 @@ define "HIV treatment outcome":
 @activity: HIV.H3 Record outreach and result
 @description: Twenty-eight days or more since last missed appointment 
 */
-
-define "Lost to follow-up":
-  "On ART H.DE47" H
-   where H.effective starts before end of "Measurement Period"
-    and H.effective ends after start of "Measurement Period"
-	and not (H.effective ends after (end of "Measurement Period" - "LTFU Days"))
    
 /* End of Lost to follow-up */
 

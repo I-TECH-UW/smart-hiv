@@ -52,6 +52,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
+include HIVIndicatorElements called HIE
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
@@ -97,7 +98,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier  3"
+	HIE."By Age Stratifier 3"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -106,7 +107,7 @@ define "Setting":
     HIC."setting"
 
 define "HIV Status":
-    HIC."HIV Status"
+    HIE."HIV Status"
 
 //provider type not provided?
 
@@ -115,4 +116,4 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIC.setting, ':')
-+ ':' + HIC."HIV Status".code 
++ ':' + HIE."HIV Status".code 

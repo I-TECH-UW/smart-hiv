@@ -111,7 +111,7 @@ define "Numerator":
   HIE."HIV-positive B.DE116"
   and HIE."On ART H.DE47"
   and 
-   (months between (end of "Measurement Period") and (date from start of HIC."First On ART".effective.toInterval()) > 6 months)
+   (months between (end of "Measurement Period") and (date from start of HE."First On ART".effective.toInterval()) > 6 months)
    and 
    exists(
     HE."Date viral load test results received by client D.DE193" VL
@@ -142,7 +142,7 @@ define "Denominator":
   HIE."HIV-positive B.DE116"
   and HIE."On ART H.DE47"
   and 
-   (months between (end of "Measurement Period") and (date from start of HIC."First On ART".effective.toInterval()) > 6 months)
+   (months between (end of "Measurement Period") and (date from start of HE."First On ART".effective.toInterval()) > 6 months)
     
 /**
 * Denominator Exclusions
@@ -171,10 +171,10 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(HIE.patientGroups, ':')

@@ -85,7 +85,7 @@ context Patient
 
 define "Measure Population":
    HIE."HIV-positive B.DE116" 
-   and (date from start of HIC."First On ART".effective.toInterval() during "Measurement Period")
+   and (date from start of HE."First On ART".effective.toInterval() during "Measurement Period")
 
 /*
  * As defined by Member States
@@ -115,10 +115,10 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(HIE.patientGroups, ':')
