@@ -135,5 +135,5 @@ define "Geographic Region Stratifier":
 define "Stratification":
   HIE."By Administrative Gender Stratifier".code 
     + ':' + HIE."By Age Stratifier"
-    + ':' + First(HIE."TPT regimen type".coding.code)
+    + ':' + Combine(HIE."TPT regimen type".coding.code)
 	  + ':' + HIE."By Geographic Region Stratifier"

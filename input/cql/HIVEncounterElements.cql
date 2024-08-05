@@ -1042,7 +1042,12 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-
+define "HIV status":
+  case 
+      when exists("HIV-positive Condition") or exists("HIV-positive Condition") then Concepts."HIV-positive - HIV.B.DE116"
+      when not exists("HIV-positive Condition") and exists(Common."HIV Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
+      else Concepts."Unknown - HIV.B.DE118"
+  end
 /* End of HIV status */
 
 /*
@@ -1052,12 +1057,12 @@ define "HIV-inconclusive Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV-positive B.DE116":
-  exists "HIV-positive B.DE116 Condition"
-    or exists "HIV-positive B.DE116 Observation"
-define "HIV-positive B.DE116 Condition":
+  exists "HIV-positive Condition"
+    or exists "HIV-positive Observation"
+define "HIV-positive Condition":
   Elements."HIV-positive B.DE116 Condition" C
     where C.prevalenceInterval() starts on or before Today
-define "HIV-positive B.DE116 Observation":
+define "HIV-positive Observation":
   Elements."HIV-positive B.DE116 Observation" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today

@@ -25,7 +25,87 @@ context Patient
  */
 
 /* Umbrella Data Elements */
+// From Common
 
+define "OAMT_initiated":
+exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."OAMT")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+    )
+
+define "OAMT_retained":
+exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."OAMT")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+      and H.period ends after (end of "Measurement Period" + 6 months)
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+      and (EOC.period ends after (end of "Measurement Period" + 6 months)
+      or end of EOC.period is null)
+    )
+    )
+    )
+
+
+define "PEP Prescribed before start of Measurement Period and Completed":
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ Concepts."PEP for HIV prevention"
+        and MR.authoredOn before end of "Measurement Period"
+  where (MS.status = 'completed'
+  and exists(MS.reasonCode C where C ~ Concepts."PrEP for HIV prevention")
+  )
+
+define "PEP Prescribed during Measurement Period and Completed":
+  [MedicationStatement] MS
+    with [MedicationRequest] MR
+      such that MS.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ Concepts."PEP for HIV prevention"
+        and MR.authoredOn after start of "Measurement Period"
+        and MR.authoredOn before end of "Measurement Period"
+  where (MS.status = 'completed'
+  and exists(MS.reasonCode C where C ~ Concepts."PrEP for HIV prevention")
+  )
+
+define "HIV Test Positive After PEP Prescribed during Measurement Period":
+  [Observation: Concepts."HIV test result - HIV.B.DE111"] O
+    with [MedicationRequest] MR
+      such that O.basedOn.references(MR) and MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ Concepts."PEP for HIV prevention"
+        and MR.authoredOn after start of "Measurement Period"
+        and MR.authoredOn before end of "Measurement Period"
+        and O.issued before (MR.authoredOn + 3 months)
+  where ( O.status in {'final', 'amended'}
+    and O.value ~ Concepts."HIV-positive - HIV.B.DE112"
+  )
+
+
+define "Patient Deceased during Measurement Period":
+  case 
+    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  "Measurement Period" and  Patient.meta.lastUpdated after start of "Measurement Period"
+    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  "Measurement Period" and Patient.deceased as FHIR.dateTime after start of "Measurement Period"
+    else false
+  end
 
 
 // HIV Testing

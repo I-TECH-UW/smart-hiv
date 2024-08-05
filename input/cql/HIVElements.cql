@@ -14,10 +14,10 @@ include HIVConceptsCustom called CustomConcepts
 include HIVCommon called Common
 
 // parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
-parameter "Measurement Date" Date default @2020-01-01
-parameter "Testing Interval" System.Quantity default 3 months
-parameter "Intervention Interval" System.Quantity default 7 days
-parameter "LTFU Days" System.Quantity default 28 days
+// parameter "Measurement Date" Date default @2020-01-01
+// parameter "Testing Interval" System.Quantity default 3 months
+// parameter "Intervention Interval" System.Quantity default 7 days
+// parameter "LTFU Days" System.Quantity default 28 days
 
 context Patient
 
@@ -26,6 +26,94 @@ context Patient
  */
 
 /* Umbrella Element Definitions */
+// From Common
+
+
+define "methadone_prescribed":
+[MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ CustomConcepts."methadone"
+
+define "buprenorphine_prescribed":
+[MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ CustomConcepts."buprenorphine"
+
+
+define "Needle Syringe Dispensed":  
+  [DeviceUseStatement] DUS
+  with [Observation: Concepts."Key population member - HIV.E.DE113"] O
+      such that DUS.reasonReference.references(O) 
+        and O.status in { 'final', 'amended', 'corrected' }
+        and exists(O.category OC where OC ~ CustomConcepts."social-history")
+        and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
+  where DUS.status = 'completed'
+
+define PWID_person:
+  [Observation: Concepts."Key population member - HIV.E.DE113"] O
+  where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
+
+define "HIV Positive Observation":
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."HIV status"
+    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+
+define "HIV Positive Observation - HIV Self Test":
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."HIV self-test"
+    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+
+define "HIV Negative Observation":
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+    and O.value ~ Concepts."HIV-negative - HIV.B.DE117"
+
+define "HIV test resulted":
+  [Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+
+define "HIV PREP Active":
+[MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."PrEP for HIV prevention")
+
+ define "Client is at elevated risk for HIV acquisition":
+    [Observation] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and O.code ~ Concepts."At elevated risk for HIV acquisition - HIV.B.DE225"
+
+define "PREP Prescription":
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ Concepts."PrEP for HIV prevention"
+
+define "PEP Prescription":
+    [MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ Concepts."PEP for HIV prevention"
+
+define "routine viral load sample collection":
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ CustomConcepts."viral load test"
+  and exists(P.reasonCode RC where RC ~ Concepts."Routine viral load test")
+
+define "viral load sample collection":
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ CustomConcepts."viral load test"
+
 define "HIV Positive Condition":
 [Condition] C
     where C.clinicalStatus ~ CustomConcepts."active"
@@ -560,18 +648,18 @@ define "Unknown B.DE36 Observation":
       and O.value ~ Concepts."Unknown - HIV.B.DE36"
 /* End of Unknown B.DE36 */
 
+
+/*
+ * Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)
+ */
+
 /*
 @dataElement: HIV.B.DE49 - Key population member
 @activity: HIV.B6 Capture or update client history
 @description: Client is a member of a key population that has an increased risk of HIV
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Key population member B.DE49":
-  exists "Key population member B.DE49 Observation"
-define "Key population member B.DE49 Observation":
-  [Observation: Concepts."Key population member - HIV.B.DE49"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+define "Is Key population member":
+  exists "Key population member type Observation"
 /* End of Key population member B.DE49 */
 
 /*
@@ -579,12 +667,10 @@ define "Key population member B.DE49 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: The type of key population that the client is included in
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Key population member type B.DE50":
-  exists "Key population member type B.DE50 Observation"
-define "Key population member type B.DE50 Observation":
-  [Observation: Concepts."Key population member type - HIV.B.DE50"] O
+define "Key population member type Observation":
+  [Observation: Concepts."Key population member - HIV.B.DE49"] O
     where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ CustomConcepts."social-history")
 /* End of Key population member type B.DE50 */
 
 /*
@@ -592,12 +678,11 @@ define "Key population member type B.DE50 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a sex worker
 */
-
-define "Sex worker B.DE51":
-  [Observation: Concepts."Key population member - HIV.B.DE49"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."Sex worker - HIV.B.DE51"
+define SW:
+  exists (
+    "Key population member type Observation" O
+    where O.value ~ Concepts."Sex worker - HIV.B.DE51"
+  )
 /* End of Sex worker B.DE51 */
 
 /*
@@ -605,12 +690,10 @@ define "Sex worker B.DE51":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a man who has sex with men
 */
-
-define "Men who have sex with men":
-  [Observation: Concepts."Key population member - HIV.B.DE49"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."Men who have sex with men"
+define MSM:
+  exists ("Key population member type Observation" O
+    where O.value ~ Concepts."Men who have sex with men"
+  )
 /* End of Men who have sex with men */
 
 /*
@@ -618,12 +701,11 @@ define "Men who have sex with men":
 @activity: HIV.B6 Capture or update client history
 @description: Client identifies as trans and gender-diverse
 */
-
-define "Trans and gender-diverse people B.DE53":
-  [Observation: Concepts."Key population member - HIV.B.DE49"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53"
+define Trans:
+  exists (
+    "Key population member type Observation" O
+    where O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53"
+  )
 /* End of Trans and gender-diverse people B.DE53 */
 
 /*
@@ -631,12 +713,11 @@ define "Trans and gender-diverse people B.DE53":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a person who injects drugs
 */
-
-define "People who inject drugs B.DE54":
-  [Observation: Concepts."Key population member - HIV.B.DE49"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
+define PWID:
+  exists (
+    "Key population member type Observation" O
+    where O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
+  )
 /* End of People who inject drugs B.DE54 */
 
 /*
@@ -644,12 +725,11 @@ define "People who inject drugs B.DE54":
 @activity: HIV.B6 Capture or update client history
 @description: Client lives in a prison or another closed setting
 */
-
-define "People living in prisons and other closed settings":
-  [Observation: Concepts."Key population member - HIV.B.DE49"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."People living in prisons and other closed settings"
+define Prisoner:
+  exists (
+    "Key population member type Observation" O
+    where O.value ~ Concepts."People living in prisons and other closed settings"
+  )
 /* End of People living in prisons and other closed settings */
 
 /*
@@ -1317,7 +1397,19 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
+define "HIV Status":
+  case 
+      when exists("HIV Positive Condition") or exists(Common."HIV Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
+      when not exists("HIV Positive Condition") and exists(Common."HIV Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
+      else Concepts."Unknown - HIV.B.DE118"
+  end
 
+define "HIV Status Condition":
+  [Condition: Concepts."HIV status"]
+
+define "HIV Status Observation":
+  [Observation: Concepts."HIV status"] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of HIV status */
 
 /*
