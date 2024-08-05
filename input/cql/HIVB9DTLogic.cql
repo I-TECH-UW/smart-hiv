@@ -1,5 +1,5 @@
 /*
-@DecisionID: HIV.B9.DT
+@DecisionID: HIV.B9.DT Logic
 @BusinessRule: HIV restesting recommendations
 @Trigger: HIV.B9 Determine recommended services
 @HitPolicy: Rule order
@@ -79,7 +79,7 @@ define "HIV burden of setting is low HIV burden setting":
   @pseudocode: "Key population member" = TRUE
   */
 define "Key population member":
-  exists(Elements."Key population member* B.DE49 Observation" O
+  exists(Elements."Key population member B.DE49 Observation" O
     where O.value is true)
 
  /*
@@ -95,7 +95,7 @@ define "Currently pregnant":
   */
 define "TB diagnosis result is diagnosed TB":
   exists(Elements."TB diagnosis result Observation" O
-    where O.value ~ HCx."Diagnosed TB" or)
+    where O.value ~ HCx."Diagnosed TB")
 
  /*
   @input: "Presumptive TB"

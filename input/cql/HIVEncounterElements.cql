@@ -1042,13 +1042,7 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV status":
-  exists "HIV status Observation"
-define "HIV status Observation":
-  Elements."HIV status Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+
 /* End of HIV status */
 
 /*
@@ -1068,42 +1062,6 @@ define "HIV-positive B.DE116 Observation":
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of HIV-positive B.DE116 */
-
-/*
-@dataElement: HIV.B.DE117 - HIV-negative
-@activity: HIV.B7 Test for HIV using testing algorithm
-@description: Client is HIV-negative
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV-negative B.DE117":
-  exists "HIV-negative B.DE117 Condition"
-    or exists "HIV-negative B.DE117 Observation"
-define "HIV-negative B.DE117 Condition":
-  Elements."HIV-negative B.DE117 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "HIV-negative B.DE117 Observation":
-  Elements."HIV-negative B.DE117 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
-/* End of HIV-negative B.DE117 */
-
-/*
-@dataElement: HIV.B.DE118 - Unknown
-@activity: HIV.B7 Test for HIV using testing algorithm
-@description: Client has unknown HIV status
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Unknown B.DE118":
-  exists "Unknown B.DE118 Condition"
-    or exists "Unknown B.DE118 Observation"
-define "Unknown B.DE118 Condition":
-  Elements."Unknown B.DE118 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Unknown B.DE118 Observation":
-  Elements."Unknown B.DE118 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
-/* End of Unknown B.DE118 */
 
 /*
 @dataElement: HIV.B.DE141 - Partner virally suppressed on ART

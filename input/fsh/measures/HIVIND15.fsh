@@ -8,7 +8,7 @@ Title: "HIV.IND.15 VMMC scale-up"
 * url = "http://smart.who.int/HIV/Measure/HIVIND15"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND15"
 * title = "HIV.IND.15 VMMC scale-up"
 * publisher = "World Health Organization (WHO)"
@@ -36,3 +36,7 @@ Title: "HIV.IND.15 VMMC scale-up"
     * code = $measure-population#measure-observation "Measure Observation"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Measure Observation"
+  * stratifier[+]
+    * id = "HIV.IND.15.S"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Stratification"

@@ -519,11 +519,11 @@ define "HIV-positive B.DE34":
   exists "HIV-positive B.DE34 Condition"
     or exists "HIV-positive B.DE34 Observation"
 define "HIV-positive B.DE34 Condition":
-  [Condition: Concepts."HIV-positive - HIV.B.DE34"]
+  [Condition: Concepts."HIV-positive"]
 define "HIV-positive B.DE34 Observation":
   "Partner HIV status reported Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV-positive - HIV.B.DE34"
+      and O.value ~ Concepts."HIV-positive"
 /* End of HIV-positive B.DE34 */
 
 /*
@@ -536,11 +536,11 @@ define "HIV-negative B.DE35":
   exists "HIV-negative B.DE35 Condition"
     or exists "HIV-negative B.DE35 Observation"
 define "HIV-negative B.DE35 Condition":
-  [Condition: Concepts."HIV-negative - HIV.B.DE35"]
+  [Condition: Concepts."HIV-negative"]
 define "HIV-negative B.DE35 Observation":
   "Partner HIV status reported Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV-negative - HIV.B.DE35"
+      and O.value ~ Concepts."HIV-negative"
 /* End of HIV-negative B.DE35 */
 
 /*

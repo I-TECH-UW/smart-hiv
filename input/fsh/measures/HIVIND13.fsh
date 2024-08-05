@@ -8,7 +8,7 @@ Title: "HIV.IND.13 OAMT minimum duration"
 * url = "http://smart.who.int/HIV/Measure/HIVIND13"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND13"
 * title = "HIV.IND.13 OAMT minimum duration"
 * publisher = "World Health Organization (WHO)"
@@ -33,3 +33,7 @@ Title: "HIV.IND.13 OAMT minimum duration"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"
+  * stratifier[+]
+    * id = "HIV.IND.13.S"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Stratification"
