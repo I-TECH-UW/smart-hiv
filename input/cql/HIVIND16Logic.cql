@@ -99,7 +99,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HIC."VMMC_adverse_event" VMAC
+  exists(HIE."VMMC_adverse_event" VMAC
     where (VMAC.severity = HCC."severe"
     or VMAC.severity = HCC."moderate")
   )
@@ -113,9 +113,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIC."VMMC_done" VM
-        where (VM.performed during "Measurement Period")
-  )
+  HIE."VMMC"
     
 
 /* end Populations */

@@ -78,7 +78,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIC.OAMT_retained
+  HIE.OAMT_retained
 
 
 /**
@@ -89,7 +89,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIC.OAMT_initiated
+  HIE.OAMT_initiated
     
 
 /* end Populations */

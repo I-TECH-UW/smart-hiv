@@ -74,10 +74,7 @@ define "Initial Population":
  */
                                                        
 define "Measure Population":
-  exists(HIC."VMMC_done" VM
-        where (VM.performed during "Measurement Period")
-  )
-
+  HIE."VMMC"
 
 /**
  * Measure Observation
