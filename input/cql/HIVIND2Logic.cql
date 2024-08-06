@@ -97,11 +97,7 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 
 context Patient
 define "Measure Population":
-   exists(HIC."HIV PREP Active" H
-   where H.effective starts before end of "Measurement Period"
-    and (H.effective ends after start of "Measurement Period"
-    or end of H.effective  ~  null)
-   )
+  HIE."HIV PREP Active"
 
 /*
  * As defined by Member States
@@ -134,16 +130,16 @@ define "patientGroups Stratifier":
 	HIE."patientGroups"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 define "prep product":
-    HIC."prep_product"
+    HIE."prep_product"
 
 define "prep_experience":
-    HIC."prep_experience"
+    HIE."prep_experience"
 
 define "prep_dosing":
-    HIC."prep_dosing"
+    HIE."prep_dosing"
 
 // Provider type concepts are not found in DD
 
@@ -151,8 +147,8 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIC.setting, ':')
-+ Combine(HIC.prep_product, ':')
-+ Combine(HIC.prep_experience, ':')
-+ Combine(HIC.prep_dosing, ':')
++ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE.setting, ':')
++ Combine(HIE.prep_product, ':')
++ Combine(HIE.prep_experience, ':')
++ Combine(HIE.prep_dosing, ':')

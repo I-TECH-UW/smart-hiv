@@ -52,13 +52,6 @@ define Exposure_Non_Occupational_consensual_sex:
     and O.value ~ Concepts."Non-occupational consensual sex"
   )
 
-define hiv_exposure_type:
-  List<String>{
-    if Exposure_Occupational then 'Occupational' else null,
-    if Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
-    if Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
-  }
-
 // Needle Syringe Dispensed
 define "Needle Syringe Dispensed":  
   [DeviceUseStatement] DUS
@@ -3211,6 +3204,77 @@ define "Date/time of suspected exposure to HIV C.DE9 Value":
 @activity: HIV.C3 Capture or update client history
 @description: The client is currently taking PrEP. Oral pre-exposure prophylaxis (PrEP) of HIV is the use of ARV drugs by people who are not infected with HIV to block the acquisition of HIV.
 */
+
+/*@triggeredBy Encounter with location = community level testing*/
+
+define "PREP Product Oral":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and (MS.medication ~ Concepts."TDF + FTC - HIV.C.DE18" or
+    MS.medication ~ Concepts."TDF - HIV.C.DE19" or
+    MS.medication ~ Concepts."TDF + 3TC - HIV.C.DE20" or
+    MS.medication ~ Concepts."Other TDF-based regimen")
+  )
+
+define "PREP Product long-acting device":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and MS.medication ~ Concepts."Dapivirine vaginal ring DVR - HIV.C.DE22"
+  )
+
+define "PREP Product long-acting injectable":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and MS.medication ~ Concepts."CAB-LA - HIV.C.DE23"
+  )
+  
+define "PREP first time":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and exists(MS.statusReason SR where SR ~ Concepts."First-time user - HIV.C.DE25")
+  )
+
+define "PREP Continuing user":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and exists(MS.statusReason SR where SR ~ Concepts."Continuing user")
+  )
+  
+define "PREP Restarting":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and exists(MS.statusReason SR where SR ~ Concepts."Restarting following a period of not taking PrEP")
+  )
+
+define "Daily_oral_PrEP":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts."Daily oral PrEP")
+  )
+
+define "Event_driven_PrEP":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts."Event-driven PrEP 2+1+1") 
+  )
+
+define "other_dosing_PrEP":
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
+    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts."Other PrEP dosing type") 
+  )
+
+
+
 // TODO: Replace placeholder with relevant CQL logic
 define "Currently on PrEP":
   exists "Currently on PrEP Observation"

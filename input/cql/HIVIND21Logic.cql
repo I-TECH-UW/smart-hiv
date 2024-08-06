@@ -145,5 +145,5 @@ define "Stratification":
  //+ ':' + HIC."Time to start ART".code
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
++ Combine(flatten(HIE.patientGroups), ':')
 + Combine(HIC.tb, ':')

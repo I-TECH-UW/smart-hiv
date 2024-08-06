@@ -8,11 +8,6 @@ include FHIRCommon called FC
 include HIVConcepts called Concepts
 include HIVConceptsCustom called CustomConcepts
 
-// parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
-// parameter "Measurement Date" Date default @2020-01-01
-// parameter "Testing Interval" System.Quantity default 3 months
-// parameter "Intervention Interval" System.Quantity default 7 days
-
 context Patient
 
 //VERIFIED
@@ -21,116 +16,6 @@ context Patient
 //DRAFT
 
 
-
-
-/*@triggeredBy Encounter with location = community level testing*/
-
-  define "PREP Product Oral":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and (MS.medication ~ Concepts."TDF + FTC - HIV.C.DE18" or
-    MS.medication ~ Concepts."TDF - HIV.C.DE19" or
-    MS.medication ~ Concepts."TDF + 3TC - HIV.C.DE20" or
-    MS.medication ~ Concepts."Other TDF-based regimen")
-  )
-
-  define "PREP Product long-acting device":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and MS.medication ~ Concepts."Dapivirine vaginal ring DVR - HIV.C.DE22"
-  )
-
-  define "PREP Product long-acting injectable":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and MS.medication ~ Concepts."CAB-LA - HIV.C.DE23"
-  )
-  
-  define "PREP first time":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and exists(MS.statusReason SR where SR ~ Concepts."First-time user - HIV.C.DE25")
-  )
-
-  define "PREP Continuing user":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and exists(MS.statusReason SR where SR ~ Concepts."Continuing user")
-  )
-  
-  define "PREP Restarting":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and exists(MS.statusReason SR where SR ~ Concepts."Restarting following a period of not taking PrEP")
-  )
-
-  define "Daily_oral_PrEP":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts."Daily oral PrEP")
-  )
-
-  define "Event_driven_PrEP":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts."Event-driven PrEP 2+1+1") 
-  )
-
-  define "other_dosing_PrEP":
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ Concepts."Currently on PrEP")
-    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts."Other PrEP dosing type") 
-  )
-
-
-
-
-  define setting:
-  List<String>{
-    if Community_testing then 'Community-level testing' else null,
-    if Facility_testing then 'Facility-level testing' else null
-  }
-
-  define anc:
-  List<String>{
-    if ANC_case then 'ANC case' else null
-  }
-
-  define tb:
-  List<String>{
-    if TB_diagnosed then 'Diagnosed TB' else null,
-    if TB_presumptive then 'Presumptive TB' else null
-  }
-
-  define prep_product:
-  List<String>{
-    if `PREP Product Oral` then 'PREP Product Oral' else null,
-    if `PREP Product long-acting device` then 'PREP Product long-acting device' else null,
-    if `PREP Product long-acting injectable` then 'PREP Product long-acting injectable' else null
-  }
-
-  define prep_experience:
-  List<String>{
-    if `PREP first time` then 'PREP first time' else null,
-    if `PREP Continuing user` then 'PREP Continuing user' else null,
-    if `PREP Restarting` then 'PREP Restarting' else null
-  }
-
-  define prep_dosing:
-  List<String>{
-    if `Daily_oral_PrEP` then 'Daily oral PrEP' else null,
-    if `Event_driven_PrEP` then 'Event driven PrEP' else null,
-    if `other_dosing_PrEP` then 'Other PrEP dosing type' else null
-  }
 
 //need to add Time to start ART (within 7, 30 or 90 days of diagnosis, as per country guidelines)
 //need to add Disaggregation by time since diagnosis

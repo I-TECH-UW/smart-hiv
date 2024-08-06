@@ -141,7 +141,7 @@ define "patientGroups Stratifier":
 	HIE."patientGroups"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 define "TB Stratifier":
     HIC."tb"
@@ -150,6 +150,6 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIC.setting, ':')
++ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE.setting, ':')
 + Combine(HIC.tb, ':')

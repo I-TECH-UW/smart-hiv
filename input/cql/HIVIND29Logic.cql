@@ -167,4 +167,4 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
++ Combine(flatten(HIE.patientGroups), ':')

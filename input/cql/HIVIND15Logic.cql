@@ -104,7 +104,7 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 define "HIV Status":
     HIE."HIV Status"
@@ -115,5 +115,5 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.setting, ':')
++ Combine(HIE.setting, ':')
 + ':' + HIE."HIV Status".code 

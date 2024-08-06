@@ -71,13 +71,11 @@ exists(
 define "methadone_prescribed at date":
 [MedicationRequest] MR
   where MR.status = 'completed'
-  and MR.intent = 'order'
-  and MR.medication ~ ConceptsCustom."methadone"
-  //and "GetMedicationDailyDose"(MR.dosageInstruction, "DosesPerDay"(singleton from MR.dosageInstruction.timing.repeat.frequencyMax)) >= 60 'mg/d'
-  and MedicationRequestPeriod(MR) starts before "Measurement Date"
-  and MedicationRequestPeriod(MR) ends after "Measurement Date"
-
-
+    and MR.intent = 'order'
+    and MR.medication ~ ConceptsCustom."methadone"
+    //and "GetMedicationDailyDose"(MR.dosageInstruction, "DosesPerDay"(singleton from MR.dosageInstruction.timing.repeat.frequencyMax)) >= 60 'mg/d'
+    and Common.MedicationRequestPeriod(MR) starts before start of "Measurement Period"
+    and Common.MedicationRequestPeriod(MR) ends after end of "Measurement Period"
 
 define "OAMT_initiated":
 exists(
@@ -231,7 +229,50 @@ define "By Geographic Region Stratifier":
 /*
  * Other Stratifiers
  */
+define hiv_exposure_type:
+  List<String>{
+    if Elements.Exposure_Occupational then 'Occupational' else null,
+    if Elements.Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
+    if Elements.Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
+  }
 
+define setting:
+  List<String>{
+    if Community_testing then 'Community-level testing' else null,
+    if Facility_testing then 'Facility-level testing' else null
+  }
+
+define anc:
+  List<String>{
+    if ANC_case then 'ANC case' else null
+  }
+
+define tb:
+  List<String>{
+    if TB_diagnosed then 'Diagnosed TB' else null,
+    if TB_presumptive then 'Presumptive TB' else null
+  }
+
+define prep_product:
+  List<String>{
+    if Elements."PREP Product Oral" then 'PREP Product Oral' else null,
+    if Elements."PREP Product long-acting device" then 'PREP Product long-acting device' else null,
+    if Elements."PREP Product long-acting injectable" then 'PREP Product long-acting injectable' else null
+  }
+
+define prep_experience:
+  List<String>{
+    if Elements."PREP first time" then 'PREP first time' else null,
+    if Elements."PREP Continuing user" then 'PREP Continuing user' else null,
+    if Elements."PREP Restarting" then 'PREP Restarting' else null
+  }
+
+define prep_dosing:
+  List<String>{
+    if Elements."Daily_oral_PrEP" then 'Daily oral PrEP' else null,
+    if Elements."Event_driven_PrEP" then 'Event driven PrEP' else null,
+    if Elements."other_dosing_PrEP" then 'Other PrEP dosing type' else null
+  }
 
 define "Treatment outcome category":
   List<String>{
@@ -241,7 +282,6 @@ define "Treatment outcome category":
     if "Refused stopped treatment" then 'Stopped' else null,
     if "On ART H.DE47" then 'On ART' else null
   }
-
 
 define "HIV status of partner or contact":
   case 
@@ -653,7 +693,8 @@ define "Key population member type Observation":
 
 // Stratifier
 define patientGroups:
-  "Key population member type Observation".getObservationCodes()
+  "Key population member type Observation" O
+  return O.getObservationCode()
 /* End of Key population member type B.DE50 */
 
 /*
@@ -2379,6 +2420,12 @@ define "Medications prescribed C.DE75 Observation":
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed pre-exposure prophylaxis (PrEP) for HIV prevention
 */
+define "HIV PREP Active":
+   exists(Elements."HIV PREP Active" H
+   where H.effective starts before end of "Measurement Period"
+    and (H.effective ends after start of "Measurement Period"
+    or end of H.effective  ~  null)
+   )
 // TODO: Replace placeholder with relevant CQL logic
 define "PrEP for HIV prevention":
   exists "PrEP for HIV prevention Condition"

@@ -136,7 +136,7 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 define "VMMC_adverse_event_type":
     HIC."VMMC_adverse_event_type"
@@ -152,6 +152,6 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.setting, ':')
++ Combine(HIE.setting, ':')
 + ':' + HIC."VMMC_adverse_event_type".code 
 + ':' + HIC."VMMC_adverse_event_timing".code 
