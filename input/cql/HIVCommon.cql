@@ -22,94 +22,8 @@ context Patient
 
 
 
-  define TB_diagnosed:
-  exists(
-    ([Condition] C
-    where C.clinicalStatus ~ CustomConcepts."active"
-    and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
-    and C.code ~ Concepts."Diagnosed TB"
-    and C.onset during "Measurement Period")
-  )
-  
-  define TB_presumptive:
-  exists(
-    ([Condition] C
-    where C.clinicalStatus ~ CustomConcepts."active"
-    and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
-    and C.code ~ Concepts."Presumptive TB - HIV.D.DE945"
-    and C.onset during "Measurement Period")
-  )
-
-
-define Exposure_Occupational:
-  exists (
-    [Observation: Concepts."HIV exposure type"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."Occupational"
-  )
-
-define Exposure_Non_Occupational_violent:
-  exists (
-    [Observation: Concepts."HIV exposure type"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."Non-occupational violent"
-  )
-
-define Exposure_Non_Occupational_consensual_sex:
-  exists (
-    [Observation: Concepts."HIV exposure type"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."Non-occupational consensual sex"
-  )
-
-define hiv_exposure_type:
-  List<String>{
-    if Exposure_Occupational then 'Occupational' else null,
-    if Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
-    if Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
-  }
 
 /*@triggeredBy Encounter with location = community level testing*/
-
-define "Community_testing":
-  exists([Observation] O
-    with [Encounter] E
-      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  Concepts."Community-level testing") 
-  where (O.status in { 'final', 'amended' }
-  and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
-  and O.issued after start of "Measurement Period"
-  and O.issued before end of "Measurement Period"))
-  
-
-/*@triggeredBy Encounter with location = facility level testing*/
-define "Facility_testing":
-  exists([Observation] O
-    with [Encounter] E
-      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  Concepts."Facility-level testing")
-  where (O.status in { 'final', 'amended' }
-  and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
-  and O.issued after start of "Measurement Period"
-  and O.issued before end of "Measurement Period")
-  )
-
-//lifted this from ANC DAK
-define "ANC_case":
-exists(
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts."Already on ART at first antenatal care visit")
-    and (exists (
-      EOC.statusHistory H
-      where H.period overlaps "Measurement Period"
-    ) 
-    or (
-      EOC.period overlaps "Measurement Period"
-    )
-    )
-    )
-  
 
   define "PREP Product Oral":
   exists([MedicationStatement] MS
@@ -349,7 +263,7 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
     or end of period = maximum DateTime
 )
 
-  define function MedicationRequestPeriod(Request "MedicationRequest"):
+  define function MedicationRequestPeriod(Request FHIR.MedicationRequest):
   Request R
     let
       dosage: singleton from R.dosageInstruction,
@@ -412,76 +326,14 @@ define function "DosesPerDay"(frequency Code):
   //dosage * Quantity { value: dosesPerDay, unit: '/d' }
 
 
-define "methadone_prescribed at date":
-[MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ CustomConcepts."methadone"
-        //and "GetMedicationDailyDose"(MR.dosageInstruction, "DosesPerDay"(singleton from MR.dosageInstruction.timing.repeat.frequencyMax)) >= 60 'mg/d'
-        and MedicationRequestPeriod(MR) starts before "Measurement Date"
-        and MedicationRequestPeriod(MR) ends after "Measurement Date"
 
-define "VMMC_done":
-[Procedure] P
-  where P.status = 'completed'
-  and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
 
-define "VMMC_adverse_event":
-[AdverseEvent] AE 
-  with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
-      and P.performed after start of "Measurement Period"
-      and P.performed before end of "Measurement Period"
-      and AE.date <= (P.performed + 30 days)
-      and AE.date >= (P.performed)
-  where AE.actuality = 'actual'
 
-define "VMMC_adverse_event_type":
-    case 
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Abnormal pain") then  Concepts."Abnormal pain"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Anaesthesia-related effects") then  Concepts."Anaesthesia-related effects"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Damage to the penis") then  Concepts."Damage to the penis"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Difficulty urinating") then  Concepts."Difficulty urinating"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Excessive bleeding") then  Concepts."Excessive bleeding"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Excessive skin removal") then  Concepts."Excessive skin removal"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Excessive swelling") then  Concepts."Excessive swelling"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Haematoma") then  Concepts."Haematoma"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Infection") then  Concepts."Infection"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Injury to glans") then  Concepts."Injury to glans"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Scar or disfigurement") then  Concepts."Scar or disfigurement"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Sharps injury to personnel") then  Concepts."Sharps injury to personnel"
-        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Wound disruption") then  Concepts."Wound disruption"
-        else Concepts."Other - HIV.B.DE222"
-    end
 
-define "VMMC_adverse_event_Intraoperative":
-[AdverseEvent] AE 
-  with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
-      and P.performed after start of "Measurement Period"
-      and P.performed before end of "Measurement Period"
-      and AE.date = P.performed
-  where AE.actuality = 'actual'
 
-define "VMMC_adverse_event_Postoperative":
-[AdverseEvent] AE 
-  with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
-      and P.performed after start of "Measurement Period"
-      and P.performed before end of "Measurement Period"
-      and AE.date <= (P.performed + 30 days)
-      and AE.date > (P.performed)
-  where AE.actuality = 'actual'
 
-  define "VMMC_adverse_event_timing":
-    case 
-        when exists(VMMC_adverse_event_Intraoperative) then  Concepts."Intraoperative"
-        when exists(VMMC_adverse_event_Postoperative) then  Concepts."Postoperative"
-        else null
-    end
+
+
 
 
   define "Partner or contact of an index case":

@@ -10,6 +10,7 @@ include WHOCommon called WC
 include WHOElements called WE
 
 include HIVConcepts called Concepts
+include HIVConceptsCustom called ConceptsCustom
 include HIVElements called Elements
 include HIVCommon called Common
 
@@ -24,8 +25,59 @@ context Patient
  * HIV Elements
  */
 
-/* Umbrella Data Elements */
+/* General Data Elements */
+
 // From Common
+
+
+define "Community_testing":
+  exists([Observation] O
+    with [Encounter] E
+      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  Concepts."Community-level testing") 
+  where (O.status in { 'final', 'amended' }
+  and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+  and O.issued after start of "Measurement Period"
+  and O.issued before end of "Measurement Period"))
+  
+
+/*@triggeredBy Encounter with location = facility level testing*/
+define "Facility_testing":
+  exists([Observation] O
+    with [Encounter] E
+      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  Concepts."Facility-level testing")
+  where (O.status in { 'final', 'amended' }
+  and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+  and O.issued after start of "Measurement Period"
+  and O.issued before end of "Measurement Period")
+  )
+
+//lifted this from ANC DAK
+define "ANC_case":
+exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Already on ART at first antenatal care visit")
+    and (exists (
+      EOC.statusHistory H
+      where H.period overlaps "Measurement Period"
+    ) 
+    or (
+      EOC.period overlaps "Measurement Period"
+    )
+    )
+    )
+  
+
+
+define "methadone_prescribed at date":
+[MedicationRequest] MR
+  where MR.status = 'completed'
+  and MR.intent = 'order'
+  and MR.medication ~ ConceptsCustom."methadone"
+  //and "GetMedicationDailyDose"(MR.dosageInstruction, "DosesPerDay"(singleton from MR.dosageInstruction.timing.repeat.frequencyMax)) >= 60 'mg/d'
+  and MedicationRequestPeriod(MR) starts before "Measurement Date"
+  and MedicationRequestPeriod(MR) ends after "Measurement Date"
+
+
 
 define "OAMT_initiated":
 exists(
@@ -1135,6 +1187,65 @@ define "VMMC procedure date Value":
 @activity: HIV.B21 Offer prevention options
 @description: Severity of the adverse event associated with voluntary medical male circumcision (VMMC) procedure
 */
+
+define "VMMC_adverse_event":
+[AdverseEvent] AE 
+  with [Procedure] P
+      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.performed after start of "Measurement Period"
+      and P.performed before end of "Measurement Period"
+      and AE.date <= (P.performed + 30 days)
+      and AE.date >= (P.performed)
+  where AE.actuality = 'actual'
+
+
+define "VMMC_adverse_event_type":
+    case 
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Abnormal pain") then  Concepts."Abnormal pain"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Anaesthesia-related effects") then  Concepts."Anaesthesia-related effects"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Damage to the penis") then  Concepts."Damage to the penis"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Difficulty urinating") then  Concepts."Difficulty urinating"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Excessive bleeding") then  Concepts."Excessive bleeding"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Excessive skin removal") then  Concepts."Excessive skin removal"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Excessive swelling") then  Concepts."Excessive swelling"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Haematoma") then  Concepts."Haematoma"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Infection") then  Concepts."Infection"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Injury to glans") then  Concepts."Injury to glans"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Scar or disfigurement") then  Concepts."Scar or disfigurement"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Sharps injury to personnel") then  Concepts."Sharps injury to personnel"
+        when exists("VMMC_adverse_event" AE where AE.event ~ Concepts."Wound disruption") then  Concepts."Wound disruption"
+        else Concepts."Other - HIV.B.DE222"
+    end
+
+define "VMMC_adverse_event_Intraoperative":
+[AdverseEvent] AE 
+  with [Procedure] P
+      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.performed after start of "Measurement Period"
+      and P.performed before end of "Measurement Period"
+      and AE.date = P.performed
+  where AE.actuality = 'actual'
+
+define "VMMC_adverse_event_Postoperative":
+[AdverseEvent] AE 
+  with [Procedure] P
+      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.performed after start of "Measurement Period"
+      and P.performed before end of "Measurement Period"
+      and AE.date <= (P.performed + 30 days)
+      and AE.date > (P.performed)
+  where AE.actuality = 'actual'
+
+define "VMMC_adverse_event_timing":
+  case 
+      when exists(VMMC_adverse_event_Intraoperative) then  Concepts."Intraoperative"
+      when exists(VMMC_adverse_event_Postoperative) then  Concepts."Postoperative"
+      else null
+  end
+
 // TODO: Replace placeholder with relevant CQL logic
 define "Adverse event severity":
   exists "Adverse event severity Observation"
@@ -5037,6 +5148,15 @@ define "TB diagnosis result Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is diagnosed with TB disease
 */
+define TB_diagnosed:
+  exists(
+    ([Condition] C
+    where C.clinicalStatus ~ ConceptsCustom."active"
+    and exists(C.category CC where CC ~ ConceptsCustom."encounter-diagnosis")
+    and C.code ~ Concepts."Diagnosed TB"
+    and C.onset during "Measurement Period")
+  )
+
 // TODO: Replace placeholder with relevant CQL logic
 define "Diagnosed TB":
   exists "Diagnosed TB Condition"
@@ -5073,6 +5193,15 @@ define "TB excluded Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client has signs or symptoms of tuberculosis (TB) without laboratory confirmation
 */
+define TB_presumptive:
+  exists(
+    ([Condition] C
+    where C.clinicalStatus ~ ConceptsCustom."active"
+    and exists(C.category CC where CC ~ ConceptsCustom."encounter-diagnosis")
+    and C.code ~ Concepts."Presumptive TB - HIV.D.DE945"
+    and C.onset during "Measurement Period")
+  )
+
 // TODO: Replace placeholder with relevant CQL logic
 define "Presumptive TB D.DE945":
   exists "Presumptive TB D.DE945 Observation"

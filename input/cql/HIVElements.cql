@@ -26,6 +26,40 @@ context Patient
 /* General Element Definitions */
 
 // From Common
+
+// Exposure to HIV
+define Exposure_Occupational:
+  exists (
+    [Observation: Concepts."HIV exposure type"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and O.value ~ Concepts."Occupational"
+  )
+
+define Exposure_Non_Occupational_violent:
+  exists (
+    [Observation: Concepts."HIV exposure type"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and O.value ~ Concepts."Non-occupational violent"
+  )
+
+define Exposure_Non_Occupational_consensual_sex:
+  exists (
+    [Observation: Concepts."HIV exposure type"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and O.value ~ Concepts."Non-occupational consensual sex"
+  )
+
+define hiv_exposure_type:
+  List<String>{
+    if Exposure_Occupational then 'Occupational' else null,
+    if Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
+    if Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
+  }
+
+// Needle Syringe Dispensed
 define "Needle Syringe Dispensed":  
   [DeviceUseStatement] DUS
   with [Observation: Concepts."Key population member - HIV.E.DE113"] O
@@ -14512,6 +14546,11 @@ define "STI services":
 @activity: HIV.B6 Capture or update client history
 @description: Client accessed voluntary medical male circumcision (VMMC) services
 */
+// define "VMMC_done":
+// [Procedure] P
+//   where P.status = 'completed'
+//   and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
+
 
 define "VMMC":
   [Procedure] P
