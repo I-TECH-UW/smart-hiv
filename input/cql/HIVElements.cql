@@ -23,23 +23,9 @@ context Patient
  * HIV Elements
  */
 
-/* Umbrella Element Definitions */
+/* General Element Definitions */
+
 // From Common
-
-
-define "methadone_prescribed":
-[MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ CustomConcepts."methadone"
-
-define "buprenorphine_prescribed":
-[MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ CustomConcepts."buprenorphine"
-
-
 define "Needle Syringe Dispensed":  
   [DeviceUseStatement] DUS
   with [Observation: Concepts."Key population member - HIV.E.DE113"] O
@@ -49,34 +35,11 @@ define "Needle Syringe Dispensed":
         and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
   where DUS.status = 'completed'
 
-define PWID_person:
-  [Observation: Concepts."Key population member - HIV.E.DE113"] O
-  where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
-
-define "HIV Positive Observation":
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."HIV status"
-    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
-
-define "HIV Positive Observation - HIV Self Test":
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."HIV self-test"
-    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
-
-define "HIV Negative Observation":
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
-    and O.value ~ Concepts."HIV-negative - HIV.B.DE117"
-
-define "HIV test resulted":
-  [Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+// define PWID_person:
+//   [Observation: Concepts."Key population member - HIV.E.DE113"] O
+//   where O.status in { 'final', 'amended', 'corrected' }
+//     and exists(O.category OC where OC ~ CustomConcepts."social-history")
+//     and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
 
 define "HIV PREP Active":
 [MedicationStatement] MS
@@ -137,7 +100,6 @@ define "On ART":
 define "ART start date":
   "ART Medication Statement" MS
   return start of MS.effective.toInterval()
-
 
 define "First On ART":
   (First("On ART D.DE38"))
@@ -639,13 +601,12 @@ define "Unknown B.DE36":
   exists "Unknown B.DE36 Condition"
     or exists "Unknown B.DE36 Observation"
 define "Unknown B.DE36 Condition":
-  [Condition: Concepts."Unknown - HIV.B.DE36"]
+  [Condition: Concepts."Unknown"]
 define "Unknown B.DE36 Observation":
   "Partner HIV status reported Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Unknown - HIV.B.DE36"
+      and O.value ~ Concepts."Unknown"
 /* End of Unknown B.DE36 */
-
 
 /*
  * Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)
@@ -1391,8 +1352,8 @@ define "HIV-inconclusive Observation":
 */
 define "HIV Status":
   case 
-      when exists("HIV Positive Condition") or exists(Common."HIV Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
-      when not exists("HIV Positive Condition") and exists(Common."HIV Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
+      when exists("HIV Positive Condition") or exists("HIV Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
+      when not exists("HIV Positive Condition") and exists("HIV Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
       else Concepts."Unknown - HIV.B.DE118"
   end
 
@@ -1402,6 +1363,18 @@ define "HIV Status Condition":
 define "HIV Status Observation":
   [Observation: Concepts."HIV status"] O
     where O.status in { 'final', 'amended', 'corrected' }
+
+define "HIV Negative Observation":
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+    and O.value ~ Concepts."HIV-negative - HIV.B.DE117"
+
+define "HIV test resulted":
+  [Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+
 /* End of HIV status */
 
 /*
@@ -1409,6 +1382,18 @@ define "HIV Status Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Client is HIV-positive
 */
+define "HIV Positive Observation":
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."HIV status"
+    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+
+define "HIV Positive Observation - HIV Self Test":
+[Observation] O
+    where O.status in {'final', 'amended'}
+    and O.code ~ Concepts."HIV self-test"
+    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV-positive B.DE116":
   {First("HIV-positive B.DE116 Condition").prevalenceInterval(),First("HIV-positive B.DE116 Observation").effective.toInterval()}
@@ -9493,6 +9478,11 @@ define "Antivirals Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Opioid substitution to treat opioid dependence
 */
+define "buprenorphine_prescribed":
+[MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ CustomConcepts."buprenorphine"
 // TODO: Replace placeholder with relevant CQL logic
 define "Buprenorphine D.DE552":
   exists "Buprenorphine D.DE552 Condition"
@@ -9544,6 +9534,12 @@ define "Hormonal family planning method Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Opioid substitution to treat opioid dependence
 */
+define "methadone_prescribed":
+[MedicationRequest] MR
+        where MR.status = 'completed'
+        and MR.intent = 'order'
+        and MR.medication ~ CustomConcepts."methadone"
+
 // TODO: Replace placeholder with relevant CQL logic
 define "Methadone D.DE555":
   exists "Methadone D.DE555 Condition"
@@ -12614,9 +12610,15 @@ define "HIV-exposed infant or child E.DE112 Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: Mother is a member of a key population which has an increased risk of HIV
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Key population member E.DE113":
+define "RelatedPersonMother":
+  [RelatedPerson] R
+    where CustomConcepts."Mother" in R.relationship.coding
+
+define "Mother": singleton from "RelatedPersonMother"
+
+define "Is Key population member E.DE113":
   exists "Key population member E.DE113 Observation"
+
 define "Key population member E.DE113 Observation":
   [Observation: Concepts."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -12680,7 +12682,6 @@ define "Trans and gender-diverse people E.DE117":
 @activity: HIV.E1 Capture or update mother's history
 @description: Infant's mother is in a prison or closed setting
 */
-
 define "People living in prisons and other closed setting":
   [Observation: Concepts."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }

@@ -111,7 +111,7 @@ define "Patient Deceased during Measurement Period":
 // HIV Testing
 define "Elevated Viral load test during Measurement Period":
   "Viral load test result D.DE387" VL
-    with Common."viral load sample collection" P 
+    with Elements."viral load sample collection" P 
     such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
     where VL.value > 1000 
     sort by start of effective.toInterval()
@@ -609,7 +609,6 @@ define patientGroups:
 @activity: HIV.B6 Capture or update client history
 @description: Client is a sex worker
 */
-
 define "Sex worker":
   exists("Key population member type Observation" O
     where O.value ~ Concepts."Sex worker - HIV.B.DE51")
@@ -963,7 +962,7 @@ define "HIV-inconclusive Observation":
 define "HIV Status":
   case 
       when exists(Elements."HIV Positive Condition" C where C.onset before end of "Measurement Period") then Concepts."HIV-positive - HIV.B.DE116"
-      when not exists(Elements."HIV Positive Condition" C where C.onset before end of "Measurement Period") and exists(Common."HIV Negative Observation" O where O.issued before end of "Measurement Period") then  Concepts."HIV-negative - HIV.B.DE117"
+      when not exists(Elements."HIV Positive Condition" C where C.onset before end of "Measurement Period") and exists(Elements."HIV Negative Observation" O where O.issued before end of "Measurement Period") then  Concepts."HIV-negative - HIV.B.DE117"
       else Concepts."Unknown - HIV.B.DE118"
   end
 /* End of HIV status */
