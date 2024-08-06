@@ -95,13 +95,13 @@ define "Initial Population":
 
 
 define "numerator":
-    exists(HIC."PEP Prescribed before start of Measurement Period and Completed" MS
+    exists(HIE."PEP Prescribed before start of Measurement Period and Completed" MS
 	where (MS.effective ends during "Measurement Period")
    ) 
 
 
 define "denominator":
-    exists(HIC."PEP Prescribed during Measurement Period and Completed" MS
+    exists(HIE."PEP Prescribed during Measurement Period and Completed" MS
 	where not (MS.effective ends after end of "Measurement Period")
    ) 
 

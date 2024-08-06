@@ -81,13 +81,13 @@ define "Initial Population":
 
 
 define "numerator":
-    exists(HIC."Needle Syringe Dispensed" DUS
+    exists(HIE."Needle Syringe Dispensed" DUS
 	where (DUS.timing during "Measurement Period")
    ) 
 
 
 define "denominator":
-    exists(HIC.PWID_person O
+    exists(HIE.PWID_person O
 	where (O.effective during "Measurement Period")
    ) 
 

@@ -87,7 +87,7 @@ define "Measure Population":
    and HIE."On ART H.DE47"
    and not HIE."Death documented"
    and not HIE."Transferred out"
-   and not HIE."Lost to follow-up"
+   and not HIE."Is Lost to follow-up"
 
 /*
  * As defined by Member States

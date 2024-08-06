@@ -89,6 +89,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
+include HIVElements called HE
 include HIVIndicatorElements called HIE
 
 // Indicator Definition
@@ -103,7 +104,7 @@ define "Initial Population":
 
 
 define "numerator":
-    exists(HIC."HIV Test Positive After PEP Prescribed during Measurement Period" O
+    exists(HIE."HIV Test Positive After PEP Prescribed during Measurement Period" O
 	where (O.issued after start of "Measurement Period")
    ) 
 
