@@ -894,13 +894,6 @@ define "HIV test type B.DE81 Observation":
 @description: Antibody test for HIV performed with a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Rapid diagnostic test for HIV B.DE82":
-  exists "Rapid diagnostic test for HIV B.DE82 Condition"
-    or exists "Rapid diagnostic test for HIV B.DE82 Observation"
-define "Rapid diagnostic test for HIV B.DE82 Condition":
-  Elements."Rapid diagnostic test for HIV B.DE82 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
 define "Rapid diagnostic test for HIV B.DE82 Observation":
   Elements."Rapid diagnostic test for HIV B.DE82 Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -912,13 +905,6 @@ define "Rapid diagnostic test for HIV B.DE82 Observation":
 @description: Antibody test for HIV performed with an enzyme immunoassay
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Enzyme immunoassay for HIV B.DE83":
-  exists "Enzyme immunoassay for HIV B.DE83 Condition"
-    or exists "Enzyme immunoassay for HIV B.DE83 Observation"
-define "Enzyme immunoassay for HIV B.DE83 Condition":
-  Elements."Enzyme immunoassay for HIV B.DE83 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
 define "Enzyme immunoassay for HIV B.DE83 Observation":
   Elements."Enzyme immunoassay for HIV B.DE83 Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -930,13 +916,6 @@ define "Enzyme immunoassay for HIV B.DE83 Observation":
 @description: Virological test, which includes testing for early infant diagnosis
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Nucleic acid test for HIV B.DE84":
-  exists "Nucleic acid test for HIV B.DE84 Condition"
-    or exists "Nucleic acid test for HIV B.DE84 Observation"
-define "Nucleic acid test for HIV B.DE84 Condition":
-  Elements."Nucleic acid test for HIV B.DE84 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
 define "Nucleic acid test for HIV B.DE84 Observation":
   Elements."Nucleic acid test for HIV B.DE84 Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -948,13 +927,6 @@ define "Nucleic acid test for HIV B.DE84 Observation":
 @description: Antibody test for HIV and syphilis performed with a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Dual HIV/syphilis rapid diagnostic test B.DE85":
-  exists "Dual HIV/syphilis rapid diagnostic test B.DE85 Condition"
-    or exists "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation"
-define "Dual HIV/syphilis rapid diagnostic test B.DE85 Condition":
-  Elements."Dual HIV/syphilis rapid diagnostic test B.DE85 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
 define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
   Elements."Dual HIV/syphilis rapid diagnostic test B.DE85 Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -966,13 +938,6 @@ define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
 @description: Antibody test for HIV performed by self-tester using a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV self-test":
-  exists "HIV self-test Condition"
-    or exists "HIV self-test Observation"
-define "HIV self-test Condition":
-  Elements."HIV self-test Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
 define "HIV self-test Observation":
   Elements."HIV self-test Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -1025,8 +990,8 @@ define "HIV test date and results returned within measurement period for HIV-pos
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-negative
 */
-define "HIV-negative B.DE113":
-  exists(Elements."HIV-negative B.DE113" O
+define "Has HIV-negative B.DE113 Observation":
+  exists(Elements."HIV-negative B.DE113 Observation" O
     where O.effective.toInterval() starts during "Measurement Period")
 /* End of HIV-negative B.DE113 */
 
