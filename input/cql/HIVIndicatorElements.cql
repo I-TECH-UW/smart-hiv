@@ -715,7 +715,13 @@ define "People living in prisons and other closed settings":
 // TODO: Replace placeholder with relevant CQL logic
 define "Date HIV test results returned":
   Elements."Date HIV test results returned" O
+// TODO: Replace placeholder with relevant CQL logic
+define "Date HIV test results returned":
+  Elements."Date HIV test results returned" O
     where O.effective.toInterval() during "Measurement Period"
+define "Date HIV test results returned Value":
+  "Date HIV test results returned" O
+  return O.value
 define "Date HIV test results returned Value":
   "Date HIV test results returned" O
   return O.value
@@ -908,6 +914,13 @@ define "HIV test date B.DE110":
 define "HIV test date B.DE110 Value":
   "HIV test date B.DE110" O
   return O.value
+// TODO: Replace placeholder with relevant CQL logic
+define "HIV test date B.DE110":
+  Elements."HIV test date B.DE110" O
+    where O.effective.toInterval() during "Measurement Period"
+define "HIV test date B.DE110 Value":
+  "HIV test date B.DE110" O
+  return O.value
 /* End of HIV test date B.DE110 */
 
 /*
@@ -915,6 +928,7 @@ define "HIV test date B.DE110 Value":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result from HIV testing after applying the testing algorithm
 */
+// TODO: Replace placeholder with relevant CQL logic
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV test result B.DE111":
   exists "HIV test result B.DE111 Observation"
@@ -928,6 +942,17 @@ define "HIV test result B.DE111 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-positive
 */
+// TODO: Replace placeholder with relevant CQL logic
+define "HIV-positive B.DE112":
+  exists "HIV-positive B.DE112 Condition"
+    or exists "HIV-positive B.DE112 Observation"
+define "HIV-positive B.DE112 Condition":
+  Elements."HIV-positive B.DE112 Condition" C
+    where C.prevalenceInterval() overlaps before "Measurement Period"
+      or C.prevalenceInterval() overlaps after "Measurement Period"
+define "HIV-positive B.DE112 Observation":
+  Elements."HIV-positive B.DE112 Observation" O
+    where O.effective.toInterval() during "Measurement Period"
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV-positive B.DE112":
   exists "HIV-positive B.DE112 Condition"
