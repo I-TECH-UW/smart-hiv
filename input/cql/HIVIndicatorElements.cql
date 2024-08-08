@@ -66,8 +66,6 @@ exists(
     )
     )
   
-
-
 define "methadone_prescribed at date":
 [MedicationRequest] MR
   where MR.status = 'completed'
@@ -193,9 +191,6 @@ define "Lost to Follow Up during the measurement period":
    )
 
 // HIV Status
-define "HIV Positive Condition":
-  Elements."HIV Positive Condition" C
-  where C.onset during "Measurement Period"
 
 // ART Status
 
@@ -733,9 +728,9 @@ define "Trans and gender-diverse people":
 @description: Client is a person who injects drugs
 */
 define "People who inject drugs":
-  exists("Key population member type Observation" O
+  "Key population member type Observation" O
     where O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
-  )
+
 /* End of People who inject drugs B.DE54 */
 
 /*
@@ -753,13 +748,22 @@ define "People living in prisons and other closed settings":
 @activity: HIV.B6 Capture or update client history
 @description: Date HIV test result returned to client
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Date HIV test results returned":
-  Elements."Date HIV test results returned" O
+define "HIV test results returned in measurement period":
+  Elements."HIV test result DiagnosticReport Observation" union Elements."HIV test result B.DE111 Observation" O
     where O.effective.toInterval() during "Measurement Period"
-define "Date HIV test results returned Value":
-  "Date HIV test results returned" O
-  return O.value
+      or O.issued during "Measurement Period"
+
+define "Has HIV test results returned in measurement period":
+  exists(Elements."HIV test result DiagnosticReport" DR
+    where DR.issued during "Measurement Period"
+      or DR.effective.toInterval() overlaps "Measurement Period")
+  or exists(
+    Elements."Date HIV test results returned Value" retVal
+    where retVal during "Measurement Period"
+  ) or exists(
+    Elements."HIV test result B.DE111 Observation" O
+    where O.effective.toInterval() during "Measurement Period"
+  )
 /* End of Date HIV test results returned */
 
 /*
@@ -979,13 +983,13 @@ define "HIV self-test Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Date of the HIV test
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV test date B.DE110":
-  Elements."HIV test date B.DE110" O
-    where O.effective.toInterval() during "Measurement Period"
-define "HIV test date B.DE110 Value":
-  "HIV test date B.DE110" O
-  return O.value
+define "HIV test date and results returned withing measurement period":
+  Elements."HIV test" SR
+  with [DiagnosticReport: Concepts."HIV test type - HIV.B.DE81 Choices"] DR
+    such that DR.basedOn.references(SR)
+    and DR.effective.toInterval() during "Measurement Period"
+  where SR.occurrence.toInterval() during "Measurement Period"
+  
 /* End of HIV test date B.DE110 */
 
 /*
@@ -993,7 +997,6 @@ define "HIV test date B.DE110 Value":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result from HIV testing after applying the testing algorithm
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "HIV test result B.DE111":
   exists "HIV test result B.DE111 Observation"
 define "HIV test result B.DE111 Observation":
@@ -1012,11 +1015,10 @@ define "HIV-positive B.DE112":
     or exists "HIV-positive B.DE112 Observation"
 define "HIV-positive B.DE112 Condition":
   Elements."HIV-positive B.DE112 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
+    where C.prevalenceInterval() overlaps "Measurement Period"
 define "HIV-positive B.DE112 Observation":
   Elements."HIV-positive B.DE112 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+    where O.effective.toInterval() overlaps "Measurement Period"
 /* End of HIV-positive B.DE112 */
 
 /*
@@ -1054,10 +1056,19 @@ define "HIV-inconclusive Observation":
 */
 define "HIV Status":
   case 
-      when exists(Elements."HIV Positive Condition" C where C.onset before end of "Measurement Period") then Concepts."HIV-positive - HIV.B.DE116"
-      when not exists(Elements."HIV Positive Condition" C where C.onset before end of "Measurement Period") and exists(Elements."HIV Negative Observation" O where O.issued before end of "Measurement Period") then  Concepts."HIV-negative - HIV.B.DE117"
+      when exists("HIV Positive Condition") then Concepts."HIV-positive - HIV.B.DE116"
+      when not exists("HIV Positive Condition") and exists(Elements."HIV Negative Observation" O where O.issued before end of "Measurement Period") then  Concepts."HIV-negative - HIV.B.DE117"
       else Concepts."Unknown - HIV.B.DE118"
   end
+
+define "HIV Positive Condition":
+  Elements."HIV Positive Condition" C
+  where C.onset before end of "Measurement Period"
+
+define "HIV Positive Observation":
+  Elements."HIV Positive Observation" O
+  where O.issued during "Measurement Period"
+
 /* End of HIV status */
 
 /*
@@ -1065,7 +1076,6 @@ define "HIV Status":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Client is HIV-positive
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "HIV-positive B.DE116":
   exists(Elements."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
 /* End of HIV-positive B.DE116 */

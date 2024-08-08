@@ -106,7 +106,7 @@ define "Measure Population":
     exists(HIC."Partner or contact of an index case" IC
     with HIC."Drug-injecting partner" DIP
       such that IC.hasMember.references(DIP)
-      with HIC."HIV test resulted" HIV
+      with HIE."HIV test is resulted" HIV
       such that IC.hasMember.references(HIV)
       and HIV.issued after start of "Measurement Period"
       and HIV.issued before end of "Measurement Period")
@@ -114,7 +114,7 @@ define "Measure Population":
     exists(HIC."Partner or contact of an index case" IC
     with HIC."Sexual partner" SP
       such that IC.hasMember.references(SP)
-      with HIC."HIV test resulted" HIV
+      with HIE."HIV test is resulted" HIV
       such that IC.hasMember.references(HIV)
       and HIV.issued after start of "Measurement Period"
       and HIV.issued before end of "Measurement Period")

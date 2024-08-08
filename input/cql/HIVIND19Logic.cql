@@ -116,9 +116,7 @@ define "numeratorExclusion":
 	) 
 
 define "denominator":
-    exists(HIC."HIV test resulted" T
-	where T.issued before end of "Measurement Period"
-	and T.issued after start of "Measurement Period")
+	
 
 define "denominatorExclusion":
 	exists(HIC."HIV Positive Observation - HIV Self Test" O

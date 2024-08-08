@@ -286,17 +286,24 @@ define "Other A.DE23 Observation":
       and O.value ~ Concepts."Other - HIV.A.DE23"
 /* End of Other A.DE23 */
 
+
+/*
+@dataElement: HIV.B HTS Visit Enounter
+@activity: HIV.B1 Determine reason for visit
+@description: Encounter for HIV testing services visit
+*/
+define "HTS Visit Encounter":
+  [Encounter] E
+    where E.type.coding.code contains CustomConcepts."HTS Visit".code
+
 /*
 @dataElement: HIV.B.DE1 - Reason for visit
 @activity: HIV.B1 Determine reason for visit
 @description: Reason for HIV testing services visit
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Reason for visit B.DE1":
-  exists "Reason for visit B.DE1 Observation"
-define "Reason for visit B.DE1 Observation":
-  [Observation: Concepts."Reason for visit - HIV.B.DE1"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  "HTS Visit Encounter" E
+  return E.reasonCode 
 /* End of Reason for visit B.DE1 */
 
 /*
@@ -304,16 +311,9 @@ define "Reason for visit B.DE1 Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: First encounter for screening for human immunodeficiency virus
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "First-time HIV test":
-  exists "First-time HIV test Condition"
-    or exists "First-time HIV test Observation"
-define "First-time HIV test Condition":
-  [Condition: Concepts."First-time HIV test"]
-define "First-time HIV test Observation":
-  "Reason for visit B.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."First-time HIV test"
+define "First-time HIV test Encounter":
+  "HTS Visit Encounter" E
+  where E.reasonCode.coding.code contains Concepts."First-time HIV test".code
 /* End of First-time HIV test */
 
 /*
@@ -322,15 +322,9 @@ define "First-time HIV test Observation":
 @description: Retesting for human immunodeficiency virus
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Retesting for HIV B.DE3":
-  exists "Retesting for HIV B.DE3 Condition"
-    or exists "Retesting for HIV B.DE3 Observation"
-define "Retesting for HIV B.DE3 Condition":
-  [Condition: Concepts."Retesting for HIV - HIV.B.DE3"]
-define "Retesting for HIV B.DE3 Observation":
-  "Reason for visit B.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Retesting for HIV - HIV.B.DE3"
+define "Retesting for HIV B.DE3 Encounter":
+  "HTS Visit Encounter" E
+  where E.reasonCode.coding.code contains Concepts."Retesting for HIV - HIV.B.DE3".code
 /* End of Retesting for HIV B.DE3 */
 
 /*
@@ -339,15 +333,9 @@ define "Retesting for HIV B.DE3 Observation":
 @description: Client attending facility for HIV testing services visit
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV testing services visit":
-  exists "HIV testing services visit Condition"
-    or exists "HIV testing services visit Observation"
-define "HIV testing services visit Condition":
-  [Condition: Concepts."HIV testing services visit"]
-define "HIV testing services visit Observation":
-  "Reason for visit B.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV testing services visit"
+define "HIV testing services visit Encounter":
+  "HTS Visit Encounter" E
+  where E.reasonCode.coding.code contains Concepts."HIV testing services visit".code
 /* End of HIV testing services visit */
 
 /*
@@ -801,6 +789,25 @@ define "Date informed of HIV-positive diagnosis Value":
 /* End of Date informed of HIV-positive diagnosis */
 
 /*
+@activity: HIV.B7 Test for HIV using testing algorithm
+*/
+define "HIV test":
+  [ServiceRequest: Concepts."HIV test type - HIV.B.DE81 Choices"] SR
+  where SR.status in { 'active', 'completed' }
+
+define "HIV test result DiagnosticReport":
+  [DiagnosticReport: Concepts."HIV test type - HIV.B.DE81 Choices"] DR
+  with "HIV test" SR
+    such that DR.basedOn.references(SR)
+  where DR.status in { 'final', 'amended', 'corrected' }
+
+
+define "HIV test result Observation":
+  [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
+  with "HIV test result DiagnosticReport" DR
+    such that DR.result.references(O)
+  where O.status in { 'final', 'amended', 'corrected' }
+/*
 @dataElement: HIV.B.DE71 - HIV diagnosis date
 @activity: HIV.B8 Provide post-test counselling
 @description: Date diagnosis was returned to client
@@ -848,8 +855,9 @@ define "HIV test conducted Observation":
 @description: Type of HIV test
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV test type B.DE81":
-  exists "HIV test type B.DE81 Observation"
+define "HIV test type B.DE81 ServiceRequest":
+  "HIV test" SR
+  return SR.code
 define "HIV test type B.DE81 Observation":
   [Observation: Concepts."HIV test type - HIV.B.DE81"] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -861,11 +869,6 @@ define "HIV test type B.DE81 Observation":
 @description: Antibody test for HIV performed with a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Rapid diagnostic test for HIV B.DE82":
-  exists "Rapid diagnostic test for HIV B.DE82 Condition"
-    or exists "Rapid diagnostic test for HIV B.DE82 Observation"
-define "Rapid diagnostic test for HIV B.DE82 Condition":
-  [Condition: Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"]
 define "Rapid diagnostic test for HIV B.DE82 Observation":
   "HIV test type B.DE81 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -878,11 +881,6 @@ define "Rapid diagnostic test for HIV B.DE82 Observation":
 @description: Antibody test for HIV performed with an enzyme immunoassay
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Enzyme immunoassay for HIV B.DE83":
-  exists "Enzyme immunoassay for HIV B.DE83 Condition"
-    or exists "Enzyme immunoassay for HIV B.DE83 Observation"
-define "Enzyme immunoassay for HIV B.DE83 Condition":
-  [Condition: Concepts."Enzyme immunoassay for HIV - HIV.B.DE83"]
 define "Enzyme immunoassay for HIV B.DE83 Observation":
   "HIV test type B.DE81 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -895,11 +893,6 @@ define "Enzyme immunoassay for HIV B.DE83 Observation":
 @description: Virological test, which includes testing for early infant diagnosis
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Nucleic acid test for HIV B.DE84":
-  exists "Nucleic acid test for HIV B.DE84 Condition"
-    or exists "Nucleic acid test for HIV B.DE84 Observation"
-define "Nucleic acid test for HIV B.DE84 Condition":
-  [Condition: Concepts."Nucleic acid test for HIV - HIV.B.DE84"]
 define "Nucleic acid test for HIV B.DE84 Observation":
   "HIV test type B.DE81 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -912,11 +905,6 @@ define "Nucleic acid test for HIV B.DE84 Observation":
 @description: Antibody test for HIV and syphilis performed with a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Dual HIV/syphilis rapid diagnostic test B.DE85":
-  exists "Dual HIV/syphilis rapid diagnostic test B.DE85 Condition"
-    or exists "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation"
-define "Dual HIV/syphilis rapid diagnostic test B.DE85 Condition":
-  [Condition: Concepts."Dual HIV/syphilis rapid diagnostic test - HIV.B.DE85"]
 define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
   "HIV test type B.DE81 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -929,11 +917,6 @@ define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
 @description: Antibody test for HIV performed by self-tester using a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV self-test":
-  exists "HIV self-test Condition"
-    or exists "HIV self-test Observation"
-define "HIV self-test Condition":
-  [Condition: Concepts."HIV self-test"]
 define "HIV self-test Observation":
   "HIV test type B.DE81 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -1299,8 +1282,10 @@ define "Invalid B.DE109 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Date of the HIV test
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "HIV test date B.DE110":
+  "HIV test result DiagnosticReport" DR
+  return DR.effective
+define "HIV test date B.DE110 Observation":
   [Observation: Concepts."HIV test date - HIV.B.DE110"] O
     where O.status in { 'final', 'amended', 'corrected' }
 define "HIV test date B.DE110 Value":
@@ -1313,12 +1298,27 @@ define "HIV test date B.DE110 Value":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result from HIV testing after applying the testing algorithm
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV test result B.DE111":
-  exists "HIV test result B.DE111 Observation"
+define "HIV test result DiagnosticReport Observation":
+  "HIV test result Observation" O
+
+define "HIV test result DiagnosticReport Value":
+  "HIV test result DiagnosticReport Observation" O
+  return O.value
+
 define "HIV test result B.DE111 Observation":
   [Observation: Concepts."HIV test result - HIV.B.DE111"] O
     where O.status in { 'final', 'amended', 'corrected' }
+
+define "HIV test result B.DE111 Value":
+  "HIV test result B.DE111 Observation" O
+  return O.value
+  
+// Moved and Redefined in HIE
+// define "HIV test resulted":
+//   [Observation] O
+//     where O.status in {'final', 'amended'}
+//     and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+
 /* End of HIV test result B.DE111 */
 
 /*
@@ -1327,11 +1327,6 @@ define "HIV test result B.DE111 Observation":
 @description: Test result is HIV-positive
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV-positive B.DE112":
-  exists "HIV-positive B.DE112 Condition"
-    or exists "HIV-positive B.DE112 Observation"
-define "HIV-positive B.DE112 Condition":
-  [Condition: Concepts."HIV-positive - HIV.B.DE112"]
 define "HIV-positive B.DE112 Observation":
   "HIV test result B.DE111 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -1343,12 +1338,20 @@ define "HIV-positive B.DE112 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-negative
 */
+define "HIV-negative DiagnosticReport Observation":
+  "HIV test result DiagnosticReport Observation" O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and O.value ~ Concepts."HIV-negative - HIV.B.DE113"
 
-define "HIV-negative B.DE113":
-  [Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
-    and O.value ~ Concepts."HIV-negative - HIV.B.DE117"
+define "HIV-negative DiagnosticReport Observation for Rapid diagnostic test for HIV":
+  "HIV-negative DiagnosticReport Observation" O
+  with [DiagnosticReport: Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"] DR
+    such that DR.result.references(O)
+  where O.value ~ Concepts."HIV-negative - HIV.B.DE113"
+
+define "HIV-negative B.DE113 Observation":
+  "HIV test result B.DE111 Observation" O
+    where O.value ~ Concepts."HIV-negative - HIV.B.DE117"
 /* End of HIV-negative B.DE113 */
 
 /*
@@ -1373,9 +1376,9 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-define "HIV Status":
+define "HIV Status Stratifier":
   case 
-      when exists("HIV Positive Condition") or exists("HIV Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
+      when exists("HIV Status Positive Condition") or exists("HIV Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
       when not exists("HIV Positive Condition") and exists("HIV Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
       else Concepts."Unknown - HIV.B.DE118"
   end
@@ -1387,16 +1390,10 @@ define "HIV Status Observation":
   [Observation: Concepts."HIV status"] O
     where O.status in { 'final', 'amended', 'corrected' }
 
-define "HIV Negative Observation":
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
-    and O.value ~ Concepts."HIV-negative - HIV.B.DE117"
+define "HIV Status Negative Observation":
+  "HIV Status Observation" O
+    where O.value ~ Concepts."HIV-negative - HIV.B.DE117"
 
-define "HIV test resulted":
-  [Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
 
 /* End of HIV status */
 

@@ -88,9 +88,7 @@ define "numerator":
 
 
 define "denominator":
-    exists(HIE."" O
-	where (O.effective during "Measurement Period")
-   ) 
+    exists(HIE."People who inject drugs") 
 
 /*
  * Disaggregators

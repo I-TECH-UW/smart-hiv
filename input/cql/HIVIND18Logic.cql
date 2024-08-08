@@ -81,16 +81,8 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 
 context Patient
 define "Measure Population":
-    exists(HE."HIV Positive Condition" C
-	where C.onset before end of "Measurement Period")
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where O.issued before end of "Measurement Period"
-	) 
-
-//define denominator?
-//How to bring in data from external sources
-
+    HIE."Is HIE Positive"
+	
 /*
  * As defined by Member States
  */
