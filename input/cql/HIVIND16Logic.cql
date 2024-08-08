@@ -137,10 +137,10 @@ define "Setting":
     HIE."setting"
 
 define "VMMC_adverse_event_type":
-    HIC."VMMC_adverse_event_type"
+    HIE."VMMC_adverse_event_type"
 
 define "VMMC_adverse_event_timing":
-    HIC.VMMC_adverse_event_timing
+    HIE.VMMC_adverse_event_timing
 
 
 //provider type not provided?
@@ -151,5 +151,5 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.setting, ':')
-+ ':' + HIC."VMMC_adverse_event_type".code 
-+ ':' + HIC."VMMC_adverse_event_timing".code 
++ ':' + HIE."VMMC_adverse_event_type".code 
++ ':' + HIE."VMMC_adverse_event_timing".code 

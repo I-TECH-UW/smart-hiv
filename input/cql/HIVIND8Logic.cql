@@ -67,6 +67,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
+include HIVElements called HE
 include HIVIndicatorElements called HIE
 
 // Indicator Definition
@@ -81,13 +82,13 @@ define "Initial Population":
 
 
 define "numerator":
-    exists(HIE."Needle Syringe Dispensed" DUS
+    exists(HE."Needle Syringe Dispensed" DUS
 	where (DUS.timing during "Measurement Period")
    ) 
 
 
 define "denominator":
-    exists(HIE.PWID_person O
+    exists(HIE."" O
 	where (O.effective during "Measurement Period")
    ) 
 

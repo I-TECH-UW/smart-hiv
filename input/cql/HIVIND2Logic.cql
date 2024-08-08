@@ -116,7 +116,6 @@ define function "Measure Observation"(Patient "Patient"):
 /*
  * Disaggregators
  */
-
 define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 

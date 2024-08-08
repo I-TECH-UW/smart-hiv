@@ -13,10 +13,6 @@ include HIVConcepts called Concepts
 include HIVConceptsCustom called CustomConcepts
 include HIVCommon called Common
 
-// parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
-// parameter "Measurement Date" Date default @2020-01-01
-
-
 context Patient
 
 /**
@@ -80,16 +76,16 @@ define "HIV PREP Active":
     and O.code ~ Concepts."At elevated risk for HIV acquisition - HIV.B.DE225"
 
 define "PREP Prescription":
-    [MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ Concepts."PrEP for HIV prevention"
+  [MedicationRequest] MR
+    where MR.status = 'completed'
+    and MR.intent = 'order'
+    and MR.medication ~ Concepts."PrEP for HIV prevention"
 
 define "PEP Prescription":
-    [MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ Concepts."PEP for HIV prevention"
+  [MedicationRequest] MR
+      where MR.status = 'completed'
+      and MR.intent = 'order'
+      and MR.medication ~ Concepts."PEP for HIV prevention"
 
 define "routine viral load sample collection":
   [Procedure] P
