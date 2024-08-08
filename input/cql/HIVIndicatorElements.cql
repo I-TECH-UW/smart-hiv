@@ -983,13 +983,14 @@ define "HIV self-test Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Date of the HIV test
 */
-define "HIV test date and results returned withing measurement period":
-  Elements."HIV test" SR
-  with [DiagnosticReport: Concepts."HIV test type - HIV.B.DE81 Choices"] DR
-    such that DR.basedOn.references(SR)
-    and DR.effective.toInterval() during "Measurement Period"
+define "HIV test date and results returned within measurement period":
+  Elements."Non-Self HIV test" SR
+  with [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
+    such that O.basedOn.references(SR)
+    and O.effective.toInterval() during "Measurement Period"
+    and O.status in { 'final', 'amended', 'corrected' }
   where SR.occurrence.toInterval() during "Measurement Period"
-  
+
 /* End of HIV test date B.DE110 */
 
 /*
@@ -1009,16 +1010,14 @@ define "HIV test result B.DE111 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-positive
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV-positive B.DE112":
-  exists "HIV-positive B.DE112 Condition"
-    or exists "HIV-positive B.DE112 Observation"
-define "HIV-positive B.DE112 Condition":
-  Elements."HIV-positive B.DE112 Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "HIV-positive B.DE112 Observation":
-  Elements."HIV-positive B.DE112 Observation" O
-    where O.effective.toInterval() overlaps "Measurement Period"
+define "HIV test date and results returned within measurement period for HIV-positive result":
+  Elements."Non-Self HIV test" SR
+  with [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
+    such that O.basedOn.references(SR)
+    and O.effective.toInterval() during "Measurement Period"
+    and O.status in { 'final', 'amended', 'corrected' }
+  where SR.occurrence.toInterval() during "Measurement Period"
+
 /* End of HIV-positive B.DE112 */
 
 /*
@@ -1054,20 +1053,21 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-define "HIV Status":
+// define "HIV Status":
+//   case 
+//       when exists("HIV Positive Condition") then Concepts."HIV-positive - HIV.B.DE116"
+//       when not exists("HIV Positive Condition") and exists(Elements."HIV Negative Observation" O where O.issued before end of "Measurement Period") then  Concepts."HIV-negative - HIV.B.DE117"
+//       else Concepts."Unknown - HIV.B.DE118"
+//   end
+
+define "HIV Status Stratifier":
   case 
-      when exists("HIV Positive Condition") then Concepts."HIV-positive - HIV.B.DE116"
-      when not exists("HIV Positive Condition") and exists(Elements."HIV Negative Observation" O where O.issued before end of "Measurement Period") then  Concepts."HIV-negative - HIV.B.DE117"
+      when exists("HIV Status Positive Condition") or exists("HIV Status Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
+      when not exists("HIV Status Positive Condition") and exists("HIV Status Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
       else Concepts."Unknown - HIV.B.DE118"
   end
 
-define "HIV Positive Condition":
-  Elements."HIV Positive Condition" C
-  where C.onset before end of "Measurement Period"
 
-define "HIV Positive Observation":
-  Elements."HIV Positive Observation" O
-  where O.issued during "Measurement Period"
 
 /* End of HIV status */
 
@@ -1076,9 +1076,26 @@ define "HIV Positive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Client is HIV-positive
 */
-define "HIV-positive B.DE116":
-  exists(Elements."HIV-positive B.DE116" HIV where HIV starts before end of "Measurement Period")
+define "HIV Status Positive Condition":
+  Elements."HIV Status Positive Condition" C
+  where C.onset before end of "Measurement Period"
+
+define "HIV Status Positive Observation":
+  Elements."HIV Status Positive Observation" O
+  where O.issued before end of "Measurement Period"
+  or O.effective.toInterval() starts before end of "Measurement Period"
+
+
 /* End of HIV-positive B.DE116 */
+
+define "HIV Status Negative Observation":
+  Elements."HIV Status Negative Observation" O
+  where O.issued before end of "Measurement Period"
+  or O.effective.toInterval() starts before end of "Measurement Period"
+
+define "HIV Status Negative Condition":
+  Elements."HIV Status Negative Condition" C
+  where C.onset before end of "Measurement Period"
 
 /*
 @dataElement: HIV.B.DE121 - Probable route of transmission

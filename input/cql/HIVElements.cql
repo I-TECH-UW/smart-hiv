@@ -4,6 +4,7 @@ using FHIR version '4.0.1'
 
 //include fhir.cqf.common.FHIRCommon called FC
 include FHIRHelpers version '4.0.1'
+include FHIRCommon version '4.0.1'
 
 include WHOConcepts
 include WHOCommon called WC
@@ -795,6 +796,10 @@ define "HIV test":
   [ServiceRequest: Concepts."HIV test type - HIV.B.DE81 Choices"] SR
   where SR.status in { 'active', 'completed' }
 
+define "Non-Self HIV test":
+  "HIV test" SR
+  where SR.code !~ Concepts."HIV self-test"
+
 define "HIV test result DiagnosticReport":
   [DiagnosticReport: Concepts."HIV test type - HIV.B.DE81 Choices"] DR
   with "HIV test" SR
@@ -1312,7 +1317,7 @@ define "HIV test result B.DE111 Observation":
 define "HIV test result B.DE111 Value":
   "HIV test result B.DE111 Observation" O
   return O.value
-  
+
 // Moved and Redefined in HIE
 // define "HIV test resulted":
 //   [Observation] O
@@ -1351,7 +1356,7 @@ define "HIV-negative DiagnosticReport Observation for Rapid diagnostic test for 
 
 define "HIV-negative B.DE113 Observation":
   "HIV test result B.DE111 Observation" O
-    where O.value ~ Concepts."HIV-negative - HIV.B.DE117"
+    where O.value ~ Concepts."HIV-negative - HIV.B.DE113"
 /* End of HIV-negative B.DE113 */
 
 /*
@@ -1376,24 +1381,10 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-define "HIV Status Stratifier":
-  case 
-      when exists("HIV Status Positive Condition") or exists("HIV Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
-      when not exists("HIV Positive Condition") and exists("HIV Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
-      else Concepts."Unknown - HIV.B.DE118"
-  end
-
-define "HIV Status Condition":
-  [Condition: Concepts."HIV status"]
 
 define "HIV Status Observation":
   [Observation: Concepts."HIV status"] O
     where O.status in { 'final', 'amended', 'corrected' }
-
-define "HIV Status Negative Observation":
-  "HIV Status Observation" O
-    where O.value ~ Concepts."HIV-negative - HIV.B.DE117"
-
 
 /* End of HIV status */
 
@@ -1402,35 +1393,63 @@ define "HIV Status Negative Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Client is HIV-positive
 */
-define "HIV Positive Observation":
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."HIV status"
-    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+define "Date HIV Status Positive":
+  Min("HIV Status Positive Observation Date" union "HIV Status Positive Condition Date")
 
-define "HIV Positive Observation - HIV Self Test":
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."HIV self-test"
-    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+define "HIV Status Positive Observation":
+"HIV Status Observation" O
+    where O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+      sort by start of effective.toInterval()
 
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV-positive B.DE116":
-  {First("HIV-positive B.DE116 Condition").prevalenceInterval(),First("HIV-positive B.DE116 Observation").effective.toInterval()}
+define "HIV Status Positive Observation Date":
+  "HIV Status Positive Observation" O
+  return start of O.effective.toInterval()
 
-define "HIV-positive B.DE116 Condition":
-  [Condition] C
+ 
+define "HIV Status Positive Condition":
+  [Condition: Concepts."HIV-positive - HIV.B.DE116"] C
     where C.clinicalStatus ~ CustomConcepts."active"
-    and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
-    and C.code ~ Concepts."HIV-positive - HIV.B.DE116"
+      and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
     sort by start of onset.toInterval()
 
-define "HIV-positive B.DE116 Observation":
-  [Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."HIV status"
-    and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+define "HIV Status Positive Condition Date":
+  "HIV Status Positive Condition" C
+  return start of C.onset.toInterval()
+
+// define "HIV Positive Observation - HIV Self Test":
+// [Observation] O
+//     where O.status in {'final', 'amended'}
+//     and O.code ~ Concepts."HIV self-test"
+//     and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+
+define "HIV Status Negative Observation":
+  "HIV Status Observation" O
+    where O.value ~ Concepts."HIV-negative - HIV.B.DE117"
     sort by start of effective.toInterval()
+
+define "HIV Status Negative Condition":
+  [Condition: Concepts."HIV-negative - HIV.B.DE117"] C
+  where C.clinicalStatus ~ CustomConcepts."active"
+  and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
+  sort by start of onset.toInterval()
+
+// TODO: Replace placeholder with relevant CQL logic
+// define "HIV-positive B.DE116":
+//   {First("HIV-positive B.DE116 Condition").prevalenceInterval(),First("HIV-positive B.DE116 Observation").effective.toInterval()}
+
+// define "HIV-positive B.DE116 Condition":
+//   [Condition] C
+//     where C.clinicalStatus ~ CustomConcepts."active"
+//     and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
+//     and C.code ~ Concepts."HIV-positive - HIV.B.DE116"
+//     sort by start of onset.toInterval()
+
+// define "HIV-positive B.DE116 Observation":
+//   [Observation] O
+//     where O.status in {'final', 'amended'}
+//     and O.code ~ Concepts."HIV status"
+//     and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
+//     sort by start of effective.toInterval()
 /* End of HIV-positive B.DE116 */
 
 /*

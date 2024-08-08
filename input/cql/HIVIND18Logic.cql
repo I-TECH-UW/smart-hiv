@@ -81,7 +81,7 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 
 context Patient
 define "Measure Population":
-    HIE."Is HIE Positive"
+    HIE."HIV-positive B.DE116"
 	
 /*
  * As defined by Member States
@@ -112,8 +112,8 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIE."patientGroups"
 
-define "ANC Stratifier":
-    HIC."anc"
+// define "ANC Stratifier":
+//     HIC."anc"
 
 
 define "Stratification":
@@ -121,4 +121,4 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(flatten(HIE.patientGroups), ':')
-+ Combine(HIC."anc", ':')
+// + Combine(HIC."anc", ':')

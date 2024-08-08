@@ -110,19 +110,12 @@ define "Initial Population":
 //Does this also filter out self HIV tests 
 //right now using HIVIND19 definition which does
 define "numerator":
-    exists(HIE."HIV Positive Condition" C
-	where C.onset during "Measurement Period")
+    exists(HIE."HIV Status Positive Condition")
 	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
-	) 
+	exists(HIE."HIV Status Positive Observation") 
 
 define "denominator":
-    exists(HIE."HIV test is resulted" T
-	where T.issued before end of "Measurement Period"
-	and T.issued after start of "Measurement Period")
-
+    exists(HIE."HIV test results returned in measurement period")
 
 /*
  * Disaggregators
@@ -143,8 +136,8 @@ define "patientGroups Stratifier":
 define "Setting":
     HIE."setting"
 
-define "TB Stratifier":
-    HIC."tb"
+// define "TB Stratifier":
+//     HIC."tb"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
@@ -152,4 +145,4 @@ define "Stratification":
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(flatten(HIE.patientGroups), ':')
 + Combine(HIE.setting, ':')
-+ Combine(HIC.tb, ':')
+//+ Combine(HIC.tb, ':')

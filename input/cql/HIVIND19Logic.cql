@@ -98,31 +98,37 @@ context Patient
 define "Initial Population":
   true
 
+define function "Measure Numerator Observation"(Patient "Patient"):
+  Count(HIE."HIV test date and results returned within measurement period for HIV-positive result")
 
 
-define "numerator":
-    exists(HE."HIV Positive Condition" C
-	where C.onset during "Measurement Period")
-	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
-	) 
+define function "Measure Denominator Observation"(Patient "Patient"):
+  Count(HIE."HIV test date and results returned within measurement period")
 
-define "numeratorExclusion":
-	exists(HIC."HIV Positive Observation - HIV Self Test" O
-	where (O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
-	) 
 
-define "denominator":
-	
+// define "numerator":
+//     exists(HE."HIV Positive Condition" C
+// 	where C.onset during "Measurement Period")
+// 	or 
+// 	exists(HIE."HIV Positive Observation" O
+// 	where (O.issued before end of "Measurement Period"
+// 	and O.issued after start of "Measurement Period")
+// 	) 
 
-define "denominatorExclusion":
-	exists(HIC."HIV Positive Observation - HIV Self Test" O
-	where (O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
-	) 
+// define "numeratorExclusion":
+// 	exists(HIC."HIV Positive Observation - HIV Self Test" O
+// 	where (O.issued before end of "Measurement Period"
+// 	and O.issued after start of "Measurement Period")
+// 	) 
+
+// define "denominator":
+
+
+// define "denominatorExclusion":
+// 	exists(HIC."HIV Positive Observation - HIV Self Test" O
+// 	where (O.issued before end of "Measurement Period"
+// 	and O.issued after start of "Measurement Period")
+// 	) 
 
 /*
  * Disaggregators
@@ -143,8 +149,8 @@ define "patientGroups Stratifier":
 define "Setting":
     HIE."setting"
 
-define "TB Stratifier":
-    HIC."tb"
+// define "TB Stratifier":
+//     HIC."tb"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
@@ -152,4 +158,4 @@ define "Stratification":
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(flatten(HIE.patientGroups), ':')
 + Combine(HIE.setting, ':')
-+ Combine(HIC.tb, ':')
+//+ Combine(HIC.tb, ':')
