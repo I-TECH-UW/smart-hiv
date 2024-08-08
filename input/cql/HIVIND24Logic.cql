@@ -112,25 +112,25 @@ define "Initial Population":
 
 define "Numerator":
   (exists(HE."PrEP service" prep
-   where prep.effective.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
-  and prep.effective.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval())
+   where prep.effective.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and prep.effective.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval())
    )
   or 
-  exists(HE."OAMT" t where t starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
-      and t starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  exists(HE."OAMT" t where t starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+      and t starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
   or 
-  exists(HE."NSP" DUS where DUS.timing.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
-  and DUS.timing.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  exists(HE."NSP" DUS where DUS.timing.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and DUS.timing.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
   or 
-  exists(HE."STI services" STI where STI.performed.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
-  and STI.performed.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  exists(HE."STI services" STI where STI.performed.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and STI.performed.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
   or 
-  exists(HE."VMMC" V where V.performed.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
-  and V.performed.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval()))
+  exists(HE."VMMC" V where V.performed.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  and V.performed.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
   or
   exists(HE."Other PRV.DE8" O
-    where O.effective.toInterval() starts before (start of HIC."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
-    and O.effective.toInterval() starts after (start of HIC."First Negative Test within Measurement Period".effective.toInterval())))
+    where O.effective.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+    and O.effective.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval())))
   and
   HIE."At elevated risk for HIV acquisition B.DE225"
 
@@ -144,7 +144,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIC."Negative Tests within Measurement Period")
+  exists(HIE."Negative Tests within Measurement Period")
   and HIE."At elevated risk for HIV acquisition B.DE225"
     
 
@@ -156,23 +156,23 @@ define "Denominator":
  */
 
 define "Administrative Gender Stratifier":
-	HIC."By Administrative Gender Stratifier"
+	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIC."By Age Stratifier 2"
+	HIE."By Age Stratifier 2"
 
 define "Geographic Region Stratifier":
-	HIC."By Geographic Region Stratifier"
+	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "HIV prevention intervention":
-	HIC."HIV prevention intervention"
+	HIE."HIV prevention intervention"
 
 define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
-  + ':' + HIC."By Age Stratifier 2"
-+ ':' + HIC."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC."HIV prevention intervention", ':')
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE."HIV prevention intervention", ':')

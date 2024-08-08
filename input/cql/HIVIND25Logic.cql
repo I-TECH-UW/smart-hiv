@@ -76,6 +76,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -102,7 +103,7 @@ define "Initial Population":
 
 
 define "Numerator":
-  exists(HIC."Negative Tests after First Negative Test")
+  exists(HIE."Negative Tests after First Negative Test")
 
 
 /**
@@ -113,7 +114,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIC."Negative Tests within Measurement Period")
+  exists(HIE."Negative Tests within Measurement Period")
     
 
 /* end Populations */
@@ -124,20 +125,20 @@ define "Denominator":
  */
 
 define "Administrative Gender Stratifier":
-	HIC."By Administrative Gender Stratifier"
+	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIC."By Age Stratifier 2"
+	HIE."By Age Stratifier 2"
 
 define "Geographic Region Stratifier":
-	HIC."By Geographic Region Stratifier"
+	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
- + ':' + HIC."HIV status of partner or contact".code
-  + ':' + HIC."By Age Stratifier 2"
-+ ':' + HIC."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
+ HIE."By Administrative Gender Stratifier".code 
+ + ':' + HIE."HIV status of partner or contact".code
+  + ':' + HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')

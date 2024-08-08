@@ -8,7 +8,7 @@ Title: "HIV.IND.16 VMMC adverse events"
 * url = "http://smart.who.int/HIV/Measure/HIVIND16"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND16"
 * title = "HIV.IND.16 VMMC adverse events"
 * publisher = "World Health Organization (WHO)"
@@ -33,3 +33,7 @@ Title: "HIV.IND.16 VMMC adverse events"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"
+  * stratifier[+]
+    * id = "HIV.IND.16.S"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Stratification"

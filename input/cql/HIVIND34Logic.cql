@@ -108,11 +108,11 @@ define "Numerator":
   HIE."HIV-positive B.DE116"
   and HIE."On ART H.DE47"
   and 
-    exists(HIC."Elevated Viral load test during Measurement Period")
+    exists(HIE."Elevated Viral load test during Measurement Period")
   and 
     exists(
       HIC."viral load sample collection" VL
-      where (months between (start of First(HIC."Elevated Viral load test during Measurement Period").issued.toInterval()) and (date from start of VL.performed.toInterval() ) < 3 months)
+      where (months between (start of First(HIE."Elevated Viral load test during Measurement Period").issued.toInterval()) and (date from start of VL.performed.toInterval() ) < 3 months)
       
       
     )
@@ -130,7 +130,7 @@ define "Denominator":
   HIE."HIV-positive B.DE116"
   and HIE."On ART H.DE47"
   and 
-    exists(HIC."Elevated Viral load test during Measurement Period")
+    exists(HIE."Elevated Viral load test during Measurement Period")
     
 
 /* end Populations */
@@ -140,22 +140,22 @@ define "Denominator":
  */
 
 define "Administrative Gender Stratifier":
-	HIC."By Administrative Gender Stratifier"
+	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIC."By Age Stratifier"
+	HIE."By Age Stratifier"
 
 define "Geographic Region Stratifier":
-	HIC."By Geographic Region Stratifier"
+	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
-  + ':' + HIC."By Age Stratifier"
-+ ':' + HIC."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')
 
 //Need to add
 // *  • ART regimen 
