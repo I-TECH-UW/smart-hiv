@@ -59,12 +59,6 @@ define "Needle Syringe Dispensed":
         and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
   where DUS.status = 'completed'
 
-// define PWID_person:
-//   [Observation: Concepts."Key population member - HIV.E.DE113"] O
-//   where O.status in { 'final', 'amended', 'corrected' }
-//     and exists(O.category OC where OC ~ CustomConcepts."social-history")
-//     and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
-
 define "HIV PREP Active":
 [MedicationStatement] MS
     where MS.status = 'completed'
@@ -133,9 +127,8 @@ define "Viral load tests received after ART intitiation":
   where start of O.issued.toInterval() after start of "First On ART".effective.toInterval()
   sort by start of issued.toInterval()
 
-// Auto-generated Elements from DAK Data Dictionary
-//   Entries based on DAK Data Dictionary for Data Elements marked as used
-//   in at least one Decision Support Table or Aggregate Indicator
+// Entries based on DAK Data Dictionary for Data Elements marked as used
+// in at least one Decision Support Table or Aggregate Indicator
 
 /*
 @dataElement: HIV.A.DE3 - Visit date
@@ -800,16 +793,6 @@ define "Non-Self HIV test":
   "HIV test" O
   where O.code !~ Concepts."HIV self-test"
 
-// define "HIV test result DiagnosticReport":
-//   [DiagnosticReport: Concepts."HIV test type - HIV.B.DE81 Choices"] DR
-//   with "HIV test" SR
-//     such that DR.basedOn.references(SR)
-//   where DR.status in { 'final', 'amended', 'corrected' }
-
-
-// define "HIV test result Observation":
-//   [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
-//   where O.status in { 'final', 'amended', 'corrected' }
 /*
 @dataElement: HIV.B.DE71 - HIV diagnosis date
 @activity: HIV.B8 Provide post-test counselling
@@ -1286,14 +1269,8 @@ define "Invalid B.DE109 Observation":
 @description: Date of the HIV test
 */
 define "HIV test date B.DE110":
-  "HIV test result DiagnosticReport" DR
-  return DR.effective
-define "HIV test date B.DE110 Observation":
-  [Observation: Concepts."HIV test date - HIV.B.DE110"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "HIV test date B.DE110 Value":
-  "HIV test date B.DE110" O
-  return O.value
+  "HIV test" O
+  return start of O.effective.toInterval()
 /* End of HIV test date B.DE110 */
 
 /*
@@ -1301,19 +1278,12 @@ define "HIV test date B.DE110 Value":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result from HIV testing after applying the testing algorithm
 */
-define "HIV test result DiagnosticReport Observation":
-  "HIV test result Observation" O
+// Same as test - see profile
+define "HIV test result Observation":
+  "HIV test" O
 
-define "HIV test result DiagnosticReport Value":
-  "HIV test result DiagnosticReport Observation" O
-  return O.value
-
-define "HIV test result B.DE111 Observation":
-  [Observation: Concepts."HIV test result - HIV.B.DE111"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-
-define "HIV test result B.DE111 Value":
-  "HIV test result B.DE111 Observation" O
+define "HIV test result Value":
+  "HIV test" O
   return O.value
 
 // Moved and Redefined in HIE
@@ -1330,10 +1300,9 @@ define "HIV test result B.DE111 Value":
 @description: Test result is HIV-positive
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV-positive B.DE112 Observation":
-  "HIV test result B.DE111 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV-positive - HIV.B.DE112"
+define "Is HIV-positive test result":
+  "HIV test result Value" V
+    where V ~ Concepts."HIV-positive - HIV.B.DE112"
 /* End of HIV-positive B.DE112 */
 
 /*
@@ -1341,20 +1310,9 @@ define "HIV-positive B.DE112 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-negative
 */
-define "HIV-negative DiagnosticReport Observation":
-  "HIV test result DiagnosticReport Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and O.value ~ Concepts."HIV-negative - HIV.B.DE113"
-
-define "HIV-negative DiagnosticReport Observation for Rapid diagnostic test for HIV":
-  "HIV-negative DiagnosticReport Observation" O
-  with [DiagnosticReport: Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"] DR
-    such that DR.result.references(O)
-  where O.value ~ Concepts."HIV-negative - HIV.B.DE113"
-
-define "HIV-negative B.DE113 Observation":
-  "HIV test result B.DE111 Observation" O
-    where O.value ~ Concepts."HIV-negative - HIV.B.DE113"
+define "Is HIV-negative test result":
+  "HIV test result Value" V
+    where V ~ Concepts."HIV-negative - HIV.B.DE113"
 /* End of HIV-negative B.DE113 */
 
 /*
@@ -1362,16 +1320,9 @@ define "HIV-negative B.DE113 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-inconclusive
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV-inconclusive":
-  exists "HIV-inconclusive Condition"
-    or exists "HIV-inconclusive Observation"
-define "HIV-inconclusive Condition":
-  [Condition: Concepts."HIV-inconclusive"]
-define "HIV-inconclusive Observation":
-  "HIV test result B.DE111 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV-inconclusive"
+define "Is HIV-inconclusive test result":
+  "HIV test result Value" V
+    where V ~ Concepts."HIV-inconclusive"
 /* End of HIV-inconclusive */
 
 /*
@@ -1379,12 +1330,9 @@ define "HIV-inconclusive Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-
 define "HIV Status Observation":
   [Observation: Concepts."HIV status"] O
     where O.status in { 'final', 'amended', 'corrected' }
-
-/* End of HIV status */
 
 /*
 @dataElement: HIV.B.DE116 - HIV-positive
@@ -1413,13 +1361,7 @@ define "HIV Status Positive Condition":
 define "HIV Status Positive Condition Date":
   "HIV Status Positive Condition" C
   return start of C.onset.toInterval()
-
-// define "HIV Positive Observation - HIV Self Test":
-// [Observation] O
-//     where O.status in {'final', 'amended'}
-//     and O.code ~ Concepts."HIV self-test"
-//     and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
-
+  
 define "HIV Status Negative Observation":
   "HIV Status Observation" O
     where O.value ~ Concepts."HIV-negative - HIV.B.DE117"
@@ -1430,25 +1372,7 @@ define "HIV Status Negative Condition":
   where C.clinicalStatus ~ CustomConcepts."active"
   and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
   sort by start of onset.toInterval()
-
-// TODO: Replace placeholder with relevant CQL logic
-// define "HIV-positive B.DE116":
-//   {First("HIV-positive B.DE116 Condition").prevalenceInterval(),First("HIV-positive B.DE116 Observation").effective.toInterval()}
-
-// define "HIV-positive B.DE116 Condition":
-//   [Condition] C
-//     where C.clinicalStatus ~ CustomConcepts."active"
-//     and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
-//     and C.code ~ Concepts."HIV-positive - HIV.B.DE116"
-//     sort by start of onset.toInterval()
-
-// define "HIV-positive B.DE116 Observation":
-//   [Observation] O
-//     where O.status in {'final', 'amended'}
-//     and O.code ~ Concepts."HIV status"
-//     and O.value ~ Concepts."HIV-positive - HIV.B.DE116"
-//     sort by start of effective.toInterval()
-/* End of HIV-positive B.DE116 */
+/* End of HIV status */
 
 /*
 @dataElement: HIV.B.DE121 - Probable route of transmission

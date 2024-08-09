@@ -189,13 +189,11 @@ define "Other A.DE23 Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: Reason for HIV testing services visit
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Reason for visit B.DE1":
-  exists "Reason for visit B.DE1 Observation"
-define "Reason for visit B.DE1 Observation":
-  Elements."Reason for visit B.DE1 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."HTS Visit Encounter" E
+    where E.partOf.references(EncounterId) 
+    or E.period.start = Today
+    return E.reasonCode
 /* End of Reason for visit B.DE1 */
 
 /*
@@ -203,17 +201,12 @@ define "Reason for visit B.DE1 Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: First encounter for screening for human immunodeficiency virus
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "First-time HIV test":
-  exists "First-time HIV test Condition"
-    or exists "First-time HIV test Observation"
-define "First-time HIV test Condition":
-  Elements."First-time HIV test Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "First-time HIV test Observation":
-  Elements."First-time HIV test Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+define "Is First-time HIV test Encounter":
+  exists "First-time HIV test Encounter"
+define "First-time HIV test Encounter":
+  Elements."First-time HIV test Encounter" E
+    where E.partOf.references(EncounterId) 
+    or E.period.start = Today
 /* End of First-time HIV test */
 
 /*
@@ -221,17 +214,12 @@ define "First-time HIV test Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: Retesting for human immunodeficiency virus
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Retesting for HIV B.DE3":
-  exists "Retesting for HIV B.DE3 Condition"
-    or exists "Retesting for HIV B.DE3 Observation"
-define "Retesting for HIV B.DE3 Condition":
-  Elements."Retesting for HIV B.DE3 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Retesting for HIV B.DE3 Observation":
-  Elements."Retesting for HIV B.DE3 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+define "Is Retesting for HIV B.DE3 Encounter":
+  exists "Retesting for HIV B.DE3 Encounter"
+define "Retesting for HIV B.DE3 Encounter":
+  Elements."Retesting for HIV B.DE3 Encounter" E
+    where E.partOf.references(EncounterId) 
+    or E.period.start = Today
 /* End of Retesting for HIV B.DE3 */
 
 /*
@@ -240,16 +228,12 @@ define "Retesting for HIV B.DE3 Observation":
 @description: Client attending facility for HIV testing services visit
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV testing services visit":
-  exists "HIV testing services visit Condition"
-    or exists "HIV testing services visit Observation"
-define "HIV testing services visit Condition":
-  Elements."HIV testing services visit Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "HIV testing services visit Observation":
-  Elements."HIV testing services visit Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+define "Is HIV testing services visit":
+  exists "HIV testing services visit Encounter"
+define "HIV testing services visit Encounter":
+  Elements."HIV testing services visit Encounter" E
+    where E.partOf.references(EncounterId) 
+    or E.period.start = Today
 /* End of HIV testing services visit */
 
 /*
@@ -354,13 +338,8 @@ define "Unknown B.DE36 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client is a member of a key population that has an increased risk of HIV
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Key population member B.DE49":
-  exists "Key population member B.DE49 Observation"
-define "Key population member B.DE49 Observation":
-  Elements."Key population member B.DE49 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+define "Is Key population member B.DE49":
+  exists("Key population member type Observation")
 /* End of Key population member B.DE49 */
 
 /*
@@ -368,11 +347,8 @@ define "Key population member B.DE49 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: The type of key population that the client is included in
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Key population member type B.DE50":
-  exists "Key population member type B.DE50 Observation"
-define "Key population member type B.DE50 Observation":
-  Elements."Key population member type B.DE50 Observation" O
+define "Key population member type Observation":
+  Elements."Key population member type Observation" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Key population member type B.DE50 */
