@@ -75,13 +75,12 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
+include HIVConfig called Config
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
-parameter "Testing Interval" System.Quantity default 3 months
 
 context Patient
 /* Populations */
@@ -100,11 +99,8 @@ define "Initial Population":
  * Calculation: COUNT of clients with "At elevated risk for HIV acquisition"=True AND with a second "HIV test date" within fixed period after "HIV test date" in the reporting period with "HIV test result"='HIV-negative'
  */
 
-
-
-
 define "Numerator":
-  exists(HIC."Negative Tests after First Negative Test")
+  exists(HIE."Negative Tests after First Negative Test")
 
 
 /**
@@ -115,7 +111,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIC."Negative Tests within Measurement Period")
+  exists(HIE."Negative Tests within Measurement Period")
     
 
 /* end Populations */
@@ -135,11 +131,11 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
- + ':' + HIC."HIV status of partner or contact".code
+ + ':' + HIE."HIV status of partner or contact".code
   + ':' + HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(flatten(HIE.patientGroups), ':')

@@ -80,8 +80,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
-include HIVElements called HE
 include HIVIndicatorElements called HIE
 
 // Indicator Definition
@@ -108,7 +106,7 @@ define "Measure Population":
     exists(HIC."Partner or contact of an index case" IC
     with HIC."Drug-injecting partner" DIP
       such that IC.hasMember.references(DIP)
-      with HIC."HIV test resulted" HIV
+      with HIE."HIV test is resulted" HIV
       such that IC.hasMember.references(HIV)
       and HIV.issued after start of "Measurement Period"
       and HIV.issued before end of "Measurement Period")
@@ -116,7 +114,7 @@ define "Measure Population":
     exists(HIC."Partner or contact of an index case" IC
     with HIC."Sexual partner" SP
       such that IC.hasMember.references(SP)
-      with HIC."HIV test resulted" HIV
+      with HIE."HIV test is resulted" HIV
       such that IC.hasMember.references(HIV)
       and HIV.issued after start of "Measurement Period"
       and HIV.issued before end of "Measurement Period")
@@ -147,14 +145,14 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "HIV status of partner or contact":
-  HIC."HIV status of partner or contact"
+  HIE."HIV status of partner or contact"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
- + ':' + HIC."HIV status of partner or contact".code
+ + ':' + HIE."HIV status of partner or contact".code
   + ':' + HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(flatten(HIE.patientGroups), ':')

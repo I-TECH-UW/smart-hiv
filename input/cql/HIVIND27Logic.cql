@@ -69,7 +69,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
@@ -88,7 +87,7 @@ define "Measure Population":
    and HIE."On ART H.DE47"
    and not HIE."Death documented"
    and not HIE."Transferred out"
-   and not HIE."Lost to follow-up"
+   and not HIE."Is Lost to follow-up"
 
 /*
  * As defined by Member States
@@ -117,10 +116,10 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(flatten(HIE.patientGroups), ':')

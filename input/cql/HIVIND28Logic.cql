@@ -79,7 +79,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
@@ -152,14 +151,14 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Treatment outcome category Stratifier":
-	HIC."Treatment outcome category"
+	HIE."Treatment outcome category"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC."Treatment outcome category", ':')
++ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE."Treatment outcome category", ':')

@@ -24,7 +24,7 @@ include HIVCommon version '0.0.1' called HIC
 include HIVConcepts called HCx
 include HIVEncounterElements called Elements
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
 
 context Patient

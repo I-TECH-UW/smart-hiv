@@ -5,14 +5,14 @@ Title: "HIV.IND.4 Volume of PrEP prescribed"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "Total volume of PrEP product prescribed"
-* url = "http://smart.who.int/hiv/Measure/HIVIND4"
+* url = "http://smart.who.int/HIV/Measure/HIVIND4"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND4"
 * title = "HIV.IND.4 Volume of PrEP prescribed"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/hiv/Library/HIVIND4Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND4Logic"
 * scoring = $measure-scoring#continuous-variable "Continuous Variable"
 * group[+]
   * population[initialPopulation]
@@ -37,18 +37,6 @@ Title: "HIV.IND.4 Volume of PrEP prescribed"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Measure Observation"
   * stratifier[+]
-    * id = "HIV.IND.4.S.AG"
+    * id = "HIV.IND.4.S"
     * criteria.language = #text/cql-identifier
-    * criteria.expression = "Administrative Gender Stratifier"
-  * stratifier[+]
-    * id = "HIV.IND.4.S.A"
-    * criteria.language = #text/cql-identifier
-    * criteria.expression = "Age Stratifier"
-  * stratifier[+]
-    * id = "HIV.IND.4.S.GR"
-    * criteria.language = #text/cql-identifier
-    * criteria.expression = "Geographic Region Stratifier"
-  * stratifier[+]
-    * id = "HIV.IND.4.S.P"
-    * criteria.language = #text/cql-identifier
-    * criteria.expression = "patientGroups Stratifier"
+    * criteria.expression = "Stratification"

@@ -81,7 +81,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
@@ -109,11 +108,11 @@ define "Numerator":
   HIE."HIV-positive B.DE116"
   and HIE."On ART H.DE47"
   and 
-    exists(HIC."Elevated Viral load test during Measurement Period")
+    exists(HIE."Elevated Viral load test during Measurement Period")
   and 
     exists(
       HIC."viral load sample collection" VL
-      where (months between (start of First(HIC."Elevated Viral load test during Measurement Period").issued.toInterval()) and (date from start of VL.performed.toInterval() ) < 3 months)
+      where (months between (start of First(HIE."Elevated Viral load test during Measurement Period").issued.toInterval()) and (date from start of VL.performed.toInterval() ) < 3 months)
       
       
     )
@@ -131,7 +130,7 @@ define "Denominator":
   HIE."HIV-positive B.DE116"
   and HIE."On ART H.DE47"
   and 
-    exists(HIC."Elevated Viral load test during Measurement Period")
+    exists(HIE."Elevated Viral load test during Measurement Period")
     
 
 /* end Populations */
@@ -150,13 +149,13 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(flatten(HIE.patientGroups), ':')
 
 //Need to add
 // *  • ART regimen 

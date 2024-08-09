@@ -5,14 +5,14 @@ Title: "HIV.IND.14 OAMT minimum dose"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "% of OAMT recipients receiving a maintenance dose greater than or equal to the recommended minimum dose"
-* url = "http://smart.who.int/hiv/Measure/HIVIND14"
+* url = "http://smart.who.int/HIV/Measure/HIVIND14"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND14"
 * title = "HIV.IND.14 OAMT minimum dose"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/hiv/Library/HIVIND14Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND14Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]
@@ -29,7 +29,7 @@ Title: "HIV.IND.14 OAMT minimum dose"
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.14.NUM"
-    * description = "Number of people, at a specified date, maintained on methadone or buprenorphine receiving recommended minimum maintenance dose (WHO guidance recommends doses of ≥60 mg of methadone or ≥8 mg of buprenorphine*)"
+    * description = "Number of people, at a specified date, maintained on methadone or buprenorphine receiving recommended minimum maintenance dose (WHO guidance recommends doses of ≥60 mg of methadone or ≥8 mg of buprenorphine)"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"

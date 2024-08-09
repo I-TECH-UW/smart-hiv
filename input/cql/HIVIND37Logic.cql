@@ -66,10 +66,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -91,19 +89,8 @@ define "Initial Population":
  * Calculation: COUNT of clients with "HIV status"='HIV-positive' AND "Place of delivery" is a 'Health facility' AND "Delivery date" is in the reporting period AND "Date of viral load sample collection" is on "Delivery date" AND "Viral load test result" LESS THAN 1000 copies/mL
  */
 
-define "First Health facility":
-  (First(HE."Health facility"))
-
 define "Numerator":
-  HIE."HIV-positive B.DE116"
-  and HIE."On ART D.DE38"
-  and HIE."Health facility"
-  and exists(
-    HIE."Viral load test result D.DE387" VL
-    with HIC."viral load sample collection" P 
-    such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
-    where VL.value < 1000
-    )
+  true
 
 
 /**
@@ -114,30 +101,8 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116"
-  and HIE."On ART D.DE38"
-  and HIE."Health facility"
-  and exists(
-    HIE."Viral load test result D.DE387" VL
-    with HIC."viral load sample collection" P 
-    such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
-    )
+  true
+    
 
 /* end Populations */
 
-/*
- * Disaggregators
- */
-
-
-define "Age Stratifier":
-	HIE."By Age Stratifier 3"
-
-define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
-
-define "Stratification":
- HIE."By Age Stratifier 3"
-+ ':' + HIE."By Geographic Region Stratifier"
-
- // need to add  Timing of ART initiation (during pregnancy, on ART at first ANC visit)

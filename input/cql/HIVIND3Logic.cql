@@ -97,9 +97,9 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
+
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -113,18 +113,14 @@ define "Initial Population":
   
 
 define "numerator":
-   exists(HIC."HIV PREP Active" H
-   where H.effective starts before end of "Measurement Period"
-    and (H.effective ends after start of "Measurement Period"
-    or end of H.effective  ~  null)
-   )
+    HIE."HIV PREP Active"
 
 define "denominator":
-	exists(HIC."HIV Negative Observation" O
+	exists(HE."HIV Negative Observation" O
 	where (O.issued before end of "Measurement Period"
 	and O.issued after start of "Measurement Period")
 	) and 
-    exists(HIC."Client is at elevated risk for HIV acquisition" O
+    exists(HE."Client is at elevated risk for HIV acquisition" O
 	where O.issued before end of "Measurement Period"
 	and O.issued after start of "Measurement Period")
 
@@ -143,19 +139,19 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 define "prep product":
-    HIC."prep_product"
+    HIE."prep_product"
 
 define "prep_experience":
-    HIC."prep_experience"
+    HIE."prep_experience"
 
 define "prep_dosing":
-    HIC."prep_dosing"
+    HIE."prep_dosing"
 
 // Provider type concepts are not found in DD
 
@@ -163,8 +159,8 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.setting, ':')
-+ Combine(HIC.prep_product, ':')
-+ Combine(HIC.prep_experience, ':')
-+ Combine(HIC.prep_dosing, ':')
++ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE.setting, ':')
++ Combine(HIE.prep_product, ':')
++ Combine(HIE.prep_experience, ':')
++ Combine(HIE.prep_dosing, ':')

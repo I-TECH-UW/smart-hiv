@@ -74,10 +74,9 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 include HIVConceptsCustom called HCC
+
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -100,7 +99,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HIC."VMMC_adverse_event" VMAC
+  exists(HIE."VMMC_adverse_event" VMAC
     where (VMAC.severity = HCC."severe"
     or VMAC.severity = HCC."moderate")
   )
@@ -114,9 +113,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIC."VMMC_done" VM
-        where (VM.performed during "Measurement Period")
-  )
+  HIE."VMMC"
     
 
 /* end Populations */
@@ -137,13 +134,13 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 define "VMMC_adverse_event_type":
-    HIC."VMMC_adverse_event_type"
+    HIE."VMMC_adverse_event_type"
 
 define "VMMC_adverse_event_timing":
-    HIC.VMMC_adverse_event_timing
+    HIE.VMMC_adverse_event_timing
 
 
 //provider type not provided?
@@ -153,6 +150,6 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.setting, ':')
-+ ':' + HIC."VMMC_adverse_event_type".code 
-+ ':' + HIC."VMMC_adverse_event_timing".code 
++ Combine(HIE.setting, ':')
++ ':' + HIE."VMMC_adverse_event_type".code 
++ ':' + HIE."VMMC_adverse_event_timing".code 

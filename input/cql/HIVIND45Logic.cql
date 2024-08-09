@@ -76,7 +76,7 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
 
 include HIVElements called HE
@@ -139,10 +139,20 @@ define "Age Stratifier":
   HIE."By Age Stratifier"
 
 define "TPT Regimen Type Stratifier":
-  HE."TPT regimen type"
+  HIE."TPT regimen type"
 
 define "ART Initiation Stratifier":
   HIE."By ART initiation"
 
 define "Geographic Region Stratifier":
   HIE."By Geographic Region Stratifier"
+
+/*
+ * Combined stratifiers
+ */
+define "Stratification":
+  HIE."By Administrative Gender Stratifier".code 
+    + ':' + HIE."By Age Stratifier"
+    + ':' + Combine(HIE."TPT regimen type".coding.code)
+    + ':' + HIE."By ART initiation"
+	  + ':' + HIE."By Geographic Region Stratifier"

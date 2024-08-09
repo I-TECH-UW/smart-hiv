@@ -5,14 +5,14 @@ Title: "HIV.IND.60 Syphilis testing coverage, pregnant women, first ANC visit"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "% of pregnant women who were tested for syphilis on first ANC services visit during the reporting period"
-* url = "http://smart.who.int/hiv/Measure/HIVIND60"
+* url = "http://smart.who.int/HIV/Measure/HIVIND60"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND60"
 * title = "HIV.IND.60 Syphilis testing coverage, pregnant women, first ANC visit"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/hiv/Library/HIVIND60Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND60Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]

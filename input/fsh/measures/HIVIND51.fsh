@@ -5,14 +5,14 @@ Title: "HIV.IND.51 TB diagnosis among those tested for TB"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "% of people living with HIV newly initiated on ART and tested for TB who are diagnosed with active TB disease"
-* url = "http://smart.who.int/hiv/Measure/HIVIND51"
+* url = "http://smart.who.int/HIV/Measure/HIVIND51"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND51"
 * title = "HIV.IND.51 TB diagnosis among those tested for TB"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/hiv/Library/HIVIND51Logic"
+* library = "http://smart.who.int/HIV/Library/HIVIND51Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]
@@ -23,7 +23,7 @@ Title: "HIV.IND.51 TB diagnosis among those tested for TB"
     * criteria.expression = "Initial Population"
   * population[denominator]
     * id = "HIV.IND.51.DEN"
-    * description = "Number of people living with HIV who newly initiated ART and screened positive for TB symptoms who had appropriate diagnostic testing during the reporting period*"
+    * description = "Number of people living with HIV who newly initiated ART and screened positive for TB symptoms who had appropriate diagnostic testing during the reporting period"
     * code = $measure-population#denominator "Denominator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Denominator"

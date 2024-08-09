@@ -65,9 +65,9 @@ library HIVIND44Logic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVCommon version '0.0.1' called HIC
+include HIVCommon called HIC
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
 
 include HIVElements called HE
@@ -117,14 +117,23 @@ define "Denominator":
  *  • Cities and other administrative regions of epidemiologic importance
  */
 
- define "Administrative Gender Stratifier":
+define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
   HIE."By Age Stratifier"
 
 define "TPT Regimen Type Stratifier":
-  HE."TPT regimen type"
+  HIE."TPT regimen type"
 
 define "Geographic Region Stratifier":
   HIE."By Geographic Region Stratifier"
+
+/*
+ * Combined stratifiers
+ */
+define "Stratification":
+  HIE."By Administrative Gender Stratifier".code 
+    + ':' + HIE."By Age Stratifier"
+    + ':' + Combine(HIE."TPT regimen type".coding.code)
+	  + ':' + HIE."By Geographic Region Stratifier"

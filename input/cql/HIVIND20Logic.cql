@@ -88,7 +88,6 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
-include HIVElements called HE
 include HIVIndicatorElements called HIE
 
 // Indicator Definition
@@ -111,19 +110,12 @@ define "Initial Population":
 //Does this also filter out self HIV tests 
 //right now using HIVIND19 definition which does
 define "numerator":
-    exists(HIC."HIV Positive Condition" C
-	where C.onset during "Measurement Period")
+    exists(HIE."HIV Status Positive Condition")
 	or 
-	exists(HIC."HIV Positive Observation" O
-	where (O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
-	) 
+	exists(HIE."HIV Status Positive Observation") 
 
 define "denominator":
-    exists(HIC."HIV test resulted" T
-	where T.issued before end of "Measurement Period"
-	and T.issued after start of "Measurement Period")
-
+    exists(HIE."HIV test results returned in measurement period")
 
 /*
  * Disaggregators
@@ -139,18 +131,18 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
-define "TB Stratifier":
-    HIC."tb"
+// define "TB Stratifier":
+//     HIC."tb"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.setting, ':')
-+ Combine(HIC.tb, ':')
++ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE.setting, ':')
+//+ Combine(HIC.tb, ':')
