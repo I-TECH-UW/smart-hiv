@@ -2536,12 +2536,10 @@ define "Date ART stopped D.DE41 Value":
 @activity: HIV.D8 Capture or update client history
 @description: Whether the client is ART naive or is restarting ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "ART start type":
-  exists "ART start type Observation"
-define "ART start type Observation":
-  Elements."ART start type Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."ART start type"
+
 /* End of ART start type */
 
 /*
@@ -2549,16 +2547,9 @@ define "ART start type Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is ART naive, having never taken ART to treat HIV before
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "First-time user of ART":
-  exists "First-time user of ART Condition"
-    or exists "First-time user of ART Observation"
-define "First-time user of ART Condition":
-  Elements."First-time user of ART Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "First-time user of ART Observation":
-  Elements."First-time user of ART Observation" O
+  exists Elements."First-time user of ART" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of First-time user of ART */
 
@@ -2567,16 +2558,9 @@ define "First-time user of ART Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is restarting ART after stopping treatment for any reason
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Restarting ART":
-  exists "Restarting ART Condition"
-    or exists "Restarting ART Observation"
-define "Restarting ART Condition":
-  Elements."Restarting ART Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Restarting ART Observation":
-  Elements."Restarting ART Observation" O
+  exists Elements."Restarting ART" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Restarting ART */
 
@@ -5176,13 +5160,10 @@ define "TB Culture":
 @activity: HIV.D4 Screen for TB
 @description: The date when TB diagnostic test was performed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB diagnostic test date":
-  Elements."TB diagnostic test date" O
-    where O.effective.toInterval() during "Measurement Period"
-define "TB diagnostic test date Value":
-  "TB diagnostic test date" O
-  return O.value
+  exists(Elements."TB diagnostic test date" P where P during "Measurement Period")
+
 /* End of TB diagnostic test date */
 
 /*
@@ -5190,13 +5171,9 @@ define "TB diagnostic test date Value":
 @activity: HIV.D8 Capture or update client history
 @description: The date on which the client start or restarted tuberculosis (TB) treatment
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB treatment start date":
-  Elements."TB treatment start date" O
-    where O.effective.toInterval() during "Measurement Period"
-define "TB treatment start date Value":
-  "TB treatment start date" O
-  return O.value
+  exists(Elements."TB treatment start date" MS where MS during "Measurement Period")
 /* End of TB treatment start date */
 
 /*

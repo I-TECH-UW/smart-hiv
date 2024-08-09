@@ -114,6 +114,7 @@ define "Initial Population":
 define "Numerator":
   HIE."HIV-positive B.DE116"
   and 
+  //I related the two because otherwise a positive observation could come from another test type and be counted. 
   exists(
     HE."mWRD test for TB" P
     with HE."Screen positive for TB" O

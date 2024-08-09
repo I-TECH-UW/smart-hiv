@@ -5444,10 +5444,8 @@ define "Established on ART Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Whether the client is ART naive or is restarting ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "ART start type":
-  exists "ART start type Observation"
-define "ART start type Observation":
   [Observation: Concepts."ART start type"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of ART start type */
@@ -5457,16 +5455,10 @@ define "ART start type Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is ART naive, having never taken ART to treat HIV before
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "First-time user of ART":
-  exists "First-time user of ART Condition"
-    or exists "First-time user of ART Observation"
-define "First-time user of ART Condition":
-  [Condition: Concepts."First-time user of ART"]
-define "First-time user of ART Observation":
-  "ART start type Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."First-time user of ART"
+  "ART start type" O
+      where O.value ~ Concepts."First-time user of ART"
 /* End of First-time user of ART */
 
 /*
@@ -5474,16 +5466,10 @@ define "First-time user of ART Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is restarting ART after stopping treatment for any reason
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Restarting ART":
-  exists "Restarting ART Condition"
-    or exists "Restarting ART Observation"
-define "Restarting ART Condition":
-  [Condition: Concepts."Restarting ART"]
-define "Restarting ART Observation":
-  "ART start type Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Restarting ART"
+   "ART start type" O
+      where O.value ~ Concepts."Restarting ART"
 /* End of Restarting ART */
 
 /*
@@ -12150,13 +12136,10 @@ define "TB Culture":
 @activity: HIV.D4 Screen for TB
 @description: The date when TB diagnostic test was performed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB diagnostic test date":
-  [Observation: Concepts."TB diagnostic test date"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "TB diagnostic test date Value":
-  "TB diagnostic test date" O
-  return O.value
+  "TB diagnostic test category" P
+     return (start of P.performed.toInterval())
 /* End of TB diagnostic test date */
 
 /*
@@ -12164,13 +12147,11 @@ define "TB diagnostic test date Value":
 @activity: HIV.D8 Capture or update client history
 @description: The date on which the client start or restarted tuberculosis (TB) treatment
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB treatment start date":
-  [Observation: Concepts."TB treatment start date"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "TB treatment start date Value":
-  "TB treatment start date" O
-  return O.value
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ CustomConcepts."tb treatment")
+    return (start of MS.effective.toInterval())
 /* End of TB treatment start date */
 
 /*
