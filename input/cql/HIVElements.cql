@@ -861,7 +861,7 @@ define "HIV test conducted Observation":
 define "HIV test type B.DE81 ServiceRequest":
   "HIV test" SR
   return SR.code
-define "HIV test type B.DE81 Observation":
+define "HIV test type B.DE81":
   [Observation: Concepts."HIV test type - HIV.B.DE81"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of HIV test type B.DE81 */
@@ -871,9 +871,9 @@ define "HIV test type B.DE81 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Antibody test for HIV performed with a rapid diagnostic
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Rapid diagnostic test for HIV B.DE82 Observation":
-  "HIV test type B.DE81 Observation" O
+
+define "Rapid diagnostic test for HIV B.DE82":
+  "HIV test type B.DE81" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
 /* End of Rapid diagnostic test for HIV B.DE82 */
@@ -883,9 +883,9 @@ define "Rapid diagnostic test for HIV B.DE82 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Antibody test for HIV performed with an enzyme immunoassay
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Enzyme immunoassay for HIV B.DE83 Observation":
-  "HIV test type B.DE81 Observation" O
+
+define "Enzyme immunoassay for HIV B.DE83":
+  "HIV test type B.DE81" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Enzyme immunoassay for HIV - HIV.B.DE83"
 /* End of Enzyme immunoassay for HIV B.DE83 */
@@ -895,9 +895,9 @@ define "Enzyme immunoassay for HIV B.DE83 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Virological test, which includes testing for early infant diagnosis
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Nucleic acid test for HIV B.DE84 Observation":
-  "HIV test type B.DE81 Observation" O
+
+define "Nucleic acid test for HIV B.DE84":
+  "HIV test type B.DE81" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Nucleic acid test for HIV - HIV.B.DE84"
 /* End of Nucleic acid test for HIV B.DE84 */
@@ -907,9 +907,9 @@ define "Nucleic acid test for HIV B.DE84 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Antibody test for HIV and syphilis performed with a rapid diagnostic
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
-  "HIV test type B.DE81 Observation" O
+
+define "Dual HIV/syphilis rapid diagnostic test B.DE85":
+  "HIV test type B.DE81" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Dual HIV/syphilis rapid diagnostic test - HIV.B.DE85"
 /* End of Dual HIV/syphilis rapid diagnostic test B.DE85 */
@@ -919,9 +919,9 @@ define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Antibody test for HIV performed by self-tester using a rapid diagnostic
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV self-test Observation":
-  "HIV test type B.DE81 Observation" O
+
+define "HIV self-test":
+  "HIV test type B.DE81" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."HIV self-test"
 /* End of HIV self-test */
@@ -12589,12 +12589,10 @@ define "Delivery date Value":
 @activity: HIV.E1 Capture or update mother's history
 @description: The type of place where the woman delivered
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Place of delivery":
-  exists "Place of delivery Observation"
-define "Place of delivery Observation":
-  [Observation: Concepts."Place of delivery"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [Procedure: CustomConcepts."delivery"]
+
 /* End of Place of delivery */
 
 /*
@@ -12602,16 +12600,13 @@ define "Place of delivery Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: The woman delivered at a health facility
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Health facility":
-  exists "Health facility Condition"
-    or exists "Health facility Observation"
-define "Health facility Condition":
-  [Condition: Concepts."Health facility"]
-define "Health facility Observation":
-  "Place of delivery Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Health facility"
+  "Place of delivery" P
+  with [Location] L
+      such that P.location.references(L) 
+      and L.physicalType ~ Concepts."Health facility"
+      
 /* End of Health facility */
 
 /*
@@ -12619,16 +12614,13 @@ define "Health facility Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: The woman delivered at home
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Home":
-  exists "Home Condition"
-    or exists "Home Observation"
-define "Home Condition":
-  [Condition: Concepts."Home"]
-define "Home Observation":
-  "Place of delivery Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Home"
+  "Place of delivery" P
+  with [Location] L
+      such that P.location.references(L) 
+      and L.physicalType ~ Concepts."Home"
+      
 /* End of Home */
 
 /*
@@ -12636,16 +12628,12 @@ define "Home Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: The woman delivered at another location that is not at home or at a health facility
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Other E.DE70":
-  exists "Other E.DE70 Condition"
-    or exists "Other E.DE70 Observation"
-define "Other E.DE70 Condition":
-  [Condition: Concepts."Other - HIV.E.DE70"]
-define "Other E.DE70 Observation":
-  "Place of delivery Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Other - HIV.E.DE70"
+  "Place of delivery" P
+  with [Location] L
+      such that P.location.references(L) 
+      and L.physicalType ~ Concepts."Other - HIV.E.DE70"
 /* End of Other E.DE70 */
 
 /*
@@ -12704,13 +12692,11 @@ define "Age of infant in years":
 @activity: HIV.F6 Check whether infant/child had HIV exposure
 @description: Whether the infant or child was determined to have had HIV exposure
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HIV-exposed infant or child E.DE112":
-  exists "HIV-exposed infant or child E.DE112 Observation"
-define "HIV-exposed infant or child E.DE112 Observation":
   [Observation: Concepts."HIV-exposed infant or child - HIV.E.DE112"] O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+
 /* End of HIV-exposed infant or child E.DE112 */
 
 /*

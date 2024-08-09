@@ -29,7 +29,6 @@ context Patient
 
 // From Common
 
-
 define "Community_testing":
   exists([Observation] O
     with [Encounter] E
@@ -882,10 +881,7 @@ define "ART start date B.DE72 Value":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV test type B.DE81":
-  exists "HIV test type B.DE81 Observation"
-define "HIV test type B.DE81 Observation":
-  Elements."HIV test type B.DE81 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."HIV test type B.DE81"
 /* End of HIV test type B.DE81 */
 
 /*
@@ -2770,7 +2766,12 @@ define "On ART D.DE38":
 @description: The date on which the client started or restarted ART
 */
 /* End of ART start date D.DE39 */
-
+define "ART start date D.DE39":
+  Elements."ART start date D.DE39" O
+    where O.effective.toInterval() during "Measurement Period"
+define "ART start date D.DE39 Value":
+  "ART start date D.DE39" O
+  return O.value
 /*
 @dataElement: HIV.D.DE41 - Date ART stopped
 @activity: HIV.D8 Capture or update client history
@@ -5687,10 +5688,8 @@ define "Delivery date Value":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Place of delivery":
-  exists "Place of delivery Observation"
-define "Place of delivery Observation":
-  Elements."Place of delivery Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Place of delivery" P
+  where P.performed.toInterval() during "Measurement Period")
 /* End of Place of delivery */
 
 /*
@@ -5700,15 +5699,8 @@ define "Place of delivery Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Health facility":
-  exists "Health facility Condition"
-    or exists "Health facility Observation"
-define "Health facility Condition":
-  Elements."Health facility Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Health facility Observation":
-  Elements."Health facility Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Health facility" P
+  where P.performed.toInterval() during "Measurement Period")
 /* End of Health facility */
 
 /*
@@ -5718,15 +5710,8 @@ define "Health facility Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Home":
-  exists "Home Condition"
-    or exists "Home Observation"
-define "Home Condition":
-  Elements."Home Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Home Observation":
-  Elements."Home Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Health facility" P
+  where P.performed.toInterval() during "Measurement Period")
 /* End of Home */
 
 /*
@@ -5736,15 +5721,8 @@ define "Home Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Other E.DE70":
-  exists "Other E.DE70 Condition"
-    or exists "Other E.DE70 Observation"
-define "Other E.DE70 Condition":
-  Elements."Other E.DE70 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Other E.DE70 Observation":
-  Elements."Other E.DE70 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Other E.DE70" P
+  where P.performed.toInterval() during "Measurement Period")
 /* End of Other E.DE70 */
 
 /*
@@ -5804,9 +5782,7 @@ define "Age of infant in years":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV-exposed infant or child E.DE112":
-  exists "HIV-exposed infant or child E.DE112 Observation"
-define "HIV-exposed infant or child E.DE112 Observation":
-  Elements."HIV-exposed infant or child E.DE112 Observation" O
+  exists Elements."HIV-exposed infant or child E.DE112" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of HIV-exposed infant or child E.DE112 */
 
