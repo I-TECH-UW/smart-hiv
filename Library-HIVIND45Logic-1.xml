@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="49">
+         <a:s>/**
+ * Library: HIV.IND.45 Logic
+ * Ref No: TBH.2
+ * Short Name: TPT completion
+ *
+ * Definition: Number and % of people living with HIV on ART who completed a course of TB preventive treatment among those who initiated TPT
+ *
+ * Numerator: Number of ART patients who completed a course of TPT during the reporting period
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True AND &quot;TB preventive treatment (TPT) start date&quot; in the previous period AND &quot;TB preventive treatment (TPT) status&quot;='Completed'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of ART patients who initiated any course of TPT during the previous reporting period
+ * Denominator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True AND &quot;TB preventive treatment (TPT) start date&quot; in the prior reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*) 
+ *  • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)** 
+ *  • Type of TPT regimen 
+ *  • ART initiation (&lt;12 months on ART, 12+ months on ART) 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
+ * Disaggregation Elements: Gender | Age | TPT regimen type | ART start date (&lt;12 months on ART, ≥12 months on ART)
+ *
+ * Numerator and Denominator Elements:
+ * HIV status 
+ *  On ART 
+ *  TB preventive treatment (TPT) start date 
+ *  TB preventive treatment (TPT) status
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative
+ * HIV.B.DE118: Unknown | Client has unknown HIV status
+ * HIV.D.DE38: On ART | Client is currently taking ART
+ * HIV.D.DE39: ART start date | The date on which the client started or restarted ART
+ * HIV.D.DE954: TB preventive treatment (TPT) start date | The date on which the client began taking TPT
+ * HIV.D.DE1028: TPT regimen type | Type of TPT regimen the client is currently on
+ * HIV.D.DE1029: 3HP | The client's current TPT regimen is 3HP
+ * HIV.D.DE1030: 1HP | The client's current TPT regimen is 1HP
+ * HIV.D.DE1031: 6H | The client's current TPT regimen is 6H
+ * HIV.D.DE1032: Six months of levofloxacin daily | The client's current TPT regimen is six months of levofloxacin daily
+ * HIV.D.DE1033: Other TB preventive treatment (TPT) regimen | The client's current TPT regimen is another regimen than those listed above
+ * HIV.D.DE1034: TB preventive treatment (TPT) status | Indicates the current status of TB preventive treatment (TPT)
+ * HIV.D.DE1035: Not started | The client did not start the TB preventive treatment (TPT)
+ * HIV.D.DE1036: On TPT | The client started the TB preventive treatment (TPT) and is currently taking the medication, without treatment interruptions
+ * HIV.D.DE1037: On TPT with interruptions | The client started the TB preventive treatment (TPT) and is currently taking the medication, with treatment interruptions
+ * HIV.D.DE1038: On hold | The health care worker has temporarily stopped the TB preventive treatment (TPT), but TPT is expected to continue again later. May also be called &quot;suspended&quot;.
+ * HIV.D.DE1039: Completed | TB preventive treatment (TPT) was completed
+ * HIV.H.DE47: On ART | Client is currently taking ART 
+ * HIV.SRV.DE6: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the effectiveness of scaled-up TPT programmes by assessing the proportion of patients who completed the recommended course of TPT.
+ * - rationale: • Many countries have made progress in initiating eligible people living with HIV on TPT. However, rates of TPT completion remain poor or unknown. | • Assessment of TPT completion is a critical element of the TB/HIV cascade of services.
+ * - method: For the numerator and denominator: Programme records (for example, ART registers) |  | Defining &quot;previous reporting period&quot;: For example, for annual reporting of January to December 2021, the previous reporting period is January to December 2020 (except for programmes with 1HP-exclusive national guidelines and implementation, in which case they may use January to December 2021). For quarterly or semi-annual reporting to the national level, the previous reporting period will depend on the TPT regimen and duration defined by national guidelines. |  | Note: For programmes using continuous isoniazid preventive therapy (IPT), TPT completion is defined as six months of treatment. | 
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND45Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND45Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="75:1-75:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="77:1-77:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="78:1-78:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="80:1-80:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="82:1-82:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="83:1-83:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="12" locator="85:1-85:88" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="11">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="10">
+                     <a:s>Date</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="9">
+                  <a:s r="7">Interval[@2023-01-01, @2023-01-30]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="9" locator="85:55-85:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="7" locator="85:64-85:74" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </low>
+            <high localId="8" locator="85:77-85:87" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="11" locator="85:32-85:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="85:41-85:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="87:1-87:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="87:1-87:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="87:1-87:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="14" locator="99:1-100:6" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s r="13">/**
+ * Indicator Definition
+ */ 
+
+/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="100:3-100:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="24" locator="109:1-110:123" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="24">
+               <a:s>/**
+ * Numerator
+ * 
+ * Definition: Number of ART patients who completed a course of TPT during the reporting period
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True AND &quot;TB preventive treatment (TPT) start date&quot; in the previous period AND &quot;TB preventive treatment (TPT) status&quot;='Completed'
+ */
+
+define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="23">
+                  <a:s r="19">
+                     <a:s r="16">
+                        <a:s r="15">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="16">
+                           <a:s>&quot;HIV-positive B.DE116&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> and </a:s>
+                     <a:s r="18">
+                        <a:s r="17">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="18">
+                           <a:s>&quot;On ART&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="22">
+                     <a:s>exists</a:s>
+                     <a:s r="21">
+                        <a:s>(</a:s>
+                        <a:s r="21">
+                           <a:s r="20">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="21">
+                              <a:s>&quot;TB preventive treatment TPT completed in measurement period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="23" locator="110:3-110:123" xsi:type="And">
+            <operand localId="19" locator="110:3-110:45" xsi:type="And">
+               <operand localId="16" locator="110:3-110:28" name="HIV-positive B.DE116" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <operand localId="18" locator="110:34-110:45" name="On ART" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="22" locator="110:51-110:123" xsi:type="Exists">
+               <operand localId="21" locator="110:57-110:123" name="TB preventive treatment TPT completed in measurement period" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="34" locator="119:1-120:124" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>/**
+ * Denominator
+ *
+ * Definition: Number of ART patients who initiated any course of TPT during the previous reporting period
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True AND &quot;TB preventive treatment (TPT) start date&quot; in the prior reporting period
+ */
+
+define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="33">
+                  <a:s r="29">
+                     <a:s r="26">
+                        <a:s r="25">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="26">
+                           <a:s>&quot;HIV-positive B.DE116&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> and </a:s>
+                     <a:s r="28">
+                        <a:s r="27">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="28">
+                           <a:s>&quot;On ART&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="32">
+                     <a:s>exists</a:s>
+                     <a:s r="31">
+                        <a:s>(</a:s>
+                        <a:s r="31">
+                           <a:s r="30">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="31">
+                              <a:s>&quot;TB preventive treatment TPT start date in measurement period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="33" locator="120:3-120:124" xsi:type="And">
+            <operand localId="29" locator="120:3-120:45" xsi:type="And">
+               <operand localId="26" locator="120:3-120:28" name="HIV-positive B.DE116" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <operand localId="28" locator="120:34-120:45" name="On ART" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="32" locator="120:51-120:124" xsi:type="Exists">
+               <operand localId="31" locator="120:57-120:124" name="TB preventive treatment TPT start date in measurement period" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="37" locator="135:1-136:42" name="Administrative Gender Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="37">
+               <a:s>/* end Populations */
+
+/*
+ * Disaggregation
+ *
+ *  • Gender (female, male, other*) 
+ *  • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)** 
+ *  • Type of TPT regimen 
+ *  • ART initiation (&lt;12 months on ART, 12+ months on ART) 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	</a:s>
+               <a:s r="36">
+                  <a:s r="35">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="36">
+                     <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="36" locator="136:2-136:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="40" locator="138:1-139:25" name="Age Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="40">
+               <a:s>define &quot;Age Stratifier&quot;:
+  </a:s>
+               <a:s r="39">
+                  <a:s r="38">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="39">
+                     <a:s>&quot;By Age Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="39" locator="139:3-139:25" name="By Age Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="43" locator="141:1-142:23" name="TPT Regimen Type Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="43">
+               <a:s>define &quot;TPT Regimen Type Stratifier&quot;:
+  </a:s>
+               <a:s r="42">
+                  <a:s r="41">
+                     <a:s>HE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="42">
+                     <a:s>&quot;TPT regimen type&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="42" locator="142:3-142:23" name="TPT regimen type" libraryName="HE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="46" locator="144:1-145:25" name="ART Initiation Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="46">
+               <a:s>define &quot;ART Initiation Stratifier&quot;:
+  </a:s>
+               <a:s r="45">
+                  <a:s r="44">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="45">
+                     <a:s>&quot;By ART initiation&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="45" locator="145:3-145:25" name="By ART initiation" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="49" locator="147:1-148:39" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="49">
+               <a:s>define &quot;Geographic Region Stratifier&quot;:
+  </a:s>
+               <a:s r="48">
+                  <a:s r="47">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="48">
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="48" locator="148:3-148:39" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>

@@ -27,7 +27,7 @@ include HIVConcepts called HCx
 include HIVConfig called Config
 include HIVEncounterElements called Elements
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
+
 include WHOCommon called WCom
 // Included for PlanDefinition
 include WHOConcepts called WCx

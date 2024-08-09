@@ -4,7 +4,7 @@ using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-//include FHIRCommon called FC
+//
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
 include HIVElements called HE
@@ -45,7 +45,7 @@ define "Elevated Viral load test during Measurement Period":
   HE."Viral load test result D.DE387" VL
     with "viral load sample collection" P 
     such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
-    where VL.value > 1000 'copies/ml'
+    where VL.value > 1000 
     sort by start of effective.toInterval()
 
 
@@ -136,24 +136,6 @@ define "By Age Stratifier 3":
 /*
  * By state stratifier
  */
-
-define "By Geographic Region Stratifier":
-    First(Patient.address A where A.use in { 'home' }).state
-
-/*
- * By Administrative Gender of Patient Stratifier
- * Need to expand codes
- */
-
-define "By Administrative Gender Stratifier":
-    case 
-        when Patient.gender = 'male' then HC."Male"
-        when Patient.gender = 'female' then HC."Female"
-        when Patient.gender = 'transgender female' then HC."Transgender female"
-        when Patient.gender = 'transgender male' then HC."Transgender male"
-        else HC."Other - HIV.A.DE23"
-    end
-
 
   define "HIV status of partner or contact":
     case 
@@ -918,7 +900,4 @@ define "VMMC_adverse_event_Postoperative":
     [Procedure] P
   where P.status = 'completed'
   and P.code ~ HC."STI testing and treatment services"
-
-
-
 

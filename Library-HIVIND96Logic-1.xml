@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="18">
+         <a:s>/**
+ * Library: HIV.IND.96 Logic
+ * Ref No: CCA.4
+ * Short Name: Cervical cancer survival
+ *
+ * Definition: Crude probability of surviving 1 year after a diagnosis of cervical cancer
+ *
+ * Numerator: Number of women living with HIV still alive 12 months after receiving a diagnosis of invasive cervical cancer
+ * Numerator Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; in previous 12 month reporting period
+ * Numerator Exclusions: &quot;Date of death&quot; less than 12 months after &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; for &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer'
+ *
+ * Denominator: Number of women living with HIV who received a diagnosis of invasive cervical cancer within a 12-month cohort observation period
+ * Denominator Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; in previous 12 month reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Age (15–19, 20–24, 25–29, 30–49, 50+ years) 
+ *  • Cervical cancer stage at diagnosis (0, I, II, III, IV) 
+ *  • Cities and other administrative areas of epidemiologic importance
+ *
+ * Disaggregation Elements: Age | Cervical cancer stage at diagnosis
+ *
+ * Numerator and Denominator Elements:
+ * Cervical cancer diagnosis 
+ *  Date of diagnosis of cervical precancer lesions or invasive cervical cancer 
+ *  HIV status
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative
+ * HIV.B.DE118: Unknown | Client has unknown HIV status
+ * HIV.D.DE705: Date of diagnosis of cervical precancer lesions or invasive cervical cancer | Date of diagnosis of cervical precancer lesions or invasive cervical cancer
+ * HIV.D.DE709: Cervical cancer diagnosis | Type of cervical cancer diagnosis
+ * HIV.D.DE710: Cervical precancer lesions | Client is diagnosed with cervical precancer lesions
+ * HIV.D.DE711: Invasive cervical cancer | Client is diagnosed with invasive cervical cancer disease
+ * HIV.D.DE712: Cervical cancer stage at diagnosis | Cervical cancer stage at diagnosis of cervical cancer
+ * HIV.D.DE713: Stage 0 | Stage 0 cervical cancer at diagnosis of cervical cancer
+ * HIV.D.DE714: Stage I | Stage I cervical cancer at diagnosis of cervical cancer
+ * HIV.D.DE715: Stage II | Stage II cervical cancer at diagnosis of cervical cancer
+ * HIV.D.DE716: Stage III | Stage III cervical cancer at diagnosis of cervical cancer
+ * HIV.D.DE717: Stage IV | Stage IV cervical cancer at diagnosis of cervical cancer
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the effectiveness of cervical cancer treatment for women diagnosed with cervical cancer.
+ * - rationale: • Surveillance of cervical cancer survival among women living with HIV is essential in monitoring the access and effectiveness of treatment and follow-up to support the needs of cancer survivors. Adequate and complete follow-up is a prerequisite to conducting a survival study. | • It is calculated by assessing the percentage of women living with HIV who were diagnosed with invasive cervical cancer who were still alive 12 months after their cervical cancer diagnosis. It excludes those who were not followed for the 12-month period. In places with good retention and follow-up, 5-year survival can also be calculated, including only those individuals under observation with complete follow-up five years after their diagnosis of cervical cancer.
+ * - method: This indicator uses a cohort analysis to measure the proportion of women living with HIV who are still alive 12 months after their diagnosis with cervical cancer. |  | The source of data is Individual-level data obtained from programme records.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND96Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND96Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="58:1-58:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="60:1-60:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="61:1-61:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="63:1-63:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="10" locator="66:1-66:88" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>// Indicator Definition
+parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="9">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="8">
+                     <a:s>Date</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="7">
+                  <a:s r="5">Interval[@2023-01-01, @2023-01-30]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="7" locator="66:55-66:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="5" locator="66:64-66:74" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </low>
+            <high localId="6" locator="66:77-66:87" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="9" locator="66:32-66:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="8" locator="66:41-66:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="68:1-68:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="68:1-68:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="68:1-68:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="12" locator="75:1-76:6" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s r="11">/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="11" locator="76:3-76:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="14" locator="85:1-86:6" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s r="13">/**
+ * Numerator
+ * 
+ * Definition: Number of women living with HIV still alive 12 months after receiving a diagnosis of invasive cervical cancer
+ * Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; in previous 12 month reporting period
+ */
+
+define &quot;Numerator&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="86:3-86:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="16" locator="94:1-95:7" name="Numerator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s r="15">/**
+ * Numerator Exclusions
+ *
+ * Calculation: &quot;Date of death&quot; less than 12 months after &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; for &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer'
+ */
+    
+define &quot;Numerator Exclusions&quot;:
+  false</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="15" locator="95:3-95:7" valueType="t:Boolean" value="false" xsi:type="Literal"/>
+      </def>
+      <def localId="18" locator="104:1-105:6" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="18">
+               <a:s r="17">/**
+ * Denominator
+ *
+ * Definition: Number of women living with HIV who received a diagnosis of invasive cervical cancer within a 12-month cohort observation period
+ * Calculation: COUNT of women with &quot;HIV status&quot;='HIV-positive' AND &quot;Cervical cancer diagnosis&quot;='Invasive cervical cancer' for a &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; in previous 12 month reporting period
+ */
+
+define &quot;Denominator&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="17" locator="105:3-105:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+   </statements>
+</library>

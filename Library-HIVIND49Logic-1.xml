@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="16">
+         <a:s>/**
+ * Library: HIV.IND.49 Logic
+ * Ref No: DFT.2
+ * Short Name: TB symptom-screened positive among new ART patients
+ *
+ * Definition: % of people living with HIV newly initiated on ART who were screened for TB symptoms and who screened positive
+ *
+ * Numerator: Number of people living with HIV newly initiated on ART who screened positive for TB symptoms
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people living with HIV newly initiated on ART during the reporting period who were screened for TB symptoms
+ * Denominator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*) 
+ *  • Age 0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)** 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
+ * Disaggregation Elements: Gender | Age
+ *
+ * Numerator and Denominator Elements:
+ * ART start date 
+ *  ART start type 
+ *  HIV status 
+ *  TB screening date 
+ *  TB screening result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative
+ * HIV.B.DE118: Unknown | Client has unknown HIV status
+ * HIV.D.DE39: ART start date | The date on which the client started or restarted ART
+ * HIV.D.DE43: ART start type | Whether the client is ART naive or is restarting ART
+ * HIV.D.DE44: First-time user of ART | Client is ART naive, having never taken ART to treat HIV before
+ * HIV.D.DE45: Restarting ART | Client is restarting ART after stopping treatment for any reason
+ * HIV.D.DE986: TB screening result | Record the result of the tuberculosis (TB) screening
+ * HIV.D.DE987: Screen positive for TB | Screening result was positive for tuberculosis (TB)
+ * HIV.D.DE988: Screen negative for TB | Screening result was negative for tuberculosis (TB)
+ * HIV.D.DE989: Inconclusive | Screening result was inconclusive for tuberculosis (TB)
+ * HIV.D.DE990: TB screening date | Date the TB screening was conducted
+ * HIV.SRV.DE6: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the percentage of people living with HIV newly initiated on ART and screened for symptoms of active TB disease who screen positive.
+ * - rationale: • Routine TB screening among people living with HIV newly initiated on ART and those who are already on ART is essential to identifying presumptive TB cases in need of confirmatory diagnostic testing and to determine eligibility for TPT if active TB disease is ruled out. | • Screening positivity rates vary based on background TB prevalence and other epidemiological and environmental factors. However, low screening positivity rates can signal inadequate or poor-quality TB screening, particularly in high burden settings. | • It is important to understand the cascade from ART enrolment to treatment of active | TB disease; this indicator will highlight obstacles between ART enrolment and screening for TB symptoms. | • This is the second of five &quot;screening cascade&quot; indicators considered priority for high burden TB/HIV settings.
+ * - method: &quot;Newly initiated&quot; is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period. |  | For the numerator and denominator: Programme records (for example, ART registers, EMR)
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND49Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND49Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="67:1-67:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="69:1-69:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="70:1-70:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="72:1-72:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="10" locator="75:1-75:88" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="10">
+               <a:s>// Indicator Definition
+parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="9">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="8">
+                     <a:s>Date</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="7">
+                  <a:s r="5">Interval[@2023-01-01, @2023-01-30]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="7" locator="75:55-75:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="5" locator="75:64-75:74" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </low>
+            <high localId="6" locator="75:77-75:87" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="9" locator="75:32-75:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="8" locator="75:41-75:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="77:1-77:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="77:1-77:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="77:1-77:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="12" locator="84:1-85:6" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s r="11">/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="11" locator="85:3-85:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="14" locator="94:1-95:6" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s r="13">/**
+ * Numerator
+ * 
+ * Definition: Number of people living with HIV newly initiated on ART who screened positive for TB symptoms
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB'
+ */
+
+define &quot;Numerator&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="95:3-95:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="16" locator="105:1-106:6" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="16">
+               <a:s r="15">/**
+ * Denominator
+ *
+ * Definition: Number of people living with HIV newly initiated on ART during the reporting period who were screened for TB symptoms
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period
+ */
+
+define &quot;Denominator&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="15" locator="106:3-106:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+   </statements>
+</library>

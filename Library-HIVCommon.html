@@ -296,10 +296,10 @@
   <table class="colsd">
 
     <tr>
-      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/HIV/Library/HIVCommon<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVCommon"/></span>
+      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/hiv/Library/HIVCommon<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVCommon"/></span>
       </td>
       <td><i>Version</i>:
-      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVCommon|0.2.0"/></span>
+      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVCommon|0.2.0"/></span>
       </td>
     </tr>
 
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-02
+            as of 2024-08-09
           
         
       </td>
@@ -349,13 +349,13 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HC</td><td><a href="Library-HIVConcepts.html">HIVConcepts</a></td></tr><tr><td>Depends On</td><td>Library HCC</td><td><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorElements</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
 
 using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-//include FHIRCommon called FC
+//
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
 include HIVElements called HE
@@ -396,7 +396,7 @@ define &quot;Elevated Viral load test during Measurement Period&quot;:
   HE.&quot;Viral load test result D.DE387&quot; VL
     with &quot;viral load sample collection&quot; P 
     such that VL.partOf.references(P) and P.performed.toInterval() during &quot;Measurement Period&quot;
-    where VL.value &gt; 1000 'copies/ml'
+    where VL.value &gt; 1000 
     sort by start of effective.toInterval()
 
 
@@ -487,24 +487,6 @@ define &quot;By Age Stratifier 3&quot;:
 /*
  * By state stratifier
  */
-
-define &quot;By Geographic Region Stratifier&quot;:
-    First(Patient.address A where A.use in { 'home' }).state
-
-/*
- * By Administrative Gender of Patient Stratifier
- * Need to expand codes
- */
-
-define &quot;By Administrative Gender Stratifier&quot;:
-    case 
-        when Patient.gender = 'male' then HC.&quot;Male&quot;
-        when Patient.gender = 'female' then HC.&quot;Female&quot;
-        when Patient.gender = 'transgender female' then HC.&quot;Transgender female&quot;
-        when Patient.gender = 'transgender male' then HC.&quot;Transgender male&quot;
-        else HC.&quot;Other - HIV.A.DE23&quot;
-    end
-
 
   define &quot;HIV status of partner or contact&quot;:
     case 
@@ -1270,10 +1252,7 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
   where P.status = 'completed'
   and P.code ~ HC.&quot;STI testing and treatment services&quot;
 
-
-
-
-</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
+</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 1004Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -1298,7 +1277,7 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 2, 2024 14:11+0000">2024-08-02</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 9, 2024 22:35+0000">2024-08-09</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
