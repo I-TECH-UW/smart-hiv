@@ -86,6 +86,8 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -107,9 +109,17 @@ define "Initial Population":
  * Calculation: COUNT of clients with "HIV status"='HIV-positive' AND "TB screening date" in the reporting period AND "TB screening result"='Screen positive for TB' AND "TB diagnostic test category"='mWRD test for TB'
  */
 
-define "Numerator":
-  true
 
+
+define "Numerator":
+  HIE."HIV-positive B.DE116"
+  and 
+  exists(
+    HE."mWRD test for TB" P
+    with HE."Screen positive for TB" O
+      such that P.partOf.references(O)
+    where P.performed.toInterval() during "Measurement Period"
+  )
 
 /**
  * Denominator
@@ -119,8 +129,38 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."HIV-positive B.DE116"
+  and 
+  exists(
+    HE."TB diagnostic test category" P
+    with HE."Screen positive for TB" O
+      such that P.partOf.references(O)
+    where P.performed.toInterval() during "Measurement Period"
+  )
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')
+
+//add Pregnant or breastfeeding women 
