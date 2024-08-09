@@ -66,7 +66,7 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
+
 include WHOCommon called WCom
 include HIVElements called HE
 include HIVIndicatorElements called HIE
@@ -100,7 +100,7 @@ define "Numerator":
   and HIE."Health facility"
   and exists(
     HIE."Viral load test result D.DE387" VL
-    with HE."viral load sample collection" P 
+    with HIC."viral load sample collection" P 
     such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
     where VL.value < 1000
     )
@@ -119,7 +119,7 @@ define "Denominator":
   and HIE."Health facility"
   and exists(
     HIE."Viral load test result D.DE387" VL
-    with HE."viral load sample collection" P 
+    with HIC."viral load sample collection" P 
     such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
     )
 

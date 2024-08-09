@@ -501,12 +501,6 @@ define "HIV test conducted Observation":
 @description: Type of HIV test
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV test type B.DE81":
-  exists "HIV test type B.DE81 Observation"
-define "HIV test type B.DE81 Observation":
-  Elements."HIV test type B.DE81 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
 /* End of HIV test type B.DE81 */
 
 /*
@@ -515,16 +509,7 @@ define "HIV test type B.DE81 Observation":
 @description: Antibody test for HIV performed with a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Rapid diagnostic test for HIV B.DE82":
-  exists "Rapid diagnostic test for HIV B.DE82 Condition"
-    or exists "Rapid diagnostic test for HIV B.DE82 Observation"
-define "Rapid diagnostic test for HIV B.DE82 Condition":
-  Elements."Rapid diagnostic test for HIV B.DE82 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Rapid diagnostic test for HIV B.DE82 Observation":
-  Elements."Rapid diagnostic test for HIV B.DE82 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+
 /* End of Rapid diagnostic test for HIV B.DE82 */
 
 /*
@@ -533,16 +518,7 @@ define "Rapid diagnostic test for HIV B.DE82 Observation":
 @description: Antibody test for HIV performed with an enzyme immunoassay
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Enzyme immunoassay for HIV B.DE83":
-  exists "Enzyme immunoassay for HIV B.DE83 Condition"
-    or exists "Enzyme immunoassay for HIV B.DE83 Observation"
-define "Enzyme immunoassay for HIV B.DE83 Condition":
-  Elements."Enzyme immunoassay for HIV B.DE83 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Enzyme immunoassay for HIV B.DE83 Observation":
-  Elements."Enzyme immunoassay for HIV B.DE83 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+
 /* End of Enzyme immunoassay for HIV B.DE83 */
 
 /*
@@ -551,16 +527,7 @@ define "Enzyme immunoassay for HIV B.DE83 Observation":
 @description: Virological test, which includes testing for early infant diagnosis
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Nucleic acid test for HIV B.DE84":
-  exists "Nucleic acid test for HIV B.DE84 Condition"
-    or exists "Nucleic acid test for HIV B.DE84 Observation"
-define "Nucleic acid test for HIV B.DE84 Condition":
-  Elements."Nucleic acid test for HIV B.DE84 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Nucleic acid test for HIV B.DE84 Observation":
-  Elements."Nucleic acid test for HIV B.DE84 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+
 /* End of Nucleic acid test for HIV B.DE84 */
 
 /*
@@ -569,16 +536,7 @@ define "Nucleic acid test for HIV B.DE84 Observation":
 @description: Antibody test for HIV and syphilis performed with a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Dual HIV/syphilis rapid diagnostic test B.DE85":
-  exists "Dual HIV/syphilis rapid diagnostic test B.DE85 Condition"
-    or exists "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation"
-define "Dual HIV/syphilis rapid diagnostic test B.DE85 Condition":
-  Elements."Dual HIV/syphilis rapid diagnostic test B.DE85 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
-  Elements."Dual HIV/syphilis rapid diagnostic test B.DE85 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+
 /* End of Dual HIV/syphilis rapid diagnostic test B.DE85 */
 
 /*
@@ -587,16 +545,7 @@ define "Dual HIV/syphilis rapid diagnostic test B.DE85 Observation":
 @description: Antibody test for HIV performed by self-tester using a rapid diagnostic
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "HIV self-test":
-  exists "HIV self-test Condition"
-    or exists "HIV self-test Observation"
-define "HIV self-test Condition":
-  Elements."HIV self-test Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "HIV self-test Observation":
-  Elements."HIV self-test Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+
 /* End of HIV self-test */
 
 /*
@@ -3834,13 +3783,8 @@ define "On ART D.DE38":
 @description: The date on which the client started or restarted ART
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "ART start date D.DE39":
-  Elements."ART start date D.DE39" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
-define "ART start date D.DE39 Value":
-  "ART start date D.DE39" O
-  return O.value
+
+
 /* End of ART start date D.DE39 */
 
 /*

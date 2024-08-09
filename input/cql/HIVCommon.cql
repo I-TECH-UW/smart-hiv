@@ -4,7 +4,7 @@ using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-//include FHIRCommon called FC
+//
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
 include HIVElements called HE
@@ -900,7 +900,4 @@ define "VMMC_adverse_event_Postoperative":
     [Procedure] P
   where P.status = 'completed'
   and P.code ~ HC."STI testing and treatment services"
-
-
-
 

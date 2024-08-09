@@ -14459,7 +14459,6 @@ define "STI services":
 @activity: HIV.B6 Capture or update client history
 @description: Client accessed voluntary medical male circumcision (VMMC) services
 */
-
 define "VMMC":
   [Procedure] P
   where P.status = 'completed'
