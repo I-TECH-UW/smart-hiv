@@ -793,25 +793,23 @@ define "Date informed of HIV-positive diagnosis Value":
 @activity: HIV.B7 Test for HIV using testing algorithm
 */
 define "HIV test":
-  [ServiceRequest: Concepts."HIV test type - HIV.B.DE81 Choices"] SR
-  where SR.status in { 'active', 'completed' }
+  [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
+  where O.status in { 'final', 'amended', 'corrected' }
 
 define "Non-Self HIV test":
-  "HIV test" SR
-  where SR.code !~ Concepts."HIV self-test"
+  "HIV test" O
+  where O.code !~ Concepts."HIV self-test"
 
-define "HIV test result DiagnosticReport":
-  [DiagnosticReport: Concepts."HIV test type - HIV.B.DE81 Choices"] DR
-  with "HIV test" SR
-    such that DR.basedOn.references(SR)
-  where DR.status in { 'final', 'amended', 'corrected' }
+// define "HIV test result DiagnosticReport":
+//   [DiagnosticReport: Concepts."HIV test type - HIV.B.DE81 Choices"] DR
+//   with "HIV test" SR
+//     such that DR.basedOn.references(SR)
+//   where DR.status in { 'final', 'amended', 'corrected' }
 
 
-define "HIV test result Observation":
-  [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
-  with "HIV test result DiagnosticReport" DR
-    such that DR.result.references(O)
-  where O.status in { 'final', 'amended', 'corrected' }
+// define "HIV test result Observation":
+//   [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
+//   where O.status in { 'final', 'amended', 'corrected' }
 /*
 @dataElement: HIV.B.DE71 - HIV diagnosis date
 @activity: HIV.B8 Provide post-test counselling

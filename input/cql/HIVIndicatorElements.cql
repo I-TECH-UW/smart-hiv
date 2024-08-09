@@ -949,12 +949,9 @@ define "HIV self-test Observation":
 @description: Date of the HIV test
 */
 define "HIV test date and results returned within measurement period":
-  Elements."Non-Self HIV test" SR
-  with [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
-    such that O.basedOn.references(SR)
-    and O.effective.toInterval() during "Measurement Period"
-    and O.status in { 'final', 'amended', 'corrected' }
-  where SR.occurrence.toInterval() during "Measurement Period"
+  Elements."Non-Self HIV test" O
+  where start of O.effective.toInterval() during "Measurement Period"
+    and O.issued during "Measurement Period"
 
 /* End of HIV test date B.DE110 */
 
@@ -976,13 +973,9 @@ define "HIV test result B.DE111 Observation":
 @description: Test result is HIV-positive
 */
 define "HIV test date and results returned within measurement period for HIV-positive result":
-  Elements."Non-Self HIV test" SR
-  with [Observation: Concepts."HIV test type - HIV.B.DE81 Choices"] O
-    such that O.basedOn.references(SR)
-    and O.effective.toInterval() during "Measurement Period"
-    and O.status in { 'final', 'amended', 'corrected' }
-  where SR.occurrence.toInterval() during "Measurement Period"
-
+  "HIV test date and results returned within measurement period" O
+    where O.value ~ Concepts."HIV-positive - HIV.B.DE112"
+  
 /* End of HIV-positive B.DE112 */
 
 /*

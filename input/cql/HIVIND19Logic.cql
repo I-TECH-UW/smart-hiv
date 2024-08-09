@@ -97,16 +97,14 @@ context Patient
  */
 define "Initial Population":
   true
+  
+define "numerator":
+	Count(HIE."HIV test date and results returned within measurement period for HIV-positive result")
 
-define function "Measure Numerator Observation"(Patient "Patient"):
-  Count(HIE."HIV test date and results returned within measurement period for HIV-positive result")
+define "denominator":
+	Count(HIE."HIV test date and results returned within measurement period")
 
 
-define function "Measure Denominator Observation"(Patient "Patient"):
-  Count(HIE."HIV test date and results returned within measurement period")
-
-
-// define "numerator":
 //     exists(HE."HIV Positive Condition" C
 // 	where C.onset during "Measurement Period")
 // 	or 
