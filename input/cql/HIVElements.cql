@@ -643,8 +643,8 @@ define "Key population member type Observation":
 @description: Client is a sex worker
 */
 define "Sex worker":
-  exists("Key population member type Observation" O
-    where O.value ~ Concepts."Sex worker - HIV.B.DE51")
+  "Key population member type Observation" O
+    where O.value ~ Concepts."Sex worker - HIV.B.DE51"
 /* End of Sex worker B.DE51 */
 
 /*
@@ -653,9 +653,9 @@ define "Sex worker":
 @description: Client is a man who has sex with men
 */
 define "Men who have sex with men":
-  exists("Key population member type Observation" O
+  "Key population member type Observation" O
     where O.value ~ Concepts."Men who have sex with men"
-  )
+  
 /* End of Men who have sex with men */
 
 /*
@@ -664,9 +664,9 @@ define "Men who have sex with men":
 @description: Client identifies as trans and gender-diverse
 */
 define "Trans and gender-diverse people":
-  exists("Key population member type Observation" O
+  "Key population member type Observation" O
     where O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53"
-  )
+  
 /* End of Trans and gender-diverse people B.DE53 */
 
 /*
@@ -675,9 +675,9 @@ define "Trans and gender-diverse people":
 @description: Client is a person who injects drugs
 */
 define "People who inject drugs":
-  exists("Key population member type Observation" O
+  "Key population member type Observation" O
     where O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
-  )
+  
 /* End of People who inject drugs B.DE54 */
 
 /*
@@ -686,8 +686,8 @@ define "People who inject drugs":
 @description: Client lives in a prison or another closed setting
 */
 define "People living in prisons and other closed settings":
-  exists("Key population member type Observation" O
-    where O.value ~ Concepts."People living in prisons and other closed settings")
+  "Key population member type Observation" O
+    where O.value ~ Concepts."People living in prisons and other closed settings"
 /* End of People living in prisons and other closed settings */
 
 /*
@@ -695,13 +695,9 @@ define "People living in prisons and other closed settings":
 @activity: HIV.B6 Capture or update client history
 @description: Date HIV test result returned to client
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Date HIV test results returned":
-  [Observation: Concepts."Date HIV test results returned"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date HIV test results returned Value":
-  "Date HIV test results returned" O
-  return O.value
+  "HIV test" O
+  return O.issued
 /* End of Date HIV test results returned */
 
 /*
@@ -840,13 +836,12 @@ define "HIV test conducted Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Type of HIV test
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "HIV test type B.DE81 ServiceRequest":
-  "HIV test" SR
-  return SR.code
 define "HIV test type B.DE81":
   [Observation: Concepts."HIV test type - HIV.B.DE81"] O
     where O.status in { 'final', 'amended', 'corrected' }
+define "HIV test type B.DE81 Value":
+  "HIV test type B.DE81" O
+  return O.value
 /* End of HIV test type B.DE81 */
 
 /*
@@ -857,8 +852,7 @@ define "HIV test type B.DE81":
 
 define "Rapid diagnostic test for HIV B.DE82":
   "HIV test type B.DE81" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
+      where O.value ~ Concepts."Rapid diagnostic test for HIV - HIV.B.DE82"
 /* End of Rapid diagnostic test for HIV B.DE82 */
 
 /*
@@ -869,8 +863,7 @@ define "Rapid diagnostic test for HIV B.DE82":
 
 define "Enzyme immunoassay for HIV B.DE83":
   "HIV test type B.DE81" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Enzyme immunoassay for HIV - HIV.B.DE83"
+      where O.value ~ Concepts."Enzyme immunoassay for HIV - HIV.B.DE83"
 /* End of Enzyme immunoassay for HIV B.DE83 */
 
 /*
@@ -878,11 +871,9 @@ define "Enzyme immunoassay for HIV B.DE83":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Virological test, which includes testing for early infant diagnosis
 */
-
 define "Nucleic acid test for HIV B.DE84":
   "HIV test type B.DE81" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Nucleic acid test for HIV - HIV.B.DE84"
+      where O.value ~ Concepts."Nucleic acid test for HIV - HIV.B.DE84"
 /* End of Nucleic acid test for HIV B.DE84 */
 
 /*
@@ -893,8 +884,7 @@ define "Nucleic acid test for HIV B.DE84":
 
 define "Dual HIV/syphilis rapid diagnostic test B.DE85":
   "HIV test type B.DE81" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Dual HIV/syphilis rapid diagnostic test - HIV.B.DE85"
+      where O.value ~ Concepts."Dual HIV/syphilis rapid diagnostic test - HIV.B.DE85"
 /* End of Dual HIV/syphilis rapid diagnostic test B.DE85 */
 
 /*
@@ -905,8 +895,7 @@ define "Dual HIV/syphilis rapid diagnostic test B.DE85":
 
 define "HIV self-test":
   "HIV test type B.DE81" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV self-test"
+      where O.value ~ Concepts."HIV self-test"
 /* End of HIV self-test */
 
 /*
@@ -1299,10 +1288,9 @@ define "HIV test result Value":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-positive
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Is HIV-positive test result":
-  "HIV test result Value" V
-    where V ~ Concepts."HIV-positive - HIV.B.DE112"
+define "HIV-positive test result":
+  "HIV test result Observation" O
+    where O.value ~ Concepts."HIV-positive - HIV.B.DE112"
 /* End of HIV-positive B.DE112 */
 
 /*
@@ -1310,9 +1298,9 @@ define "Is HIV-positive test result":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-negative
 */
-define "Is HIV-negative test result":
-  "HIV test result Value" V
-    where V ~ Concepts."HIV-negative - HIV.B.DE113"
+define "HIV-negative test result":
+  "HIV test result Observation" O
+    where O.value ~ Concepts."HIV-negative - HIV.B.DE113"
 /* End of HIV-negative B.DE113 */
 
 /*
@@ -1320,9 +1308,9 @@ define "Is HIV-negative test result":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-inconclusive
 */
-define "Is HIV-inconclusive test result":
-  "HIV test result Value" V
-    where V ~ Concepts."HIV-inconclusive"
+define "HIV-inconclusive test result":
+  "HIV test result Observation" O
+    where O.value ~ Concepts."HIV-inconclusive"
 /* End of HIV-inconclusive */
 
 /*
@@ -5510,13 +5498,9 @@ define "ART start date D.DE39":
 @activity: HIV.D8 Capture or update client history
 @description: Date on which client stopped ART
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Date ART stopped D.DE41":
-  [Observation: Concepts."Date ART stopped - HIV.D.DE41"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date ART stopped D.DE41 Value":
-  "Date ART stopped D.DE41" O
-  return O.value
+  "On ART D.DE38" MS
+  return end of MS.effective.toInterval()
 /* End of Date ART stopped D.DE41 */
 
 /*
