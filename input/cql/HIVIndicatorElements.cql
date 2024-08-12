@@ -412,17 +412,43 @@ define "Referred through partner services Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: The client is a contact or partner of a person diagnosed with HIV (an index case)
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Partner or contact of an index case":
-  exists "Partner or contact of an index case Condition"
-    or exists "Partner or contact of an index case Observation"
-define "Partner or contact of an index case Condition":
-  Elements."Partner or contact of an index case Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Partner or contact of an index case Observation":
-  Elements."Partner or contact of an index case Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+    [Observation: Concepts."Referred through partner services"] O 
+    where O.status in { 'final', 'amended', 'corrected' }
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+    and O.code ~ Concepts."Partner or contact of an index case"
+  
+define "Drug-injecting partner":
+  [Observation: Concepts."Type of contact or partner for partner services"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Drug-injecting partner - HIV.B.DE10"
+
+define "Sexual partner":
+  [Observation: Concepts."Type of contact or partner for partner services"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Sexual partner - HIV.B.DE11" 
+
+//HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
+
+define "already known positive":
+  [Observation: Concepts."HIV status of partner or contact"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Already knew positive"
+
+define "Newly diagnosed":
+  [Observation: Concepts."HIV status of partner or contact"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Newly diagnosed"
+
+define "Negative - HIV.H.DE37":
+  [Observation: Concepts."HIV status of partner or contact"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Negative - HIV.H.DE37"
 /* End of Partner or contact of an index case */
 
 /*
@@ -745,9 +771,12 @@ define "People living in prisons and other closed settings":
 @activity: HIV.B6 Capture or update client history
 @description: Date HIV test result returned to client
 */
+define "HIV test results returned in measurement period":
+  Elements."HIV test" O
+   where O.issued during "Measurement Period"
+
 define "Has HIV test results returned in measurement period":
-  exists(Elements."Date HIV test results returned" d
-   where d during "Measurement Period")
+  exists("HIV test results returned in measurement period")
 /* End of Date HIV test results returned */
 
 /*
@@ -929,6 +958,10 @@ define "HIV Status Stratifier":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Client is HIV-positive
 */
+define "Has HIV-positive Status":
+  exists "HIV Status Positive Condition"
+  or exists "HIV Status Positive Observation"
+
 define "HIV Status Positive Condition":
   Elements."HIV Status Positive Condition" C
   where C.onset before end of "Measurement Period"
@@ -938,6 +971,7 @@ define "HIV Status Positive Observation":
   where O.issued before end of "Measurement Period"
   or O.effective.toInterval() starts before end of "Measurement Period"
 
+define "HIV test is results "
 
 /* End of HIV-positive B.DE116 */
 

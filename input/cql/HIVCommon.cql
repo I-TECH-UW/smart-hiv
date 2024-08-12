@@ -221,43 +221,7 @@ define function "DosesPerDay"(frequency Code):
 
 
 
-  define "Partner or contact of an index case":
-    [Observation: Concepts."Referred through partner services"] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.code ~ Concepts."Partner or contact of an index case"
   
-  define "Drug-injecting partner":
-    [Observation: Concepts."Type of contact or partner for partner services"] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.code ~ Concepts."Drug-injecting partner - HIV.B.DE10"
-  
-  define "Sexual partner":
-    [Observation: Concepts."Type of contact or partner for partner services"] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.code ~ Concepts."Sexual partner - HIV.B.DE11" 
-  
-  //HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
-
-  define "already known positive":
-    [Observation: Concepts."HIV status of partner or contact"] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.code ~ Concepts."Already knew positive"
-  
-  define "Newly diagnosed":
-    [Observation: Concepts."HIV status of partner or contact"] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.code ~ Concepts."Newly diagnosed"
-
-  define "Negative - HIV.H.DE37":
-    [Observation: Concepts."HIV status of partner or contact"] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
-    and O.code ~ Concepts."Negative - HIV.H.DE37"
   
 
 

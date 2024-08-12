@@ -83,7 +83,7 @@ context Patient
 */
 
 define "Measure Population":
-   HIE."HIV-positive B.DE116"
+   HIE."Has HIV-positive Status"
    and HIE."On ART H.DE47"
    and not HIE."Death documented"
    and not HIE."Transferred out"
