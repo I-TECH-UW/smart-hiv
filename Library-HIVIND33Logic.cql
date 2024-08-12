@@ -78,7 +78,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
@@ -103,10 +102,10 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."HIV-positive B.DE116"
+  HIE."Has HIV-positive Status"
   and HIE."On ART H.DE47"
-   and (date from start of HIC."First On ART".effective.toInterval() during "Measurement Period")
-   and (months between (start of First(HIC."Viral load tests received after ART intitiation").issued.toInterval()) and (date from start of HIC."First On ART".effective.toInterval()) < 6 months)
+   and (date from start of HE."First On ART".effective.toInterval() during "Measurement Period")
+   and (months between (start of First(HE."Viral load tests received after ART intitiation").issued.toInterval()) and (date from start of HE."First On ART".effective.toInterval()) < 6 months)
 
 
 /**
@@ -117,9 +116,9 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116"
+  HIE."Has HIV-positive Status"
   and HIE."On ART H.DE47"
-   and (date from start of HIC."First On ART".effective.toInterval() during "Measurement Period")
+   and (date from start of HE."First On ART".effective.toInterval() during "Measurement Period")
     
 
 /* end Populations */
@@ -138,10 +137,10 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(HIE.patientGroups, ':')

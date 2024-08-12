@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-09
+            as of 2024-08-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND28Logic</b></p><a name="HIVIND28Logic"> </a><a name="hcHIVIND28Logic"> </a><a name="HIVIND28Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorElements</code></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Treatment outcome category Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND28Logic</b></p><a name="HIVIND28Logic"> </a><a name="hcHIVIND28Logic"> </a><a name="HIVIND28Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Treatment outcome category Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.28 Logic
  * Ref No: ART.2
  * Short Name: Total attrition from ART
@@ -430,7 +430,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
@@ -448,19 +447,19 @@ define &quot;Initial Population&quot;:
 define &quot;numerator&quot;:
 //MINUS | COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True on the reporting period end date
    (
-    HIE.&quot;Death documented&quot;
-   or HIE.&quot;Transferred out&quot;
-   or HIE.&quot;Lost to follow-up&quot;
+    HIE.&quot;Has death documented&quot;
+   or HIE.&quot;Has transferred out&quot;
+   or HIE.&quot;Is lost to follow-up&quot;
    )
    and (((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-    HIE.&quot;HIV-positive B.DE116&quot;
+   HIE.&quot;Has HIV-positive Status&quot;
    and HIE.&quot;On ART H.DE47&quot;
    )
    ) or
    (
     //Accounts for end of last period
-    exists(HE.&quot;HIV-positive B.DE116&quot; HIV where HIV starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;))
+    HIE.&quot;Has HIV-positive Status at last measurment period&quot;
    and exists(HE.&quot;On ART H.DE47&quot; ART
    where ART.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
     and ART.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
@@ -473,13 +472,13 @@ define &quot;numerator&quot;:
  define &quot;denominator&quot;:
    (((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-    HIE.&quot;HIV-positive B.DE116&quot;
+   HIE.&quot;Has HIV-positive Status&quot;
    and HIE.&quot;On ART H.DE47&quot;
    )
    ) or
    (
     //Accounts for end of last period
-    exists(HE.&quot;HIV-positive B.DE116&quot; HIV where HIV starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;))
+    HIE.&quot;Has HIV-positive Status at last measurment period&quot;
    and exists(HE.&quot;On ART H.DE47&quot; ART
    where ART.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
     and ART.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
@@ -503,17 +502,17 @@ define &quot;Geographic Region Stratifier&quot;:
 	HIE.&quot;By Geographic Region Stratifier&quot;
 
 define &quot;patientGroups Stratifier&quot;:
-	HIC.&quot;patientGroups&quot;
+	HIE.&quot;patientGroups&quot;
 
 define &quot;Treatment outcome category Stratifier&quot;:
-	HIC.&quot;Treatment outcome category&quot;
+	HIE.&quot;Treatment outcome category&quot;
 
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
   + ':' + HIE.&quot;By Age Stratifier&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.&quot;Treatment outcome category&quot;, ':')</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 63Kb )</p></div>
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE.&quot;Treatment outcome category&quot;, ':')</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 54Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -538,7 +537,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 9, 2024 22:35+0000">2024-08-09</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Aug 12, 2024 23:19+0000">2024-08-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

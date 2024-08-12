@@ -77,8 +77,9 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-
+//
 include WHOCommon called WCom
+
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
@@ -89,7 +90,7 @@ context Patient
 define "Measure Population":
    Sum(
     (
-      collapse (HIC."PREP Prescription" MR
+      collapse (HE."PREP Prescription" MR
       return HIC."Prescription Relevant Period"( MR ) intersect "Measurement Period"
       )
     ) PREPUseInterval
@@ -120,16 +121,16 @@ define "Age Stratifier":
 	HIE."By Age Stratifier 3"
 
 define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier" 
+	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "prep product":
-    HIC."prep_product"
+    HIE."prep_product"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 //provider type not provided?
 
@@ -137,6 +138,6 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.setting, ':')
-+ Combine(HIC.prep_product, ':')
++ Combine(HIE.patientGroups, ':') 
++ Combine(HIE.setting, ':')
++ Combine(HIE.prep_product, ':')

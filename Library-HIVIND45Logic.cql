@@ -107,7 +107,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."HIV-positive B.DE116" and HIE."On ART" and exists(HIE."TB preventive treatment TPT completed in measurement period")
+ HIE."Has HIV-positive Status" and HIE."On ART" and exists(HIE."TB preventive treatment TPT completed in measurement period")
 
 /**
  * Denominator
@@ -117,7 +117,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116" and HIE."On ART" and exists(HIE."TB preventive treatment TPT start date in measurement period")
+ HIE."Has HIV-positive Status" and HIE."On ART" and exists(HIE."TB preventive treatment TPT start date in measurement period")
     
 /* end Populations */
 
@@ -139,10 +139,20 @@ define "Age Stratifier":
   HIE."By Age Stratifier"
 
 define "TPT Regimen Type Stratifier":
-  HE."TPT regimen type"
+  HIE."TPT regimen type"
 
 define "ART Initiation Stratifier":
   HIE."By ART initiation"
 
 define "Geographic Region Stratifier":
   HIE."By Geographic Region Stratifier"
+
+/*
+ * Combined stratifiers
+ */
+define "Stratification":
+  HIE."By Administrative Gender Stratifier".code 
+    + ':' + HIE."By Age Stratifier"
+    + ':' + Combine(HIE."TPT regimen type".coding.code)
+    + ':' + HIE."By ART initiation"
+	  + ':' + HIE."By Geographic Region Stratifier"

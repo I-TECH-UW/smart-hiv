@@ -296,10 +296,10 @@
   <table class="colsd">
 
     <tr>
-      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/hiv/Library/HIVB2DTLogic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVB2DTLogic"/></span>
+      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/hiv/Library/HIVB9DTLogic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVB9DTLogic"/></span>
       </td>
       <td><i>Version</i>:
-      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVB2DTLogic|0.2.0"/></span>
+      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVB9DTLogic|0.2.0"/></span>
       </td>
     </tr>
 
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-09
+            as of 2024-08-12
           
         
       </td>
@@ -350,7 +350,9 @@
 
 
   <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVB9DTLogic</b></p><a name="HIVB9DTLogic"> </a><a name="hcHIVB9DTLogic"> </a><a name="HIVB9DTLogic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/*
-@DecisionID: HIV.B9.DT
+Library: HIV.B9.DT Logic
+
+@DecisionID: HIV.B9.DT.HIV Re-testing Recommendations
 @BusinessRule: HIV restesting recommendations
 @Trigger: HIV.B9 Determine recommended services
 @HitPolicy: Rule order
@@ -373,8 +375,8 @@ library HIVB9DTLogic
 // Included Libraries
 using FHIR version '4.0.1'
 
-include HIVCommon version '0.0.1' called HIC
-include HIVConcepts called HCx
+include HIVCommon version '0.0.1' called Common
+include HIVConcepts called Concepts
 include HIVConfig called Config
 include HIVEncounterElements called Elements
 include FHIRHelpers version '4.0.1'
@@ -392,8 +394,8 @@ context Patient
   @pseudocode: &quot;HIV status&quot; IN 'HIV-negative', 'Unknown'
   */
 define &quot;HIV status negative or unknown&quot;:
-  exists(Elements.&quot;HIV status Observation&quot; O
-    where O.value in { HCx.&quot;HIV-negative&quot;, HCx.&quot;Unknown&quot; })
+  exists(Elements.&quot;HIV status&quot; S
+    where S in { Concepts.&quot;HIV-negative&quot;, Concepts.&quot;Unknown&quot; }) 
 
  /*
   @input: &quot;Partner HIV reported positive&quot;
@@ -401,7 +403,7 @@ define &quot;HIV status negative or unknown&quot;:
   */
 define &quot;Partner HIV positive&quot;:
   exists(Elements.&quot;Partner HIV status reported Observation&quot; O
-    where O.value ~ HCx.&quot;HIV-positive&quot;)
+    where O.value ~ Concepts.&quot;HIV-positive&quot;)
 
  /*
   @input: &quot;Sex partner's HIV treatment status is partner not virally suppressed&quot;
@@ -409,28 +411,28 @@ define &quot;Partner HIV positive&quot;:
   */
 define &quot;Sex partner's HIV treatment status is partner not virally suppressed&quot;:
   exists(Elements.&quot;Sex partners HIV treatment status Observation&quot; O
-    where O.value ~ HCx.&quot;Partner is not virally suppressed&quot;)
+    where O.value ~ Concepts.&quot;Partner is not virally suppressed&quot;)
 
  /*
   @input: &quot;HIV burden of setting is high HIV burden setting&quot;
   @pseudocode: &quot;HIV burden of the setting&quot;='High HIV burden setting'
   */
 define &quot;HIV burden of setting is high HIV burden setting&quot;:
-  Config.&quot;HIV burden of setting&quot; ~ HCx.&quot;High HIV burden setting&quot;
+  Config.&quot;HIV burden of setting&quot; ~ Concepts.&quot;High HIV burden setting&quot;
 
  /*
   @input: &quot;HIV burden of setting is low HIV burden setting&quot;
   @pseudocode: &quot;HIV burden of the setting&quot;='Low HIV burden setting'
   */
 define &quot;HIV burden of setting is low HIV burden setting&quot;:
-  Config.&quot;HIV burden of setting&quot; ~ HCx.&quot;Low HIV burden setting&quot;
+  Config.&quot;HIV burden of setting&quot; ~ Concepts.&quot;Low HIV burden setting&quot;
 
  /*
   @input: &quot;Key population member&quot;
   @pseudocode: &quot;Key population member&quot; = TRUE
   */
 define &quot;Key population member&quot;:
-  exists(Elements.&quot;Key population member* B.DE49 Observation&quot; O
+  exists(Elements.&quot;Key population member B.DE49 Observation&quot; O
     where O.value is true)
 
  /*
@@ -446,7 +448,7 @@ define &quot;Currently pregnant&quot;:
   */
 define &quot;TB diagnosis result is diagnosed TB&quot;:
   exists(Elements.&quot;TB diagnosis result Observation&quot; O
-    where O.value ~ HCx.&quot;Diagnosed TB&quot; or)
+    where O.value ~ Concepts.&quot;Diagnosed TB&quot;)
 
  /*
   @input: &quot;Presumptive TB&quot;
@@ -619,7 +621,7 @@ define &quot;Partner has HIV and is not virally suppressed&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 9, 2024 22:35+0000">2024-08-09</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Aug 12, 2024 23:19+0000">2024-08-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

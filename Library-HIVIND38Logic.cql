@@ -93,7 +93,7 @@ define "Initial Population":
 
 
 define "Numerator":
-  exists(HE."HIV-exposed infant or child E.DE112" O
+  exists(HIE."HIV-exposed infant or child E.DE112" O
   with [Patient] P
       such that O.subject.references(P) and P.birthDate during "Measurement Period")
    and exists(
@@ -101,8 +101,6 @@ define "Numerator":
     with [Patient] Pt
     such that O.subject.references(Pt) 
     and months between start of O.effective.toInterval() and FHIRHelpers.ToDate(Pt.birthDate) < 2 months)
-
-  
 
 
 /**

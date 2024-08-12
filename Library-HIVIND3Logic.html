@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-09
+            as of 2024-08-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND3Logic</b></p><a name="HIVIND3Logic"> </a><a name="hcHIVIND3Logic"> </a><a name="HIVIND3Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorElements</code></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Setting</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>prep product</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>prep_experience</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>prep_dosing</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND3Logic</b></p><a name="HIVIND3Logic"> </a><a name="hcHIVIND3Logic"> </a><a name="HIVIND3Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Setting</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>prep product</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>prep_experience</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>prep_dosing</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.3 Logic
  * Ref No: PRV.3
  * Short Name: PrEP coverage
@@ -448,9 +448,9 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
+
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -462,22 +462,15 @@ context Patient
 define &quot;Initial Population&quot;:
   true
   
+/* Numerator Calculation: Count of clients with &quot;Date medications prescribed&quot; within reporting period AND &quot;Medications prescribed&quot;='PrEP for HIV prevention'*/
 
 define &quot;numerator&quot;:
-   exists(HIC.&quot;HIV PREP Active&quot; H
-   where H.effective starts before end of &quot;Measurement Period&quot;
-    and (H.effective ends after start of &quot;Measurement Period&quot;
-    or end of H.effective  ~  null)
-   )
+    HIE.&quot;HIV PREP Active&quot;
 
+/*  * Denominator Calculation: Programme/service provider level:  | COUNT of clients with &quot;HIV test date&quot; within reporting period AND &quot;HIV test result&quot;='HIV-negative' AND &quot;At elevated risk for HIV acquisition&quot;=True † |  | Population level: *Estimate of the number of people who would benefit from PrEP */
 define &quot;denominator&quot;:
-	exists(HIC.&quot;HIV Negative Observation&quot; O
-	where (O.issued before end of &quot;Measurement Period&quot;
-	and O.issued after start of &quot;Measurement Period&quot;)
-	) and 
-    exists(HIC.&quot;Client is at elevated risk for HIV acquisition&quot; O
-	where O.issued before end of &quot;Measurement Period&quot;
-	and O.issued after start of &quot;Measurement Period&quot;)
+	exists(HIE.&quot;Negative HIV test within measurement period&quot;) and 
+    HIE.&quot;At elevated risk for HIV acquisition B.DE225&quot;
 
     
 /*
@@ -494,19 +487,19 @@ define &quot;Geographic Region Stratifier&quot;:
 	HIE.&quot;By Geographic Region Stratifier&quot;
 
 define &quot;patientGroups Stratifier&quot;:
-	HIC.&quot;patientGroups&quot;
+	HIE.&quot;patientGroups&quot;
 
 define &quot;Setting&quot;:
-    HIC.&quot;setting&quot;
+    HIE.&quot;setting&quot;
 
 define &quot;prep product&quot;:
-    HIC.&quot;prep_product&quot;
+    HIE.&quot;prep_product&quot;
 
 define &quot;prep_experience&quot;:
-    HIC.&quot;prep_experience&quot;
+    HIE.&quot;prep_experience&quot;
 
 define &quot;prep_dosing&quot;:
-    HIC.&quot;prep_dosing&quot;
+    HIE.&quot;prep_dosing&quot;
 
 // Provider type concepts are not found in DD
 
@@ -514,11 +507,11 @@ define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
   + ':' + HIE.&quot;By Age Stratifier 3&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.setting, ':')
-+ Combine(HIC.prep_product, ':')
-+ Combine(HIC.prep_experience, ':')
-+ Combine(HIC.prep_dosing, ':')</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 53Kb )</p></div>
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE.setting, ':')
++ Combine(HIE.prep_product, ':')
++ Combine(HIE.prep_experience, ':')
++ Combine(HIE.prep_dosing, ':')</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 34Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -543,7 +536,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 9, 2024 22:35+0000">2024-08-09</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Aug 12, 2024 23:19+0000">2024-08-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

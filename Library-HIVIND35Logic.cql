@@ -124,7 +124,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 
@@ -149,10 +148,10 @@ define "Initial Population":
  */
 
 define "Numerator":
-  (HIE."HIV-positive B.DE116"
+  (HIE."Has HIV-positive Status"
   and HIE."Toxicity/side effects H.DE75")
   and ((
-    HIE."HIV-positive B.DE116"
+    HIE."Has HIV-positive Status" 
     and HIE."On ART H.DE47"
     and 
     (exists(HE."New regimen after switch to second-line regimen" R
@@ -172,7 +171,7 @@ define "Numerator":
   )
   or
   (
-    HIE."HIV-positive B.DE116"
+    HIE."Has HIV-positive Status"
     and HIE."On ART H.DE47"
     and 
     (exists(HE."New regimen after substitution within second-line regimen" R
@@ -201,7 +200,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116"
+  HIE."Has HIV-positive Status"
     and HIE."On ART H.DE47"
     
 
@@ -222,13 +221,13 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
++ Combine(HIE.patientGroups, ':')
 
 /*
 need to add

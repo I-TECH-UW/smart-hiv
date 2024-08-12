@@ -4,7 +4,7 @@
    <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
    <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="22">
+      <a:s r="20">
          <a:s>/**
  * Library: HIV.IND.14 Logic
  * Ref No: PRV.14
@@ -114,78 +114,56 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="5" locator="65:1-65:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="5">
-               <a:s>include </a:s>
-               <a:s>
-                  <a:s>HIVElements</a:s>
-               </a:s>
-               <a:s> called HE</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="6" locator="66:1-66:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="6">
-               <a:s>include </a:s>
-               <a:s>
-                  <a:s>HIVIndicatorElements</a:s>
-               </a:s>
-               <a:s> called HIE</a:s>
-            </a:s>
-         </annotation>
-      </def>
    </includes>
    <parameters>
-      <def localId="12" locator="69:1-69:88" name="Measurement Period" accessLevel="Public">
+      <def localId="10" locator="66:1-66:88" name="Measurement Period" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="12">
+            <a:s r="10">
                <a:s>// Indicator Definition
 parameter &quot;Measurement Period&quot; </a:s>
-               <a:s r="11">
+               <a:s r="9">
                   <a:s>Interval&lt;</a:s>
-                  <a:s r="10">
+                  <a:s r="8">
                      <a:s>Date</a:s>
                   </a:s>
                   <a:s>></a:s>
                </a:s>
                <a:s> default </a:s>
-               <a:s r="9">
-                  <a:s r="7">Interval[@2023-01-01, @2023-01-30]</a:s>
+               <a:s r="7">
+                  <a:s r="5">Interval[@2023-01-01, @2023-01-30]</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <default localId="9" locator="69:55-69:88" lowClosed="true" highClosed="true" xsi:type="Interval">
-            <low localId="7" locator="69:64-69:74" xsi:type="Date">
+         <default localId="7" locator="66:55-66:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="5" locator="66:64-66:74" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="1" xsi:type="Literal"/>
             </low>
-            <high localId="8" locator="69:77-69:87" xsi:type="Date">
+            <high localId="6" locator="66:77-66:87" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="30" xsi:type="Literal"/>
             </high>
          </default>
-         <parameterTypeSpecifier localId="11" locator="69:32-69:45" xsi:type="IntervalTypeSpecifier">
-            <pointType localId="10" locator="69:41-69:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         <parameterTypeSpecifier localId="9" locator="66:32-66:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="8" locator="66:41-66:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
          </parameterTypeSpecifier>
       </def>
    </parameters>
    <contexts>
-      <def locator="71:1-71:15" name="Patient"/>
+      <def locator="68:1-68:15" name="Patient"/>
    </contexts>
    <statements>
-      <def locator="71:1-71:15" name="Patient" context="Patient">
+      <def locator="68:1-68:15" name="Patient" context="Patient">
          <expression xsi:type="SingletonFrom">
-            <operand locator="71:1-71:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+            <operand locator="68:1-68:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="14" locator="78:1-79:6" name="Initial Population" context="Patient" accessLevel="Public">
+      <def localId="12" locator="75:1-76:6" name="Initial Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="14">
-               <a:s r="13">/* Populations */
+            <a:s r="12">
+               <a:s r="11">/* Populations */
 
 /*
  *Initial Population
@@ -195,12 +173,12 @@ define &quot;Initial Population&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="13" locator="79:3-79:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="11" locator="76:3-76:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="16" locator="88:1-89:6" name="Numerator" context="Patient" accessLevel="Public">
+      <def localId="14" locator="85:1-86:6" name="Numerator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="16">
-               <a:s r="15">/**
+            <a:s r="14">
+               <a:s r="13">/**
  * Numerator
  * 
  * Definition: Number of people, at a specified date, maintained on methadone or buprenorphine receiving recommended minimum maintenance dose (WHO guidance recommends doses of ≥60 mg of methadone or ≥8 mg of buprenorphine*)
@@ -211,12 +189,12 @@ define &quot;Numerator&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="15" locator="89:3-89:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="13" locator="86:3-86:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="18" locator="97:1-98:7" name="Numerator Exclusions" context="Patient" accessLevel="Public">
+      <def localId="16" locator="94:1-95:7" name="Numerator Exclusions" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="18">
-               <a:s r="17">/**
+            <a:s r="16">
+               <a:s r="15">/**
  * Numerator Exclusions
  *
  * Calculation: &quot;Client being inducted on OAMT&quot; OR &quot;Client on reducing doses of OAMT&quot;
@@ -226,12 +204,12 @@ define &quot;Numerator Exclusions&quot;:
   false</a:s>
             </a:s>
          </annotation>
-         <expression localId="17" locator="98:3-98:7" valueType="t:Boolean" value="false" xsi:type="Literal"/>
+         <expression localId="15" locator="95:3-95:7" valueType="t:Boolean" value="false" xsi:type="Literal"/>
       </def>
-      <def localId="20" locator="107:1-108:6" name="Denominator" context="Patient" accessLevel="Public">
+      <def localId="18" locator="104:1-105:6" name="Denominator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="20">
-               <a:s r="19">/**
+            <a:s r="18">
+               <a:s r="17">/**
  * Denominator
  *
  * Definition: Number of people receiving maintenance dose of methadone or buprenorphine at a specified date, excluding: a) individuals currently being inducted on OAMT and yet to reach the maintenance dose and b) individuals on reducing doses of OAMT.
@@ -242,12 +220,12 @@ define &quot;Denominator&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="19" locator="108:3-108:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="17" locator="105:3-105:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="22" locator="116:1-117:7" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+      <def localId="20" locator="113:1-114:7" name="Denominator Exclusions" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="22">
-               <a:s r="21">/**
+            <a:s r="20">
+               <a:s r="19">/**
 * Denominator Exclusions
 *
 * Calculation: &quot;Client being inducted on OAMT&quot; OR &quot;Client on reducing doses of OAMT&quot;
@@ -257,7 +235,7 @@ define &quot;Denominator Exclusions&quot;:
   false</a:s>
             </a:s>
          </annotation>
-         <expression localId="21" locator="117:3-117:7" valueType="t:Boolean" value="false" xsi:type="Literal"/>
+         <expression localId="19" locator="114:3-114:7" valueType="t:Boolean" value="false" xsi:type="Literal"/>
       </def>
    </statements>
 </library>

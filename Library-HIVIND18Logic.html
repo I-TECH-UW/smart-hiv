@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-09
+            as of 2024-08-12
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND18Logic</b></p><a name="HIVIND18Logic"> </a><a name="hcHIVIND18Logic"> </a><a name="HIVIND18Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorElements</code></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Measure Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>ANC Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND18Logic</b></p><a name="HIVIND18Logic"> </a><a name="hcHIVIND18Logic"> </a><a name="HIVIND18Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Measure Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.18 Logic
  * Ref No: HTS.1
  * Short Name: People living with HIV who know their HIV status (first 95)
@@ -432,16 +432,8 @@ parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@
 
 context Patient
 define &quot;Measure Population&quot;:
-    exists(HIC.&quot;HIV Positive Condition&quot; C
-	where C.onset before end of &quot;Measurement Period&quot;)
-	or 
-	exists(HIC.&quot;HIV Positive Observation&quot; O
-	where O.issued before end of &quot;Measurement Period&quot;
-	) 
-
-//define denominator?
-//How to bring in data from external sources
-
+   HIE.&quot;Has HIV-positive Status&quot;
+	
 /*
  * As defined by Member States
  */
@@ -469,19 +461,19 @@ define &quot;Geographic Region Stratifier&quot;:
 	HIE.&quot;By Geographic Region Stratifier&quot;
 
 define &quot;patientGroups Stratifier&quot;:
-	HIC.&quot;patientGroups&quot;
+	HIE.&quot;patientGroups&quot;
 
-define &quot;ANC Stratifier&quot;:
-    HIC.&quot;anc&quot;
+// define &quot;ANC Stratifier&quot;:
+//     HIC.&quot;anc&quot;
 
 
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
   + ':' + HIE.&quot;By Age Stratifier 2&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.&quot;anc&quot;, ':')
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 30Kb )</p></div>
++ Combine(HIE.patientGroups, ':')
+// + Combine(HIC.&quot;anc&quot;, ':')
+</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 22Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -506,7 +498,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 9, 2024 22:35+0000">2024-08-09</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Aug 12, 2024 23:19+0000">2024-08-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

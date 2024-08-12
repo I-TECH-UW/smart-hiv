@@ -56,9 +56,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
-include HIVElements called HE
 include HIVIndicatorElements called HIE
-
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
@@ -80,7 +78,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIC.OAMT_retained
+  HIE.OAMT_retained
 
 
 /**
@@ -91,7 +89,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIC.OAMT_initiated
+  HIE.OAMT_initiated
     
 
 /* end Populations */
@@ -110,10 +108,10 @@ define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 //provider type not provided?
 
@@ -121,5 +119,5 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.setting, ':')
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE.setting, ':')

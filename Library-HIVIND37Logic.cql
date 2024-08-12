@@ -68,8 +68,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
-include HIVElements called HE
+
 include HIVIndicatorElements called HIE
+include HIVElements called HE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -95,12 +96,12 @@ define "First Health facility":
   (First(HE."Health facility"))
 
 define "Numerator":
-  HIE."HIV-positive B.DE116"
+  HIE."Has HIV-positive Status"
   and HIE."On ART D.DE38"
   and HIE."Health facility"
   and exists(
     HIE."Viral load test result D.DE387" VL
-    with HIC."viral load sample collection" P 
+    with HE."viral load sample collection" P 
     such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
     where VL.value < 1000
     )
@@ -114,12 +115,12 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116"
+  HIE."Has HIV-positive Status"
   and HIE."On ART D.DE38"
   and HIE."Health facility"
   and exists(
     HIE."Viral load test result D.DE387" VL
-    with HIC."viral load sample collection" P 
+    with HE."viral load sample collection" P 
     such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
     )
 
@@ -140,4 +141,4 @@ define "Stratification":
  HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 
- // need to add  Timing of ART initiation (during pregnancy, on ART at first ANC visit)
+ // need to add  Timing of ART initiation (during pregnancy, on ART at first ANC visit)

@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-09
+            as of 2024-08-12
           
         
       </td>
@@ -349,583 +349,24 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library HC</td><td><a href="Library-HIVConcepts.html">HIVConcepts</a></td></tr><tr><td>Depends On</td><td>Library HCC</td><td><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><code>http://smart.who.int/hiv/Library/HIVIndicatorElements</code></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVCommon version '0.0.1' 
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVCommon</b></p><a name="HIVCommon"> </a><a name="hcHIVCommon"> </a><a name="HIVCommon-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library Concepts</td><td><a href="Library-HIVConcepts.html">HIVConcepts</a></td></tr><tr><td>Depends On</td><td>Library CustomConcepts</td><td><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>STI_testing</td><td>out</td><td>0</td><td>*</td><td>Procedure</td></tr></table><h2>Data Requirements</h2><table class="grid"><tr><td colspan="2"><b>Type</b>: <a href="http://hl7.org/fhir/R4/procedure.html">Procedure</a> (<a href="http://hl7.org/fhir/R4/procedure.html">Procedure</a>)</td></tr></table><table class="grid"><tr><td colspan="2"><b>Type</b>: <a href="http://hl7.org/fhir/R4/medication.html">Medication</a> (<a href="http://hl7.org/fhir/R4/medication.html">Medication</a>)</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">library HIVCommon version '0.0.1' 
 
 using FHIR version '4.0.1'
 
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-//
-include HIVConcepts called HC
-include HIVConceptsCustom called HCC
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
-
-parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2020-01-01, @2020-12-31]
-parameter &quot;Measurement Date&quot; Date default @2020-01-01
-parameter &quot;Testing Interval&quot; System.Quantity default 3 months
-parameter &quot;Intervention Interval&quot; System.Quantity default 7 days
+include HIVConcepts called Concepts
+include HIVConceptsCustom called CustomConcepts
 
 context Patient
 
-
 //VERIFIED
 
-define &quot;routine viral load sample collection&quot;:
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ HCC.&quot;viral load test&quot;
-  and exists(P.reasonCode RC where RC ~ HC.&quot;Routine viral load test&quot;)
-
-define &quot;viral load sample collection&quot;:
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ HCC.&quot;viral load test&quot;
-
-
-define &quot;First On ART&quot;:
-  (First(HE.&quot;On ART D.DE38&quot;))
-
-define &quot;Viral load tests received after ART intitiation&quot;:
-  HE.&quot;Viral load test result D.DE387&quot; O
-  where start of O.issued.toInterval() after start of &quot;First On ART&quot;.effective.toInterval()
-  sort by start of issued.toInterval()
-
-define &quot;Elevated Viral load test during Measurement Period&quot;:
-  HE.&quot;Viral load test result D.DE387&quot; VL
-    with &quot;viral load sample collection&quot; P 
-    such that VL.partOf.references(P) and P.performed.toInterval() during &quot;Measurement Period&quot;
-    where VL.value &gt; 1000 
-    sort by start of effective.toInterval()
-
-
-define &quot;Negative Tests within Measurement Period&quot;:
-HE.&quot;HIV-negative B.DE113&quot; O
-    with HE.&quot;At elevated risk for HIV acquisition B.DE225&quot; HIV
-    such that O.hasMember.references(HIV)
-    where O.effective.toInterval() starts during &quot;Measurement Period&quot;
-    sort by start of effective.toInterval()
-
-define &quot;First Negative Test within Measurement Period&quot;:
-  (First(&quot;Negative Tests within Measurement Period&quot;))
-
-define &quot;Negative Tests after First Negative Test&quot;:
-HE.&quot;HIV-negative B.DE113&quot; O
-    with HE.&quot;At elevated risk for HIV acquisition B.DE225&quot; HIV
-      such that O.hasMember.references(HIV)
-    where  O.effective.toInterval() starts after start of &quot;First Negative Test within Measurement Period&quot;.effective.toInterval()
-      and O.effective.toInterval() starts before (start of &quot;First Negative Test within Measurement Period&quot;.effective.toInterval() + &quot;Testing Interval&quot;)
-    sort by start of effective.toInterval()
-
-  define patientGroups:
-  List&lt;String&gt;{
-    if HIE.&quot;Sex worker B.DE51&quot; then 'SW' else null,
-    if HIE.&quot;Men who have sex with men&quot; then 'MSM' else null,
-    if HIE.&quot;Trans and gender-diverse people B.DE53&quot; then 'Trans' else null,
-    if HIE.&quot;People who inject drugs B.DE54&quot; then 'PWID' else null,
-    if HIE.&quot;People living in prisons and other closed settings&quot; then 'Prisoner' else null
-  }
-
-  define &quot;Treatment outcome category&quot;:
-  List&lt;String&gt;{
-    if HIE.&quot;Lost to follow-up&quot; then 'LTFU' else null,
-    if HIE.&quot;Transferred out&quot; then 'Transfer Out' else null,
-    if HIE.&quot;Death documented&quot; then 'Death' else null,
-    if HIE.&quot;Refused stopped treatment&quot; then 'Stopped' else null,
-    if HIE.&quot;On ART H.DE47&quot; then 'On ART' else null
-  }
-
-
-/*
- * By Age Stratifiers
- * (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)
- * 
- */
-define &quot;By Age Stratifier&quot;:
-    case 
-        when HIE.&quot;Age In Years&quot; &lt;= 4 then '0-4'
-        when HIE.&quot;Age In Years&quot; &lt;= 9 then '5-9'
-        when HIE.&quot;Age In Years&quot; &lt;= 14 then '10–14'
-        when HIE.&quot;Age In Years&quot; &lt;= 19 then '15–19'
-        when HIE.&quot;Age In Years&quot; &lt;= 24 then '20–24'
-        when HIE.&quot;Age In Years&quot; &lt;= 29 then '25–29'
-        when HIE.&quot;Age In Years&quot; &lt;= 34 then '30–34'
-        when HIE.&quot;Age In Years&quot; &lt;= 39 then '35–39'
-        when HIE.&quot;Age In Years&quot; &lt;= 44 then '40–44'
-        when HIE.&quot;Age In Years&quot; &lt;= 49 then '45–49'
-        when HIE.&quot;Age In Years&quot; &gt;= 50 then '50+'
-        else null
-    end
-  
-  /*
- * By Age Stratifiers
- * Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)
- * 
- */
-define &quot;By Age Stratifier 2&quot;:
-    case 
-        when HIE.&quot;Age In Years&quot; &lt;= 4 then '0-4'
-        when HIE.&quot;Age In Years&quot; &lt;= 9 then '5-9'
-        when HIE.&quot;Age In Years&quot; &lt;= 14 then '10–14'
-        when HIE.&quot;Age In Years&quot; &lt;= 19 then '15–19'
-        when HIE.&quot;Age In Years&quot; &lt;= 24 then '20–24'
-        when HIE.&quot;Age In Years&quot; &lt;= 49 then '25–49'
-        when HIE.&quot;Age In Years&quot; &gt;= 50 then '50+'
-        else null
-    end
-
-define &quot;By Age Stratifier 3&quot;:
-    case 
-        when HIE.&quot;Age In Years&quot; &gt;= 15 and HIE.&quot;Age In Years&quot;&lt;= 19 then '15-19'
-        when HIE.&quot;Age In Years&quot; &lt;= 24 then '20-24'
-        when HIE.&quot;Age In Years&quot; &lt;= 49 then '25–49'
-        when HIE.&quot;Age In Years&quot; &gt;= 50 then '50+'
-        else null
-    end
-
-/*
- * By state stratifier
- */
-
-  define &quot;HIV status of partner or contact&quot;:
-    case 
-        when HIE.&quot;Already knew positive&quot; then HC.&quot;Already knew positive&quot;
-        when HIE.&quot;Newly diagnosed&quot; then HC.&quot;Newly diagnosed&quot;
-        when HIE.&quot;Negative H.DE37&quot; then HC.&quot;Negative - HIV.H.DE37&quot;
-        else null
-    end
-
-//(including PrEP, OAMT, NSP, STI services, VMMC) 
-  define &quot;HIV prevention intervention&quot;:
-  List&lt;String&gt;{
-    if HIE.&quot;PrEP service&quot; then 'PrEP' else null,
-    if HIE.&quot;OAMT&quot; then 'OAMT' else null,
-    if HIE.&quot;NSP&quot; then 'NSP' else null,
-    if HIE.&quot;STI services&quot; then 'STI services' else null,
-    if HIE.&quot;VMMC&quot; then 'VMMC' else null,
-    if HIE.&quot;Other PRV.DE8&quot; then 'other prevention' else null
-  }
 
 //DRAFT
-define &quot;Patient Deceased during Measurement Period&quot;:
-  case 
-    when Patient.deceased is FHIR.boolean and Patient.deceased ~ true then Patient.meta.lastUpdated before end of  &quot;Measurement Period&quot; and  Patient.meta.lastUpdated after start of &quot;Measurement Period&quot;
-    when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime before end of  &quot;Measurement Period&quot; and Patient.deceased as FHIR.dateTime after start of &quot;Measurement Period&quot;
-    else false
-  end
-
-define &quot;HIV Positive Condition&quot;:
-[Condition] C
-    where C.clinicalStatus ~ HCC.&quot;active&quot;
-    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
-    and C.code ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
-    sort by start of onset.toInterval()
-
-define &quot;First HIV Positive Condition&quot;:
-  First(&quot;HIV Positive Condition&quot;)
-
-define &quot;HIV Positive Observation&quot;:
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ HC.&quot;HIV status&quot;
-    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
-
-define &quot;HIV Positive Observation - HIV Self Test&quot;:
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ HC.&quot;HIV self-test&quot;
-    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE116&quot;
-
-define &quot;HIV Negative Observation&quot;:
-[Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
-    and O.value ~ HC.&quot;HIV-negative - HIV.B.DE117&quot;
-
-define &quot;HIV test resulted&quot;:
-  [Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
-
-define &quot;HIV PREP Active&quot;:
-[MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
-
- define &quot;Client is at elevated risk for HIV acquisition&quot;:
-    [Observation] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.code ~ HC.&quot;At elevated risk for HIV acquisition - HIV.B.DE225&quot;
-
-define &quot;PREP Prescription&quot;:
-    [MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HC.&quot;PrEP for HIV prevention&quot;
-
-define &quot;PEP Prescription&quot;:
-    [MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
-
-define &quot;PEP Prescribed before start of Measurement Period and Completed&quot;:
-  [MedicationStatement] MS
-    with [MedicationRequest] MR
-      such that MS.basedOn.references(MR) and MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
-        and MR.authoredOn before end of &quot;Measurement Period&quot;
-  where (MS.status = 'completed'
-  and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
-  )
-
-define &quot;PEP Prescribed during Measurement Period and Completed&quot;:
-  [MedicationStatement] MS
-    with [MedicationRequest] MR
-      such that MS.basedOn.references(MR) and MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
-        and MR.authoredOn after start of &quot;Measurement Period&quot;
-        and MR.authoredOn before end of &quot;Measurement Period&quot;
-  where (MS.status = 'completed'
-  and exists(MS.reasonCode C where C ~ HC.&quot;PrEP for HIV prevention&quot;)
-  )
-
-define &quot;HIV Test Positive After PEP Prescribed during Measurement Period&quot;:
-  [Observation: HC.&quot;HIV test result - HIV.B.DE111&quot;] O
-    with [MedicationRequest] MR
-      such that O.basedOn.references(MR) and MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HC.&quot;PEP for HIV prevention&quot;
-        and MR.authoredOn after start of &quot;Measurement Period&quot;
-        and MR.authoredOn before end of &quot;Measurement Period&quot;
-        and O.issued before (MR.authoredOn + 3 months)
-  where ( O.status in {'final', 'amended'}
-    and O.value ~ HC.&quot;HIV-positive - HIV.B.DE112&quot;
-  )
-
-define &quot;Needle Syringe Dispensed&quot;:  
-  [DeviceUseStatement] DUS
-  with [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
-      such that DUS.reasonReference.references(O) 
-        and O.status in { 'final', 'amended', 'corrected' }
-        and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-        and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
-  where DUS.status = 'completed'
-
-define PWID_person:
-  [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
-  where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
-
-define &quot;OAMT_initiated&quot;:
-exists(
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC.&quot;OAMT&quot;)
-    and (exists (
-      EOC.statusHistory H
-      where H.period starts after start of &quot;Measurement Period&quot;
-      and H.period starts before end of &quot;Measurement Period&quot;
-    ) 
-    or (
-      EOC.period starts after start of &quot;Measurement Period&quot;
-      and EOC.period starts before end of &quot;Measurement Period&quot;
-    )
-    )
-    )
-
-define &quot;OAMT_retained&quot;:
-exists(
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC.&quot;OAMT&quot;)
-    and (exists (
-      EOC.statusHistory H
-      where H.period starts after start of &quot;Measurement Period&quot;
-      and H.period starts before end of &quot;Measurement Period&quot;
-      and H.period ends after (end of &quot;Measurement Period&quot; + 6 months)
-    ) 
-    or (
-      EOC.period starts after start of &quot;Measurement Period&quot;
-      and EOC.period starts before end of &quot;Measurement Period&quot;
-      and (EOC.period ends after (end of &quot;Measurement Period&quot; + 6 months)
-      or end of EOC.period is null)
-    )
-    )
-    )
-
-define &quot;methadone_prescribed&quot;:
-[MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HCC.&quot;methadone&quot;
-
-define &quot;buprenorphine_prescribed&quot;:
-[MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HCC.&quot;buprenorphine&quot;
-  
 
 
-
-
-define &quot;Lost to Follow Up during the measurement period&quot;:
-    exists(HE.&quot;On ART H.DE47&quot; H
-   where H.effective starts before end of &quot;Measurement Period&quot;
-    and H.effective ends after start of &quot;Measurement Period&quot;
-	and not (H.effective ends after (end of &quot;Measurement Period&quot; - 28 days))
-   )
-
-define &quot;HIV Status&quot;:
-    case 
-        when exists(&quot;HIV Positive Condition&quot; C where C.onset before end of &quot;Measurement Period&quot;) then HC.&quot;HIV-positive - HIV.B.DE116&quot;
-        when not exists(&quot;HIV Positive Condition&quot; C where C.onset before end of &quot;Measurement Period&quot;) and exists(&quot;HIV Negative Observation&quot; O where O.issued before end of &quot;Measurement Period&quot;) then  HC.&quot;HIV-negative - HIV.B.DE117&quot;
-        else HC.&quot;Unknown - HIV.B.DE118&quot;
-    end
-
-/*
- * Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)
- */
-
- define SW:
-  exists (
-    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;Sex worker - HIV.B.DE51&quot;
-  )
-
- define MSM:
-  exists (
-    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;Men who have sex with men&quot;
-  )
-
-  define Trans:
-  exists (
-    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;Trans and gender-diverse people - HIV.B.DE53&quot;
-  )
-
-  define PWID:
-  exists (
-    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;People who inject drugs - HIV.B.DE54&quot;
-  )
-
-  define Prisoner:
-  exists (
-    [Observation: HC.&quot;Key population member - HIV.E.DE113&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;People living in prisons and other closed settings&quot;
-  )
-
-  define TB_diagnosed:
-  exists(
-    ([Condition] C
-    where C.clinicalStatus ~ HCC.&quot;active&quot;
-    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
-    and C.code ~ HC.&quot;Diagnosed TB&quot;
-    and C.onset during &quot;Measurement Period&quot;)
-  )
-  
-  define TB_presumptive:
-  exists(
-    ([Condition] C
-    where C.clinicalStatus ~ HCC.&quot;active&quot;
-    and exists(C.category CC where CC ~ HCC.&quot;encounter-diagnosis&quot;)
-    and C.code ~ HC.&quot;Presumptive TB - HIV.D.DE945&quot;
-    and C.onset during &quot;Measurement Period&quot;)
-  )
-
-
-define Exposure_Occupational:
-  exists (
-    [Observation: HC.&quot;HIV exposure type&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;Occupational&quot;
-  )
-
-define Exposure_Non_Occupational_violent:
-  exists (
-    [Observation: HC.&quot;HIV exposure type&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;Non-occupational violent&quot;
-  )
-
-define Exposure_Non_Occupational_consensual_sex:
-  exists (
-    [Observation: HC.&quot;HIV exposure type&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.value ~ HC.&quot;Non-occupational consensual sex&quot;
-  )
-
-define hiv_exposure_type:
-  List&lt;String&gt;{
-    if Exposure_Occupational then 'Occupational' else null,
-    if Exposure_Non_Occupational_violent then 'Non-occupational violent' else null,
-    if Exposure_Non_Occupational_consensual_sex then 'Non-occupational consensual sex' else null
-  }
-
-/*@triggeredBy Encounter with location = community level testing*/
-
-define &quot;Community_testing&quot;:
-  exists([Observation] O
-    with [Encounter] E
-      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Community-level testing&quot;) 
-  where (O.status in { 'final', 'amended' }
-  and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
-  and O.issued after start of &quot;Measurement Period&quot;
-  and O.issued before end of &quot;Measurement Period&quot;))
-  
-
-/*@triggeredBy Encounter with location = facility level testing*/
-define &quot;Facility_testing&quot;:
-  exists([Observation] O
-    with [Encounter] E
-      such that O.encounter.references(E) and exists(E.location.physicalType PT where PT ~  HC.&quot;Facility-level testing&quot;)
-  where (O.status in { 'final', 'amended' }
-  and O.code ~ HC.&quot;Rapid diagnostic test for HIV - HIV.B.DE82&quot;
-  and O.issued after start of &quot;Measurement Period&quot;
-  and O.issued before end of &quot;Measurement Period&quot;)
-  )
-
-//lifted this from ANC DAK
-define &quot;ANC_case&quot;:
-exists(
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ HC.&quot;Already on ART at first antenatal care visit&quot;)
-    and (exists (
-      EOC.statusHistory H
-      where H.period overlaps &quot;Measurement Period&quot;
-    ) 
-    or (
-      EOC.period overlaps &quot;Measurement Period&quot;
-    )
-    )
-    )
-  
-
-  define &quot;PREP Product Oral&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and (MS.medication ~ HC.&quot;TDF + FTC - HIV.C.DE18&quot; or
-    MS.medication ~ HC.&quot;TDF - HIV.C.DE19&quot; or
-    MS.medication ~ HC.&quot;TDF + 3TC - HIV.C.DE20&quot; or
-    MS.medication ~ HC.&quot;Other TDF-based regimen&quot;)
-  )
-
-  define &quot;PREP Product long-acting device&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and MS.medication ~ HC.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;
-  )
-
-  define &quot;PREP Product long-acting injectable&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and MS.medication ~ HC.&quot;CAB-LA - HIV.C.DE23&quot;
-  )
-  
-  define &quot;PREP first time&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and exists(MS.statusReason SR where SR ~ HC.&quot;First-time user - HIV.C.DE25&quot;)
-  )
-
-  define &quot;PREP Continuing user&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and exists(MS.statusReason SR where SR ~ HC.&quot;Continuing user&quot;)
-  )
-  
-  define &quot;PREP Restarting&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and exists(MS.statusReason SR where SR ~ HC.&quot;Restarting following a period of not taking PrEP&quot;)
-  )
-
-  define &quot;Daily_oral_PrEP&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Daily oral PrEP&quot;)
-  )
-
-  define &quot;Event_driven_PrEP&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Event-driven PrEP 2+1+1&quot;) 
-  )
-
-  define &quot;other_dosing_PrEP&quot;:
-  exists([MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ HC.&quot;Currently on PrEP&quot;)
-    and exists(MS.dosage.additionalInstruction AI where AI ~ HC.&quot;Other PrEP dosing type&quot;) 
-  )
-
-
-
-
-  define setting:
-  List&lt;String&gt;{
-    if Community_testing then 'Community-level testing' else null,
-    if Facility_testing then 'Facility-level testing' else null
-  }
-
-  define anc:
-  List&lt;String&gt;{
-    if ANC_case then 'ANC case' else null
-  }
-
-  define tb:
-  List&lt;String&gt;{
-    if TB_diagnosed then 'Diagnosed TB' else null,
-    if TB_presumptive then 'Presumptive TB' else null
-  }
-
-  define prep_product:
-  List&lt;String&gt;{
-    if `PREP Product Oral` then 'PREP Product Oral' else null,
-    if `PREP Product long-acting device` then 'PREP Product long-acting device' else null,
-    if `PREP Product long-acting injectable` then 'PREP Product long-acting injectable' else null
-  }
-
-  define prep_experience:
-  List&lt;String&gt;{
-    if `PREP first time` then 'PREP first time' else null,
-    if `PREP Continuing user` then 'PREP Continuing user' else null,
-    if `PREP Restarting` then 'PREP Restarting' else null
-  }
-
-  define prep_dosing:
-  List&lt;String&gt;{
-    if `Daily_oral_PrEP` then 'Daily oral PrEP' else null,
-    if `Event_driven_PrEP` then 'Event driven PrEP' else null,
-    if `other_dosing_PrEP` then 'Other PrEP dosing type' else null
-  }
 
 //need to add Time to start ART (within 7, 30 or 90 days of diagnosis, as per country guidelines)
 //need to add Disaggregation by time since diagnosis
@@ -993,7 +434,7 @@ define &quot;PREP Prescription Days&quot;:
         [MedicationRequest] MR
           where MR.status = 'completed'
           and MR.intent = 'order'
-          and MR.medication ~ HC.&quot;PrEP for HIV prevention&quot;
+          and MR.medication ~ Concepts.&quot;PrEP for HIV prevention&quot;
         return WComV2.&quot;Prescription Relevant Period&quot;( MR ) intersect &quot;Measurement Period&quot;
       )
     ) PREPUseInterval
@@ -1058,7 +499,7 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
     or end of period = maximum DateTime
 )
 
-  define function MedicationRequestPeriod(Request &quot;MedicationRequest&quot;):
+  define function MedicationRequestPeriod(Request FHIR.MedicationRequest):
   Request R
     let
       dosage: singleton from R.dosageInstruction,
@@ -1094,26 +535,26 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
 define function &quot;DosesPerDay&quot;(frequency Code):
 	/*Calculates the cumulative dose per day for each prescription*/
 	case
-		when frequency ~ HCC.&quot;Once daily (qualifier value)&quot; then 1.0
-		when frequency ~ HCC.&quot;Twice a day (qualifier value)&quot; then 2.0
-		when frequency ~ HCC.&quot;Three times daily (qualifier value)&quot; then 3.0
-		when frequency ~ HCC.&quot;Four times daily (qualifier value)&quot; then 4.0
-		when frequency ~ HCC.&quot;Every twenty four hours (qualifier value)&quot; then 1.0
-		when frequency ~ HCC.&quot;Every twelve hours (qualifier value)&quot; then 2.0
-		when frequency ~ HCC.&quot;Every thirty six hours (qualifier value)&quot; then 0.67
-		when frequency ~ HCC.&quot;Every eight hours (qualifier value)&quot; then 3.0
-		when frequency ~ HCC.&quot;Every four hours (qualifier value)&quot; then 6.0
-		when frequency ~ HCC.&quot;Every six hours (qualifier value)&quot; then 4.0
-		when frequency ~ HCC.&quot;Every seventy two hours (qualifier value)&quot; then 0.34
-		when frequency ~ HCC.&quot;Every forty eight hours (qualifier value)&quot; then 0.5
-		when frequency ~ HCC.&quot;Every eight to twelve hours (qualifier value)&quot; then 2.0
-		when frequency ~ HCC.&quot;Every six to eight hours (qualifier value)&quot; then 3.0
-		when frequency ~ HCC.&quot;Every three to four hours (qualifier value)&quot; then 6.0
-		when frequency ~ HCC.&quot;Every three to six hours (qualifier value)&quot; then 4.0
-		when frequency ~ HCC.&quot;Every two to four hours (qualifier value)&quot; then 6.0
-		when frequency ~ HCC.&quot;One to four times a day (qualifier value)&quot; then 4.0
-		when frequency ~ HCC.&quot;One to three times a day (qualifier value)&quot; then 3.0
-		when frequency ~ HCC.&quot;One to two times a day (qualifier value)&quot; then 2.0
+		when frequency ~ CustomConcepts.&quot;Once daily (qualifier value)&quot; then 1.0
+		when frequency ~ CustomConcepts.&quot;Twice a day (qualifier value)&quot; then 2.0
+		when frequency ~ CustomConcepts.&quot;Three times daily (qualifier value)&quot; then 3.0
+		when frequency ~ CustomConcepts.&quot;Four times daily (qualifier value)&quot; then 4.0
+		when frequency ~ CustomConcepts.&quot;Every twenty four hours (qualifier value)&quot; then 1.0
+		when frequency ~ CustomConcepts.&quot;Every twelve hours (qualifier value)&quot; then 2.0
+		when frequency ~ CustomConcepts.&quot;Every thirty six hours (qualifier value)&quot; then 0.67
+		when frequency ~ CustomConcepts.&quot;Every eight hours (qualifier value)&quot; then 3.0
+		when frequency ~ CustomConcepts.&quot;Every four hours (qualifier value)&quot; then 6.0
+		when frequency ~ CustomConcepts.&quot;Every six hours (qualifier value)&quot; then 4.0
+		when frequency ~ CustomConcepts.&quot;Every seventy two hours (qualifier value)&quot; then 0.34
+		when frequency ~ CustomConcepts.&quot;Every forty eight hours (qualifier value)&quot; then 0.5
+		when frequency ~ CustomConcepts.&quot;Every eight to twelve hours (qualifier value)&quot; then 2.0
+		when frequency ~ CustomConcepts.&quot;Every six to eight hours (qualifier value)&quot; then 3.0
+		when frequency ~ CustomConcepts.&quot;Every three to four hours (qualifier value)&quot; then 6.0
+		when frequency ~ CustomConcepts.&quot;Every three to six hours (qualifier value)&quot; then 4.0
+		when frequency ~ CustomConcepts.&quot;Every two to four hours (qualifier value)&quot; then 6.0
+		when frequency ~ CustomConcepts.&quot;One to four times a day (qualifier value)&quot; then 4.0
+		when frequency ~ CustomConcepts.&quot;One to three times a day (qualifier value)&quot; then 3.0
+		when frequency ~ CustomConcepts.&quot;One to two times a day (qualifier value)&quot; then 2.0
 		else null 
 	end
 
@@ -1121,128 +562,17 @@ define function &quot;DosesPerDay&quot;(frequency Code):
   //dosage * Quantity { value: dosesPerDay, unit: '/d' }
 
 
-define &quot;methadone_prescribed at date&quot;:
-[MedicationRequest] MR
-        where MR.status = 'completed'
-        and MR.intent = 'order'
-        and MR.medication ~ HCC.&quot;methadone&quot;
-        //and &quot;GetMedicationDailyDose&quot;(MR.dosageInstruction, &quot;DosesPerDay&quot;(singleton from MR.dosageInstruction.timing.repeat.frequencyMax)) &gt;= 60 'mg/d'
-        and MedicationRequestPeriod(MR) starts before &quot;Measurement Date&quot;
-        and MedicationRequestPeriod(MR) ends after &quot;Measurement Date&quot;
-
-define &quot;VMMC_done&quot;:
-[Procedure] P
-  where P.status = 'completed'
-  and P.code ~ HC.&quot;Voluntary medical male circumcision VMMC&quot;
-
-define &quot;VMMC_adverse_event&quot;:
-[AdverseEvent] AE 
-  with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  HC.&quot;Voluntary medical male circumcision VMMC&quot;
-      and P.performed after start of &quot;Measurement Period&quot;
-      and P.performed before end of &quot;Measurement Period&quot;
-      and AE.date &lt;= (P.performed + 30 days)
-      and AE.date &gt;= (P.performed)
-  where AE.actuality = 'actual'
-
-define &quot;VMMC_adverse_event_type&quot;:
-    case 
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Abnormal pain&quot;) then  HC.&quot;Abnormal pain&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Anaesthesia-related effects&quot;) then  HC.&quot;Anaesthesia-related effects&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Damage to the penis&quot;) then  HC.&quot;Damage to the penis&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Difficulty urinating&quot;) then  HC.&quot;Difficulty urinating&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Excessive bleeding&quot;) then  HC.&quot;Excessive bleeding&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Excessive skin removal&quot;) then  HC.&quot;Excessive skin removal&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Excessive swelling&quot;) then  HC.&quot;Excessive swelling&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Haematoma&quot;) then  HC.&quot;Haematoma&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Infection&quot;) then  HC.&quot;Infection&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Injury to glans&quot;) then  HC.&quot;Injury to glans&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Scar or disfigurement&quot;) then  HC.&quot;Scar or disfigurement&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Sharps injury to personnel&quot;) then  HC.&quot;Sharps injury to personnel&quot;
-        when exists(&quot;VMMC_adverse_event&quot; AE where AE.event ~ HC.&quot;Wound disruption&quot;) then  HC.&quot;Wound disruption&quot;
-        else HC.&quot;Other - HIV.B.DE222&quot;
-    end
-
-define &quot;VMMC_adverse_event_Intraoperative&quot;:
-[AdverseEvent] AE 
-  with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  HC.&quot;Voluntary medical male circumcision VMMC&quot;
-      and P.performed after start of &quot;Measurement Period&quot;
-      and P.performed before end of &quot;Measurement Period&quot;
-      and AE.date = P.performed
-  where AE.actuality = 'actual'
-
-define &quot;VMMC_adverse_event_Postoperative&quot;:
-[AdverseEvent] AE 
-  with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  HC.&quot;Voluntary medical male circumcision VMMC&quot;
-      and P.performed after start of &quot;Measurement Period&quot;
-      and P.performed before end of &quot;Measurement Period&quot;
-      and AE.date &lt;= (P.performed + 30 days)
-      and AE.date &gt; (P.performed)
-  where AE.actuality = 'actual'
-
-  define &quot;VMMC_adverse_event_timing&quot;:
-    case 
-        when exists(VMMC_adverse_event_Intraoperative) then  HC.&quot;Intraoperative&quot;
-        when exists(VMMC_adverse_event_Postoperative) then  HC.&quot;Postoperative&quot;
-        else null
-    end
 
 
-  define &quot;Partner or contact of an index case&quot;:
-    [Observation: HC.&quot;Referred through partner services&quot;] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.code ~ HC.&quot;Partner or contact of an index case&quot;
+
+
+
+
+
+
+
+
   
-  define &quot;Drug-injecting partner&quot;:
-    [Observation: HC.&quot;Type of contact or partner for partner services&quot;] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.code ~ HC.&quot;Drug-injecting partner - HIV.B.DE10&quot;
-  
-  define &quot;Sexual partner&quot;:
-    [Observation: HC.&quot;Type of contact or partner for partner services&quot;] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.code ~ HC.&quot;Sexual partner - HIV.B.DE11&quot; 
-  
-
-  define &quot;First HIV Treatment&quot;:
-    First(HE.&quot;On ART H.DE47&quot;)
-
-
-  define &quot;Time to start ART&quot;:
-    case 
-        when difference in days between start of &quot;First HIV Treatment&quot;.effective.toInterval() and start of &quot;First HIV Positive Condition&quot;.onset.toInterval() &lt;= 7 then HC.&quot;Within 7 days of HIV diagnosis&quot;
-        when difference in days between start of &quot;First HIV Treatment&quot;.effective.toInterval() and start of &quot;First HIV Positive Condition&quot;.onset.toInterval() &lt;= 30 then HC.&quot;Within 30 days of HIV diagnosis&quot;
-        when difference in days between start of &quot;First HIV Treatment&quot;.effective.toInterval() and start of &quot;First HIV Positive Condition&quot;.onset.toInterval() &lt;= 90 then HC.&quot;Within 90 days of HIV diagnosis&quot;
-    else null
-    end
-  
-  //HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
-
-  define &quot;already known positive&quot;:
-    [Observation: HC.&quot;HIV status of partner or contact&quot;] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.code ~ HC.&quot;Already knew positive&quot;
-  
-  define &quot;Newly diagnosed&quot;:
-    [Observation: HC.&quot;HIV status of partner or contact&quot;] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.code ~ HC.&quot;Newly diagnosed&quot;
-
-  define &quot;Negative - HIV.H.DE37&quot;:
-    [Observation: HC.&quot;HIV status of partner or contact&quot;] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ HCC.&quot;social-history&quot;)
-    and O.code ~ HC.&quot;Negative - HIV.H.DE37&quot;
   
 
 
@@ -1250,9 +580,41 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
   define STI_testing:
     [Procedure] P
   where P.status = 'completed'
-  and P.code ~ HC.&quot;STI testing and treatment services&quot;
+  and P.code ~ Concepts.&quot;STI testing and treatment services&quot;
 
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 1004Kb )</p></div>
+
+/**
+ * @description Takes a choice between a Medication and a CodeableConcept and returns just the code of the medication
+ */
+define function ExtractMedicationCode(choice Choice&lt;FHIR.CodeableConcept, FHIR.Reference&gt;):
+  case
+	  when choice is FHIR.CodeableConcept then
+    	choice as FHIR.CodeableConcept
+    when choice is FHIR.Reference then
+      First([Medication] M 
+        where M.id = Last(Split(choice.reference, '/'))
+        return M.code as FHIR.CodeableConcept)
+    else
+      Message(null as FHIR.CodeableConcept, true, '1', 'Error', 'Cannot compute a medication code') // TODO: I'm sure that this is supported somehow?
+  end
+
+/**
+ * @description Returns the code of an Observation CodeableConcept
+ */
+define fluent function getObservationCode(observation FHIR.Observation):
+  case 
+    when observation.code is FHIR.CodeableConcept then (observation.value as CodeableConcept).coding.code
+    else null
+  end
+  
+/**
+ * @description Returns a list of codes of an a list of Observations
+ */
+define fluent function getObservationCodes(obslist List&lt;FHIR.Observation&gt;):
+  obslist obs return obs.getObservationCode()
+
+
+</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 199Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -1277,7 +639,7 @@ define &quot;VMMC_adverse_event_Postoperative&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Aug 9, 2024 22:35+0000">2024-08-09</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Aug 12, 2024 23:19+0000">2024-08-12</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
