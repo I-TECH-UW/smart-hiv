@@ -243,9 +243,9 @@ define function ExtractMedicationCode(choice Choice<FHIR.CodeableConcept, FHIR.R
       First([Medication] M 
         where M.id = Last(Split(choice.reference, '/'))
         return M.code as FHIR.CodeableConcept)
-		else
+    else
       Message(null as FHIR.CodeableConcept, true, '1', 'Error', 'Cannot compute a medication code') // TODO: I'm sure that this is supported somehow?
-	end
+  end
 
 /**
  * @description Returns the code of an Observation CodeableConcept

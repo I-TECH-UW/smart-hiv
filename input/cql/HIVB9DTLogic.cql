@@ -1,5 +1,7 @@
 /*
-@DecisionID: HIV.B9.DT Logic
+Library: HIV.B9.DT Logic
+
+@DecisionID: HIV.B9.DT.HIV Re-testing Recommendations
 @BusinessRule: HIV restesting recommendations
 @Trigger: HIV.B9 Determine recommended services
 @HitPolicy: Rule order
