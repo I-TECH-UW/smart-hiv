@@ -68,6 +68,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
 include HIVIndicatorElements called HIE
 
 // Indicator Definition
@@ -92,7 +93,7 @@ define "Initial Population":
 
 
 define "Numerator":
-  exists(HE."HIV-exposed infant or child E.DE112" O
+  exists(HIE."HIV-exposed infant or child E.DE112" O
   with [Patient] P
       such that O.subject.references(P) and P.birthDate during "Measurement Period")
    and exists(

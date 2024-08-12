@@ -81,7 +81,7 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 
 context Patient
 define "Measure Population":
-    HIE."HIV-positive B.DE116"
+   HIE."Has HIV-positive Status"
 	
 /*
  * As defined by Member States

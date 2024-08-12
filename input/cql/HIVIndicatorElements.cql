@@ -268,9 +268,9 @@ define prep_dosing:
 
 define "Treatment outcome category":
   List<String>{
-    if "Is Lost to follow-up" then 'LTFU' else null,
-    if "Transferred out" then 'Transfer Out' else null,
-    if "Death documented" then 'Death' else null,
+    if "Is lost to follow-up" then 'LTFU' else null,
+    if "Has transferred out" then 'Transfer Out' else null,
+    if "Has death documented" then 'Death' else null,
     if "Refused stopped treatment" then 'Stopped' else null,
     if "On ART H.DE47" then 'On ART' else null
   }
@@ -412,43 +412,7 @@ define "Referred through partner services Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: The client is a contact or partner of a person diagnosed with HIV (an index case)
 */
-define "Partner or contact of an index case":
-    [Observation: Concepts."Referred through partner services"] O 
-    where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
-    and O.code ~ Concepts."Partner or contact of an index case"
-  
-define "Drug-injecting partner":
-  [Observation: Concepts."Type of contact or partner for partner services"] O 
-  where O.status in { 'final', 'amended', 'corrected' }
-  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
-  and O.code ~ Concepts."Drug-injecting partner - HIV.B.DE10"
 
-define "Sexual partner":
-  [Observation: Concepts."Type of contact or partner for partner services"] O 
-  where O.status in { 'final', 'amended', 'corrected' }
-  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
-  and O.code ~ Concepts."Sexual partner - HIV.B.DE11" 
-
-//HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
-
-define "already known positive":
-  [Observation: Concepts."HIV status of partner or contact"] O 
-  where O.status in { 'final', 'amended', 'corrected' }
-  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
-  and O.code ~ Concepts."Already knew positive"
-
-define "Newly diagnosed":
-  [Observation: Concepts."HIV status of partner or contact"] O 
-  where O.status in { 'final', 'amended', 'corrected' }
-  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
-  and O.code ~ Concepts."Newly diagnosed"
-
-define "Negative - HIV.H.DE37":
-  [Observation: Concepts."HIV status of partner or contact"] O 
-  where O.status in { 'final', 'amended', 'corrected' }
-  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
-  and O.code ~ Concepts."Negative - HIV.H.DE37"
 /* End of Partner or contact of an index case */
 
 /*
@@ -944,7 +908,7 @@ define "Negative HIV test within measurement period":
 
 define "HIV Status Stratifier":
   case 
-      when exists("HIV Status Positive Condition") or exists("HIV Status Positive Observation") then Concepts."HIV-positive - HIV.B.DE116"
+      when "Has HIV-positive Status" then Concepts."HIV-positive - HIV.B.DE116"
       when not exists("HIV Status Positive Condition") and exists("HIV Status Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
       else Concepts."Unknown - HIV.B.DE118"
   end
@@ -958,6 +922,18 @@ define "HIV Status Stratifier":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Client is HIV-positive
 */
+define "Has HIV-positive Status at last measurment period":
+  exists "HIV Status positive at last measurement period Condition"
+  or exists "HIV Status positive at last measurement period Observation"
+  
+define "HIV Status positive at last measurement period Condition":
+  Elements."HIV Status Positive Condition" C
+  where C.onset.toInterval() starts before (start of "Measurement Period" - duration in days of "Measurement Period")
+
+define "HIV Status positive at last measurement period Observation":
+  Elements."HIV Status Positive Observation" O
+  where O.effective.toInterval() starts before (start of "Measurement Period" - duration in days of "Measurement Period")
+
 define "Has HIV-positive Status":
   exists "HIV Status Positive Condition"
   or exists "HIV Status Positive Observation"
@@ -970,8 +946,6 @@ define "HIV Status Positive Observation":
   Elements."HIV Status Positive Observation" O
   where O.issued before end of "Measurement Period"
   or O.effective.toInterval() starts before end of "Measurement Period"
-
-define "HIV test is results "
 
 /* End of HIV-positive B.DE116 */
 
@@ -5708,8 +5682,10 @@ define "Age of infant in years":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV-exposed infant or child E.DE112":
-  exists Elements."HIV-exposed infant or child E.DE112" O
+  Elements."HIV-exposed infant or child E.DE112" O
     where O.effective.toInterval() during "Measurement Period"
+define "is HIV-exposed infant or child E.DE112":
+  exists "HIV-exposed infant or child E.DE112"
 /* End of HIV-exposed infant or child E.DE112 */
 
 /*
@@ -6453,7 +6429,7 @@ define "Lost to follow-up":
 	and not (H.effective ends after (end of "Measurement Period" - Config."LTFU Days"))
 
 
-define "Is Lost to follow-up":
+define "Is lost to follow-up":
   exists("Lost to follow-up")
 
 /* End of Lost to follow-up */
@@ -6464,7 +6440,7 @@ define "Is Lost to follow-up":
 @description: The client transferred to another facility
 */
 
-define "Transferred out":
+define "Has transferred out":
   exists(Elements."Transferred out" t where t ends during "Measurement Period")
 /* End of Transferred out */
 
@@ -6473,8 +6449,7 @@ define "Transferred out":
 @activity: HIV.H3 Record outreach and result
 @description: People living with HIV previously on ART who are confirmed to have died from any cause
 */
-
-define "Death documented":
+define "Has death documented":
   Elements."Death documented" before end of "Measurement Period"
 /* End of Death documented */
 

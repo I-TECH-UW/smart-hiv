@@ -107,7 +107,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."HIV-positive B.DE116" and HIE."On ART" and exists(HIE."TB preventive treatment TPT completed in measurement period")
+ HIE."Has HIV-positive Status" and HIE."On ART" and exists(HIE."TB preventive treatment TPT completed in measurement period")
 
 /**
  * Denominator
@@ -117,7 +117,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116" and HIE."On ART" and exists(HIE."TB preventive treatment TPT start date in measurement period")
+ HIE."Has HIV-positive Status" and HIE."On ART" and exists(HIE."TB preventive treatment TPT start date in measurement period")
     
 /* end Populations */
 

@@ -85,9 +85,9 @@ context Patient
 define "Measure Population":
    HIE."Has HIV-positive Status"
    and HIE."On ART H.DE47"
-   and not HIE."Death documented"
-   and not HIE."Transferred out"
-   and not HIE."Is Lost to follow-up"
+   and not HIE."Has death documented"
+   and not HIE."Has transferred out"
+   and not HIE."Is lost to follow-up"
 
 /*
  * As defined by Member States

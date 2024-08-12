@@ -11,7 +11,7 @@ include WHOCommon called WC
 include WHOElements called WE
 
 include HIVConcepts called Concepts
-include HIVConceptsCustom called CustomConcepts
+include HIVConceptsCustom called ConceptsCustom
 include HIVCommon called Common
 
 context Patient
@@ -29,7 +29,7 @@ define Exposure_Occupational:
   exists (
     [Observation: Concepts."HIV exposure type"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.value ~ Concepts."Occupational"
   )
 
@@ -37,7 +37,7 @@ define Exposure_Non_Occupational_violent:
   exists (
     [Observation: Concepts."HIV exposure type"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.value ~ Concepts."Non-occupational violent"
   )
 
@@ -45,7 +45,7 @@ define Exposure_Non_Occupational_consensual_sex:
   exists (
     [Observation: Concepts."HIV exposure type"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.value ~ Concepts."Non-occupational consensual sex"
   )
 
@@ -55,7 +55,7 @@ define "Needle Syringe Dispensed":
   with [Observation: Concepts."Key population member - HIV.E.DE113"] O
       such that DUS.reasonReference.references(O) 
         and O.status in { 'final', 'amended', 'corrected' }
-        and exists(O.category OC where OC ~ CustomConcepts."social-history")
+        and exists(O.category OC where OC ~ ConceptsCustom."social-history")
         and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
   where DUS.status = 'completed'
 
@@ -67,7 +67,7 @@ define "HIV PREP Active":
  define "Client is at elevated risk for HIV acquisition":
     [Observation] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.code ~ Concepts."At elevated risk for HIV acquisition - HIV.B.DE225"
 
 define "PREP Prescription":
@@ -85,18 +85,18 @@ define "PEP Prescription":
 define "routine viral load sample collection":
   [Procedure] P
   where P.status = 'completed'
-  and P.code ~ CustomConcepts."viral load test"
+  and P.code ~ ConceptsCustom."viral load test"
   and exists(P.reasonCode RC where RC ~ Concepts."Routine viral load test")
 
 define "viral load sample collection":
   [Procedure] P
   where P.status = 'completed'
-  and P.code ~ CustomConcepts."viral load test"
+  and P.code ~ ConceptsCustom."viral load test"
 
 define "HIV Positive Condition":
 [Condition] C
-    where C.clinicalStatus ~ CustomConcepts."active"
-    and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
+    where C.clinicalStatus ~ ConceptsCustom."active"
+    and exists(C.category CC where CC ~ ConceptsCustom."encounter-diagnosis")
     and C.code ~ Concepts."HIV-positive - HIV.B.DE116"
     sort by start of onset.toInterval()
 
@@ -288,7 +288,7 @@ define "Other A.DE23 Observation":
 */
 define "HTS Visit Encounter":
   [Encounter] E
-    where E.type.coding.code contains CustomConcepts."HTS Visit".code
+    where E.type.coding.code contains ConceptsCustom."HTS Visit".code
 
 /*
 @dataElement: HIV.B.DE1 - Reason for visit
@@ -350,16 +350,39 @@ define "Referred through partner services Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: The client is a contact or partner of a person diagnosed with HIV (an index case)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Partner or contact of an index case":
-  exists "Partner or contact of an index case Condition"
-    or exists "Partner or contact of an index case Observation"
-define "Partner or contact of an index case Condition":
-  [Condition: Concepts."Partner or contact of an index case"]
-define "Partner or contact of an index case Observation":
-  "Referred through partner services Observation" O
+    [Observation: Concepts."Referred through partner services"] O 
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Partner or contact of an index case"
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+    and O.code ~ Concepts."Partner or contact of an index case"
+  
+define "Drug-injecting partner":
+  [Observation: Concepts."Type of contact or partner for partner services"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Drug-injecting partner - HIV.B.DE10"
+
+define "Sexual partner":
+  [Observation: Concepts."Type of contact or partner for partner services"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Sexual partner - HIV.B.DE11" 
+
+//HIV status of partner or contact (already known positive, newly diagnosed positive, negative) 
+
+define "already known positive":
+  [Observation: Concepts."HIV status of partner or contact"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Already knew positive"
+
+define "Negative - HIV.H.DE37":
+  [Observation: Concepts."HIV status of partner or contact"] O 
+  where O.status in { 'final', 'amended', 'corrected' }
+  and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  and O.code ~ Concepts."Negative - HIV.H.DE37"
+
 /* End of Partner or contact of an index case */
 
 /*
@@ -634,7 +657,7 @@ define "Is Key population member":
 define "Key population member type Observation":
   [Observation: Concepts."Key population member - HIV.B.DE49"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
 /* End of Key population member type B.DE50 */
 
 /*
@@ -1342,8 +1365,8 @@ define "HIV Status Positive Observation Date":
  
 define "HIV Status Positive Condition":
   [Condition: Concepts."HIV-positive - HIV.B.DE116"] C
-    where C.clinicalStatus ~ CustomConcepts."active"
-      and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
+    where C.clinicalStatus ~ ConceptsCustom."active"
+      and exists(C.category CC where CC ~ ConceptsCustom."encounter-diagnosis")
     sort by start of onset.toInterval()
 
 define "HIV Status Positive Condition Date":
@@ -1357,8 +1380,8 @@ define "HIV Status Negative Observation":
 
 define "HIV Status Negative Condition":
   [Condition: Concepts."HIV-negative - HIV.B.DE117"] C
-  where C.clinicalStatus ~ CustomConcepts."active"
-  and exists(C.category CC where CC ~ CustomConcepts."encounter-diagnosis")
+  where C.clinicalStatus ~ ConceptsCustom."active"
+  and exists(C.category CC where CC ~ ConceptsCustom."encounter-diagnosis")
   sort by start of onset.toInterval()
 /* End of HIV status */
 
@@ -2560,7 +2583,7 @@ define "HIV retest prior to starting ART conducted Observation":
 define "At elevated risk for HIV acquisition B.DE225":
   [Observation] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.code ~ Concepts."At elevated risk for HIV acquisition - HIV.B.DE225"
 /* End of At elevated risk for HIV acquisition B.DE225 */
 
@@ -6638,7 +6661,7 @@ define "Date viral load test results received by client D.DE193":
 define "Date of viral load sample collection D.DE194":
   [Procedure] P
   where P.status = 'completed'
-  and P.code ~ CustomConcepts."viral load test"
+  and P.code ~ ConceptsCustom."viral load test"
 /* End of Date of viral load sample collection D.DE194 */
 
 /*
@@ -9498,7 +9521,7 @@ define "buprenorphine_prescribed":
 [MedicationRequest] MR
         where MR.status = 'completed'
         and MR.intent = 'order'
-        and MR.medication ~ CustomConcepts."buprenorphine"
+        and MR.medication ~ ConceptsCustom."buprenorphine"
 // TODO: Replace placeholder with relevant CQL logic
 define "Buprenorphine D.DE552":
   exists "Buprenorphine D.DE552 Condition"
@@ -9554,7 +9577,7 @@ define "methadone_prescribed":
 [MedicationRequest] MR
         where MR.status = 'completed'
         and MR.intent = 'order'
-        and MR.medication ~ CustomConcepts."methadone"
+        and MR.medication ~ ConceptsCustom."methadone"
 
 // TODO: Replace placeholder with relevant CQL logic
 define "Methadone D.DE555":
@@ -12499,7 +12522,7 @@ define "Delivery date Value":
 */
 
 define "Place of delivery":
-  [Procedure: CustomConcepts."delivery"]
+  [Procedure: ConceptsCustom."delivery"]
 
 /* End of Place of delivery */
 
@@ -12614,7 +12637,7 @@ define "HIV-exposed infant or child E.DE112":
 */
 define "RelatedPersonMother":
   [RelatedPerson] R
-    where CustomConcepts."Mother" in R.relationship.coding
+    where ConceptsCustom."Mother" in R.relationship.coding
 
 define "Mother": singleton from "RelatedPersonMother"
 
@@ -12649,7 +12672,7 @@ define "Key population member type E.DE114 Observation":
 define "Sex worker E.DE115":
   [Observation: Concepts."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.value ~ Concepts."Sex worker - HIV.E.DE115"
 /* End of Sex worker E.DE115 */
 
@@ -12662,7 +12685,7 @@ define "Sex worker E.DE115":
 define "People who inject drugs E.DE116":
   [Observation: Concepts."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.value ~ Concepts."People who inject drugs - HIV.E.DE116"
 /* End of People who inject drugs E.DE116 */
 
@@ -12675,7 +12698,7 @@ define "People who inject drugs E.DE116":
 define "Trans and gender-diverse people E.DE117":
   [Observation: Concepts."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.value ~ Concepts."Trans and gender-diverse people - HIV.E.DE117"
 /* End of Trans and gender-diverse people E.DE117 */
 
@@ -12687,7 +12710,7 @@ define "Trans and gender-diverse people E.DE117":
 define "People living in prisons and other closed setting":
   [Observation: Concepts."Key population member - HIV.E.DE113"] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.value ~ Concepts."People living in prisons and other closed setting"
 /* End of People living in prisons and other closed setting */
 
@@ -14178,7 +14201,7 @@ define "HIV status of partner or contact Observation":
 define "Already knew positive":
   [Observation: Concepts."HIV status of partner or contact"] O 
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.code ~ Concepts."Already knew positive"
 /* End of Already knew positive */
 
@@ -14191,7 +14214,7 @@ define "Already knew positive":
 define "Newly diagnosed":
   [Observation: Concepts."HIV status of partner or contact"] O 
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.code ~ Concepts."Newly diagnosed"
 /* End of Newly diagnosed */
 
@@ -14204,7 +14227,7 @@ define "Newly diagnosed":
 define "Negative H.DE37":
   [Observation: Concepts."HIV status of partner or contact"] O 
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.code ~ Concepts."Negative - HIV.H.DE37"
 /* End of Negative H.DE37 */
 
@@ -14232,6 +14255,8 @@ define "HIV treatment outcome":
 @activity: HIV.H3 Record outreach and result
 @description: The client transferred to another facility
 */
+define "Has transferred out":
+  exists "Transferred out"
 
 define "Transferred out":
   flatten{"Transferred out status","Transferred out statusHistory".statusHistory.period}
@@ -14265,6 +14290,9 @@ define "Death documented":
     when Patient.deceased is FHIR.dateTime then Patient.deceased as FHIR.dateTime
     else null
   end
+
+define "Has death documented":
+  "Death documented" is not null
 /* End of Death documented */
 
 /*
@@ -14428,7 +14456,7 @@ define "Other reason for stopping ART H.DE80 Observation":
 define "At elevated risk for HIV acquisition PRV.DE1":
   [Observation] O
     where O.status in { 'final', 'amended', 'corrected' }
-    and exists(O.category OC where OC ~ CustomConcepts."social-history")
+    and exists(O.category OC where OC ~ ConceptsCustom."social-history")
     and O.code ~ Concepts."At elevated risk for HIV acquisition - HIV.PRV.DE1"
 /* End of At elevated risk for HIV acquisition PRV.DE1 */
 
@@ -14491,7 +14519,7 @@ define "OAMT statusHistory":
 
 define "NSP":
   [DeviceUseStatement] DUS
-  with [Device: CustomConcepts."needle-syringe"] D
+  with [Device: ConceptsCustom."needle-syringe"] D
       such that DUS.reasonReference.references(D) 
         and D.status in { 'active' }
   where DUS.status = 'completed'
