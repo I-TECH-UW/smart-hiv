@@ -99,10 +99,10 @@ define "Initial Population":
   true
   
 define "numerator":
-	Count(HIE."HIV test date and results returned within measurement period for HIV-positive result")
+	Count(HIE."Non-Self HIV test date and results returned within measurement period for HIV-positive result")
 
 define "denominator":
-	Count(HIE."HIV test date and results returned within measurement period")
+	Count(HIE."Non-Self HIV test with date and results returned in measurement period")
 
 
 //     exists(HE."HIV Positive Condition" C

@@ -118,7 +118,7 @@ define "Numerator":
    and 
    exists(
     HIE."Viral load test result D.DE387" VL
-    with HIC."routine viral load sample collection" P 
+    with HE."routine viral load sample collection" P 
     such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
     where VL.value < 1000
     )
@@ -139,7 +139,7 @@ define "Denominator":
    and 
    exists(
     HIE."Viral load test result D.DE387" VL
-    with HIC."routine viral load sample collection" P 
+    with HE."routine viral load sample collection" P 
     such that VL.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
     )
     

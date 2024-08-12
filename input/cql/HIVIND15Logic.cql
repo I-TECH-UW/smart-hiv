@@ -104,7 +104,7 @@ define "Setting":
     HIE."setting"
 
 define "HIV Status":
-    HIE."HIV Status"
+    HIE."HIV Status Stratifier"
 
 //provider type not provided?
 
@@ -113,4 +113,4 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.setting, ':')
-+ ':' + HIE."HIV Status".code 
++ ':' + HIE."HIV Status Stratifier".code 

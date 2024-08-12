@@ -4,7 +4,6 @@ using FHIR version '4.0.1'
 
 //include fhir.cqf.common.FHIRCommon called FC
 include FHIRHelpers version '4.0.1'
-include FHIRCommon version '4.0.1'
 
 include WHOConcepts
 include WHOCommon called WC
