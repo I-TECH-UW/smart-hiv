@@ -47,9 +47,10 @@ define "Age under 10":
  @output: "Immediately take action or refer for care if a client is having this issue"
  */
 define "Immediately take action or refer for care if a client is having this issue":
-  exists(Elements."Signs of serious illness" O
-    where "Age 10 or older" 
-      and O.value ~ HCx."Tachycardia")
+  "Age 10 or older" and exists(
+    Elements."Signs of serious illness Observation" O
+      where O.value ~ HCx."Tachycardia"
+  )
 
 /*
  @output "Immediately take action or refer for care if client is showing this sign of a serious illness."
@@ -67,15 +68,17 @@ define "Use clinical judgement and consider local epidemiology to determine if s
  @dynamicValue: Guidance
  */
 define "Guidance":
-  case 
-  when "Immediately take action or refer for care if a client is having this issue" 
-    then "Immediately take action or refer for care if a client is having this issue."
+  case
+  when "Immediately take action or refer for care if a client is having this issue"
+    then 'Immediately take action or refer for care if a client is having this issue.'
   when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age 10 or older"
-    then "Immediately take action or refer for care if client is showing this sign of a serious illness."
+    then 'Immediately take action or refer for care if client is showing this sign of a serious illness.'
   when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age under 10"
-    then """This is a sign and/or symptom of a serious health condition.
-  
-Immediately take action or refer for care if client is showing this sign of a serious illness."""
+    then 'This is a sign and/or symptom of a serious health condition.
+
+Immediately take action or refer for care if client is showing this sign of a serious illness.'
+  when "Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill"
+    then 'Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill.'
   else null
   end
 
@@ -83,31 +86,37 @@ Immediately take action or refer for care if client is showing this sign of a se
  Supporting Logic
 */
 define "Signs of serious illness age 10 or older":
-  "Age 10 or older" and Elements."Signs of serious illness" O
-    where
-      O.value ~ HCx."Tachypnea" or
-      O.value ~ HCx."Unable to walk unaided"
+  "Age 10 or older" and exists(
+    Elements."Signs of serious illness Observation" O
+      where
+        O.value ~ HCx."Tachypnea" or
+        O.value ~ HCx."Unable to walk unaided"
+  )
 
 define "Signs of serious illness age under 10":
-  "Age under 10" and Elements."Signs of serious illness" O
-    where 
-      O.value in {
-        HCx."Lethargy - HIV.D.DE22",
-        HCx."Unconsciousness",
-        HCx."Convulsions",
-        HCx."Unable to breastfeed",
-        HCx."Unable to drink",
-        HCx."Repeated vomiting"
-      } 
-  
+  "Age under 10" and exists(
+    Elements."Signs of serious illness Observation" O
+      where
+        O.value ~ HCx."Lethargy - HIV.D.DE22" or
+        O.value ~ HCx."Unconsciousness" or
+        O.value ~ HCx."Convulsions" or
+        O.value ~ HCx."Unable to breastfeed" or
+        O.value ~ HCx."Unable to drink" or
+        O.value ~ HCx."Repeated vomiting"
+    )
+
 define "Signs of serious illness requiring clinical judgement age 10 or older":
-  "Age 10 or older" and Elements."Signs of serious illness" O
-    where
-      O.value ~ HCx."Fever of 39 C or greater" or
-      O.value ~ HCx."Other sign of serious illness"
-  
+  "Age 10 or older" and exists(
+    Elements."Signs of serious illness Observation" O
+      where
+        O.value ~ HCx."Fever of 39 C or greater" or
+        O.value ~ HCx."Other sign of serious illness"
+  )
+
 define "Signs of serious illness requiring clinical judgement age under 10":
-  "Age under 10" and Elements."Signs of serious illness" O
-    where 
-      O.value ~ HCx."Fever of 39 C or greater" or
-      O.value ~ HCx."Other sign of serious illness"
+  "Age under 10" and exists(
+    Elements."Signs of serious illness Observation" O
+      where
+        O.value ~ HCx."Fever of 39 C or greater" or
+        O.value ~ HCx."Other sign of serious illness"
+  )

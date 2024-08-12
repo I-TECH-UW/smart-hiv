@@ -1,7 +1,7 @@
 Instance: HIVB2DTLogic
 InstanceOf: Library
 Title: "HIV.B2.DT Logic"
-Description: "Description not yet available for HIV.B2.DT Logic."
+Description: "HIV.B2.DT Signs of Serious Illness Logic"
 Usage: #definition
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablelibrary"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablelibrary"

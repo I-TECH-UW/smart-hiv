@@ -33,7 +33,6 @@ include WHOCommon called WCom
 include WHOConcepts called WCx
 include WHOEncounterElements called WElm
 
-
 context Patient
 
  /*
@@ -41,24 +40,30 @@ context Patient
   @pseudocode: "HIV status" IN 'HIV-negative', 'Unknown'
   */
 define "HIV status negative or unknown":
-  exists(Elements."HIV status Observation" O
-    where O.value in { HCx."HIV-negative", HCx."Unknown" })
+  exists(
+    Elements."HIV status Observation" O
+      where O.value in { HCx."HIV-negative", HCx."Unknown" }
+  )
 
  /*
   @input: "Partner HIV reported positive"
   @pseudocode: "Partner HIV status (reported)"='HIV-positive'
   */
 define "Partner HIV positive":
-  exists(Elements."Partner HIV status reported Observation" O
-    where O.value ~ HCx."HIV-positive")
+  exists(
+    Elements."Partner HIV status reported Observation" O
+      where O.value ~ HCx."HIV-positive"
+  )
 
  /*
   @input: "Sex partner's HIV treatment status is partner not virally suppressed"
   @pseudocode: "Sex partner's HIV treatment status"='Partner is not virally suppressed'
   */
 define "Sex partner's HIV treatment status is partner not virally suppressed":
-  exists(Elements."Sex partners HIV treatment status Observation" O
-    where O.value ~ HCx."Partner is not virally suppressed")
+  exists(
+    Elements."Sex partners HIV treatment status Observation" O
+      where O.value ~ HCx."Partner is not virally suppressed"
+  )
 
  /*
   @input: "HIV burden of setting is high HIV burden setting"
@@ -79,8 +84,10 @@ define "HIV burden of setting is low HIV burden setting":
   @pseudocode: "Key population member" = TRUE
   */
 define "Key population member":
-  exists(Elements."Key population member* B.DE49 Observation" O
-    where O.value is true)
+  exists(
+    Elements."Key population member* B.DE49 Observation" O
+      where O.value is true
+  )
 
  /*
   @input: "Currently pregnant"
@@ -94,32 +101,40 @@ define "Currently pregnant":
   @pseudocode: "Currently pregnant"=True
   */
 define "TB diagnosis result is diagnosed TB":
-  exists(Elements."TB diagnosis result Observation" O
-    where O.value ~ HCx."Diagnosed TB" or)
+  exists(
+    Elements."TB diagnosis result Observation" O
+      where O.value ~ HCx."Diagnosed TB"
+  )
 
  /*
   @input: "Presumptive TB"
   @pseudocode: "Presumptive TB"=True
   */
 define "Presumptive TB":
-  exists(Elements."Presumptive TB D.DE282 Observation" O
-    where O.value is true)
+  exists(
+    Elements."Presumptive TB D.DE282 Observation" O
+      where O.value is true
+  )
 
 /*
   @input: "Currently on PrEP"
   @pseudocode: "Currently on PrEP"=True
   */
 define "Currently on PrEP":
-  exists(Elements."Currently on PrEP" O
-    where O.value is true)
+  exists(
+    Elements."Currently on PrEP" O
+      where O.value is true
+  )
 
  /*
   @input: "At elevated risk for HIV acquisition"
   @pseudocode: "At elevated risk for HIV acquisition"=True
   */
 define "At elevated risk for HIV acquisition":
-  exists(Elements."At elevated risk for HIV acquisition" O
-    where O.value is true)
+  exists(
+    Elements."At elevated risk for HIV acquisition" O
+      where O.value is true
+  )
 
  /*
   @output: "Schedule an annual follow-up test"

@@ -1,7 +1,7 @@
 Instance: HIVB9DTLogic
 InstanceOf: Library
 Title: "HIV.B9.DT Logic"
-Description: "Description not yet available for HIV.B9.DT Logic."
+Description: "HIV.B9.DT Re-test Recommendations Logic"
 Usage: #definition
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablelibrary"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablelibrary"
