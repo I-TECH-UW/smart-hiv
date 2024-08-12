@@ -90,6 +90,7 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
+include HIVElements called HE
 include HIVIndicatorElements called HIE
 
 // Indicator Definition
@@ -97,7 +98,7 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 
 context Patient
 define "Measure Population":
-  HIE."HIV PREP Active"
+   HIE."HIV PREP Active" 
 
 /*
  * As defined by Member States
@@ -116,6 +117,7 @@ define function "Measure Observation"(Patient "Patient"):
 /*
  * Disaggregators
  */
+
 define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
@@ -129,16 +131,16 @@ define "patientGroups Stratifier":
 	HIE."patientGroups"
 
 define "Setting":
-    HIE."setting"
+  HIE."setting"
 
 define "prep product":
-    HIE."prep_product"
+  HIE."prep_product"
 
 define "prep_experience":
-    HIE."prep_experience"
+  HIE."prep_experience"
 
 define "prep_dosing":
-    HIE."prep_dosing"
+  HIE."prep_dosing"
 
 // Provider type concepts are not found in DD
 
@@ -146,7 +148,7 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE.patientGroups, ':')
 + Combine(HIE.setting, ':')
 + Combine(HIE.prep_product, ':')
 + Combine(HIE.prep_experience, ':')

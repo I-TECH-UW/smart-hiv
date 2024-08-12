@@ -111,18 +111,15 @@ context Patient
 define "Initial Population":
   true
   
+/* Numerator Calculation: Count of clients with "Date medications prescribed" within reporting period AND "Medications prescribed"='PrEP for HIV prevention'*/
 
 define "numerator":
     HIE."HIV PREP Active"
 
+/*  * Denominator Calculation: Programme/service provider level:  | COUNT of clients with "HIV test date" within reporting period AND "HIV test result"='HIV-negative' AND "At elevated risk for HIV acquisition"=True † |  | Population level: *Estimate of the number of people who would benefit from PrEP */
 define "denominator":
-	exists(HE."HIV Negative Observation" O
-	where (O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
-	) and 
-    exists(HE."Client is at elevated risk for HIV acquisition" O
-	where O.issued before end of "Measurement Period"
-	and O.issued after start of "Measurement Period")
+	exists(HIE."Negative HIV test within measurement period") and 
+    HIE."At elevated risk for HIV acquisition B.DE225"
 
     
 /*
@@ -159,7 +156,7 @@ define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE.patientGroups, ':')
 + Combine(HIE.setting, ':')
 + Combine(HIE.prep_product, ':')
 + Combine(HIE.prep_experience, ':')

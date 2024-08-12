@@ -155,4 +155,4 @@ define "Stratification":
  + ':' + HIE."HIV status of partner or contact".code
   + ':' + HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
-+ Combine(flatten(HIE.patientGroups), ':')
++ Combine(HIE.patientGroups, ':')

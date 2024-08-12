@@ -686,7 +686,7 @@ define "Key population member type Observation":
 // Stratifier
 define patientGroups:
   "Key population member type Observation" O
-  return O.getObservationCode()
+  return Combine(O.code.coding.code, ':')
 /* End of Key population member type B.DE50 */
 
 /*
@@ -889,11 +889,17 @@ define "Non-Self HIV test with date and results returned in measurement period":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: Test result is HIV-positive
 */
+
 define "Non-Self HIV test date and results returned within measurement period for HIV-positive result":
   "Non-Self HIV test with date and results returned in measurement period" O
     where O.value ~ Concepts."HIV-positive - HIV.B.DE112"
 /* End of HIV-positive B.DE112 */
 
+/* HIV-negative test */
+define "Negative HIV test within measurement period":
+  Elements."HIV test" O
+  where O.effective.toInterval() overlaps "Measurement Period"
+    and O.value ~ Concepts."HIV-negative - HIV.B.DE113"
 
 /*
 @dataElement: HIV.B.DE115 - HIV status
@@ -1545,7 +1551,7 @@ define "Other B.DE222 Observation":
 
 define "At elevated risk for HIV acquisition B.DE225":
   exists(Elements."At elevated risk for HIV acquisition B.DE225" O 
-  where O.effective.toInterval() during "Measurement Period")
+  where O.effective.toInterval() overlaps "Measurement Period")
 /* End of At elevated risk for HIV acquisition B.DE225 */
 
 /*
