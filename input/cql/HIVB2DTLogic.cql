@@ -49,7 +49,7 @@ define "Age under 10":
 define "Immediately take action or refer for care if a client is having this issue":
   "Age 10 or older" and exists(
     Elements."Signs of serious illness Observation" O
-      where O.value ~ HCx."Tachycardia"
+      where O.value ~ Concepts."Tachycardia"
   )
 
 /*
