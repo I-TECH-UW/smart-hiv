@@ -104,7 +104,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."HIV-positive B.DE116"
-  and (start of HIC."First On ART".effective.toInterval() during "Measurement Period")
+  and (start of HE."First On ART".effective.toInterval() during "Measurement Period")
   and HIE."Date of TB diagnosis"
 
 
@@ -117,7 +117,7 @@ define "Numerator":
 
 define "Denominator":
   HIE."HIV-positive B.DE116"
-  and (start of HIC."First On ART".effective.toInterval() during "Measurement Period")
+  and (start of HE."First On ART".effective.toInterval() during "Measurement Period")
     
 
 /* end Populations */
@@ -138,10 +138,10 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIC."patientGroups"
 
-define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
-  + ':' + HIC."By Age Stratifier"
-+ ':' + HIC."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
+//define "Stratification":
+// HIC."By Administrative Gender Stratifier".code 
+//  + ':' + HIC."By Age Stratifier"
+//+ ':' + HIC."By Geographic Region Stratifier"
+//+ Combine(HIC.patientGroups, ':')
 
 //add Pregnant or breastfeeding women 

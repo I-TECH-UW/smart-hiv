@@ -72,12 +72,24 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include FHIRCommon called FC
 include WHOCommon called WCom
+include HIVConcepts called HC
+include HIVConceptsCustom called HCC
+include HIVCommon called Common
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
 context Patient
 /* Populations */
+
+define "Last ART prescribed before end of measurement period":
+  Last([MedicationRequest: HCC."ART medication"] MR
+  where (MR.authoredOn.toInterval() before end of "Measurement Period")
+  and Common.MedicationRequestPeriod(MR) overlaps "Measurement Period"
+  sort by start of authoredOn.toInterval())
+
 
 /*
  *Initial Population
@@ -94,7 +106,9 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  HIE."HIV-positive B.DE116"
+   and HIE."On ART H.DE47"
+   and (duration in months of Common.MedicationRequestPeriod("Last ART prescribed before end of measurement period") >= 3 months)
 
 
 /**
@@ -105,8 +119,30 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."HIV-positive B.DE116"
+   and HIE."On ART H.DE47"
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIC."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIC."By Age Stratifier"
+
+define "Geographic Region Stratifier":
+	HIC."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIC."patientGroups"
+
+define "Stratification":
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')

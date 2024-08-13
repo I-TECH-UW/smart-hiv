@@ -4223,11 +4223,9 @@ define "Other D.DE739 Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is eligible for differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Eligible for DSD ART":
-  exists "Eligible for DSD ART Observation"
-define "Eligible for DSD ART Observation":
-  Elements."Eligible for DSD ART Observation" O
+  exists Elements."Eligible for DSD ART" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Eligible for DSD ART */
 
@@ -4236,13 +4234,10 @@ define "Eligible for DSD ART Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Date client was assessed for eligibility for differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date DSD ART eligibility assessed":
-  Elements."Date DSD ART eligibility assessed" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date DSD ART eligibility assessed Value":
-  "Date DSD ART eligibility assessed" O
-  return O.value
+  exists(Elements."Date DSD ART eligibility assessed" P where P during "Measurement Period")
+
 /* End of Date DSD ART eligibility assessed */
 
 /*
@@ -4250,12 +4245,22 @@ define "Date DSD ART eligibility assessed Value":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client currently enrolled in differentiated service delivery (DSD) ART model
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Currently enrolled in DSD ART model":
-  exists "Currently enrolled in DSD ART model Observation"
-define "Currently enrolled in DSD ART model Observation":
-  Elements."Currently enrolled in DSD ART model Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Currently enrolled in DSD ART model")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+  )
 /* End of Currently enrolled in DSD ART model */
 
 /*
@@ -4263,13 +4268,9 @@ define "Currently enrolled in DSD ART model Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Date client started on differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "DSD ART start date":
-  Elements."DSD ART start date" O
-    where O.effective.toInterval() during "Measurement Period"
-define "DSD ART start date Value":
-  "DSD ART start date" O
-  return O.value
+  exists(Elements."DSD ART start date" t where t starts during "Measurement Period")
 /* End of DSD ART start date */
 
 /*

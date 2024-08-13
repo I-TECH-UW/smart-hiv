@@ -90,7 +90,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."HIV-positive B.DE116"
-  and (start of HIC."First On ART".effective.toInterval() during "Measurement Period")
+  and (start of HE."First On ART".effective.toInterval() during "Measurement Period")
   and HIE."First-time user of ART"
   and HIE."TB screening date"
 
@@ -104,7 +104,7 @@ define "Numerator":
 
 define "Denominator":
   HIE."HIV-positive B.DE116"
-  and (start of HIC."First On ART".effective.toInterval() during "Measurement Period")
+  and (start of HE."First On ART".effective.toInterval() during "Measurement Period")
   and HIE."First-time user of ART"
     
 
@@ -123,9 +123,9 @@ define "Age Stratifier":
 define "Geographic Region Stratifier":
 	HIC."By Geographic Region Stratifier"
 
-define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
-  + ':' + HIC."By Age Stratifier"
-+ ':' + HIC."By Geographic Region Stratifier"
+//define "Stratification":
+ //HIC."By Administrative Gender Stratifier".code 
+ // + ':' + HIC."By Age Stratifier"
+//+ ':' + HIC."By Geographic Region Stratifier"
 
 

@@ -7,8 +7,7 @@ include WHOCommon called WCom
 //include FHIRCommon called FC
 include HIVConcepts called HC
 include HIVConceptsCustom called HCC
-include HIVElements called HE
-include HIVIndicatorElements called HIE
+
 
 
 parameter "Measurement Period" Interval<Date> default Interval[@2020-01-01, @2020-12-31]
@@ -20,6 +19,11 @@ context Patient
 
 
 //VERIFIED
+
+
+
+
+
 
 define "routine viral load sample collection":
   [Procedure] P
