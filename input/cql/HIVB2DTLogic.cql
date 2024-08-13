@@ -21,10 +21,10 @@ library HIVB2DTLogic
 using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
-include HIVConcepts called HCx
+include HIVConcepts called Concepts
 include HIVEncounterElements called Elements
 include FHIRHelpers version '4.0.1'
-include FHIRCommon called FC
+
 include WHOCommon called WCom
 
 context Patient
@@ -68,17 +68,15 @@ define "Use clinical judgement and consider local epidemiology to determine if s
  @dynamicValue: Guidance
  */
 define "Guidance":
-  case
-  when "Immediately take action or refer for care if a client is having this issue"
+  case 
+  when "Immediately take action or refer for care if a client is having this issue" 
     then 'Immediately take action or refer for care if a client is having this issue.'
   when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age 10 or older"
     then 'Immediately take action or refer for care if client is showing this sign of a serious illness.'
   when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age under 10"
-    then 'This is a sign and/or symptom of a serious health condition.
-
-Immediately take action or refer for care if client is showing this sign of a serious illness.'
-  when "Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill"
-    then 'Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill.'
+    then '''This is a sign and/or symptom of a serious health condition.
+  
+Immediately take action or refer for care if client is showing this sign of a serious illness.'''
   else null
   end
 
@@ -89,34 +87,34 @@ define "Signs of serious illness age 10 or older":
   "Age 10 or older" and exists(
     Elements."Signs of serious illness Observation" O
       where
-        O.value ~ HCx."Tachypnea" or
-        O.value ~ HCx."Unable to walk unaided"
+        O.value ~ Concepts."Tachypnea" or
+        O.value ~ Concepts."Unable to walk unaided"
   )
 
 define "Signs of serious illness age under 10":
   "Age under 10" and exists(
     Elements."Signs of serious illness Observation" O
       where
-        O.value ~ HCx."Lethargy - HIV.D.DE22" or
-        O.value ~ HCx."Unconsciousness" or
-        O.value ~ HCx."Convulsions" or
-        O.value ~ HCx."Unable to breastfeed" or
-        O.value ~ HCx."Unable to drink" or
-        O.value ~ HCx."Repeated vomiting"
+        O.value ~ Concepts."Lethargy - HIV.D.DE22" or
+        O.value ~ Concepts."Unconsciousness" or
+        O.value ~ Concepts."Convulsions" or
+        O.value ~ Concepts."Unable to breastfeed" or
+        O.value ~ Concepts."Unable to drink" or
+        O.value ~ Concepts."Repeated vomiting"
     )
 
 define "Signs of serious illness requiring clinical judgement age 10 or older":
   "Age 10 or older" and exists(
     Elements."Signs of serious illness Observation" O
       where
-        O.value ~ HCx."Fever of 39 C or greater" or
-        O.value ~ HCx."Other sign of serious illness"
+        O.value ~ Concepts."Fever of 39 C or greater" or
+        O.value ~ Concepts."Other sign of serious illness"
   )
 
 define "Signs of serious illness requiring clinical judgement age under 10":
   "Age under 10" and exists(
     Elements."Signs of serious illness Observation" O
       where
-        O.value ~ HCx."Fever of 39 C or greater" or
-        O.value ~ HCx."Other sign of serious illness"
+        O.value ~ Concepts."Fever of 39 C or greater" or
+        O.value ~ Concepts."Other sign of serious illness"
   )

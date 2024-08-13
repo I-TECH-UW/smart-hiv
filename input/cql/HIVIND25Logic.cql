@@ -75,10 +75,12 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+include HIVConfig called Config
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
-parameter "Testing Interval" System.Quantity default 3 months
 
 context Patient
 /* Populations */
@@ -97,27 +99,8 @@ define "Initial Population":
  * Calculation: COUNT of clients with "At elevated risk for HIV acquisition"=True AND with a second "HIV test date" within fixed period after "HIV test date" in the reporting period with "HIV test result"='HIV-negative'
  */
 
-define "Negative Tests within Measurement Period":
-HIC."HIV Negative Observation" O
-    with HIC."Client is at elevated risk for HIV acquisition" HIV
-    such that O.hasMember.references(HIV)
-    where O.issued.value in "Measurement Period"
-    sort by issued
-
-define "First Negative Test within Measurement Period":
-  (First("Negative Tests within Measurement Period"))
-
-define "Negative Tests after First Negative Test":
-HIC."HIV Negative Observation" O
-    with HIC."Client is at elevated risk for HIV acquisition" HIV
-      such that O.hasMember.references(HIV)
-    where O.issued after "First Negative Test within Measurement Period".issued
-      and O.issued before ("First Negative Test within Measurement Period".issued + "Testing Interval")
-    sort by issued
-
-
 define "Numerator":
-  exists(HIC."Negative Tests after First Negative Test")
+  exists(HIE."Negative Tests after First Negative Test")
 
 
 /**
@@ -128,7 +111,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIC."Negative Tests within Measurement Period")
+  exists(HIE."Negative Tests within Measurement Period")
     
 
 /* end Populations */
@@ -139,23 +122,20 @@ define "Denominator":
  */
 
 define "Administrative Gender Stratifier":
-	HIC."By Administrative Gender Stratifier"
+	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIC."By Age Stratifier 2"
+	HIE."By Age Stratifier 2"
 
 define "Geographic Region Stratifier":
-	HIC."By Geographic Region Stratifier"
+	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
-
-define "HIV status of partner or contact":
-  HIC."HIV status of partner or contact"
+	HIE."patientGroups"
 
 define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
- + ':' + HIC."HIV status of partner or contact".code
-  + ':' + HIC."By Age Stratifier 2"
-+ ':' + HIC."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
+ HIE."By Administrative Gender Stratifier".code 
+ + ':' + HIE."HIV status of partner or contact".code
+  + ':' + HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')

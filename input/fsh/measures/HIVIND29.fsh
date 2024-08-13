@@ -5,14 +5,14 @@ Title: "HIV.IND.29 People living with HIV on ART who have suppressed viral load"
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "% of people living with HIV on ART (for at least six months) who have virological suppression"
-* url = "http://smart.who.int/HIV/Measure/HIVIND29"
+* url = "http://smart.who.int/hiv/Measure/HIVIND29"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND29"
 * title = "HIV.IND.29 People living with HIV on ART who have suppressed viral load"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/HIV/Library/HIVIND29Logic"
+* library = "http://smart.who.int/hiv/Library/HIVIND29Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]
@@ -29,7 +29,11 @@ Title: "HIV.IND.29 People living with HIV on ART who have suppressed viral load"
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.29.NUM"
-    * description = "Number of people living with HIV on ART for at least six months and with at least one routine VL test result who have virological suppression (<1000 copies/mL*) during the reporting period."
+    * description = "Number of people living with HIV on ART for at least six months and with at least one routine VL test result who have virological suppression (<1000 copies/mL) during the reporting period."
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"
+  * stratifier[+]
+    * id = "HIV.IND.29.S"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Stratification"

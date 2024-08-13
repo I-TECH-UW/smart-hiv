@@ -5,14 +5,14 @@ Title: "HIV.IND.34 Appropriate second viral load test after adherence counsellin
 * meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure"
 * extension[http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cqfm-populationBasis].valueCode = #boolean
 * description = "% of people living with HIV receiving ART with VL ≥1000 copies/mL who received a follow-up viral load test within three months"
-* url = "http://smart.who.int/HIV/Measure/HIVIND34"
+* url = "http://smart.who.int/hiv/Measure/HIVIND34"
 * status = #draft
 * experimental = true
-* date = "2024-07-12"
+* date = "2024-08-05"
 * name = "HIVIND34"
 * title = "HIV.IND.34 Appropriate second viral load test after adherence counselling"
 * publisher = "World Health Organization (WHO)"
-* library = "http://smart.who.int/HIV/Library/HIVIND34Logic"
+* library = "http://smart.who.int/hiv/Library/HIVIND34Logic"
 * scoring = $measure-scoring#proportion "Proportion"
 * group[+]
   * population[initialPopulation]
@@ -29,7 +29,11 @@ Title: "HIV.IND.34 Appropriate second viral load test after adherence counsellin
     * criteria.expression = "Denominator"
   * population[numerator]
     * id = "HIV.IND.34.NUM"
-    * description = "Number of people living with HIV on ART who received a follow-up VL test three months after a VL test result of ≥1000 copies/mL during the reporting period*"
+    * description = "Number of people living with HIV on ART who received a follow-up VL test three months after a VL test result of ≥1000 copies/mL during the reporting period"
     * code = $measure-population#numerator "Numerator"
     * criteria.language = #text/cql-identifier
     * criteria.expression = "Numerator"
+  * stratifier[+]
+    * id = "HIV.IND.34.S"
+    * criteria.language = #text/cql-identifier
+    * criteria.expression = "Stratification"
