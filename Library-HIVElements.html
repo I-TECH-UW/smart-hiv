@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-12
+            as of 2024-08-13
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVElements</b></p><a name="HIVElements"> </a><a name="hcHIVElements"> </a><a name="HIVElements-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WHOConcepts</td><td><code>http://smart.who.int/hiv/Library/WHOConcepts</code></td></tr><tr><td>Depends On</td><td>Library WC</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library WE</td><td><code>http://smart.who.int/hiv/Library/WHOElements</code></td></tr><tr><td>Depends On</td><td>Library Concepts</td><td><a href="Library-HIVConcepts.html">HIVConcepts</a></td></tr><tr><td>Depends On</td><td>Library ConceptsCustom</td><td><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></td></tr><tr><td>Depends On</td><td>Library Common</td><td><a href="Library-HIVCommon.html">HIVCommon</a></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVElements
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVElements</b></p><a name="HIVElements"> </a><a name="hcHIVElements"> </a><a name="HIVElements-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVElements
 
 using FHIR version '4.0.1'
 
@@ -5895,12 +5895,11 @@ define &quot;Established on ART Observation&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: Whether the client is ART naive or is restarting ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;ART start type&quot;:
-  exists &quot;ART start type Observation&quot;
-define &quot;ART start type Observation&quot;:
-  [Observation: Concepts.&quot;ART start type&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts.&quot;On ART - HIV.D.DE38&quot;)
+    sort by start of effective.toInterval()
 /* End of ART start type */
 
 /*
@@ -5908,16 +5907,10 @@ define &quot;ART start type Observation&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: Client is ART naive, having never taken ART to treat HIV before
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;First-time user of ART&quot;:
-  exists &quot;First-time user of ART Condition&quot;
-    or exists &quot;First-time user of ART Observation&quot;
-define &quot;First-time user of ART Condition&quot;:
-  [Condition: Concepts.&quot;First-time user of ART&quot;]
-define &quot;First-time user of ART Observation&quot;:
-  &quot;ART start type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;First-time user of ART&quot;
+  &quot;ART start type&quot; MS
+      where exists(MS.reasonCode C where C ~ Concepts.&quot;First-time user of ART&quot;) 
 /* End of First-time user of ART */
 
 /*
@@ -5925,16 +5918,11 @@ define &quot;First-time user of ART Observation&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: Client is restarting ART after stopping treatment for any reason
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Restarting ART&quot;:
-  exists &quot;Restarting ART Condition&quot;
-    or exists &quot;Restarting ART Observation&quot;
-define &quot;Restarting ART Condition&quot;:
-  [Condition: Concepts.&quot;Restarting ART&quot;]
-define &quot;Restarting ART Observation&quot;:
-  &quot;ART start type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Restarting ART&quot;
+   &quot;ART start type&quot; MS
+      where exists(MS.reasonCode C where C ~ Concepts.&quot;Restarting ART&quot;) 
+
 /* End of Restarting ART */
 
 /*
@@ -10618,10 +10606,8 @@ define &quot;Malaria prevention such as bed nets and prophylaxis, depending on e
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is eligible for differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Eligible for DSD ART&quot;:
-  exists &quot;Eligible for DSD ART Observation&quot;
-define &quot;Eligible for DSD ART Observation&quot;:
   [Observation: Concepts.&quot;Eligible for DSD ART&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
@@ -10632,13 +10618,11 @@ define &quot;Eligible for DSD ART Observation&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Date client was assessed for eligibility for differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Date DSD ART eligibility assessed&quot;:
-  [Observation: Concepts.&quot;Date DSD ART eligibility assessed&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;Date DSD ART eligibility assessed Value&quot;:
-  &quot;Date DSD ART eligibility assessed&quot; O
-  return O.value
+  [Procedure: CustomConcepts.&quot;DSD ART eligibility assessed&quot;] P
+    where P.status in { 'completed' }
+  return P.performed.toInterval()
 /* End of Date DSD ART eligibility assessed */
 
 /*
@@ -10646,13 +10630,11 @@ define &quot;Date DSD ART eligibility assessed Value&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client currently enrolled in differentiated service delivery (DSD) ART model
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Currently enrolled in DSD ART model&quot;:
-  exists &quot;Currently enrolled in DSD ART model Observation&quot;
-define &quot;Currently enrolled in DSD ART model Observation&quot;:
-  [Observation: Concepts.&quot;Currently enrolled in DSD ART model&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts.&quot;Currently enrolled in DSD ART model&quot;)
+  
 /* End of Currently enrolled in DSD ART model */
 
 /*
@@ -10660,13 +10642,23 @@ define &quot;Currently enrolled in DSD ART model Observation&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Date client started on differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;DSD ART start date&quot;:
-  [Observation: Concepts.&quot;DSD ART start date&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;DSD ART start date Value&quot;:
-  &quot;DSD ART start date&quot; O
-  return O.value
+  flatten{&quot;DSD ART status&quot;,&quot;DSD ART statusHistory&quot;.statusHistory.period}
+
+define &quot;DSD ART status&quot;:
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts.&quot;Currently enrolled in DSD ART model&quot;)
+      and EOC.status = 'finished'
+    return EOC.period
+
+define &quot;DSD ART statusHistory&quot;:
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts.&quot;Currently enrolled in DSD ART model&quot;) 
+    and (exists (
+      EOC.statusHistory H
+      where H.status = 'finished'
+      and H.period is not null))
 /* End of DSD ART start date */
 
 /*
@@ -11960,13 +11952,10 @@ define &quot;Presumptive TB D.DE945 Observation&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: The date when the diagnosis was established
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Date of TB diagnosis&quot;:
-  [Observation: Concepts.&quot;Date of TB diagnosis&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;Date of TB diagnosis Value&quot;:
-  &quot;Date of TB diagnosis&quot; O
-  return O.value
+  [Condition: Concepts.&quot;Diagnosed TB&quot;] C
+  return C.prevalenceInterval()
 /* End of Date of TB diagnosis */
 
 /*
@@ -12451,10 +12440,8 @@ define &quot;History of contact with a person with TB Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Record the result of the tuberculosis (TB) screening
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;TB screening result&quot;:
-  exists &quot;TB screening result Observation&quot;
-define &quot;TB screening result Observation&quot;:
   [Observation: Concepts.&quot;TB screening result&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of TB screening result */
@@ -12464,16 +12451,10 @@ define &quot;TB screening result Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Screening result was positive for tuberculosis (TB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Screen positive for TB&quot;:
-  exists &quot;Screen positive for TB Condition&quot;
-    or exists &quot;Screen positive for TB Observation&quot;
-define &quot;Screen positive for TB Condition&quot;:
-  [Condition: Concepts.&quot;Screen positive for TB&quot;]
-define &quot;Screen positive for TB Observation&quot;:
-  &quot;TB screening result Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Screen positive for TB&quot;
+  &quot;TB screening result&quot; O
+  where O.value ~ Concepts.&quot;Screen positive for TB&quot;
 /* End of Screen positive for TB */
 
 /*
@@ -12481,16 +12462,10 @@ define &quot;Screen positive for TB Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Screening result was negative for tuberculosis (TB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Screen negative for TB&quot;:
-  exists &quot;Screen negative for TB Condition&quot;
-    or exists &quot;Screen negative for TB Observation&quot;
-define &quot;Screen negative for TB Condition&quot;:
-  [Condition: Concepts.&quot;Screen negative for TB&quot;]
-define &quot;Screen negative for TB Observation&quot;:
-  &quot;TB screening result Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Screen negative for TB&quot;
+  &quot;TB screening result&quot; O
+  where O.value ~ Concepts.&quot;Screen negative for TB&quot;
 /* End of Screen negative for TB */
 
 /*
@@ -12498,16 +12473,10 @@ define &quot;Screen negative for TB Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Screening result was inconclusive for tuberculosis (TB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Inconclusive D.DE989&quot;:
-  exists &quot;Inconclusive D.DE989 Condition&quot;
-    or exists &quot;Inconclusive D.DE989 Observation&quot;
-define &quot;Inconclusive D.DE989 Condition&quot;:
-  [Condition: Concepts.&quot;Inconclusive - HIV.D.DE989&quot;]
-define &quot;Inconclusive D.DE989 Observation&quot;:
-  &quot;TB screening result Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Inconclusive - HIV.D.DE989&quot;
+  &quot;TB screening result&quot; O
+  where O.value ~ Concepts.&quot;Inconclusive - HIV.D.DE989&quot;
 /* End of Inconclusive D.DE989 */
 
 /*
@@ -12515,13 +12484,11 @@ define &quot;Inconclusive D.DE989 Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Date the TB screening was conducted
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;TB screening date&quot;:
-  [Observation: Concepts.&quot;TB screening date&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;TB screening date Value&quot;:
-  &quot;TB screening date&quot; O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.category ~ Concepts.&quot;TB diagnostic test category&quot;
 /* End of TB screening date */
 
 /*
@@ -12529,12 +12496,11 @@ define &quot;TB screening date Value&quot;:
 @activity: HIV.D4 Screen for TB
 @description: The type of diagnostic test performed to detect tuberculosis (TB) disease
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;TB diagnostic test category&quot;:
-  exists &quot;TB diagnostic test category Observation&quot;
-define &quot;TB diagnostic test category Observation&quot;:
-  [Observation: Concepts.&quot;TB diagnostic test category&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [Procedure] P
+  where P.status = 'completed'
+  and P.category ~ Concepts.&quot;TB diagnostic test category&quot;
 /* End of TB diagnostic test category */
 
 /*
@@ -12542,16 +12508,10 @@ define &quot;TB diagnostic test category Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Client tested for tuberculosis with a lateral flow urine lipoarabinomannan assay
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;LF-LAM&quot;:
-  exists &quot;LF-LAM Condition&quot;
-    or exists &quot;LF-LAM Observation&quot;
-define &quot;LF-LAM Condition&quot;:
-  [Condition: Concepts.&quot;LF-LAM&quot;]
-define &quot;LF-LAM Observation&quot;:
-  &quot;TB diagnostic test category Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;LF-LAM&quot;
+  &quot;TB diagnostic test category&quot; P
+  where P.code ~ Concepts.&quot;LF-LAM&quot;
 /* End of LF-LAM */
 
 /*
@@ -12559,16 +12519,10 @@ define &quot;LF-LAM Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Client tested with a WHO-recommended molecular diagnostic test to detect Mycobacterium tuberculosis (MTB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;mWRD test for TB&quot;:
-  exists &quot;mWRD test for TB Condition&quot;
-    or exists &quot;mWRD test for TB Observation&quot;
-define &quot;mWRD test for TB Condition&quot;:
-  [Condition: Concepts.&quot;mWRD test for TB&quot;]
-define &quot;mWRD test for TB Observation&quot;:
-  &quot;TB diagnostic test category Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;mWRD test for TB&quot;
+  &quot;TB diagnostic test category&quot; P
+  where P.code ~ Concepts.&quot;mWRD test for TB&quot;
 /* End of mWRD test for TB */
 
 /*
@@ -12576,16 +12530,10 @@ define &quot;mWRD test for TB Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Client tested for tuberculosis with a sputum acid-fast bacilli (AFB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Microscopy - Sputum acid-fast bacilli AFB&quot;:
-  exists &quot;Microscopy - Sputum acid-fast bacilli AFB Condition&quot;
-    or exists &quot;Microscopy - Sputum acid-fast bacilli AFB Observation&quot;
-define &quot;Microscopy - Sputum acid-fast bacilli AFB Condition&quot;:
-  [Condition: Concepts.&quot;Microscopy - Sputum acid-fast bacilli AFB&quot;]
-define &quot;Microscopy - Sputum acid-fast bacilli AFB Observation&quot;:
-  &quot;TB diagnostic test category Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Microscopy - Sputum acid-fast bacilli AFB&quot;
+  &quot;TB diagnostic test category&quot; P
+  where P.code ~ Concepts.&quot;Microscopy - Sputum acid-fast bacilli AFB&quot;
 /* End of Microscopy - Sputum acid-fast bacilli AFB */
 
 /*
@@ -12593,16 +12541,10 @@ define &quot;Microscopy - Sputum acid-fast bacilli AFB Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: Client tested for tuberculosis (TB) with a culture
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;TB Culture&quot;:
-  exists &quot;TB Culture Condition&quot;
-    or exists &quot;TB Culture Observation&quot;
-define &quot;TB Culture Condition&quot;:
-  [Condition: Concepts.&quot;TB Culture&quot;]
-define &quot;TB Culture Observation&quot;:
-  &quot;TB diagnostic test category Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;TB Culture&quot;
+  &quot;TB diagnostic test category&quot; P
+  where P.code ~ Concepts.&quot;TB Culture&quot;
 /* End of TB Culture */
 
 /*
@@ -12610,13 +12552,10 @@ define &quot;TB Culture Observation&quot;:
 @activity: HIV.D4 Screen for TB
 @description: The date when TB diagnostic test was performed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;TB diagnostic test date&quot;:
-  [Observation: Concepts.&quot;TB diagnostic test date&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;TB diagnostic test date Value&quot;:
-  &quot;TB diagnostic test date&quot; O
-  return O.value
+  &quot;TB diagnostic test category&quot; P
+     return (start of P.performed.toInterval())
 /* End of TB diagnostic test date */
 
 /*
@@ -12624,13 +12563,11 @@ define &quot;TB diagnostic test date Value&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: The date on which the client start or restarted tuberculosis (TB) treatment
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;TB treatment start date&quot;:
-  [Observation: Concepts.&quot;TB treatment start date&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;TB treatment start date Value&quot;:
-  &quot;TB treatment start date&quot; O
-  return O.value
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ CustomConcepts.&quot;tb treatment&quot;)
+    return (start of MS.effective.toInterval())
 /* End of TB treatment start date */
 
 /*
@@ -15431,7 +15368,10 @@ define &quot;Reporting date Value&quot;:
 
 /*
  * Custom elements and logic for use DT and IND CQL Libraries
- */</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 7Mb )</p></div>
+ */
+
+define &quot;First On ART&quot;:
+  (First(&quot;On ART D.DE38&quot;))</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -15456,7 +15396,7 @@ define &quot;Reporting date Value&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Aug 12, 2024 23:19+0000">2024-08-12</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Aug 13, 2024 19:21+0000">2024-08-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

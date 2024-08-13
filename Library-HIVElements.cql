@@ -5544,12 +5544,11 @@ define "Established on ART Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Whether the client is ART naive or is restarting ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "ART start type":
-  exists "ART start type Observation"
-define "ART start type Observation":
-  [Observation: Concepts."ART start type"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts."On ART - HIV.D.DE38")
+    sort by start of effective.toInterval()
 /* End of ART start type */
 
 /*
@@ -5557,16 +5556,10 @@ define "ART start type Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is ART naive, having never taken ART to treat HIV before
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "First-time user of ART":
-  exists "First-time user of ART Condition"
-    or exists "First-time user of ART Observation"
-define "First-time user of ART Condition":
-  [Condition: Concepts."First-time user of ART"]
-define "First-time user of ART Observation":
-  "ART start type Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."First-time user of ART"
+  "ART start type" MS
+      where exists(MS.reasonCode C where C ~ Concepts."First-time user of ART") 
 /* End of First-time user of ART */
 
 /*
@@ -5574,16 +5567,11 @@ define "First-time user of ART Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is restarting ART after stopping treatment for any reason
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Restarting ART":
-  exists "Restarting ART Condition"
-    or exists "Restarting ART Observation"
-define "Restarting ART Condition":
-  [Condition: Concepts."Restarting ART"]
-define "Restarting ART Observation":
-  "ART start type Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Restarting ART"
+   "ART start type" MS
+      where exists(MS.reasonCode C where C ~ Concepts."Restarting ART") 
+
 /* End of Restarting ART */
 
 /*
@@ -10267,10 +10255,8 @@ define "Malaria prevention such as bed nets and prophylaxis, depending on epidem
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is eligible for differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Eligible for DSD ART":
-  exists "Eligible for DSD ART Observation"
-define "Eligible for DSD ART Observation":
   [Observation: Concepts."Eligible for DSD ART"] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
@@ -10281,13 +10267,11 @@ define "Eligible for DSD ART Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Date client was assessed for eligibility for differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date DSD ART eligibility assessed":
-  [Observation: Concepts."Date DSD ART eligibility assessed"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date DSD ART eligibility assessed Value":
-  "Date DSD ART eligibility assessed" O
-  return O.value
+  [Procedure: CustomConcepts."DSD ART eligibility assessed"] P
+    where P.status in { 'completed' }
+  return P.performed.toInterval()
 /* End of Date DSD ART eligibility assessed */
 
 /*
@@ -10295,13 +10279,11 @@ define "Date DSD ART eligibility assessed Value":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client currently enrolled in differentiated service delivery (DSD) ART model
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Currently enrolled in DSD ART model":
-  exists "Currently enrolled in DSD ART model Observation"
-define "Currently enrolled in DSD ART model Observation":
-  [Observation: Concepts."Currently enrolled in DSD ART model"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Currently enrolled in DSD ART model")
+  
 /* End of Currently enrolled in DSD ART model */
 
 /*
@@ -10309,13 +10291,23 @@ define "Currently enrolled in DSD ART model Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Date client started on differentiated service delivery (DSD) for ART
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "DSD ART start date":
-  [Observation: Concepts."DSD ART start date"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "DSD ART start date Value":
-  "DSD ART start date" O
-  return O.value
+  flatten{"DSD ART status","DSD ART statusHistory".statusHistory.period}
+
+define "DSD ART status":
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Currently enrolled in DSD ART model")
+      and EOC.status = 'finished'
+    return EOC.period
+
+define "DSD ART statusHistory":
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Currently enrolled in DSD ART model") 
+    and (exists (
+      EOC.statusHistory H
+      where H.status = 'finished'
+      and H.period is not null))
 /* End of DSD ART start date */
 
 /*
@@ -11609,13 +11601,10 @@ define "Presumptive TB D.DE945 Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The date when the diagnosis was established
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date of TB diagnosis":
-  [Observation: Concepts."Date of TB diagnosis"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date of TB diagnosis Value":
-  "Date of TB diagnosis" O
-  return O.value
+  [Condition: Concepts."Diagnosed TB"] C
+  return C.prevalenceInterval()
 /* End of Date of TB diagnosis */
 
 /*
@@ -12100,10 +12089,8 @@ define "History of contact with a person with TB Observation":
 @activity: HIV.D4 Screen for TB
 @description: Record the result of the tuberculosis (TB) screening
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB screening result":
-  exists "TB screening result Observation"
-define "TB screening result Observation":
   [Observation: Concepts."TB screening result"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of TB screening result */
@@ -12113,16 +12100,10 @@ define "TB screening result Observation":
 @activity: HIV.D4 Screen for TB
 @description: Screening result was positive for tuberculosis (TB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Screen positive for TB":
-  exists "Screen positive for TB Condition"
-    or exists "Screen positive for TB Observation"
-define "Screen positive for TB Condition":
-  [Condition: Concepts."Screen positive for TB"]
-define "Screen positive for TB Observation":
-  "TB screening result Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Screen positive for TB"
+  "TB screening result" O
+  where O.value ~ Concepts."Screen positive for TB"
 /* End of Screen positive for TB */
 
 /*
@@ -12130,16 +12111,10 @@ define "Screen positive for TB Observation":
 @activity: HIV.D4 Screen for TB
 @description: Screening result was negative for tuberculosis (TB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Screen negative for TB":
-  exists "Screen negative for TB Condition"
-    or exists "Screen negative for TB Observation"
-define "Screen negative for TB Condition":
-  [Condition: Concepts."Screen negative for TB"]
-define "Screen negative for TB Observation":
-  "TB screening result Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Screen negative for TB"
+  "TB screening result" O
+  where O.value ~ Concepts."Screen negative for TB"
 /* End of Screen negative for TB */
 
 /*
@@ -12147,16 +12122,10 @@ define "Screen negative for TB Observation":
 @activity: HIV.D4 Screen for TB
 @description: Screening result was inconclusive for tuberculosis (TB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Inconclusive D.DE989":
-  exists "Inconclusive D.DE989 Condition"
-    or exists "Inconclusive D.DE989 Observation"
-define "Inconclusive D.DE989 Condition":
-  [Condition: Concepts."Inconclusive - HIV.D.DE989"]
-define "Inconclusive D.DE989 Observation":
-  "TB screening result Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Inconclusive - HIV.D.DE989"
+  "TB screening result" O
+  where O.value ~ Concepts."Inconclusive - HIV.D.DE989"
 /* End of Inconclusive D.DE989 */
 
 /*
@@ -12164,13 +12133,11 @@ define "Inconclusive D.DE989 Observation":
 @activity: HIV.D4 Screen for TB
 @description: Date the TB screening was conducted
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB screening date":
-  [Observation: Concepts."TB screening date"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "TB screening date Value":
-  "TB screening date" O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.category ~ Concepts."TB diagnostic test category"
 /* End of TB screening date */
 
 /*
@@ -12178,12 +12145,11 @@ define "TB screening date Value":
 @activity: HIV.D4 Screen for TB
 @description: The type of diagnostic test performed to detect tuberculosis (TB) disease
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB diagnostic test category":
-  exists "TB diagnostic test category Observation"
-define "TB diagnostic test category Observation":
-  [Observation: Concepts."TB diagnostic test category"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [Procedure] P
+  where P.status = 'completed'
+  and P.category ~ Concepts."TB diagnostic test category"
 /* End of TB diagnostic test category */
 
 /*
@@ -12191,16 +12157,10 @@ define "TB diagnostic test category Observation":
 @activity: HIV.D4 Screen for TB
 @description: Client tested for tuberculosis with a lateral flow urine lipoarabinomannan assay
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "LF-LAM":
-  exists "LF-LAM Condition"
-    or exists "LF-LAM Observation"
-define "LF-LAM Condition":
-  [Condition: Concepts."LF-LAM"]
-define "LF-LAM Observation":
-  "TB diagnostic test category Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."LF-LAM"
+  "TB diagnostic test category" P
+  where P.code ~ Concepts."LF-LAM"
 /* End of LF-LAM */
 
 /*
@@ -12208,16 +12168,10 @@ define "LF-LAM Observation":
 @activity: HIV.D4 Screen for TB
 @description: Client tested with a WHO-recommended molecular diagnostic test to detect Mycobacterium tuberculosis (MTB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "mWRD test for TB":
-  exists "mWRD test for TB Condition"
-    or exists "mWRD test for TB Observation"
-define "mWRD test for TB Condition":
-  [Condition: Concepts."mWRD test for TB"]
-define "mWRD test for TB Observation":
-  "TB diagnostic test category Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."mWRD test for TB"
+  "TB diagnostic test category" P
+  where P.code ~ Concepts."mWRD test for TB"
 /* End of mWRD test for TB */
 
 /*
@@ -12225,16 +12179,10 @@ define "mWRD test for TB Observation":
 @activity: HIV.D4 Screen for TB
 @description: Client tested for tuberculosis with a sputum acid-fast bacilli (AFB)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Microscopy - Sputum acid-fast bacilli AFB":
-  exists "Microscopy - Sputum acid-fast bacilli AFB Condition"
-    or exists "Microscopy - Sputum acid-fast bacilli AFB Observation"
-define "Microscopy - Sputum acid-fast bacilli AFB Condition":
-  [Condition: Concepts."Microscopy - Sputum acid-fast bacilli AFB"]
-define "Microscopy - Sputum acid-fast bacilli AFB Observation":
-  "TB diagnostic test category Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Microscopy - Sputum acid-fast bacilli AFB"
+  "TB diagnostic test category" P
+  where P.code ~ Concepts."Microscopy - Sputum acid-fast bacilli AFB"
 /* End of Microscopy - Sputum acid-fast bacilli AFB */
 
 /*
@@ -12242,16 +12190,10 @@ define "Microscopy - Sputum acid-fast bacilli AFB Observation":
 @activity: HIV.D4 Screen for TB
 @description: Client tested for tuberculosis (TB) with a culture
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB Culture":
-  exists "TB Culture Condition"
-    or exists "TB Culture Observation"
-define "TB Culture Condition":
-  [Condition: Concepts."TB Culture"]
-define "TB Culture Observation":
-  "TB diagnostic test category Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."TB Culture"
+  "TB diagnostic test category" P
+  where P.code ~ Concepts."TB Culture"
 /* End of TB Culture */
 
 /*
@@ -12259,13 +12201,10 @@ define "TB Culture Observation":
 @activity: HIV.D4 Screen for TB
 @description: The date when TB diagnostic test was performed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB diagnostic test date":
-  [Observation: Concepts."TB diagnostic test date"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "TB diagnostic test date Value":
-  "TB diagnostic test date" O
-  return O.value
+  "TB diagnostic test category" P
+     return (start of P.performed.toInterval())
 /* End of TB diagnostic test date */
 
 /*
@@ -12273,13 +12212,11 @@ define "TB diagnostic test date Value":
 @activity: HIV.D8 Capture or update client history
 @description: The date on which the client start or restarted tuberculosis (TB) treatment
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB treatment start date":
-  [Observation: Concepts."TB treatment start date"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "TB treatment start date Value":
-  "TB treatment start date" O
-  return O.value
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ CustomConcepts."tb treatment")
+    return (start of MS.effective.toInterval())
 /* End of TB treatment start date */
 
 /*
@@ -15081,3 +15018,6 @@ define "Reporting date Value":
 /*
  * Custom elements and logic for use DT and IND CQL Libraries
  */
+
+define "First On ART":
+  (First("On ART D.DE38"))

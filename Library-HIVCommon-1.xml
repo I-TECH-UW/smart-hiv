@@ -92,15 +92,13 @@
             <operand locator="11:1-11:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="86" locator="95:1-106:7" name="GetDurationInDays" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="86" locator="93:1-104:7" name="GetDurationInDays" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="86">
                <a:s>//VERIFIED
 
 
 //DRAFT
-
-
 
 //need to add Time to start ART (within 7, 30 or 90 days of diagnosis, as per country guidelines)
 //need to add Disaggregation by time since diagnosis
@@ -463,126 +461,126 @@ define function GetDurationInDays(value FHIR.Duration): // returns Decimal:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="85" locator="96:5-106:7" xsi:type="Case">
-            <comparand localId="9" locator="96:10-96:25" path="value" xsi:type="Property">
-               <source localId="8" locator="96:10-96:19" path="code" xsi:type="Property">
-                  <source localId="7" locator="96:10-96:14" name="value" xsi:type="OperandRef"/>
+         <expression localId="85" locator="94:5-104:7" xsi:type="Case">
+            <comparand localId="9" locator="94:10-94:25" path="value" xsi:type="Property">
+               <source localId="8" locator="94:10-94:19" path="code" xsi:type="Property">
+                  <source localId="7" locator="94:10-94:14" name="value" xsi:type="OperandRef"/>
                </source>
             </comparand>
-            <caseItem localId="15" locator="97:7-97:39">
-               <when localId="10" locator="97:12-97:14" valueType="t:String" value="a" xsi:type="Literal"/>
-               <then localId="14" locator="97:21-97:39" xsi:type="Multiply">
+            <caseItem localId="15" locator="95:7-95:39">
+               <when localId="10" locator="95:12-95:14" valueType="t:String" value="a" xsi:type="Literal"/>
+               <then localId="14" locator="95:21-95:39" xsi:type="Multiply">
                   <operand name="ToDecimal" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="12" locator="97:21-97:31" path="value" xsi:type="Property">
-                        <source localId="11" locator="97:21-97:25" name="value" xsi:type="OperandRef"/>
+                     <operand localId="12" locator="95:21-95:31" path="value" xsi:type="Property">
+                        <source localId="11" locator="95:21-95:25" name="value" xsi:type="OperandRef"/>
                      </operand>
                   </operand>
-                  <operand localId="13" locator="97:35-97:39" valueType="t:Decimal" value="365.0" xsi:type="Literal"/>
+                  <operand localId="13" locator="95:35-95:39" valueType="t:Decimal" value="365.0" xsi:type="Literal"/>
                </then>
             </caseItem>
-            <caseItem localId="22" locator="98:7-98:45">
-               <when localId="16" locator="98:12-98:15" valueType="t:String" value="mo" xsi:type="Literal"/>
-               <then localId="21" locator="98:22-98:45" xsi:type="Multiply">
-                  <operand localId="19" locator="98:22-98:38" path="value" xsi:type="Property">
-                     <source localId="18" locator="98:22-98:32" path="value" xsi:type="Property">
-                        <source localId="17" locator="98:22-98:26" name="value" xsi:type="OperandRef"/>
+            <caseItem localId="22" locator="96:7-96:45">
+               <when localId="16" locator="96:12-96:15" valueType="t:String" value="mo" xsi:type="Literal"/>
+               <then localId="21" locator="96:22-96:45" xsi:type="Multiply">
+                  <operand localId="19" locator="96:22-96:38" path="value" xsi:type="Property">
+                     <source localId="18" locator="96:22-96:32" path="value" xsi:type="Property">
+                        <source localId="17" locator="96:22-96:26" name="value" xsi:type="OperandRef"/>
                      </source>
                   </operand>
-                  <operand localId="20" locator="98:42-98:45" valueType="t:Decimal" value="30.0" xsi:type="Literal"/>
+                  <operand localId="20" locator="96:42-96:45" valueType="t:Decimal" value="30.0" xsi:type="Literal"/>
                </then>
             </caseItem>
-            <caseItem localId="29" locator="99:7-99:44">
-               <when localId="23" locator="99:12-99:15" valueType="t:String" value="wk" xsi:type="Literal"/>
-               <then localId="28" locator="99:22-99:44" xsi:type="Multiply">
-                  <operand localId="26" locator="99:22-99:38" path="value" xsi:type="Property">
-                     <source localId="25" locator="99:22-99:32" path="value" xsi:type="Property">
-                        <source localId="24" locator="99:22-99:26" name="value" xsi:type="OperandRef"/>
+            <caseItem localId="29" locator="97:7-97:44">
+               <when localId="23" locator="97:12-97:15" valueType="t:String" value="wk" xsi:type="Literal"/>
+               <then localId="28" locator="97:22-97:44" xsi:type="Multiply">
+                  <operand localId="26" locator="97:22-97:38" path="value" xsi:type="Property">
+                     <source localId="25" locator="97:22-97:32" path="value" xsi:type="Property">
+                        <source localId="24" locator="97:22-97:26" name="value" xsi:type="OperandRef"/>
                      </source>
                   </operand>
-                  <operand localId="27" locator="99:42-99:44" valueType="t:Decimal" value="7.0" xsi:type="Literal"/>
+                  <operand localId="27" locator="97:42-97:44" valueType="t:Decimal" value="7.0" xsi:type="Literal"/>
                </then>
             </caseItem>
-            <caseItem localId="34" locator="100:7-100:37">
-               <when localId="30" locator="100:12-100:14" valueType="t:String" value="d" xsi:type="Literal"/>
-               <then localId="33" locator="100:21-100:37" path="value" xsi:type="Property">
-                  <source localId="32" locator="100:21-100:31" path="value" xsi:type="Property">
-                     <source localId="31" locator="100:21-100:25" name="value" xsi:type="OperandRef"/>
+            <caseItem localId="34" locator="98:7-98:37">
+               <when localId="30" locator="98:12-98:14" valueType="t:String" value="d" xsi:type="Literal"/>
+               <then localId="33" locator="98:21-98:37" path="value" xsi:type="Property">
+                  <source localId="32" locator="98:21-98:31" path="value" xsi:type="Property">
+                     <source localId="31" locator="98:21-98:25" name="value" xsi:type="OperandRef"/>
                   </source>
                </then>
             </caseItem>
-            <caseItem localId="41" locator="101:7-101:44">
-               <when localId="35" locator="101:12-101:14" valueType="t:String" value="h" xsi:type="Literal"/>
-               <then localId="40" locator="101:21-101:44" xsi:type="Divide">
-                  <operand localId="38" locator="101:21-101:37" path="value" xsi:type="Property">
-                     <source localId="37" locator="101:21-101:31" path="value" xsi:type="Property">
-                        <source localId="36" locator="101:21-101:25" name="value" xsi:type="OperandRef"/>
+            <caseItem localId="41" locator="99:7-99:44">
+               <when localId="35" locator="99:12-99:14" valueType="t:String" value="h" xsi:type="Literal"/>
+               <then localId="40" locator="99:21-99:44" xsi:type="Divide">
+                  <operand localId="38" locator="99:21-99:37" path="value" xsi:type="Property">
+                     <source localId="37" locator="99:21-99:31" path="value" xsi:type="Property">
+                        <source localId="36" locator="99:21-99:25" name="value" xsi:type="OperandRef"/>
                      </source>
                   </operand>
-                  <operand localId="39" locator="101:41-101:44" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                  <operand localId="39" locator="99:41-99:44" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
                </then>
             </caseItem>
-            <caseItem localId="50" locator="102:7-102:53">
-               <when localId="42" locator="102:12-102:16" valueType="t:String" value="min" xsi:type="Literal"/>
-               <then localId="49" locator="102:23-102:53" xsi:type="Divide">
-                  <operand localId="47" locator="102:23-102:46" xsi:type="Divide">
-                     <operand localId="45" locator="102:23-102:39" path="value" xsi:type="Property">
-                        <source localId="44" locator="102:23-102:33" path="value" xsi:type="Property">
-                           <source localId="43" locator="102:23-102:27" name="value" xsi:type="OperandRef"/>
+            <caseItem localId="50" locator="100:7-100:53">
+               <when localId="42" locator="100:12-100:16" valueType="t:String" value="min" xsi:type="Literal"/>
+               <then localId="49" locator="100:23-100:53" xsi:type="Divide">
+                  <operand localId="47" locator="100:23-100:46" xsi:type="Divide">
+                     <operand localId="45" locator="100:23-100:39" path="value" xsi:type="Property">
+                        <source localId="44" locator="100:23-100:33" path="value" xsi:type="Property">
+                           <source localId="43" locator="100:23-100:27" name="value" xsi:type="OperandRef"/>
                         </source>
                      </operand>
-                     <operand localId="46" locator="102:43-102:46" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
+                     <operand localId="46" locator="100:43-100:46" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
                   </operand>
-                  <operand localId="48" locator="102:50-102:53" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                  <operand localId="48" locator="100:50-100:53" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
                </then>
             </caseItem>
-            <caseItem localId="61" locator="103:7-103:58">
-               <when localId="51" locator="103:12-103:14" valueType="t:String" value="s" xsi:type="Literal"/>
-               <then localId="60" locator="103:21-103:58" xsi:type="Divide">
-                  <operand localId="58" locator="103:21-103:51" xsi:type="Divide">
-                     <operand localId="56" locator="103:21-103:44" xsi:type="Divide">
-                        <operand localId="54" locator="103:21-103:37" path="value" xsi:type="Property">
-                           <source localId="53" locator="103:21-103:31" path="value" xsi:type="Property">
-                              <source localId="52" locator="103:21-103:25" name="value" xsi:type="OperandRef"/>
+            <caseItem localId="61" locator="101:7-101:58">
+               <when localId="51" locator="101:12-101:14" valueType="t:String" value="s" xsi:type="Literal"/>
+               <then localId="60" locator="101:21-101:58" xsi:type="Divide">
+                  <operand localId="58" locator="101:21-101:51" xsi:type="Divide">
+                     <operand localId="56" locator="101:21-101:44" xsi:type="Divide">
+                        <operand localId="54" locator="101:21-101:37" path="value" xsi:type="Property">
+                           <source localId="53" locator="101:21-101:31" path="value" xsi:type="Property">
+                              <source localId="52" locator="101:21-101:25" name="value" xsi:type="OperandRef"/>
                            </source>
                         </operand>
-                        <operand localId="55" locator="103:41-103:44" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
+                        <operand localId="55" locator="101:41-101:44" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
                      </operand>
-                     <operand localId="57" locator="103:48-103:51" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
+                     <operand localId="57" locator="101:48-101:51" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
                   </operand>
-                  <operand localId="59" locator="103:55-103:58" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                  <operand localId="59" locator="101:55-101:58" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
                </then>
             </caseItem>
-            <caseItem localId="74" locator="104:7-104:68">
-               <when localId="62" locator="104:12-104:15" valueType="t:String" value="ms" xsi:type="Literal"/>
-               <then localId="73" locator="104:22-104:68" xsi:type="Divide">
-                  <operand localId="71" locator="104:22-104:59" xsi:type="Divide">
-                     <operand localId="69" locator="104:22-104:52" xsi:type="Divide">
-                        <operand localId="67" locator="104:22-104:45" xsi:type="Divide">
-                           <operand localId="65" locator="104:22-104:38" path="value" xsi:type="Property">
-                              <source localId="64" locator="104:22-104:32" path="value" xsi:type="Property">
-                                 <source localId="63" locator="104:22-104:26" name="value" xsi:type="OperandRef"/>
+            <caseItem localId="74" locator="102:7-102:68">
+               <when localId="62" locator="102:12-102:15" valueType="t:String" value="ms" xsi:type="Literal"/>
+               <then localId="73" locator="102:22-102:68" xsi:type="Divide">
+                  <operand localId="71" locator="102:22-102:59" xsi:type="Divide">
+                     <operand localId="69" locator="102:22-102:52" xsi:type="Divide">
+                        <operand localId="67" locator="102:22-102:45" xsi:type="Divide">
+                           <operand localId="65" locator="102:22-102:38" path="value" xsi:type="Property">
+                              <source localId="64" locator="102:22-102:32" path="value" xsi:type="Property">
+                                 <source localId="63" locator="102:22-102:26" name="value" xsi:type="OperandRef"/>
                               </source>
                            </operand>
-                           <operand localId="66" locator="104:42-104:45" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
+                           <operand localId="66" locator="102:42-102:45" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
                         </operand>
-                        <operand localId="68" locator="104:49-104:52" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
+                        <operand localId="68" locator="102:49-102:52" valueType="t:Decimal" value="60.0" xsi:type="Literal"/>
                      </operand>
-                     <operand localId="70" locator="104:56-104:59" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                     <operand localId="70" locator="102:56-102:59" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
                   </operand>
-                  <operand localId="72" locator="104:63-104:68" valueType="t:Decimal" value="1000.0" xsi:type="Literal"/>
+                  <operand localId="72" locator="102:63-102:68" valueType="t:Decimal" value="1000.0" xsi:type="Literal"/>
                </then>
             </caseItem>
             <else xsi:type="ToDecimal">
-               <operand localId="84" locator="105:12-105:101" xsi:type="Message">
-                  <source localId="75" locator="105:20-105:23" valueType="t:Integer" value="1000" xsi:type="Literal"/>
-                  <condition localId="76" locator="105:26-105:29" valueType="t:Boolean" value="true" xsi:type="Literal"/>
-                  <code localId="77" locator="105:32-105:42" valueType="t:String" value="Undefined" xsi:type="Literal"/>
-                  <severity localId="78" locator="105:45-105:51" valueType="t:String" value="Error" xsi:type="Literal"/>
-                  <message localId="83" locator="105:54-105:100" xsi:type="Concatenate">
-                     <operand localId="79" locator="105:54-105:81" valueType="t:String" value="Unsupported duration unit " xsi:type="Literal"/>
-                     <operand localId="82" locator="105:85-105:100" path="value" xsi:type="Property">
-                        <source localId="81" locator="105:85-105:94" path="code" xsi:type="Property">
-                           <source localId="80" locator="105:85-105:89" name="value" xsi:type="OperandRef"/>
+               <operand localId="84" locator="103:12-103:101" xsi:type="Message">
+                  <source localId="75" locator="103:20-103:23" valueType="t:Integer" value="1000" xsi:type="Literal"/>
+                  <condition localId="76" locator="103:26-103:29" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+                  <code localId="77" locator="103:32-103:42" valueType="t:String" value="Undefined" xsi:type="Literal"/>
+                  <severity localId="78" locator="103:45-103:51" valueType="t:String" value="Error" xsi:type="Literal"/>
+                  <message localId="83" locator="103:54-103:100" xsi:type="Concatenate">
+                     <operand localId="79" locator="103:54-103:81" valueType="t:String" value="Unsupported duration unit " xsi:type="Literal"/>
+                     <operand localId="82" locator="103:85-103:100" path="value" xsi:type="Property">
+                        <source localId="81" locator="103:85-103:94" path="code" xsi:type="Property">
+                           <source localId="80" locator="103:85-103:89" name="value" xsi:type="OperandRef"/>
                         </source>
                      </operand>
                   </message>
@@ -590,10 +588,10 @@ define function GetDurationInDays(value FHIR.Duration): // returns Decimal:
             </else>
          </expression>
          <operand name="value">
-            <operandTypeSpecifier localId="6" locator="95:41-95:53" name="fhir:Duration" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="6" locator="93:41-93:53" name="fhir:Duration" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="116" locator="108:1-117:11" name="Prescription Relevant Period" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="116" locator="106:1-115:11" name="Prescription Relevant Period" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="116">
                <a:s>define function &quot;Prescription Relevant Period&quot;(prescription FHIR.MedicationRequest):
@@ -732,78 +730,78 @@ define function GetDurationInDays(value FHIR.Duration): // returns Decimal:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="115" locator="109:3-117:11" xsi:type="If">
-            <condition localId="99" locator="109:6-112:3" xsi:type="And">
-               <operand localId="94" locator="110:5-110:84" xsi:type="And">
-                  <operand localId="90" locator="110:5-110:39" xsi:type="Not">
-                     <operand locator="110:5-110:39" xsi:type="IsNull">
-                        <operand localId="89" locator="110:5-110:27" path="authoredOn" xsi:type="Property">
-                           <source localId="88" locator="110:5-110:16" name="prescription" xsi:type="OperandRef"/>
+         <expression localId="115" locator="107:3-115:11" xsi:type="If">
+            <condition localId="99" locator="107:6-110:3" xsi:type="And">
+               <operand localId="94" locator="108:5-108:84" xsi:type="And">
+                  <operand localId="90" locator="108:5-108:39" xsi:type="Not">
+                     <operand locator="108:5-108:39" xsi:type="IsNull">
+                        <operand localId="89" locator="108:5-108:27" path="authoredOn" xsi:type="Property">
+                           <source localId="88" locator="108:5-108:16" name="prescription" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
-                  <operand localId="93" locator="110:45-110:84" xsi:type="Not">
-                     <operand locator="110:45-110:84" xsi:type="IsNull">
-                        <operand localId="92" locator="110:45-110:72" path="dispenseRequest" xsi:type="Property">
-                           <source localId="91" locator="110:45-110:56" name="prescription" xsi:type="OperandRef"/>
+                  <operand localId="93" locator="108:45-108:84" xsi:type="Not">
+                     <operand locator="108:45-108:84" xsi:type="IsNull">
+                        <operand localId="92" locator="108:45-108:72" path="dispenseRequest" xsi:type="Property">
+                           <source localId="91" locator="108:45-108:56" name="prescription" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                </operand>
-               <operand localId="98" locator="111:11-111:73" xsi:type="Not">
-                  <operand locator="111:11-111:73" xsi:type="IsNull">
-                     <operand localId="97" locator="111:11-111:61" path="expectedSupplyDuration" xsi:type="Property">
-                        <source localId="96" locator="111:11-111:38" path="dispenseRequest" xsi:type="Property">
-                           <source localId="95" locator="111:11-111:22" name="prescription" xsi:type="OperandRef"/>
+               <operand localId="98" locator="109:11-109:73" xsi:type="Not">
+                  <operand locator="109:11-109:73" xsi:type="IsNull">
+                     <operand localId="97" locator="109:11-109:61" path="expectedSupplyDuration" xsi:type="Property">
+                        <source localId="96" locator="109:11-109:38" path="dispenseRequest" xsi:type="Property">
+                           <source localId="95" locator="109:11-109:22" name="prescription" xsi:type="OperandRef"/>
                         </source>
                      </operand>
                   </operand>
                </operand>
             </condition>
-            <then localId="113" locator="113:8-116:3" lowClosed="true" highClosed="true" xsi:type="Interval">
-               <low localId="102" locator="114:5-114:37" xsi:type="DateFrom">
+            <then localId="113" locator="111:8-114:3" lowClosed="true" highClosed="true" xsi:type="Interval">
+               <low localId="102" locator="112:5-112:37" xsi:type="DateFrom">
                   <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="101" locator="114:15-114:37" path="authoredOn" xsi:type="Property">
-                        <source localId="100" locator="114:15-114:26" name="prescription" xsi:type="OperandRef"/>
+                     <operand localId="101" locator="112:15-112:37" path="authoredOn" xsi:type="Property">
+                        <source localId="100" locator="112:15-112:26" name="prescription" xsi:type="OperandRef"/>
                      </operand>
                   </operand>
                </low>
-               <high localId="112" locator="115:5-115:150" xsi:type="Add">
-                  <operand localId="105" locator="115:5-115:37" xsi:type="DateFrom">
+               <high localId="112" locator="113:5-113:150" xsi:type="Add">
+                  <operand localId="105" locator="113:5-113:37" xsi:type="DateFrom">
                      <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="104" locator="115:15-115:37" path="authoredOn" xsi:type="Property">
-                           <source localId="103" locator="115:15-115:26" name="prescription" xsi:type="OperandRef"/>
+                        <operand localId="104" locator="113:15-113:37" path="authoredOn" xsi:type="Property">
+                           <source localId="103" locator="113:15-113:26" name="prescription" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
-                  <operand localId="111" locator="115:41-115:150" classType="t:Quantity" xsi:type="Instance">
+                  <operand localId="111" locator="113:41-113:150" classType="t:Quantity" xsi:type="Instance">
                      <element name="value">
-                        <value localId="109" locator="115:65-115:134" name="GetDurationInDays" xsi:type="FunctionRef">
-                           <operand localId="108" locator="115:83-115:133" path="expectedSupplyDuration" xsi:type="Property">
-                              <source localId="107" locator="115:83-115:110" path="dispenseRequest" xsi:type="Property">
-                                 <source localId="106" locator="115:83-115:94" name="prescription" xsi:type="OperandRef"/>
+                        <value localId="109" locator="113:65-113:134" name="GetDurationInDays" xsi:type="FunctionRef">
+                           <operand localId="108" locator="113:83-113:133" path="expectedSupplyDuration" xsi:type="Property">
+                              <source localId="107" locator="113:83-113:110" path="dispenseRequest" xsi:type="Property">
+                                 <source localId="106" locator="113:83-113:94" name="prescription" xsi:type="OperandRef"/>
                               </source>
                            </operand>
                         </value>
                      </element>
                      <element name="unit">
-                        <value localId="110" locator="115:143-115:148" valueType="t:String" value="days" xsi:type="Literal"/>
+                        <value localId="110" locator="113:143-113:148" valueType="t:String" value="days" xsi:type="Literal"/>
                      </element>
                   </operand>
                </high>
             </then>
             <else xsi:type="As">
-               <operand localId="114" locator="117:8-117:11" xsi:type="Null"/>
+               <operand localId="114" locator="115:8-115:11" xsi:type="Null"/>
                <asTypeSpecifier xsi:type="IntervalTypeSpecifier">
                   <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
                </asTypeSpecifier>
             </else>
          </expression>
          <operand name="prescription">
-            <operandTypeSpecifier localId="87" locator="108:61-108:82" name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="87" locator="106:61-106:82" name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="351" locator="120:1-144:5" name="ToDaily" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="351" locator="118:1-142:5" name="ToDaily" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="351">
                <a:s>//System.Integer
@@ -1605,448 +1603,448 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="350" locator="121:3-144:5" xsi:type="Case">
-            <comparand localId="120" locator="121:8-121:18" path="unit" xsi:type="Property">
-               <source localId="119" locator="121:8-121:13" name="period" xsi:type="OperandRef"/>
+         <expression localId="350" locator="119:3-142:5" xsi:type="Case">
+            <comparand localId="120" locator="119:8-119:18" path="unit" xsi:type="Property">
+               <source localId="119" locator="119:8-119:13" name="period" xsi:type="OperandRef"/>
             </comparand>
-            <caseItem localId="128" locator="122:5-122:51">
-               <when localId="121" locator="122:10-122:12" valueType="t:String" value="h" xsi:type="Literal"/>
-               <then localId="127" locator="122:19-122:51" xsi:type="Multiply">
+            <caseItem localId="128" locator="120:5-120:51">
+               <when localId="121" locator="120:10-120:12" valueType="t:String" value="h" xsi:type="Literal"/>
+               <then localId="127" locator="120:19-120:51" xsi:type="Multiply">
                   <operand xsi:type="ToDecimal">
-                     <operand localId="122" locator="122:19-122:27" name="frequency" xsi:type="OperandRef"/>
+                     <operand localId="122" locator="120:19-120:27" name="frequency" xsi:type="OperandRef"/>
                   </operand>
-                  <operand localId="126" locator="122:31-122:51" xsi:type="Divide">
-                     <operand localId="123" locator="122:32-122:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                     <operand localId="125" locator="122:39-122:50" path="value" xsi:type="Property">
-                        <source localId="124" locator="122:39-122:44" name="period" xsi:type="OperandRef"/>
+                  <operand localId="126" locator="120:31-120:51" xsi:type="Divide">
+                     <operand localId="123" locator="120:32-120:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                     <operand localId="125" locator="120:39-120:50" path="value" xsi:type="Property">
+                        <source localId="124" locator="120:39-120:44" name="period" xsi:type="OperandRef"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="138" locator="123:5-123:58">
-               <when localId="129" locator="123:10-123:14" valueType="t:String" value="min" xsi:type="Literal"/>
-               <then localId="137" locator="123:21-123:58" xsi:type="Multiply">
-                  <operand localId="135" locator="123:21-123:53" xsi:type="Multiply">
+            <caseItem localId="138" locator="121:5-121:58">
+               <when localId="129" locator="121:10-121:14" valueType="t:String" value="min" xsi:type="Literal"/>
+               <then localId="137" locator="121:21-121:58" xsi:type="Multiply">
+                  <operand localId="135" locator="121:21-121:53" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="130" locator="123:21-123:29" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="130" locator="121:21-121:29" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="134" locator="123:33-123:53" xsi:type="Divide">
-                        <operand localId="131" locator="123:34-123:37" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="133" locator="123:41-123:52" path="value" xsi:type="Property">
-                           <source localId="132" locator="123:41-123:46" name="period" xsi:type="OperandRef"/>
+                     <operand localId="134" locator="121:33-121:53" xsi:type="Divide">
+                        <operand localId="131" locator="121:34-121:37" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="133" locator="121:41-121:52" path="value" xsi:type="Property">
+                           <source localId="132" locator="121:41-121:46" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="136" locator="123:57-123:58" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                     <operand localId="136" locator="121:57-121:58" valueType="t:Integer" value="60" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="150" locator="124:5-124:61">
-               <when localId="139" locator="124:10-124:12" valueType="t:String" value="s" xsi:type="Literal"/>
-               <then localId="149" locator="124:19-124:61" xsi:type="Multiply">
-                  <operand localId="147" locator="124:19-124:56" xsi:type="Multiply">
-                     <operand localId="145" locator="124:19-124:51" xsi:type="Multiply">
+            <caseItem localId="150" locator="122:5-122:61">
+               <when localId="139" locator="122:10-122:12" valueType="t:String" value="s" xsi:type="Literal"/>
+               <then localId="149" locator="122:19-122:61" xsi:type="Multiply">
+                  <operand localId="147" locator="122:19-122:56" xsi:type="Multiply">
+                     <operand localId="145" locator="122:19-122:51" xsi:type="Multiply">
                         <operand xsi:type="ToDecimal">
-                           <operand localId="140" locator="124:19-124:27" name="frequency" xsi:type="OperandRef"/>
+                           <operand localId="140" locator="122:19-122:27" name="frequency" xsi:type="OperandRef"/>
                         </operand>
-                        <operand localId="144" locator="124:31-124:51" xsi:type="Divide">
-                           <operand localId="141" locator="124:32-124:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                           <operand localId="143" locator="124:39-124:50" path="value" xsi:type="Property">
-                              <source localId="142" locator="124:39-124:44" name="period" xsi:type="OperandRef"/>
+                        <operand localId="144" locator="122:31-122:51" xsi:type="Divide">
+                           <operand localId="141" locator="122:32-122:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                           <operand localId="143" locator="122:39-122:50" path="value" xsi:type="Property">
+                              <source localId="142" locator="122:39-122:44" name="period" xsi:type="OperandRef"/>
                            </operand>
                         </operand>
                      </operand>
                      <operand xsi:type="ToDecimal">
-                        <operand localId="146" locator="124:55-124:56" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                        <operand localId="146" locator="122:55-122:56" valueType="t:Integer" value="60" xsi:type="Literal"/>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="148" locator="124:60-124:61" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                     <operand localId="148" locator="122:60-122:61" valueType="t:Integer" value="60" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="160" locator="125:5-125:56">
-               <when localId="151" locator="125:10-125:12" valueType="t:String" value="d" xsi:type="Literal"/>
-               <then localId="159" locator="125:19-125:56" xsi:type="Divide">
-                  <operand localId="157" locator="125:19-125:51" xsi:type="Multiply">
+            <caseItem localId="160" locator="123:5-123:56">
+               <when localId="151" locator="123:10-123:12" valueType="t:String" value="d" xsi:type="Literal"/>
+               <then localId="159" locator="123:19-123:56" xsi:type="Divide">
+                  <operand localId="157" locator="123:19-123:51" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="152" locator="125:19-125:27" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="152" locator="123:19-123:27" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="156" locator="125:31-125:51" xsi:type="Divide">
-                        <operand localId="153" locator="125:32-125:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="155" locator="125:39-125:50" path="value" xsi:type="Property">
-                           <source localId="154" locator="125:39-125:44" name="period" xsi:type="OperandRef"/>
+                     <operand localId="156" locator="123:31-123:51" xsi:type="Divide">
+                        <operand localId="153" locator="123:32-123:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="155" locator="123:39-123:50" path="value" xsi:type="Property">
+                           <source localId="154" locator="123:39-123:44" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="158" locator="125:55-125:56" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                     <operand localId="158" locator="123:55-123:56" valueType="t:Integer" value="24" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="172" locator="126:5-126:63">
-               <when localId="161" locator="126:10-126:13" valueType="t:String" value="wk" xsi:type="Literal"/>
-               <then localId="171" locator="126:20-126:63" xsi:type="Divide">
-                  <operand localId="167" locator="126:20-126:52" xsi:type="Multiply">
+            <caseItem localId="172" locator="124:5-124:63">
+               <when localId="161" locator="124:10-124:13" valueType="t:String" value="wk" xsi:type="Literal"/>
+               <then localId="171" locator="124:20-124:63" xsi:type="Divide">
+                  <operand localId="167" locator="124:20-124:52" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="162" locator="126:20-126:28" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="162" locator="124:20-124:28" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="166" locator="126:32-126:52" xsi:type="Divide">
-                        <operand localId="163" locator="126:33-126:36" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="165" locator="126:40-126:51" path="value" xsi:type="Property">
-                           <source localId="164" locator="126:40-126:45" name="period" xsi:type="OperandRef"/>
+                     <operand localId="166" locator="124:32-124:52" xsi:type="Divide">
+                        <operand localId="163" locator="124:33-124:36" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="165" locator="124:40-124:51" path="value" xsi:type="Property">
+                           <source localId="164" locator="124:40-124:45" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="170" locator="126:56-126:63" xsi:type="Multiply">
-                        <operand localId="168" locator="126:57-126:58" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="169" locator="126:62" valueType="t:Integer" value="7" xsi:type="Literal"/>
+                     <operand localId="170" locator="124:56-124:63" xsi:type="Multiply">
+                        <operand localId="168" locator="124:57-124:58" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="169" locator="124:62" valueType="t:Integer" value="7" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="184" locator="127:5-127:64">
-               <when localId="173" locator="127:10-127:13" valueType="t:String" value="mo" xsi:type="Literal"/>
-               <then localId="183" locator="127:20-127:64" xsi:type="Divide">
-                  <operand localId="179" locator="127:20-127:52" xsi:type="Multiply">
+            <caseItem localId="184" locator="125:5-125:64">
+               <when localId="173" locator="125:10-125:13" valueType="t:String" value="mo" xsi:type="Literal"/>
+               <then localId="183" locator="125:20-125:64" xsi:type="Divide">
+                  <operand localId="179" locator="125:20-125:52" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="174" locator="127:20-127:28" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="174" locator="125:20-125:28" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="178" locator="127:32-127:52" xsi:type="Divide">
-                        <operand localId="175" locator="127:33-127:36" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="177" locator="127:40-127:51" path="value" xsi:type="Property">
-                           <source localId="176" locator="127:40-127:45" name="period" xsi:type="OperandRef"/>
+                     <operand localId="178" locator="125:32-125:52" xsi:type="Divide">
+                        <operand localId="175" locator="125:33-125:36" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="177" locator="125:40-125:51" path="value" xsi:type="Property">
+                           <source localId="176" locator="125:40-125:45" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="182" locator="127:56-127:64" xsi:type="Multiply">
-                        <operand localId="180" locator="127:57-127:58" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="181" locator="127:62-127:63" valueType="t:Integer" value="30" xsi:type="Literal"/>
+                     <operand localId="182" locator="125:56-125:64" xsi:type="Multiply">
+                        <operand localId="180" locator="125:57-125:58" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="181" locator="125:62-125:63" valueType="t:Integer" value="30" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="196" locator="128:5-128:64">
-               <when localId="185" locator="128:10-128:12" valueType="t:String" value="a" xsi:type="Literal"/>
-               <then localId="195" locator="128:19-128:64" xsi:type="Divide">
-                  <operand localId="191" locator="128:19-128:51" xsi:type="Multiply">
+            <caseItem localId="196" locator="126:5-126:64">
+               <when localId="185" locator="126:10-126:12" valueType="t:String" value="a" xsi:type="Literal"/>
+               <then localId="195" locator="126:19-126:64" xsi:type="Divide">
+                  <operand localId="191" locator="126:19-126:51" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="186" locator="128:19-128:27" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="186" locator="126:19-126:27" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="190" locator="128:31-128:51" xsi:type="Divide">
-                        <operand localId="187" locator="128:32-128:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="189" locator="128:39-128:50" path="value" xsi:type="Property">
-                           <source localId="188" locator="128:39-128:44" name="period" xsi:type="OperandRef"/>
+                     <operand localId="190" locator="126:31-126:51" xsi:type="Divide">
+                        <operand localId="187" locator="126:32-126:35" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="189" locator="126:39-126:50" path="value" xsi:type="Property">
+                           <source localId="188" locator="126:39-126:44" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="194" locator="128:55-128:64" xsi:type="Multiply">
-                        <operand localId="192" locator="128:56-128:57" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="193" locator="128:61-128:63" valueType="t:Integer" value="365" xsi:type="Literal"/>
+                     <operand localId="194" locator="126:55-126:64" xsi:type="Multiply">
+                        <operand localId="192" locator="126:56-126:57" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="193" locator="126:61-126:63" valueType="t:Integer" value="365" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="204" locator="129:5-129:54">
-               <when localId="197" locator="129:10-129:15" valueType="t:String" value="hour" xsi:type="Literal"/>
-               <then localId="203" locator="129:22-129:54" xsi:type="Multiply">
+            <caseItem localId="204" locator="127:5-127:54">
+               <when localId="197" locator="127:10-127:15" valueType="t:String" value="hour" xsi:type="Literal"/>
+               <then localId="203" locator="127:22-127:54" xsi:type="Multiply">
                   <operand xsi:type="ToDecimal">
-                     <operand localId="198" locator="129:22-129:30" name="frequency" xsi:type="OperandRef"/>
+                     <operand localId="198" locator="127:22-127:30" name="frequency" xsi:type="OperandRef"/>
                   </operand>
-                  <operand localId="202" locator="129:34-129:54" xsi:type="Divide">
-                     <operand localId="199" locator="129:35-129:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                     <operand localId="201" locator="129:42-129:53" path="value" xsi:type="Property">
-                        <source localId="200" locator="129:42-129:47" name="period" xsi:type="OperandRef"/>
+                  <operand localId="202" locator="127:34-127:54" xsi:type="Divide">
+                     <operand localId="199" locator="127:35-127:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                     <operand localId="201" locator="127:42-127:53" path="value" xsi:type="Property">
+                        <source localId="200" locator="127:42-127:47" name="period" xsi:type="OperandRef"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="214" locator="130:5-130:61">
-               <when localId="205" locator="130:10-130:17" valueType="t:String" value="minute" xsi:type="Literal"/>
-               <then localId="213" locator="130:24-130:61" xsi:type="Multiply">
-                  <operand localId="211" locator="130:24-130:56" xsi:type="Multiply">
+            <caseItem localId="214" locator="128:5-128:61">
+               <when localId="205" locator="128:10-128:17" valueType="t:String" value="minute" xsi:type="Literal"/>
+               <then localId="213" locator="128:24-128:61" xsi:type="Multiply">
+                  <operand localId="211" locator="128:24-128:56" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="206" locator="130:24-130:32" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="206" locator="128:24-128:32" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="210" locator="130:36-130:56" xsi:type="Divide">
-                        <operand localId="207" locator="130:37-130:40" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="209" locator="130:44-130:55" path="value" xsi:type="Property">
-                           <source localId="208" locator="130:44-130:49" name="period" xsi:type="OperandRef"/>
+                     <operand localId="210" locator="128:36-128:56" xsi:type="Divide">
+                        <operand localId="207" locator="128:37-128:40" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="209" locator="128:44-128:55" path="value" xsi:type="Property">
+                           <source localId="208" locator="128:44-128:49" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="212" locator="130:60-130:61" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                     <operand localId="212" locator="128:60-128:61" valueType="t:Integer" value="60" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="226" locator="131:5-131:66">
-               <when localId="215" locator="131:10-131:17" valueType="t:String" value="second" xsi:type="Literal"/>
-               <then localId="225" locator="131:24-131:66" xsi:type="Multiply">
-                  <operand localId="223" locator="131:24-131:61" xsi:type="Multiply">
-                     <operand localId="221" locator="131:24-131:56" xsi:type="Multiply">
+            <caseItem localId="226" locator="129:5-129:66">
+               <when localId="215" locator="129:10-129:17" valueType="t:String" value="second" xsi:type="Literal"/>
+               <then localId="225" locator="129:24-129:66" xsi:type="Multiply">
+                  <operand localId="223" locator="129:24-129:61" xsi:type="Multiply">
+                     <operand localId="221" locator="129:24-129:56" xsi:type="Multiply">
                         <operand xsi:type="ToDecimal">
-                           <operand localId="216" locator="131:24-131:32" name="frequency" xsi:type="OperandRef"/>
+                           <operand localId="216" locator="129:24-129:32" name="frequency" xsi:type="OperandRef"/>
                         </operand>
-                        <operand localId="220" locator="131:36-131:56" xsi:type="Divide">
-                           <operand localId="217" locator="131:37-131:40" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                           <operand localId="219" locator="131:44-131:55" path="value" xsi:type="Property">
-                              <source localId="218" locator="131:44-131:49" name="period" xsi:type="OperandRef"/>
+                        <operand localId="220" locator="129:36-129:56" xsi:type="Divide">
+                           <operand localId="217" locator="129:37-129:40" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                           <operand localId="219" locator="129:44-129:55" path="value" xsi:type="Property">
+                              <source localId="218" locator="129:44-129:49" name="period" xsi:type="OperandRef"/>
                            </operand>
                         </operand>
                      </operand>
                      <operand xsi:type="ToDecimal">
-                        <operand localId="222" locator="131:60-131:61" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                        <operand localId="222" locator="129:60-129:61" valueType="t:Integer" value="60" xsi:type="Literal"/>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="224" locator="131:65-131:66" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                     <operand localId="224" locator="129:65-129:66" valueType="t:Integer" value="60" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="236" locator="132:5-132:58">
-               <when localId="227" locator="132:10-132:14" valueType="t:String" value="day" xsi:type="Literal"/>
-               <then localId="235" locator="132:21-132:58" xsi:type="Divide">
-                  <operand localId="233" locator="132:21-132:53" xsi:type="Multiply">
+            <caseItem localId="236" locator="130:5-130:58">
+               <when localId="227" locator="130:10-130:14" valueType="t:String" value="day" xsi:type="Literal"/>
+               <then localId="235" locator="130:21-130:58" xsi:type="Divide">
+                  <operand localId="233" locator="130:21-130:53" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="228" locator="132:21-132:29" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="228" locator="130:21-130:29" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="232" locator="132:33-132:53" xsi:type="Divide">
-                        <operand localId="229" locator="132:34-132:37" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="231" locator="132:41-132:52" path="value" xsi:type="Property">
-                           <source localId="230" locator="132:41-132:46" name="period" xsi:type="OperandRef"/>
+                     <operand localId="232" locator="130:33-130:53" xsi:type="Divide">
+                        <operand localId="229" locator="130:34-130:37" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="231" locator="130:41-130:52" path="value" xsi:type="Property">
+                           <source localId="230" locator="130:41-130:46" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="234" locator="132:57-132:58" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                     <operand localId="234" locator="130:57-130:58" valueType="t:Integer" value="24" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="248" locator="133:5-133:65">
-               <when localId="237" locator="133:10-133:15" valueType="t:String" value="week" xsi:type="Literal"/>
-               <then localId="247" locator="133:22-133:65" xsi:type="Divide">
-                  <operand localId="243" locator="133:22-133:54" xsi:type="Multiply">
+            <caseItem localId="248" locator="131:5-131:65">
+               <when localId="237" locator="131:10-131:15" valueType="t:String" value="week" xsi:type="Literal"/>
+               <then localId="247" locator="131:22-131:65" xsi:type="Divide">
+                  <operand localId="243" locator="131:22-131:54" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="238" locator="133:22-133:30" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="238" locator="131:22-131:30" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="242" locator="133:34-133:54" xsi:type="Divide">
-                        <operand localId="239" locator="133:35-133:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="241" locator="133:42-133:53" path="value" xsi:type="Property">
-                           <source localId="240" locator="133:42-133:47" name="period" xsi:type="OperandRef"/>
+                     <operand localId="242" locator="131:34-131:54" xsi:type="Divide">
+                        <operand localId="239" locator="131:35-131:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="241" locator="131:42-131:53" path="value" xsi:type="Property">
+                           <source localId="240" locator="131:42-131:47" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="246" locator="133:58-133:65" xsi:type="Multiply">
-                        <operand localId="244" locator="133:59-133:60" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="245" locator="133:64" valueType="t:Integer" value="7" xsi:type="Literal"/>
+                     <operand localId="246" locator="131:58-131:65" xsi:type="Multiply">
+                        <operand localId="244" locator="131:59-131:60" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="245" locator="131:64" valueType="t:Integer" value="7" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="260" locator="134:5-134:67">
-               <when localId="249" locator="134:10-134:16" valueType="t:String" value="month" xsi:type="Literal"/>
-               <then localId="259" locator="134:23-134:67" xsi:type="Divide">
-                  <operand localId="255" locator="134:23-134:55" xsi:type="Multiply">
+            <caseItem localId="260" locator="132:5-132:67">
+               <when localId="249" locator="132:10-132:16" valueType="t:String" value="month" xsi:type="Literal"/>
+               <then localId="259" locator="132:23-132:67" xsi:type="Divide">
+                  <operand localId="255" locator="132:23-132:55" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="250" locator="134:23-134:31" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="250" locator="132:23-132:31" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="254" locator="134:35-134:55" xsi:type="Divide">
-                        <operand localId="251" locator="134:36-134:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="253" locator="134:43-134:54" path="value" xsi:type="Property">
-                           <source localId="252" locator="134:43-134:48" name="period" xsi:type="OperandRef"/>
+                     <operand localId="254" locator="132:35-132:55" xsi:type="Divide">
+                        <operand localId="251" locator="132:36-132:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="253" locator="132:43-132:54" path="value" xsi:type="Property">
+                           <source localId="252" locator="132:43-132:48" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="258" locator="134:59-134:67" xsi:type="Multiply">
-                        <operand localId="256" locator="134:60-134:61" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="257" locator="134:65-134:66" valueType="t:Integer" value="30" xsi:type="Literal"/>
+                     <operand localId="258" locator="132:59-132:67" xsi:type="Multiply">
+                        <operand localId="256" locator="132:60-132:61" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="257" locator="132:65-132:66" valueType="t:Integer" value="30" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="272" locator="135:5-135:67">
-               <when localId="261" locator="135:10-135:15" valueType="t:String" value="year" xsi:type="Literal"/>
-               <then localId="271" locator="135:22-135:67" xsi:type="Divide">
-                  <operand localId="267" locator="135:22-135:54" xsi:type="Multiply">
+            <caseItem localId="272" locator="133:5-133:67">
+               <when localId="261" locator="133:10-133:15" valueType="t:String" value="year" xsi:type="Literal"/>
+               <then localId="271" locator="133:22-133:67" xsi:type="Divide">
+                  <operand localId="267" locator="133:22-133:54" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="262" locator="135:22-135:30" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="262" locator="133:22-133:30" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="266" locator="135:34-135:54" xsi:type="Divide">
-                        <operand localId="263" locator="135:35-135:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="265" locator="135:42-135:53" path="value" xsi:type="Property">
-                           <source localId="264" locator="135:42-135:47" name="period" xsi:type="OperandRef"/>
+                     <operand localId="266" locator="133:34-133:54" xsi:type="Divide">
+                        <operand localId="263" locator="133:35-133:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="265" locator="133:42-133:53" path="value" xsi:type="Property">
+                           <source localId="264" locator="133:42-133:47" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="270" locator="135:58-135:67" xsi:type="Multiply">
-                        <operand localId="268" locator="135:59-135:60" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="269" locator="135:64-135:66" valueType="t:Integer" value="365" xsi:type="Literal"/>
+                     <operand localId="270" locator="133:58-133:67" xsi:type="Multiply">
+                        <operand localId="268" locator="133:59-133:60" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="269" locator="133:64-133:66" valueType="t:Integer" value="365" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="280" locator="136:5-136:55">
-               <when localId="273" locator="136:10-136:16" valueType="t:String" value="hours" xsi:type="Literal"/>
-               <then localId="279" locator="136:23-136:55" xsi:type="Multiply">
+            <caseItem localId="280" locator="134:5-134:55">
+               <when localId="273" locator="134:10-134:16" valueType="t:String" value="hours" xsi:type="Literal"/>
+               <then localId="279" locator="134:23-134:55" xsi:type="Multiply">
                   <operand xsi:type="ToDecimal">
-                     <operand localId="274" locator="136:23-136:31" name="frequency" xsi:type="OperandRef"/>
+                     <operand localId="274" locator="134:23-134:31" name="frequency" xsi:type="OperandRef"/>
                   </operand>
-                  <operand localId="278" locator="136:35-136:55" xsi:type="Divide">
-                     <operand localId="275" locator="136:36-136:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                     <operand localId="277" locator="136:43-136:54" path="value" xsi:type="Property">
-                        <source localId="276" locator="136:43-136:48" name="period" xsi:type="OperandRef"/>
+                  <operand localId="278" locator="134:35-134:55" xsi:type="Divide">
+                     <operand localId="275" locator="134:36-134:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                     <operand localId="277" locator="134:43-134:54" path="value" xsi:type="Property">
+                        <source localId="276" locator="134:43-134:48" name="period" xsi:type="OperandRef"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="290" locator="137:5-137:62">
-               <when localId="281" locator="137:10-137:18" valueType="t:String" value="minutes" xsi:type="Literal"/>
-               <then localId="289" locator="137:25-137:62" xsi:type="Multiply">
-                  <operand localId="287" locator="137:25-137:57" xsi:type="Multiply">
+            <caseItem localId="290" locator="135:5-135:62">
+               <when localId="281" locator="135:10-135:18" valueType="t:String" value="minutes" xsi:type="Literal"/>
+               <then localId="289" locator="135:25-135:62" xsi:type="Multiply">
+                  <operand localId="287" locator="135:25-135:57" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="282" locator="137:25-137:33" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="282" locator="135:25-135:33" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="286" locator="137:37-137:57" xsi:type="Divide">
-                        <operand localId="283" locator="137:38-137:41" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="285" locator="137:45-137:56" path="value" xsi:type="Property">
-                           <source localId="284" locator="137:45-137:50" name="period" xsi:type="OperandRef"/>
+                     <operand localId="286" locator="135:37-135:57" xsi:type="Divide">
+                        <operand localId="283" locator="135:38-135:41" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="285" locator="135:45-135:56" path="value" xsi:type="Property">
+                           <source localId="284" locator="135:45-135:50" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="288" locator="137:61-137:62" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                     <operand localId="288" locator="135:61-135:62" valueType="t:Integer" value="60" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="302" locator="138:5-138:67">
-               <when localId="291" locator="138:10-138:18" valueType="t:String" value="seconds" xsi:type="Literal"/>
-               <then localId="301" locator="138:25-138:67" xsi:type="Multiply">
-                  <operand localId="299" locator="138:25-138:62" xsi:type="Multiply">
-                     <operand localId="297" locator="138:25-138:57" xsi:type="Multiply">
+            <caseItem localId="302" locator="136:5-136:67">
+               <when localId="291" locator="136:10-136:18" valueType="t:String" value="seconds" xsi:type="Literal"/>
+               <then localId="301" locator="136:25-136:67" xsi:type="Multiply">
+                  <operand localId="299" locator="136:25-136:62" xsi:type="Multiply">
+                     <operand localId="297" locator="136:25-136:57" xsi:type="Multiply">
                         <operand xsi:type="ToDecimal">
-                           <operand localId="292" locator="138:25-138:33" name="frequency" xsi:type="OperandRef"/>
+                           <operand localId="292" locator="136:25-136:33" name="frequency" xsi:type="OperandRef"/>
                         </operand>
-                        <operand localId="296" locator="138:37-138:57" xsi:type="Divide">
-                           <operand localId="293" locator="138:38-138:41" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                           <operand localId="295" locator="138:45-138:56" path="value" xsi:type="Property">
-                              <source localId="294" locator="138:45-138:50" name="period" xsi:type="OperandRef"/>
+                        <operand localId="296" locator="136:37-136:57" xsi:type="Divide">
+                           <operand localId="293" locator="136:38-136:41" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                           <operand localId="295" locator="136:45-136:56" path="value" xsi:type="Property">
+                              <source localId="294" locator="136:45-136:50" name="period" xsi:type="OperandRef"/>
                            </operand>
                         </operand>
                      </operand>
                      <operand xsi:type="ToDecimal">
-                        <operand localId="298" locator="138:61-138:62" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                        <operand localId="298" locator="136:61-136:62" valueType="t:Integer" value="60" xsi:type="Literal"/>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="300" locator="138:66-138:67" valueType="t:Integer" value="60" xsi:type="Literal"/>
+                     <operand localId="300" locator="136:66-136:67" valueType="t:Integer" value="60" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="312" locator="139:5-139:59">
-               <when localId="303" locator="139:10-139:15" valueType="t:String" value="days" xsi:type="Literal"/>
-               <then localId="311" locator="139:22-139:59" xsi:type="Divide">
-                  <operand localId="309" locator="139:22-139:54" xsi:type="Multiply">
+            <caseItem localId="312" locator="137:5-137:59">
+               <when localId="303" locator="137:10-137:15" valueType="t:String" value="days" xsi:type="Literal"/>
+               <then localId="311" locator="137:22-137:59" xsi:type="Divide">
+                  <operand localId="309" locator="137:22-137:54" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="304" locator="139:22-139:30" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="304" locator="137:22-137:30" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="308" locator="139:34-139:54" xsi:type="Divide">
-                        <operand localId="305" locator="139:35-139:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="307" locator="139:42-139:53" path="value" xsi:type="Property">
-                           <source localId="306" locator="139:42-139:47" name="period" xsi:type="OperandRef"/>
+                     <operand localId="308" locator="137:34-137:54" xsi:type="Divide">
+                        <operand localId="305" locator="137:35-137:38" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="307" locator="137:42-137:53" path="value" xsi:type="Property">
+                           <source localId="306" locator="137:42-137:47" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="310" locator="139:58-139:59" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                     <operand localId="310" locator="137:58-137:59" valueType="t:Integer" value="24" xsi:type="Literal"/>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="324" locator="140:5-140:66">
-               <when localId="313" locator="140:10-140:16" valueType="t:String" value="weeks" xsi:type="Literal"/>
-               <then localId="323" locator="140:23-140:66" xsi:type="Divide">
-                  <operand localId="319" locator="140:23-140:55" xsi:type="Multiply">
+            <caseItem localId="324" locator="138:5-138:66">
+               <when localId="313" locator="138:10-138:16" valueType="t:String" value="weeks" xsi:type="Literal"/>
+               <then localId="323" locator="138:23-138:66" xsi:type="Divide">
+                  <operand localId="319" locator="138:23-138:55" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="314" locator="140:23-140:31" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="314" locator="138:23-138:31" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="318" locator="140:35-140:55" xsi:type="Divide">
-                        <operand localId="315" locator="140:36-140:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="317" locator="140:43-140:54" path="value" xsi:type="Property">
-                           <source localId="316" locator="140:43-140:48" name="period" xsi:type="OperandRef"/>
+                     <operand localId="318" locator="138:35-138:55" xsi:type="Divide">
+                        <operand localId="315" locator="138:36-138:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="317" locator="138:43-138:54" path="value" xsi:type="Property">
+                           <source localId="316" locator="138:43-138:48" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="322" locator="140:59-140:66" xsi:type="Multiply">
-                        <operand localId="320" locator="140:60-140:61" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="321" locator="140:65" valueType="t:Integer" value="7" xsi:type="Literal"/>
+                     <operand localId="322" locator="138:59-138:66" xsi:type="Multiply">
+                        <operand localId="320" locator="138:60-138:61" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="321" locator="138:65" valueType="t:Integer" value="7" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="336" locator="141:5-141:68">
-               <when localId="325" locator="141:10-141:17" valueType="t:String" value="months" xsi:type="Literal"/>
-               <then localId="335" locator="141:24-141:68" xsi:type="Divide">
-                  <operand localId="331" locator="141:24-141:56" xsi:type="Multiply">
+            <caseItem localId="336" locator="139:5-139:68">
+               <when localId="325" locator="139:10-139:17" valueType="t:String" value="months" xsi:type="Literal"/>
+               <then localId="335" locator="139:24-139:68" xsi:type="Divide">
+                  <operand localId="331" locator="139:24-139:56" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="326" locator="141:24-141:32" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="326" locator="139:24-139:32" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="330" locator="141:36-141:56" xsi:type="Divide">
-                        <operand localId="327" locator="141:37-141:40" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="329" locator="141:44-141:55" path="value" xsi:type="Property">
-                           <source localId="328" locator="141:44-141:49" name="period" xsi:type="OperandRef"/>
+                     <operand localId="330" locator="139:36-139:56" xsi:type="Divide">
+                        <operand localId="327" locator="139:37-139:40" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="329" locator="139:44-139:55" path="value" xsi:type="Property">
+                           <source localId="328" locator="139:44-139:49" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="334" locator="141:60-141:68" xsi:type="Multiply">
-                        <operand localId="332" locator="141:61-141:62" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="333" locator="141:66-141:67" valueType="t:Integer" value="30" xsi:type="Literal"/>
+                     <operand localId="334" locator="139:60-139:68" xsi:type="Multiply">
+                        <operand localId="332" locator="139:61-139:62" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="333" locator="139:66-139:67" valueType="t:Integer" value="30" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
-            <caseItem localId="348" locator="142:5-142:68">
-               <when localId="337" locator="142:10-142:16" valueType="t:String" value="years" xsi:type="Literal"/>
-               <then localId="347" locator="142:23-142:68" xsi:type="Divide">
-                  <operand localId="343" locator="142:23-142:55" xsi:type="Multiply">
+            <caseItem localId="348" locator="140:5-140:68">
+               <when localId="337" locator="140:10-140:16" valueType="t:String" value="years" xsi:type="Literal"/>
+               <then localId="347" locator="140:23-140:68" xsi:type="Divide">
+                  <operand localId="343" locator="140:23-140:55" xsi:type="Multiply">
                      <operand xsi:type="ToDecimal">
-                        <operand localId="338" locator="142:23-142:31" name="frequency" xsi:type="OperandRef"/>
+                        <operand localId="338" locator="140:23-140:31" name="frequency" xsi:type="OperandRef"/>
                      </operand>
-                     <operand localId="342" locator="142:35-142:55" xsi:type="Divide">
-                        <operand localId="339" locator="142:36-142:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
-                        <operand localId="341" locator="142:43-142:54" path="value" xsi:type="Property">
-                           <source localId="340" locator="142:43-142:48" name="period" xsi:type="OperandRef"/>
+                     <operand localId="342" locator="140:35-140:55" xsi:type="Divide">
+                        <operand localId="339" locator="140:36-140:39" valueType="t:Decimal" value="24.0" xsi:type="Literal"/>
+                        <operand localId="341" locator="140:43-140:54" path="value" xsi:type="Property">
+                           <source localId="340" locator="140:43-140:48" name="period" xsi:type="OperandRef"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="346" locator="142:59-142:68" xsi:type="Multiply">
-                        <operand localId="344" locator="142:60-142:61" valueType="t:Integer" value="24" xsi:type="Literal"/>
-                        <operand localId="345" locator="142:65-142:67" valueType="t:Integer" value="365" xsi:type="Literal"/>
+                     <operand localId="346" locator="140:59-140:68" xsi:type="Multiply">
+                        <operand localId="344" locator="140:60-140:61" valueType="t:Integer" value="24" xsi:type="Literal"/>
+                        <operand localId="345" locator="140:65-140:67" valueType="t:Integer" value="365" xsi:type="Literal"/>
                      </operand>
                   </operand>
                </then>
             </caseItem>
             <else asType="t:Decimal" xsi:type="As">
-               <operand localId="349" locator="143:10-143:13" xsi:type="Null"/>
+               <operand localId="349" locator="141:10-141:13" xsi:type="Null"/>
             </else>
          </expression>
          <operand name="frequency">
-            <operandTypeSpecifier localId="117" locator="120:35-120:48" name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="117" locator="118:35-118:48" name="t:Integer" xsi:type="NamedTypeSpecifier"/>
          </operand>
          <operand name="period">
-            <operandTypeSpecifier localId="118" locator="120:58-120:72" name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="118" locator="118:58-118:72" name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="364" locator="146:3-149:1" name="HasEnd" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="364" locator="144:3-147:1" name="HasEnd" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="364">
                <a:s>define function &quot;HasEnd&quot;(period Interval&lt;DateTime> ):
@@ -2091,28 +2089,28 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="363" locator="147:3-149:1" xsi:type="Not">
-            <operand localId="362" locator="147:7-149:1" xsi:type="Or">
-               <operand localId="356" locator="147:8-147:28" xsi:type="IsNull">
-                  <operand localId="355" locator="147:8-147:20" xsi:type="End">
-                     <operand localId="354" locator="147:15-147:20" name="period" xsi:type="OperandRef"/>
+         <expression localId="363" locator="145:3-147:1" xsi:type="Not">
+            <operand localId="362" locator="145:7-147:1" xsi:type="Or">
+               <operand localId="356" locator="145:8-145:28" xsi:type="IsNull">
+                  <operand localId="355" locator="145:8-145:20" xsi:type="End">
+                     <operand localId="354" locator="145:15-145:20" name="period" xsi:type="OperandRef"/>
                   </operand>
                </operand>
-               <operand localId="361" locator="148:8-148:39" xsi:type="Equal">
-                  <operand localId="358" locator="148:8-148:20" xsi:type="End">
-                     <operand localId="357" locator="148:15-148:20" name="period" xsi:type="OperandRef"/>
+               <operand localId="361" locator="146:8-146:39" xsi:type="Equal">
+                  <operand localId="358" locator="146:8-146:20" xsi:type="End">
+                     <operand localId="357" locator="146:15-146:20" name="period" xsi:type="OperandRef"/>
                   </operand>
-                  <operand localId="360" locator="148:24-148:39" valueType="t:DateTime" xsi:type="MaxValue"/>
+                  <operand localId="360" locator="146:24-146:39" valueType="t:DateTime" xsi:type="MaxValue"/>
                </operand>
             </operand>
          </expression>
          <operand name="period">
-            <operandTypeSpecifier localId="353" locator="146:35-146:52" xsi:type="IntervalTypeSpecifier">
-               <pointType localId="352" locator="146:44-146:51" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="353" locator="144:35-144:52" xsi:type="IntervalTypeSpecifier">
+               <pointType localId="352" locator="144:44-144:51" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
             </operandTypeSpecifier>
          </operand>
       </def>
-      <def localId="481" locator="151:3-181:64" name="MedicationRequestPeriod" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="481" locator="149:3-179:64" name="MedicationRequestPeriod" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="481">
                <a:s>define function MedicationRequestPeriod(Request FHIR.MedicationRequest):
@@ -2636,208 +2634,208 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="480" locator="152:3-181:64" xsi:type="Query">
-            <source localId="367" locator="152:3-152:11" alias="R">
-               <expression localId="366" locator="152:3-152:9" name="Request" xsi:type="OperandRef"/>
+         <expression localId="480" locator="150:3-179:64" xsi:type="Query">
+            <source localId="367" locator="150:3-150:11" alias="R">
+               <expression localId="366" locator="150:3-150:9" name="Request" xsi:type="OperandRef"/>
             </source>
-            <let localId="371" locator="154:7-154:48" identifier="dosage">
-               <expression localId="370" locator="154:15-154:48" xsi:type="SingletonFrom">
-                  <operand localId="369" locator="154:30-154:48" path="dosageInstruction" scope="R" xsi:type="Property"/>
+            <let localId="371" locator="152:7-152:48" identifier="dosage">
+               <expression localId="370" locator="152:15-152:48" xsi:type="SingletonFrom">
+                  <operand localId="369" locator="152:30-152:48" path="dosageInstruction" scope="R" xsi:type="Property"/>
                </expression>
             </let>
-            <let localId="375" locator="155:7-155:52" identifier="doseAndRate">
-               <expression localId="374" locator="155:20-155:52" xsi:type="SingletonFrom">
-                  <operand localId="373" locator="155:35-155:52" path="doseAndRate" xsi:type="Property">
-                     <source localId="372" locator="155:35-155:40" name="dosage" xsi:type="QueryLetRef"/>
+            <let localId="375" locator="153:7-153:52" identifier="doseAndRate">
+               <expression localId="374" locator="153:20-153:52" xsi:type="SingletonFrom">
+                  <operand localId="373" locator="153:35-153:52" path="doseAndRate" xsi:type="Property">
+                     <source localId="372" locator="153:35-153:40" name="dosage" xsi:type="QueryLetRef"/>
                   </operand>
                </expression>
             </let>
-            <let localId="380" locator="156:7-156:42" identifier="doseRange">
-               <expression localId="379" locator="156:18-156:42" strict="false" xsi:type="As">
-                  <operand localId="377" locator="156:18-156:33" path="dose" xsi:type="Property">
-                     <source localId="376" locator="156:18-156:28" name="doseAndRate" xsi:type="QueryLetRef"/>
+            <let localId="380" locator="154:7-154:42" identifier="doseRange">
+               <expression localId="379" locator="154:18-154:42" strict="false" xsi:type="As">
+                  <operand localId="377" locator="154:18-154:33" path="dose" xsi:type="Property">
+                     <source localId="376" locator="154:18-154:28" name="doseAndRate" xsi:type="QueryLetRef"/>
                   </operand>
-                  <asTypeSpecifier localId="378" locator="156:38-156:42" name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
+                  <asTypeSpecifier localId="378" locator="154:38-154:42" name="fhir:Range" xsi:type="NamedTypeSpecifier"/>
                </expression>
             </let>
-            <let localId="385" locator="157:7-157:54" identifier="doseQuantity">
-               <expression localId="384" locator="157:21-157:54" strict="false" xsi:type="As">
-                  <operand localId="382" locator="157:21-157:36" path="dose" xsi:type="Property">
-                     <source localId="381" locator="157:21-157:31" name="doseAndRate" xsi:type="QueryLetRef"/>
+            <let localId="385" locator="155:7-155:54" identifier="doseQuantity">
+               <expression localId="384" locator="155:21-155:54" strict="false" xsi:type="As">
+                  <operand localId="382" locator="155:21-155:36" path="dose" xsi:type="Property">
+                     <source localId="381" locator="155:21-155:31" name="doseAndRate" xsi:type="QueryLetRef"/>
                   </operand>
-                  <asTypeSpecifier localId="383" locator="157:41-157:54" name="fhir:SimpleQuantity" xsi:type="NamedTypeSpecifier"/>
+                  <asTypeSpecifier localId="383" locator="155:41-155:54" name="fhir:SimpleQuantity" xsi:type="NamedTypeSpecifier"/>
                </expression>
             </let>
-            <let localId="390" locator="158:7-158:52" identifier="dose">
-               <expression localId="389" locator="158:13-158:52" xsi:type="Coalesce">
-                  <operand localId="387" locator="158:22-158:37" xsi:type="End">
+            <let localId="390" locator="156:7-156:52" identifier="dose">
+               <expression localId="389" locator="156:13-156:52" xsi:type="Coalesce">
+                  <operand localId="387" locator="156:22-156:37" xsi:type="End">
                      <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="386" locator="158:29-158:37" name="doseRange" xsi:type="QueryLetRef"/>
+                        <operand localId="386" locator="156:29-156:37" name="doseRange" xsi:type="QueryLetRef"/>
                      </operand>
                   </operand>
                   <operand name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="388" locator="158:40-158:51" name="doseQuantity" xsi:type="QueryLetRef"/>
+                     <operand localId="388" locator="156:40-156:51" name="doseQuantity" xsi:type="QueryLetRef"/>
                   </operand>
                </expression>
             </let>
-            <let localId="393" locator="159:7-159:27" identifier="timing">
-               <expression localId="392" locator="159:15-159:27" path="timing" xsi:type="Property">
-                  <source localId="391" locator="159:15-159:20" name="dosage" xsi:type="QueryLetRef"/>
+            <let localId="393" locator="157:7-157:27" identifier="timing">
+               <expression localId="392" locator="157:15-157:27" path="timing" xsi:type="Property">
+                  <source localId="391" locator="157:15-157:20" name="dosage" xsi:type="QueryLetRef"/>
                </expression>
             </let>
-            <let localId="401" locator="160:7-160:78" identifier="frequency">
-               <expression localId="400" locator="160:18-160:78" xsi:type="Coalesce">
-                  <operand localId="396" locator="160:27-160:52" path="frequencyMax" xsi:type="Property">
-                     <source localId="395" locator="160:27-160:39" path="repeat" xsi:type="Property">
-                        <source localId="394" locator="160:27-160:32" name="timing" xsi:type="QueryLetRef"/>
+            <let localId="401" locator="158:7-158:78" identifier="frequency">
+               <expression localId="400" locator="158:18-158:78" xsi:type="Coalesce">
+                  <operand localId="396" locator="158:27-158:52" path="frequencyMax" xsi:type="Property">
+                     <source localId="395" locator="158:27-158:39" path="repeat" xsi:type="Property">
+                        <source localId="394" locator="158:27-158:32" name="timing" xsi:type="QueryLetRef"/>
                      </source>
                   </operand>
-                  <operand localId="399" locator="160:55-160:77" path="frequency" xsi:type="Property">
-                     <source localId="398" locator="160:55-160:67" path="repeat" xsi:type="Property">
-                        <source localId="397" locator="160:55-160:60" name="timing" xsi:type="QueryLetRef"/>
+                  <operand localId="399" locator="158:55-158:77" path="frequency" xsi:type="Property">
+                     <source localId="398" locator="158:55-158:67" path="repeat" xsi:type="Property">
+                        <source localId="397" locator="158:55-158:60" name="timing" xsi:type="QueryLetRef"/>
                      </source>
                   </operand>
                </expression>
             </let>
-            <let localId="410" locator="161:7-161:99" identifier="period">
-               <expression localId="409" locator="161:15-161:99" classType="t:Quantity" xsi:type="Instance">
+            <let localId="410" locator="159:7-159:99" identifier="period">
+               <expression localId="409" locator="159:15-159:99" classType="t:Quantity" xsi:type="Instance">
                   <element name="value">
                      <value name="ToDecimal" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="404" locator="161:40-161:59" path="period" xsi:type="Property">
-                           <source localId="403" locator="161:40-161:52" path="repeat" xsi:type="Property">
-                              <source localId="402" locator="161:40-161:45" name="timing" xsi:type="QueryLetRef"/>
+                        <operand localId="404" locator="159:40-159:59" path="period" xsi:type="Property">
+                           <source localId="403" locator="159:40-159:52" path="repeat" xsi:type="Property">
+                              <source localId="402" locator="159:40-159:45" name="timing" xsi:type="QueryLetRef"/>
                            </source>
                         </operand>
                      </value>
                   </element>
                   <element name="unit">
-                     <value localId="408" locator="161:68-161:97" path="value" xsi:type="Property">
-                        <source localId="407" locator="161:68-161:91" path="periodUnit" xsi:type="Property">
-                           <source localId="406" locator="161:68-161:80" path="repeat" xsi:type="Property">
-                              <source localId="405" locator="161:68-161:73" name="timing" xsi:type="QueryLetRef"/>
+                     <value localId="408" locator="159:68-159:97" path="value" xsi:type="Property">
+                        <source localId="407" locator="159:68-159:91" path="periodUnit" xsi:type="Property">
+                           <source localId="406" locator="159:68-159:80" path="repeat" xsi:type="Property">
+                              <source localId="405" locator="159:68-159:73" name="timing" xsi:type="QueryLetRef"/>
                            </source>
                         </source>
                      </value>
                   </element>
                </expression>
             </let>
-            <let localId="422" locator="162:7-162:115" identifier="dosesPerDay">
-               <expression localId="421" locator="162:20-162:115" xsi:type="Coalesce">
-                  <operand localId="415" locator="162:29-162:77" name="ToDaily" xsi:type="FunctionRef">
-                     <operand localId="413" locator="162:37-162:68" name="ToInteger" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="412" locator="162:59-162:67" name="frequency" xsi:type="QueryLetRef"/>
+            <let localId="422" locator="160:7-160:115" identifier="dosesPerDay">
+               <expression localId="421" locator="160:20-160:115" xsi:type="Coalesce">
+                  <operand localId="415" locator="160:29-160:77" name="ToDaily" xsi:type="FunctionRef">
+                     <operand localId="413" locator="160:37-160:68" name="ToInteger" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand localId="412" locator="160:59-160:67" name="frequency" xsi:type="QueryLetRef"/>
                      </operand>
-                     <operand localId="414" locator="162:71-162:76" name="period" xsi:type="QueryLetRef"/>
+                     <operand localId="414" locator="160:71-160:76" name="period" xsi:type="QueryLetRef"/>
                   </operand>
                   <operand xsi:type="ToDecimal">
-                     <operand localId="419" locator="162:80-162:109" xsi:type="Count">
-                        <source localId="418" locator="162:86-162:108" path="timeOfDay" xsi:type="Property">
-                           <source localId="417" locator="162:86-162:98" path="repeat" xsi:type="Property">
-                              <source localId="416" locator="162:86-162:91" name="timing" xsi:type="QueryLetRef"/>
+                     <operand localId="419" locator="160:80-160:109" xsi:type="Count">
+                        <source localId="418" locator="160:86-160:108" path="timeOfDay" xsi:type="Property">
+                           <source localId="417" locator="160:86-160:98" path="repeat" xsi:type="Property">
+                              <source localId="416" locator="160:86-160:91" name="timing" xsi:type="QueryLetRef"/>
                            </source>
                         </source>
                      </operand>
                   </operand>
-                  <operand localId="420" locator="162:112-162:114" valueType="t:Decimal" value="1.0" xsi:type="Literal"/>
+                  <operand localId="420" locator="160:112-160:114" valueType="t:Decimal" value="1.0" xsi:type="Literal"/>
                </expression>
             </let>
-            <let localId="428" locator="163:7-163:50" identifier="boundsPeriod">
-               <expression localId="427" locator="163:21-163:50" strict="false" xsi:type="As">
-                  <operand localId="425" locator="163:21-163:40" path="bounds" xsi:type="Property">
-                     <source localId="424" locator="163:21-163:33" path="repeat" xsi:type="Property">
-                        <source localId="423" locator="163:21-163:26" name="timing" xsi:type="QueryLetRef"/>
+            <let localId="428" locator="161:7-161:50" identifier="boundsPeriod">
+               <expression localId="427" locator="161:21-161:50" strict="false" xsi:type="As">
+                  <operand localId="425" locator="161:21-161:40" path="bounds" xsi:type="Property">
+                     <source localId="424" locator="161:21-161:33" path="repeat" xsi:type="Property">
+                        <source localId="423" locator="161:21-161:26" name="timing" xsi:type="QueryLetRef"/>
                      </source>
                   </operand>
-                  <asTypeSpecifier localId="426" locator="163:45-163:50" name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                  <asTypeSpecifier localId="426" locator="161:45-161:50" name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
                </expression>
             </let>
-            <let localId="432" locator="164:7-164:58" identifier="daysSupply">
-               <expression localId="431" locator="164:19-164:58" path="expectedSupplyDuration" xsi:type="Property">
-                  <source localId="430" locator="164:19-164:35" path="dispenseRequest" scope="R" xsi:type="Property"/>
+            <let localId="432" locator="162:7-162:58" identifier="daysSupply">
+               <expression localId="431" locator="162:19-162:58" path="expectedSupplyDuration" xsi:type="Property">
+                  <source localId="430" locator="162:19-162:35" path="dispenseRequest" scope="R" xsi:type="Property"/>
                </expression>
             </let>
-            <let localId="436" locator="165:7-165:42" identifier="quantity">
-               <expression localId="435" locator="165:17-165:42" path="quantity" xsi:type="Property">
-                  <source localId="434" locator="165:17-165:33" path="dispenseRequest" scope="R" xsi:type="Property"/>
+            <let localId="436" locator="163:7-163:42" identifier="quantity">
+               <expression localId="435" locator="163:17-163:42" path="quantity" xsi:type="Property">
+                  <source localId="434" locator="163:17-163:33" path="dispenseRequest" scope="R" xsi:type="Property"/>
                </expression>
             </let>
-            <let localId="442" locator="166:7-166:68" identifier="refills">
-               <expression localId="441" locator="166:16-166:68" xsi:type="Coalesce">
+            <let localId="442" locator="164:7-164:68" identifier="refills">
+               <expression localId="441" locator="164:16-164:68" xsi:type="Coalesce">
                   <operand name="ToInteger" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="439" locator="166:25-166:64" path="numberOfRepeatsAllowed" xsi:type="Property">
-                        <source localId="438" locator="166:25-166:41" path="dispenseRequest" scope="R" xsi:type="Property"/>
+                     <operand localId="439" locator="164:25-164:64" path="numberOfRepeatsAllowed" xsi:type="Property">
+                        <source localId="438" locator="164:25-164:41" path="dispenseRequest" scope="R" xsi:type="Property"/>
                      </operand>
                   </operand>
-                  <operand localId="440" locator="166:67" valueType="t:Integer" value="0" xsi:type="Literal"/>
+                  <operand localId="440" locator="164:67" valueType="t:Integer" value="0" xsi:type="Literal"/>
                </expression>
             </let>
-            <let localId="452" locator="167:7-172:9" identifier="startDate">
-               <expression localId="451" locator="168:9-172:9" xsi:type="Coalesce">
-                  <operand localId="444" locator="169:11-169:31" xsi:type="Start">
+            <let localId="452" locator="165:7-170:9" identifier="startDate">
+               <expression localId="451" locator="166:9-170:9" xsi:type="Coalesce">
+                  <operand localId="444" locator="167:11-167:31" xsi:type="Start">
                      <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="443" locator="169:20-169:31" name="boundsPeriod" xsi:type="QueryLetRef"/>
+                        <operand localId="443" locator="167:20-167:31" name="boundsPeriod" xsi:type="QueryLetRef"/>
                      </operand>
                   </operand>
-                  <operand localId="448" locator="170:11-170:51" xsi:type="Start">
+                  <operand localId="448" locator="168:11-168:51" xsi:type="Start">
                      <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="447" locator="170:20-170:51" path="validityPeriod" xsi:type="Property">
-                           <source localId="446" locator="170:20-170:36" path="dispenseRequest" scope="R" xsi:type="Property"/>
+                        <operand localId="447" locator="168:20-168:51" path="validityPeriod" xsi:type="Property">
+                           <source localId="446" locator="168:20-168:36" path="dispenseRequest" scope="R" xsi:type="Property"/>
                         </operand>
                      </operand>
                   </operand>
                   <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="450" locator="171:11-171:22" path="authoredOn" scope="R" xsi:type="Property"/>
+                     <operand localId="450" locator="169:11-169:22" path="authoredOn" scope="R" xsi:type="Property"/>
                   </operand>
                </expression>
             </let>
-            <return localId="479" locator="173:5-181:64">
-               <expression localId="478" locator="174:7-181:64" xsi:type="If">
-                  <condition localId="454" locator="174:10-174:29" name="HasEnd" xsi:type="FunctionRef">
+            <return localId="479" locator="171:5-179:64">
+               <expression localId="478" locator="172:7-179:64" xsi:type="If">
+                  <condition localId="454" locator="172:10-172:29" name="HasEnd" xsi:type="FunctionRef">
                      <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="453" locator="174:17-174:28" name="boundsPeriod" xsi:type="QueryLetRef"/>
+                        <operand localId="453" locator="172:17-172:28" name="boundsPeriod" xsi:type="QueryLetRef"/>
                      </operand>
                   </condition>
-                  <then localId="458" locator="175:9-175:48" lowClosed="true" highClosed="true" xsi:type="Interval">
-                     <low localId="455" locator="175:18-175:26" name="startDate" xsi:type="QueryLetRef"/>
-                     <high localId="457" locator="175:29-175:47" xsi:type="End">
+                  <then localId="458" locator="173:9-173:48" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low localId="455" locator="173:18-173:26" name="startDate" xsi:type="QueryLetRef"/>
+                     <high localId="457" locator="173:29-173:47" xsi:type="End">
                         <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="456" locator="175:36-175:47" name="boundsPeriod" xsi:type="QueryLetRef"/>
+                           <operand localId="456" locator="173:36-173:47" name="boundsPeriod" xsi:type="QueryLetRef"/>
                         </operand>
                      </high>
                   </then>
-                  <else localId="477" locator="177:9-181:64" xsi:type="Query">
-                     <source localId="470" locator="177:9-180:24" alias="durationInDays">
-                        <expression localId="469" locator="177:9-180:9" xsi:type="Multiply">
-                           <operand localId="465" locator="178:11-178:63" xsi:type="Coalesce">
+                  <else localId="477" locator="175:9-179:64" xsi:type="Query">
+                     <source localId="470" locator="175:9-178:24" alias="durationInDays">
+                        <expression localId="469" locator="175:9-178:9" xsi:type="Multiply">
+                           <operand localId="465" locator="176:11-176:63" xsi:type="Coalesce">
                               <operand name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand localId="459" locator="178:20-178:29" name="daysSupply" xsi:type="QueryLetRef"/>
+                                 <operand localId="459" locator="176:20-176:29" name="daysSupply" xsi:type="QueryLetRef"/>
                               </operand>
-                              <operand localId="464" locator="178:32-178:62" xsi:type="Divide">
+                              <operand localId="464" locator="176:32-176:62" xsi:type="Divide">
                                  <operand name="ToQuantity" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                    <operand localId="460" locator="178:32-178:39" name="quantity" xsi:type="QueryLetRef"/>
+                                    <operand localId="460" locator="176:32-176:39" name="quantity" xsi:type="QueryLetRef"/>
                                  </operand>
-                                 <operand localId="463" locator="178:43-178:62" xsi:type="Multiply">
-                                    <operand localId="461" locator="178:44-178:47" name="dose" xsi:type="QueryLetRef"/>
+                                 <operand localId="463" locator="176:43-176:62" xsi:type="Multiply">
+                                    <operand localId="461" locator="176:44-176:47" name="dose" xsi:type="QueryLetRef"/>
                                     <operand xsi:type="ToQuantity">
-                                       <operand localId="462" locator="178:51-178:61" name="dosesPerDay" xsi:type="QueryLetRef"/>
+                                       <operand localId="462" locator="176:51-176:61" name="dosesPerDay" xsi:type="QueryLetRef"/>
                                     </operand>
                                  </operand>
                               </operand>
                            </operand>
                            <operand xsi:type="ToQuantity">
-                              <operand localId="468" locator="179:15-179:27" xsi:type="Add">
-                                 <operand localId="466" locator="179:16" valueType="t:Integer" value="1" xsi:type="Literal"/>
-                                 <operand localId="467" locator="179:20-179:26" name="refills" xsi:type="QueryLetRef"/>
+                              <operand localId="468" locator="177:15-177:27" xsi:type="Add">
+                                 <operand localId="466" locator="177:16" valueType="t:Integer" value="1" xsi:type="Literal"/>
+                                 <operand localId="467" locator="177:20-177:26" name="refills" xsi:type="QueryLetRef"/>
                               </operand>
                            </operand>
                         </expression>
                      </source>
-                     <return localId="476" locator="181:11-181:64">
-                        <expression localId="475" locator="181:18-181:64" lowClosed="true" highClosed="true" xsi:type="Interval">
-                           <low localId="471" locator="181:27-181:35" name="startDate" xsi:type="QueryLetRef"/>
-                           <high localId="474" locator="181:38-181:63" xsi:type="Add">
-                              <operand localId="472" locator="181:38-181:46" name="startDate" xsi:type="QueryLetRef"/>
-                              <operand localId="473" locator="181:50-181:63" name="durationInDays" xsi:type="AliasRef"/>
+                     <return localId="476" locator="179:11-179:64">
+                        <expression localId="475" locator="179:18-179:64" lowClosed="true" highClosed="true" xsi:type="Interval">
+                           <low localId="471" locator="179:27-179:35" name="startDate" xsi:type="QueryLetRef"/>
+                           <high localId="474" locator="179:38-179:63" xsi:type="Add">
+                              <operand localId="472" locator="179:38-179:46" name="startDate" xsi:type="QueryLetRef"/>
+                              <operand localId="473" locator="179:50-179:63" name="durationInDays" xsi:type="AliasRef"/>
                            </high>
                         </expression>
                      </return>
@@ -2846,10 +2844,10 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
             </return>
          </expression>
          <operand name="Request">
-            <operandTypeSpecifier localId="365" locator="151:51-151:72" name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="365" locator="149:51-149:72" name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="605" locator="184:1-208:4" name="DosesPerDay" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="605" locator="182:1-206:4" name="DosesPerDay" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="605">
                <a:s>define function &quot;DosesPerDay&quot;(frequency Code):
@@ -3284,156 +3282,156 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="604" locator="186:2-208:4" xsi:type="Case">
-            <caseItem localId="488" locator="187:3-187:73">
-               <when localId="486" locator="187:8-187:64" xsi:type="Equivalent">
-                  <operand localId="483" locator="187:8-187:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="485" locator="187:20-187:64" name="Once daily (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+         <expression localId="604" locator="184:2-206:4" xsi:type="Case">
+            <caseItem localId="488" locator="185:3-185:73">
+               <when localId="486" locator="185:8-185:64" xsi:type="Equivalent">
+                  <operand localId="483" locator="185:8-185:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="485" locator="185:20-185:64" name="Once daily (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="487" locator="187:71-187:73" valueType="t:Decimal" value="1.0" xsi:type="Literal"/>
+               <then localId="487" locator="185:71-185:73" valueType="t:Decimal" value="1.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="494" locator="188:3-188:74">
-               <when localId="492" locator="188:8-188:65" xsi:type="Equivalent">
-                  <operand localId="489" locator="188:8-188:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="491" locator="188:20-188:65" name="Twice a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="494" locator="186:3-186:74">
+               <when localId="492" locator="186:8-186:65" xsi:type="Equivalent">
+                  <operand localId="489" locator="186:8-186:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="491" locator="186:20-186:65" name="Twice a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="493" locator="188:72-188:74" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
+               <then localId="493" locator="186:72-186:74" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="500" locator="189:3-189:80">
-               <when localId="498" locator="189:8-189:71" xsi:type="Equivalent">
-                  <operand localId="495" locator="189:8-189:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="497" locator="189:20-189:71" name="Three times daily (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="500" locator="187:3-187:80">
+               <when localId="498" locator="187:8-187:71" xsi:type="Equivalent">
+                  <operand localId="495" locator="187:8-187:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="497" locator="187:20-187:71" name="Three times daily (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="499" locator="189:78-189:80" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
+               <then localId="499" locator="187:78-187:80" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="506" locator="190:3-190:79">
-               <when localId="504" locator="190:8-190:70" xsi:type="Equivalent">
-                  <operand localId="501" locator="190:8-190:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="503" locator="190:20-190:70" name="Four times daily (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="506" locator="188:3-188:79">
+               <when localId="504" locator="188:8-188:70" xsi:type="Equivalent">
+                  <operand localId="501" locator="188:8-188:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="503" locator="188:20-188:70" name="Four times daily (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="505" locator="190:77-190:79" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
+               <then localId="505" locator="188:77-188:79" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="512" locator="191:3-191:86">
-               <when localId="510" locator="191:8-191:77" xsi:type="Equivalent">
-                  <operand localId="507" locator="191:8-191:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="509" locator="191:20-191:77" name="Every twenty four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="512" locator="189:3-189:86">
+               <when localId="510" locator="189:8-189:77" xsi:type="Equivalent">
+                  <operand localId="507" locator="189:8-189:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="509" locator="189:20-189:77" name="Every twenty four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="511" locator="191:84-191:86" valueType="t:Decimal" value="1.0" xsi:type="Literal"/>
+               <then localId="511" locator="189:84-189:86" valueType="t:Decimal" value="1.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="518" locator="192:3-192:81">
-               <when localId="516" locator="192:8-192:72" xsi:type="Equivalent">
-                  <operand localId="513" locator="192:8-192:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="515" locator="192:20-192:72" name="Every twelve hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="518" locator="190:3-190:81">
+               <when localId="516" locator="190:8-190:72" xsi:type="Equivalent">
+                  <operand localId="513" locator="190:8-190:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="515" locator="190:20-190:72" name="Every twelve hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="517" locator="192:79-192:81" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
+               <then localId="517" locator="190:79-190:81" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="524" locator="193:3-193:86">
-               <when localId="522" locator="193:8-193:76" xsi:type="Equivalent">
-                  <operand localId="519" locator="193:8-193:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="521" locator="193:20-193:76" name="Every thirty six hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="524" locator="191:3-191:86">
+               <when localId="522" locator="191:8-191:76" xsi:type="Equivalent">
+                  <operand localId="519" locator="191:8-191:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="521" locator="191:20-191:76" name="Every thirty six hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="523" locator="193:83-193:86" valueType="t:Decimal" value="0.67" xsi:type="Literal"/>
+               <then localId="523" locator="191:83-191:86" valueType="t:Decimal" value="0.67" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="530" locator="194:3-194:80">
-               <when localId="528" locator="194:8-194:71" xsi:type="Equivalent">
-                  <operand localId="525" locator="194:8-194:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="527" locator="194:20-194:71" name="Every eight hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="530" locator="192:3-192:80">
+               <when localId="528" locator="192:8-192:71" xsi:type="Equivalent">
+                  <operand localId="525" locator="192:8-192:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="527" locator="192:20-192:71" name="Every eight hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="529" locator="194:78-194:80" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
+               <then localId="529" locator="192:78-192:80" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="536" locator="195:3-195:79">
-               <when localId="534" locator="195:8-195:70" xsi:type="Equivalent">
-                  <operand localId="531" locator="195:8-195:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="533" locator="195:20-195:70" name="Every four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="536" locator="193:3-193:79">
+               <when localId="534" locator="193:8-193:70" xsi:type="Equivalent">
+                  <operand localId="531" locator="193:8-193:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="533" locator="193:20-193:70" name="Every four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="535" locator="195:77-195:79" valueType="t:Decimal" value="6.0" xsi:type="Literal"/>
+               <then localId="535" locator="193:77-193:79" valueType="t:Decimal" value="6.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="542" locator="196:3-196:78">
-               <when localId="540" locator="196:8-196:69" xsi:type="Equivalent">
-                  <operand localId="537" locator="196:8-196:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="539" locator="196:20-196:69" name="Every six hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="542" locator="194:3-194:78">
+               <when localId="540" locator="194:8-194:69" xsi:type="Equivalent">
+                  <operand localId="537" locator="194:8-194:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="539" locator="194:20-194:69" name="Every six hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="541" locator="196:76-196:78" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
+               <then localId="541" locator="194:76-194:78" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="548" locator="197:3-197:87">
-               <when localId="546" locator="197:8-197:77" xsi:type="Equivalent">
-                  <operand localId="543" locator="197:8-197:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="545" locator="197:20-197:77" name="Every seventy two hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="548" locator="195:3-195:87">
+               <when localId="546" locator="195:8-195:77" xsi:type="Equivalent">
+                  <operand localId="543" locator="195:8-195:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="545" locator="195:20-195:77" name="Every seventy two hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="547" locator="197:84-197:87" valueType="t:Decimal" value="0.34" xsi:type="Literal"/>
+               <then localId="547" locator="195:84-195:87" valueType="t:Decimal" value="0.34" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="554" locator="198:3-198:86">
-               <when localId="552" locator="198:8-198:77" xsi:type="Equivalent">
-                  <operand localId="549" locator="198:8-198:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="551" locator="198:20-198:77" name="Every forty eight hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="554" locator="196:3-196:86">
+               <when localId="552" locator="196:8-196:77" xsi:type="Equivalent">
+                  <operand localId="549" locator="196:8-196:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="551" locator="196:20-196:77" name="Every forty eight hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="553" locator="198:84-198:86" valueType="t:Decimal" value="0.5" xsi:type="Literal"/>
+               <then localId="553" locator="196:84-196:86" valueType="t:Decimal" value="0.5" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="560" locator="199:3-199:90">
-               <when localId="558" locator="199:8-199:81" xsi:type="Equivalent">
-                  <operand localId="555" locator="199:8-199:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="557" locator="199:20-199:81" name="Every eight to twelve hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="560" locator="197:3-197:90">
+               <when localId="558" locator="197:8-197:81" xsi:type="Equivalent">
+                  <operand localId="555" locator="197:8-197:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="557" locator="197:20-197:81" name="Every eight to twelve hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="559" locator="199:88-199:90" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
+               <then localId="559" locator="197:88-197:90" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="566" locator="200:3-200:87">
-               <when localId="564" locator="200:8-200:78" xsi:type="Equivalent">
-                  <operand localId="561" locator="200:8-200:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="563" locator="200:20-200:78" name="Every six to eight hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="566" locator="198:3-198:87">
+               <when localId="564" locator="198:8-198:78" xsi:type="Equivalent">
+                  <operand localId="561" locator="198:8-198:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="563" locator="198:20-198:78" name="Every six to eight hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="565" locator="200:85-200:87" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
+               <then localId="565" locator="198:85-198:87" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="572" locator="201:3-201:88">
-               <when localId="570" locator="201:8-201:79" xsi:type="Equivalent">
-                  <operand localId="567" locator="201:8-201:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="569" locator="201:20-201:79" name="Every three to four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="572" locator="199:3-199:88">
+               <when localId="570" locator="199:8-199:79" xsi:type="Equivalent">
+                  <operand localId="567" locator="199:8-199:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="569" locator="199:20-199:79" name="Every three to four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="571" locator="201:86-201:88" valueType="t:Decimal" value="6.0" xsi:type="Literal"/>
+               <then localId="571" locator="199:86-199:88" valueType="t:Decimal" value="6.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="578" locator="202:3-202:87">
-               <when localId="576" locator="202:8-202:78" xsi:type="Equivalent">
-                  <operand localId="573" locator="202:8-202:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="575" locator="202:20-202:78" name="Every three to six hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="578" locator="200:3-200:87">
+               <when localId="576" locator="200:8-200:78" xsi:type="Equivalent">
+                  <operand localId="573" locator="200:8-200:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="575" locator="200:20-200:78" name="Every three to six hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="577" locator="202:85-202:87" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
+               <then localId="577" locator="200:85-200:87" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="584" locator="203:3-203:86">
-               <when localId="582" locator="203:8-203:77" xsi:type="Equivalent">
-                  <operand localId="579" locator="203:8-203:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="581" locator="203:20-203:77" name="Every two to four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="584" locator="201:3-201:86">
+               <when localId="582" locator="201:8-201:77" xsi:type="Equivalent">
+                  <operand localId="579" locator="201:8-201:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="581" locator="201:20-201:77" name="Every two to four hours (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="583" locator="203:84-203:86" valueType="t:Decimal" value="6.0" xsi:type="Literal"/>
+               <then localId="583" locator="201:84-201:86" valueType="t:Decimal" value="6.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="590" locator="204:3-204:86">
-               <when localId="588" locator="204:8-204:77" xsi:type="Equivalent">
-                  <operand localId="585" locator="204:8-204:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="587" locator="204:20-204:77" name="One to four times a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="590" locator="202:3-202:86">
+               <when localId="588" locator="202:8-202:77" xsi:type="Equivalent">
+                  <operand localId="585" locator="202:8-202:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="587" locator="202:20-202:77" name="One to four times a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="589" locator="204:84-204:86" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
+               <then localId="589" locator="202:84-202:86" valueType="t:Decimal" value="4.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="596" locator="205:3-205:87">
-               <when localId="594" locator="205:8-205:78" xsi:type="Equivalent">
-                  <operand localId="591" locator="205:8-205:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="593" locator="205:20-205:78" name="One to three times a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="596" locator="203:3-203:87">
+               <when localId="594" locator="203:8-203:78" xsi:type="Equivalent">
+                  <operand localId="591" locator="203:8-203:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="593" locator="203:20-203:78" name="One to three times a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="595" locator="205:85-205:87" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
+               <then localId="595" locator="203:85-203:87" valueType="t:Decimal" value="3.0" xsi:type="Literal"/>
             </caseItem>
-            <caseItem localId="602" locator="206:3-206:85">
-               <when localId="600" locator="206:8-206:76" xsi:type="Equivalent">
-                  <operand localId="597" locator="206:8-206:16" name="frequency" xsi:type="OperandRef"/>
-                  <operand localId="599" locator="206:20-206:76" name="One to two times a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
+            <caseItem localId="602" locator="204:3-204:85">
+               <when localId="600" locator="204:8-204:76" xsi:type="Equivalent">
+                  <operand localId="597" locator="204:8-204:16" name="frequency" xsi:type="OperandRef"/>
+                  <operand localId="599" locator="204:20-204:76" name="One to two times a day (qualifier value)" libraryName="CustomConcepts" xsi:type="CodeRef"/>
                </when>
-               <then localId="601" locator="206:83-206:85" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
+               <then localId="601" locator="204:83-204:85" valueType="t:Decimal" value="2.0" xsi:type="Literal"/>
             </caseItem>
             <else asType="t:Decimal" xsi:type="As">
-               <operand localId="603" locator="207:8-207:11" xsi:type="Null"/>
+               <operand localId="603" locator="205:8-205:11" xsi:type="Null"/>
             </else>
          </expression>
          <operand name="frequency">
-            <operandTypeSpecifier localId="482" locator="184:41-184:44" name="t:Code" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="482" locator="182:41-182:44" name="t:Code" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="619" locator="229:3-232:60" name="STI_testing" context="Patient" accessLevel="Public">
+      <def localId="619" locator="227:3-230:60" name="STI_testing" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="619">
                <a:s>//define function &quot;GetMedicationDailyDose&quot;(dosage Quantity, dosesPerDay Decimal):
@@ -3516,29 +3514,29 @@ define function ToDaily(frequency System.Integer, period System.Quantity):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="618" locator="230:5-232:60" xsi:type="Query">
-            <source localId="607" locator="230:5-230:17" alias="P">
-               <expression localId="606" locator="230:5-230:15" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" xsi:type="Retrieve"/>
+         <expression localId="618" locator="228:5-230:60" xsi:type="Query">
+            <source localId="607" locator="228:5-228:17" alias="P">
+               <expression localId="606" locator="228:5-228:15" dataType="fhir:Procedure" templateId="http://hl7.org/fhir/StructureDefinition/Procedure" xsi:type="Retrieve"/>
             </source>
-            <where localId="617" locator="231:3-232:60" xsi:type="And">
-               <operand localId="611" locator="231:9-231:30" xsi:type="Equal">
+            <where localId="617" locator="229:3-230:60" xsi:type="And">
+               <operand localId="611" locator="229:9-229:30" xsi:type="Equal">
                   <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="609" locator="231:9-231:16" path="status" scope="P" xsi:type="Property"/>
+                     <operand localId="609" locator="229:9-229:16" path="status" scope="P" xsi:type="Property"/>
                   </operand>
-                  <operand localId="610" locator="231:20-231:30" valueType="t:String" value="completed" xsi:type="Literal"/>
+                  <operand localId="610" locator="229:20-229:30" valueType="t:String" value="completed" xsi:type="Literal"/>
                </operand>
-               <operand localId="616" locator="232:7-232:60" xsi:type="Equivalent">
+               <operand localId="616" locator="230:7-230:60" xsi:type="Equivalent">
                   <operand name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="613" locator="232:7-232:12" path="code" scope="P" xsi:type="Property"/>
+                     <operand localId="613" locator="230:7-230:12" path="code" scope="P" xsi:type="Property"/>
                   </operand>
                   <operand xsi:type="ToConcept">
-                     <operand localId="615" locator="232:16-232:60" name="STI testing and treatment services" libraryName="Concepts" xsi:type="CodeRef"/>
+                     <operand localId="615" locator="230:16-230:60" name="STI testing and treatment services" libraryName="Concepts" xsi:type="CodeRef"/>
                   </operand>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="660" locator="238:1-248:5" name="ExtractMedicationCode" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="660" locator="236:1-246:5" name="ExtractMedicationCode" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="660">
                <a:s>/**
@@ -3694,70 +3692,70 @@ define function ExtractMedicationCode(choice Choice&lt;FHIR.CodeableConcept, FHI
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="659" locator="239:3-248:5" xsi:type="Case">
-            <caseItem localId="629" locator="240:4-241:35">
-               <when localId="625" locator="240:9-240:38" xsi:type="Is">
-                  <operand localId="623" locator="240:9-240:14" name="choice" xsi:type="OperandRef"/>
-                  <isTypeSpecifier localId="624" locator="240:19-240:38" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+         <expression localId="659" locator="237:3-246:5" xsi:type="Case">
+            <caseItem localId="629" locator="238:4-239:35">
+               <when localId="625" locator="238:9-238:38" xsi:type="Is">
+                  <operand localId="623" locator="238:9-238:14" name="choice" xsi:type="OperandRef"/>
+                  <isTypeSpecifier localId="624" locator="238:19-238:38" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
                </when>
-               <then localId="628" locator="241:6-241:35" strict="false" xsi:type="As">
-                  <operand localId="626" locator="241:6-241:11" name="choice" xsi:type="OperandRef"/>
-                  <asTypeSpecifier localId="627" locator="241:16-241:35" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+               <then localId="628" locator="239:6-239:35" strict="false" xsi:type="As">
+                  <operand localId="626" locator="239:6-239:11" name="choice" xsi:type="OperandRef"/>
+                  <asTypeSpecifier localId="627" locator="239:16-239:35" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
                </then>
             </caseItem>
-            <caseItem localId="650" locator="242:5-245:46">
-               <when localId="632" locator="242:10-242:33" xsi:type="Is">
-                  <operand localId="630" locator="242:10-242:15" name="choice" xsi:type="OperandRef"/>
-                  <isTypeSpecifier localId="631" locator="242:20-242:33" name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+            <caseItem localId="650" locator="240:5-243:46">
+               <when localId="632" locator="240:10-240:33" xsi:type="Is">
+                  <operand localId="630" locator="240:10-240:15" name="choice" xsi:type="OperandRef"/>
+                  <isTypeSpecifier localId="631" locator="240:20-240:33" name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
                </when>
-               <then localId="649" locator="243:7-245:46" xsi:type="First">
-                  <source localId="648" locator="243:13-245:45" xsi:type="Query">
-                     <source localId="634" locator="243:13-243:26" alias="M">
-                        <expression localId="633" locator="243:13-243:24" dataType="fhir:Medication" templateId="http://hl7.org/fhir/StructureDefinition/Medication" xsi:type="Retrieve"/>
+               <then localId="649" locator="241:7-243:46" xsi:type="First">
+                  <source localId="648" locator="241:13-243:45" xsi:type="Query">
+                     <source localId="634" locator="241:13-241:26" alias="M">
+                        <expression localId="633" locator="241:13-241:24" dataType="fhir:Medication" templateId="http://hl7.org/fhir/StructureDefinition/Medication" xsi:type="Retrieve"/>
                      </source>
-                     <where localId="642" locator="244:9-244:55" xsi:type="Equal">
+                     <where localId="642" locator="242:9-242:55" xsi:type="Equal">
                         <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="636" locator="244:15-244:18" path="id" scope="M" xsi:type="Property"/>
+                           <operand localId="636" locator="242:15-242:18" path="id" scope="M" xsi:type="Property"/>
                         </operand>
-                        <operand localId="641" locator="244:22-244:55" xsi:type="Last">
-                           <source localId="640" locator="244:27-244:54" xsi:type="Split">
+                        <operand localId="641" locator="242:22-242:55" xsi:type="Last">
+                           <source localId="640" locator="242:27-242:54" xsi:type="Split">
                               <stringToSplit name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand localId="638" locator="244:33-244:48" path="reference" xsi:type="Property">
-                                    <source localId="637" locator="244:33-244:38" name="choice" xsi:type="OperandRef"/>
+                                 <operand localId="638" locator="242:33-242:48" path="reference" xsi:type="Property">
+                                    <source localId="637" locator="242:33-242:38" name="choice" xsi:type="OperandRef"/>
                                  </operand>
                               </stringToSplit>
-                              <separator localId="639" locator="244:51-244:53" valueType="t:String" value="/" xsi:type="Literal"/>
+                              <separator localId="639" locator="242:51-242:53" valueType="t:String" value="/" xsi:type="Literal"/>
                            </source>
                         </operand>
                      </where>
-                     <return localId="647" locator="245:9-245:45">
-                        <expression localId="646" locator="245:16-245:45" strict="false" xsi:type="As">
-                           <operand localId="644" locator="245:16-245:21" path="code" scope="M" xsi:type="Property"/>
-                           <asTypeSpecifier localId="645" locator="245:26-245:45" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                     <return localId="647" locator="243:9-243:45">
+                        <expression localId="646" locator="243:16-243:45" strict="false" xsi:type="As">
+                           <operand localId="644" locator="243:16-243:21" path="code" scope="M" xsi:type="Property"/>
+                           <asTypeSpecifier localId="645" locator="243:26-243:45" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
                         </expression>
                      </return>
                   </source>
                </then>
             </caseItem>
-            <else localId="658" locator="247:7-247:99" xsi:type="Message">
-               <source localId="653" locator="247:15-247:42" strict="false" xsi:type="As">
-                  <operand localId="651" locator="247:15-247:18" xsi:type="Null"/>
-                  <asTypeSpecifier localId="652" locator="247:23-247:42" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+            <else localId="658" locator="245:7-245:99" xsi:type="Message">
+               <source localId="653" locator="245:15-245:42" strict="false" xsi:type="As">
+                  <operand localId="651" locator="245:15-245:18" xsi:type="Null"/>
+                  <asTypeSpecifier localId="652" locator="245:23-245:42" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
                </source>
-               <condition localId="654" locator="247:45-247:48" valueType="t:Boolean" value="true" xsi:type="Literal"/>
-               <code localId="655" locator="247:51-247:53" valueType="t:String" value="1" xsi:type="Literal"/>
-               <severity localId="656" locator="247:56-247:62" valueType="t:String" value="Error" xsi:type="Literal"/>
-               <message localId="657" locator="247:65-247:98" valueType="t:String" value="Cannot compute a medication code" xsi:type="Literal"/>
+               <condition localId="654" locator="245:45-245:48" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+               <code localId="655" locator="245:51-245:53" valueType="t:String" value="1" xsi:type="Literal"/>
+               <severity localId="656" locator="245:56-245:62" valueType="t:String" value="Error" xsi:type="Literal"/>
+               <message localId="657" locator="245:65-245:98" valueType="t:String" value="Cannot compute a medication code" xsi:type="Literal"/>
             </else>
          </expression>
          <operand name="choice">
-            <operandTypeSpecifier localId="622" locator="238:46-238:89" xsi:type="ChoiceTypeSpecifier">
-               <choice localId="620" locator="238:53-238:72" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
-               <choice localId="621" locator="238:75-238:88" name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="622" locator="236:46-236:89" xsi:type="ChoiceTypeSpecifier">
+               <choice localId="620" locator="236:53-236:72" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+               <choice localId="621" locator="236:75-236:88" name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
             </operandTypeSpecifier>
          </operand>
       </def>
-      <def localId="675" locator="253:1-257:5" name="getObservationCode" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+      <def localId="675" locator="251:1-255:5" name="getObservationCode" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="675">
                <a:s>/**
@@ -3826,22 +3824,22 @@ define fluent function getObservationCode(observation FHIR.Observation):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="674" locator="254:3-257:5" xsi:type="Case">
-            <caseItem localId="672" locator="255:5-255:105">
-               <when localId="665" locator="255:10-255:49" xsi:type="Is">
-                  <operand localId="663" locator="255:10-255:25" path="code" xsi:type="Property">
-                     <source localId="662" locator="255:10-255:20" name="observation" xsi:type="OperandRef"/>
+         <expression localId="674" locator="252:3-255:5" xsi:type="Case">
+            <caseItem localId="672" locator="253:5-253:105">
+               <when localId="665" locator="253:10-253:49" xsi:type="Is">
+                  <operand localId="663" locator="253:10-253:25" path="code" xsi:type="Property">
+                     <source localId="662" locator="253:10-253:20" name="observation" xsi:type="OperandRef"/>
                   </operand>
-                  <isTypeSpecifier localId="664" locator="255:30-255:49" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                  <isTypeSpecifier localId="664" locator="253:30-253:49" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
                </when>
-               <then localId="671" locator="255:56-255:105" xsi:type="Query">
+               <then localId="671" locator="253:56-253:105" xsi:type="Query">
                   <source alias="$this">
-                     <expression localId="670" locator="255:56-255:100" path="coding" xsi:type="Property">
-                        <source localId="669" locator="255:56-255:93" strict="false" xsi:type="As">
-                           <operand localId="667" locator="255:57-255:73" path="value" xsi:type="Property">
-                              <source localId="666" locator="255:57-255:67" name="observation" xsi:type="OperandRef"/>
+                     <expression localId="670" locator="253:56-253:100" path="coding" xsi:type="Property">
+                        <source localId="669" locator="253:56-253:93" strict="false" xsi:type="As">
+                           <operand localId="667" locator="253:57-253:73" path="value" xsi:type="Property">
+                              <source localId="666" locator="253:57-253:67" name="observation" xsi:type="OperandRef"/>
                            </operand>
-                           <asTypeSpecifier localId="668" locator="255:78-255:92" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
+                           <asTypeSpecifier localId="668" locator="253:78-253:92" name="fhir:CodeableConcept" xsi:type="NamedTypeSpecifier"/>
                         </source>
                      </expression>
                   </source>
@@ -3860,17 +3858,17 @@ define fluent function getObservationCode(observation FHIR.Observation):
                </then>
             </caseItem>
             <else xsi:type="As">
-               <operand localId="673" locator="256:10-256:13" xsi:type="Null"/>
+               <operand localId="673" locator="254:10-254:13" xsi:type="Null"/>
                <asTypeSpecifier xsi:type="ListTypeSpecifier">
                   <elementType name="fhir:code" xsi:type="NamedTypeSpecifier"/>
                </asTypeSpecifier>
             </else>
          </expression>
          <operand name="observation">
-            <operandTypeSpecifier localId="661" locator="253:55-253:70" name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="661" locator="251:55-251:70" name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="684" locator="262:1-263:45" name="getObservationCodes" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
+      <def localId="684" locator="260:1-261:45" name="getObservationCodes" context="Patient" accessLevel="Public" fluent="true" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="684">
                <a:s>/**
@@ -3907,19 +3905,19 @@ define fluent function getObservationCodes(obslist List&lt;FHIR.Observation>):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="683" locator="263:3-263:45" xsi:type="Query">
-            <source localId="679" locator="263:3-263:13" alias="obs">
-               <expression localId="678" locator="263:3-263:9" name="obslist" xsi:type="OperandRef"/>
+         <expression localId="683" locator="261:3-261:45" xsi:type="Query">
+            <source localId="679" locator="261:3-261:13" alias="obs">
+               <expression localId="678" locator="261:3-261:9" name="obslist" xsi:type="OperandRef"/>
             </source>
-            <return localId="682" locator="263:15-263:45">
-               <expression localId="681" locator="263:22-263:45" name="getObservationCode" xsi:type="FunctionRef">
-                  <operand localId="680" locator="263:22-263:24" name="obs" xsi:type="AliasRef"/>
+            <return localId="682" locator="261:15-261:45">
+               <expression localId="681" locator="261:22-261:45" name="getObservationCode" xsi:type="FunctionRef">
+                  <operand localId="680" locator="261:22-261:24" name="obs" xsi:type="AliasRef"/>
                </expression>
             </return>
          </expression>
          <operand name="obslist">
-            <operandTypeSpecifier localId="677" locator="262:52-262:73" xsi:type="ListTypeSpecifier">
-               <elementType localId="676" locator="262:57-262:72" name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="677" locator="260:52-260:73" xsi:type="ListTypeSpecifier">
+               <elementType localId="676" locator="260:57-260:72" name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
             </operandTypeSpecifier>
          </operand>
       </def>

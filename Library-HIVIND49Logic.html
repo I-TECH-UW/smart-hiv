@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-12
+            as of 2024-08-13
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND49Logic</b></p><a name="HIVIND49Logic"> </a><a name="hcHIVIND49Logic"> </a><a name="HIVIND49Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND49Logic</b></p><a name="HIVIND49Logic"> </a><a name="hcHIVIND49Logic"> </a><a name="HIVIND49Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.49 Logic
  * Ref No: DFT.2
  * Short Name: TB symptom-screened positive among new ART patients
@@ -421,6 +421,8 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -443,7 +445,9 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
+  HIE.&quot;HIV-positive B.DE116&quot;
+  and (start of First(HE.&quot;First-time user of ART&quot;).effective.toInterval() during &quot;Measurement Period&quot;)
+  and HIE.&quot;Screen positive for TB&quot;
 
 
 /**
@@ -454,12 +458,30 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
+  HIE.&quot;HIV-positive B.DE116&quot;
+  and (start of First(HE.&quot;First-time user of ART&quot;).effective.toInterval() during &quot;Measurement Period&quot;)
+  and HIE.&quot;TB screening date&quot;
     
 
 /* end Populations */
 
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 12Kb )</p></div>
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIC.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIC.&quot;By Age Stratifier&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIC.&quot;By Geographic Region Stratifier&quot;
+
+//define &quot;Stratification&quot;:
+ //HIC.&quot;By Administrative Gender Stratifier&quot;.code 
+ // + ':' + HIC.&quot;By Age Stratifier&quot;
+//+ ':' + HIC.&quot;By Geographic Region Stratifier&quot;</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -484,7 +506,7 @@ define &quot;Denominator&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Aug 12, 2024 23:19+0000">2024-08-12</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Aug 13, 2024 19:21+0000">2024-08-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

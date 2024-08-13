@@ -15,8 +15,6 @@ context Patient
 
 //DRAFT
 
-
-
 //need to add Time to start ART (within 7, 30 or 90 days of diagnosis, as per country guidelines)
 //need to add Disaggregation by time since diagnosis
   
