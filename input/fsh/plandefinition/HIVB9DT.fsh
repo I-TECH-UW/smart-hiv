@@ -18,7 +18,7 @@ Usage: #definition
   * type = #citation
   * citation = "Consolidated Guidelines on HIV Testing Services (2019)"
 * action[+]
-  textEquivalent = "Determine retest recommendation"
+  * textEquivalent = "Determine retest recommendation"
   * action[+]
     * textEquivalent = "Schedule an annual follow-up test"
     * condition[+]
