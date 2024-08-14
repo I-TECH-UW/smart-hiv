@@ -1,9 +1,9 @@
 HIV : Validation Results
 =========================================
 
-err = 564, warn = 320, info = 2287
+err = 558, warn = 320, info = 2289
 IG Publisher Version: 1.6.20
-Generated Tue Aug 13 19:24:40 UTC 2024. FHIR version 4.0.1 for smart.who.int.hiv#0.2.0 (canonical = http://smart.who.int/hiv)
+Generated Wed Aug 14 10:53:35 UTC 2024. FHIR version 4.0.1 for smart.who.int.hiv#0.2.0 (canonical = http://smart.who.int/hiv)
  Build Errors : 57 / 4 / 0
  /github/workspace/fsh-generated/resources/ActivityDefinition-HIVB9DTScheduleFollowUp : 0 / 0 / 1
  /github/workspace/fsh-generated/resources/ActorDefinition-Client : 0 / 1 / 2
@@ -21,7 +21,7 @@ Generated Tue Aug 13 19:24:40 UTC 2024. FHIR version 4.0.1 for smart.who.int.hiv
  /github/workspace/fsh-generated/resources/ActorDefinition-TrainedNonPhysicianClinician : 0 / 1 / 2
  /github/workspace/fsh-generated/resources/CodeSystem-HIVConcepts : 0 / 17 / 4
  /github/workspace/fsh-generated/resources/ImplementationGuide-smart.who.int.hiv : 0 / 0 / 4
- /github/workspace/fsh-generated/resources/Library-HIVB2DTLogic : 31 / 1538 / 11
+ /github/workspace/fsh-generated/resources/Library-HIVB2DTLogic : 25 / 1538 / 11
  /github/workspace/fsh-generated/resources/Library-HIVB7DTLogic : 0 / 26 / 11
  /github/workspace/fsh-generated/resources/Library-HIVB9DTLogic : 51 / 1538 / 11
  /github/workspace/fsh-generated/resources/Library-HIVCommon : 0 / 15 / 11
@@ -214,6 +214,7 @@ Generated Tue Aug 13 19:24:40 UTC 2024. FHIR version 4.0.1 for smart.who.int.hiv
  /github/workspace/fsh-generated/resources/Measure-HIVIND94 : 0 / 0 / 9
  /github/workspace/fsh-generated/resources/Measure-HIVIND95 : 0 / 0 / 9
  /github/workspace/fsh-generated/resources/Measure-HIVIND96 : 0 / 0 / 9
+ /github/workspace/fsh-generated/resources/PlanDefinition-HIVB2DT : 0 / 0 / 8
  /github/workspace/fsh-generated/resources/PlanDefinition-HIVB9DT : 0 / 11 / 8
  /github/workspace/fsh-generated/resources/Questionnaire-HIV.A2GatherClientDetails : 0 / 0 / 6
  /github/workspace/fsh-generated/resources/Questionnaire-HIV.A5CreateNewClientRecord : 0 / 0 / 6
@@ -683,7 +684,9 @@ WARNING: CodeSystem/HIVConcepts: CodeSystem.concept[2029].definition: value shou
 WARNING: CodeSystem/HIVConcepts: CodeSystem.meta.profile[2]: Profile reference 'http://smart.who.int/base/StructureDefinition/SGCodeSystem' has not been checked because it could not be found, and the validator is set to not fetch unknown profiles
 == fsh-generated/resources/ImplementationGuide-smart.who.int.hiv.json ==
 == fsh-generated/resources/Library-HIVB2DTLogic.json ==
-ERROR: HIVB2DTLogic: Syntax error at ""
+ERROR: HIVB2DTLogic: Syntax error at 'This is a sign and/or symptom of a serious health condition.
+  
+Immediately take action or refer for care if client is showing this sign of a serious illness.'
 WARNING: /github/workspace/input/cql/HIVB2DTLogic.cql: The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.
 WARNING: /github/workspace/input/cql/HIVB2DTLogic.cql: The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.
 WARNING: /github/workspace/input/cql/HIVB2DTLogic.cql: The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.
@@ -710,13 +713,7 @@ ERROR: HIVEncounterElements: Could not resolve identifier Screen negative for TB
 ERROR: HIVEncounterElements: Could not resolve identifier Inconclusive D.DE989 Condition in library HIVElements.
 ERROR: HIVEncounterElements: Could not validate reference to expression Inconclusive D.DE989 Condition because its definition contains errors.
 ERROR: HIVEncounterElements: Could not resolve identifier Inconclusive D.DE989 Observation in library HIVElements.
-ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
-ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
-ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
-ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
-ERROR: HIVB2DTLogic: Member value not found for type System.Boolean.
-ERROR: HIVB2DTLogic: Could not validate reference to expression Immediately take action or refer for care if a client is having this issue because its definition contains errors.
-ERROR: HIVB2DTLogic.cql: CQL Processing failed with (29) errors.
+ERROR: HIVB2DTLogic.cql: CQL Processing failed with (23) errors.
 INFORMATION: Library/HIVB2DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablelibrary|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Library/HIVB2DTLogic: Library.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cql/StructureDefinition/cql-library|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 ERROR: Library/HIVB2DTLogic: Library.content[1]: Constraint failed: clb-2: 'CQL libraries must have a content element with data or a url (or both)'
@@ -2246,19 +2243,22 @@ INFORMATION: Resource: This resource could usefully have an OID assigned (OIDs a
 INFORMATION: Measure/HIVIND96: Measure.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablemeasure|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Measure/HIVIND96: Measure.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablemeasure|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 INFORMATION: Resource: This resource could usefully have an OID assigned (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
+== fsh-generated/resources/PlanDefinition-HIVB2DT.json ==
+INFORMATION: PlanDefinition/HIVB2DT: PlanDefinition.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-recommendationdefinition|2.0.0-draft (this may not be a problem, but you should check that it's not intended to match a slice)
+INFORMATION: PlanDefinition/HIVB2DT: PlanDefinition.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableplandefinition|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 == fsh-generated/resources/PlanDefinition-HIVB9DT.json ==
 INFORMATION: PlanDefinition/HIVB9DT: PlanDefinition.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-recommendationdefinition|2.0.0-draft (this may not be a problem, but you should check that it's not intended to match a slice)
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[3].action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
-WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[4].action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[3].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[3].action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[3].action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[3].action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[4].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[4].action[0].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[4].action[1].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
+WARNING: PlanDefinition/HIVB9DT: PlanDefinition.action[0].action[4].action[2].type.coding[0]: Coding has no system. A code with no system has no defined meaning, and it cannot be validated. A system should be provided
 INFORMATION: PlanDefinition/HIVB9DT: PlanDefinition.extension[0]: This element does not match any known slice defined in the profile http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableplandefinition|1.0.0 (this may not be a problem, but you should check that it's not intended to match a slice)
 == fsh-generated/resources/Questionnaire-HIV.A2GatherClientDetails.json ==
 == fsh-generated/resources/Questionnaire-HIV.A5CreateNewClientRecord.json ==

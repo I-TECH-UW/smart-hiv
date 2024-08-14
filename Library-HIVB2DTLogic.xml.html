@@ -44,8 +44,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.3"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.3"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.4"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.4"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -302,7 +302,7 @@
         
           Draft
           
-            as of 2024-08-13
+            as of 2024-08-14
           
         
       </td>
@@ -357,7 +357,7 @@ library HIVB2DTLogic
 using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
-include HIVConcepts called HCx
+include HIVConcepts called Concepts
 include HIVEncounterElements called Elements
 include FHIRHelpers version '4.0.1'
 
@@ -383,9 +383,10 @@ define &amp;quot;Age under 10&amp;quot;:
  @output: &amp;quot;Immediately take action or refer for care if a client is having this issue&amp;quot;
  */
 define &amp;quot;Immediately take action or refer for care if a client is having this issue&amp;quot;:
-  exists(Elements.&amp;quot;Signs of serious illness&amp;quot; O
-    where &amp;quot;Age 10 or older&amp;quot; 
-      and O.value ~ HCx.&amp;quot;Tachycardia&amp;quot;)
+  &amp;quot;Age 10 or older&amp;quot; and exists(
+    Elements.&amp;quot;Signs of serious illness Observation&amp;quot; O
+      where O.value ~ Concepts.&amp;quot;Tachycardia&amp;quot;
+  )
 
 /*
  @output &amp;quot;Immediately take action or refer for care if client is showing this sign of a serious illness.&amp;quot;
@@ -405,13 +406,13 @@ define &amp;quot;Use clinical judgement and consider local epidemiology to deter
 define &amp;quot;Guidance&amp;quot;:
   case 
   when &amp;quot;Immediately take action or refer for care if a client is having this issue&amp;quot; 
-    then &amp;quot;Immediately take action or refer for care if a client is having this issue.&amp;quot;
+    then 'Immediately take action or refer for care if a client is having this issue.'
   when &amp;quot;Immediately take action or refer for care if client is showing this sign of a serious illness&amp;quot; and &amp;quot;Age 10 or older&amp;quot;
-    then &amp;quot;Immediately take action or refer for care if client is showing this sign of a serious illness.&amp;quot;
+    then 'Immediately take action or refer for care if client is showing this sign of a serious illness.'
   when &amp;quot;Immediately take action or refer for care if client is showing this sign of a serious illness&amp;quot; and &amp;quot;Age under 10&amp;quot;
-    then &amp;quot;&amp;quot;&amp;quot;This is a sign and/or symptom of a serious health condition.
+    then '''This is a sign and/or symptom of a serious health condition.
   
-Immediately take action or refer for care if client is showing this sign of a serious illness.&amp;quot;&amp;quot;&amp;quot;
+Immediately take action or refer for care if client is showing this sign of a serious illness.'''
   else null
   end
 
@@ -419,34 +420,40 @@ Immediately take action or refer for care if client is showing this sign of a se
  Supporting Logic
 */
 define &amp;quot;Signs of serious illness age 10 or older&amp;quot;:
-  &amp;quot;Age 10 or older&amp;quot; and Elements.&amp;quot;Signs of serious illness&amp;quot; O
-    where
-      O.value ~ HCx.&amp;quot;Tachypnea&amp;quot; or
-      O.value ~ HCx.&amp;quot;Unable to walk unaided&amp;quot;
+  &amp;quot;Age 10 or older&amp;quot; and exists(
+    Elements.&amp;quot;Signs of serious illness Observation&amp;quot; O
+      where
+        O.value ~ Concepts.&amp;quot;Tachypnea&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Unable to walk unaided&amp;quot;
+  )
 
 define &amp;quot;Signs of serious illness age under 10&amp;quot;:
-  &amp;quot;Age under 10&amp;quot; and Elements.&amp;quot;Signs of serious illness&amp;quot; O
-    where 
-      O.value in {
-        HCx.&amp;quot;Lethargy - HIV.D.DE22&amp;quot;,
-        HCx.&amp;quot;Unconsciousness&amp;quot;,
-        HCx.&amp;quot;Convulsions&amp;quot;,
-        HCx.&amp;quot;Unable to breastfeed&amp;quot;,
-        HCx.&amp;quot;Unable to drink&amp;quot;,
-        HCx.&amp;quot;Repeated vomiting&amp;quot;
-      } 
-  
+  &amp;quot;Age under 10&amp;quot; and exists(
+    Elements.&amp;quot;Signs of serious illness Observation&amp;quot; O
+      where
+        O.value ~ Concepts.&amp;quot;Lethargy - HIV.D.DE22&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Unconsciousness&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Convulsions&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Unable to breastfeed&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Unable to drink&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Repeated vomiting&amp;quot;
+    )
+
 define &amp;quot;Signs of serious illness requiring clinical judgement age 10 or older&amp;quot;:
-  &amp;quot;Age 10 or older&amp;quot; and Elements.&amp;quot;Signs of serious illness&amp;quot; O
-    where
-      O.value ~ HCx.&amp;quot;Fever of 39 C or greater&amp;quot; or
-      O.value ~ HCx.&amp;quot;Other sign of serious illness&amp;quot;
-  
+  &amp;quot;Age 10 or older&amp;quot; and exists(
+    Elements.&amp;quot;Signs of serious illness Observation&amp;quot; O
+      where
+        O.value ~ Concepts.&amp;quot;Fever of 39 C or greater&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Other sign of serious illness&amp;quot;
+  )
+
 define &amp;quot;Signs of serious illness requiring clinical judgement age under 10&amp;quot;:
-  &amp;quot;Age under 10&amp;quot; and Elements.&amp;quot;Signs of serious illness&amp;quot; O
-    where 
-      O.value ~ HCx.&amp;quot;Fever of 39 C or greater&amp;quot; or
-      O.value ~ HCx.&amp;quot;Other sign of serious illness&amp;quot;
+  &amp;quot;Age under 10&amp;quot; and exists(
+    Elements.&amp;quot;Signs of serious illness Observation&amp;quot; O
+      where
+        O.value ~ Concepts.&amp;quot;Fever of 39 C or greater&amp;quot; or
+        O.value ~ Concepts.&amp;quot;Other sign of serious illness&amp;quot;
+  )
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;No Content&lt;/code&gt; (&lt;code&gt;application/elm+xml&lt;/code&gt;)&lt;/p&gt;&lt;/div&gt;<a name="end-xhtml"></a>
   &lt;/text&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>
@@ -465,7 +472,7 @@ define &amp;quot;Signs of serious illness requiring clinical judgement age under
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Coding#Coding.code">code</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;logic-library&quot;/&gt;
     &lt;/coding&gt;
   &lt;/type&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-08-13T19:21:15+00:00&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a> <a href="http://hl7.org/fhir/R4/datatypes.html#dateTime">value</a>=&quot;2024-08-14T10:49:52+00:00&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/metadatatypes.html#ContactDetail#ContactDetail.name">name</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;WHO&quot;/&gt;
@@ -474,11 +481,11 @@ define &amp;quot;Signs of serious illness requiring clinical judgement age under
       &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#ContactPoint#ContactPoint.value">value</a> <a href="http://hl7.org/fhir/R4/datatypes.html#string">value</a>=&quot;http://who.int&quot;/&gt;
     &lt;/telecom&gt;
   &lt;/contact&gt;
-  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a> <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;Description not yet available for HIV.B2.DT Logic.&quot;/&gt;
+  &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.description">description</a> <a href="http://hl7.org/fhir/R4/datatypes.html#markdown">value</a>=&quot;HIV.B2.DT Signs of Serious Illness Logic&quot;/&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;text/cql&quot;/&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.data">data</a>
-          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoqCkxpYnJhcnk6IEhJVi5CMi5EVCBMb2dpYwoKQERlY2lzaW9uSUQ6IEhJVi5CMi5EVApAQnVzaW5lc3NSdWxlOiBDaGVjayBmb3Igc2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzCkBUcmlnZ2VyOiBISVYuQjIgQ2hlY2sgZm9yIHNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcwpAVHJpZ2dlcjogSElWLkQzIENoZWNrIGZvciBzaWducyBvZiBzZXJpb3VzIGlsbG5lc3MKQEhpdFBvbGljeTogUnVsZSBPcmRlcgpARGVzY3JpcHRpb246IENoZWNrIGZvciBzZXJpb3VzIGlsbG5lc3MKCkRhdGEgQ29uY2VwdHM6CiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aAogKiBISVYuRC5ERTE3OiBTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgfCBTaWducyB0aGF0IG1heSBpbmRpY2F0ZSB0aGUgY2xpZW50IGhhcyBhIHNlcmlvdXMgaWxsbmVzcyBhbmQgbmVlZHMgdHJpYWdlIG9yIGFuIGVtZXJnZW5jeSByZWZlcnJhbAogKiBISVYuRC5ERTk6IEJvZHkgdGVtcGVyYXR1cmUgfCBUZW1wZXJhdHVyZSBvZiB0aGUgY2xpZW50IGluIENlbHNpdXMKCkNvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIEhJViBwcmV2ZW50aW9uLCB0ZXN0aW5nLCB0cmVhdG1lbnQsIHNlcnZpY2UgZGVsaXZlcnkgYW5kIG1vbml0b3Jpbmc6IHJlY29tbWVuZGF0aW9ucyBmb3IgYSBwdWJsaWMgaGVhbHRoIGFwcHJvYWNoICgyMDIxKSBDaGFwdGVyIDU6IEFkdmFuY2VkIEhJViBEaXNlYXNlLiBGaWd1cmUgNS4xOiBBbGdvcml0aG0gZm9yIHByb3ZpZGluZyBhIHBhY2thZ2Ugb2YgY2FyZSBmb3IgcGVvcGxlIHdpdGggYWR2YW5jZWQgSElWIGRpc2Vhc2UuCiovCgpsaWJyYXJ5IEhJVkIyRFRMb2dpYwoKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgSElWQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCmluY2x1ZGUgSElWQ29uY2VwdHMgY2FsbGVkIEhDeAppbmNsdWRlIEhJVkVuY291bnRlckVsZW1lbnRzIGNhbGxlZCBFbGVtZW50cwppbmNsdWRlIEZISVJIZWxwZXJzIHZlcnNpb24gJzQuMC4xJwoKaW5jbHVkZSBXSE9Db21tb24gY2FsbGVkIFdDb20KCmNvbnRleHQgUGF0aWVudAoKIC8qCiAgQGlucHV0OiAiQWdlIDEwIG9yIG9sZGVyIgogIEBwc2V1ZG9jb2RlOiAnQWdlJyA+PSAxMCB5ZWFycwogICovCmRlZmluZSAiQWdlIDEwIG9yIG9sZGVyIjoKICBBZ2VJblllYXJzQXQoVG9kYXkoKSkgPj0gMTAKCiAvKgogIEBpbnB1dDogIkFnZSB1bmRlciAxMCIKICBAcHNldWRvY29kZTogJ0FnZScgPCAxMCB5ZWFycwogICovCmRlZmluZSAiQWdlIHVuZGVyIDEwIjoKICBBZ2VJblllYXJzQXQoVG9kYXkoKSkgPCAxMAoKLyoKIEBvdXRwdXQ6ICJJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBhIGNsaWVudCBpcyBoYXZpbmcgdGhpcyBpc3N1ZSIKICovCmRlZmluZSAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgYSBjbGllbnQgaXMgaGF2aW5nIHRoaXMgaXNzdWUiOgogIGV4aXN0cyhFbGVtZW50cy4iU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIiBPCiAgICB3aGVyZSAiQWdlIDEwIG9yIG9sZGVyIiAKICAgICAgYW5kIE8udmFsdWUgfiBIQ3guIlRhY2h5Y2FyZGlhIikKCi8qCiBAb3V0cHV0ICJJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBjbGllbnQgaXMgc2hvd2luZyB0aGlzIHNpZ24gb2YgYSBzZXJpb3VzIGlsbG5lc3MuIgogKi8KZGVmaW5lICJJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBjbGllbnQgaXMgc2hvd2luZyB0aGlzIHNpZ24gb2YgYSBzZXJpb3VzIGlsbG5lc3MiOgogICJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgYWdlIDEwIG9yIG9sZGVyIiBvciAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIGFnZSB1bmRlciAxMCIKCi8qCiBAb3V0cHV0ICJVc2UgY2xpbmljYWwganVkZ2VtZW50IGFuZCBjb25zaWRlciBsb2NhbCBlcGlkZW1pb2xvZ3kgdG8gZGV0ZXJtaW5lIGlmIHN5bXB0b21zIHN1Z2dlc3QgY2xpZW50IGlzIHNlcmlvdXNseSBpbGwiCiAqLwpkZWZpbmUgIlVzZSBjbGluaWNhbCBqdWRnZW1lbnQgYW5kIGNvbnNpZGVyIGxvY2FsIGVwaWRlbWlvbG9neSB0byBkZXRlcm1pbmUgaWYgc3ltcHRvbXMgc3VnZ2VzdCBjbGllbnQgaXMgc2VyaW91c2x5IGlsbCI6CiAgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyByZXF1aXJpbmcgY2xpbmljYWwganVkZ2VtZW50IGFnZSAxMCBvciBvbGRlciIgb3IgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyByZXF1aXJpbmcgY2xpbmljYWwganVkZ2VtZW50IGFnZSB1bmRlciAxMCIKCi8qCiBAZHluYW1pY1ZhbHVlOiBHdWlkYW5jZQogKi8KZGVmaW5lICJHdWlkYW5jZSI6CiAgY2FzZSAKICB3aGVuICJJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBhIGNsaWVudCBpcyBoYXZpbmcgdGhpcyBpc3N1ZSIgCiAgICB0aGVuICJJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBhIGNsaWVudCBpcyBoYXZpbmcgdGhpcyBpc3N1ZS4iCiAgd2hlbiAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgY2xpZW50IGlzIHNob3dpbmcgdGhpcyBzaWduIG9mIGEgc2VyaW91cyBpbGxuZXNzIiBhbmQgIkFnZSAxMCBvciBvbGRlciIKICAgIHRoZW4gIkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGNsaWVudCBpcyBzaG93aW5nIHRoaXMgc2lnbiBvZiBhIHNlcmlvdXMgaWxsbmVzcy4iCiAgd2hlbiAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgY2xpZW50IGlzIHNob3dpbmcgdGhpcyBzaWduIG9mIGEgc2VyaW91cyBpbGxuZXNzIiBhbmQgIkFnZSB1bmRlciAxMCIKICAgIHRoZW4gIiIiVGhpcyBpcyBhIHNpZ24gYW5kL29yIHN5bXB0b20gb2YgYSBzZXJpb3VzIGhlYWx0aCBjb25kaXRpb24uCiAgCkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGNsaWVudCBpcyBzaG93aW5nIHRoaXMgc2lnbiBvZiBhIHNlcmlvdXMgaWxsbmVzcy4iIiIKICBlbHNlIG51bGwKICBlbmQKCi8qCiBTdXBwb3J0aW5nIExvZ2ljCiovCmRlZmluZSAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIGFnZSAxMCBvciBvbGRlciI6CiAgIkFnZSAxMCBvciBvbGRlciIgYW5kIEVsZW1lbnRzLiJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MiIE8KICAgIHdoZXJlCiAgICAgIE8udmFsdWUgfiBIQ3guIlRhY2h5cG5lYSIgb3IKICAgICAgTy52YWx1ZSB+IEhDeC4iVW5hYmxlIHRvIHdhbGsgdW5haWRlZCIKCmRlZmluZSAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIGFnZSB1bmRlciAxMCI6CiAgIkFnZSB1bmRlciAxMCIgYW5kIEVsZW1lbnRzLiJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MiIE8KICAgIHdoZXJlIAogICAgICBPLnZhbHVlIGluIHsKICAgICAgICBIQ3guIkxldGhhcmd5IC0gSElWLkQuREUyMiIsCiAgICAgICAgSEN4LiJVbmNvbnNjaW91c25lc3MiLAogICAgICAgIEhDeC4iQ29udnVsc2lvbnMiLAogICAgICAgIEhDeC4iVW5hYmxlIHRvIGJyZWFzdGZlZWQiLAogICAgICAgIEhDeC4iVW5hYmxlIHRvIGRyaW5rIiwKICAgICAgICBIQ3guIlJlcGVhdGVkIHZvbWl0aW5nIgogICAgICB9IAogIApkZWZpbmUgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyByZXF1aXJpbmcgY2xpbmljYWwganVkZ2VtZW50IGFnZSAxMCBvciBvbGRlciI6CiAgIkFnZSAxMCBvciBvbGRlciIgYW5kIEVsZW1lbnRzLiJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MiIE8KICAgIHdoZXJlCiAgICAgIE8udmFsdWUgfiBIQ3guIkZldmVyIG9mIDM5IEMgb3IgZ3JlYXRlciIgb3IKICAgICAgTy52YWx1ZSB+IEhDeC4iT3RoZXIgc2lnbiBvZiBzZXJpb3VzIGlsbG5lc3MiCiAgCmRlZmluZSAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIHJlcXVpcmluZyBjbGluaWNhbCBqdWRnZW1lbnQgYWdlIHVuZGVyIDEwIjoKICAiQWdlIHVuZGVyIDEwIiBhbmQgRWxlbWVudHMuIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyIgTwogICAgd2hlcmUgCiAgICAgIE8udmFsdWUgfiBIQ3guIkZldmVyIG9mIDM5IEMgb3IgZ3JlYXRlciIgb3IKICAgICAgTy52YWx1ZSB+IEhDeC4iT3RoZXIgc2lnbiBvZiBzZXJpb3VzIGlsbG5lc3MiCg==&quot;/&gt;
+          <a href="http://hl7.org/fhir/R4/datatypes.html#base64Binary">value</a>=&quot;LyoqCkxpYnJhcnk6IEhJVi5CMi5EVCBMb2dpYwoKQERlY2lzaW9uSUQ6IEhJVi5CMi5EVApAQnVzaW5lc3NSdWxlOiBDaGVjayBmb3Igc2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzCkBUcmlnZ2VyOiBISVYuQjIgQ2hlY2sgZm9yIHNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcwpAVHJpZ2dlcjogSElWLkQzIENoZWNrIGZvciBzaWducyBvZiBzZXJpb3VzIGlsbG5lc3MKQEhpdFBvbGljeTogUnVsZSBPcmRlcgpARGVzY3JpcHRpb246IENoZWNrIGZvciBzZXJpb3VzIGlsbG5lc3MKCkRhdGEgQ29uY2VwdHM6CiAqIEhJVi5BLkRFMTc6IEFnZSB8IENhbGN1bGF0ZWQgYWdlIChudW1iZXIgb2YgeWVhcnMpIG9mIHRoZSBjbGllbnQgYmFzZWQgb24gZGF0ZSBvZiBiaXJ0aAogKiBISVYuRC5ERTE3OiBTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgfCBTaWducyB0aGF0IG1heSBpbmRpY2F0ZSB0aGUgY2xpZW50IGhhcyBhIHNlcmlvdXMgaWxsbmVzcyBhbmQgbmVlZHMgdHJpYWdlIG9yIGFuIGVtZXJnZW5jeSByZWZlcnJhbAogKiBISVYuRC5ERTk6IEJvZHkgdGVtcGVyYXR1cmUgfCBUZW1wZXJhdHVyZSBvZiB0aGUgY2xpZW50IGluIENlbHNpdXMKCkNvbnNvbGlkYXRlZCBndWlkZWxpbmVzIG9uIEhJViBwcmV2ZW50aW9uLCB0ZXN0aW5nLCB0cmVhdG1lbnQsIHNlcnZpY2UgZGVsaXZlcnkgYW5kIG1vbml0b3Jpbmc6IHJlY29tbWVuZGF0aW9ucyBmb3IgYSBwdWJsaWMgaGVhbHRoIGFwcHJvYWNoICgyMDIxKSBDaGFwdGVyIDU6IEFkdmFuY2VkIEhJViBEaXNlYXNlLiBGaWd1cmUgNS4xOiBBbGdvcml0aG0gZm9yIHByb3ZpZGluZyBhIHBhY2thZ2Ugb2YgY2FyZSBmb3IgcGVvcGxlIHdpdGggYWR2YW5jZWQgSElWIGRpc2Vhc2UuCiovCgpsaWJyYXJ5IEhJVkIyRFRMb2dpYwoKdXNpbmcgRkhJUiB2ZXJzaW9uICc0LjAuMScKCmluY2x1ZGUgSElWQ29tbW9uIHZlcnNpb24gJzAuMC4xJyBjYWxsZWQgSElDCmluY2x1ZGUgSElWQ29uY2VwdHMgY2FsbGVkIENvbmNlcHRzCmluY2x1ZGUgSElWRW5jb3VudGVyRWxlbWVudHMgY2FsbGVkIEVsZW1lbnRzCmluY2x1ZGUgRkhJUkhlbHBlcnMgdmVyc2lvbiAnNC4wLjEnCgppbmNsdWRlIFdIT0NvbW1vbiBjYWxsZWQgV0NvbQoKY29udGV4dCBQYXRpZW50CgogLyoKICBAaW5wdXQ6ICJBZ2UgMTAgb3Igb2xkZXIiCiAgQHBzZXVkb2NvZGU6ICdBZ2UnID49IDEwIHllYXJzCiAgKi8KZGVmaW5lICJBZ2UgMTAgb3Igb2xkZXIiOgogIEFnZUluWWVhcnNBdChUb2RheSgpKSA+PSAxMAoKIC8qCiAgQGlucHV0OiAiQWdlIHVuZGVyIDEwIgogIEBwc2V1ZG9jb2RlOiAnQWdlJyA8IDEwIHllYXJzCiAgKi8KZGVmaW5lICJBZ2UgdW5kZXIgMTAiOgogIEFnZUluWWVhcnNBdChUb2RheSgpKSA8IDEwCgovKgogQG91dHB1dDogIkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGEgY2xpZW50IGlzIGhhdmluZyB0aGlzIGlzc3VlIgogKi8KZGVmaW5lICJJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBhIGNsaWVudCBpcyBoYXZpbmcgdGhpcyBpc3N1ZSI6CiAgIkFnZSAxMCBvciBvbGRlciIgYW5kIGV4aXN0cygKICAgIEVsZW1lbnRzLiJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgT2JzZXJ2YXRpb24iIE8KICAgICAgd2hlcmUgTy52YWx1ZSB+IENvbmNlcHRzLiJUYWNoeWNhcmRpYSIKICApCgovKgogQG91dHB1dCAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgY2xpZW50IGlzIHNob3dpbmcgdGhpcyBzaWduIG9mIGEgc2VyaW91cyBpbGxuZXNzLiIKICovCmRlZmluZSAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgY2xpZW50IGlzIHNob3dpbmcgdGhpcyBzaWduIG9mIGEgc2VyaW91cyBpbGxuZXNzIjoKICAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIGFnZSAxMCBvciBvbGRlciIgb3IgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyBhZ2UgdW5kZXIgMTAiCgovKgogQG91dHB1dCAiVXNlIGNsaW5pY2FsIGp1ZGdlbWVudCBhbmQgY29uc2lkZXIgbG9jYWwgZXBpZGVtaW9sb2d5IHRvIGRldGVybWluZSBpZiBzeW1wdG9tcyBzdWdnZXN0IGNsaWVudCBpcyBzZXJpb3VzbHkgaWxsIgogKi8KZGVmaW5lICJVc2UgY2xpbmljYWwganVkZ2VtZW50IGFuZCBjb25zaWRlciBsb2NhbCBlcGlkZW1pb2xvZ3kgdG8gZGV0ZXJtaW5lIGlmIHN5bXB0b21zIHN1Z2dlc3QgY2xpZW50IGlzIHNlcmlvdXNseSBpbGwiOgogICJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgcmVxdWlyaW5nIGNsaW5pY2FsIGp1ZGdlbWVudCBhZ2UgMTAgb3Igb2xkZXIiIG9yICJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgcmVxdWlyaW5nIGNsaW5pY2FsIGp1ZGdlbWVudCBhZ2UgdW5kZXIgMTAiCgovKgogQGR5bmFtaWNWYWx1ZTogR3VpZGFuY2UKICovCmRlZmluZSAiR3VpZGFuY2UiOgogIGNhc2UgCiAgd2hlbiAiSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgYSBjbGllbnQgaXMgaGF2aW5nIHRoaXMgaXNzdWUiIAogICAgdGhlbiAnSW1tZWRpYXRlbHkgdGFrZSBhY3Rpb24gb3IgcmVmZXIgZm9yIGNhcmUgaWYgYSBjbGllbnQgaXMgaGF2aW5nIHRoaXMgaXNzdWUuJwogIHdoZW4gIkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGNsaWVudCBpcyBzaG93aW5nIHRoaXMgc2lnbiBvZiBhIHNlcmlvdXMgaWxsbmVzcyIgYW5kICJBZ2UgMTAgb3Igb2xkZXIiCiAgICB0aGVuICdJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBjbGllbnQgaXMgc2hvd2luZyB0aGlzIHNpZ24gb2YgYSBzZXJpb3VzIGlsbG5lc3MuJwogIHdoZW4gIkltbWVkaWF0ZWx5IHRha2UgYWN0aW9uIG9yIHJlZmVyIGZvciBjYXJlIGlmIGNsaWVudCBpcyBzaG93aW5nIHRoaXMgc2lnbiBvZiBhIHNlcmlvdXMgaWxsbmVzcyIgYW5kICJBZ2UgdW5kZXIgMTAiCiAgICB0aGVuICcnJ1RoaXMgaXMgYSBzaWduIGFuZC9vciBzeW1wdG9tIG9mIGEgc2VyaW91cyBoZWFsdGggY29uZGl0aW9uLgogIApJbW1lZGlhdGVseSB0YWtlIGFjdGlvbiBvciByZWZlciBmb3IgY2FyZSBpZiBjbGllbnQgaXMgc2hvd2luZyB0aGlzIHNpZ24gb2YgYSBzZXJpb3VzIGlsbG5lc3MuJycnCiAgZWxzZSBudWxsCiAgZW5kCgovKgogU3VwcG9ydGluZyBMb2dpYwoqLwpkZWZpbmUgIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyBhZ2UgMTAgb3Igb2xkZXIiOgogICJBZ2UgMTAgb3Igb2xkZXIiIGFuZCBleGlzdHMoCiAgICBFbGVtZW50cy4iU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIE9ic2VydmF0aW9uIiBPCiAgICAgIHdoZXJlCiAgICAgICAgTy52YWx1ZSB+IENvbmNlcHRzLiJUYWNoeXBuZWEiIG9yCiAgICAgICAgTy52YWx1ZSB+IENvbmNlcHRzLiJVbmFibGUgdG8gd2FsayB1bmFpZGVkIgogICkKCmRlZmluZSAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIGFnZSB1bmRlciAxMCI6CiAgIkFnZSB1bmRlciAxMCIgYW5kIGV4aXN0cygKICAgIEVsZW1lbnRzLiJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgT2JzZXJ2YXRpb24iIE8KICAgICAgd2hlcmUKICAgICAgICBPLnZhbHVlIH4gQ29uY2VwdHMuIkxldGhhcmd5IC0gSElWLkQuREUyMiIgb3IKICAgICAgICBPLnZhbHVlIH4gQ29uY2VwdHMuIlVuY29uc2Npb3VzbmVzcyIgb3IKICAgICAgICBPLnZhbHVlIH4gQ29uY2VwdHMuIkNvbnZ1bHNpb25zIiBvcgogICAgICAgIE8udmFsdWUgfiBDb25jZXB0cy4iVW5hYmxlIHRvIGJyZWFzdGZlZWQiIG9yCiAgICAgICAgTy52YWx1ZSB+IENvbmNlcHRzLiJVbmFibGUgdG8gZHJpbmsiIG9yCiAgICAgICAgTy52YWx1ZSB+IENvbmNlcHRzLiJSZXBlYXRlZCB2b21pdGluZyIKICAgICkKCmRlZmluZSAiU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIHJlcXVpcmluZyBjbGluaWNhbCBqdWRnZW1lbnQgYWdlIDEwIG9yIG9sZGVyIjoKICAiQWdlIDEwIG9yIG9sZGVyIiBhbmQgZXhpc3RzKAogICAgRWxlbWVudHMuIlNpZ25zIG9mIHNlcmlvdXMgaWxsbmVzcyBPYnNlcnZhdGlvbiIgTwogICAgICB3aGVyZQogICAgICAgIE8udmFsdWUgfiBDb25jZXB0cy4iRmV2ZXIgb2YgMzkgQyBvciBncmVhdGVyIiBvcgogICAgICAgIE8udmFsdWUgfiBDb25jZXB0cy4iT3RoZXIgc2lnbiBvZiBzZXJpb3VzIGlsbG5lc3MiCiAgKQoKZGVmaW5lICJTaWducyBvZiBzZXJpb3VzIGlsbG5lc3MgcmVxdWlyaW5nIGNsaW5pY2FsIGp1ZGdlbWVudCBhZ2UgdW5kZXIgMTAiOgogICJBZ2UgdW5kZXIgMTAiIGFuZCBleGlzdHMoCiAgICBFbGVtZW50cy4iU2lnbnMgb2Ygc2VyaW91cyBpbGxuZXNzIE9ic2VydmF0aW9uIiBPCiAgICAgIHdoZXJlCiAgICAgICAgTy52YWx1ZSB+IENvbmNlcHRzLiJGZXZlciBvZiAzOSBDIG9yIGdyZWF0ZXIiIG9yCiAgICAgICAgTy52YWx1ZSB+IENvbmNlcHRzLiJPdGhlciBzaWduIG9mIHNlcmlvdXMgaWxsbmVzcyIKICApCg==&quot;/&gt;
   &lt;/content&gt;
   &lt;<a href="http://hl7.org/fhir/R4/library.html#Library.content">content</a>&gt;
     &lt;<a href="http://hl7.org/fhir/R4/datatypes.html#Attachment#Attachment.contentType">contentType</a> <a href="http://hl7.org/fhir/R4/datatypes.html#code">value</a>=&quot;application/elm+xml&quot;/&gt;
@@ -507,7 +514,7 @@ define &amp;quot;Signs of serious illness requiring clinical judgement age under
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Aug 13, 2024 19:21+0000">2024-08-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Aug 14, 2024 10:49+0000">2024-08-14</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

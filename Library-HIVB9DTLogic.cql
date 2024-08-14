@@ -35,7 +35,6 @@ include WHOCommon called WCom
 include WHOConcepts called WCx
 include WHOEncounterElements called WElm
 
-
 context Patient
 
  /*

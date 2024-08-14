@@ -10,6 +10,7 @@ codesystem "SNOMEDCT:2018-03": 'urn:oid:2.16.840.1.113883.6.96' version 'urn:hl7
 codesystem "SNOMEDCT": 'urn:oid:2.16.840.1.113883.6.96'
 codesystem "AdverseEventSeverity": 'http://terminology.hl7.org/CodeSystem/adverse-event-severity'
 codesystem "RoleCode": 'http://terminology.hl7.org/CodeSystem/v3-RoleCode'
+
 code "encounter-diagnosis": 'encounter-diagnosis' from "ConditionCategoryCodes" display 'Encounter Diagnosis'
 
 // Related Person
