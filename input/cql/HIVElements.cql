@@ -2737,13 +2737,11 @@ define "Any STI syndrome diagnosed B.DE235 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of syphilis test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Syphilis test date B.DE249":
-  [Observation: Concepts."Syphilis test date - HIV.B.DE249"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Syphilis test date B.DE249 Value":
-  "Syphilis test date B.DE249" O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom."syphilis test"
 /* End of Syphilis test date B.DE249 */
 
 /*
@@ -10269,7 +10267,7 @@ define "Eligible for DSD ART":
 */
 
 define "Date DSD ART eligibility assessed":
-  [Procedure: CustomConcepts."DSD ART eligibility assessed"] P
+  [Procedure: ConceptsCustom."DSD ART eligibility assessed"] P
     where P.status in { 'completed' }
   return P.performed.toInterval()
 /* End of Date DSD ART eligibility assessed */
@@ -12215,7 +12213,7 @@ define "TB diagnostic test date":
 
 define "TB treatment start date":
   [MedicationStatement] MS
-    where exists(MS.reasonCode C where C ~ CustomConcepts."tb treatment")
+    where exists(MS.reasonCode C where C ~ ConceptsCustom."tb treatment")
     return (start of MS.effective.toInterval())
 /* End of TB treatment start date */
 
@@ -12508,13 +12506,13 @@ define "Other E.DE70":
 @activity: HIV.E1 Capture or update mother's history
 @description: The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')
 */
-// TODO: Replace placeholder with relevant CQL logic
+
+define "Antenatal care contact":
+  ["Encounter": type in ConceptsCustom."Antenatal care contact"]
+
 define "ANC contact date E.DE85":
-  [Observation: Concepts."ANC contact date - HIV.E.DE85"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "ANC contact date E.DE85 Value":
-  "ANC contact date E.DE85" O
-  return O.value
+  "Antenatal care contact" E
+  return E.period.toInterval()
 /* End of ANC contact date E.DE85 */
 
 /*
@@ -14821,13 +14819,9 @@ define "Viral load test result SRV.DE13 Value":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Visit date SRV.DE15":
-  [Observation: Concepts."Visit date - HIV.SRV.DE15"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Visit date SRV.DE15 Value":
-  "Visit date SRV.DE15" O
-  return O.value
+  [Encounter] E
 /* End of Visit date SRV.DE15 */
 
 /*
@@ -15019,5 +15013,3 @@ define "Reporting date Value":
  * Custom elements and logic for use DT and IND CQL Libraries
  */
 
-define "First On ART":
-  (First("On ART D.DE38"))

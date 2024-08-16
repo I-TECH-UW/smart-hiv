@@ -16,3 +16,6 @@ define "Intervention Interval":
 
 define "LTFU Days":
     28 days
+
+define "DSD Retention Interval":
+    12 months

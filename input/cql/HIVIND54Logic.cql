@@ -108,7 +108,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."HIV-positive B.DE116"
+  HIE."Has HIV-positive Status"
    and HIE."On ART H.DE47"
    and HIE."DSD ART start date"
 
@@ -121,7 +121,7 @@ define "Numerator":
  */
 
 define "Denominator":
-HIE."HIV-positive B.DE116"
+HIE."Has HIV-positive Status"
    and HIE."On ART H.DE47"
   and HIE."Date DSD ART eligibility assessed"
   and HIE."Eligible for DSD ART"
@@ -129,3 +129,26 @@ HIE."HIV-positive B.DE116"
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIE."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIE."By Age Stratifier"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIE."patientGroups"
+
+define "Stratification":
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')
+
+//need DSD group

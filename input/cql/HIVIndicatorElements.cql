@@ -1719,13 +1719,10 @@ define "Any STI syndrome diagnosed B.DE235 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of syphilis test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Syphilis test date B.DE249":
-  Elements."Syphilis test date B.DE249" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Syphilis test date B.DE249 Value":
-  "Syphilis test date B.DE249" O
-  return O.value
+  exists(Elements."Syphilis test date B.DE249" P
+    where P.performed.toInterval() during "Measurement Period")
 /* End of Syphilis test date B.DE249 */
 
 /*
@@ -5548,13 +5545,10 @@ define "Other E.DE70":
 @activity: HIV.E1 Capture or update mother's history
 @description: The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "ANC contact date E.DE85":
-  Elements."ANC contact date E.DE85" O
-    where O.effective.toInterval() during "Measurement Period"
-define "ANC contact date E.DE85 Value":
-  "ANC contact date E.DE85" O
-  return O.value
+  exists(Elements."ANC contact date E.DE85" E where E during "Measurement Period")
+
 /* End of ANC contact date E.DE85 */
 
 /*
@@ -6540,7 +6534,7 @@ define "At elevated risk for HIV acquisition PRV.DE1":
 @activity: HIV.B6 Capture or update client history
 @description: HIV prevention intervention that client accessed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 //(including PrEP, OAMT, NSP, STI services, VMMC) 
 define "HIV prevention intervention":
   List<String>{
@@ -6551,6 +6545,10 @@ define "HIV prevention intervention":
     if "VMMC" then 'VMMC' else null,
     if "Other PRV.DE8" then 'other prevention' else null
   }
+
+  define "HIV.PRV.DE2 - HIV prevention intervention":
+    "PrEP service" or "OAMT" or "NSP" or "STI services" or "VMMC" or "Other PRV.DE8"
+
 
 /* End of HIV prevention intervention */
 
@@ -6905,13 +6903,10 @@ define "Viral load test result SRV.DE13 Value":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Visit date SRV.DE15":
-  Elements."Visit date SRV.DE15" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Visit date SRV.DE15 Value":
-  "Visit date SRV.DE15" O
-  return O.value
+  exists(Elements."Visit date SRV.DE15" E
+    where start of E.period.toInterval() during "Measurement Period")
 /* End of Visit date SRV.DE15 */
 
 /*
