@@ -58,7 +58,7 @@ valueset "STI tested for - HIV.B.DE237 Choices": 'http://smart.who.int/hiv/Value
 valueset "Syphilis test result - HIV.B.DE250 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE250'
 valueset "Gonorrhoea test result - HIV.B.DE256 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE256'
 valueset "Type of specimen - HIV.B.DE261 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE261'
-valueset "Syphilis testF type - HIV.B.DE269 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE269'
+valueset "Syphilis test type - HIV.B.DE269 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE269'
 valueset "Neisseria gonorrhoeae test type - HIV.B.DE276 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE276'
 valueset "Chlamydia trachomatis test type - HIV.B.DE284 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE284'
 valueset "Trichomonas vaginalis test type - HIV.B.DE293 Choices": 'http://smart.who.int/hiv/ValueSet/HIV.B.DE293'
