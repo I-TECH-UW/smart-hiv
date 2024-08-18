@@ -2741,11 +2741,13 @@ define "Any STI syndrome diagnosed B.DE235 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of syphilis test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Syphilis test date B.DE249":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom."syphilis test"
+  [Observation: Concepts."Syphilis test date - HIV.B.DE249"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define "Syphilis test date B.DE249 Value":
+  "Syphilis test date B.DE249" O
+  return O.value
 /* End of Syphilis test date B.DE249 */
 
 /*
@@ -2753,8 +2755,10 @@ define "Syphilis test date B.DE249":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Result from syphilis test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Syphilis test result B.DE250":
+  exists "Syphilis test result B.DE250 Observation"
+define "Syphilis test result B.DE250 Observation":
   [Observation: Concepts."Syphilis test result - HIV.B.DE250"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Syphilis test result B.DE250 */
@@ -2764,9 +2768,14 @@ define "Syphilis test result B.DE250":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is positive for syphilis
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Positive B.DE251":
-  "Syphilis test result B.DE250" O
+  exists "Positive B.DE251 Condition"
+    or exists "Positive B.DE251 Observation"
+define "Positive B.DE251 Condition":
+  [Condition: Concepts."Positive - HIV.B.DE251"]
+define "Positive B.DE251 Observation":
+  "Syphilis test result B.DE250 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Positive - HIV.B.DE251"
 /* End of Positive B.DE251 */
@@ -2776,9 +2785,14 @@ define "Positive B.DE251":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is negative for syphilis
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Negative B.DE252":
-  "Syphilis test result B.DE250" O
+  exists "Negative B.DE252 Condition"
+    or exists "Negative B.DE252 Observation"
+define "Negative B.DE252 Condition":
+  [Condition: Concepts."Negative - HIV.B.DE252"]
+define "Negative B.DE252 Observation":
+  "Syphilis test result B.DE250 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Negative - HIV.B.DE252"
 /* End of Negative B.DE252 */
@@ -2788,9 +2802,14 @@ define "Negative B.DE252":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is inconclusive
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Inconclusive B.DE253":
-  "Syphilis test result B.DE250" O
+  exists "Inconclusive B.DE253 Condition"
+    or exists "Inconclusive B.DE253 Observation"
+define "Inconclusive B.DE253 Condition":
+  [Condition: Concepts."Inconclusive - HIV.B.DE253"]
+define "Inconclusive B.DE253 Observation":
+  "Syphilis test result B.DE250 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Inconclusive - HIV.B.DE253"
 /* End of Inconclusive B.DE253 */
@@ -10254,7 +10273,7 @@ define "Eligible for DSD ART":
 */
 
 define "Date DSD ART eligibility assessed":
-  [Procedure: ConceptsCustom."DSD ART eligibility assessed"] P
+  [Procedure: CustomConcepts."DSD ART eligibility assessed"] P
     where P.status in { 'completed' }
   return P.performed.toInterval()
 /* End of Date DSD ART eligibility assessed */
@@ -12200,7 +12219,7 @@ define "TB diagnostic test date":
 
 define "TB treatment start date":
   [MedicationStatement] MS
-    where exists(MS.reasonCode C where C ~ ConceptsCustom."tb treatment")
+    where exists(MS.reasonCode C where C ~ CustomConcepts."tb treatment")
     return (start of MS.effective.toInterval())
 /* End of TB treatment start date */
 
@@ -12493,13 +12512,13 @@ define "Other E.DE70":
 @activity: HIV.E1 Capture or update mother's history
 @description: The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')
 */
-
-define "Antenatal care contact":
-  ["Encounter": type in ConceptsCustom."Antenatal care contact"]
-
+// TODO: Replace placeholder with relevant CQL logic
 define "ANC contact date E.DE85":
-  "Antenatal care contact" E
-  return E.period.toInterval()
+  [Observation: Concepts."ANC contact date - HIV.E.DE85"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define "ANC contact date E.DE85 Value":
+  "ANC contact date E.DE85" O
+  return O.value
 /* End of ANC contact date E.DE85 */
 
 /*
@@ -14386,9 +14405,12 @@ define "At elevated risk for HIV acquisition PRV.DE1":
 @activity: HIV.B6 Capture or update client history
 @description: HIV prevention intervention that client accessed
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "HIV prevention intervention":
-  exists ("PrEP service") or exists("OAMT") or exists("NSP") or exists("STI services") or exists("VMMC") or exists("Other PRV.DE8")
+  exists "HIV prevention intervention Observation"
+define "HIV prevention intervention Observation":
+  [Observation: Concepts."HIV prevention intervention"] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of HIV prevention intervention */
 
 /*
@@ -14401,11 +14423,6 @@ define "PrEP service":
   [MedicationStatement] MS
     where exists(MS.reasonCode C where C ~ Concepts."PrEP for HIV prevention")
     sort by start of effective.toInterval()
-
- define "PrEP service date":
-  [MedicationStatement] MS
-    where exists(MS.reasonCode C where C ~ Concepts."PrEP for HIV prevention")
-    return start of MS.effective.toInterval()   
 /* End of PrEP service */
 
 /*
@@ -14429,19 +14446,8 @@ define "OAMT statusHistory":
       EOC.statusHistory H
       where H.period is not null))
 
-define "OAMT status date":
-  [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts."OAMT")
-    return start of EOC.period
 
-define "OAMT statusHistory date":
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts."OAMT") 
-    and (exists (
-      EOC.statusHistory H
-      where H.period is not null))
-    //return start of "OAMT statusHistory".statusHistory.period
-    //need to ask brynn
+
 
 /* End of OAMT */
 
@@ -14457,14 +14463,6 @@ define "NSP":
       such that DUS.reasonReference.references(D) 
         and D.status in { 'active' }
   where DUS.status = 'completed'
-
-  define "NSP date":
-  [DeviceUseStatement] DUS
-  with [Device: ConceptsCustom."needle-syringe"] D
-      such that DUS.reasonReference.references(D) 
-        and D.status in { 'active' }
-  where DUS.status = 'completed'
-  return start of DUS.timing.toInterval()
 /* End of NSP */
 
 /*
@@ -14477,12 +14475,6 @@ define "STI services":
   [Procedure] P
   where P.status = 'completed'
   and P.code ~ Concepts."STI testing and treatment services"
-
-define "STI services date":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ Concepts."STI testing and treatment services"
-  return start of P.performed.toInterval()
 /* End of STI services */
 
 /*
@@ -14500,12 +14492,6 @@ define "VMMC":
   [Procedure] P
   where P.status = 'completed'
   and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
-
-define "VMMC date":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
-  return start of P.performed.toInterval()
 /* End of VMMC */
 
 /*
@@ -14520,13 +14506,6 @@ define "Other PRV.DE8":
     and O.code ~ Concepts."HIV prevention intervention"
     and O.value ~ Concepts."Other - HIV.PRV.DE8"
     sort by start of effective.toInterval()
-
-define "Other PRV.DE8 date":
-  [Observation] O
-    where O.status in {'final', 'amended'}
-    and O.code ~ Concepts."HIV prevention intervention"
-    and O.value ~ Concepts."Other - HIV.PRV.DE8"
-  return start of O.effective.toInterval()
   
 /* End of Other PRV.DE8 */
 
@@ -14535,11 +14514,13 @@ define "Other PRV.DE8 date":
 @activity: HIV.B6 Capture or update client history
 @description: Date the client accessed HIV prevention intervention
 */
-
-define "Date accessed HIV prevention intervention": 
-  flatten{"PrEP service date", "NSP date", "STI services date", "VMMC date", "Other PRV.DE8 date","OAMT status date"}
-  
-  //, "OAMT","NSP".timing,"STI services".performed,"VMMC".performed,"Other PRV.DE8".effective}
+// TODO: Replace placeholder with relevant CQL logic
+define "Date accessed HIV prevention intervention":
+  [Observation: Concepts."Date accessed HIV prevention intervention"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define "Date accessed HIV prevention intervention Value":
+  "Date accessed HIV prevention intervention" O
+  return O.value
 /* End of Date accessed HIV prevention intervention */
 
 /*
@@ -14844,9 +14825,13 @@ define "Viral load test result SRV.DE13 Value":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Visit date SRV.DE15":
-  [Encounter] E
+  [Observation: Concepts."Visit date - HIV.SRV.DE15"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define "Visit date SRV.DE15 Value":
+  "Visit date SRV.DE15" O
+  return O.value
 /* End of Visit date SRV.DE15 */
 
 /*
@@ -15038,3 +15023,5 @@ define "Reporting date Value":
  * Custom elements and logic for use DT and IND CQL Libraries
  */
 
+define "First On ART":
+  (First("On ART D.DE38"))

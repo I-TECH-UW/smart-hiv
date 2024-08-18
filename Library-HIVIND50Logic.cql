@@ -105,7 +105,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."Has HIV-positive Status"
+  HIE."HIV-positive B.DE116"
   and (start of First(HE."First-time user of ART").effective.toInterval() during "Measurement Period")
   //related the two since we want a positive observation from a specific diagnostic test.
   and exists(
@@ -124,7 +124,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."Has HIV-positive Status"
+  HIE."HIV-positive B.DE116"
   and (start of First(HE."First-time user of ART").effective.toInterval() during "Measurement Period")
   and HIE."Screen positive for TB" 
     
@@ -136,15 +136,15 @@ define "Denominator":
  */
 
 define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
+	HIC."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier"
+	HIC."By Age Stratifier"
 
 define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
+	HIC."By Geographic Region Stratifier"
 
-define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
-+ ':' + HIE."By Geographic Region Stratifier"
+//define "Stratification":
+// HIC."By Administrative Gender Stratifier".code 
+//  + ':' + HIC."By Age Stratifier"
+//+ ':' + HIC."By Geographic Region Stratifier"

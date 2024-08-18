@@ -112,7 +112,7 @@ define "Initial Population":
 
 
 define "Numerator":
-  HIE."Has HIV-positive Status"
+  HIE."HIV-positive B.DE116"
   and 
   //I related the two because otherwise a positive observation could come from another test type and be counted. 
   exists(
@@ -130,7 +130,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."Has HIV-positive Status"
+  HIE."HIV-positive B.DE116"
   and 
   exists(
     HE."TB diagnostic test category" P
@@ -147,21 +147,21 @@ define "Denominator":
  */
 
 define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
+	HIC."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier"
+	HIC."By Age Stratifier"
 
 define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
+	HIC."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIE."patientGroups"
+	HIC."patientGroups"
 
 define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
-+ ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')
 
 //add Pregnant or breastfeeding women 

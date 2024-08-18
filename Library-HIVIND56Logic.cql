@@ -74,9 +74,6 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
-include HIVConfig called Config
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -97,14 +94,9 @@ define "Initial Population":
  * Definition: Number of people on ART known to be on treatment 12 months after enrolling in a DSD ART model* (also at 24, 36, 48, 60 months, etc. after enrolment in the model)
  * Calculation: COUNT of clients with "HIV status"='HIV-positive' AND "On ART"=True AND "DSD ART start date">X months before reporting period end date AND "Currently enrolled in DSD ART model"=True |  | Reported where 'X' is 12, 24, 36, 48, or 60 months
  */
-  
 
 define "Numerator":
-  HIE."Has HIV-positive Status"
-   and HIE."On ART H.DE47"
-   and exists(HE."DSD ART start date" t where months between start of t and end of "Measurement Period" >= Config."DSD Retention Interval")
-   and HIE."Currently enrolled in DSD ART model"
-
+  true
 
 /**
  * Numerator Exclusions
@@ -113,7 +105,7 @@ define "Numerator":
  */
     
 define "Numerator Exclusions":
-  HIE."Has transferred out"
+  false
 
 /**
  * Denominator
@@ -123,9 +115,7 @@ define "Numerator Exclusions":
  */
 
 define "Denominator":
-  HIE."Has HIV-positive Status"
-   and HIE."On ART H.DE47"
-   and exists(HE."DSD ART start date" t where months between start of t and end of "Measurement Period" >= Config."DSD Retention Interval")
+  true
     
 /**
 * Denominator Exclusions
@@ -134,28 +124,7 @@ define "Denominator":
 */
 
 define "Denominator Exclusions":
-  HIE."Has transferred out"
+  false
 
 /* end Populations */
 
-/*
- * Disaggregators
- */
-
-define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
-
-define "Age Stratifier":
-	HIE."By Age Stratifier"
-
-define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
-
-define "patientGroups Stratifier":
-	HIE."patientGroups"
-
-define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
-+ ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
