@@ -6,8 +6,8 @@ Description: "An DAK-specific HIV test observation with possible results"
 * ^experimental = true
 * ^title = "HIV Test"
 * code = HIVConcepts#HIV.B.DE81
-* category from http://terminology.hl7.org/CodeSystem/observation-category#laboratory
-* value[x] only CodeableConcept 1..*
+* category = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
+* value[x] only CodeableConcept
 * valueCodeableConcept from HIV.B.DE111 (required)
 * effective[x] ^short = "Time at which test performed"
 * effective[x] only dateTime or instant

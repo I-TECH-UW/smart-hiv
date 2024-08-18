@@ -6,4 +6,4 @@ Description: "A condition identifying patients at elevated risk for HIV acquisit
 * ^experimental = true
 * ^title = "Elevated HIV Risk Acquisition Condition"
 * verificationStatus from http://hl7.org/fhir/ValueSet/condition-ver-status (required)
-* code = Concepts."At elevated risk for HIV acquisition - HIV.B.DE225"
+* code = HIVConcepts#HIV.B.DE225

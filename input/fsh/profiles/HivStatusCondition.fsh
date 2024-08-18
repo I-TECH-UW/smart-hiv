@@ -6,5 +6,5 @@ Description: "A condition representing a patient's HIV status."
 * ^experimental = true
 * ^title = "HIV Status Condition"
 * clinicalStatus from http://hl7.org/fhir/ValueSet/condition-clinical (required) 
-* category from http://terminology.hl7.org/CodeSystem/condition-category where code = #encounter-diagnosis
-* code from HIV.B.D115 (required)
+* category = http://terminology.hl7.org/CodeSystem/condition-category#encounter-diagnosis
+* code from http://smart.who.int/hiv/ValueSet/HIV.B.DE115 (required)
