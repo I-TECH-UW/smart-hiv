@@ -67,6 +67,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
@@ -79,40 +82,38 @@ define "Initial Population":
 
 
 define "numerator":
-    exists(HIC."Needle Syringe Dispensed" DUS
+    exists(HE."Needle Syringe Dispensed" DUS
 	where (DUS.timing during "Measurement Period")
    ) 
 
 
 define "denominator":
-    exists(HIC.PWID_person O
-	where (O.effective during "Measurement Period")
-   ) 
+    exists(HIE."People who inject drugs") 
 
 /*
  * Disaggregators
  */
 
 define "Administrative Gender Stratifier":
-	HIC."By Administrative Gender Stratifier"
+	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIC."By Age Stratifier 3"
+	HIE."By Age Stratifier 3"
 
 define "Geographic Region Stratifier":
-	HIC."By Geographic Region Stratifier"
+	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 //provider type not provided?
 
 define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
-  + ':' + HIC."By Age Stratifier"
-+ ':' + HIC."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.setting, ':')
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE.setting, ':')

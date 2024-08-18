@@ -1,0 +1,339 @@
+{
+  "resourceType" : "PlanDefinition",
+  "id" : "HIVB9DT",
+  "meta" : {
+    "profile" : ["http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-recommendationdefinition",
+    "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareableplandefinition",
+    "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishableplandefinition"]
+  },
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: PlanDefinition HIVB9DT</b></p><a name=\"HIVB9DT\"> </a><a name=\"hcHIVB9DT\"> </a><a name=\"HIVB9DT-en-US\"> </a><p><b>url</b>: <a href=\"PlanDefinition-HIVB9DT.html\">PlanDefinition HIV.B9.DT Determine retest recommendation</a></p><p><b>version</b>: 0.3.0</p><p><b>name</b>: HIVB9DT</p><p><b>title</b>: HIV.B9.DT Determine retest recommendation</p><p><b>type</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/plan-definition-type eca-rule}\">ECA Rule</span></p><p><b>status</b>: Draft</p><p><b>experimental</b>: true</p><p><b>date</b>: 2024-08-18 19:05:30+0000</p><p><b>publisher</b>: WHO</p><p><b>contact</b>: WHO: <a href=\"http://who.int\">http://who.int</a></p><p><b>description</b>: </p><div><p>HIV restesting recommendations</p>\n</div><h3>RelatedArtifacts</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Citation</b></td></tr><tr><td style=\"display: none\">*</td><td>Citation</td><td><div><p>Consolidated Guidelines on HIV Testing Services (2019)</p>\n</div></td></tr></table><p><b>library</b>: <a href=\"Library-HIVB9DTLogic.html\">HIV.B9.DT Logic</a></p><blockquote><p><b>action</b></p><p><b>textEquivalent</b>: Determine retest recommendation</p><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote></blockquote></div>"
+  },
+  "extension" : [{
+    "url" : "http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability",
+    "valueCode" : "computable"
+  }],
+  "url" : "http://smart.who.int/hiv/PlanDefinition/HIVB9DT",
+  "version" : "0.3.0",
+  "name" : "HIVB9DT",
+  "title" : "HIV.B9.DT Determine retest recommendation",
+  "type" : {
+    "coding" : [{
+      "system" : "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+      "code" : "eca-rule"
+    }]
+  },
+  "status" : "draft",
+  "experimental" : true,
+  "date" : "2024-08-18T19:05:30+00:00",
+  "publisher" : "WHO",
+  "contact" : [{
+    "name" : "WHO",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "http://who.int"
+    }]
+  }],
+  "description" : "HIV restesting recommendations",
+  "relatedArtifact" : [{
+    "type" : "citation",
+    "citation" : "Consolidated Guidelines on HIV Testing Services (2019)"
+  }],
+  "library" : ["http://smart.who.int/hiv/Library/HIVB9DTLogic"],
+  "action" : [{
+    "textEquivalent" : "Determine retest recommendation",
+    "action" : [{
+      "textEquivalent" : "Schedule an annual follow-up test",
+      "condition" : [{
+        "kind" : "applicability",
+        "expression" : {
+          "language" : "text/cql-identifier",
+          "expression" : "Schedule an annual follow-up test"
+        }
+      }],
+      "type" : {
+        "coding" : [{
+          "code" : "create"
+        }]
+      },
+      "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+      "dynamicValue" : [{
+        "path" : "intent",
+        "expression" : {
+          "description" : "Intent = 'plan'",
+          "language" : "text/cql",
+          "expression" : "'plan' from \"http://hl7.org/fhir/request-intent\""
+        }
+      },
+      {
+        "path" : "code.coding",
+        "expression" : {
+          "description" : "HIV Screening",
+          "language" : "text/cql",
+          "expression" : "'171121004' from \"SNOMED-CT\" display 'HIV screening'"
+        }
+      },
+      {
+        "path" : "occurrenceDateTime",
+        "expression" : {
+          "description" : "At the recommended interval",
+          "language" : "text/cql-identifier",
+          "expression" : "Schedule Date"
+        }
+      }]
+    },
+    {
+      "textEquivalent" : "Schedule quarterly retesting for PrEP users",
+      "condition" : [{
+        "kind" : "applicability",
+        "expression" : {
+          "language" : "text/cql-identifier",
+          "expression" : "Schedule quarterly retesting for PrEP users"
+        }
+      }],
+      "type" : {
+        "coding" : [{
+          "code" : "create"
+        }]
+      },
+      "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+      "dynamicValue" : [{
+        "path" : "intent",
+        "expression" : {
+          "description" : "Intent = 'plan'",
+          "language" : "text/cql",
+          "expression" : "'plan' from \"http://hl7.org/fhir/request-intent\""
+        }
+      },
+      {
+        "path" : "code.coding",
+        "expression" : {
+          "description" : "HIV Screening",
+          "language" : "text/cql",
+          "expression" : "'171121004' from \"SNOMED-CT\" display 'HIV screening'"
+        }
+      },
+      {
+        "path" : "occurrenceDateTime",
+        "expression" : {
+          "description" : "At the recommended interval",
+          "language" : "text/cql-identifier",
+          "expression" : "Schedule Date"
+        }
+      }]
+    },
+    {
+      "textEquivalent" : "Follow-up test recommended",
+      "condition" : [{
+        "kind" : "applicability",
+        "expression" : {
+          "language" : "text/cql-identifier",
+          "expression" : "Follow-up test recommended"
+        }
+      }],
+      "type" : {
+        "coding" : [{
+          "code" : "create"
+        }]
+      },
+      "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+      "dynamicValue" : [{
+        "path" : "intent",
+        "expression" : {
+          "description" : "Intent = 'proposal'",
+          "language" : "text/cql",
+          "expression" : "'proposal' from \"http://hl7.org/fhir/request-intent\""
+        }
+      },
+      {
+        "path" : "code.coding",
+        "expression" : {
+          "description" : "HIV Screening",
+          "language" : "text/cql",
+          "expression" : "'171121004' from \"SNOMED-CT\" display 'HIV screening'"
+        }
+      }]
+    },
+    {
+      "textEquivalent" : "Schedule an HIV test, syphilis test, hepatitis B test as early as possible during this pregnancy",
+      "condition" : [{
+        "kind" : "applicability",
+        "expression" : {
+          "language" : "text/cql-identifier",
+          "expression" : "Schedule an HIV test, syphilis test, hepatitis B test as early as possible during this pregnancy"
+        }
+      }],
+      "type" : {
+        "coding" : [{
+          "code" : "create"
+        }]
+      },
+      "action" : [{
+        "textEquivalent" : "Schedule an HIV test as early as possible",
+        "type" : {
+          "coding" : [{
+            "code" : "create"
+          }]
+        },
+        "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+        "dynamicValue" : [{
+          "path" : "intent",
+          "expression" : {
+            "description" : "Intent = 'proposal'",
+            "language" : "text/cql",
+            "expression" : "'proposal' from \"http://hl7.org/fhir/request-intent\""
+          }
+        },
+        {
+          "path" : "code.coding",
+          "expression" : {
+            "description" : "HIV test",
+            "language" : "text/cql",
+            "expression" : "'171121004' from \"SNOMED-CT\" display 'HIV test'"
+          }
+        }]
+      },
+      {
+        "textEquivalent" : "Schedule a Syphilis test as early as possible",
+        "type" : {
+          "coding" : [{
+            "code" : "create"
+          }]
+        },
+        "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+        "dynamicValue" : [{
+          "path" : "intent",
+          "expression" : {
+            "description" : "Intent = 'proposal'",
+            "language" : "text/cql",
+            "expression" : "'proposal' from \"http://hl7.org/fhir/request-intent\""
+          }
+        },
+        {
+          "path" : "code.coding",
+          "expression" : {
+            "description" : "Syphilis test",
+            "language" : "text/cql",
+            "expression" : "'40675008' from \"SNOMED-CT\" display 'Syphilis test'"
+          }
+        }]
+      },
+      {
+        "textEquivalent" : "Schedule a Heptatitis test as early as possible",
+        "type" : {
+          "coding" : [{
+            "code" : "create"
+          }]
+        },
+        "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+        "dynamicValue" : [{
+          "path" : "intent",
+          "expression" : {
+            "description" : "Intent = 'proposal'",
+            "language" : "text/cql",
+            "expression" : "'proposal' from \"http://hl7.org/fhir/request-intent\""
+          }
+        },
+        {
+          "path" : "code.coding",
+          "expression" : {
+            "description" : "Heptatitis B test",
+            "language" : "text/cql",
+            "expression" : "'313476009' from \"SNOMED-CT\" display 'Heptatitis B test'"
+          }
+        }]
+      }]
+    },
+    {
+      "textEquivalent" : "Schedule a follow-up tests for pregnant persons",
+      "condition" : [{
+        "kind" : "applicability",
+        "expression" : {
+          "language" : "text/cql-identifier",
+          "expression" : "Schedule a 'Follow-up test recommended date' at first ANC contact date"
+        }
+      }],
+      "type" : {
+        "coding" : [{
+          "code" : "create"
+        }]
+      },
+      "action" : [{
+        "textEquivalent" : "Schedule a follow-up test recommended date at first ANC contact date",
+        "type" : {
+          "coding" : [{
+            "code" : "create"
+          }]
+        },
+        "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+        "dynamicValue" : [{
+          "path" : "intent",
+          "expression" : {
+            "description" : "Intent = 'proposal'",
+            "language" : "text/cql",
+            "expression" : "'proposal' from \"http://hl7.org/fhir/request-intent\""
+          }
+        },
+        {
+          "path" : "code.coding",
+          "expression" : {
+            "description" : "HIV Screening",
+            "language" : "text/cql",
+            "expression" : "'171121004' from \"SNOMED-CT\" display 'HIV screening'"
+          }
+        }]
+      },
+      {
+        "textEquivalent" : "Schedule a follow-up test recommended date during a third trimester visit",
+        "type" : {
+          "coding" : [{
+            "code" : "create"
+          }]
+        },
+        "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+        "dynamicValue" : [{
+          "path" : "intent",
+          "expression" : {
+            "description" : "Intent = 'proposal'",
+            "language" : "text/cql",
+            "expression" : "'proposal' from \"http://hl7.org/fhir/request-intent\""
+          }
+        },
+        {
+          "path" : "code.coding",
+          "expression" : {
+            "description" : "HIV Screening",
+            "language" : "text/cql",
+            "expression" : "'171121004' from \"SNOMED-CT\" display 'HIV screening'"
+          }
+        }]
+      },
+      {
+        "textEquivalent" : "Schedule a follow-up test recommended date either two-weeks, 6 months or 9 months post delivery",
+        "type" : {
+          "coding" : [{
+            "code" : "create"
+          }]
+        },
+        "definitionCanonical" : "http://smart.who.int/hiv/ActivityDefinition/HIVB9DTScheduleFollowUp",
+        "dynamicValue" : [{
+          "path" : "intent",
+          "expression" : {
+            "description" : "Intent = 'proposal'",
+            "language" : "text/cql",
+            "expression" : "'proposal' from \"http://hl7.org/fhir/request-intent\""
+          }
+        },
+        {
+          "path" : "code.coding",
+          "expression" : {
+            "description" : "HIV Screening",
+            "language" : "text/cql",
+            "expression" : "'171121004' from \"SNOMED-CT\" display 'HIV screening'"
+          }
+        }]
+      }]
+    }]
+  }]
+}
