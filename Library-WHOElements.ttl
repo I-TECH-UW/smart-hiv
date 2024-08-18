@@ -25,13 +25,13 @@
   ] ; # 
   fhir:text [
      fhir:status [ fhir:v "generated" ] ;
-     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: Library WHOElements</b></p><a name=\"WHOElements\"> </a><a name=\"hcWHOElements\"> </a><a name=\"WHOElements-en-US\"> </a><h2>Related Artifacts</h2><table class=\"grid\"><tr><td>Depends On</td><td>Library Concepts</td><td><code>http://smart.who.int/hiv/Library/WHOConcepts</code></td></tr><tr><td>Depends On</td><td>Library Common</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr></table><h2>Parameters</h2><table class=\"grid\"><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Pregnancy Status Observation</td><td>out</td><td>0</td><td>*</td><td>Observation</td></tr><tr><td>Pregnant Observation</td><td>out</td><td>0</td><td>*</td><td>Observation</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class=\"language-sql\">library WHOElements\n\nusing FHIR version '4.0.1'\n\ninclude FHIRHelpers version '4.0.1'\n\ninclude WHOConcepts called Concepts\ninclude WHOCommon called Common\n\ncontext Patient\n\ndefine &quot;Pregnancy Status Observation&quot;:\n  [Observation: Concepts.&quot;Pregnancy status&quot;] O\n    where O.status in { 'final', 'amended', 'corrected' }\n\ndefine &quot;Pregnant Observation&quot;:\n  &quot;Pregnancy Status Observation&quot; O\n    where O.value ~ Concepts.&quot;Pregnant&quot;\n\n</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 10Kb )</p></div>"
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: Library WHOElements</b></p><a name=\"WHOElements\"> </a><a name=\"hcWHOElements\"> </a><a name=\"WHOElements-en-US\"> </a><h2>Related Artifacts</h2><table class=\"grid\"><tr><td>Depends On</td><td>Library Concepts</td><td><a href=\"Library-WHOConcepts.html\">WHOConcepts</a></td></tr><tr><td>Depends On</td><td>Library Common</td><td><a href=\"Library-WHOCommon.html\">WHOCommon</a></td></tr></table><h2>Parameters</h2><table class=\"grid\"><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Pregnancy Status Observation</td><td>out</td><td>0</td><td>*</td><td>Observation</td></tr><tr><td>Pregnant Observation</td><td>out</td><td>0</td><td>*</td><td>Observation</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class=\"language-sql\">library WHOElements\n\nusing FHIR version '4.0.1'\n\ninclude FHIRHelpers version '4.0.1'\n\ninclude WHOConcepts called Concepts\ninclude WHOCommon called Common\n\ncontext Patient\n\ndefine &quot;Pregnancy Status Observation&quot;:\n  [Observation: Concepts.&quot;Pregnancy status&quot;] O\n    where O.status in { 'final', 'amended', 'corrected' }\n\ndefine &quot;Pregnant Observation&quot;:\n  &quot;Pregnancy Status Observation&quot; O\n    where O.value ~ Concepts.&quot;Pregnant&quot;\n\n</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 10Kb )</p></div>"
   ] ; # 
   fhir:extension ( [
      fhir:url [ fhir:v "http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability"^^xsd:anyURI ] ;
      fhir:value [ fhir:v "computable" ]
   ] ) ; # 
-  fhir:url [ fhir:v "http://smart.who.int/base-clinical/Library/WHOElements"^^xsd:anyURI] ; # 
+  fhir:url [ fhir:v "http://smart.who.int/hiv/Library/WHOElements"^^xsd:anyURI] ; # 
   fhir:version [ fhir:v "0.2.0"] ; # 
   fhir:name [ fhir:v "WHOElements"] ; # 
   fhir:title [ fhir:v "WHOElements"] ; # 
@@ -43,7 +43,7 @@
        fhir:code [ fhir:v "logic-library" ]
      ] )
   ] ; # 
-  fhir:date [ fhir:v "2024-08-18T18:01:46+00:00"^^xsd:dateTime] ; # 
+  fhir:date [ fhir:v "2024-08-18T18:15:40+00:00"^^xsd:dateTime] ; # 
   fhir:publisher [ fhir:v "WHO"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "WHO" ] ;

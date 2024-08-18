@@ -1719,13 +1719,10 @@ define "Any STI syndrome diagnosed B.DE235 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of syphilis test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Syphilis test date B.DE249":
-  Elements."Syphilis test date B.DE249" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Syphilis test date B.DE249 Value":
-  "Syphilis test date B.DE249" O
-  return O.value
+  exists(Elements."Syphilis test date B.DE249" P
+    where P.performed.toInterval() during "Measurement Period")
 /* End of Syphilis test date B.DE249 */
 
 /*
@@ -1733,12 +1730,10 @@ define "Syphilis test date B.DE249 Value":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Result from syphilis test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Syphilis test result B.DE250":
-  exists "Syphilis test result B.DE250 Observation"
-define "Syphilis test result B.DE250 Observation":
-  Elements."Syphilis test result B.DE250 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."Syphilis test result B.DE250" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of Syphilis test result B.DE250 */
 
 /*
@@ -1746,16 +1741,9 @@ define "Syphilis test result B.DE250 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is positive for syphilis
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Positive B.DE251":
-  exists "Positive B.DE251 Condition"
-    or exists "Positive B.DE251 Observation"
-define "Positive B.DE251 Condition":
-  Elements."Positive B.DE251 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Positive B.DE251 Observation":
-  Elements."Positive B.DE251 Observation" O
+  exists Elements."Positive B.DE251" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Positive B.DE251 */
 
@@ -1764,16 +1752,9 @@ define "Positive B.DE251 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is negative for syphilis
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Negative B.DE252":
-  exists "Negative B.DE252 Condition"
-    or exists "Negative B.DE252 Observation"
-define "Negative B.DE252 Condition":
-  Elements."Negative B.DE252 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Negative B.DE252 Observation":
-  Elements."Negative B.DE252 Observation" O
+  exists Elements."Negative B.DE252" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Negative B.DE252 */
 
@@ -1782,16 +1763,9 @@ define "Negative B.DE252 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is inconclusive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Inconclusive B.DE253":
-  exists "Inconclusive B.DE253 Condition"
-    or exists "Inconclusive B.DE253 Observation"
-define "Inconclusive B.DE253 Condition":
-  Elements."Inconclusive B.DE253 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Inconclusive B.DE253 Observation":
-  Elements."Inconclusive B.DE253 Observation" O
+  exists Elements."Inconclusive B.DE253" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Inconclusive B.DE253 */
 
@@ -5548,13 +5522,10 @@ define "Other E.DE70":
 @activity: HIV.E1 Capture or update mother's history
 @description: The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "ANC contact date E.DE85":
-  Elements."ANC contact date E.DE85" O
-    where O.effective.toInterval() during "Measurement Period"
-define "ANC contact date E.DE85 Value":
-  "ANC contact date E.DE85" O
-  return O.value
+  exists(Elements."ANC contact date E.DE85" E where E during "Measurement Period")
+
 /* End of ANC contact date E.DE85 */
 
 /*
@@ -6540,7 +6511,7 @@ define "At elevated risk for HIV acquisition PRV.DE1":
 @activity: HIV.B6 Capture or update client history
 @description: HIV prevention intervention that client accessed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 //(including PrEP, OAMT, NSP, STI services, VMMC) 
 define "HIV prevention intervention":
   List<String>{
@@ -6551,6 +6522,10 @@ define "HIV prevention intervention":
     if "VMMC" then 'VMMC' else null,
     if "Other PRV.DE8" then 'other prevention' else null
   }
+
+  define "HIV.PRV.DE2 - HIV prevention intervention":
+    "PrEP service" or "OAMT" or "NSP" or "STI services" or "VMMC" or "Other PRV.DE8"
+
 
 /* End of HIV prevention intervention */
 
@@ -6622,13 +6597,9 @@ define "Other PRV.DE8":
 @activity: HIV.B6 Capture or update client history
 @description: Date the client accessed HIV prevention intervention
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date accessed HIV prevention intervention":
-  Elements."Date accessed HIV prevention intervention" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date accessed HIV prevention intervention Value":
-  "Date accessed HIV prevention intervention" O
-  return O.value
+  exists (Elements."Date accessed HIV prevention intervention" t where t included in "Measurement Period")
 /* End of Date accessed HIV prevention intervention */
 
 /*
@@ -6905,13 +6876,10 @@ define "Viral load test result SRV.DE13 Value":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Visit date SRV.DE15":
-  Elements."Visit date SRV.DE15" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Visit date SRV.DE15 Value":
-  "Visit date SRV.DE15" O
-  return O.value
+  exists(Elements."Visit date SRV.DE15" E
+    where start of E.period.toInterval() during "Measurement Period")
 /* End of Visit date SRV.DE15 */
 
 /*

@@ -9,13 +9,13 @@
   },
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: Library WHOEncounterElements</b></p><a name=\"WHOEncounterElements\"> </a><a name=\"hcWHOEncounterElements\"> </a><a name=\"WHOEncounterElements-en-US\"> </a><h2>Related Artifacts</h2><table class=\"grid\"><tr><td>Depends On</td><td>Library Concepts</td><td><code>http://smart.who.int/hiv/Library/WHOConcepts</code></td></tr><tr><td>Depends On</td><td>Library Common</td><td><code>http://smart.who.int/hiv/Library/WHOCommon</code></td></tr><tr><td>Depends On</td><td>Library Elements</td><td><code>http://smart.who.int/hiv/Library/WHOElements</code></td></tr></table><h2>Parameters</h2><table class=\"grid\"><tr><td>AsOf</td><td>in</td><td>0</td><td>1</td><td>date</td></tr><tr><td>EncounterId</td><td>in</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Pregnant Observation</td><td>out</td><td>0</td><td>*</td><td>Observation</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class=\"language-sql\">library WHOEncounterElements\n\nusing FHIR version '4.0.1'\n\ninclude FHIRHelpers version '4.0.1'\n\ninclude WHOConcepts called Concepts\ninclude WHOCommon called Common\ninclude WHOElements called Elements\n\nparameter AsOf Date default Today()\nparameter EncounterId String\n\ncontext Patient\n\ndefine &quot;Pregnant Observation&quot;:\n  Elements.&quot;Pregnant Observation&quot; O\n    where O.encounter.references(EncounterId)\n      or O.effective.toInterval() starts 9 months on or before day of AsOf\n</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 10Kb )</p></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: Library WHOEncounterElements</b></p><a name=\"WHOEncounterElements\"> </a><a name=\"hcWHOEncounterElements\"> </a><a name=\"WHOEncounterElements-en-US\"> </a><h2>Related Artifacts</h2><table class=\"grid\"><tr><td>Depends On</td><td>Library Concepts</td><td><a href=\"Library-WHOConcepts.html\">WHOConcepts</a></td></tr><tr><td>Depends On</td><td>Library Common</td><td><a href=\"Library-WHOCommon.html\">WHOCommon</a></td></tr><tr><td>Depends On</td><td>Library Elements</td><td><a href=\"Library-WHOElements.html\">WHOElements</a></td></tr></table><h2>Parameters</h2><table class=\"grid\"><tr><td>AsOf</td><td>in</td><td>0</td><td>1</td><td>date</td></tr><tr><td>EncounterId</td><td>in</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Pregnant Observation</td><td>out</td><td>0</td><td>*</td><td>Observation</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class=\"language-sql\">library WHOEncounterElements\n\nusing FHIR version '4.0.1'\n\ninclude FHIRHelpers version '4.0.1'\n\ninclude WHOConcepts called Concepts\ninclude WHOCommon called Common\ninclude WHOElements called Elements\n\nparameter AsOf Date default Today()\nparameter EncounterId String\n\ncontext Patient\n\ndefine &quot;Pregnant Observation&quot;:\n  Elements.&quot;Pregnant Observation&quot; O\n    where O.encounter.references(EncounterId)\n      or O.effective.toInterval() starts 9 months on or before day of AsOf\n</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 10Kb )</p></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/cqf-knowledgeCapability",
     "valueCode" : "computable"
   }],
-  "url" : "http://smart.who.int/WHO/Library/WHOEncounterElements",
+  "url" : "http://smart.who.int/hiv/Library/WHOEncounterElements",
   "version" : "0.2.0",
   "name" : "WHOEncounterElements",
   "title" : "WHOEncounterElements",
@@ -27,7 +27,7 @@
       "code" : "logic-library"
     }]
   },
-  "date" : "2024-08-18T18:01:46+00:00",
+  "date" : "2024-08-18T18:15:40+00:00",
   "publisher" : "WHO",
   "contact" : [{
     "name" : "WHO",
