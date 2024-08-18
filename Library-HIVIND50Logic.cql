@@ -78,10 +78,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -96,7 +94,6 @@ context Patient
 define "Initial Population":
   true
 
-
 /**
  * Numerator
  * 
@@ -105,15 +102,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."Has HIV-positive Status"
-  and (start of First(HE."First-time user of ART").effective.toInterval() during "Measurement Period")
-  //related the two since we want a positive observation from a specific diagnostic test.
-  and exists(
-    HE."TB diagnostic test category" P
-    with HE."Screen positive for TB" O
-      such that P.partOf.references(O)
-    where P.performed.toInterval() during "Measurement Period"
-  )
+  true
 
 
 /**
@@ -124,27 +113,8 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."Has HIV-positive Status"
-  and (start of First(HE."First-time user of ART").effective.toInterval() during "Measurement Period")
-  and HIE."Screen positive for TB" 
+  true
     
 
 /* end Populations */
 
-/*
- * Disaggregators
- */
-
-define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
-
-define "Age Stratifier":
-	HIE."By Age Stratifier"
-
-define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
-
-define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
-+ ':' + HIE."By Geographic Region Stratifier"

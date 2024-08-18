@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.22"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.22"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.18"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.18"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -296,10 +296,10 @@
   <table class="colsd">
 
     <tr>
-      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/hiv/Library/HIVIND28Logic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVIND28Logic"/></span>
+      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/HIV/Library/HIVIND28Logic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVIND28Logic"/></span>
       </td>
       <td><i>Version</i>:
-      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVIND28Logic|0.2.0"/></span>
+      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVIND28Logic|0.2.0"/></span>
       </td>
     </tr>
 
@@ -349,7 +349,7 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND28Logic</b></p><a name="HIVIND28Logic"> </a><a name="hcHIVIND28Logic"> </a><a name="HIVIND28Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><a href="Library-WHOCommon.html">WHOCommon</a></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Treatment outcome category Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND28Logic</b></p><a name="HIVIND28Logic"> </a><a name="hcHIVIND28Logic"> </a><a name="HIVIND28Logic-en-US"> </a><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.28 Logic
  * Ref No: ART.2
  * Short Name: Total attrition from ART
@@ -429,9 +429,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
+include FHIRCommon called FC
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -445,24 +444,35 @@ define &quot;Initial Population&quot;:
 
 
 define &quot;numerator&quot;:
-//MINUS | COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True on the reporting period end date
    (
-    HIE.&quot;Has death documented&quot;
-   or HIE.&quot;Has transferred out&quot;
-   or HIE.&quot;Is lost to follow-up&quot;
+    HIC.&quot;Patient Deceased before end of Measurement Period&quot;
+   and HIC.&quot;Transfer Out at Facility during the measurement period&quot;
+   and HIC.&quot;Lost to Follow Up during the measurement period&quot;
    )
-   and (((
+   and ((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-   HIE.&quot;Has HIV-positive Status&quot;
-   and HIE.&quot;On ART H.DE47&quot;
+    (exists(HIC.&quot;HIV Positive Condition&quot; C
+	where C.onset before end of &quot;Measurement Period&quot;)
+	or 
+	exists(HIC.&quot;HIV Positive Observation&quot; O
+	where (O.issued before end of &quot;Measurement Period&quot;)
+	))
+   and exists(HIC.&quot;HIV Treatment Active&quot; H
+   where H.effective starts before end of &quot;Measurement Period&quot;
+    and H.effective ends after start of &quot;Measurement Period&quot;
    )
    ) or
    (
     //Accounts for end of last period
-    HIE.&quot;Has HIV-positive Status at last measurment period&quot;
-   and exists(HE.&quot;On ART H.DE47&quot; ART
-   where ART.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
-    and ART.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+    (exists(HIC.&quot;HIV Positive Condition&quot; C
+	where C.onset before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;))
+	or 
+	exists(HIC.&quot;HIV Positive Observation&quot; O
+	where (O.issued before end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+	))
+   and exists(HIC.&quot;HIV Treatment Active&quot; H
+   where H.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+    and H.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
    )
    )
    )
@@ -470,18 +480,30 @@ define &quot;numerator&quot;:
 
 
  define &quot;denominator&quot;:
-   (((
+   ((
     //saying needs to not be counted this measurement period but should have counted this period or last period
-   HIE.&quot;Has HIV-positive Status&quot;
-   and HIE.&quot;On ART H.DE47&quot;
+    (exists(HIC.&quot;HIV Positive Condition&quot; C
+	where C.onset before end of &quot;Measurement Period&quot;)
+	or 
+	exists(HIC.&quot;HIV Positive Observation&quot; O
+	where (O.issued before end of &quot;Measurement Period&quot;)
+	))
+   and exists(HIC.&quot;HIV Treatment Active&quot; H
+   where H.effective starts before end of &quot;Measurement Period&quot;
+    and H.effective ends after start of &quot;Measurement Period&quot;
    )
    ) or
    (
     //Accounts for end of last period
-    HIE.&quot;Has HIV-positive Status at last measurment period&quot;
-   and exists(HE.&quot;On ART H.DE47&quot; ART
-   where ART.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
-    and ART.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+    (exists(HIC.&quot;HIV Positive Condition&quot; C
+	where C.onset before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;))
+	or 
+	exists(HIC.&quot;HIV Positive Observation&quot; O
+	where (O.issued before end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+	))
+   and exists(HIC.&quot;HIV Treatment Active&quot; H
+   where H.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+    and H.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
    )
    )
    )
@@ -493,26 +515,23 @@ define &quot;numerator&quot;:
  */
 
 define &quot;Administrative Gender Stratifier&quot;:
-	HIE.&quot;By Administrative Gender Stratifier&quot;
+	HIC.&quot;By Administrative Gender Stratifier&quot;
 
 define &quot;Age Stratifier&quot;:
-	HIE.&quot;By Age Stratifier&quot;
+	HIC.&quot;By Age Stratifier&quot;
 
 define &quot;Geographic Region Stratifier&quot;:
-	HIE.&quot;By Geographic Region Stratifier&quot;
+	HIC.&quot;By Geographic Region Stratifier&quot;
 
 define &quot;patientGroups Stratifier&quot;:
-	HIE.&quot;patientGroups&quot;
+	HIC.&quot;patientGroups&quot;
 
-define &quot;Treatment outcome category Stratifier&quot;:
-	HIE.&quot;Treatment outcome category&quot;
+//NEED TO FIGURE OUT Treatment outcome category (died, stopped treatment, lost to follow-up)
 
 define &quot;Stratification&quot;:
- HIE.&quot;By Administrative Gender Stratifier&quot;.code 
-  + ':' + HIE.&quot;By Age Stratifier&quot;
-+ ':' + HIE.&quot;By Geographic Region Stratifier&quot;
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIE.&quot;Treatment outcome category&quot;, ':')</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 54Kb )</p></div>
+ HIC.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIC.&quot;By Age Stratifier&quot;
++ ':' + HIC.&quot;By Geographic Region Stratifier&quot;</code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
   
@@ -537,7 +556,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sun, Aug 18, 2024 18:15+0000">2024-08-18</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sun, Aug 18, 2024 19:04+0000">2024-08-18</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

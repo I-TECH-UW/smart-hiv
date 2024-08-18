@@ -83,10 +83,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
+include FHIRCommon called FC
 include WHOCommon called WCom
-
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -97,63 +95,59 @@ context Patient
  */
 define "Initial Population":
   true
-  
+
+
+
 define "numerator":
-	Count(HIE."Non-Self HIV test date and results returned within measurement period for HIV-positive result")
+    exists(HIC."HIV Positive Condition" C
+	where C.onset during "Measurement Period")
+	or 
+	exists(HIC."HIV Positive Observation" O
+	where (O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
+	) 
+
+define "numeratorExclusion":
+	exists(HIC."HIV Positive Observation - HIV Self Test" O
+	where (O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
+	) 
 
 define "denominator":
-	Count(HIE."Non-Self HIV test with date and results returned in measurement period")
+    exists(HIC."HIV test resulted" T
+	where T.issued before end of "Measurement Period"
+	and T.issued after start of "Measurement Period")
 
-
-//     exists(HE."HIV Positive Condition" C
-// 	where C.onset during "Measurement Period")
-// 	or 
-// 	exists(HIE."HIV Positive Observation" O
-// 	where (O.issued before end of "Measurement Period"
-// 	and O.issued after start of "Measurement Period")
-// 	) 
-
-// define "numeratorExclusion":
-// 	exists(HIC."HIV Positive Observation - HIV Self Test" O
-// 	where (O.issued before end of "Measurement Period"
-// 	and O.issued after start of "Measurement Period")
-// 	) 
-
-// define "denominator":
-
-
-// define "denominatorExclusion":
-// 	exists(HIC."HIV Positive Observation - HIV Self Test" O
-// 	where (O.issued before end of "Measurement Period"
-// 	and O.issued after start of "Measurement Period")
-// 	) 
+define "denominatorExclusion":
+	exists(HIC."HIV Positive Observation - HIV Self Test" O
+	where (O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
+	) 
 
 /*
  * Disaggregators
  */
  
 define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
+	HIC."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier"
+	HIC."By Age Stratifier"
 
 define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
+	HIC."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIE."patientGroups"
+	HIC."patientGroups"
 
 define "Setting":
-    HIE."setting"
+    HIC."setting"
 
-// define "TB Stratifier":
-//     HIC."tb"
+define "TB Stratifier":
+    HIC."tb"
 
 define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
-+ ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
-//+ Combine(HIC.tb, ':')
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
+//Need to discuss how to add list

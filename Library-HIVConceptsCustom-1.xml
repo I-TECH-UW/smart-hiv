@@ -2,7 +2,7 @@
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="100">
+      <a:s r="80">
          <a:s>library HIVConceptsCustom</a:s>
       </a:s>
    </annotation>
@@ -12,608 +12,488 @@
       <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
    </usings>
    <codeSystems>
-      <def localId="1" locator="2:1-2:87" name="HIVConceptsCustom" id="http://smart.who.int/hiv/CodeSystem/HIVConceptsCustom" accessLevel="Public">
+      <def localId="1" locator="3:1-3:95" name="ConditionCategoryCodes" id="http://terminology.hl7.org/CodeSystem/condition-category" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="1">
-               <a:s>codesystem &quot;HIVConceptsCustom&quot;: 'http://smart.who.int/hiv/CodeSystem/HIVConceptsCustom'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="2" locator="4:1-4:95" name="ConditionCategoryCodes" id="http://terminology.hl7.org/CodeSystem/condition-category" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="2">
                <a:s>codesystem &quot;ConditionCategoryCodes&quot;: 'http://terminology.hl7.org/CodeSystem/condition-category'</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="3" locator="5:1-5:101" name="ConditionClinicalStatusCodes" id="http://terminology.hl7.org/CodeSystem/condition-clinical" accessLevel="Public">
+      <def localId="2" locator="4:1-4:101" name="ConditionClinicalStatusCodes" id="http://terminology.hl7.org/CodeSystem/condition-clinical" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="3">
+            <a:s r="2">
                <a:s>codesystem &quot;ConditionClinicalStatusCodes&quot;: 'http://terminology.hl7.org/CodeSystem/condition-clinical'</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="4" locator="6:1-6:99" name="ObservationCategoryCodes" id="http://terminology.hl7.org/CodeSystem/observation-category" accessLevel="Public">
+      <def localId="3" locator="5:1-5:99" name="ObservationCategoryCodes" id="http://terminology.hl7.org/CodeSystem/observation-category" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="4">
+            <a:s r="3">
                <a:s>codesystem &quot;ObservationCategoryCodes&quot;: 'http://terminology.hl7.org/CodeSystem/observation-category'</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="5" locator="7:1-7:49" name="missing concepts" id="missing concepts" accessLevel="Public">
+      <def localId="4" locator="6:1-6:49" name="missing concepts" id="missing concepts" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="5">
+            <a:s r="4">
                <a:s>codesystem &quot;missing concepts&quot;: 'missing concepts'</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="6" locator="8:1-8:82" name="Devicestatement-status" id="http://hl7.org/fhir/device-statement-status" accessLevel="Public">
+      <def localId="5" locator="7:1-7:91" name="Devicestatement-status" id="http://hl7.org/fhir/ValueSet/device-statement-status" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="6">
-               <a:s>codesystem &quot;Devicestatement-status&quot;: 'http://hl7.org/fhir/device-statement-status'</a:s>
+            <a:s r="5">
+               <a:s>codesystem &quot;Devicestatement-status&quot;: 'http://hl7.org/fhir/ValueSet/device-statement-status'</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="7" locator="9:1-9:97" name="SNOMEDCT:2018-03" id="urn:oid:2.16.840.1.113883.6.96" version="urn:hl7:version:2018-03" accessLevel="Public">
+      <def localId="6" locator="8:1-8:97" name="SNOMEDCT:2018-03" id="urn:oid:2.16.840.1.113883.6.96" version="urn:hl7:version:2018-03" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="7">
+            <a:s r="6">
                <a:s>codesystem &quot;SNOMEDCT:2018-03&quot;: 'urn:oid:2.16.840.1.113883.6.96' version 'urn:hl7:version:2018-03'</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="8" locator="10:1-10:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
+      <def localId="7" locator="9:1-9:55" name="SNOMEDCT" id="urn:oid:2.16.840.1.113883.6.96" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="8">
+            <a:s r="7">
                <a:s>codesystem &quot;SNOMEDCT&quot;: 'urn:oid:2.16.840.1.113883.6.96'</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="9" locator="11:1-11:97" name="AdverseEventSeverity" id="http://terminology.hl7.org/CodeSystem/adverse-event-severity" accessLevel="Public">
+      <def localId="8" locator="10:1-10:88" name="AdverseEventSeverity" id="http://hl7.org/fhir/ValueSet/adverse-event-severity" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9">
-               <a:s>codesystem &quot;AdverseEventSeverity&quot;: 'http://terminology.hl7.org/CodeSystem/adverse-event-severity'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="10" locator="12:1-12:74" name="RoleCode" id="http://terminology.hl7.org/CodeSystem/v3-RoleCode" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="10">
-               <a:s>codesystem &quot;RoleCode&quot;: 'http://terminology.hl7.org/CodeSystem/v3-RoleCode'</a:s>
+            <a:s r="8">
+               <a:s>codesystem &quot;AdverseEventSeverity&quot;: 'http://hl7.org/fhir/ValueSet/adverse-event-severity'</a:s>
             </a:s>
          </annotation>
       </def>
    </codeSystems>
-   <valueSets>
-      <def localId="13" locator="17:1-17:103" name="RelatedPersonRelationshipType" id="http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="13">
-               <a:s>// Related Person
-valueset &quot;RelatedPersonRelationshipType&quot;: 'http://hl7.org/fhir/ValueSet/relatedperson-relationshiptype'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="100" locator="78:1-78:103" name="Antenatal care contact" id="http://fhir.org/guides/who/anc-cds/ValueSet/antenatal-care-contact" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="100">
-               <a:s>valueset &quot;Antenatal care contact&quot;: 'http://fhir.org/guides/who/anc-cds/ValueSet/antenatal-care-contact'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-   </valueSets>
    <codes>
-      <def localId="12" locator="14:1-14:109" name="encounter-diagnosis" id="encounter-diagnosis" display="Encounter Diagnosis" accessLevel="Public">
+      <def localId="10" locator="12:1-12:109" name="encounter-diagnosis" id="encounter-diagnosis" display="Encounter Diagnosis" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="12">
+            <a:s r="10">
                <a:s>code &quot;encounter-diagnosis&quot;: 'encounter-diagnosis' from </a:s>
-               <a:s r="11">
+               <a:s r="9">
                   <a:s>&quot;ConditionCategoryCodes&quot;</a:s>
                </a:s>
                <a:s> display 'Encounter Diagnosis'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="11" locator="14:56-14:79" name="ConditionCategoryCodes"/>
+         <codeSystem localId="9" locator="12:56-12:79" name="ConditionCategoryCodes"/>
       </def>
-      <def localId="15" locator="18:1-18:36" name="Mother" id="MTH" accessLevel="Public">
+      <def localId="12" locator="15:1-15:59" name="active" id="active" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="15">
-               <a:s>code &quot;Mother&quot;: 'MTH' from </a:s>
-               <a:s r="14">
-                  <a:s>&quot;RoleCode&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="14" locator="18:27-18:36" name="RoleCode"/>
-      </def>
-      <def localId="17" locator="21:1-21:59" name="active" id="active" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="17">
+            <a:s r="12">
                <a:s>// Condition Clinical Status Codes
 code &quot;active&quot;: 'active' from </a:s>
-               <a:s r="16">
+               <a:s r="11">
                   <a:s>&quot;ConditionClinicalStatusCodes&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="16" locator="21:30-21:59" name="ConditionClinicalStatusCodes"/>
+         <codeSystem localId="11" locator="15:30-15:59" name="ConditionClinicalStatusCodes"/>
       </def>
-      <def localId="19" locator="22:1-22:67" name="recurrence" id="recurrence" accessLevel="Public">
+      <def localId="14" locator="16:1-16:67" name="recurrence" id="recurrence" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="19">
+            <a:s r="14">
                <a:s>code &quot;recurrence&quot;: 'recurrence' from </a:s>
-               <a:s r="18">
+               <a:s r="13">
                   <a:s>&quot;ConditionClinicalStatusCodes&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="18" locator="22:38-22:67" name="ConditionClinicalStatusCodes"/>
+         <codeSystem localId="13" locator="16:38-16:67" name="ConditionClinicalStatusCodes"/>
       </def>
-      <def localId="21" locator="23:1-23:61" name="relapse" id="relapse" accessLevel="Public">
+      <def localId="16" locator="17:1-17:61" name="relapse" id="relapse" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="21">
+            <a:s r="16">
                <a:s>code &quot;relapse&quot;: 'relapse' from </a:s>
-               <a:s r="20">
+               <a:s r="15">
                   <a:s>&quot;ConditionClinicalStatusCodes&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="20" locator="23:32-23:61" name="ConditionClinicalStatusCodes"/>
+         <codeSystem localId="15" locator="17:32-17:61" name="ConditionClinicalStatusCodes"/>
       </def>
-      <def localId="23" locator="24:1-24:63" name="inactive" id="inactive" accessLevel="Public">
+      <def localId="18" locator="18:1-18:63" name="inactive" id="inactive" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="23">
+            <a:s r="18">
                <a:s>code &quot;inactive&quot;: 'inactive' from </a:s>
-               <a:s r="22">
+               <a:s r="17">
                   <a:s>&quot;ConditionClinicalStatusCodes&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="22" locator="24:34-24:63" name="ConditionClinicalStatusCodes"/>
+         <codeSystem localId="17" locator="18:34-18:63" name="ConditionClinicalStatusCodes"/>
       </def>
-      <def localId="25" locator="25:1-25:65" name="remission" id="remission" accessLevel="Public">
+      <def localId="20" locator="19:1-19:65" name="remission" id="remission" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="25">
+            <a:s r="20">
                <a:s>code &quot;remission&quot;: 'remission' from </a:s>
-               <a:s r="24">
+               <a:s r="19">
                   <a:s>&quot;ConditionClinicalStatusCodes&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="24" locator="25:36-25:65" name="ConditionClinicalStatusCodes"/>
+         <codeSystem localId="19" locator="19:36-19:65" name="ConditionClinicalStatusCodes"/>
       </def>
-      <def localId="27" locator="26:1-26:63" name="resolved" id="resolved" accessLevel="Public">
+      <def localId="22" locator="20:1-20:63" name="resolved" id="resolved" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="27">
+            <a:s r="22">
                <a:s>code &quot;resolved&quot;: 'resolved' from </a:s>
-               <a:s r="26">
+               <a:s r="21">
                   <a:s>&quot;ConditionClinicalStatusCodes&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="26" locator="26:34-26:63" name="ConditionClinicalStatusCodes"/>
+         <codeSystem localId="21" locator="20:34-20:63" name="ConditionClinicalStatusCodes"/>
       </def>
-      <def localId="29" locator="29:1-29:96" name="social-history" id="social-history" display="Social History" accessLevel="Public">
+      <def localId="24" locator="23:1-23:96" name="social-history" id="social-history" display="Social History" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="29">
+            <a:s r="24">
                <a:s>//Observation category codes
 code &quot;social-history&quot;: 'social-history' from </a:s>
-               <a:s r="28">
+               <a:s r="23">
                   <a:s>&quot;ObservationCategoryCodes&quot;</a:s>
                </a:s>
                <a:s> display 'Social History'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="28" locator="29:46-29:71" name="ObservationCategoryCodes"/>
+         <codeSystem localId="23" locator="23:46-23:71" name="ObservationCategoryCodes"/>
       </def>
-      <def localId="31" locator="32:1-32:59" name="completed" id="completed" accessLevel="Public">
+      <def localId="26" locator="26:1-26:59" name="completed" id="completed" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="31">
+            <a:s r="26">
                <a:s>//Device statement status
 code &quot;completed&quot;: 'completed' from </a:s>
-               <a:s r="30">
+               <a:s r="25">
                   <a:s>&quot;Devicestatement-status&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="30" locator="32:36-32:59" name="Devicestatement-status"/>
+         <codeSystem localId="25" locator="26:36-26:59" name="Devicestatement-status"/>
       </def>
-      <def localId="33" locator="35:1-35:47" name="mild" id="mild" accessLevel="Public">
+      <def localId="28" locator="29:1-29:47" name="mild" id="mild" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="33">
+            <a:s r="28">
                <a:s>//adverse event severity
 code &quot;mild&quot;: 'mild' from </a:s>
-               <a:s r="32">
+               <a:s r="27">
                   <a:s>&quot;AdverseEventSeverity&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="32" locator="35:26-35:47" name="AdverseEventSeverity"/>
+         <codeSystem localId="27" locator="29:26-29:47" name="AdverseEventSeverity"/>
       </def>
-      <def localId="35" locator="36:1-36:55" name="moderate" id="moderate" accessLevel="Public">
+      <def localId="30" locator="30:1-30:55" name="moderate" id="moderate" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="35">
+            <a:s r="30">
                <a:s>code &quot;moderate&quot;: 'moderate' from </a:s>
-               <a:s r="34">
+               <a:s r="29">
                   <a:s>&quot;AdverseEventSeverity&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="34" locator="36:34-36:55" name="AdverseEventSeverity"/>
+         <codeSystem localId="29" locator="30:34-30:55" name="AdverseEventSeverity"/>
       </def>
-      <def localId="37" locator="37:1-37:51" name="severe" id="severe" accessLevel="Public">
+      <def localId="32" locator="31:1-31:51" name="severe" id="severe" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="37">
+            <a:s r="32">
                <a:s>code &quot;severe&quot;: 'severe' from </a:s>
-               <a:s r="36">
+               <a:s r="31">
                   <a:s>&quot;AdverseEventSeverity&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="36" locator="37:30-37:51" name="AdverseEventSeverity"/>
+         <codeSystem localId="31" locator="31:30-31:51" name="AdverseEventSeverity"/>
       </def>
-      <def localId="39" locator="40:1-40:125" name="Every eight hours (qualifier value)" id="307469008" display="Every eight hours (qualifier value)" accessLevel="Public">
+      <def localId="34" locator="34:1-34:125" name="Every eight hours (qualifier value)" id="307469008" display="Every eight hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="39">
+            <a:s r="34">
                <a:s>//frequency
 code &quot;Every eight hours (qualifier value)&quot;: '307469008' from </a:s>
-               <a:s r="38">
+               <a:s r="33">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Every eight hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="38" locator="40:62-40:79" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="33" locator="34:62-34:79" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="41" locator="41:1-41:137" name="Every eight to twelve hours (qualifier value)" id="396140003" display="Every eight to twelve hours (qualifier value)" accessLevel="Public">
+      <def localId="36" locator="35:1-35:137" name="Every eight to twelve hours (qualifier value)" id="396140003" display="Every eight to twelve hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="41">
+            <a:s r="36">
                <a:s>code &quot;Every eight to twelve hours (qualifier value)&quot;: '396140003' from </a:s>
-               <a:s r="40">
+               <a:s r="35">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'Every eight to twelve hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="40" locator="41:72-41:81" name="SNOMEDCT"/>
+         <codeSystem localId="35" locator="35:72-35:81" name="SNOMEDCT"/>
       </def>
-      <def localId="43" locator="42:1-42:137" name="Every forty eight hours (qualifier value)" id="396131002" display="Every forty eight hours (qualifier value)" accessLevel="Public">
+      <def localId="38" locator="36:1-36:137" name="Every forty eight hours (qualifier value)" id="396131002" display="Every forty eight hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="43">
+            <a:s r="38">
                <a:s>code &quot;Every forty eight hours (qualifier value)&quot;: '396131002' from </a:s>
-               <a:s r="42">
+               <a:s r="37">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Every forty eight hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="42" locator="42:68-42:85" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="37" locator="36:68-36:85" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="45" locator="43:1-43:115" name="Every four hours (qualifier value)" id="225756002" display="Every four hours (qualifier value)" accessLevel="Public">
+      <def localId="40" locator="37:1-37:115" name="Every four hours (qualifier value)" id="225756002" display="Every four hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="45">
+            <a:s r="40">
                <a:s>code &quot;Every four hours (qualifier value)&quot;: '225756002' from </a:s>
-               <a:s r="44">
+               <a:s r="39">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'Every four hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="44" locator="43:61-43:70" name="SNOMEDCT"/>
+         <codeSystem localId="39" locator="37:61-37:70" name="SNOMEDCT"/>
       </def>
-      <def localId="47" locator="44:1-44:137" name="Every seventy two hours (qualifier value)" id="396143001" display="Every seventy two hours (qualifier value)" accessLevel="Public">
+      <def localId="42" locator="38:1-38:137" name="Every seventy two hours (qualifier value)" id="396143001" display="Every seventy two hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="47">
+            <a:s r="42">
                <a:s>code &quot;Every seventy two hours (qualifier value)&quot;: '396143001' from </a:s>
-               <a:s r="46">
+               <a:s r="41">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Every seventy two hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="46" locator="44:68-44:85" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="41" locator="38:68-38:85" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="49" locator="45:1-45:121" name="Every six hours (qualifier value)" id="307468000" display="Every six hours (qualifier value)" accessLevel="Public">
+      <def localId="44" locator="39:1-39:121" name="Every six hours (qualifier value)" id="307468000" display="Every six hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="49">
+            <a:s r="44">
                <a:s>code &quot;Every six hours (qualifier value)&quot;: '307468000' from </a:s>
-               <a:s r="48">
+               <a:s r="43">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Every six hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="48" locator="45:60-45:77" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="43" locator="39:60-39:77" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="51" locator="46:1-46:131" name="Every six to eight hours (qualifier value)" id="396139000" display="Every six to eight hours (qualifier value)" accessLevel="Public">
+      <def localId="46" locator="40:1-40:131" name="Every six to eight hours (qualifier value)" id="396139000" display="Every six to eight hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="51">
+            <a:s r="46">
                <a:s>code &quot;Every six to eight hours (qualifier value)&quot;: '396139000' from </a:s>
-               <a:s r="50">
+               <a:s r="45">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'Every six to eight hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="50" locator="46:69-46:78" name="SNOMEDCT"/>
+         <codeSystem localId="45" locator="40:69-40:78" name="SNOMEDCT"/>
       </def>
-      <def localId="53" locator="47:1-47:135" name="Every thirty six hours (qualifier value)" id="396126004" display="Every thirty six hours (qualifier value)" accessLevel="Public">
+      <def localId="48" locator="41:1-41:135" name="Every thirty six hours (qualifier value)" id="396126004" display="Every thirty six hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="53">
+            <a:s r="48">
                <a:s>code &quot;Every thirty six hours (qualifier value)&quot;: '396126004' from </a:s>
-               <a:s r="52">
+               <a:s r="47">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Every thirty six hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="52" locator="47:67-47:84" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="47" locator="41:67-41:84" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="55" locator="48:1-48:133" name="Every three to four hours (qualifier value)" id="225754004" display="Every three to four hours (qualifier value)" accessLevel="Public">
+      <def localId="50" locator="42:1-42:133" name="Every three to four hours (qualifier value)" id="225754004" display="Every three to four hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="55">
+            <a:s r="50">
                <a:s>code &quot;Every three to four hours (qualifier value)&quot;: '225754004' from </a:s>
-               <a:s r="54">
+               <a:s r="49">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'Every three to four hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="54" locator="48:70-48:79" name="SNOMEDCT"/>
+         <codeSystem localId="49" locator="42:70-42:79" name="SNOMEDCT"/>
       </def>
-      <def localId="57" locator="49:1-49:131" name="Every three to six hours (qualifier value)" id="396127008" display="Every three to six hours (qualifier value)" accessLevel="Public">
+      <def localId="52" locator="43:1-43:131" name="Every three to six hours (qualifier value)" id="396127008" display="Every three to six hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="57">
+            <a:s r="52">
                <a:s>code &quot;Every three to six hours (qualifier value)&quot;: '396127008' from </a:s>
-               <a:s r="56">
+               <a:s r="51">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'Every three to six hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="56" locator="49:69-49:78" name="SNOMEDCT"/>
+         <codeSystem localId="51" locator="43:69-43:78" name="SNOMEDCT"/>
       </def>
-      <def localId="59" locator="50:1-50:127" name="Every twelve hours (qualifier value)" id="307470009" display="Every twelve hours (qualifier value)" accessLevel="Public">
+      <def localId="54" locator="44:1-44:127" name="Every twelve hours (qualifier value)" id="307470009" display="Every twelve hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="59">
+            <a:s r="54">
                <a:s>code &quot;Every twelve hours (qualifier value)&quot;: '307470009' from </a:s>
-               <a:s r="58">
+               <a:s r="53">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Every twelve hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="58" locator="50:63-50:80" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="53" locator="44:63-44:80" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="61" locator="51:1-51:137" name="Every twenty four hours (qualifier value)" id="396125000" display="Every twenty four hours (qualifier value)" accessLevel="Public">
+      <def localId="56" locator="45:1-45:137" name="Every twenty four hours (qualifier value)" id="396125000" display="Every twenty four hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="61">
+            <a:s r="56">
                <a:s>code &quot;Every twenty four hours (qualifier value)&quot;: '396125000' from </a:s>
-               <a:s r="60">
+               <a:s r="55">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Every twenty four hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="60" locator="51:68-51:85" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="55" locator="45:68-45:85" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="63" locator="52:1-52:129" name="Every two to four hours (qualifier value)" id="225752000" display="Every two to four hours (qualifier value)" accessLevel="Public">
+      <def localId="58" locator="46:1-46:129" name="Every two to four hours (qualifier value)" id="225752000" display="Every two to four hours (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="63">
+            <a:s r="58">
                <a:s>code &quot;Every two to four hours (qualifier value)&quot;: '225752000' from </a:s>
-               <a:s r="62">
+               <a:s r="57">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'Every two to four hours (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="62" locator="52:68-52:77" name="SNOMEDCT"/>
+         <codeSystem localId="57" locator="46:68-46:77" name="SNOMEDCT"/>
       </def>
-      <def localId="65" locator="53:1-53:123" name="Four times daily (qualifier value)" id="307439001" display="Four times daily (qualifier value)" accessLevel="Public">
+      <def localId="60" locator="47:1-47:123" name="Four times daily (qualifier value)" id="307439001" display="Four times daily (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="65">
+            <a:s r="60">
                <a:s>code &quot;Four times daily (qualifier value)&quot;: '307439001' from </a:s>
-               <a:s r="64">
+               <a:s r="59">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Four times daily (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="64" locator="53:61-53:78" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="59" locator="47:61-47:78" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="67" locator="54:1-54:111" name="Once daily (qualifier value)" id="229797004" display="Once daily (qualifier value)" accessLevel="Public">
+      <def localId="62" locator="48:1-48:111" name="Once daily (qualifier value)" id="229797004" display="Once daily (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="67">
+            <a:s r="62">
                <a:s>code &quot;Once daily (qualifier value)&quot;: '229797004' from </a:s>
-               <a:s r="66">
+               <a:s r="61">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Once daily (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="66" locator="54:55-54:72" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="61" locator="48:55-48:72" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="69" locator="55:1-55:129" name="One to four times a day (qualifier value)" id="396109005" display="One to four times a day (qualifier value)" accessLevel="Public">
+      <def localId="64" locator="49:1-49:129" name="One to four times a day (qualifier value)" id="396109005" display="One to four times a day (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="69">
+            <a:s r="64">
                <a:s>code &quot;One to four times a day (qualifier value)&quot;: '396109005' from </a:s>
-               <a:s r="68">
+               <a:s r="63">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'One to four times a day (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="68" locator="55:68-55:77" name="SNOMEDCT"/>
+         <codeSystem localId="63" locator="49:68-49:77" name="SNOMEDCT"/>
       </def>
-      <def localId="71" locator="56:1-56:131" name="One to three times a day (qualifier value)" id="396108002" display="One to three times a day (qualifier value)" accessLevel="Public">
+      <def localId="66" locator="50:1-50:131" name="One to three times a day (qualifier value)" id="396108002" display="One to three times a day (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="71">
+            <a:s r="66">
                <a:s>code &quot;One to three times a day (qualifier value)&quot;: '396108002' from </a:s>
-               <a:s r="70">
+               <a:s r="65">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'One to three times a day (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="70" locator="56:69-56:78" name="SNOMEDCT"/>
+         <codeSystem localId="65" locator="50:69-50:78" name="SNOMEDCT"/>
       </def>
-      <def localId="73" locator="57:1-57:127" name="One to two times a day (qualifier value)" id="396107007" display="One to two times a day (qualifier value)" accessLevel="Public">
+      <def localId="68" locator="51:1-51:127" name="One to two times a day (qualifier value)" id="396107007" display="One to two times a day (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="73">
+            <a:s r="68">
                <a:s>code &quot;One to two times a day (qualifier value)&quot;: '396107007' from </a:s>
-               <a:s r="72">
+               <a:s r="67">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'One to two times a day (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="72" locator="57:67-57:76" name="SNOMEDCT"/>
+         <codeSystem localId="67" locator="51:67-51:76" name="SNOMEDCT"/>
       </def>
-      <def localId="75" locator="58:1-58:125" name="Three times daily (qualifier value)" id="229798009" display="Three times daily (qualifier value)" accessLevel="Public">
+      <def localId="70" locator="52:1-52:125" name="Three times daily (qualifier value)" id="229798009" display="Three times daily (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="75">
+            <a:s r="70">
                <a:s>code &quot;Three times daily (qualifier value)&quot;: '229798009' from </a:s>
-               <a:s r="74">
+               <a:s r="69">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Three times daily (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="74" locator="58:62-58:79" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="69" locator="52:62-52:79" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="77" locator="59:1-59:113" name="Twice a day (qualifier value)" id="229799001" display="Twice a day (qualifier value)" accessLevel="Public">
+      <def localId="72" locator="53:1-53:113" name="Twice a day (qualifier value)" id="229799001" display="Twice a day (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="77">
+            <a:s r="72">
                <a:s>code &quot;Twice a day (qualifier value)&quot;: '229799001' from </a:s>
-               <a:s r="76">
+               <a:s r="71">
                   <a:s>&quot;SNOMEDCT:2018-03&quot;</a:s>
                </a:s>
                <a:s> display 'Twice a day (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="76" locator="59:56-59:73" name="SNOMEDCT:2018-03"/>
+         <codeSystem localId="71" locator="53:56-53:73" name="SNOMEDCT:2018-03"/>
       </def>
-      <def localId="79" locator="60:1-60:129" name="Two to four times a day (qualifier value)" id="396111001" display="Two to four times a day (qualifier value)" accessLevel="Public">
+      <def localId="74" locator="54:1-54:129" name="Two to four times a day (qualifier value)" id="396111001" display="Two to four times a day (qualifier value)" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="79">
+            <a:s r="74">
                <a:s>code &quot;Two to four times a day (qualifier value)&quot;: '396111001' from </a:s>
-               <a:s r="78">
+               <a:s r="73">
                   <a:s>&quot;SNOMEDCT&quot;</a:s>
                </a:s>
                <a:s> display 'Two to four times a day (qualifier value)'</a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="78" locator="60:68-60:77" name="SNOMEDCT"/>
+         <codeSystem localId="73" locator="54:68-54:77" name="SNOMEDCT"/>
       </def>
-      <def localId="81" locator="64:1-64:54" name="HTS Visit" id="HTS Visit" accessLevel="Public">
+      <def localId="76" locator="58:1-58:63" name="needle-syringe" id="needle syringe" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="81">
-               <a:s>// Encounter Types
-code &quot;HTS Visit&quot;: 'HTS Visit' from </a:s>
-               <a:s r="80">
-                  <a:s>&quot;HIVConceptsCustom&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="80" locator="64:36-64:54" name="HIVConceptsCustom"/>
-      </def>
-      <def localId="83" locator="67:1-67:63" name="needle-syringe" id="needle syringe" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="83">
+            <a:s r="76">
                <a:s>//not currently provided
 code &quot;needle-syringe&quot;: 'needle syringe' from </a:s>
-               <a:s r="82">
+               <a:s r="75">
                   <a:s>&quot;missing concepts&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="82" locator="67:46-67:63" name="missing concepts"/>
+         <codeSystem localId="75" locator="58:46-58:63" name="missing concepts"/>
       </def>
-      <def localId="85" locator="68:1-68:53" name="methadone" id="methadone" accessLevel="Public">
+      <def localId="78" locator="59:1-59:53" name="methadone" id="methadone" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="85">
+            <a:s r="78">
                <a:s>code &quot;methadone&quot;: 'methadone' from </a:s>
-               <a:s r="84">
+               <a:s r="77">
                   <a:s>&quot;missing concepts&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="84" locator="68:36-68:53" name="missing concepts"/>
+         <codeSystem localId="77" locator="59:36-59:53" name="missing concepts"/>
       </def>
-      <def localId="87" locator="69:1-69:61" name="buprenorphine" id="buprenorphine" accessLevel="Public">
+      <def localId="80" locator="60:1-60:61" name="buprenorphine" id="buprenorphine" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="87">
+            <a:s r="80">
                <a:s>code &quot;buprenorphine&quot;: 'buprenorphine' from </a:s>
-               <a:s r="86">
+               <a:s r="79">
                   <a:s>&quot;missing concepts&quot;</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <codeSystem localId="86" locator="69:44-69:61" name="missing concepts"/>
-      </def>
-      <def localId="89" locator="70:1-70:65" name="viral load test" id="viral load test" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="89">
-               <a:s>code &quot;viral load test&quot;: 'viral load test' from </a:s>
-               <a:s r="88">
-                  <a:s>&quot;missing concepts&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="88" locator="70:48-70:65" name="missing concepts"/>
-      </def>
-      <def localId="91" locator="71:1-71:51" name="delivery" id="delivery" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="91">
-               <a:s>code &quot;delivery&quot;: 'delivery' from </a:s>
-               <a:s r="90">
-                  <a:s>&quot;missing concepts&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="90" locator="71:34-71:51" name="missing concepts"/>
-      </def>
-      <def localId="93" locator="72:1-72:59" name="tb treatment" id="tb treatment" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="93">
-               <a:s>code &quot;tb treatment&quot;: 'tb treatment' from </a:s>
-               <a:s r="92">
-                  <a:s>&quot;missing concepts&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="92" locator="72:42-72:59" name="missing concepts"/>
-      </def>
-      <def localId="95" locator="73:1-73:63" name="ART medication" id="ART medication" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="95">
-               <a:s>code &quot;ART medication&quot;: 'ART medication' from </a:s>
-               <a:s r="94">
-                  <a:s>&quot;missing concepts&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="94" locator="73:46-73:63" name="missing concepts"/>
-      </def>
-      <def localId="97" locator="74:1-74:92" name="DSD ART eligibility assessed" id="DSD ART eligibility assessed" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="97">
-               <a:s>code &quot;DSD ART eligibility assessed&quot; : 'DSD ART eligibility assessed' from </a:s>
-               <a:s r="96">
-                  <a:s>&quot;missing concepts&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="96" locator="74:75-74:92" name="missing concepts"/>
-      </def>
-      <def localId="99" locator="75:1-75:62" name="syphilis test" id="syphilis test" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="99">
-               <a:s>code &quot;syphilis test&quot; : 'syphilis test' from </a:s>
-               <a:s r="98">
-                  <a:s>&quot;missing concepts&quot;</a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="98" locator="75:45-75:62" name="missing concepts"/>
+         <codeSystem localId="79" locator="60:44-60:61" name="missing concepts"/>
       </def>
    </codes>
 </library>

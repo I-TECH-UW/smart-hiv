@@ -44,8 +44,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.107"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.107"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.102"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.102"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -332,7 +332,7 @@
   },
   "<a href="http://hl7.org/fhir/R4/library.html#Library.text">text</a>" : {
     "<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.status">status</a>" : "generated",
-    "<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.div">div</a>" : "&lt;div xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;&lt;p class=\&quot;res-header-id\&quot;&gt;&lt;b&gt;Generated Narrative: Library WHOEncounterElements&lt;/b&gt;&lt;/p&gt;&lt;a name=\&quot;WHOEncounterElements\&quot;&gt; &lt;/a&gt;&lt;a name=\&quot;hcWHOEncounterElements\&quot;&gt; &lt;/a&gt;&lt;a name=\&quot;WHOEncounterElements-en-US\&quot;&gt; &lt;/a&gt;&lt;h2&gt;Related Artifacts&lt;/h2&gt;&lt;table class=\&quot;grid\&quot;&gt;&lt;tr&gt;&lt;td&gt;Depends On&lt;/td&gt;&lt;td&gt;Library Concepts&lt;/td&gt;&lt;td&gt;&lt;a href=\&quot;Library-WHOConcepts.html\&quot;&gt;WHOConcepts&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Depends On&lt;/td&gt;&lt;td&gt;Library Common&lt;/td&gt;&lt;td&gt;&lt;a href=\&quot;Library-WHOCommon.html\&quot;&gt;WHOCommon&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Depends On&lt;/td&gt;&lt;td&gt;Library Elements&lt;/td&gt;&lt;td&gt;&lt;a href=\&quot;Library-WHOElements.html\&quot;&gt;WHOElements&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;h2&gt;Parameters&lt;/h2&gt;&lt;table class=\&quot;grid\&quot;&gt;&lt;tr&gt;&lt;td&gt;AsOf&lt;/td&gt;&lt;td&gt;in&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;date&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;EncounterId&lt;/td&gt;&lt;td&gt;in&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Patient&lt;/td&gt;&lt;td&gt;out&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;Patient&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Pregnant Observation&lt;/td&gt;&lt;td&gt;out&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;*&lt;/td&gt;&lt;td&gt;Observation&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=\&quot;language-sql\&quot;&gt;library WHOEncounterElements\n\nusing FHIR version '4.0.1'\n\ninclude FHIRHelpers version '4.0.1'\n\ninclude WHOConcepts called Concepts\ninclude WHOCommon called Common\ninclude WHOElements called Elements\n\nparameter AsOf Date default Today()\nparameter EncounterId String\n\ncontext Patient\n\ndefine &amp;quot;Pregnant Observation&amp;quot;:\n  Elements.&amp;quot;Pregnant Observation&amp;quot; O\n    where O.encounter.references(EncounterId)\n      or O.effective.toInterval() starts 9 months on or before day of AsOf\n&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;Content not shown - (&lt;/code&gt;&lt;code&gt;application/elm+xml&lt;/code&gt;, size = 10Kb )&lt;/p&gt;&lt;/div&gt;"
+    "<a href="http://hl7.org/fhir/R4/datatypes.html#Narrative#Narrative.div">div</a>" : "&lt;div xmlns=\&quot;http://www.w3.org/1999/xhtml\&quot;&gt;&lt;p class=\&quot;res-header-id\&quot;&gt;&lt;b&gt;Generated Narrative: Library WHOEncounterElements&lt;/b&gt;&lt;/p&gt;&lt;a name=\&quot;WHOEncounterElements\&quot;&gt; &lt;/a&gt;&lt;a name=\&quot;hcWHOEncounterElements\&quot;&gt; &lt;/a&gt;&lt;a name=\&quot;WHOEncounterElements-en-US\&quot;&gt; &lt;/a&gt;&lt;h2&gt;Related Artifacts&lt;/h2&gt;&lt;table class=\&quot;grid\&quot;&gt;&lt;tr&gt;&lt;td&gt;Depends On&lt;/td&gt;&lt;td&gt;Library Concepts&lt;/td&gt;&lt;td&gt;&lt;code&gt;http://smart.who.int/hiv/Library/WHOConcepts&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Depends On&lt;/td&gt;&lt;td&gt;Library Common&lt;/td&gt;&lt;td&gt;&lt;code&gt;http://smart.who.int/hiv/Library/WHOCommon&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Depends On&lt;/td&gt;&lt;td&gt;Library Elements&lt;/td&gt;&lt;td&gt;&lt;code&gt;http://smart.who.int/hiv/Library/WHOElements&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;h2&gt;Parameters&lt;/h2&gt;&lt;table class=\&quot;grid\&quot;&gt;&lt;tr&gt;&lt;td&gt;AsOf&lt;/td&gt;&lt;td&gt;in&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;date&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;EncounterId&lt;/td&gt;&lt;td&gt;in&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;string&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Patient&lt;/td&gt;&lt;td&gt;out&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;Patient&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Pregnant Observation&lt;/td&gt;&lt;td&gt;out&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;*&lt;/td&gt;&lt;td&gt;Observation&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;h2&gt;Contents&lt;/h2&gt;&lt;p&gt;&lt;code&gt;text/cql&lt;/code&gt;&lt;/p&gt;&lt;pre&gt;&lt;code class=\&quot;language-sql\&quot;&gt;library WHOEncounterElements\n\nusing FHIR version '4.0.1'\n\ninclude FHIRHelpers version '4.0.1'\n\ninclude WHOConcepts called Concepts\ninclude WHOCommon called Common\ninclude WHOElements called Elements\n\nparameter AsOf Date default Today()\nparameter EncounterId String\n\ncontext Patient\n\ndefine &amp;quot;Pregnant Observation&amp;quot;:\n  Elements.&amp;quot;Pregnant Observation&amp;quot; O\n    where O.encounter.references(EncounterId)\n      or O.effective.toInterval() starts 9 months on or before day of AsOf\n&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;Content not shown - (&lt;/code&gt;&lt;code&gt;application/elm+xml&lt;/code&gt;, size = 10Kb )&lt;/p&gt;&lt;/div&gt;"
   },
   "<a href="http://hl7.org/fhir/R4/library.html#Library.extension">extension</a>" : [
     {
@@ -340,7 +340,7 @@
       "<a href="http://hl7.org/fhir/R4/extensibility.html#Extension#Extension.value[x]">valueCode</a>" : "computable"
     }
   ],
-  "<a href="http://hl7.org/fhir/R4/library.html#Library.url">url</a>" : "http://smart.who.int/hiv/Library/WHOEncounterElements",
+  "<a href="http://hl7.org/fhir/R4/library.html#Library.url">url</a>" : "http://smart.who.int/WHOEncounter/Library/WHOEncounterElements",
   "<a href="http://hl7.org/fhir/R4/library.html#Library.version">version</a>" : "0.2.0",
   "<a href="http://hl7.org/fhir/R4/library.html#Library.name">name</a>" : "WHOEncounterElements",
   "<a href="http://hl7.org/fhir/R4/library.html#Library.title">title</a>" : "WHOEncounterElements",
@@ -354,7 +354,7 @@
       }
     ]
   },
-  "<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a>" : "2024-08-18T18:15:40+00:00",
+  "<a href="http://hl7.org/fhir/R4/library.html#Library.date">date</a>" : "2024-08-18T19:04:15+00:00",
   "<a href="http://hl7.org/fhir/R4/library.html#Library.publisher">publisher</a>" : "WHO",
   "<a href="http://hl7.org/fhir/R4/library.html#Library.contact">contact</a>" : [
     {
@@ -449,7 +449,7 @@
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sun, Aug 18, 2024 18:15+0000">2024-08-18</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sun, Aug 18, 2024 19:04+0000">2024-08-18</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
