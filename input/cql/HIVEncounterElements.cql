@@ -1665,9 +1665,9 @@ define "HIV retest prior to starting ART conducted Observation":
 @description: Client is at elevated risk for HIV acquisition
 */
 define "At elevated risk for HIV acquisition B.DE225":
-  Elements."At elevated risk for HIV acquisition B.DE225" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."At elevated risk for HIV acquisition B.DE225" C
+    where C.prevalenceInterval() starts on or before Today
+      or C.encounter.references(EncounterId)
 /* End of At elevated risk for HIV acquisition B.DE225 */
 
 /*
@@ -1696,6 +1696,7 @@ define "Positive B.DE251":
 define "Positive B.DE251 Condition":
   Elements."Positive B.DE251 Condition" C
     where C.prevalenceInterval() starts on or before Today
+    or C.encounter.references(EncounterId)
 define "Positive B.DE251 Observation":
   Elements."Positive B.DE251 Observation" O
     where O.encounter.references(EncounterId)
