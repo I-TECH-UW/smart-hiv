@@ -1730,12 +1730,10 @@ define "Syphilis test date B.DE249":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Result from syphilis test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Syphilis test result B.DE250":
-  exists "Syphilis test result B.DE250 Observation"
-define "Syphilis test result B.DE250 Observation":
-  Elements."Syphilis test result B.DE250 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."Syphilis test result B.DE250" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of Syphilis test result B.DE250 */
 
 /*
@@ -1743,16 +1741,9 @@ define "Syphilis test result B.DE250 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is positive for syphilis
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Positive B.DE251":
-  exists "Positive B.DE251 Condition"
-    or exists "Positive B.DE251 Observation"
-define "Positive B.DE251 Condition":
-  Elements."Positive B.DE251 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Positive B.DE251 Observation":
-  Elements."Positive B.DE251 Observation" O
+  exists Elements."Positive B.DE251" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Positive B.DE251 */
 
@@ -1761,16 +1752,9 @@ define "Positive B.DE251 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is negative for syphilis
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Negative B.DE252":
-  exists "Negative B.DE252 Condition"
-    or exists "Negative B.DE252 Observation"
-define "Negative B.DE252 Condition":
-  Elements."Negative B.DE252 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Negative B.DE252 Observation":
-  Elements."Negative B.DE252 Observation" O
+  exists Elements."Negative B.DE252" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Negative B.DE252 */
 
@@ -1779,16 +1763,9 @@ define "Negative B.DE252 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is inconclusive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Inconclusive B.DE253":
-  exists "Inconclusive B.DE253 Condition"
-    or exists "Inconclusive B.DE253 Observation"
-define "Inconclusive B.DE253 Condition":
-  Elements."Inconclusive B.DE253 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Inconclusive B.DE253 Observation":
-  Elements."Inconclusive B.DE253 Observation" O
+  exists Elements."Inconclusive B.DE253" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Inconclusive B.DE253 */
 
@@ -6620,13 +6597,9 @@ define "Other PRV.DE8":
 @activity: HIV.B6 Capture or update client history
 @description: Date the client accessed HIV prevention intervention
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date accessed HIV prevention intervention":
-  Elements."Date accessed HIV prevention intervention" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date accessed HIV prevention intervention Value":
-  "Date accessed HIV prevention intervention" O
-  return O.value
+  exists (Elements."Date accessed HIV prevention intervention" t where t included in "Measurement Period")
 /* End of Date accessed HIV prevention intervention */
 
 /*
