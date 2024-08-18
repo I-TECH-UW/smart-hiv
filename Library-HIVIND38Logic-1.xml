@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="60">
+         <a:s>/**
+ * Library: HIV.IND.38 Logic
+ * Ref No: VER.2
+ * Short Name: Early infant diagnosis (EID) coverage
+ *
+ * Definition: % of HIV-exposed infants who receive a virological test for HIV within two months (and 12 months) of birth
+ *
+ * Numerator: Number of HIV-exposed infants born during the reporting period who received a virological HIV test within two months (and 12 months) of birth
+ * Numerator Calculation: COUNT of infants who are an &quot;HIV-exposed infant or child&quot; with &quot;Infant date of birth&quot; within the reporting period AND with &quot;Date of viral load sample collection&quot; LESS THAN 2 months AFTER &quot;Infant date of birth&quot; AND &quot;HIV test type&quot;='Nucleic acid test for HIV'
+ * Numerator Exclusions: 
+ *
+ * Denominator: Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women.
+ * Denominator Calculation: *Estimated number of HIV-positive women who delivered during the reporting period
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Test result (HIV-positive, HIV-negative, indeterminate, other) to enable calculation of the percentage positive and the percentage with an indeterminate result among HIV-exposed infants receiving a virological test 
+ *  • Age of infant (&lt;2 months, 2-12 months) to allow the separate calculation of the proportion of exposed infants receiving virological testing within two months of birth and within 12 months of birth 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
+ * Disaggregation Elements: HIV test date (at 2 months, at 12 months) | Age of infant (&lt;2 months, 2-12 months)
+ *
+ * Numerator and Denominator Elements:
+ * Date of viral load sample collection 
+ *  HIV test type 
+ *  HIV-exposed infant or child 
+ *  Infant date of birth
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ * HIV.B.DE81: HIV test type | Type of HIV test
+ * HIV.B.DE82: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic
+ * HIV.B.DE83: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay
+ * HIV.B.DE84: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis
+ * HIV.B.DE85: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic
+ * HIV.B.DE86: HIV self-test | Antibody test for HIV performed by self-tester using a rapid diagnostic
+ * HIV.B.DE110: HIV test date | Date of the HIV test
+ * HIV.D.DE194: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ * HIV.E.DE87: Infant date of birth | The infant's date of birth (DOB) if known
+ * HIV.E.DE90: Age of infant | Infant age calculated using date of birth
+ * HIV.E.DE112: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure
+ * HIV.E.DE168: HIV test type | Type of HIV test
+ * HIV.E.DE169: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic (RDT)
+ * HIV.E.DE170: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay (EIA)
+ * HIV.E.DE171: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis
+ * HIV.E.DE172: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic
+ * HIV.E.DE224: HIV test date | Date of the HIV test
+ * HIV.G.DE8: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ * HIV.SRV.DE1: HIV test date | Date of the HIV test
+ * HIV.SRV.DE12: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ * HIV.SRV.DE20: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure
+ *
+ * Additional Context
+ * - what it measures: This indicator measures early HIV diagnosis in infants.
+ * - rationale: • High coverage of early virological testing of infants helps initiate ART early in children with confirmed HIV infection and supports counselling on efforts to prevent seroconversion of those with a negative early test result. | • Current PMTCT guidelines recommend virological testing for HIV-exposed infants within two months of birth.
+ * - method: For the numerator: Programme records (for example, PMTCT registers, laboratory records). |  | For the denominator: Modelling-based estimates (for example, Spectrum AIM) |  | The recommended reporting period is 12 months.
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND38Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND38Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="65:1-65:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="67:1-67:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="68:1-68:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="70:1-70:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="71:1-71:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="72:1-72:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="12" locator="75:1-75:88" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>// Indicator Definition
+parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="11">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="10">
+                     <a:s>Date</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="9">
+                  <a:s r="7">Interval[@2023-01-01, @2023-01-30]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="9" locator="75:55-75:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="7" locator="75:64-75:74" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </low>
+            <high localId="8" locator="75:77-75:87" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="11" locator="75:32-75:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="75:41-75:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="77:1-77:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="77:1-77:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="77:1-77:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="14" locator="84:1-85:6" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s r="13">/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="85:3-85:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="55" locator="95:1-103:105" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="55">
+               <a:s>/**
+ * Numerator
+ * 
+ * Definition: Number of HIV-exposed infants born during the reporting period who received a virological HIV test within two months (and 12 months) of birth
+ * Calculation: COUNT of infants who are an &quot;HIV-exposed infant or child&quot; with &quot;Infant date of birth&quot; within the reporting period AND with &quot;Date of viral load sample collection&quot; LESS THAN 2 months AFTER &quot;Infant date of birth&quot; AND &quot;HIV test type&quot;='Nucleic acid test for HIV'
+ */
+
+
+define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="54">
+                  <a:s r="30">
+                     <a:s>exists</a:s>
+                     <a:s r="29">
+                        <a:s>(</a:s>
+                        <a:s r="29">
+                           <a:s>
+                              <a:s r="16">
+                                 <a:s r="15">
+                                    <a:s>
+                                       <a:s>HIE.&quot;HIV-exposed infant or child E.DE112&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> O</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  </a:s>
+                           <a:s r="28">
+                              <a:s>with </a:s>
+                              <a:s r="18">
+                                 <a:s r="17">
+                                    <a:s r="17">
+                                       <a:s>[Patient]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                              <a:s>
+      such that </a:s>
+                              <a:s r="27">
+                                 <a:s r="22">
+                                    <a:s r="20">
+                                       <a:s r="19">
+                                          <a:s>O</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="20">
+                                          <a:s>subject</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="22">
+                                       <a:s>references(</a:s>
+                                       <a:s r="21">
+                                          <a:s>P</a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> and </a:s>
+                                 <a:s r="26">
+                                    <a:s r="24">
+                                       <a:s r="23">
+                                          <a:s>P</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="24">
+                                          <a:s>birthDate</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="26"> during </a:s>
+                                    <a:s r="25">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+   and </a:s>
+                  <a:s r="53">
+                     <a:s>exists</a:s>
+                     <a:s r="52">
+                        <a:s>(
+    </a:s>
+                        <a:s r="52">
+                           <a:s>
+                              <a:s r="32">
+                                 <a:s r="31">
+                                    <a:s>
+                                       <a:s>HE.&quot;Nucleic acid test for HIV B.DE84&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> O</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> 
+    </a:s>
+                           <a:s r="51">
+                              <a:s>with </a:s>
+                              <a:s r="34">
+                                 <a:s r="33">
+                                    <a:s r="33">
+                                       <a:s>[Patient]</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> Pt</a:s>
+                              </a:s>
+                              <a:s>
+    such that </a:s>
+                              <a:s r="50">
+                                 <a:s r="38">
+                                    <a:s r="36">
+                                       <a:s r="35">
+                                          <a:s>O</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="36">
+                                          <a:s>subject</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="38">
+                                       <a:s>references(</a:s>
+                                       <a:s r="37">
+                                          <a:s>Pt</a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> 
+    and </a:s>
+                                 <a:s r="49">
+                                    <a:s r="47">
+                                       <a:s>months between </a:s>
+                                       <a:s r="42">
+                                          <a:s>start of </a:s>
+                                          <a:s r="41">
+                                             <a:s r="40">
+                                                <a:s r="39">
+                                                   <a:s>O</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="40">
+                                                   <a:s>effective</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="41">
+                                                <a:s>toInterval()</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> and </a:s>
+                                       <a:s r="46">
+                                          <a:s r="43">
+                                             <a:s>FHIRHelpers</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="46">
+                                             <a:s>ToDate(</a:s>
+                                             <a:s r="45">
+                                                <a:s r="44">
+                                                   <a:s>Pt</a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="45">
+                                                   <a:s>birthDate</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s>)</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> &lt; </a:s>
+                                    <a:s r="48">
+                                       <a:s>2 months</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="54" locator="96:3-103:105" xsi:type="And">
+            <operand localId="30" locator="96:3-98:84" xsi:type="Exists">
+               <operand localId="29" locator="96:9-98:84" xsi:type="Query">
+                  <source localId="16" locator="96:10-96:52" alias="O">
+                     <expression localId="15" locator="96:10-96:50" name="HIV-exposed infant or child E.DE112" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="28" locator="97:3-98:83" alias="P" xsi:type="With">
+                     <expression localId="17" locator="97:8-97:16" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+                     <suchThat localId="27" locator="98:17-98:83" xsi:type="And">
+                        <operand localId="22" locator="98:17-98:39" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                           <operand localId="20" locator="98:17-98:25" path="subject" scope="O" xsi:type="Property"/>
+                           <operand localId="21" locator="98:38" name="P" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand localId="26" locator="98:45-98:83" xsi:type="In">
+                           <operand name="ToDate" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <operand localId="24" locator="98:45-98:55" path="birthDate" scope="P" xsi:type="Property"/>
+                           </operand>
+                           <operand localId="25" locator="98:64-98:83" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+               </operand>
+            </operand>
+            <operand localId="53" locator="99:8-103:105" xsi:type="Exists">
+               <operand localId="52" locator="99:14-103:105" xsi:type="Query">
+                  <source localId="32" locator="100:5-100:43" alias="O">
+                     <expression localId="31" locator="100:5-100:41" name="Nucleic acid test for HIV B.DE84" libraryName="HE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="51" locator="101:5-103:104" alias="Pt" xsi:type="With">
+                     <expression localId="33" locator="101:10-101:18" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+                     <suchThat localId="50" locator="102:15-103:104" xsi:type="And">
+                        <operand localId="38" locator="102:15-102:38" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                           <operand localId="36" locator="102:15-102:23" path="subject" scope="O" xsi:type="Property"/>
+                           <operand localId="37" locator="102:36-102:37" name="Pt" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand localId="49" locator="103:9-103:104" xsi:type="Less">
+                           <operand xsi:type="ToQuantity">
+                              <operand localId="47" locator="103:9-103:93" precision="Month" xsi:type="DurationBetween">
+                                 <operand localId="42" locator="103:24-103:56" xsi:type="Start">
+                                    <operand localId="41" locator="103:33-103:56" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                       <operand localId="40" locator="103:33-103:43" path="effective" scope="O" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <operand localId="46" locator="103:62-103:93" name="ToDate" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                       <operand localId="45" locator="103:81-103:92" path="birthDate" scope="Pt" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="48" locator="103:97-103:104" value="2" unit="months" xsi:type="Quantity"/>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="57" locator="113:1-114:6" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="57">
+               <a:s r="56">/**
+ * Denominator - THiS SHOULDN'T BE PROPORTION
+ *
+ * Definition: Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women.
+ * Calculation: *Estimated number of HIV-positive women who delivered during the reporting period
+ */
+
+define &quot;Denominator&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="56" locator="114:3-114:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="60" locator="124:1-125:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="60">
+               <a:s>/* end Populations */
+
+/*
+ * Disaggregators
+ */
+
+
+define &quot;Geographic Region Stratifier&quot;:
+	</a:s>
+               <a:s r="59">
+                  <a:s r="58">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="59">
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="59" locator="125:2-125:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+   </statements>
+</library>

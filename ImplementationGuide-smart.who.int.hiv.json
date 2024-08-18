@@ -16,7 +16,7 @@
   "title" : "WHO SMART Guidelines - HIV",
   "status" : "draft",
   "experimental" : true,
-  "date" : "2024-08-18T03:48:48+00:00",
+  "date" : "2024-08-18T17:57:09+00:00",
   "publisher" : "WHO",
   "contact" : [{
     "name" : "WHO",
@@ -927,6 +927,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivAltPepBackbonePrescription"
+      },
+      "name" : "Alternative PEP Backbone Prescription",
+      "description" : "A profile for MedicationRequest representing an alternative PEP backbone prescription.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -958,6 +970,18 @@
       },
       "name" : "Alternative third PEP drug ValueSet",
       "description" : "Value set of alternative third drug for PEP",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivAltThirdPepPrescription"
+      },
+      "name" : "Alternative Third PEP Prescription",
+      "description" : "A profile for MedicationRequest representing an alternative Third PEP drug choice prescription.",
       "exampleBoolean" : false
     },
     {
@@ -1623,6 +1647,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivCurrentPrepRegimenPrescription"
+      },
+      "name" : "Current PrEP Regimen Prescription",
+      "description" : "A profile for MedicationRequest representing a prescription of a current PrEP regimen.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -1875,6 +1911,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivElevatedRiskForAcquisition"
+      },
+      "name" : "Elevated HIV Risk Acquisition Condition",
+      "description" : "A condition identifying patients at elevated risk for HIV acquisition.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "Questionnaire"
       }],
       "reference" : {
@@ -1919,6 +1967,161 @@
       "name" : "Entry point for facility-level testing ValueSet",
       "description" : "Value set of specific point where testing is happening at a facility",
       "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationRequest"
+      }],
+      "reference" : {
+        "reference" : "MedicationRequest/ExampleAltPepBackbonePrescription"
+      },
+      "name" : "Example Alternative PEP Backbone Prescription",
+      "description" : "This is an example of an alternative PEP backbone prescription resource based on the AltPepBackbonePrescription profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivAltPepBackbonePrescription"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationRequest"
+      }],
+      "reference" : {
+        "reference" : "MedicationRequest/ExampleAltThirdPepPrescription"
+      },
+      "name" : "Example Alternative Third PEP Prescription",
+      "description" : "This is an example of an alternative Third PEP prescription resource based on the AltThirdPepPrescription profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivAltThirdPepPrescription"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationRequest"
+      }],
+      "reference" : {
+        "reference" : "MedicationRequest/ExampleCurrentPrepRegimenPrescription"
+      },
+      "name" : "Example Current PrEP Regimen Prescription",
+      "description" : "This is an example of a current PrEP regimen prescription resource based on the CurrentPrepRegimen profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivCurrentPrepRegimenPrescription"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Condition"
+      }],
+      "reference" : {
+        "reference" : "Condition/ExampleElevatedHivRiskCondition"
+      },
+      "name" : "Example Elevated HIV Risk Condition",
+      "description" : "This is an example of an Elevated HIV Risk Condition resource based on the HivElevatedRiskForAcquisition profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivElevatedRiskForAcquisition"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Observation"
+      }],
+      "reference" : {
+        "reference" : "Observation/ExampleHivKeyPopulation"
+      },
+      "name" : "Example HIV Key Population Observation",
+      "description" : "This is an example of an HIV Key Population Observation resource based on the HivKeyPopulation profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivKeyPopulation"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationStatement"
+      }],
+      "reference" : {
+        "reference" : "MedicationStatement/ExampleHivOnArt"
+      },
+      "name" : "Example HIV On ART Medication Statement",
+      "description" : "This is an example of an On ART Medication Statement resource based on the HivOnArtMedicationStatement profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivOnArt"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Condition"
+      }],
+      "reference" : {
+        "reference" : "Condition/ExampleHivPositiveCondition"
+      },
+      "name" : "Example HIV Positive Status Condition",
+      "description" : "This is an example of an HIV Positive Status Condition resource based on the HivStatusCondition profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivStatusCondition"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Observation"
+      }],
+      "reference" : {
+        "reference" : "Observation/ExampleHivStatusPositiveObservation"
+      },
+      "name" : "Example HIV Positive Status Observation",
+      "description" : "This is an example of an HIV Positive Status Observation resource based on the HivStatusObservation profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivStatusObservation"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Observation"
+      }],
+      "reference" : {
+        "reference" : "Observation/HivTest"
+      },
+      "name" : "Example HIV Test Observation for Positive Result",
+      "description" : "This is an example of an HIV Test Observation resource based on the HivTest profile for a positive test result.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivTest"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationRequest"
+      }],
+      "reference" : {
+        "reference" : "MedicationRequest/ExamplePreferredPepBackbonePrescription"
+      },
+      "name" : "Example Preferred PEP Backbone Prescription",
+      "description" : "This is an example of a preferred PEP backbone prescription resource based on the PreferredPepBackbonePrescription profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPreferredPepBackbonePrescription"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationRequest"
+      }],
+      "reference" : {
+        "reference" : "MedicationRequest/ExamplePreferredThirdPepPrescription"
+      },
+      "name" : "Example Preferred Third PEP Prescription",
+      "description" : "This is an example of a preferred third PEP prescription resource based on the PreferredThirdPepPrescription profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPreferredThirdPepPrescription"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationRequest"
+      }],
+      "reference" : {
+        "reference" : "MedicationRequest/ExamplePrepProductPrescription"
+      },
+      "name" : "Example PrEP Product Prescription",
+      "description" : "This is an example of a PREP Product Prescription resource based on the PrepProductPrescription profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPrepProductPrescription"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Patient"
+      }],
+      "reference" : {
+        "reference" : "Patient/example-hiv-patient"
+      },
+      "name" : "ExampleHivPatient",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPatient"
     },
     {
       "extension" : [{
@@ -2319,6 +2522,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPrepActive"
+      },
+      "name" : "HIV Prep Active",
+      "description" : "A medication statement describing a patient on active PrEP",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -2367,6 +2582,30 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivStatusCondition"
+      },
+      "name" : "HIV Status Condition",
+      "description" : "A condition representing a patient's HIV status.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivStatusObservation"
+      },
+      "name" : "HIV Status Observation",
+      "description" : "An observation representing a patient's HIV status.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -2410,6 +2649,18 @@
       },
       "name" : "HIV status ValueSet",
       "description" : "Value set of HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivTest"
+      },
+      "name" : "HIV Test",
+      "description" : "An DAK-specific HIV test observation with possible results",
       "exampleBoolean" : false
     },
     {
@@ -2511,17 +2762,6 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "ExampleScenario"
-      }],
-      "reference" : {
-        "reference" : "ExampleScenario/HIV.A.REGISTRATION"
-      },
-      "name" : "HIV.A.REGISTRATION",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "StructureDefinition:logical"
       }],
       "reference" : {
@@ -2534,12 +2774,13 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "ExampleScenario"
+        "valueString" : "PlanDefinition"
       }],
       "reference" : {
-        "reference" : "ExampleScenario/HIV.B.HIVtesting"
+        "reference" : "PlanDefinition/HIVB2DT"
       },
-      "name" : "HIV.B.HIVtesting",
+      "name" : "HIV.B2.DT Check for signs of serious illness",
+      "description" : "Check for signs of serious illness",
       "exampleBoolean" : false
     },
     {
@@ -2551,7 +2792,7 @@
         "reference" : "Library/HIVB2DTLogic"
       },
       "name" : "HIV.B2.DT Logic",
-      "description" : "Description not yet available for HIV.B2.DT Logic.",
+      "description" : "HIV.B2.DT Signs of Serious Illness Logic",
       "exampleBoolean" : false
     },
     {
@@ -2564,6 +2805,42 @@
       },
       "name" : "HIV.B7.DT Logic",
       "description" : "Description not yet available for HIV.B7.DT Logic.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "PlanDefinition"
+      }],
+      "reference" : {
+        "reference" : "PlanDefinition/HIVB9DT"
+      },
+      "name" : "HIV.B9.DT Determine retest recommendation",
+      "description" : "HIV restesting recommendations",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Library"
+      }],
+      "reference" : {
+        "reference" : "Library/HIVB9DTLogic"
+      },
+      "name" : "HIV.B9.DT Logic",
+      "description" : "HIV.B9.DT Re-test Recommendations Logic",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "ActivityDefinition"
+      }],
+      "reference" : {
+        "reference" : "ActivityDefinition/HIVB9DTScheduleFollowUp"
+      },
+      "name" : "HIV.B9.DT Schedule Follow-up Test",
+      "description" : "Schedule Follow-up Test",
       "exampleBoolean" : false
     },
     {
@@ -4825,17 +5102,6 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "ExampleScenario"
-      }],
-      "reference" : {
-        "reference" : "ExampleScenario/HIV.PrEP.Visit.Scenario"
-      },
-      "name" : "HIV.PrEP.Visit.Scenario",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "StructureDefinition:logical"
       }],
       "reference" : {
@@ -4927,6 +5193,17 @@
       },
       "name" : "HIVIndicatorElements",
       "description" : "Description not yet available for HIVIndicatorElements.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPatient"
+      },
+      "name" : "HivPatient",
       "exampleBoolean" : false
     },
     {
@@ -5472,6 +5749,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivOnArt"
+      },
+      "name" : "On ART Medication Statement",
+      "description" : "A medication statement describing a Patient's ART program",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -5616,6 +5905,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivKeyPopulation"
+      },
+      "name" : "Patient Key Population Status",
+      "description" : "An observation describing Patient's key population status",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -5700,6 +6001,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPreferredPepBackbonePrescription"
+      },
+      "name" : "Preferred PEP Backbone Prescription",
+      "description" : "A profile for MedicationRequest representing a preferred PEP backbone prescription.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -5731,6 +6044,18 @@
       },
       "name" : "Preferred third PEP drug ValueSet",
       "description" : "Value set of preferred third drug for PEP",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPreferredThirdPepPrescription"
+      },
+      "name" : "Preferred Third PEP Prescription",
+      "description" : "A profile for MedicationRequest representing the preferred third PEP drug choice prescription.",
       "exampleBoolean" : false
     },
     {
@@ -5791,6 +6116,18 @@
       },
       "name" : "PrEP product prescribed ValueSet",
       "description" : "Value set of prEP product that the client was prescribed",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPrepProductPrescription"
+      },
+      "name" : "PrEP Product Prescription",
+      "description" : "A profile for MedicationRequest representing a prescription of a PrEP product.",
       "exampleBoolean" : false
     },
     {

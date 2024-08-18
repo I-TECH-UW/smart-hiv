@@ -79,12 +79,15 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
 context Patient
 define "Measure Population":
-  exists(HIC."PEP Prescription" MR
+  exists(HE."PEP Prescription" MR
   where MR.authoredOn before end of  "Measurement Period"
   and  MR.authoredOn after start of  "Measurement Period")
 
@@ -106,33 +109,33 @@ define function "Measure Observation"(Patient "Patient"):
  */
 
 define "Administrative Gender Stratifier":
-	HIC."By Administrative Gender Stratifier"
+	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIC."By Age Stratifier 3"
+	HIE."By Age Stratifier 3"
 
 define "Geographic Region Stratifier":
-	HIC."By Geographic Region Stratifier"
+	HIE."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIC."patientGroups"
+	HIE."patientGroups"
 
 define "prep product":
-    HIC."prep_product"
+    HIE."prep_product"
 
 define "Setting":
-    HIC."setting"
+    HIE."setting"
 
 define "hiv_exposure_type":
-    HIC."hiv_exposure_type"
+    HIE."hiv_exposure_type"
 
 //provider type not provided?
 
 define "Stratification":
- HIC."By Administrative Gender Stratifier".code 
-  + ':' + HIC."By Age Stratifier 3"
-+ ':' + HIC."By Geographic Region Stratifier"
-+ Combine(HIC.patientGroups, ':')
-+ Combine(HIC.setting, ':')
-+ Combine(HIC.prep_product, ':')
-+ Combine(HIC.hiv_exposure_type, ':')
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier 3"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE.setting, ':')
++ Combine(HIE.prep_product, ':')
++ Combine(HIE."hiv_exposure_type", ':')

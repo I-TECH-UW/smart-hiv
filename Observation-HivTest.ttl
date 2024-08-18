@@ -1,0 +1,51 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://smart.who.int/hiv/Observation/HivTest> a fhir:Observation ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "HivTest"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://smart.who.int/hiv/StructureDefinition/HivTest"^^xsd:anyURI ;
+       fhir:link <http://smart.who.int/hiv/StructureDefinition/HivTest>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: Observation HivTest</b></p><a name=\"HivTest\"> </a><a name=\"hcHivTest\"> </a><a name=\"HivTest-en-US\"> </a><p><b>status</b>: Final</p><p><b>category</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/observation-category laboratory}\">Laboratory</span></p><p><b>code</b>: <span title=\"Codes:{http://smart.who.int/hiv/CodeSystem/HIVConcepts HIV.B.DE81}\">HIV Test</span></p><p><b>subject</b>: <a href=\"Patient-example-hiv-patient.html\">Anonymous Patient (no stated gender), DoB Unknown</a></p><p><b>effective</b>: 2023-01-01 14:30:00+0000</p><p><b>issued</b>: 2023-01-03 15:00:00+0000</p><p><b>value</b>: <span title=\"Codes:{http://smart.who.int/hiv/CodeSystem/HIVConcepts HIV.B.DE112}\">HIV-positive</span></p></div>"
+  ] ; # 
+  fhir:status [ fhir:v "final"] ; # 
+  fhir:category ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://terminology.hl7.org/CodeSystem/observation-category"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "laboratory" ]
+     ] )
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://smart.who.int/hiv/CodeSystem/HIVConcepts"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "HIV.B.DE81" ] ;
+       fhir:display [ fhir:v "HIV Test" ]
+     ] )
+  ] ; # 
+  fhir:subject [
+     fhir:link <http://smart.who.int/hiv/Patient/example-hiv-patient> ;
+     fhir:reference [ fhir:v "Patient/example-hiv-patient" ]
+  ] ; # 
+  fhir:effective [ fhir:v "2023-01-01T14:30:00Z"^^xsd:dateTime] ; # 
+  fhir:issued [ fhir:v "2023-01-03T15:00:00Z"^^xsd:dateTime] ; # 
+  fhir:value [
+     a fhir:CodeableConcept ;
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://smart.who.int/hiv/CodeSystem/HIVConcepts"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "HIV.B.DE112" ] ;
+       fhir:display [ fhir:v "HIV-positive" ]
+     ] )
+  ] . # 
+
+# -------------------------------------------------------------------------------------
+

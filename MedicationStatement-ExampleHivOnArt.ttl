@@ -1,0 +1,42 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://smart.who.int/hiv/MedicationStatement/ExampleHivOnArt> a fhir:MedicationStatement ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ExampleHivOnArt"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://smart.who.int/hiv/StructureDefinition/HivOnArt"^^xsd:anyURI ;
+       fhir:link <http://smart.who.int/hiv/StructureDefinition/HivOnArt>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: MedicationStatement ExampleHivOnArt</b></p><a name=\"ExampleHivOnArt\"> </a><a name=\"hcExampleHivOnArt\"> </a><a name=\"ExampleHivOnArt-en-US\"> </a><p><b>status</b>: Active</p><p><b>medication</b>: <span title=\"Codes:{http://smart.who.int/hiv/CodeSystem/HIVConcepts HIV.D.DE91}\">ABC + 3TC + ATV/r</span></p><p><b>subject</b>: <a href=\"Patient-example-hiv-patient.html\">Anonymous Patient (no stated gender), DoB Unknown</a></p><p><b>effective</b>: 2022-01-17 12:00:00+0000</p><p><b>reasonCode</b>: <span title=\"Codes:{http://smart.who.int/hiv/CodeSystem/HIVConcepts HIV.D.DE38}\">On ART</span></p></div>"
+  ] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:medication [
+     a fhir:CodeableConcept ;
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://smart.who.int/hiv/CodeSystem/HIVConcepts"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "HIV.D.DE91" ]
+     ] )
+  ] ; # 
+  fhir:subject [
+     fhir:link <http://smart.who.int/hiv/Patient/example-hiv-patient> ;
+     fhir:reference [ fhir:v "Patient/example-hiv-patient" ]
+  ] ; # 
+  fhir:effective [ fhir:v "2022-01-17T12:00:00Z"^^xsd:dateTime] ; # 
+  fhir:reasonCode ( [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://smart.who.int/hiv/CodeSystem/HIVConcepts"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "HIV.D.DE38" ]
+     ] )
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

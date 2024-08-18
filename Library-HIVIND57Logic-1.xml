@@ -1,0 +1,1244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="166">
+         <a:s>/**
+ * Library: HIV.IND.57 Logic
+ * Ref No: DSD.5
+ * Short Name: Viral suppression among people living with HIV engaged in DSD ART models
+ *
+ * Definition: % of people living with HIV engaged in DSD ART models who have virological suppression
+ *
+ * Numerator: Number of people enrolled in a DSD ART model with at least one routine viral load test during the reporting period who have virological suppression (&lt;1000 copies/mL) at 6 months after ART initiation and yearly thereafter (that is, at 24, 36, 48 and 60 months, etc. after ART initiation).
+ * Numerator Calculation: COUNT of clients with &quot;Currently enrolled in DSD ART model&quot;=True AND &quot;Date of viral load sample collection&quot; during the reporting period AND &quot;Reason for HIV viral load test&quot;='Routine viral load test' AND &quot;Viral load test result&quot; LESS THAN 1000 copies/mL
+ * Numerator Exclusions: &quot;Date of viral load sample collection&quot; LESS THAN 6 months AFTER &quot;ART start date&quot;
+ *
+ * Denominator: Number of people enrolled in a DSD ART model with at least one routine viral load result in a medical or laboratory record during the reporting period
+ * Denominator Calculation: COUNT of clients with &quot;Currently enrolled in DSD ART model&quot;=True AND &quot;Date of viral load sample collection&quot; during the reporting period AND &quot;Reason for HIV viral load test&quot;='Routine viral load test'
+ * Denominator Exclusions: &quot;Date of viral load sample collection&quot; LESS THAN 6 months AFTER &quot;ART start date&quot;
+ *
+ * Disaggregations:
+ * • Gender (female, male, other*) 
+ *  • Age (0–4, 5–14, 15–24, 25+ years) 
+ *  • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)** 
+ *  • Cities and other administrative regions of epidemiologic importance
+ *
+ * Disaggregation Elements: Gender | Age | Key population member type
+ *
+ * Numerator and Denominator Elements:
+ * Currently enrolled in DSD ART model 
+ *  Date of viral load sample collection 
+ *  Reason for HIV viral load test 
+ *  Viral load test result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.B.DE50: Key population member type* | The type of key population that the client is included in
+ * HIV.B.DE51: Sex worker | Client is a sex worker
+ * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men
+ * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse
+ * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs
+ * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting
+ * HIV.D.DE194: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ * HIV.D.DE387: Viral load test result | Result from the viral load test in number of copies/mL
+ * HIV.D.DE391: Reason for HIV viral load test | Whether the viral load is being tested for routine monitoring on a set schedule or for targeted monitoring for suspected treatment failure
+ * HIV.D.DE392: Routine viral load test | Routine refers to viral load tests obtained at standard intervals following ART initiation to monitor viral load response to ART
+ * HIV.D.DE393: Targeted viral load monitoring | Targeted refers to viral load tests obtained based on a specific clinical indication (such as concern about disease progression or failure to respond to ART)
+ * HIV.D.DE394: Initial viral load test | The first viral load test of the client
+ * HIV.D.DE395: Follow-up viral load test after receiving enhanced adherence counselling | A follow-up viral load test within 3-6 months after enhanced adherence counselling after client received a high viral load test result
+ * HIV.D.DE762: Currently enrolled in DSD ART model | Client currently enrolled in differentiated service delivery (DSD) ART model
+ * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in
+ * HIV.E.DE115: Sex worker | Infant's mother is a sex worker
+ * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs
+ * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse
+ * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting
+ * HIV.G.DE8: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ * HIV.G.DE12: Viral load test result | Result from the viral load test in number of copies/mL
+ * HIV.SRV.DE12: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load
+ * HIV.SRV.DE13: Viral load test result | Result from the viral load test in number of copies/mL
+ *
+ * Additional Context
+ * - what it measures: Measures HIV viral suppression at six months and 12 months after ART initiation and yearly thereafter among people living with HIV enrolled in DSD ART models |  | This indicator is limited to facilities with electronic health information systems and would be monitored in addition to viral load suppression by ART cohort for all people living with HIV and on ART.
+ * - rationale: • Enables monitoring of viral load suppression by cohort of people living with HIV enrolled in DSD models for ART and progress towards the third 95 target | • Viral load suppression is also the best available measure of patient adherence to ART.
+ * - method: EMR/electronic information systems |  | Measurement frequency: quarterly where feasible, at least annually
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND57Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND57Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="75:1-75:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="77:1-77:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="78:1-78:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="80:1-80:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="81:1-81:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="82:1-82:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="83:1-83:31" localIdentifier="Config" path="http://smart.who.int/hiv/HIVConfig">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVConfig</a:s>
+               </a:s>
+               <a:s> called Config</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="13" locator="86:1-86:88" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="13">
+               <a:s>// Indicator Definition
+parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="12">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="11">
+                     <a:s>Date</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="10">
+                  <a:s r="8">Interval[@2023-01-01, @2023-01-30]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="10" locator="86:55-86:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="8" locator="86:64-86:74" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </low>
+            <high localId="9" locator="86:77-86:87" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="12" locator="86:32-86:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="11" locator="86:41-86:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="88:1-88:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="88:1-88:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="88:1-88:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="15" locator="95:1-96:6" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="15">
+               <a:s r="14">/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="14" locator="96:3-96:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="40" locator="105:1-112:5" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="40">
+               <a:s>/**
+ * Numerator
+ * 
+ * Definition: Number of people enrolled in a DSD ART model with at least one routine viral load test during the reporting period who have virological suppression (&lt;1000 copies/mL) at 6 months after ART initiation and yearly thereafter (that is, at 24, 36, 48 and 60 months, etc. after ART initiation).
+ * Calculation: COUNT of clients with &quot;Currently enrolled in DSD ART model&quot;=True AND &quot;Date of viral load sample collection&quot; during the reporting period AND &quot;Reason for HIV viral load test&quot;='Routine viral load test' AND &quot;Viral load test result&quot; LESS THAN 1000 copies/mL
+ */
+
+define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="39">
+                  <a:s r="17">
+                     <a:s r="16">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="17">
+                        <a:s>&quot;Currently enrolled in DSD ART model&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+   and </a:s>
+                  <a:s r="38">
+                     <a:s>exists</a:s>
+                     <a:s r="37">
+                        <a:s>(
+    </a:s>
+                        <a:s r="37">
+                           <a:s>
+                              <a:s r="19">
+                                 <a:s r="18">
+                                    <a:s>
+                                       <a:s>HIE.&quot;Viral load test result D.DE387&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> VL</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="32">
+                              <a:s>with </a:s>
+                              <a:s r="21">
+                                 <a:s r="20">
+                                    <a:s>
+                                       <a:s>HE.&quot;routine viral load sample collection&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                              <a:s> 
+    such that </a:s>
+                              <a:s r="31">
+                                 <a:s r="25">
+                                    <a:s r="23">
+                                       <a:s r="22">
+                                          <a:s>VL</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="23">
+                                          <a:s>partOf</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="25">
+                                       <a:s>references(</a:s>
+                                       <a:s r="24">
+                                          <a:s>P</a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> and  </a:s>
+                                 <a:s r="30">
+                                    <a:s r="28">
+                                       <a:s r="27">
+                                          <a:s r="26">
+                                             <a:s>P</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="27">
+                                             <a:s>performed</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="28">
+                                          <a:s>toInterval()</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="30"> during </a:s>
+                                    <a:s r="29">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="36">
+                              <a:s>where </a:s>
+                              <a:s r="36">
+                                 <a:s r="34">
+                                    <a:s r="33">
+                                       <a:s>VL</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="34">
+                                       <a:s>value</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="35"> &lt; 1000</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="39" locator="106:3-112:5" xsi:type="And">
+            <operand localId="17" locator="106:3-106:43" name="Currently enrolled in DSD ART model" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="38" locator="107:8-112:5" xsi:type="Exists">
+               <operand localId="37" locator="107:14-112:5" xsi:type="Query">
+                  <source localId="19" locator="108:5-108:43" alias="VL">
+                     <expression localId="18" locator="108:5-108:40" name="Viral load test result D.DE387" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="32" locator="109:5-110:95" alias="P" xsi:type="With">
+                     <expression localId="20" locator="109:10-109:50" name="routine viral load sample collection" libraryName="HE" xsi:type="ExpressionRef"/>
+                     <suchThat localId="31" locator="110:15-110:95" xsi:type="And">
+                        <operand localId="25" locator="110:15-110:37" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                           <operand localId="23" locator="110:15-110:23" path="partOf" scope="VL" xsi:type="Property"/>
+                           <operand localId="24" locator="110:36" name="P" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand localId="30" locator="110:44-110:95" xsi:type="IncludedIn">
+                           <operand localId="28" locator="110:44-110:67" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                              <operand localId="27" locator="110:44-110:54" path="performed" scope="P" xsi:type="Property"/>
+                           </operand>
+                           <operand xsi:type="Interval">
+                              <low xsi:type="ToDateTime">
+                                 <operand path="low" xsi:type="Property">
+                                    <source localId="29" locator="110:76-110:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </operand>
+                              </low>
+                              <lowClosedExpression path="lowClosed" xsi:type="Property">
+                                 <source localId="29" locator="110:76-110:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </lowClosedExpression>
+                              <high xsi:type="ToDateTime">
+                                 <operand path="high" xsi:type="Property">
+                                    <source localId="29" locator="110:76-110:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </operand>
+                              </high>
+                              <highClosedExpression path="highClosed" xsi:type="Property">
+                                 <source localId="29" locator="110:76-110:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </highClosedExpression>
+                           </operand>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+                  <where localId="36" locator="111:5-111:25" xsi:type="Less">
+                     <operand name="ToInteger" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand asType="fhir:integer" xsi:type="As">
+                           <operand localId="34" locator="111:11-111:18" path="value" scope="VL" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="35" locator="111:22-111:25" valueType="t:Integer" value="1000" xsi:type="Literal"/>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="79" locator="120:1-128:5" name="Numerator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="79">
+               <a:s>/**
+ * Numerator Exclusions
+ *
+ * Calculation: &quot;Date of viral load sample collection&quot; LESS THAN 6 months AFTER &quot;ART start date&quot;
+ */
+    
+define &quot;Numerator Exclusions&quot;:
+  </a:s>
+               <a:s r="78">
+                  <a:s r="42">
+                     <a:s r="41">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="42">
+                        <a:s>&quot;Currently enrolled in DSD ART model&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+   and </a:s>
+                  <a:s r="77">
+                     <a:s>exists</a:s>
+                     <a:s r="76">
+                        <a:s>(
+    </a:s>
+                        <a:s r="76">
+                           <a:s>
+                              <a:s r="44">
+                                 <a:s r="43">
+                                    <a:s>
+                                       <a:s>HIE.&quot;Viral load test result D.DE387&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> VL</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="71">
+                              <a:s>with </a:s>
+                              <a:s r="46">
+                                 <a:s r="45">
+                                    <a:s>
+                                       <a:s>HE.&quot;routine viral load sample collection&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                              <a:s> 
+    such that </a:s>
+                              <a:s r="70">
+                                 <a:s r="56">
+                                    <a:s r="50">
+                                       <a:s r="48">
+                                          <a:s r="47">
+                                             <a:s>VL</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="48">
+                                             <a:s>partOf</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="50">
+                                          <a:s>references(</a:s>
+                                          <a:s r="49">
+                                             <a:s>P</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> and  </a:s>
+                                    <a:s r="55">
+                                       <a:s r="53">
+                                          <a:s r="52">
+                                             <a:s r="51">
+                                                <a:s>P</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="52">
+                                                <a:s>performed</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="53">
+                                             <a:s>toInterval()</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="55"> during </a:s>
+                                       <a:s r="54">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    and </a:s>
+                                 <a:s r="69">
+                                    <a:s r="67">
+                                       <a:s>months between </a:s>
+                                       <a:s r="60">
+                                          <a:s>(</a:s>
+                                          <a:s r="60">
+                                             <a:s>start of </a:s>
+                                             <a:s r="59">
+                                                <a:s r="58">
+                                                   <a:s r="57">
+                                                      <a:s>P</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="58">
+                                                      <a:s>performed</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="59">
+                                                   <a:s>toInterval()</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                       <a:s> and </a:s>
+                                       <a:s r="66">
+                                          <a:s>(</a:s>
+                                          <a:s r="66">
+                                             <a:s>date from </a:s>
+                                             <a:s r="65">
+                                                <a:s>start of </a:s>
+                                                <a:s r="64">
+                                                   <a:s r="63">
+                                                      <a:s r="62">
+                                                         <a:s r="61">
+                                                            <a:s>HE</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="62">
+                                                            <a:s>&quot;First On ART&quot;</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="63">
+                                                         <a:s>effective</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="64">
+                                                      <a:s>toInterval()</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> &lt; </a:s>
+                                    <a:s r="68">
+                                       <a:s>6 months</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="75">
+                              <a:s>where </a:s>
+                              <a:s r="75">
+                                 <a:s r="73">
+                                    <a:s r="72">
+                                       <a:s>VL</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="73">
+                                       <a:s>value</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="74"> &lt; 1000</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="78" locator="121:3-128:5" xsi:type="And">
+            <operand localId="42" locator="121:3-121:43" name="Currently enrolled in DSD ART model" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="77" locator="122:8-128:5" xsi:type="Exists">
+               <operand localId="76" locator="122:14-128:5" xsi:type="Query">
+                  <source localId="44" locator="123:5-123:43" alias="VL">
+                     <expression localId="43" locator="123:5-123:40" name="Viral load test result D.DE387" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="71" locator="124:5-126:135" alias="P" xsi:type="With">
+                     <expression localId="45" locator="124:10-124:50" name="routine viral load sample collection" libraryName="HE" xsi:type="ExpressionRef"/>
+                     <suchThat localId="70" locator="125:15-126:135" xsi:type="And">
+                        <operand localId="56" locator="125:15-125:95" xsi:type="And">
+                           <operand localId="50" locator="125:15-125:37" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                              <operand localId="48" locator="125:15-125:23" path="partOf" scope="VL" xsi:type="Property"/>
+                              <operand localId="49" locator="125:36" name="P" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="55" locator="125:44-125:95" xsi:type="IncludedIn">
+                              <operand localId="53" locator="125:44-125:67" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                 <operand localId="52" locator="125:44-125:54" path="performed" scope="P" xsi:type="Property"/>
+                              </operand>
+                              <operand xsi:type="Interval">
+                                 <low xsi:type="ToDateTime">
+                                    <operand path="low" xsi:type="Property">
+                                       <source localId="54" locator="125:76-125:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </low>
+                                 <lowClosedExpression path="lowClosed" xsi:type="Property">
+                                    <source localId="54" locator="125:76-125:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </lowClosedExpression>
+                                 <high xsi:type="ToDateTime">
+                                    <operand path="high" xsi:type="Property">
+                                       <source localId="54" locator="125:76-125:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </high>
+                                 <highClosedExpression path="highClosed" xsi:type="Property">
+                                    <source localId="54" locator="125:76-125:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </highClosedExpression>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="69" locator="126:9-126:135" xsi:type="Less">
+                           <operand xsi:type="ToQuantity">
+                              <operand localId="67" locator="126:9-126:124" precision="Month" xsi:type="DurationBetween">
+                                 <operand localId="60" locator="126:24-126:58" xsi:type="Start">
+                                    <operand localId="59" locator="126:34-126:57" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                       <operand localId="58" locator="126:34-126:44" path="performed" scope="P" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <operand localId="66" locator="126:64-126:124" xsi:type="DateFrom">
+                                       <operand localId="65" locator="126:75-126:123" xsi:type="Start">
+                                          <operand localId="64" locator="126:84-126:123" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                             <operand localId="63" locator="126:84-126:110" path="effective" xsi:type="Property">
+                                                <source localId="62" locator="126:84-126:100" name="First On ART" libraryName="HE" xsi:type="ExpressionRef"/>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="68" locator="126:128-126:135" value="6" unit="months" xsi:type="Quantity"/>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+                  <where localId="75" locator="127:5-127:25" xsi:type="Less">
+                     <operand name="ToInteger" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand asType="fhir:integer" xsi:type="As">
+                           <operand localId="73" locator="127:11-127:18" path="value" scope="VL" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand localId="74" locator="127:22-127:25" valueType="t:Integer" value="1000" xsi:type="Literal"/>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="100" locator="138:1-144:5" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="100">
+               <a:s>/**
+ * Denominator
+ *
+ * Definition: Number of people enrolled in a DSD ART model with at least one routine viral load result in a medical or laboratory record during the reporting period
+ * Calculation: COUNT of clients with &quot;Currently enrolled in DSD ART model&quot;=True AND &quot;Date of viral load sample collection&quot; during the reporting period AND &quot;Reason for HIV viral load test&quot;='Routine viral load test'
+ */
+
+define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="99">
+                  <a:s r="81">
+                     <a:s r="80">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="81">
+                        <a:s>&quot;Currently enrolled in DSD ART model&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+   and </a:s>
+                  <a:s r="98">
+                     <a:s>exists</a:s>
+                     <a:s r="97">
+                        <a:s>(
+    </a:s>
+                        <a:s r="97">
+                           <a:s>
+                              <a:s r="83">
+                                 <a:s r="82">
+                                    <a:s>
+                                       <a:s>HIE.&quot;Viral load test result D.DE387&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> VL</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="96">
+                              <a:s>with </a:s>
+                              <a:s r="85">
+                                 <a:s r="84">
+                                    <a:s>
+                                       <a:s>HE.&quot;routine viral load sample collection&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                              <a:s> 
+    such that </a:s>
+                              <a:s r="95">
+                                 <a:s r="89">
+                                    <a:s r="87">
+                                       <a:s r="86">
+                                          <a:s>VL</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="87">
+                                          <a:s>partOf</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="89">
+                                       <a:s>references(</a:s>
+                                       <a:s r="88">
+                                          <a:s>P</a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> and  </a:s>
+                                 <a:s r="94">
+                                    <a:s r="92">
+                                       <a:s r="91">
+                                          <a:s r="90">
+                                             <a:s>P</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="91">
+                                             <a:s>performed</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="92">
+                                          <a:s>toInterval()</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="94"> during </a:s>
+                                    <a:s r="93">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="99" locator="139:3-144:5" xsi:type="And">
+            <operand localId="81" locator="139:3-139:43" name="Currently enrolled in DSD ART model" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="98" locator="140:8-144:5" xsi:type="Exists">
+               <operand localId="97" locator="140:14-144:5" xsi:type="Query">
+                  <source localId="83" locator="141:5-141:43" alias="VL">
+                     <expression localId="82" locator="141:5-141:40" name="Viral load test result D.DE387" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="96" locator="142:5-143:95" alias="P" xsi:type="With">
+                     <expression localId="84" locator="142:10-142:50" name="routine viral load sample collection" libraryName="HE" xsi:type="ExpressionRef"/>
+                     <suchThat localId="95" locator="143:15-143:95" xsi:type="And">
+                        <operand localId="89" locator="143:15-143:37" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                           <operand localId="87" locator="143:15-143:23" path="partOf" scope="VL" xsi:type="Property"/>
+                           <operand localId="88" locator="143:36" name="P" xsi:type="AliasRef"/>
+                        </operand>
+                        <operand localId="94" locator="143:44-143:95" xsi:type="IncludedIn">
+                           <operand localId="92" locator="143:44-143:67" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                              <operand localId="91" locator="143:44-143:54" path="performed" scope="P" xsi:type="Property"/>
+                           </operand>
+                           <operand xsi:type="Interval">
+                              <low xsi:type="ToDateTime">
+                                 <operand path="low" xsi:type="Property">
+                                    <source localId="93" locator="143:76-143:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </operand>
+                              </low>
+                              <lowClosedExpression path="lowClosed" xsi:type="Property">
+                                 <source localId="93" locator="143:76-143:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </lowClosedExpression>
+                              <high xsi:type="ToDateTime">
+                                 <operand path="high" xsi:type="Property">
+                                    <source localId="93" locator="143:76-143:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </operand>
+                              </high>
+                              <highClosedExpression path="highClosed" xsi:type="Property">
+                                 <source localId="93" locator="143:76-143:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </highClosedExpression>
+                           </operand>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="135" locator="152:1-159:5" name="Denominator Exclusions" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="135">
+               <a:s>/**
+* Denominator Exclusions
+*
+* Calculation: &quot;Date of viral load sample collection&quot; LESS THAN 6 months AFTER &quot;ART start date&quot;
+*/
+
+define &quot;Denominator Exclusions&quot;:
+  </a:s>
+               <a:s r="134">
+                  <a:s r="102">
+                     <a:s r="101">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="102">
+                        <a:s>&quot;Currently enrolled in DSD ART model&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+   and </a:s>
+                  <a:s r="133">
+                     <a:s>exists</a:s>
+                     <a:s r="132">
+                        <a:s>(
+    </a:s>
+                        <a:s r="132">
+                           <a:s>
+                              <a:s r="104">
+                                 <a:s r="103">
+                                    <a:s>
+                                       <a:s>HIE.&quot;Viral load test result D.DE387&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> VL</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="131">
+                              <a:s>with </a:s>
+                              <a:s r="106">
+                                 <a:s r="105">
+                                    <a:s>
+                                       <a:s>HE.&quot;routine viral load sample collection&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                              <a:s> 
+    such that </a:s>
+                              <a:s r="130">
+                                 <a:s r="116">
+                                    <a:s r="110">
+                                       <a:s r="108">
+                                          <a:s r="107">
+                                             <a:s>VL</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="108">
+                                             <a:s>partOf</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="110">
+                                          <a:s>references(</a:s>
+                                          <a:s r="109">
+                                             <a:s>P</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> and  </a:s>
+                                    <a:s r="115">
+                                       <a:s r="113">
+                                          <a:s r="112">
+                                             <a:s r="111">
+                                                <a:s>P</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="112">
+                                                <a:s>performed</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="113">
+                                             <a:s>toInterval()</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="115"> during </a:s>
+                                       <a:s r="114">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+    and </a:s>
+                                 <a:s r="129">
+                                    <a:s r="127">
+                                       <a:s>months between </a:s>
+                                       <a:s r="120">
+                                          <a:s>(</a:s>
+                                          <a:s r="120">
+                                             <a:s>start of </a:s>
+                                             <a:s r="119">
+                                                <a:s r="118">
+                                                   <a:s r="117">
+                                                      <a:s>P</a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="118">
+                                                      <a:s>performed</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s>.</a:s>
+                                                <a:s r="119">
+                                                   <a:s>toInterval()</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                       <a:s> and </a:s>
+                                       <a:s r="126">
+                                          <a:s>(</a:s>
+                                          <a:s r="126">
+                                             <a:s>date from </a:s>
+                                             <a:s r="125">
+                                                <a:s>start of </a:s>
+                                                <a:s r="124">
+                                                   <a:s r="123">
+                                                      <a:s r="122">
+                                                         <a:s r="121">
+                                                            <a:s>HE</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="122">
+                                                            <a:s>&quot;First On ART&quot;</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="123">
+                                                         <a:s>effective</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="124">
+                                                      <a:s>toInterval()</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> &lt; </a:s>
+                                    <a:s r="128">
+                                       <a:s>6 months</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="134" locator="153:3-159:5" xsi:type="And">
+            <operand localId="102" locator="153:3-153:43" name="Currently enrolled in DSD ART model" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="133" locator="154:8-159:5" xsi:type="Exists">
+               <operand localId="132" locator="154:14-159:5" xsi:type="Query">
+                  <source localId="104" locator="155:5-155:43" alias="VL">
+                     <expression localId="103" locator="155:5-155:40" name="Viral load test result D.DE387" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="131" locator="156:5-158:135" alias="P" xsi:type="With">
+                     <expression localId="105" locator="156:10-156:50" name="routine viral load sample collection" libraryName="HE" xsi:type="ExpressionRef"/>
+                     <suchThat localId="130" locator="157:15-158:135" xsi:type="And">
+                        <operand localId="116" locator="157:15-157:95" xsi:type="And">
+                           <operand localId="110" locator="157:15-157:37" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                              <operand localId="108" locator="157:15-157:23" path="partOf" scope="VL" xsi:type="Property"/>
+                              <operand localId="109" locator="157:36" name="P" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="115" locator="157:44-157:95" xsi:type="IncludedIn">
+                              <operand localId="113" locator="157:44-157:67" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                 <operand localId="112" locator="157:44-157:54" path="performed" scope="P" xsi:type="Property"/>
+                              </operand>
+                              <operand xsi:type="Interval">
+                                 <low xsi:type="ToDateTime">
+                                    <operand path="low" xsi:type="Property">
+                                       <source localId="114" locator="157:76-157:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </low>
+                                 <lowClosedExpression path="lowClosed" xsi:type="Property">
+                                    <source localId="114" locator="157:76-157:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </lowClosedExpression>
+                                 <high xsi:type="ToDateTime">
+                                    <operand path="high" xsi:type="Property">
+                                       <source localId="114" locator="157:76-157:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </high>
+                                 <highClosedExpression path="highClosed" xsi:type="Property">
+                                    <source localId="114" locator="157:76-157:95" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </highClosedExpression>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="129" locator="158:9-158:135" xsi:type="Less">
+                           <operand xsi:type="ToQuantity">
+                              <operand localId="127" locator="158:9-158:124" precision="Month" xsi:type="DurationBetween">
+                                 <operand localId="120" locator="158:24-158:58" xsi:type="Start">
+                                    <operand localId="119" locator="158:34-158:57" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                       <operand localId="118" locator="158:34-158:44" path="performed" scope="P" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <operand localId="126" locator="158:64-158:124" xsi:type="DateFrom">
+                                       <operand localId="125" locator="158:75-158:123" xsi:type="Start">
+                                          <operand localId="124" locator="158:84-158:123" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                             <operand localId="123" locator="158:84-158:110" path="effective" xsi:type="Property">
+                                                <source localId="122" locator="158:84-158:100" name="First On ART" libraryName="HE" xsi:type="ExpressionRef"/>
+                                             </operand>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="128" locator="158:128-158:135" value="6" unit="months" xsi:type="Quantity"/>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="138" locator="167:1-168:42" name="Administrative Gender Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="138">
+               <a:s>/* end Populations */
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	</a:s>
+               <a:s r="137">
+                  <a:s r="136">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="137">
+                     <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="137" locator="168:2-168:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="141" locator="170:1-171:24" name="Age Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="141">
+               <a:s>define &quot;Age Stratifier&quot;:
+	</a:s>
+               <a:s r="140">
+                  <a:s r="139">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="140">
+                     <a:s>&quot;By Age Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="140" locator="171:2-171:24" name="By Age Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="144" locator="173:1-174:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="144">
+               <a:s>define &quot;Geographic Region Stratifier&quot;:
+	</a:s>
+               <a:s r="143">
+                  <a:s r="142">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="143">
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="143" locator="174:2-174:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="147" locator="176:1-177:20" name="patientGroups Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="147">
+               <a:s>define &quot;patientGroups Stratifier&quot;:
+	</a:s>
+               <a:s r="146">
+                  <a:s r="145">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="146">
+                     <a:s>&quot;patientGroups&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="146" locator="177:2-177:20" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="166" locator="179:1-183:33" name="Stratification" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="166">
+               <a:s>define &quot;Stratification&quot;:
+ </a:s>
+               <a:s r="165">
+                  <a:s r="160">
+                     <a:s r="157">
+                        <a:s r="155">
+                           <a:s r="152">
+                              <a:s r="150">
+                                 <a:s r="149">
+                                    <a:s r="148">
+                                       <a:s>HIE</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="149">
+                                       <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="150">
+                                    <a:s>code</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> 
+  + </a:s>
+                              <a:s r="151">
+                                 <a:s>':'</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> + </a:s>
+                           <a:s r="154">
+                              <a:s r="153">
+                                 <a:s>HIE</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="154">
+                                 <a:s>&quot;By Age Stratifier&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
++ </a:s>
+                        <a:s r="156">
+                           <a:s>':'</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> + </a:s>
+                     <a:s r="159">
+                        <a:s r="158">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="159">
+                           <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
++ </a:s>
+                  <a:s r="164">
+                     <a:s>Combine(</a:s>
+                     <a:s r="162">
+                        <a:s r="161">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="162">
+                           <a:s>patientGroups</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>, </a:s>
+                     <a:s r="163">
+                        <a:s>':'</a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="165" locator="180:2-183:33" xsi:type="Concatenate">
+            <operand localId="160" locator="180:2-182:45" xsi:type="Concatenate">
+               <operand localId="157" locator="180:2-182:5" xsi:type="Concatenate">
+                  <operand localId="155" locator="180:2-181:33" xsi:type="Concatenate">
+                     <operand localId="152" locator="180:2-181:7" xsi:type="Concatenate">
+                        <operand localId="150" locator="180:2-180:47" path="code" xsi:type="Property">
+                           <source localId="149" locator="180:2-180:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+                        </operand>
+                        <operand localId="151" locator="181:5-181:7" valueType="t:String" value=":" xsi:type="Literal"/>
+                     </operand>
+                     <operand localId="154" locator="181:11-181:33" name="By Age Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  </operand>
+                  <operand localId="156" locator="182:3-182:5" valueType="t:String" value=":" xsi:type="Literal"/>
+               </operand>
+               <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <operand localId="159" locator="182:9-182:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+            <operand localId="164" locator="183:3-183:33" xsi:type="Combine">
+               <source localId="162" locator="183:11-183:27" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <separator localId="163" locator="183:30-183:32" valueType="t:String" value=":" xsi:type="Literal"/>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>

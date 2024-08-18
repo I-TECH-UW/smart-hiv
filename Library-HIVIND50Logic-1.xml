@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation xsi:type="a:Annotation">
+      <a:s r="81">
+         <a:s>/**
+ * Library: HIV.IND.50 Logic
+ * Ref No: DFT.3
+ * Short Name: TB testing among those symptom-screened positive
+ *
+ * Definition: % of people living with HIV newly initiated on ART and screened positive for TB symptoms who then are tested for TB
+ *
+ * Numerator: Number of people living with HIV newly initiated on ART who are investigated for active TB disease with appropriate diagnostic testing*
+ * Numerator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB' AND a &quot;TB diagnostic test category&quot; is NOT NULL AND with a &quot;TB diagnostic test date&quot; in the reporting period
+ * Numerator Exclusions: 
+ *
+ * Denominator: Number of people living with HIV newly initiated on ART and screened positive for TB symptoms during the reporting period
+ * Denominator Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB'
+ * Denominator Exclusions: 
+ *
+ * Disaggregations:
+ * • Gender (male, female, other**) 
+ *  • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)*** 
+ *  • Cities and other administrative regions of epidemiologic importance 
+ *   
+ *  Consider disaggregating the type of diagnostic testing, for example, GeneXpert testing, LF-LAM, sputum acid-fast bacilli (AFB) examination (alone) or other diagnostic testing.
+ *
+ * Disaggregation Elements: Gender | Age | TB diagnostic test category
+ *
+ * Numerator and Denominator Elements:
+ * ART start date 
+ *  ART start type 
+ *  HIV status 
+ *  TB diagnostic test category 
+ *  TB diagnostic test date 
+ *  TB screening date 
+ *  TB screening result
+ *
+ * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022
+ * 
+ * Data Concepts:
+ * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
+ * HIV.A.DE18: Gender* | Gender of the client*
+ * HIV.A.DE19: Female | Client identifies as female
+ * HIV.A.DE20: Male | Client identifies as male
+ * HIV.A.DE21: Transgender male | Client identifies as transgender male
+ * HIV.A.DE22: Transgender female | Client identifies as transgender female
+ * HIV.A.DE23: Other | Additional category
+ * HIV.B.DE72: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
+ * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
+ * HIV.B.DE116: HIV-positive | Client is HIV-positive
+ * HIV.B.DE117: HIV-negative | Client is HIV-negative
+ * HIV.B.DE118: Unknown | Client has unknown HIV status
+ * HIV.D.DE39: ART start date | The date on which the client started or restarted ART
+ * HIV.D.DE43: ART start type | Whether the client is ART naive or is restarting ART
+ * HIV.D.DE44: First-time user of ART | Client is ART naive, having never taken ART to treat HIV before
+ * HIV.D.DE45: Restarting ART | Client is restarting ART after stopping treatment for any reason
+ * HIV.D.DE986: TB screening result | Record the result of the tuberculosis (TB) screening
+ * HIV.D.DE987: Screen positive for TB | Screening result was positive for tuberculosis (TB)
+ * HIV.D.DE988: Screen negative for TB | Screening result was negative for tuberculosis (TB)
+ * HIV.D.DE989: Inconclusive | Screening result was inconclusive for tuberculosis (TB)
+ * HIV.D.DE990: TB screening date | Date the TB screening was conducted
+ * HIV.D.DE992: TB diagnostic test category | The type of diagnostic test performed to detect tuberculosis (TB) disease
+ * HIV.D.DE993: LF-LAM | Client tested for tuberculosis with a lateral flow urine lipoarabinomannan assay
+ * HIV.D.DE994: mWRD test for TB | Client tested with a WHO-recommended molecular diagnostic test to detect Mycobacterium tuberculosis (MTB)
+ * HIV.D.DE995: Microscopy - Sputum acid-fast bacilli (AFB) | Client tested for tuberculosis with a sputum acid-fast bacilli (AFB)
+ * HIV.D.DE996: TB Culture | Client tested for tuberculosis (TB) with a culture
+ * HIV.D.DE997: TB diagnostic test date | The date when TB diagnostic test was performed
+ * HIV.SRV.DE6: ART start date | The date on which the client started or restarted antiretroviral therapy (ART)
+ *
+ * Additional Context
+ * - what it measures: This indicator measures the percentage of people living with HIV newly initiated on ART and screened positive for TB symptoms who then had clinical evaluation and/or appropriate TB diagnostic testing.
+ * - rationale: • Appropriate TB diagnostic testing is essential for people living with HIV who symptom- screen positive for TB. | • It is important to understand the cascade from ART enrolment to treatment of active | TB disease; this indicator will shed light on any obstacles between positive screening for TB symptoms and proper diagnostic testing, based on national clinical guidelines. | • This is the third of five &quot;screening cascade&quot; indicators considered priority for high burden TB/HIV settings.
+ * - method: &quot;Newly initiated&quot; is defined as the number of people living with HIV who start ART in accordance with national treatment guidelines during the reporting period. |  | For the numerator and denominator: Programme records (for example, ART registers, EMR)
+ * 
+ * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ */
+
+library HIVIND50Logic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVIND50Logic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="77:1-77:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>// Included Libraries
+using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="79:1-79:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="80:1-80:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="82:1-82:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="83:1-83:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="84:1-84:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="12" locator="87:1-87:88" name="Measurement Period" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="12">
+               <a:s>// Indicator Definition
+parameter &quot;Measurement Period&quot; </a:s>
+               <a:s r="11">
+                  <a:s>Interval&lt;</a:s>
+                  <a:s r="10">
+                     <a:s>Date</a:s>
+                  </a:s>
+                  <a:s>></a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="9">
+                  <a:s r="7">Interval[@2023-01-01, @2023-01-30]</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="9" locator="87:55-87:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="7" locator="87:64-87:74" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+            </low>
+            <high localId="8" locator="87:77-87:87" xsi:type="Date">
+               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+               <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            </high>
+         </default>
+         <parameterTypeSpecifier localId="11" locator="87:32-87:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="87:41-87:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         </parameterTypeSpecifier>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="89:1-89:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="89:1-89:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="89:1-89:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="14" locator="96:1-97:6" name="Initial Population" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s r="13">/* Populations */
+
+/*
+ *Initial Population
+ */
+
+define &quot;Initial Population&quot;:
+  true</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="97:3-97:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+      </def>
+      <def localId="43" locator="107:1-116:3" name="Numerator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="43">
+               <a:s>/**
+ * Numerator
+ * 
+ * Definition: Number of people living with HIV newly initiated on ART who are investigated for active TB disease with appropriate diagnostic testing*
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB' AND a &quot;TB diagnostic test category&quot; is NOT NULL AND with a &quot;TB diagnostic test date&quot; in the reporting period
+ */
+
+define &quot;Numerator&quot;:
+  </a:s>
+               <a:s r="42">
+                  <a:s r="25">
+                     <a:s r="16">
+                        <a:s r="15">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="16">
+                           <a:s>&quot;Has HIV-positive Status&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  and </a:s>
+                     <a:s r="24">
+                        <a:s>(</a:s>
+                        <a:s r="24">
+                           <a:s r="22">
+                              <a:s>start of </a:s>
+                              <a:s r="21">
+                                 <a:s r="20">
+                                    <a:s r="19">
+                                       <a:s>First(</a:s>
+                                       <a:s r="18">
+                                          <a:s r="17">
+                                             <a:s>HE</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="18">
+                                             <a:s>&quot;First-time user of ART&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="20">
+                                       <a:s>effective</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="21">
+                                    <a:s>toInterval()</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="24"> during </a:s>
+                           <a:s r="23">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  //related the two since we want a positive observation from a specific diagnostic test.
+  and </a:s>
+                  <a:s r="41">
+                     <a:s>exists</a:s>
+                     <a:s r="40">
+                        <a:s>(
+    </a:s>
+                        <a:s r="40">
+                           <a:s>
+                              <a:s r="27">
+                                 <a:s r="26">
+                                    <a:s>
+                                       <a:s>HE.&quot;TB diagnostic test category&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="34">
+                              <a:s>with </a:s>
+                              <a:s r="29">
+                                 <a:s r="28">
+                                    <a:s>
+                                       <a:s>HE.&quot;Screen positive for TB&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> O</a:s>
+                              </a:s>
+                              <a:s>
+      such that </a:s>
+                              <a:s r="33">
+                                 <a:s r="31">
+                                    <a:s r="30">
+                                       <a:s>P</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="31">
+                                       <a:s>partOf</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="33">
+                                    <a:s>references(</a:s>
+                                    <a:s r="32">
+                                       <a:s>O</a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="39">
+                              <a:s>where </a:s>
+                              <a:s r="39">
+                                 <a:s r="37">
+                                    <a:s r="36">
+                                       <a:s r="35">
+                                          <a:s>P</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="36">
+                                          <a:s>performed</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="37">
+                                       <a:s>toInterval()</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="39"> during </a:s>
+                                 <a:s r="38">
+                                    <a:s>&quot;Measurement Period&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="42" locator="108:3-116:3" xsi:type="And">
+            <operand localId="25" locator="108:3-109:102" xsi:type="And">
+               <operand localId="16" locator="108:3-108:31" name="Has HIV-positive Status" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <operand localId="24" locator="109:7-109:102" xsi:type="In">
+                  <operand localId="22" locator="109:8-109:73" xsi:type="Start">
+                     <operand localId="21" locator="109:17-109:73" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                        <operand localId="20" locator="109:17-109:60" path="effective" xsi:type="Property">
+                           <source localId="19" locator="109:17-109:50" xsi:type="First">
+                              <source localId="18" locator="109:23-109:49" name="First-time user of ART" libraryName="HE" xsi:type="ExpressionRef"/>
+                           </source>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="Interval">
+                     <low xsi:type="ToDateTime">
+                        <operand path="low" xsi:type="Property">
+                           <source localId="23" locator="109:82-109:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </low>
+                     <lowClosedExpression path="lowClosed" xsi:type="Property">
+                        <source localId="23" locator="109:82-109:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </lowClosedExpression>
+                     <high xsi:type="ToDateTime">
+                        <operand path="high" xsi:type="Property">
+                           <source localId="23" locator="109:82-109:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </high>
+                     <highClosedExpression path="highClosed" xsi:type="Property">
+                        <source localId="23" locator="109:82-109:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </highClosedExpression>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="41" locator="111:7-116:3" xsi:type="Exists">
+               <operand localId="40" locator="111:13-116:3" xsi:type="Query">
+                  <source localId="27" locator="112:5-112:38" alias="P">
+                     <expression localId="26" locator="112:5-112:36" name="TB diagnostic test category" libraryName="HE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="34" locator="113:5-114:38" alias="O" xsi:type="With">
+                     <expression localId="28" locator="113:10-113:36" name="Screen positive for TB" libraryName="HE" xsi:type="ExpressionRef"/>
+                     <suchThat localId="33" locator="114:17-114:38" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                        <operand localId="31" locator="114:17-114:24" path="partOf" scope="P" xsi:type="Property"/>
+                        <operand localId="32" locator="114:37" name="O" xsi:type="AliasRef"/>
+                     </suchThat>
+                  </relationship>
+                  <where localId="39" locator="115:5-115:62" xsi:type="IncludedIn">
+                     <operand localId="37" locator="115:11-115:34" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                        <operand localId="36" locator="115:11-115:21" path="performed" scope="P" xsi:type="Property"/>
+                     </operand>
+                     <operand xsi:type="Interval">
+                        <low xsi:type="ToDateTime">
+                           <operand path="low" xsi:type="Property">
+                              <source localId="38" locator="115:43-115:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                           </operand>
+                        </low>
+                        <lowClosedExpression path="lowClosed" xsi:type="Property">
+                           <source localId="38" locator="115:43-115:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </lowClosedExpression>
+                        <high xsi:type="ToDateTime">
+                           <operand path="high" xsi:type="Property">
+                              <source localId="38" locator="115:43-115:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                           </operand>
+                        </high>
+                        <highClosedExpression path="highClosed" xsi:type="Property">
+                           <source localId="38" locator="115:43-115:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </highClosedExpression>
+                     </operand>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="58" locator="126:1-129:34" name="Denominator" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="58">
+               <a:s>/**
+ * Denominator
+ *
+ * Definition: Number of people living with HIV newly initiated on ART and screened positive for TB symptoms during the reporting period
+ * Calculation: COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND with &quot;ART start type&quot;='First-time user of ART' AND with &quot;ART start date&quot; in the reporting period AND &quot;TB screening date&quot; in the reporting period AND &quot;TB screening result&quot;='Screen positive for TB'
+ */
+
+define &quot;Denominator&quot;:
+  </a:s>
+               <a:s r="57">
+                  <a:s r="54">
+                     <a:s r="45">
+                        <a:s r="44">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="45">
+                           <a:s>&quot;Has HIV-positive Status&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  and </a:s>
+                     <a:s r="53">
+                        <a:s>(</a:s>
+                        <a:s r="53">
+                           <a:s r="51">
+                              <a:s>start of </a:s>
+                              <a:s r="50">
+                                 <a:s r="49">
+                                    <a:s r="48">
+                                       <a:s>First(</a:s>
+                                       <a:s r="47">
+                                          <a:s r="46">
+                                             <a:s>HE</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="47">
+                                             <a:s>&quot;First-time user of ART&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="49">
+                                       <a:s>effective</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="50">
+                                    <a:s>toInterval()</a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s r="53"> during </a:s>
+                           <a:s r="52">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  and </a:s>
+                  <a:s r="56">
+                     <a:s r="55">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="56">
+                        <a:s>&quot;Screen positive for TB&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="57" locator="127:3-129:34" xsi:type="And">
+            <operand localId="54" locator="127:3-128:102" xsi:type="And">
+               <operand localId="45" locator="127:3-127:31" name="Has HIV-positive Status" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <operand localId="53" locator="128:7-128:102" xsi:type="In">
+                  <operand localId="51" locator="128:8-128:73" xsi:type="Start">
+                     <operand localId="50" locator="128:17-128:73" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                        <operand localId="49" locator="128:17-128:60" path="effective" xsi:type="Property">
+                           <source localId="48" locator="128:17-128:50" xsi:type="First">
+                              <source localId="47" locator="128:23-128:49" name="First-time user of ART" libraryName="HE" xsi:type="ExpressionRef"/>
+                           </source>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand xsi:type="Interval">
+                     <low xsi:type="ToDateTime">
+                        <operand path="low" xsi:type="Property">
+                           <source localId="52" locator="128:82-128:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </low>
+                     <lowClosedExpression path="lowClosed" xsi:type="Property">
+                        <source localId="52" locator="128:82-128:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </lowClosedExpression>
+                     <high xsi:type="ToDateTime">
+                        <operand path="high" xsi:type="Property">
+                           <source localId="52" locator="128:82-128:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </high>
+                     <highClosedExpression path="highClosed" xsi:type="Property">
+                        <source localId="52" locator="128:82-128:101" name="Measurement Period" xsi:type="ParameterRef"/>
+                     </highClosedExpression>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="56" locator="129:7-129:34" name="Screen positive for TB" libraryName="HIE" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="61" locator="138:1-139:42" name="Administrative Gender Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="61">
+               <a:s>/* end Populations */
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	</a:s>
+               <a:s r="60">
+                  <a:s r="59">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="60">
+                     <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="60" locator="139:2-139:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="64" locator="141:1-142:24" name="Age Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="64">
+               <a:s>define &quot;Age Stratifier&quot;:
+	</a:s>
+               <a:s r="63">
+                  <a:s r="62">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="63">
+                     <a:s>&quot;By Age Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="63" locator="142:2-142:24" name="By Age Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="67" locator="144:1-145:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="67">
+               <a:s>define &quot;Geographic Region Stratifier&quot;:
+	</a:s>
+               <a:s r="66">
+                  <a:s r="65">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="66">
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="66" locator="145:2-145:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="81" locator="147:1-150:45" name="Stratification" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="81">
+               <a:s>define &quot;Stratification&quot;:
+ </a:s>
+               <a:s r="80">
+                  <a:s r="77">
+                     <a:s r="75">
+                        <a:s r="72">
+                           <a:s r="70">
+                              <a:s r="69">
+                                 <a:s r="68">
+                                    <a:s>HIE</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="69">
+                                    <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="70">
+                                 <a:s>code</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> 
+  + </a:s>
+                           <a:s r="71">
+                              <a:s>':'</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> + </a:s>
+                        <a:s r="74">
+                           <a:s r="73">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="74">
+                              <a:s>&quot;By Age Stratifier&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
++ </a:s>
+                     <a:s r="76">
+                        <a:s>':'</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> + </a:s>
+                  <a:s r="79">
+                     <a:s r="78">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="79">
+                        <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="80" locator="148:2-150:45" xsi:type="Concatenate">
+            <operand localId="77" locator="148:2-150:5" xsi:type="Concatenate">
+               <operand localId="75" locator="148:2-149:33" xsi:type="Concatenate">
+                  <operand localId="72" locator="148:2-149:7" xsi:type="Concatenate">
+                     <operand localId="70" locator="148:2-148:47" path="code" xsi:type="Property">
+                        <source localId="69" locator="148:2-148:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+                     </operand>
+                     <operand localId="71" locator="149:5-149:7" valueType="t:String" value=":" xsi:type="Literal"/>
+                  </operand>
+                  <operand localId="74" locator="149:11-149:33" name="By Age Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="76" locator="150:3-150:5" valueType="t:String" value=":" xsi:type="Literal"/>
+            </operand>
+            <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+               <operand localId="79" locator="150:9-150:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+   </statements>
+</library>
