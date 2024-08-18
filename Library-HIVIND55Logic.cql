@@ -82,10 +82,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -108,9 +106,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-    HIE."HIV-positive B.DE116"
-   and HIE."On ART H.DE47"
-   and HIE."Currently enrolled in DSD ART model"
+  true
 
 
 /**
@@ -121,10 +117,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116"
-   and HIE."On ART H.DE47"
-  and HIE."Date DSD ART eligibility assessed"
-  and HIE."Eligible for DSD ART"
+  true
     
 
 /* end Populations */

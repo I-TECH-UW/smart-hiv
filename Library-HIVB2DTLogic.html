@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.4"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.4"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.1"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.1"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -296,10 +296,10 @@
   <table class="colsd">
 
     <tr>
-      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/hiv/Library/HIVB2DTLogic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVB2DTLogic"/></span>
+      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/HIV/Library/HIVB2DTLogic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVB2DTLogic"/></span>
       </td>
       <td><i>Version</i>:
-      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVB2DTLogic|0.2.0"/></span>
+      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVB2DTLogic|0.2.0"/></span>
       </td>
     </tr>
 
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-14
+            as of 2024-08-18
           
         
       </td>
@@ -332,7 +332,7 @@
 
 
 <p>
-<p>HIV.B2.DT Signs of Serious Illness Logic</p>
+<p>Description not yet available for HIV.B2.DT Logic.</p>
 
 </p>
 
@@ -353,122 +353,90 @@
 Library: HIV.B2.DT Logic
 
 @DecisionID: HIV.B2.DT
-@BusinessRule: Check for signs of serious illness
-@Trigger: HIV.B2 Check for signs of serious illness
-@Trigger: HIV.D3 Check for signs of serious illness
-@HitPolicy: Rule Order
-@Description: Check for serious illness
+@BusinessRule:
+@Trigger: 
+@Description: 
 
-Data Concepts:
- * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth
- * HIV.D.DE17: Signs of serious illness | Signs that may indicate the client has a serious illness and needs triage or an emergency referral
- * HIV.D.DE9: Body temperature | Temperature of the client in Celsius
-
-Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease.
+Check for signs of serious illness
+Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease.  
+Should this just be for anyone with HIV? 
+Wouldn't other  disease domains also code for general exam?
 */
 
 library HIVB2DTLogic
 
-using FHIR version '4.0.1'
+ using FHIR version '4.0.1'
+ 
 
-include HIVCommon version '0.0.1' called HIC
-include HIVConcepts called Concepts
-include HIVEncounterElements called Elements
-include FHIRHelpers version '4.0.1'
+ include HIVCommon version '0.0.1' called HIC
+ include FHIRHelpers version '4.0.1'
+ include WHOCommon called WCom
+ include FHIRCommon called FC
 
-include WHOCommon called WCom
+ valueset &quot;Tachycardia&quot;: ''
+ valueset &quot;Tachypnea&quot;: ''
+ valueset &quot;Unable to walk unaided&quot;: ''
+ valueset &quot;Body temperature = ≥ 39 °C&quot;: '' 
+ valueset &quot;Other sign of serious illness (specify)&quot;: ''
+ valueset &quot;Lethargy&quot;: ''
+ valueset &quot;Unconsciousness&quot;: ''
+ valueset &quot;Convulsions&quot;: ''
+ valueset &quot;Unable to breastfeed&quot;: ''
+ valueset &quot;Unable to drink&quot;: ''
+ valueset &quot;Repeated vomiting&quot;: ''
 
-context Patient
+ context Patient
 
  /*
-  @input: &quot;Age 10 or older&quot;
-  @pseudocode: 'Age' &gt;= 10 years
+  * Age = ≥ 10 years
   */
-define &quot;Age 10 or older&quot;:
+
+define &quot;Age_10_or_more&quot;:
   AgeInYearsAt(Today()) &gt;= 10
 
  /*
-  @input: &quot;Age under 10&quot;
-  @pseudocode: 'Age' &lt; 10 years
+  * Age &lt; 10 years
   */
-define &quot;Age under 10&quot;:
+
+define &quot;Age_less_than_10&quot;:
   AgeInYearsAt(Today()) &lt; 10
 
-/*
- @output: &quot;Immediately take action or refer for care if a client is having this issue&quot;
- */
-define &quot;Immediately take action or refer for care if a client is having this issue&quot;:
-  &quot;Age 10 or older&quot; and exists(
-    Elements.&quot;Signs of serious illness Observation&quot; O
-      where O.value ~ Concepts.&quot;Tachycardia&quot;
+define &quot;Take action or refer client showing signs of a serious illness&quot;:
+  exists(([Observation: &quot;Tachycardia&quot;]
+  union [Observation: &quot;Tachypnea&quot;]
+  union [Observation: &quot;Unable to walk unaided&quot;]) O
+  where Age_10_or_more
+  and O.status in { 'final', 'amended' })
+  or exists(([Observation: &quot;Lethargy&quot;]
+  union [Observation: &quot;Unconsciousness&quot;]
+  union [Observation: &quot;Convulsions&quot;]
+  union [Observation: &quot;Unable to breastfeed&quot;]
+  union [Observation: &quot;Unable to drink&quot;]
+  union [Observation: &quot;Unconsciousness&quot;]
+  union [Observation: &quot;Repeated vomiting&quot;]) O
+  where Age_less_than_10
+  and O.status in { 'final', 'amended' }
   )
 
-/*
- @output &quot;Immediately take action or refer for care if client is showing this sign of a serious illness.&quot;
- */
-define &quot;Immediately take action or refer for care if client is showing this sign of a serious illness&quot;:
-  &quot;Signs of serious illness age 10 or older&quot; or &quot;Signs of serious illness age under 10&quot;
+//plan definition Immediately take action or refer for care if a client is having this issue.
 
-/*
- @output &quot;Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill&quot;
- */
 define &quot;Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill&quot;:
-  &quot;Signs of serious illness requiring clinical judgement age 10 or older&quot; or &quot;Signs of serious illness requiring clinical judgement age under 10&quot;
+  exists (([Observation: &quot;Body temperature = ≥ 39 °C&quot;]
+  union [Observation: &quot;Other sign of serious illness (specify)&quot;]) O
+  where Age_10_or_more
+  and O.status in { 'final', 'amended' })
+  // Please this condition needs to be fixed
+  // or exists((([Observation: &quot;Body temperature = ≥ 39 °C&quot;]
+  // intersect [Observation: &quot;Tachycardia&quot;])
+  // or ([Observation: &quot;Body temperature = ≥ 39 °C&quot;]
+  // intersect [Observation: &quot;Tachypnea&quot;])
+  // or [Observation: &quot;Other sign of serious illness (specify)&quot;]) O
+  // where Age_less_than_10
+  // and O.status in { 'final', 'amended' })
+  // )
 
-/*
- @dynamicValue: Guidance
- */
-define &quot;Guidance&quot;:
-  case 
-  when &quot;Immediately take action or refer for care if a client is having this issue&quot; 
-    then 'Immediately take action or refer for care if a client is having this issue.'
-  when &quot;Immediately take action or refer for care if client is showing this sign of a serious illness&quot; and &quot;Age 10 or older&quot;
-    then 'Immediately take action or refer for care if client is showing this sign of a serious illness.'
-  when &quot;Immediately take action or refer for care if client is showing this sign of a serious illness&quot; and &quot;Age under 10&quot;
-    then '''This is a sign and/or symptom of a serious health condition.
-  
-Immediately take action or refer for care if client is showing this sign of a serious illness.'''
-  else null
-  end
 
-/*
- Supporting Logic
-*/
-define &quot;Signs of serious illness age 10 or older&quot;:
-  &quot;Age 10 or older&quot; and exists(
-    Elements.&quot;Signs of serious illness Observation&quot; O
-      where
-        O.value ~ Concepts.&quot;Tachypnea&quot; or
-        O.value ~ Concepts.&quot;Unable to walk unaided&quot;
-  )
-
-define &quot;Signs of serious illness age under 10&quot;:
-  &quot;Age under 10&quot; and exists(
-    Elements.&quot;Signs of serious illness Observation&quot; O
-      where
-        O.value ~ Concepts.&quot;Lethargy - HIV.D.DE22&quot; or
-        O.value ~ Concepts.&quot;Unconsciousness&quot; or
-        O.value ~ Concepts.&quot;Convulsions&quot; or
-        O.value ~ Concepts.&quot;Unable to breastfeed&quot; or
-        O.value ~ Concepts.&quot;Unable to drink&quot; or
-        O.value ~ Concepts.&quot;Repeated vomiting&quot;
-    )
-
-define &quot;Signs of serious illness requiring clinical judgement age 10 or older&quot;:
-  &quot;Age 10 or older&quot; and exists(
-    Elements.&quot;Signs of serious illness Observation&quot; O
-      where
-        O.value ~ Concepts.&quot;Fever of 39 C or greater&quot; or
-        O.value ~ Concepts.&quot;Other sign of serious illness&quot;
-  )
-
-define &quot;Signs of serious illness requiring clinical judgement age under 10&quot;:
-  &quot;Age under 10&quot; and exists(
-    Elements.&quot;Signs of serious illness Observation&quot; O
-      where
-        O.value ~ Concepts.&quot;Fever of 39 C or greater&quot; or
-        O.value ~ Concepts.&quot;Other sign of serious illness&quot;
-  )
+//plan definition  Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill. 
 </code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
   <!-- insert notes if present -->
@@ -494,7 +462,7 @@ define &quot;Signs of serious illness requiring clinical judgement age under 10&
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Aug 14, 2024 10:49+0000">2024-08-14</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sun, Aug 18, 2024 03:48+0000">2024-08-18</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

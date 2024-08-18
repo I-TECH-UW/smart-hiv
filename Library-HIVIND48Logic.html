@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.43"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.43"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.39"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.39"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -296,10 +296,10 @@
   <table class="colsd">
 
     <tr>
-      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/hiv/Library/HIVIND48Logic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVIND48Logic"/></span>
+      <td colspan="4"><i>Official URL</i>: <span class="copy-text">http://smart.who.int/HIV/Library/HIVIND48Logic<button title="Click to copy URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVIND48Logic"/></span>
       </td>
       <td><i>Version</i>:
-      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/hiv/Library/HIVIND48Logic|0.2.0"/></span>
+      <span class="copy-text">0.2.0<button title="Click to copy versioned URL" class="btn-copy" data-clipboard-text="http://smart.who.int/HIV/Library/HIVIND48Logic|0.2.0"/></span>
       </td>
     </tr>
 
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-14
+            as of 2024-08-18
           
         
       </td>
@@ -414,10 +414,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -440,10 +438,7 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  HIE.&quot;HIV-positive B.DE116&quot;
-  and (start of HE.&quot;First On ART&quot;.effective.toInterval() during &quot;Measurement Period&quot;)
-  and HIE.&quot;First-time user of ART&quot;
-  and HIE.&quot;TB screening date&quot;
+  true
 
 
 /**
@@ -454,31 +449,10 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  HIE.&quot;HIV-positive B.DE116&quot;
-  and (start of HE.&quot;First On ART&quot;.effective.toInterval() during &quot;Measurement Period&quot;)
-  and HIE.&quot;First-time user of ART&quot;
+  true
     
 
 /* end Populations */
-
-/*
- * Disaggregators
- */
-
-define &quot;Administrative Gender Stratifier&quot;:
-	HIC.&quot;By Administrative Gender Stratifier&quot;
-
-define &quot;Age Stratifier&quot;:
-	HIC.&quot;By Age Stratifier&quot;
-
-define &quot;Geographic Region Stratifier&quot;:
-	HIC.&quot;By Geographic Region Stratifier&quot;
-
-//define &quot;Stratification&quot;:
- //HIC.&quot;By Administrative Gender Stratifier&quot;.code 
- // + ':' + HIC.&quot;By Age Stratifier&quot;
-//+ ':' + HIC.&quot;By Geographic Region Stratifier&quot;
-
 
 </code></pre><p><code>No Content</code> (<code>application/elm+xml</code>)</p></div>
 
@@ -505,7 +479,7 @@ define &quot;Geographic Region Stratifier&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Aug 14, 2024 10:49+0000">2024-08-14</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.2.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sun, Aug 18, 2024 03:48+0000">2024-08-18</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

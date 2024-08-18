@@ -97,9 +97,6 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
-
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -111,15 +108,22 @@ context Patient
 define "Initial Population":
   true
   
-/* Numerator Calculation: Count of clients with "Date medications prescribed" within reporting period AND "Medications prescribed"='PrEP for HIV prevention'*/
 
 define "numerator":
-    HIE."HIV PREP Active"
+   exists(HIC."HIV PREP Active" H
+   where H.effective starts before end of "Measurement Period"
+    and (H.effective ends after start of "Measurement Period"
+    or end of H.effective  ~  null)
+   )
 
-/*  * Denominator Calculation: Programme/service provider level:  | COUNT of clients with "HIV test date" within reporting period AND "HIV test result"='HIV-negative' AND "At elevated risk for HIV acquisition"=True † |  | Population level: *Estimate of the number of people who would benefit from PrEP */
 define "denominator":
-	exists(HIE."Negative HIV test within measurement period") and 
-    HIE."At elevated risk for HIV acquisition B.DE225"
+	exists(HIC."HIV Negative Observation" O
+	where (O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
+	) and 
+    exists(HIC."Client is at elevated risk for HIV acquisition" O
+	where O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
 
     
 /*
@@ -127,37 +131,37 @@ define "denominator":
  */
 
 define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
+	HIC."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 3"
+	HIC."By Age Stratifier 3"
 
 define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
+	HIC."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIE."patientGroups"
+	HIC."patientGroups"
 
 define "Setting":
-    HIE."setting"
+    HIC."setting"
 
 define "prep product":
-    HIE."prep_product"
+    HIC."prep_product"
 
 define "prep_experience":
-    HIE."prep_experience"
+    HIC."prep_experience"
 
 define "prep_dosing":
-    HIE."prep_dosing"
+    HIC."prep_dosing"
 
 // Provider type concepts are not found in DD
 
 define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 3"
-+ ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
-+ Combine(HIE.prep_product, ':')
-+ Combine(HIE.prep_experience, ':')
-+ Combine(HIE.prep_dosing, ':')
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier 3"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')
++ Combine(HIC.setting, ':')
++ Combine(HIC.prep_product, ':')
++ Combine(HIC.prep_experience, ':')
++ Combine(HIC.prep_dosing, ':')

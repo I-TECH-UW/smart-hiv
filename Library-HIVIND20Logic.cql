@@ -86,9 +86,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
+include FHIRCommon called FC
 include WHOCommon called WCom
-
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -110,39 +109,45 @@ define "Initial Population":
 //Does this also filter out self HIV tests 
 //right now using HIVIND19 definition which does
 define "numerator":
-    exists(HIE."HIV Status Positive Condition")
+    exists(HIC."HIV Positive Condition" C
+	where C.onset during "Measurement Period")
 	or 
-	exists(HIE."HIV Status Positive Observation") 
+	exists(HIC."HIV Positive Observation" O
+	where (O.issued before end of "Measurement Period"
+	and O.issued after start of "Measurement Period")
+	) 
 
 define "denominator":
-    exists(HIE."HIV test results returned in measurement period")
+    exists(HIC."HIV test resulted" T
+	where T.issued before end of "Measurement Period"
+	and T.issued after start of "Measurement Period")
+
 
 /*
  * Disaggregators
  */
  
 define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
+	HIC."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier"
+	HIC."By Age Stratifier"
 
 define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
+	HIC."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIE."patientGroups"
+	HIC."patientGroups"
 
 define "Setting":
-    HIE."setting"
+    HIC."setting"
 
-// define "TB Stratifier":
-//     HIC."tb"
+define "TB Stratifier":
+    HIC."tb"
 
 define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
-+ ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
-//+ Combine(HIC.tb, ':')
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
+//Need to discuss how to add list
+//+ ':' +HIC."patientGroups"

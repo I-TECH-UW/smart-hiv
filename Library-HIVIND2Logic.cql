@@ -90,15 +90,16 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
-include HIVElements called HE
-include HIVIndicatorElements called HIE
-
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
 context Patient
 define "Measure Population":
-   HIE."HIV PREP Active" 
+   exists(HIC."HIV PREP Active" H
+   where H.effective starts before end of "Measurement Period"
+    and (H.effective ends after start of "Measurement Period"
+    or end of H.effective  ~  null)
+   )
 
 /*
  * As defined by Member States
@@ -119,37 +120,37 @@ define function "Measure Observation"(Patient "Patient"):
  */
 
 define "Administrative Gender Stratifier":
-	HIE."By Administrative Gender Stratifier"
+	HIC."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 3"
+	HIC."By Age Stratifier 3"
 
 define "Geographic Region Stratifier":
-	HIE."By Geographic Region Stratifier"
+	HIC."By Geographic Region Stratifier"
 
 define "patientGroups Stratifier":
-	HIE."patientGroups"
+	HIC."patientGroups"
 
 define "Setting":
-  HIE."setting"
+    HIC."setting"
 
 define "prep product":
-  HIE."prep_product"
+    HIC."prep_product"
 
 define "prep_experience":
-  HIE."prep_experience"
+    HIC."prep_experience"
 
 define "prep_dosing":
-  HIE."prep_dosing"
+    HIC."prep_dosing"
 
 // Provider type concepts are not found in DD
 
 define "Stratification":
- HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
-+ ':' + HIE."By Geographic Region Stratifier"
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
-+ Combine(HIE.prep_product, ':')
-+ Combine(HIE.prep_experience, ':')
-+ Combine(HIE.prep_dosing, ':')
+ HIC."By Administrative Gender Stratifier".code 
+  + ':' + HIC."By Age Stratifier"
++ ':' + HIC."By Geographic Region Stratifier"
++ Combine(HIC.patientGroups, ':')
++ Combine(HIC.setting, ':')
++ Combine(HIC.prep_product, ':')
++ Combine(HIC.prep_experience, ':')
++ Combine(HIC.prep_dosing, ':')

@@ -68,10 +68,8 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
-
+include FHIRCommon called FC
 include WHOCommon called WCom
-include HIVElements called HE
-include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -94,9 +92,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."HIV-positive B.DE116"
-  and (start of First(HE."First-time user of ART").effective.toInterval() during "Measurement Period")
-  and HIE."Screen positive for TB"
+  true
 
 
 /**
@@ -107,27 +103,8 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."HIV-positive B.DE116"
-  and (start of First(HE."First-time user of ART").effective.toInterval() during "Measurement Period")
-  and HIE."TB screening date"
+  true
     
 
 /* end Populations */
 
-/*
- * Disaggregators
- */
-
-define "Administrative Gender Stratifier":
-	HIC."By Administrative Gender Stratifier"
-
-define "Age Stratifier":
-	HIC."By Age Stratifier"
-
-define "Geographic Region Stratifier":
-	HIC."By Geographic Region Stratifier"
-
-//define "Stratification":
- //HIC."By Administrative Gender Stratifier".code 
- // + ':' + HIC."By Age Stratifier"
-//+ ':' + HIC."By Geographic Region Stratifier"
