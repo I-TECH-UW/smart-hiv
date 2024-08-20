@@ -68,6 +68,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+include HIVConfig called Config
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -89,8 +92,17 @@ define "Initial Population":
  * Calculation: COUNT of pregnant women with first "ANC contact date" for this pregnancy in the reporting period AND with "Syphilis test date" on first "ANC contact date" AND "Syphilis test result"='Positive'
  */
 
+
+
+
+
 define "Numerator":
-  true
+  First(HIE."ANC within pregnancy").period.toInterval() during "Measurement Period"
+  and exists(HE."Positive B.DE251" S
+  with HE."Syphilis test date B.DE249" P
+  such that S.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
+  and start of P.performed.toInterval() = start of HIE."first anc date"
+  )
 
 
 /**
@@ -101,8 +113,30 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  First(HIE."ANC within pregnancy").period.toInterval() during "Measurement Period"
+  and exists(HE."Syphilis test date B.DE249" P
+  where P.performed.toInterval() during "Measurement Period"
+  and start of P.performed.toInterval() = start of HIE."first anc date"
+  )
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "HIV Status":
+  HIE."HIV Status Stratifier"
+
+define "Stratification":
+HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ ':' + HIE."HIV Status Stratifier".code 
