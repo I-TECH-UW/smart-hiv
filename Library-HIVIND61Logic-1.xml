@@ -5,7 +5,7 @@
    <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
    <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="66">
+      <a:s r="63">
          <a:s>/**
  * Library: HIV.IND.61 Logic
  * Ref No: STI.1C2
@@ -202,9 +202,9 @@ define &quot;Initial Population&quot;:
          </annotation>
          <expression localId="14" locator="73:3-73:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="20" locator="82:1-83:37" name="all anc dates" context="Patient" accessLevel="Public">
+      <def localId="36" locator="83:1-87:3" name="Numerator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="20">
+            <a:s r="36">
                <a:s>/**
  * Numerator
  * 
@@ -212,57 +212,36 @@ define &quot;Initial Population&quot;:
  * Calculation: COUNT of pregnant women with &quot;ANC contact date&quot; in reporting period AND &quot;Syphilis test date&quot; on ANY &quot;ANC contact date&quot; for this pregnancy
  */
 
-define &quot;all anc dates&quot;:
-</a:s>
-               <a:s r="19">
-                  <a:s>flatten</a:s>
-                  <a:s r="18">
-                     <a:s>{</a:s>
-                     <a:s r="17">
-                        <a:s r="16">
-                           <a:s>HE</a:s>
-                        </a:s>
-                        <a:s>.</a:s>
-                        <a:s r="17">
-                           <a:s>&quot;ANC contact date E.DE85&quot;</a:s>
-                        </a:s>
-                     </a:s>
-                     <a:s>}</a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="19" locator="83:1-83:37" xsi:type="Flatten">
-            <operand localId="18" locator="83:8-83:37" xsi:type="List">
-               <element localId="17" locator="83:9-83:36" name="ANC contact date E.DE85" libraryName="HE" xsi:type="ExpressionRef"/>
-            </operand>
-         </expression>
-      </def>
-      <def localId="40" locator="85:1-89:3" name="Numerator" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="40">
-               <a:s>define &quot;Numerator&quot;:
+
+define &quot;Numerator&quot;:
   </a:s>
-               <a:s r="39">
-                  <a:s r="22">
-                     <a:s r="21">
-                        <a:s>HIE</a:s>
-                     </a:s>
-                     <a:s>.</a:s>
-                     <a:s r="22">
-                        <a:s>&quot;ANC contact date E.DE85&quot;</a:s>
+               <a:s r="35">
+                  <a:s r="18">
+                     <a:s>exists</a:s>
+                     <a:s r="17">
+                        <a:s>(</a:s>
+                        <a:s r="17">
+                           <a:s r="16">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="17">
+                              <a:s>&quot;ANC within pregnancy within measurement period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
                      </a:s>
                   </a:s>
                   <a:s>
   and </a:s>
-                  <a:s r="38">
+                  <a:s r="34">
                      <a:s>exists</a:s>
-                     <a:s r="37">
+                     <a:s r="33">
                         <a:s>(</a:s>
-                        <a:s r="37">
+                        <a:s r="33">
                            <a:s>
-                              <a:s r="24">
-                                 <a:s r="23">
+                              <a:s r="20">
+                                 <a:s r="19">
                                     <a:s>
                                        <a:s>HE.&quot;Syphilis test date B.DE249&quot;</a:s>
                                     </a:s>
@@ -272,48 +251,48 @@ define &quot;all anc dates&quot;:
                            </a:s>
                            <a:s>
     </a:s>
-                           <a:s r="36">
+                           <a:s r="32">
                               <a:s>where </a:s>
-                              <a:s r="36">
+                              <a:s r="32">
                                  <a:s>exists</a:s>
-                                 <a:s r="35">
+                                 <a:s r="31">
                                     <a:s>(</a:s>
-                                    <a:s r="35">
+                                    <a:s r="31">
                                        <a:s>
-                                          <a:s r="26">
-                                             <a:s r="25">
+                                          <a:s r="22">
+                                             <a:s r="21">
                                                 <a:s>
-                                                   <a:s>&quot;all anc dates&quot;</a:s>
+                                                   <a:s>HIE.&quot;all anc dates&quot;</a:s>
                                                 </a:s>
                                              </a:s>
                                              <a:s> t</a:s>
                                           </a:s>
                                        </a:s>
                                        <a:s> </a:s>
-                                       <a:s r="34">
+                                       <a:s r="30">
                                           <a:s>where </a:s>
-                                          <a:s r="34">
-                                             <a:s r="32">
+                                          <a:s r="30">
+                                             <a:s r="28">
                                                 <a:s>duration in days of </a:s>
-                                                <a:s r="31">
+                                                <a:s r="27">
                                                    <a:s>(</a:s>
-                                                   <a:s r="31">
-                                                      <a:s r="27">
+                                                   <a:s r="27">
+                                                      <a:s r="23">
                                                          <a:s>t</a:s>
                                                       </a:s>
                                                       <a:s> intersect </a:s>
-                                                      <a:s r="30">
-                                                         <a:s r="29">
-                                                            <a:s r="28">
+                                                      <a:s r="26">
+                                                         <a:s r="25">
+                                                            <a:s r="24">
                                                                <a:s>P</a:s>
                                                             </a:s>
                                                             <a:s>.</a:s>
-                                                            <a:s r="29">
+                                                            <a:s r="25">
                                                                <a:s>performed</a:s>
                                                             </a:s>
                                                          </a:s>
                                                          <a:s>.</a:s>
-                                                         <a:s r="30">
+                                                         <a:s r="26">
                                                             <a:s>toInterval()</a:s>
                                                          </a:s>
                                                       </a:s>
@@ -321,7 +300,7 @@ define &quot;all anc dates&quot;:
                                                    <a:s>)</a:s>
                                                 </a:s>
                                              </a:s>
-                                             <a:s r="33"> > 0</a:s>
+                                             <a:s r="29"> > 0</a:s>
                                           </a:s>
                                        </a:s>
                                     </a:s>
@@ -337,38 +316,40 @@ define &quot;all anc dates&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="39" locator="86:3-89:3" xsi:type="And">
-            <operand localId="22" locator="86:3-86:31" name="ANC contact date E.DE85" libraryName="HIE" xsi:type="ExpressionRef"/>
-            <operand localId="38" locator="87:7-89:3" xsi:type="Exists">
-               <operand localId="37" locator="87:13-89:3" xsi:type="Query">
-                  <source localId="24" locator="87:14-87:46" alias="P">
-                     <expression localId="23" locator="87:14-87:44" name="Syphilis test date B.DE249" libraryName="HE" xsi:type="ExpressionRef"/>
+         <expression localId="35" locator="84:3-87:3" xsi:type="And">
+            <operand localId="18" locator="84:3-84:62" xsi:type="Exists">
+               <operand localId="17" locator="84:9-84:62" name="ANC within pregnancy within measurement period" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="34" locator="85:7-87:3" xsi:type="Exists">
+               <operand localId="33" locator="85:13-87:3" xsi:type="Query">
+                  <source localId="20" locator="85:14-85:46" alias="P">
+                     <expression localId="19" locator="85:14-85:44" name="Syphilis test date B.DE249" libraryName="HE" xsi:type="ExpressionRef"/>
                   </source>
-                  <where localId="36" locator="88:5-88:104" xsi:type="Exists">
-                     <operand localId="35" locator="88:17-88:104" xsi:type="Query">
-                        <source localId="26" locator="88:18-88:34" alias="t">
-                           <expression localId="25" locator="88:18-88:32" name="all anc dates" xsi:type="ExpressionRef"/>
+                  <where localId="32" locator="86:5-86:108" xsi:type="Exists">
+                     <operand localId="31" locator="86:17-86:108" xsi:type="Query">
+                        <source localId="22" locator="86:18-86:38" alias="t">
+                           <expression localId="21" locator="86:18-86:36" name="all anc dates" libraryName="HIE" xsi:type="ExpressionRef"/>
                         </source>
-                        <where localId="34" locator="88:36-88:103" xsi:type="Greater">
-                           <operand localId="32" locator="88:42-88:99" precision="Day" xsi:type="DurationBetween">
+                        <where localId="30" locator="86:40-86:107" xsi:type="Greater">
+                           <operand localId="28" locator="86:46-86:103" precision="Day" xsi:type="DurationBetween">
                               <operand xsi:type="Start">
-                                 <operand localId="31" locator="88:62-88:99" xsi:type="Intersect">
-                                    <operand localId="27" locator="88:63" name="t" xsi:type="AliasRef"/>
-                                    <operand localId="30" locator="88:75-88:98" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
-                                       <operand localId="29" locator="88:75-88:85" path="performed" scope="P" xsi:type="Property"/>
+                                 <operand localId="27" locator="86:66-86:103" xsi:type="Intersect">
+                                    <operand localId="23" locator="86:67" name="t" xsi:type="AliasRef"/>
+                                    <operand localId="26" locator="86:79-86:102" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                       <operand localId="25" locator="86:79-86:89" path="performed" scope="P" xsi:type="Property"/>
                                     </operand>
                                  </operand>
                               </operand>
                               <operand xsi:type="End">
-                                 <operand localId="31" locator="88:62-88:99" xsi:type="Intersect">
-                                    <operand localId="27" locator="88:63" name="t" xsi:type="AliasRef"/>
-                                    <operand localId="30" locator="88:75-88:98" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
-                                       <operand localId="29" locator="88:75-88:85" path="performed" scope="P" xsi:type="Property"/>
+                                 <operand localId="27" locator="86:66-86:103" xsi:type="Intersect">
+                                    <operand localId="23" locator="86:67" name="t" xsi:type="AliasRef"/>
+                                    <operand localId="26" locator="86:79-86:102" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                       <operand localId="25" locator="86:79-86:89" path="performed" scope="P" xsi:type="Property"/>
                                     </operand>
                                  </operand>
                               </operand>
                            </operand>
-                           <operand localId="33" locator="88:103" valueType="t:Integer" value="0" xsi:type="Literal"/>
+                           <operand localId="29" locator="86:107" valueType="t:Integer" value="0" xsi:type="Literal"/>
                         </where>
                      </operand>
                   </where>
@@ -376,9 +357,9 @@ define &quot;all anc dates&quot;:
             </operand>
          </expression>
       </def>
-      <def localId="43" locator="102:1-103:31" name="Denominator" context="Patient" accessLevel="Public">
+      <def localId="40" locator="100:1-101:62" name="Denominator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="43">
+            <a:s r="40">
                <a:s>/**
  * Denominator
  *
@@ -388,22 +369,31 @@ define &quot;all anc dates&quot;:
 
 define &quot;Denominator&quot;:
   </a:s>
-               <a:s r="42">
-                  <a:s r="41">
-                     <a:s>HIE</a:s>
-                  </a:s>
-                  <a:s>.</a:s>
-                  <a:s r="42">
-                     <a:s>&quot;ANC contact date E.DE85&quot;</a:s>
+               <a:s r="39">
+                  <a:s>exists</a:s>
+                  <a:s r="38">
+                     <a:s>(</a:s>
+                     <a:s r="38">
+                        <a:s r="37">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="38">
+                           <a:s>&quot;ANC within pregnancy within measurement period&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>)</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="42" locator="103:3-103:31" name="ANC contact date E.DE85" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="39" locator="101:3-101:62" xsi:type="Exists">
+            <operand localId="38" locator="101:9-101:62" name="ANC within pregnancy within measurement period" libraryName="HIE" xsi:type="ExpressionRef"/>
+         </expression>
       </def>
-      <def localId="46" locator="113:1-114:26" name="Age Stratifier" context="Patient" accessLevel="Public">
+      <def localId="43" locator="111:1-112:26" name="Age Stratifier" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="46">
+            <a:s r="43">
                <a:s>/* end Populations */
 
 /*
@@ -413,130 +403,130 @@ define &quot;Denominator&quot;:
 
 define &quot;Age Stratifier&quot;:
 	</a:s>
+               <a:s r="42">
+                  <a:s r="41">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="42">
+                     <a:s>&quot;By Age Stratifier 2&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="42" locator="112:2-112:26" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="46" locator="114:1-115:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="46">
+               <a:s>define &quot;Geographic Region Stratifier&quot;:
+	</a:s>
                <a:s r="45">
                   <a:s r="44">
                      <a:s>HIE</a:s>
                   </a:s>
                   <a:s>.</a:s>
                   <a:s r="45">
-                     <a:s>&quot;By Age Stratifier 2&quot;</a:s>
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="45" locator="114:2-114:26" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="45" locator="115:2-115:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="49" locator="116:1-117:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+      <def localId="49" locator="117:1-118:29" name="HIV Status" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="49">
-               <a:s>define &quot;Geographic Region Stratifier&quot;:
-	</a:s>
+               <a:s>define &quot;HIV Status&quot;:
+  </a:s>
                <a:s r="48">
                   <a:s r="47">
                      <a:s>HIE</a:s>
                   </a:s>
                   <a:s>.</a:s>
                   <a:s r="48">
-                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="48" locator="117:2-117:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
-      </def>
-      <def localId="52" locator="119:1-120:29" name="HIV Status" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="52">
-               <a:s>define &quot;HIV Status&quot;:
-  </a:s>
-               <a:s r="51">
-                  <a:s r="50">
-                     <a:s>HIE</a:s>
-                  </a:s>
-                  <a:s>.</a:s>
-                  <a:s r="51">
                      <a:s>&quot;HIV Status Stratifier&quot;</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="51" locator="120:3-120:29" name="HIV Status Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="48" locator="118:3-118:29" name="HIV Status Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="66" locator="122:1-125:40" name="Stratification" context="Patient" accessLevel="Public">
+      <def localId="63" locator="120:1-123:40" name="Stratification" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="66">
+            <a:s r="63">
                <a:s>define &quot;Stratification&quot;:
 </a:s>
-               <a:s r="65">
-                  <a:s r="61">
-                     <a:s r="59">
-                        <a:s r="56">
-                           <a:s r="54">
-                              <a:s r="53">
+               <a:s r="62">
+                  <a:s r="58">
+                     <a:s r="56">
+                        <a:s r="53">
+                           <a:s r="51">
+                              <a:s r="50">
                                  <a:s>HIE</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="54">
+                              <a:s r="51">
                                  <a:s>&quot;By Age Stratifier 2&quot;</a:s>
                               </a:s>
                            </a:s>
                            <a:s>
 + </a:s>
-                           <a:s r="55">
+                           <a:s r="52">
                               <a:s>':'</a:s>
                            </a:s>
                         </a:s>
                         <a:s> + </a:s>
-                        <a:s r="58">
-                           <a:s r="57">
+                        <a:s r="55">
+                           <a:s r="54">
                               <a:s>HIE</a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="58">
+                           <a:s r="55">
                               <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
                            </a:s>
                         </a:s>
                      </a:s>
                      <a:s>
 + </a:s>
-                     <a:s r="60">
+                     <a:s r="57">
                         <a:s>':'</a:s>
                      </a:s>
                   </a:s>
                   <a:s> + </a:s>
-                  <a:s r="64">
-                     <a:s r="63">
-                        <a:s r="62">
+                  <a:s r="61">
+                     <a:s r="60">
+                        <a:s r="59">
                            <a:s>HIE</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="63">
+                        <a:s r="60">
                            <a:s>&quot;HIV Status Stratifier&quot;</a:s>
                         </a:s>
                      </a:s>
                      <a:s>.</a:s>
-                     <a:s r="64">
+                     <a:s r="61">
                         <a:s>code</a:s>
                      </a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="65" locator="123:1-125:40" xsi:type="Concatenate">
-            <operand localId="61" locator="123:1-125:5" xsi:type="Concatenate">
-               <operand localId="59" locator="123:1-124:45" xsi:type="Concatenate">
-                  <operand localId="56" locator="123:1-124:5" xsi:type="Concatenate">
-                     <operand localId="54" locator="123:1-123:25" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
-                     <operand localId="55" locator="124:3-124:5" valueType="t:String" value=":" xsi:type="Literal"/>
+         <expression localId="62" locator="121:1-123:40" xsi:type="Concatenate">
+            <operand localId="58" locator="121:1-123:5" xsi:type="Concatenate">
+               <operand localId="56" locator="121:1-122:45" xsi:type="Concatenate">
+                  <operand localId="53" locator="121:1-122:5" xsi:type="Concatenate">
+                     <operand localId="51" locator="121:1-121:25" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
+                     <operand localId="52" locator="122:3-122:5" valueType="t:String" value=":" xsi:type="Literal"/>
                   </operand>
                   <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                     <operand localId="58" locator="124:9-124:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+                     <operand localId="55" locator="122:9-122:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                   </operand>
                </operand>
-               <operand localId="60" locator="125:3-125:5" valueType="t:String" value=":" xsi:type="Literal"/>
+               <operand localId="57" locator="123:3-123:5" valueType="t:String" value=":" xsi:type="Literal"/>
             </operand>
-            <operand localId="64" locator="125:9-125:40" path="code" xsi:type="Property">
-               <source localId="63" locator="125:9-125:35" name="HIV Status Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="61" locator="123:9-123:40" path="code" xsi:type="Property">
+               <source localId="60" locator="123:9-123:35" name="HIV Status Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
             </operand>
          </expression>
       </def>

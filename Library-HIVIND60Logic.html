@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-08-18
+            as of 2024-08-21
           
         
       </td>
@@ -436,9 +436,9 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  First(HE.&quot;ANC contact date E.DE85&quot;) during &quot;Measurement Period&quot;
+  First(HIE.&quot;ANC within pregnancy&quot;).period.toInterval() during &quot;Measurement Period&quot;
   and exists(HE.&quot;Syphilis test date B.DE249&quot; P
-    where start of P.performed.toInterval() = start of First(HE.&quot;ANC contact date E.DE85&quot;))
+    where start of P.performed.toInterval() = start of First(HIE.&quot;ANC within pregnancy&quot;).period.toInterval())
 
 
 /**
@@ -449,7 +449,7 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  First(HE.&quot;ANC contact date E.DE85&quot;) during &quot;Measurement Period&quot;
+  First(HIE.&quot;ANC within pregnancy&quot;).period.toInterval() during &quot;Measurement Period&quot;
     
 
 /* end Populations */
@@ -471,7 +471,7 @@ define &quot;HIV Status&quot;:
 define &quot;Stratification&quot;:
 HIE.&quot;By Age Stratifier 2&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
-+ ':' + HIE.&quot;HIV Status Stratifier&quot;.code </code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 26Kb )</p></div>
++ ':' + HIE.&quot;HIV Status Stratifier&quot;.code </code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 31Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -496,7 +496,7 @@ HIE.&quot;By Age Stratifier 2&quot;
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sun, Aug 18, 2024 19:09+0000">2024-08-18</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Aug 21, 2024 16:05+0000">2024-08-21</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

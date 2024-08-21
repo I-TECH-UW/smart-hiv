@@ -73,6 +73,9 @@ code "tb treatment": 'tb treatment' from "missing concepts"
 code "ART medication": 'ART medication' from "missing concepts"
 code "DSD ART eligibility assessed" : 'DSD ART eligibility assessed' from "missing concepts"
 code "syphilis test" : 'syphilis test' from "missing concepts"
+code "Gonorrhoea test" : 'Gonorrhoea test' from "missing concepts"
+code "syphilis treatment" : 'syphilis treatment' from "missing concepts"
+code "Gonorrhoea treatment" : 'Gonorrhoea treatment' from "missing concepts"
 
 
 valueset "Antenatal care contact": 'http://fhir.org/guides/who/anc-cds/ValueSet/antenatal-care-contact'
