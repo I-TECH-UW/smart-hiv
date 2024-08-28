@@ -12465,7 +12465,6 @@ define "Other E.DE70":
 @activity: HIV.E1 Capture or update mother's history
 @description: The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')
 */
-
 define "Antenatal care contact":
   ["Encounter": type in ConceptsCustom."Antenatal care contact"]
 
