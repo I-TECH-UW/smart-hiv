@@ -1,0 +1,211 @@
+{
+  "resourceType" : "PlanDefinition",
+  "id" : "HIV-A-Registration-PlanDefinition",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: PlanDefinition HIV-A-Registration-PlanDefinition</b></p><a name=\"HIV-A-Registration-PlanDefinition\"> </a><a name=\"hcHIV-A-Registration-PlanDefinition\"> </a><a name=\"HIV-A-Registration-PlanDefinition-en-US\"> </a><p><b>url</b>: <a href=\"PlanDefinition-HIV-A-Registration-PlanDefinition.html\">PlanDefinition PlanDefinition - HIV.A. Registration</a></p><p><b>version</b>: 0.3.0</p><p><b>name</b>: PlanDefinition_HIV.A. Registration</p><p><b>title</b>: PlanDefinition - HIV.A. Registration</p><p><b>type</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/plan-definition-type workflow-definition}\">Workflow Definition</span></p><p><b>status</b>: Active</p><p><b>experimental</b>: true</p><p><b>date</b>: 2024-09-25 13:28:49+0000</p><p><b>publisher</b>: WHO</p><p><b>contact</b>: WHO: <a href=\"http://who.int\">http://who.int</a></p><p><b>description</b>: </p><div><p>To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling.</p>\n</div><blockquote><p><b>action</b></p><p><b>title</b>: Registration business process</p><p><b>description</b>: To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling</p><blockquote><p><b>participant</b></p><p><b>type</b>: Patient</p><p><b>role</b>: <span title=\"Codes:\">client</span></p></blockquote><blockquote><p><b>participant</b></p><p><b>type</b>: Practitioner</p><p><b>role</b>: <span title=\"Codes:\">TrainedLayProvider</span></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote></blockquote></div>"
+  },
+  "url" : "http://smart.who.int/hiv/PlanDefinition/HIV-A-Registration-PlanDefinition",
+  "version" : "0.3.0",
+  "name" : "PlanDefinition_HIV.A. Registration",
+  "title" : "PlanDefinition - HIV.A. Registration",
+  "type" : {
+    "coding" : [{
+      "system" : "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+      "code" : "workflow-definition",
+      "display" : "Workflow Definition"
+    }]
+  },
+  "status" : "active",
+  "experimental" : true,
+  "date" : "2024-09-25T13:28:49+00:00",
+  "publisher" : "WHO",
+  "contact" : [{
+    "name" : "WHO",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "http://who.int"
+    }]
+  }],
+  "description" : "To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling.",
+  "action" : [{
+    "title" : "Registration business process",
+    "description" : "To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling",
+    "participant" : [{
+      "type" : "patient",
+      "role" : {
+        "coding" : [{
+          "code" : "client"
+        }]
+      }
+    },
+    {
+      "type" : "practitioner",
+      "role" : {
+        "coding" : [{
+          "code" : "TrainedLayProvider"
+        }]
+      }
+    }],
+    "action" : [{
+      "id" : "HIV.A.1",
+      "title" : "Arrive at facility",
+      "description" : "Client arrives at the health facility.",
+      "relatedAction" : [{
+        "actionId" : "HIV.A.2",
+        "relationship" : "before-start"
+      }],
+      "participant" : [{
+        "type" : "patient",
+        "role" : {
+          "coding" : [{
+            "code" : "client"
+          }]
+        }
+      }]
+    },
+    {
+      "id" : "HIV.A.2",
+      "title" : "Gather client’s details",
+      "description" : "Ask the client whether he or she has previously been issued a unique identifier",
+      "relatedAction" : [{
+        "actionId" : "HIV.A.3",
+        "relationship" : "before-start"
+      }],
+      "participant" : [{
+        "type" : "patient",
+        "role" : {
+          "coding" : [{
+            "code" : "client"
+          }]
+        }
+      }]
+    },
+    {
+      "id" : "HIV.A.3",
+      "title" : "Search for client record",
+      "description" : "This search process can be done through a variety of means depending on what mechanisms are available in the record system. For example, clients can be searched for by name, unique identifier, or QR code. ",
+      "relatedAction" : [{
+        "actionId" : "HIV.A.4",
+        "relationship" : "before-start"
+      }],
+      "participant" : [{
+        "type" : "practitioner",
+        "role" : {
+          "coding" : [{
+            "code" : "TrainedLayProvider"
+          }]
+        }
+      }]
+    },
+    {
+      "id" : "HIV.A.4",
+      "title" : "Match found?",
+      "description" : "If multiple records are found and no unique ID, use option to merge records",
+      "relatedAction" : [{
+        "actionId" : "HIV.A.7",
+        "relationship" : "before-start"
+      }],
+      "participant" : [{
+        "type" : "practitioner",
+        "role" : {
+          "coding" : [{
+            "code" : "TrainedLayProvider"
+          }]
+        }
+      }],
+      "groupingBehavior" : "logical-group",
+      "selectionBehavior" : "exactly-one",
+      "action" : [{
+        "id" : "HIV.A.5",
+        "title" : "Create new client record",
+        "description" : "If a previous unique identifier has been issued, use the same number to create the client record.",
+        "relatedAction" : [{
+          "actionId" : "HIV.A.4",
+          "relationship" : "before-end"
+        }],
+        "participant" : [{
+          "type" : "practitioner",
+          "role" : {
+            "coding" : [{
+              "code" : "TrainedLayProvider"
+            }]
+          }
+        }]
+      },
+      {
+        "id" : "HIV.A.6",
+        "title" : "Validate client details",
+        "description" : "Review and update client record or ask for information and complete new client record:",
+        "relatedAction" : [{
+          "actionId" : "HIV.A.4",
+          "relationship" : "before-end"
+        }],
+        "action" : [{
+          "id" : "HIV.A.6.1",
+          "title" : "Review sociodemographic data with client",
+          "description" : "Review client’s non-clinical information, such as name, address, contact information, etc.",
+          "relatedAction" : [{
+            "actionId" : "HIV.A.6.2",
+            "relationship" : "before-start"
+          }],
+          "participant" : [{
+            "type" : "practitioner",
+            "role" : {
+              "coding" : [{
+                "code" : "TrainedLayProvider"
+              }]
+            }
+          }]
+        },
+        {
+          "id" : "HIV.A.6.2",
+          "title" : "Update needed?",
+          "description" : "Has the client moved? Has the client changed contact information? Has any other sociodemographic information changed?",
+          "relatedAction" : [{
+            "actionId" : "HIV.A.6.3",
+            "relationship" : "before-start"
+          }],
+          "participant" : [{
+            "type" : "practitioner",
+            "role" : {
+              "coding" : [{
+                "code" : "TrainedLayProvider"
+              }]
+            }
+          }]
+        },
+        {
+          "id" : "HIV.A.6.3",
+          "title" : "Update client details",
+          "description" : "Ask client to provide updated information if address or other details have changed since last contact",
+          "relatedAction" : [{
+            "actionId" : "HIV.A.7",
+            "relationship" : "before-start"
+          }],
+          "participant" : [{
+            "type" : "practitioner",
+            "role" : {
+              "coding" : [{
+                "code" : "TrainedLayProvider"
+              }]
+            }
+          }]
+        }]
+      }]
+    },
+    {
+      "id" : "HIV.A.7",
+      "title" : "Check in client",
+      "description" : "Add client to the relevant queue for services",
+      "participant" : [{
+        "type" : "practitioner",
+        "role" : {
+          "coding" : [{
+            "code" : "TrainedLayProvider"
+          }]
+        }
+      }]
+    }]
+  }]
+}

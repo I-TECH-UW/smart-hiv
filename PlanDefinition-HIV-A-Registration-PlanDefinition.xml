@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PlanDefinition xmlns="http://hl7.org/fhir">
+  <id value="HIV-A-Registration-PlanDefinition"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: PlanDefinition HIV-A-Registration-PlanDefinition</b></p><a name="HIV-A-Registration-PlanDefinition"> </a><a name="hcHIV-A-Registration-PlanDefinition"> </a><a name="HIV-A-Registration-PlanDefinition-en-US"> </a><p><b>url</b>: <a href="PlanDefinition-HIV-A-Registration-PlanDefinition.html">PlanDefinition PlanDefinition - HIV.A. Registration</a></p><p><b>version</b>: 0.3.0</p><p><b>name</b>: PlanDefinition_HIV.A. Registration</p><p><b>title</b>: PlanDefinition - HIV.A. Registration</p><p><b>type</b>: <span title="Codes:{http://terminology.hl7.org/CodeSystem/plan-definition-type workflow-definition}">Workflow Definition</span></p><p><b>status</b>: Active</p><p><b>experimental</b>: true</p><p><b>date</b>: 2024-09-25 13:28:49+0000</p><p><b>publisher</b>: WHO</p><p><b>contact</b>: WHO: <a href="http://who.int">http://who.int</a></p><p><b>description</b>: </p><div><p>To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling.</p>
+</div><blockquote><p><b>action</b></p><p><b>title</b>: Registration business process</p><p><b>description</b>: To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling</p><blockquote><p><b>participant</b></p><p><b>type</b>: Patient</p><p><b>role</b>: <span title="Codes:">client</span></p></blockquote><blockquote><p><b>participant</b></p><p><b>type</b>: Practitioner</p><p><b>role</b>: <span title="Codes:">TrainedLayProvider</span></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote></blockquote></div>
+  </text>
+  <url value="http://smart.who.int/hiv/PlanDefinition/HIV-A-Registration-PlanDefinition"/>
+  <version value="0.3.0"/>
+  <name value="PlanDefinition_HIV.A. Registration"/>
+  <title value="PlanDefinition - HIV.A. Registration"/>
+  <type>
+    <coding>
+      <system value="http://terminology.hl7.org/CodeSystem/plan-definition-type"/>
+      <code value="workflow-definition"/>
+      <display value="Workflow Definition"/>
+    </coding>
+  </type>
+  <status value="active"/>
+  <experimental value="true"/>
+  <date value="2024-09-25T13:28:49+00:00"/>
+  <publisher value="WHO"/>
+  <contact>
+    <name value="WHO"/>
+    <telecom>
+      <system value="url"/>
+      <value value="http://who.int"/>
+    </telecom>
+  </contact>
+  <description value="To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling."/>
+  <action>
+    <title value="Registration business process"/>
+    <description value="To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling"/>
+    <participant>
+      <type value="patient"/>
+      <role>
+        <coding>
+          <code value="client"/>
+        </coding>
+      </role>
+    </participant>
+    <participant>
+      <type value="practitioner"/>
+      <role>
+        <coding>
+          <code value="TrainedLayProvider"/>
+        </coding>
+      </role>
+    </participant>
+    <action id="HIV.A.1">
+      <title value="Arrive at facility"/>
+      <description value="Client arrives at the health facility."/>
+      <relatedAction>
+        <actionId value="HIV.A.2"/>
+        <relationship value="before-start"/>
+      </relatedAction>
+      <participant>
+        <type value="patient"/>
+        <role>
+          <coding>
+            <code value="client"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.A.2">
+      <title value="Gather client’s details"/>
+      <description value="Ask the client whether he or she has previously been issued a unique identifier"/>
+      <relatedAction>
+        <actionId value="HIV.A.3"/>
+        <relationship value="before-start"/>
+      </relatedAction>
+      <participant>
+        <type value="patient"/>
+        <role>
+          <coding>
+            <code value="client"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.A.3">
+      <title value="Search for client record"/>
+      <description value="This search process can be done through a variety of means depending on what mechanisms are available in the record system. For example, clients can be searched for by name, unique identifier, or QR code. "/>
+      <relatedAction>
+        <actionId value="HIV.A.4"/>
+        <relationship value="before-start"/>
+      </relatedAction>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.A.4">
+      <title value="Match found?"/>
+      <description value="If multiple records are found and no unique ID, use option to merge records"/>
+      <relatedAction>
+        <actionId value="HIV.A.7"/>
+        <relationship value="before-start"/>
+      </relatedAction>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+      <groupingBehavior value="logical-group"/>
+      <selectionBehavior value="exactly-one"/>
+      <action id="HIV.A.5">
+        <title value="Create new client record"/>
+        <description value="If a previous unique identifier has been issued, use the same number to create the client record."/>
+        <relatedAction>
+          <actionId value="HIV.A.4"/>
+          <relationship value="before-end"/>
+        </relatedAction>
+        <participant>
+          <type value="practitioner"/>
+          <role>
+            <coding>
+              <code value="TrainedLayProvider"/>
+            </coding>
+          </role>
+        </participant>
+      </action>
+      <action id="HIV.A.6">
+        <title value="Validate client details"/>
+        <description value="Review and update client record or ask for information and complete new client record:"/>
+        <relatedAction>
+          <actionId value="HIV.A.4"/>
+          <relationship value="before-end"/>
+        </relatedAction>
+        <action id="HIV.A.6.1">
+          <title value="Review sociodemographic data with client"/>
+          <description value="Review client’s non-clinical information, such as name, address, contact information, etc."/>
+          <relatedAction>
+            <actionId value="HIV.A.6.2"/>
+            <relationship value="before-start"/>
+          </relatedAction>
+          <participant>
+            <type value="practitioner"/>
+            <role>
+              <coding>
+                <code value="TrainedLayProvider"/>
+              </coding>
+            </role>
+          </participant>
+        </action>
+        <action id="HIV.A.6.2">
+          <title value="Update needed?"/>
+          <description value="Has the client moved? Has the client changed contact information? Has any other sociodemographic information changed?"/>
+          <relatedAction>
+            <actionId value="HIV.A.6.3"/>
+            <relationship value="before-start"/>
+          </relatedAction>
+          <participant>
+            <type value="practitioner"/>
+            <role>
+              <coding>
+                <code value="TrainedLayProvider"/>
+              </coding>
+            </role>
+          </participant>
+        </action>
+        <action id="HIV.A.6.3">
+          <title value="Update client details"/>
+          <description value="Ask client to provide updated information if address or other details have changed since last contact"/>
+          <relatedAction>
+            <actionId value="HIV.A.7"/>
+            <relationship value="before-start"/>
+          </relatedAction>
+          <participant>
+            <type value="practitioner"/>
+            <role>
+              <coding>
+                <code value="TrainedLayProvider"/>
+              </coding>
+            </role>
+          </participant>
+        </action>
+      </action>
+    </action>
+    <action id="HIV.A.7">
+      <title value="Check in client"/>
+      <description value="Add client to the relevant queue for services"/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+  </action>
+</PlanDefinition>

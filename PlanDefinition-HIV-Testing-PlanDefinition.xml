@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PlanDefinition xmlns="http://hl7.org/fhir">
+  <id value="HIV-Testing-PlanDefinition"/>
+  <text>
+    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: PlanDefinition HIV-Testing-PlanDefinition</b></p><a name="HIV-Testing-PlanDefinition"> </a><a name="hcHIV-Testing-PlanDefinition"> </a><a name="HIV-Testing-PlanDefinition-en-US"> </a><p><b>url</b>: <a href="PlanDefinition-HIV-Testing-PlanDefinition.html">PlanDefinition PlanDefinition - HiV Testing</a></p><p><b>version</b>: 0.3.0</p><p><b>name</b>: PlanDefinition_HIV_Testing</p><p><b>title</b>: PlanDefinition - HiV Testing</p><p><b>type</b>: <span title="Codes:{http://terminology.hl7.org/CodeSystem/plan-definition-type workflow-definition}">Workflow Definition</span></p><p><b>status</b>: Active</p><p><b>experimental</b>: true</p><p><b>date</b>: 2024-09-25 13:28:49+0000</p><p><b>publisher</b>: WHO</p><p><b>contact</b>: WHO: <a href="http://who.int">http://who.int</a></p><p><b>description</b>: </p><div><p>To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services</p>
+</div><blockquote><p><b>action</b></p><p><b>title</b>: HIV testing services</p><p><b>description</b>: To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services</p><blockquote><p><b>participant</b></p><p><b>type</b>: Patient</p><p><b>role</b>: <span title="Codes:">client</span></p></blockquote><blockquote><p><b>participant</b></p><p><b>type</b>: Practitioner</p><p><b>role</b>: <span title="Codes:">TrainedLayProvider</span></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote><blockquote><p><b>action</b></p></blockquote></blockquote></div>
+  </text>
+  <url value="http://smart.who.int/hiv/PlanDefinition/HIV-Testing-PlanDefinition"/>
+  <version value="0.3.0"/>
+  <name value="PlanDefinition_HIV_Testing"/>
+  <title value="PlanDefinition - HiV Testing"/>
+  <type>
+    <coding>
+      <system value="http://terminology.hl7.org/CodeSystem/plan-definition-type"/>
+      <code value="workflow-definition"/>
+      <display value="Workflow Definition"/>
+    </coding>
+  </type>
+  <status value="active"/>
+  <experimental value="true"/>
+  <date value="2024-09-25T13:28:49+00:00"/>
+  <publisher value="WHO"/>
+  <contact>
+    <name value="WHO"/>
+    <telecom>
+      <system value="url"/>
+      <value value="http://who.int"/>
+    </telecom>
+  </contact>
+  <description value="To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services"/>
+  <action>
+    <title value="HIV testing services"/>
+    <description value="To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services"/>
+    <participant>
+      <type value="patient"/>
+      <role>
+        <coding>
+          <code value="client"/>
+        </coding>
+      </role>
+    </participant>
+    <participant>
+      <type value="practitioner"/>
+      <role>
+        <coding>
+          <code value="TrainedLayProvider"/>
+        </coding>
+      </role>
+    </participant>
+    <action id="HIV.B.1">
+      <title value="Determine reason for visit"/>
+      <description value="Ask client if they have visited previously, search for client details in the system and determine reason for visit"/>
+      <relatedAction>
+        <actionId value="HIV.B.2"/>
+        <relationship value="before-start"/>
+      </relatedAction>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.2">
+      <title value="Check for signs of serious illness"/>
+      <description value="Any person who has signs of serious illness should be referred to the appropriate higher-level facility for management. Danger signs differ by age group."/>
+      <relatedAction>
+        <actionId value="HIV.B.3"/>
+        <relationship value="before-start"/>
+      </relatedAction>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.3">
+      <title value="Signs of serious illness?"/>
+      <description value="If the client has danger signs of being seriously ill, this warrants a referral to a higher-level facility. Clear criteria for referral should be available. "/>
+      <relatedAction>
+        <actionId value="HIV.B.7"/>
+        <relationship value="before-start"/>
+      </relatedAction>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+      <groupingBehavior value="logical-group"/>
+      <selectionBehavior value="exactly-one"/>
+      <action id="HIV.B.3.1">
+        <title value="Collect client Details"/>
+        <description value="Collect client details"/>
+        <relatedAction>
+          <actionId value="HIV.B.3"/>
+          <relationship value="before-end"/>
+        </relatedAction>
+        <action id="HIV.B.4">
+          <title value="Take vital signs "/>
+          <description value="Vital signs, such as blood pressure and weight, may be taken and recorded."/>
+          <relatedAction>
+            <actionId value="HIV.B.5"/>
+            <relationship value="before-start"/>
+          </relatedAction>
+          <participant>
+            <type value="practitioner"/>
+            <role>
+              <coding>
+                <code value="TrainedLayProvider"/>
+              </coding>
+            </role>
+          </participant>
+        </action>
+        <action id="HIV.B.5">
+          <title value="Provide pre-test information"/>
+          <description value="Pre-test information messages"/>
+          <relatedAction>
+            <actionId value="HIV.B.6"/>
+            <relationship value="before-start"/>
+          </relatedAction>
+          <participant>
+            <type value="practitioner"/>
+            <role>
+              <coding>
+                <code value="TrainedLayProvider"/>
+              </coding>
+            </role>
+          </participant>
+        </action>
+        <action id="HIV.B.6">
+          <title value="Capture or update client history"/>
+          <description value="Discuss history with client and review available records. Examples of history may include other diagnoses, medications (including any use of ART), at risk for HIV or engages in HIV risk behaviours, partner’s HIV status and whether the client has performed an HIV self-test and, if so, the results"/>
+          <participant>
+            <type value="practitioner"/>
+            <role>
+              <coding>
+                <code value="TrainedLayProvider"/>
+              </coding>
+            </role>
+          </participant>
+        </action>
+      </action>
+      <action id="HIV.B.3.2">
+        <title value="Referral"/>
+        <description value="Referral"/>
+        <relatedAction>
+          <actionId value="HIV.B.4"/>
+          <relationship value="before-end"/>
+        </relatedAction>
+      </action>
+    </action>
+    <action id="HIV.B.7">
+      <title value="Test for HIV using testing algorithm"/>
+      <description value="The type of test to use depends on national policies and may reflect a number of factors, such as the client’s age, whether the client is pregnant, and the availability of tests at a facility."/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.8">
+      <title value="Provide post-test counselling"/>
+      <description value="Messages need to provide clients with the latest information and be clearly communicated to all people tested for HIV, regardless of the test result but tailored to their test result"/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.9">
+      <title value="Determine recommended services"/>
+      <description value="All people with HIV-positive diagnoses should be offered a package of support interventions that ensure timely linkage to care."/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.11">
+      <title value="Counsel on benefits of ART and disclosure"/>
+      <description value="People with no contraindication to rapid ART initiation should be fully informed of the benefits of ART and offered rapid ART initiation, including the option of same-day initiation."/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.12">
+      <title value="Discuss voluntary disclosure and partner services options"/>
+      <description value="TIt is important that providers discuss, as part of post-test counselling, options for partner services and encourage HIV-positive clients to use provider-assisted referral to inform their sexual and drug-injecting partner(s) about their potential exposure to HIV and offer them voluntary HTS"/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.13">
+      <title value="Make informed decision on care"/>
+      <description value="Some people need time to adjust to learning their HIV-positive status and may need further support for starting ART and choosing when and how to link to services. People should not be coerced to start immediately and should be supported in making an informed choice regarding when to start ART"/>
+      <participant>
+        <type value="patient"/>
+        <role>
+          <coding>
+            <code value="client"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.15">
+      <title value="Arrange for active ART referral"/>
+      <description value="The tester makes an appointment for the client or accompanies the client to an appointment"/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.16">
+      <title value="Arrange follow-up"/>
+      <description value="Arrange for follow-up of clients who are unable to enrol in HIV care on the day of diagnosis."/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.18">
+      <title value="Provide voluntary partner services"/>
+      <description value="Partner services include partner notification, contact tracing, index testing and family-based index case testing for reaching partners of people with HIV. In this kit “partner services” is used as an inclusive term encompassing a range of partner services packages and approaches, including social network-based approaches. HIV partner services can be delivered in many ways, including patient referral and provider-assisted referral. "/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.20">
+      <title value="Schedule retest"/>
+      <description value="Not all groups or settings need post-test counselling messages encouraging periodic retesting. In certain situations, individuals who have been tested for HIV in the past can be retested"/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+    <action id="HIV.B.21">
+      <title value="Offer prevention options"/>
+      <description value="Messages should include information on HIV prevention interventions and how to access them, such as male and female condoms, PrEP for those at high ongoing risk, voluntary medical male circumcision for men and boys in eastern and southern Africa, and harm reduction services for people who inject drugs"/>
+      <participant>
+        <type value="practitioner"/>
+        <role>
+          <coding>
+            <code value="TrainedLayProvider"/>
+          </coding>
+        </role>
+      </participant>
+    </action>
+  </action>
+</PlanDefinition>
