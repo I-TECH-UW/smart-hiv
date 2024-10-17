@@ -903,10 +903,13 @@ define &quot;Facility-level testing Observation&quot;:
 @activity: HIV.B6 Capture or update client history
 @description: Client is currently pregnant
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Currently pregnant B.DE29&quot;:
-  [Condition: Concepts.&quot;Currently pregnant - HIV.B.DE29&quot;] C
-  sort by start of prevalenceInterval() 
+  exists &quot;Currently pregnant B.DE29 Observation&quot;
+define &quot;Currently pregnant B.DE29 Observation&quot;:
+  [Observation: Concepts.&quot;Currently pregnant - HIV.B.DE29&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value is true
 /* End of Currently pregnant B.DE29 */
 
 /*
@@ -3148,11 +3151,13 @@ define &quot;Inconclusive B.DE253&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of initiation of syphilis treatment
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Syphilis treatment start date B.DE254&quot;:
-  [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ ConceptsCustom.&quot;syphilis treatment&quot;)
+  [Observation: Concepts.&quot;Syphilis treatment start date - HIV.B.DE254&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Syphilis treatment start date B.DE254 Value&quot;:
+  &quot;Syphilis treatment start date B.DE254&quot; O
+  return O.value
 /* End of Syphilis treatment start date B.DE254 */
 
 /*
@@ -3160,11 +3165,13 @@ define &quot;Syphilis treatment start date B.DE254&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of Gonorrhoea test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Gonorrhoea test date B.DE255&quot;:
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom.&quot;Gonorrhoea test&quot;
+  [Observation: Concepts.&quot;Gonorrhoea test date - HIV.B.DE255&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Gonorrhoea test date B.DE255 Value&quot;:
+  &quot;Gonorrhoea test date B.DE255&quot; O
+  return O.value
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
@@ -3172,8 +3179,10 @@ define &quot;Gonorrhoea test date B.DE255&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Result from Gonorrhoea test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Gonorrhoea test result B.DE256&quot;:
+  exists &quot;Gonorrhoea test result B.DE256 Observation&quot;
+define &quot;Gonorrhoea test result B.DE256 Observation&quot;:
   [Observation: Concepts.&quot;Gonorrhoea test result - HIV.B.DE256&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Gonorrhoea test result B.DE256 */
@@ -3183,10 +3192,16 @@ define &quot;Gonorrhoea test result B.DE256&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is positive for Neisseria gonorrhoeae
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Positive B.DE257&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O
-  where O.value ~ Concepts.&quot;Positive - HIV.B.DE257&quot;
+  exists &quot;Positive B.DE257 Condition&quot;
+    or exists &quot;Positive B.DE257 Observation&quot;
+define &quot;Positive B.DE257 Condition&quot;:
+  [Condition: Concepts.&quot;Positive - HIV.B.DE257&quot;]
+define &quot;Positive B.DE257 Observation&quot;:
+  &quot;Gonorrhoea test result B.DE256 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Positive - HIV.B.DE257&quot;
 /* End of Positive B.DE257 */
 
 /*
@@ -3194,11 +3209,16 @@ define &quot;Positive B.DE257&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is negative for Neisseria gonorrhoeae
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Negative B.DE258&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O
-  where O.value ~ Concepts.&quot;Negative - HIV.B.DE258&quot;
-
+  exists &quot;Negative B.DE258 Condition&quot;
+    or exists &quot;Negative B.DE258 Observation&quot;
+define &quot;Negative B.DE258 Condition&quot;:
+  [Condition: Concepts.&quot;Negative - HIV.B.DE258&quot;]
+define &quot;Negative B.DE258 Observation&quot;:
+  &quot;Gonorrhoea test result B.DE256 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Negative - HIV.B.DE258&quot;
 /* End of Negative B.DE258 */
 
 /*
@@ -3206,10 +3226,16 @@ define &quot;Negative B.DE258&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is inconclusive
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Inconclusive B.DE259&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O
-  where O.value ~ Concepts.&quot;Inconclusive - HIV.B.DE259&quot;
+  exists &quot;Inconclusive B.DE259 Condition&quot;
+    or exists &quot;Inconclusive B.DE259 Observation&quot;
+define &quot;Inconclusive B.DE259 Condition&quot;:
+  [Condition: Concepts.&quot;Inconclusive - HIV.B.DE259&quot;]
+define &quot;Inconclusive B.DE259 Observation&quot;:
+  &quot;Gonorrhoea test result B.DE256 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Inconclusive - HIV.B.DE259&quot;
 /* End of Inconclusive B.DE259 */
 
 /*
@@ -3217,11 +3243,13 @@ define &quot;Inconclusive B.DE259&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of initiation of Gonorrhoea treatment
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Gonorrhoea treatment start date B.DE260&quot;:
-  [MedicationStatement] MS
-    where MS.status = 'completed'
-    and exists(MS.reasonCode C where C ~ ConceptsCustom.&quot;Gonorrhoea treatment&quot;)
+  [Observation: Concepts.&quot;Gonorrhoea treatment start date - HIV.B.DE260&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Gonorrhoea treatment start date B.DE260 Value&quot;:
+  &quot;Gonorrhoea treatment start date B.DE260&quot; O
+  return O.value
 /* End of Gonorrhoea treatment start date B.DE260 */
 
 /*
@@ -15386,7 +15414,7 @@ define &quot;Reporting date Value&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Oct 17, 2024 13:23+0000">2024-10-17</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Oct 17, 2024 13:40+0000">2024-10-17</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

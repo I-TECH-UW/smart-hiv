@@ -572,10 +572,12 @@ define "Facility-level testing Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client is currently pregnant
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Currently pregnant B.DE29":
-  Elements."Currently pregnant B.DE29" C
-    where C.prevalenceInterval() during "Measurement Period"
+  exists "Currently pregnant B.DE29 Observation"
+define "Currently pregnant B.DE29 Observation":
+  Elements."Currently pregnant B.DE29 Observation" O
+    where O.effective.toInterval() during "Measurement Period"
 /* End of Currently pregnant B.DE29 */
 
 /*
@@ -1772,11 +1774,13 @@ define "Inconclusive B.DE253":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of initiation of syphilis treatment
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Syphilis treatment start date B.DE254":
-  exists (Elements."Syphilis treatment start date B.DE254" MS
-    where MS.effective.toInterval() during "Measurement Period")
-
+  Elements."Syphilis treatment start date B.DE254" O
+    where O.effective.toInterval() during "Measurement Period"
+define "Syphilis treatment start date B.DE254 Value":
+  "Syphilis treatment start date B.DE254" O
+  return O.value
 /* End of Syphilis treatment start date B.DE254 */
 
 /*
@@ -1784,10 +1788,13 @@ define "Syphilis treatment start date B.DE254":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of Gonorrhoea test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Gonorrhoea test date B.DE255":
-  exists(Elements."Gonorrhoea test date B.DE255" P
-    where P.performed.toInterval() during "Measurement Period")
+  Elements."Gonorrhoea test date B.DE255" O
+    where O.effective.toInterval() during "Measurement Period"
+define "Gonorrhoea test date B.DE255 Value":
+  "Gonorrhoea test date B.DE255" O
+  return O.value
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
@@ -1795,10 +1802,12 @@ define "Gonorrhoea test date B.DE255":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Result from Gonorrhoea test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Gonorrhoea test result B.DE256":
-    exists(Elements."Gonorrhoea test result B.DE256" O
-    where O.effective.toInterval() during "Measurement Period")
+  exists "Gonorrhoea test result B.DE256 Observation"
+define "Gonorrhoea test result B.DE256 Observation":
+  Elements."Gonorrhoea test result B.DE256 Observation" O
+    where O.effective.toInterval() during "Measurement Period"
 /* End of Gonorrhoea test result B.DE256 */
 
 /*
@@ -1806,9 +1815,16 @@ define "Gonorrhoea test result B.DE256":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is positive for Neisseria gonorrhoeae
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Positive B.DE257":
-  exists Elements."Positive B.DE257" O
+  exists "Positive B.DE257 Condition"
+    or exists "Positive B.DE257 Observation"
+define "Positive B.DE257 Condition":
+  Elements."Positive B.DE257 Condition" C
+    where C.prevalenceInterval() overlaps before "Measurement Period"
+      or C.prevalenceInterval() overlaps after "Measurement Period"
+define "Positive B.DE257 Observation":
+  Elements."Positive B.DE257 Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Positive B.DE257 */
 
@@ -1817,9 +1833,16 @@ define "Positive B.DE257":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is negative for Neisseria gonorrhoeae
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Negative B.DE258":
-  exists Elements."Negative B.DE258" O
+  exists "Negative B.DE258 Condition"
+    or exists "Negative B.DE258 Observation"
+define "Negative B.DE258 Condition":
+  Elements."Negative B.DE258 Condition" C
+    where C.prevalenceInterval() overlaps before "Measurement Period"
+      or C.prevalenceInterval() overlaps after "Measurement Period"
+define "Negative B.DE258 Observation":
+  Elements."Negative B.DE258 Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Negative B.DE258 */
 
@@ -1828,9 +1851,16 @@ define "Negative B.DE258":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Test result is inconclusive
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Inconclusive B.DE259":
-  exists Elements."Inconclusive B.DE259" O
+  exists "Inconclusive B.DE259 Condition"
+    or exists "Inconclusive B.DE259 Observation"
+define "Inconclusive B.DE259 Condition":
+  Elements."Inconclusive B.DE259 Condition" C
+    where C.prevalenceInterval() overlaps before "Measurement Period"
+      or C.prevalenceInterval() overlaps after "Measurement Period"
+define "Inconclusive B.DE259 Observation":
+  Elements."Inconclusive B.DE259 Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Inconclusive B.DE259 */
 
@@ -1839,10 +1869,13 @@ define "Inconclusive B.DE259":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Date of initiation of Gonorrhoea treatment
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define "Gonorrhoea treatment start date B.DE260":
-  exists (Elements."Gonorrhoea treatment start date B.DE260" MS
-    where MS.effective.toInterval() during "Measurement Period")
+  Elements."Gonorrhoea treatment start date B.DE260" O
+    where O.effective.toInterval() during "Measurement Period"
+define "Gonorrhoea treatment start date B.DE260 Value":
+  "Gonorrhoea treatment start date B.DE260" O
+  return O.value
 /* End of Gonorrhoea treatment start date B.DE260 */
 
 /*
@@ -6278,14 +6311,15 @@ define "HIV treatment outcome":
 @activity: HIV.H3 Record outreach and result
 @description: Twenty-eight days or more since last missed appointment 
 */
-define "Not Lost to follow-up":
+define "Lost to follow-up":
   Elements."On ART H.DE47" H
-   where H.effective.toInterval() starts before end of "Measurement Period"
-    and H.effective ends after (end of "Measurement Period" - Config."LTFU Days")
+   where H.effective starts before end of "Measurement Period"
+    and H.effective ends after start of "Measurement Period"
+	and not (H.effective ends after (end of "Measurement Period" - Config."LTFU Days"))
 
 
 define "Is lost to follow-up":
-  "On ART H.DE47" and not exists("Not Lost to follow-up")
+  exists("Lost to follow-up")
 
 /* End of Lost to follow-up */
 
@@ -6295,22 +6329,8 @@ define "Is lost to follow-up":
 @description: The client transferred to another facility
 */
 
-define "Not Transferred Out":
-Elements."On ART H.DE47" ART
-  with [EpisodeOfCare] EOC
-      such that ART.context.references(EOC) and
-      not exists (
-      EOC.statusHistory H
-      where H.status = 'finished' and H.period overlaps "Measurement Period"
-    ) 
-    and not (
-      EOC.status = 'finished' and EOC.period overlaps "Measurement Period"
-    )
-  where ART.effective.toInterval() starts before end of "Measurement Period"
-    and ART.effective.toInterval() ends after start of "Measurement Period"
-
 define "Has transferred out":
-  "On ART H.DE47" and not exists("Not Transferred Out")
+  exists(Elements."Transferred out" t where t ends during "Measurement Period")
 /* End of Transferred out */
 
 /*
@@ -6961,23 +6981,3 @@ define "Reporting date Value":
 /*
  * Custom elements and logic for use DT and IND CQL Libraries
  */
-
- define "ANC within pregnancy":
-  Elements."Antenatal care contact" E
-  where E.period.toInterval() during First("Currently pregnant B.DE29").prevalenceInterval()
-
-define "ANC within pregnancy dates":
-  Elements."Antenatal care contact" E
-  where E.period.toInterval() during First("Currently pregnant B.DE29").prevalenceInterval()
-  return E.period.toInterval()
-
- define "ANC within pregnancy within measurement period":
-  Elements."Antenatal care contact" E
-  where E.period.toInterval() during First("Currently pregnant B.DE29").prevalenceInterval()
-  and E.period.toInterval() during "Measurement Period"
-
-define "all anc dates":
-  flatten{"ANC within pregnancy dates"}
-
-define "first anc date":
-  First("ANC within pregnancy dates")

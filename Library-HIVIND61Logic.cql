@@ -79,11 +79,13 @@ define "Initial Population":
  * Calculation: COUNT of pregnant women with "ANC contact date" in reporting period AND "Syphilis test date" on ANY "ANC contact date" for this pregnancy
  */
 
+define "all anc dates":
+flatten{HE."ANC contact date E.DE85"}
 
 define "Numerator":
-  exists(HIE."ANC within pregnancy within measurement period")
+  HIE."ANC contact date E.DE85"
   and exists(HE."Syphilis test date B.DE249" P
-    where exists(HIE."all anc dates" t where duration in days of (t intersect P.performed.toInterval()) > 0)
+    where exists("all anc dates" t where duration in days of (t intersect P.performed.toInterval()) > 0)
   )
     
     
@@ -98,7 +100,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIE."ANC within pregnancy within measurement period")
+  HIE."ANC contact date E.DE85"
     
 
 /* end Populations */
