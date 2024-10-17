@@ -1,0 +1,304 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://smart.who.int/hiv/PlanDefinition/HIV-Testing-PlanDefinition> a fhir:PlanDefinition ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "HIV-Testing-PlanDefinition"] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: PlanDefinition HIV-Testing-PlanDefinition</b></p><a name=\"HIV-Testing-PlanDefinition\"> </a><a name=\"hcHIV-Testing-PlanDefinition\"> </a><a name=\"HIV-Testing-PlanDefinition-en-US\"> </a><p><b>url</b>: <a href=\"PlanDefinition-HIV-Testing-PlanDefinition.html\">PlanDefinition PlanDefinition - HiV Testing</a></p><p><b>version</b>: 0.3.0</p><p><b>name</b>: PlanDefinition_HIV_Testing</p><p><b>title</b>: PlanDefinition - HiV Testing</p><p><b>type</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/plan-definition-type workflow-definition}\">Workflow Definition</span></p><p><b>status</b>: Active</p><p><b>experimental</b>: true</p><p><b>date</b>: 2024-10-17 13:43:39+0000</p><p><b>publisher</b>: WHO</p><p><b>contact</b>: WHO: <a href=\"http://who.int\">http://who.int</a></p><p><b>description</b>: </p><div><p>To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services</p>\n</div><blockquote><p><b>action</b></p><p><b>title</b>: HIV testing services</p><p><b>description</b>: To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services</p><blockquote><p><b>participant</b></p><p><b>type</b>: Patient</p><p><b>role</b>: <span title=\"Codes:\">client</span></p></blockquote><blockquote><p><b>participant</b></p><p><b>type</b>: Practitioner</p><p><b>role</b>: <span title=\"Codes:\">TrainedLayProvider</span></p></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.1</blockquote><p><b>title</b>: Determine reason for visit</p><p><b>description</b>: Ask client if they have visited previously, search for client details in the system and determine reason for visit</p><h3>RelatedActions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style=\"display: none\">*</td><td>HIV.B.2</td><td>Before Start</td></tr></table><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.2</blockquote><p><b>title</b>: Check for signs of serious illness</p><p><b>description</b>: Any person who has signs of serious illness should be referred to the appropriate higher-level facility for management. Danger signs differ by age group.</p><h3>RelatedActions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style=\"display: none\">*</td><td>HIV.B.3</td><td>Before Start</td></tr></table><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.3</blockquote><p><b>title</b>: Signs of serious illness?</p><p><b>description</b>: If the client has danger signs of being seriously ill, this warrants a referral to a higher-level facility. Clear criteria for referral should be available. </p><h3>RelatedActions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style=\"display: none\">*</td><td>HIV.B.7</td><td>Before Start</td></tr></table><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table><p><b>groupingBehavior</b>: Logical Group</p><p><b>selectionBehavior</b>: Exactly One</p><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.3.1</blockquote><p><b>title</b>: Collect client Details</p><p><b>description</b>: Collect client details</p><h3>RelatedActions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style=\"display: none\">*</td><td>HIV.B.3</td><td>Before End</td></tr></table><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.4</blockquote><p><b>title</b>: Take vital signs </p><p><b>description</b>: Vital signs, such as blood pressure and weight, may be taken and recorded.</p><h3>RelatedActions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style=\"display: none\">*</td><td>HIV.B.5</td><td>Before Start</td></tr></table><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.5</blockquote><p><b>title</b>: Provide pre-test information</p><p><b>description</b>: Pre-test information messages</p><h3>RelatedActions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style=\"display: none\">*</td><td>HIV.B.6</td><td>Before Start</td></tr></table><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.6</blockquote><p><b>title</b>: Capture or update client history</p><p><b>description</b>: Discuss history with client and review available records. Examples of history may include other diagnoses, medications (including any use of ART), at risk for HIV or engages in HIV risk behaviours, partner’s HIV status and whether the client has performed an HIV self-test and, if so, the results</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.3.2</blockquote><p><b>title</b>: Referral</p><p><b>description</b>: Referral</p><h3>RelatedActions</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style=\"display: none\">*</td><td>HIV.B.4</td><td>Before End</td></tr></table></blockquote></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.7</blockquote><p><b>title</b>: Test for HIV using testing algorithm</p><p><b>description</b>: The type of test to use depends on national policies and may reflect a number of factors, such as the client’s age, whether the client is pregnant, and the availability of tests at a facility.</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.8</blockquote><p><b>title</b>: Provide post-test counselling</p><p><b>description</b>: Messages need to provide clients with the latest information and be clearly communicated to all people tested for HIV, regardless of the test result but tailored to their test result</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.9</blockquote><p><b>title</b>: Determine recommended services</p><p><b>description</b>: All people with HIV-positive diagnoses should be offered a package of support interventions that ensure timely linkage to care.</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.11</blockquote><p><b>title</b>: Counsel on benefits of ART and disclosure</p><p><b>description</b>: People with no contraindication to rapid ART initiation should be fully informed of the benefits of ART and offered rapid ART initiation, including the option of same-day initiation.</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.12</blockquote><p><b>title</b>: Discuss voluntary disclosure and partner services options</p><p><b>description</b>: TIt is important that providers discuss, as part of post-test counselling, options for partner services and encourage HIV-positive clients to use provider-assisted referral to inform their sexual and drug-injecting partner(s) about their potential exposure to HIV and offer them voluntary HTS</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.13</blockquote><p><b>title</b>: Make informed decision on care</p><p><b>description</b>: Some people need time to adjust to learning their HIV-positive status and may need further support for starting ART and choosing when and how to link to services. People should not be coerced to start immediately and should be supported in making an informed choice regarding when to start ART</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Patient</td><td><span title=\"Codes:\">client</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.15</blockquote><p><b>title</b>: Arrange for active ART referral</p><p><b>description</b>: The tester makes an appointment for the client or accompanies the client to an appointment</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.16</blockquote><p><b>title</b>: Arrange follow-up</p><p><b>description</b>: Arrange for follow-up of clients who are unable to enrol in HIV care on the day of diagnosis.</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.18</blockquote><p><b>title</b>: Provide voluntary partner services</p><p><b>description</b>: Partner services include partner notification, contact tracing, index testing and family-based index case testing for reaching partners of people with HIV. In this kit “partner services” is used as an inclusive term encompassing a range of partner services packages and approaches, including social network-based approaches. HIV partner services can be delivered in many ways, including patient referral and provider-assisted referral. </p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.20</blockquote><p><b>title</b>: Schedule retest</p><p><b>description</b>: Not all groups or settings need post-test counselling messages encouraging periodic retesting. In certain situations, individuals who have been tested for HIV in the past can be retested</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.B.21</blockquote><p><b>title</b>: Offer prevention options</p><p><b>description</b>: Messages should include information on HIV prevention interventions and how to access them, such as male and female condoms, PrEP for those at high ongoing risk, voluntary medical male circumcision for men and boys in eastern and southern Africa, and harm reduction services for people who inject drugs</p><h3>Participants</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style=\"display: none\">*</td><td>Practitioner</td><td><span title=\"Codes:\">TrainedLayProvider</span></td></tr></table></blockquote></blockquote></div>"
+  ] ; # 
+  fhir:url [ fhir:v "http://smart.who.int/hiv/PlanDefinition/HIV-Testing-PlanDefinition"^^xsd:anyURI] ; # 
+  fhir:version [ fhir:v "0.3.0"] ; # 
+  fhir:name [ fhir:v "PlanDefinition_HIV_Testing"] ; # 
+  fhir:title [ fhir:v "PlanDefinition - HiV Testing"] ; # 
+  fhir:type [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://terminology.hl7.org/CodeSystem/plan-definition-type"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "workflow-definition" ] ;
+       fhir:display [ fhir:v "Workflow Definition" ]
+     ] )
+  ] ; # 
+  fhir:status [ fhir:v "active"] ; # 
+  fhir:experimental [ fhir:v "true"^^xsd:boolean] ; # 
+  fhir:date [ fhir:v "2024-10-17T13:43:39+00:00"^^xsd:dateTime] ; # 
+  fhir:publisher [ fhir:v "WHO"] ; # 
+  fhir:contact ( [
+     fhir:name [ fhir:v "WHO" ] ;
+     fhir:telecom ( [
+       fhir:system [ fhir:v "url" ] ;
+       fhir:value [ fhir:v "http://who.int" ]
+     ] )
+  ] ) ; # 
+  fhir:description [ fhir:v "To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services"] ; # 
+  fhir:action ( [
+     fhir:title [ fhir:v "HIV testing services" ] ;
+     fhir:description [ fhir:v "To diagnose individuals with HIV and facilitate their engagement in care and ART as early as possible, as well as to counsel HIV-negative clients and link them to prevention and other services" ] ;
+     fhir:participant ( [
+       fhir:type [ fhir:v "patient" ] ;
+       fhir:role [
+         fhir:coding ( [
+           fhir:code [ fhir:v "client" ]
+         ] )
+       ]
+     ] [
+       fhir:type [ fhir:v "practitioner" ] ;
+       fhir:role [
+         fhir:coding ( [
+           fhir:code [ fhir:v "TrainedLayProvider" ]
+         ] )
+       ]
+     ] ) ;
+     fhir:action ( [
+       fhir:id [ fhir:v "HIV.B.1" ] ;
+       fhir:title [ fhir:v "Determine reason for visit" ] ;
+       fhir:description [ fhir:v "Ask client if they have visited previously, search for client details in the system and determine reason for visit" ] ;
+       fhir:relatedAction ( [
+         fhir:actionId [ fhir:v "HIV.B.2" ] ;
+         fhir:relationship [ fhir:v "before-start" ]
+       ] ) ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.2" ] ;
+       fhir:title [ fhir:v "Check for signs of serious illness" ] ;
+       fhir:description [ fhir:v "Any person who has signs of serious illness should be referred to the appropriate higher-level facility for management. Danger signs differ by age group." ] ;
+       fhir:relatedAction ( [
+         fhir:actionId [ fhir:v "HIV.B.3" ] ;
+         fhir:relationship [ fhir:v "before-start" ]
+       ] ) ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.3" ] ;
+       fhir:title [ fhir:v "Signs of serious illness?" ] ;
+       fhir:description [ fhir:v "If the client has danger signs of being seriously ill, this warrants a referral to a higher-level facility. Clear criteria for referral should be available. " ] ;
+       fhir:relatedAction ( [
+         fhir:actionId [ fhir:v "HIV.B.7" ] ;
+         fhir:relationship [ fhir:v "before-start" ]
+       ] ) ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] ) ;
+       fhir:groupingBehavior [ fhir:v "logical-group" ] ;
+       fhir:selectionBehavior [ fhir:v "exactly-one" ] ;
+       fhir:action ( [
+         fhir:id [ fhir:v "HIV.B.3.1" ] ;
+         fhir:title [ fhir:v "Collect client Details" ] ;
+         fhir:description [ fhir:v "Collect client details" ] ;
+         fhir:relatedAction ( [
+           fhir:actionId [ fhir:v "HIV.B.3" ] ;
+           fhir:relationship [ fhir:v "before-end" ]
+         ] ) ;
+         fhir:action ( [
+           fhir:id [ fhir:v "HIV.B.4" ] ;
+           fhir:title [ fhir:v "Take vital signs " ] ;
+           fhir:description [ fhir:v "Vital signs, such as blood pressure and weight, may be taken and recorded." ] ;
+           fhir:relatedAction ( [
+             fhir:actionId [ fhir:v "HIV.B.5" ] ;
+             fhir:relationship [ fhir:v "before-start" ]
+           ] ) ;
+           fhir:participant ( [
+             fhir:type [ fhir:v "practitioner" ] ;
+             fhir:role [
+               fhir:coding ( [
+                 fhir:code [ fhir:v "TrainedLayProvider" ]
+               ] )
+             ]
+           ] )
+         ] [
+           fhir:id [ fhir:v "HIV.B.5" ] ;
+           fhir:title [ fhir:v "Provide pre-test information" ] ;
+           fhir:description [ fhir:v "Pre-test information messages" ] ;
+           fhir:relatedAction ( [
+             fhir:actionId [ fhir:v "HIV.B.6" ] ;
+             fhir:relationship [ fhir:v "before-start" ]
+           ] ) ;
+           fhir:participant ( [
+             fhir:type [ fhir:v "practitioner" ] ;
+             fhir:role [
+               fhir:coding ( [
+                 fhir:code [ fhir:v "TrainedLayProvider" ]
+               ] )
+             ]
+           ] )
+         ] [
+           fhir:id [ fhir:v "HIV.B.6" ] ;
+           fhir:title [ fhir:v "Capture or update client history" ] ;
+           fhir:description [ fhir:v "Discuss history with client and review available records. Examples of history may include other diagnoses, medications (including any use of ART), at risk for HIV or engages in HIV risk behaviours, partner’s HIV status and whether the client has performed an HIV self-test and, if so, the results" ] ;
+           fhir:participant ( [
+             fhir:type [ fhir:v "practitioner" ] ;
+             fhir:role [
+               fhir:coding ( [
+                 fhir:code [ fhir:v "TrainedLayProvider" ]
+               ] )
+             ]
+           ] )
+         ] )
+       ] [
+         fhir:id [ fhir:v "HIV.B.3.2" ] ;
+         fhir:title [ fhir:v "Referral" ] ;
+         fhir:description [ fhir:v "Referral" ] ;
+         fhir:relatedAction ( [
+           fhir:actionId [ fhir:v "HIV.B.4" ] ;
+           fhir:relationship [ fhir:v "before-end" ]
+         ] )
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.7" ] ;
+       fhir:title [ fhir:v "Test for HIV using testing algorithm" ] ;
+       fhir:description [ fhir:v "The type of test to use depends on national policies and may reflect a number of factors, such as the client’s age, whether the client is pregnant, and the availability of tests at a facility." ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.8" ] ;
+       fhir:title [ fhir:v "Provide post-test counselling" ] ;
+       fhir:description [ fhir:v "Messages need to provide clients with the latest information and be clearly communicated to all people tested for HIV, regardless of the test result but tailored to their test result" ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.9" ] ;
+       fhir:title [ fhir:v "Determine recommended services" ] ;
+       fhir:description [ fhir:v "All people with HIV-positive diagnoses should be offered a package of support interventions that ensure timely linkage to care." ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.11" ] ;
+       fhir:title [ fhir:v "Counsel on benefits of ART and disclosure" ] ;
+       fhir:description [ fhir:v "People with no contraindication to rapid ART initiation should be fully informed of the benefits of ART and offered rapid ART initiation, including the option of same-day initiation." ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.12" ] ;
+       fhir:title [ fhir:v "Discuss voluntary disclosure and partner services options" ] ;
+       fhir:description [ fhir:v "TIt is important that providers discuss, as part of post-test counselling, options for partner services and encourage HIV-positive clients to use provider-assisted referral to inform their sexual and drug-injecting partner(s) about their potential exposure to HIV and offer them voluntary HTS" ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.13" ] ;
+       fhir:title [ fhir:v "Make informed decision on care" ] ;
+       fhir:description [ fhir:v "Some people need time to adjust to learning their HIV-positive status and may need further support for starting ART and choosing when and how to link to services. People should not be coerced to start immediately and should be supported in making an informed choice regarding when to start ART" ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "patient" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "client" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.15" ] ;
+       fhir:title [ fhir:v "Arrange for active ART referral" ] ;
+       fhir:description [ fhir:v "The tester makes an appointment for the client or accompanies the client to an appointment" ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.16" ] ;
+       fhir:title [ fhir:v "Arrange follow-up" ] ;
+       fhir:description [ fhir:v "Arrange for follow-up of clients who are unable to enrol in HIV care on the day of diagnosis." ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.18" ] ;
+       fhir:title [ fhir:v "Provide voluntary partner services" ] ;
+       fhir:description [ fhir:v "Partner services include partner notification, contact tracing, index testing and family-based index case testing for reaching partners of people with HIV. In this kit “partner services” is used as an inclusive term encompassing a range of partner services packages and approaches, including social network-based approaches. HIV partner services can be delivered in many ways, including patient referral and provider-assisted referral. " ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.20" ] ;
+       fhir:title [ fhir:v "Schedule retest" ] ;
+       fhir:description [ fhir:v "Not all groups or settings need post-test counselling messages encouraging periodic retesting. In certain situations, individuals who have been tested for HIV in the past can be retested" ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] [
+       fhir:id [ fhir:v "HIV.B.21" ] ;
+       fhir:title [ fhir:v "Offer prevention options" ] ;
+       fhir:description [ fhir:v "Messages should include information on HIV prevention interventions and how to access them, such as male and female condoms, PrEP for those at high ongoing risk, voluntary medical male circumcision for men and boys in eastern and southern Africa, and harm reduction services for people who inject drugs" ] ;
+       fhir:participant ( [
+         fhir:type [ fhir:v "practitioner" ] ;
+         fhir:role [
+           fhir:coding ( [
+             fhir:code [ fhir:v "TrainedLayProvider" ]
+           ] )
+         ]
+       ] )
+     ] )
+  ] ) . # 
+
+# -------------------------------------------------------------------------------------
+

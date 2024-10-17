@@ -85,9 +85,9 @@ define "Initial Population":
  */
 
 define "Numerator":
-  First(HE."ANC contact date E.DE85") during "Measurement Period"
+  First(HIE."ANC within pregnancy").period.toInterval() during "Measurement Period"
   and exists(HE."Syphilis test date B.DE249" P
-    where start of P.performed.toInterval() = start of First(HE."ANC contact date E.DE85"))
+    where start of P.performed.toInterval() = start of First(HIE."ANC within pregnancy").period.toInterval())
 
 
 /**
@@ -98,7 +98,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  First(HE."ANC contact date E.DE85") during "Measurement Period"
+  First(HIE."ANC within pregnancy").period.toInterval() during "Measurement Period"
     
 
 /* end Populations */
