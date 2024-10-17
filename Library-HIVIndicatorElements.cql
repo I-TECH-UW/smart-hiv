@@ -6278,15 +6278,14 @@ define "HIV treatment outcome":
 @activity: HIV.H3 Record outreach and result
 @description: Twenty-eight days or more since last missed appointment 
 */
-define "Lost to follow-up":
+define "Not Lost to follow-up":
   Elements."On ART H.DE47" H
-   where H.effective starts before end of "Measurement Period"
-    and H.effective ends after start of "Measurement Period"
-	and not (H.effective ends after (end of "Measurement Period" - Config."LTFU Days"))
+   where H.effective.toInterval() starts before end of "Measurement Period"
+    and H.effective ends after (end of "Measurement Period" - Config."LTFU Days")
 
 
 define "Is lost to follow-up":
-  exists("Lost to follow-up")
+  "On ART H.DE47" and not exists("Not Lost to follow-up")
 
 /* End of Lost to follow-up */
 
@@ -6296,8 +6295,22 @@ define "Is lost to follow-up":
 @description: The client transferred to another facility
 */
 
+define "Not Transferred Out":
+Elements."On ART H.DE47" ART
+  with [EpisodeOfCare] EOC
+      such that ART.context.references(EOC) and
+      not exists (
+      EOC.statusHistory H
+      where H.status = 'finished' and H.period overlaps "Measurement Period"
+    ) 
+    and not (
+      EOC.status = 'finished' and EOC.period overlaps "Measurement Period"
+    )
+  where ART.effective.toInterval() starts before end of "Measurement Period"
+    and ART.effective.toInterval() ends after start of "Measurement Period"
+
 define "Has transferred out":
-  exists(Elements."Transferred out" t where t ends during "Measurement Period")
+  "On ART H.DE47" and not exists("Not Transferred Out")
 /* End of Transferred out */
 
 /*
