@@ -74,6 +74,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+include HIVConfig called Config
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -96,7 +99,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  HIE."Has HIV-positive Status" and HIE."HCV test date D.DE169"
 
 
 /**
@@ -107,8 +110,34 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."Has HIV-positive Status"
+  and HIE."Visit date SRV.DE15"
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIE."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIE."patientGroups"
+
+//Add provider types
+
+
+
+define "Stratification":
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')

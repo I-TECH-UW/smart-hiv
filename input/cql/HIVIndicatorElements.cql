@@ -1565,9 +1565,21 @@ define "At elevated risk for HIV acquisition B.DE225":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Syndrome or STI for which client is diagnosed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
+define "STI syndrome":
+  List<String>{
+    if "Urethral discharge syndrome B.DE227" then 'Urethral Discharge' else null,
+    if "Vaginal discharge syndrome B.DE228" then 'Vaginal Discharge' else null,
+    if "Lower Abdominal pain  B.DE229" then 'Lower Abdominal Pain' else null,
+    if "Genital ulcer disease syndrome B.DE230" then 'Genital Ulcer' else null,
+    if "Anorectal discharge B.DE231" then 'Anorectal discharge ' else null
+  }
+
+
 define "Syndrome/STI diagnosed B.DE226":
-  exists "Syndrome/STI diagnosed B.DE226 Observation"
+  "Urethral discharge syndrome B.DE227" or "Vaginal discharge syndrome B.DE228" or "Lower Abdominal pain  B.DE229" or "Genital ulcer disease syndrome B.DE230" or
+  "Anorectal discharge B.DE231"
+
 define "Syndrome/STI diagnosed B.DE226 Observation":
   Elements."Syndrome/STI diagnosed B.DE226 Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -1578,7 +1590,7 @@ define "Syndrome/STI diagnosed B.DE226 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with urethral discharge syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Urethral discharge syndrome B.DE227":
   exists "Urethral discharge syndrome B.DE227 Condition"
     or exists "Urethral discharge syndrome B.DE227 Observation"
@@ -1596,7 +1608,7 @@ define "Urethral discharge syndrome B.DE227 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with vaginal discharge syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Vaginal discharge syndrome B.DE228":
   exists "Vaginal discharge syndrome B.DE228 Condition"
     or exists "Vaginal discharge syndrome B.DE228 Observation"
@@ -1614,14 +1626,10 @@ define "Vaginal discharge syndrome B.DE228 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Lower Abdominal pain  B.DE229":
-  exists "Lower Abdominal pain  B.DE229 Condition"
-    or exists "Lower Abdominal pain  B.DE229 Observation"
-define "Lower Abdominal pain  B.DE229 Condition":
-  Elements."Lower Abdominal pain  B.DE229 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
+  exists "Lower Abdominal pain  B.DE229 Observation"
+
 define "Lower Abdominal pain  B.DE229 Observation":
   Elements."Lower Abdominal pain  B.DE229 Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -1632,7 +1640,7 @@ define "Lower Abdominal pain  B.DE229 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with genital ulcer disease syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Genital ulcer disease syndrome B.DE230":
   exists "Genital ulcer disease syndrome B.DE230 Condition"
     or exists "Genital ulcer disease syndrome B.DE230 Observation"
@@ -1650,14 +1658,10 @@ define "Genital ulcer disease syndrome B.DE230 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with anorectal discharge
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Anorectal discharge B.DE231":
-  exists "Anorectal discharge B.DE231 Condition"
-    or exists "Anorectal discharge B.DE231 Observation"
-define "Anorectal discharge B.DE231 Condition":
-  Elements."Anorectal discharge B.DE231 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
+  exists "Anorectal discharge B.DE231 Observation"
+
 define "Anorectal discharge B.DE231 Observation":
   Elements."Anorectal discharge B.DE231 Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -2678,13 +2682,11 @@ define "Current ART regimen Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis B virus (HBV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HBsAg test date D.DE161":
-  Elements."HBsAg test date D.DE161" O
-    where O.effective.toInterval() during "Measurement Period"
-define "HBsAg test date D.DE161 Value":
-  "HBsAg test date D.DE161" O
-  return O.value
+  exists(Elements."HBsAg test date D.DE161" P
+    where P.performed.toInterval() during "Measurement Period")
+
 /* End of HBsAg test date D.DE161 */
 
 /*
@@ -2692,11 +2694,9 @@ define "HBsAg test date D.DE161 Value":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis B virus test result (HBsAg)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HBsAg test result D.DE162":
-  exists "HBsAg test result D.DE162 Observation"
-define "HBsAg test result D.DE162 Observation":
-  Elements."HBsAg test result D.DE162 Observation" O
+  exists Elements."HBsAg test result D.DE162" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of HBsAg test result D.DE162 */
 
@@ -2705,16 +2705,9 @@ define "HBsAg test result D.DE162 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was positive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Positive D.DE163":
-  exists "Positive D.DE163 Condition"
-    or exists "Positive D.DE163 Observation"
-define "Positive D.DE163 Condition":
-  Elements."Positive D.DE163 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Positive D.DE163 Observation":
-  Elements."Positive D.DE163 Observation" O
+  exists Elements."Positive D.DE163" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Positive D.DE163 */
 
@@ -2725,14 +2718,7 @@ define "Positive D.DE163 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Negative D.DE164":
-  exists "Negative D.DE164 Condition"
-    or exists "Negative D.DE164 Observation"
-define "Negative D.DE164 Condition":
-  Elements."Negative D.DE164 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Negative D.DE164 Observation":
-  Elements."Negative D.DE164 Observation" O
+  exists Elements."Negative D.DE164" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Negative D.DE164 */
 
@@ -2741,16 +2727,9 @@ define "Negative D.DE164 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was indeterminate
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Indeterminate D.DE165":
-  exists "Indeterminate D.DE165 Condition"
-    or exists "Indeterminate D.DE165 Observation"
-define "Indeterminate D.DE165 Condition":
-  Elements."Indeterminate D.DE165 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Indeterminate D.DE165 Observation":
-  Elements."Indeterminate D.DE165 Observation" O
+  exists Elements."Indeterminate D.DE165" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Indeterminate D.DE165 */
 
@@ -2773,13 +2752,11 @@ define "HBV treatment TDF start date Value":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV test date D.DE169":
-  Elements."HCV test date D.DE169" O
-    where O.effective.toInterval() during "Measurement Period"
-define "HCV test date D.DE169 Value":
-  "HCV test date D.DE169" O
-  return O.value
+  exists(Elements."HBsAg test date D.DE161" P
+    where P.performed.toInterval() during "Measurement Period")
+
 /* End of HCV test date D.DE169 */
 
 /*
@@ -6802,12 +6779,13 @@ define "ART start date SRV.DE6 Value":
 @activity: HIV.B6 Capture or update client history
 @description: Client is currently pregnant
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Currently pregnant SRV.DE7":
-  exists "Currently pregnant SRV.DE7 Observation"
-define "Currently pregnant SRV.DE7 Observation":
-  Elements."Currently pregnant SRV.DE7 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists "Currently pregnant SRV.DE7 Condition"
+define "Currently pregnant SRV.DE7 Condition":
+  Elements."Currently pregnant SRV.DE7 Condition" C
+    where C.prevalenceInterval() overlaps before "Measurement Period"
+      or C.prevalenceInterval() overlaps after "Measurement Period"
 /* End of Currently pregnant SRV.DE7 */
 
 /*

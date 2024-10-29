@@ -71,6 +71,8 @@ include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 include HIVElements called HE
 include HIVIndicatorElements called HIE
+include HIVConfig called Config
+include HIVConcepts called Concepts
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -84,10 +86,24 @@ context Patient
 
 define "Measure Population":
    HIE."Has HIV-positive Status"
-   and HIE."On ART H.DE47"
+   and exists(HE."On ART H.DE47" A
+    with [EpisodeOfCare] EOC
+      such that A.context.references(EOC) and 
+      //Not Transferred out
+      not (exists(EOC.type T where T ~ Concepts."On ART - HIV.H.DE47")
+      and EOC.status = 'finished' and EOC.period.toInterval() ends during "Measurement Period")
+      and not exists (
+      EOC.statusHistory H
+      where H.status = 'finished'
+      and H.period.toInterval() ends during "Measurement Period")
+      //On ART for at least one day in measurement period
+    where A.effective.toInterval() starts before end of "Measurement Period"
+    and A.effective.toInterval() ends after start of "Measurement Period"
+    //Not Lost to follow up
+	and (A.effective.toInterval() ends after (end of "Measurement Period" - Config."LTFU Days"))
+   )
    and not HIE."Has death documented"
-   and not HIE."Has transferred out"
-   and not HIE."Is lost to follow-up"
+
 
 /*
  * As defined by Member States

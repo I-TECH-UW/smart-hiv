@@ -97,6 +97,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+include HIVConfig called Config
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -119,7 +122,9 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  Count((HE."Syndrome/STI diagnosed B.DE226 Observation" O
+    where O.effective.toInterval() during "Measurement Period" 
+  and exists (HE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval())))>1
 
 
 /**
@@ -130,8 +135,45 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  exists(HE."Syndrome/STI diagnosed B.DE226 Observation" O
+    where O.effective.toInterval() during "Measurement Period" 
+  and exists (HE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval()))
     
 
 /* end Populations */
 
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIE."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIE."patientGroups"
+
+define "HIV prevention intervention":
+	HIE."HIV prevention intervention"
+
+  define "STI syndrome":
+	HIE."STI syndrome"
+
+define "HIV Status":
+  HIE."HIV Status Stratifier"
+
+
+define "Stratification":
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE."HIV prevention intervention", ':')
++ ':' + HIE."HIV Status Stratifier".code 
++ Combine(HIE."STI syndrome", ':')

@@ -2592,9 +2592,11 @@ define "At elevated risk for HIV acquisition B.DE225":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Syndrome or STI for which client is diagnosed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Syndrome/STI diagnosed B.DE226":
-  exists "Syndrome/STI diagnosed B.DE226 Observation"
+    "Urethral discharge syndrome B.DE227" or "Vaginal discharge syndrome B.DE228" or "Lower Abdominal pain  B.DE229" or "Genital ulcer disease syndrome B.DE230" or
+  "Anorectal discharge B.DE231"
+
 define "Syndrome/STI diagnosed B.DE226 Observation":
   [Observation: Concepts."Syndrome/STI diagnosed - HIV.B.DE226"] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -2605,7 +2607,7 @@ define "Syndrome/STI diagnosed B.DE226 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with urethral discharge syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Urethral discharge syndrome B.DE227":
   exists "Urethral discharge syndrome B.DE227 Condition"
     or exists "Urethral discharge syndrome B.DE227 Observation"
@@ -2622,7 +2624,7 @@ define "Urethral discharge syndrome B.DE227 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with vaginal discharge syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Vaginal discharge syndrome B.DE228":
   exists "Vaginal discharge syndrome B.DE228 Condition"
     or exists "Vaginal discharge syndrome B.DE228 Observation"
@@ -2639,12 +2641,10 @@ define "Vaginal discharge syndrome B.DE228 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Lower Abdominal pain  B.DE229":
-  exists "Lower Abdominal pain  B.DE229 Condition"
-    or exists "Lower Abdominal pain  B.DE229 Observation"
-define "Lower Abdominal pain  B.DE229 Condition":
-  [Condition: Concepts."Lower Abdominal pain  - HIV.B.DE229"]
+  exists "Lower Abdominal pain  B.DE229 Observation"
+
 define "Lower Abdominal pain  B.DE229 Observation":
   "Syndrome/STI diagnosed B.DE226 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -2656,7 +2656,7 @@ define "Lower Abdominal pain  B.DE229 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with genital ulcer disease syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Genital ulcer disease syndrome B.DE230":
   exists "Genital ulcer disease syndrome B.DE230 Condition"
     or exists "Genital ulcer disease syndrome B.DE230 Observation"
@@ -2673,12 +2673,10 @@ define "Genital ulcer disease syndrome B.DE230 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with anorectal discharge
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Anorectal discharge B.DE231":
-  exists "Anorectal discharge B.DE231 Condition"
-    or exists "Anorectal discharge B.DE231 Observation"
-define "Anorectal discharge B.DE231 Condition":
-  [Condition: Concepts."Anorectal discharge - HIV.B.DE231"]
+  exists "Anorectal discharge B.DE231 Observation"
+
 define "Anorectal discharge B.DE231 Observation":
   "Syndrome/STI diagnosed B.DE226 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -6189,24 +6187,22 @@ define "STI testing and treatment D.DE160 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis B virus (HBV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HBsAg test date D.DE161":
-  [Observation: Concepts."HBsAg test date - HIV.D.DE161"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "HBsAg test date D.DE161 Value":
-  "HBsAg test date D.DE161" O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom."HBsAg test"
+
 /* End of HBsAg test date D.DE161 */
+
 
 /*
 @dataElement: HIV.D.DE162 - HBsAg test result
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis B virus test result (HBsAg)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HBsAg test result D.DE162":
-  exists "HBsAg test result D.DE162 Observation"
-define "HBsAg test result D.DE162 Observation":
   [Observation: Concepts."HBsAg test result - HIV.D.DE162"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of HBsAg test result D.DE162 */
@@ -6216,16 +6212,11 @@ define "HBsAg test result D.DE162 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was positive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Positive D.DE163":
-  exists "Positive D.DE163 Condition"
-    or exists "Positive D.DE163 Observation"
-define "Positive D.DE163 Condition":
-  [Condition: Concepts."Positive - HIV.D.DE163"]
-define "Positive D.DE163 Observation":
-  "HBsAg test result D.DE162 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Positive - HIV.D.DE163"
+  "HBsAg test result D.DE162" O
+  where O.value ~ Concepts."Positive - HIV.D.DE163"
+
 /* End of Positive D.DE163 */
 
 /*
@@ -6233,16 +6224,11 @@ define "Positive D.DE163 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was negative
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Negative D.DE164":
-  exists "Negative D.DE164 Condition"
-    or exists "Negative D.DE164 Observation"
-define "Negative D.DE164 Condition":
-  [Condition: Concepts."Negative - HIV.D.DE164"]
-define "Negative D.DE164 Observation":
-  "HBsAg test result D.DE162 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Negative - HIV.D.DE164"
+  "HBsAg test result D.DE162" O
+  where O.value ~ Concepts."Negative - HIV.D.DE164"
+
 /* End of Negative D.DE164 */
 
 /*
@@ -6250,16 +6236,10 @@ define "Negative D.DE164 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was indeterminate
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Indeterminate D.DE165":
-  exists "Indeterminate D.DE165 Condition"
-    or exists "Indeterminate D.DE165 Observation"
-define "Indeterminate D.DE165 Condition":
-  [Condition: Concepts."Indeterminate - HIV.D.DE165"]
-define "Indeterminate D.DE165 Observation":
-  "HBsAg test result D.DE162 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Indeterminate - HIV.D.DE165"
+    "HBsAg test result D.DE162" O
+  where O.value ~ Concepts."Indeterminate - HIV.D.DE165"
 /* End of Indeterminate D.DE165 */
 
 /*
@@ -6281,13 +6261,12 @@ define "HBV treatment TDF start date Value":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV test date D.DE169":
-  [Observation: Concepts."HCV test date - HIV.D.DE169"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "HCV test date D.DE169 Value":
-  "HCV test date D.DE169" O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom."HCV test"
+
 /* End of HCV test date D.DE169 */
 
 /*
@@ -14760,13 +14739,11 @@ define "ART start date SRV.DE6 Value":
 @activity: HIV.B6 Capture or update client history
 @description: Client is currently pregnant
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Currently pregnant SRV.DE7":
-  exists "Currently pregnant SRV.DE7 Observation"
-define "Currently pregnant SRV.DE7 Observation":
-  [Observation: Concepts."Currently pregnant - HIV.SRV.DE7"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  exists "Currently pregnant SRV.DE7 Condition"
+define "Currently pregnant SRV.DE7 Condition":
+  [Condition: Concepts."Currently pregnant - HIV.SRV.DE7"]
 /* End of Currently pregnant SRV.DE7 */
 
 /*

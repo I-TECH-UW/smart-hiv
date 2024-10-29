@@ -73,6 +73,10 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+include HIVConfig called Config
+
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -89,13 +93,14 @@ define "Initial Population":
 
 /**
  * Numerator
- * 
+ *  * CALCULATION SHOULD BE MODIFIED TO REFLECT CONTEXT
  * Definition: Number of people attending HIV prevention services tested for HCV (HCV antibody, HCV RNA or HCV core antigen) during the reporting period
  * Calculation: COUNT of clients with "HCV test date" in the reporting period
  */
 
 define "Numerator":
-  true
+  HIE."HCV test date D.DE169" and 
+  HIE."Date accessed HIV prevention intervention"
 
 
 /**
@@ -106,8 +111,37 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."Date accessed HIV prevention intervention"
     
 
 /* end Populations */
 
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIE."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "patientGroups Stratifier":
+	HIE."patientGroups"
+
+define "HIV Status":
+  HIE."HIV Status Stratifier"
+
+
+define "Stratification":
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ Combine(HIE.patientGroups, ':')
++ ':' + HIE."HIV Status Stratifier".code 
+
+//add Provider type 
