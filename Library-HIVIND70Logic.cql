@@ -133,6 +133,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Gonorrhoea test date B.DE255"
+  and HIE."Date accessed HIV prevention intervention"
 
 
 /**

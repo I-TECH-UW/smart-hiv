@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-10-17
+            as of 2024-10-30
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div><p class="res-header-id"><b>Generated Narrative: Library HIVIND85Logic</b></p><a name="HIVIND85Logic"> </a><a name="hcHIVIND85Logic"> </a><a name="HIVIND85Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><a href="Library-WHOCommon.html">WHOCommon</a></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVIND85Logic</b></p><a name="HIVIND85Logic"> </a><a name="hcHIVIND85Logic"> </a><a name="HIVIND85Logic-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library HIC</td><td><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></td></tr><tr><td>Depends On</td><td>Library WCom</td><td><a href="Library-WHOCommon.html">WHOCommon</a></td></tr><tr><td>Depends On</td><td>Library HE</td><td><a href="Library-HIVElements.html">HIVElements</a></td></tr><tr><td>Depends On</td><td>Library HIE</td><td><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></td></tr><tr><td>Depends On</td><td>Library Config</td><td><a href="Library-HIVConfig.html">HIVConfig</a></td></tr></table><h2>Parameters</h2><table class="grid"><tr><td>Measurement Period</td><td>in</td><td>0</td><td>1</td><td>Period</td></tr><tr><td>Patient</td><td>out</td><td>0</td><td>1</td><td>Patient</td></tr><tr><td>Initial Population</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Numerator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Denominator</td><td>out</td><td>0</td><td>1</td><td>boolean</td></tr><tr><td>Administrative Gender Stratifier</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Age Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>Geographic Region Stratifier</td><td>out</td><td>0</td><td>1</td><td>string</td></tr><tr><td>patientGroups Stratifier</td><td>out</td><td>0</td><td>*</td><td>string</td></tr><tr><td>HIV Status</td><td>out</td><td>0</td><td>1</td><td>Coding</td></tr><tr><td>Stratification</td><td>out</td><td>0</td><td>1</td><td>string</td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code class="language-sql">/**
  * Library: HIV.IND.85 Logic
  * Ref No: HEP.3A
  * Short Name: HBsAg positivity, HIV prevention services
@@ -433,6 +433,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+include HIVConfig called Config
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -455,7 +458,9 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
+  exists(HE.&quot;Positive D.DE163&quot; G
+  with HE.&quot;HBsAg test date D.DE161&quot; P
+  such that G.partOf.references(P) and P.performed.toInterval() during &quot;Measurement Period&quot;)
 
 
 /**
@@ -466,12 +471,41 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
+  exists(HE.&quot;HBsAg test date D.DE161&quot; P
+    where P.performed.toInterval() during &quot;Measurement Period&quot; 
+  and exists (HE.&quot;Date accessed HIV prevention intervention&quot; t where t = start of P.performed.toInterval()))
     
 
 /* end Populations */
 
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 13Kb )</p></div>
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIE.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIE.&quot;By Age Stratifier 2&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIE.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;patientGroups Stratifier&quot;:
+	HIE.&quot;patientGroups&quot;
+
+define &quot;HIV Status&quot;:
+  HIE.&quot;HIV Status Stratifier&quot;
+
+
+define &quot;Stratification&quot;:
+ HIE.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIE.&quot;By Age Stratifier 2&quot;
++ ':' + HIE.&quot;By Geographic Region Stratifier&quot;
++ Combine(HIE.patientGroups, ':')
++ ':' + HIE.&quot;HIV Status Stratifier&quot;.code 
+
+//add Provider type </code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 39Kb )</p></div>
 
   <!-- insert notes if present -->
   
@@ -496,7 +530,7 @@ define &quot;Denominator&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Oct 17, 2024 13:46+0000">2024-10-17</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Oct 30, 2024 19:02+0000">2024-10-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

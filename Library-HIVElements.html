@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-10-17
+            as of 2024-10-30
           
         
       </td>
@@ -349,7 +349,7 @@
   
 
 
-  <div><p class="res-header-id"><b>Generated Narrative: Library HIVElements</b></p><a name="HIVElements"> </a><a name="hcHIVElements"> </a><a name="HIVElements-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WHOConcepts</td><td><a href="Library-WHOConcepts.html">WHOConcepts</a></td></tr><tr><td>Depends On</td><td>Library WC</td><td><a href="Library-WHOCommon.html">WHOCommon</a></td></tr><tr><td>Depends On</td><td>Library WE</td><td><a href="Library-WHOElements.html">WHOElements</a></td></tr><tr><td>Depends On</td><td>Library Concepts</td><td><a href="Library-HIVConcepts.html">HIVConcepts</a></td></tr><tr><td>Depends On</td><td>Library ConceptsCustom</td><td><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></td></tr><tr><td>Depends On</td><td>Library Common</td><td><a href="Library-HIVCommon.html">HIVCommon</a></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVElements
+  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVElements</b></p><a name="HIVElements"> </a><a name="hcHIVElements"> </a><a name="HIVElements-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WHOConcepts</td><td><a href="Library-WHOConcepts.html">WHOConcepts</a></td></tr><tr><td>Depends On</td><td>Library WC</td><td><a href="Library-WHOCommon.html">WHOCommon</a></td></tr><tr><td>Depends On</td><td>Library WE</td><td><a href="Library-WHOElements.html">WHOElements</a></td></tr><tr><td>Depends On</td><td>Library Concepts</td><td><a href="Library-HIVConcepts.html">HIVConcepts</a></td></tr><tr><td>Depends On</td><td>Library ConceptsCustom</td><td><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></td></tr><tr><td>Depends On</td><td>Library Common</td><td><a href="Library-HIVCommon.html">HIVCommon</a></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVElements
 
 using FHIR version '4.0.1'
 
@@ -2943,9 +2943,11 @@ define &quot;At elevated risk for HIV acquisition B.DE225&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Syndrome or STI for which client is diagnosed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Syndrome/STI diagnosed B.DE226&quot;:
-  exists &quot;Syndrome/STI diagnosed B.DE226 Observation&quot;
+    &quot;Urethral discharge syndrome B.DE227&quot; or &quot;Vaginal discharge syndrome B.DE228&quot; or &quot;Lower Abdominal pain  B.DE229&quot; or &quot;Genital ulcer disease syndrome B.DE230&quot; or
+  &quot;Anorectal discharge B.DE231&quot;
+
 define &quot;Syndrome/STI diagnosed B.DE226 Observation&quot;:
   [Observation: Concepts.&quot;Syndrome/STI diagnosed - HIV.B.DE226&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -2956,7 +2958,7 @@ define &quot;Syndrome/STI diagnosed B.DE226 Observation&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with urethral discharge syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Urethral discharge syndrome B.DE227&quot;:
   exists &quot;Urethral discharge syndrome B.DE227 Condition&quot;
     or exists &quot;Urethral discharge syndrome B.DE227 Observation&quot;
@@ -2973,7 +2975,7 @@ define &quot;Urethral discharge syndrome B.DE227 Observation&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with vaginal discharge syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Vaginal discharge syndrome B.DE228&quot;:
   exists &quot;Vaginal discharge syndrome B.DE228 Condition&quot;
     or exists &quot;Vaginal discharge syndrome B.DE228 Observation&quot;
@@ -2990,12 +2992,10 @@ define &quot;Vaginal discharge syndrome B.DE228 Observation&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Lower Abdominal pain  B.DE229&quot;:
-  exists &quot;Lower Abdominal pain  B.DE229 Condition&quot;
-    or exists &quot;Lower Abdominal pain  B.DE229 Observation&quot;
-define &quot;Lower Abdominal pain  B.DE229 Condition&quot;:
-  [Condition: Concepts.&quot;Lower Abdominal pain  - HIV.B.DE229&quot;]
+  exists &quot;Lower Abdominal pain  B.DE229 Observation&quot;
+
 define &quot;Lower Abdominal pain  B.DE229 Observation&quot;:
   &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -3007,7 +3007,7 @@ define &quot;Lower Abdominal pain  B.DE229 Observation&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with genital ulcer disease syndrome
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Genital ulcer disease syndrome B.DE230&quot;:
   exists &quot;Genital ulcer disease syndrome B.DE230 Condition&quot;
     or exists &quot;Genital ulcer disease syndrome B.DE230 Observation&quot;
@@ -3024,12 +3024,10 @@ define &quot;Genital ulcer disease syndrome B.DE230 Observation&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with anorectal discharge
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Anorectal discharge B.DE231&quot;:
-  exists &quot;Anorectal discharge B.DE231 Condition&quot;
-    or exists &quot;Anorectal discharge B.DE231 Observation&quot;
-define &quot;Anorectal discharge B.DE231 Condition&quot;:
-  [Condition: Concepts.&quot;Anorectal discharge - HIV.B.DE231&quot;]
+  exists &quot;Anorectal discharge B.DE231 Observation&quot;
+
 define &quot;Anorectal discharge B.DE231 Observation&quot;:
   &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -6540,24 +6538,22 @@ define &quot;STI testing and treatment D.DE160 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis B virus (HBV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HBsAg test date D.DE161&quot;:
-  [Observation: Concepts.&quot;HBsAg test date - HIV.D.DE161&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;HBsAg test date D.DE161 Value&quot;:
-  &quot;HBsAg test date D.DE161&quot; O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom.&quot;HBsAg test&quot;
+
 /* End of HBsAg test date D.DE161 */
+
 
 /*
 @dataElement: HIV.D.DE162 - HBsAg test result
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis B virus test result (HBsAg)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HBsAg test result D.DE162&quot;:
-  exists &quot;HBsAg test result D.DE162 Observation&quot;
-define &quot;HBsAg test result D.DE162 Observation&quot;:
   [Observation: Concepts.&quot;HBsAg test result - HIV.D.DE162&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of HBsAg test result D.DE162 */
@@ -6567,16 +6563,11 @@ define &quot;HBsAg test result D.DE162 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was positive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Positive D.DE163&quot;:
-  exists &quot;Positive D.DE163 Condition&quot;
-    or exists &quot;Positive D.DE163 Observation&quot;
-define &quot;Positive D.DE163 Condition&quot;:
-  [Condition: Concepts.&quot;Positive - HIV.D.DE163&quot;]
-define &quot;Positive D.DE163 Observation&quot;:
-  &quot;HBsAg test result D.DE162 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Positive - HIV.D.DE163&quot;
+  &quot;HBsAg test result D.DE162&quot; O
+  where O.value ~ Concepts.&quot;Positive - HIV.D.DE163&quot;
+
 /* End of Positive D.DE163 */
 
 /*
@@ -6584,16 +6575,11 @@ define &quot;Positive D.DE163 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was negative
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Negative D.DE164&quot;:
-  exists &quot;Negative D.DE164 Condition&quot;
-    or exists &quot;Negative D.DE164 Observation&quot;
-define &quot;Negative D.DE164 Condition&quot;:
-  [Condition: Concepts.&quot;Negative - HIV.D.DE164&quot;]
-define &quot;Negative D.DE164 Observation&quot;:
-  &quot;HBsAg test result D.DE162 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Negative - HIV.D.DE164&quot;
+  &quot;HBsAg test result D.DE162&quot; O
+  where O.value ~ Concepts.&quot;Negative - HIV.D.DE164&quot;
+
 /* End of Negative D.DE164 */
 
 /*
@@ -6601,16 +6587,10 @@ define &quot;Negative D.DE164 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HBsAg test result was indeterminate
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Indeterminate D.DE165&quot;:
-  exists &quot;Indeterminate D.DE165 Condition&quot;
-    or exists &quot;Indeterminate D.DE165 Observation&quot;
-define &quot;Indeterminate D.DE165 Condition&quot;:
-  [Condition: Concepts.&quot;Indeterminate - HIV.D.DE165&quot;]
-define &quot;Indeterminate D.DE165 Observation&quot;:
-  &quot;HBsAg test result D.DE162 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Indeterminate - HIV.D.DE165&quot;
+    &quot;HBsAg test result D.DE162&quot; O
+  where O.value ~ Concepts.&quot;Indeterminate - HIV.D.DE165&quot;
 /* End of Indeterminate D.DE165 */
 
 /*
@@ -6632,13 +6612,12 @@ define &quot;HBV treatment TDF start date Value&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date client was tested for hepatitis C virus (HCV antibody, HCV RNA or HCV core antigen)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HCV test date D.DE169&quot;:
-  [Observation: Concepts.&quot;HCV test date - HIV.D.DE169&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;HCV test date D.DE169 Value&quot;:
-  &quot;HCV test date D.DE169&quot; O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom.&quot;HCV test&quot;
+
 /* End of HCV test date D.DE169 */
 
 /*
@@ -15111,13 +15090,11 @@ define &quot;ART start date SRV.DE6 Value&quot;:
 @activity: HIV.B6 Capture or update client history
 @description: Client is currently pregnant
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Currently pregnant SRV.DE7&quot;:
-  exists &quot;Currently pregnant SRV.DE7 Observation&quot;
-define &quot;Currently pregnant SRV.DE7 Observation&quot;:
-  [Observation: Concepts.&quot;Currently pregnant - HIV.SRV.DE7&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  exists &quot;Currently pregnant SRV.DE7 Condition&quot;
+define &quot;Currently pregnant SRV.DE7 Condition&quot;:
+  [Condition: Concepts.&quot;Currently pregnant - HIV.SRV.DE7&quot;]
 /* End of Currently pregnant SRV.DE7 */
 
 /*
@@ -15386,7 +15363,7 @@ define &quot;Reporting date Value&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Oct 17, 2024 13:46+0000">2024-10-17</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Oct 30, 2024 19:02+0000">2024-10-30</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
