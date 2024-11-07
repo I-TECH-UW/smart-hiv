@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-10-30
+            as of 2024-11-07
           
         
       </td>
@@ -6598,13 +6598,11 @@ define &quot;Indeterminate D.DE165&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date when client started treatment (TDF) for hepatitis B virus (HBV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HBV treatment TDF start date&quot;:
-  [Observation: Concepts.&quot;HBV treatment TDF start date&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;HBV treatment TDF start date Value&quot;:
-  &quot;HBV treatment TDF start date&quot; O
-  return O.value
+  &quot;Currently on TDF-based ART&quot; MS
+  sort by start of effective.toInterval()
+
 /* End of HBV treatment TDF start date */
 
 /*
@@ -6620,17 +6618,17 @@ define &quot;HCV test date D.DE169&quot;:
 
 /* End of HCV test date D.DE169 */
 
+
 /*
 @dataElement: HIV.D.DE170 - HCV test result
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C virus test result (HCV antibody, HCV RNA or HCV core antigen)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HCV test result D.DE170&quot;:
-  exists &quot;HCV test result D.DE170 Observation&quot;
-define &quot;HCV test result D.DE170 Observation&quot;:
   [Observation: Concepts.&quot;HCV test result - HIV.D.DE170&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
+
 /* End of HCV test result D.DE170 */
 
 /*
@@ -6638,16 +6636,10 @@ define &quot;HCV test result D.DE170 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV test result was positive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Positive D.DE171&quot;:
-  exists &quot;Positive D.DE171 Condition&quot;
-    or exists &quot;Positive D.DE171 Observation&quot;
-define &quot;Positive D.DE171 Condition&quot;:
-  [Condition: Concepts.&quot;Positive - HIV.D.DE171&quot;]
-define &quot;Positive D.DE171 Observation&quot;:
-  &quot;HCV test result D.DE170 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Positive - HIV.D.DE171&quot;
+  &quot;HCV test result D.DE170&quot; O
+  where O.value ~ Concepts.&quot;Positive - HIV.D.DE171&quot;
 /* End of Positive D.DE171 */
 
 /*
@@ -6655,16 +6647,10 @@ define &quot;Positive D.DE171 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV test result was negative
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Negative D.DE172&quot;:
-  exists &quot;Negative D.DE172 Condition&quot;
-    or exists &quot;Negative D.DE172 Observation&quot;
-define &quot;Negative D.DE172 Condition&quot;:
-  [Condition: Concepts.&quot;Negative - HIV.D.DE172&quot;]
-define &quot;Negative D.DE172 Observation&quot;:
-  &quot;HCV test result D.DE170 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Negative - HIV.D.DE172&quot;
+  &quot;HCV test result D.DE170&quot; O
+  where O.value ~ Concepts.&quot;Negative - HIV.D.DE172&quot;
 /* End of Negative D.DE172 */
 
 /*
@@ -6672,16 +6658,10 @@ define &quot;Negative D.DE172 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV test result was indeterminate
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Indeterminate D.DE173&quot;:
-  exists &quot;Indeterminate D.DE173 Condition&quot;
-    or exists &quot;Indeterminate D.DE173 Observation&quot;
-define &quot;Indeterminate D.DE173 Condition&quot;:
-  [Condition: Concepts.&quot;Indeterminate - HIV.D.DE173&quot;]
-define &quot;Indeterminate D.DE173 Observation&quot;:
-  &quot;HCV test result D.DE170 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Indeterminate - HIV.D.DE173&quot;
+  &quot;HCV test result D.DE170&quot; O
+  where O.value ~ Concepts.&quot;Indeterminate - HIV.D.DE173&quot;
 /* End of Indeterminate D.DE173 */
 
 /*
@@ -6689,13 +6669,10 @@ define &quot;Indeterminate D.DE173 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date when client started treatment for hepatitis C virus (HCV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HCV treatment start date&quot;:
-  [Observation: Concepts.&quot;HCV treatment start date&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;HCV treatment start date Value&quot;:
-  &quot;HCV treatment start date&quot; O
-  return O.value
+  &quot;HCV medicine type&quot; MS
+  sort by start of effective.toInterval()
 /* End of HCV treatment start date */
 
 /*
@@ -6703,13 +6680,10 @@ define &quot;HCV treatment start date Value&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date when client completed treatment for hepatitis C virus (HCV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HCV treatment completion date&quot;:
-  [Observation: Concepts.&quot;HCV treatment completion date&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;HCV treatment completion date Value&quot;:
-  &quot;HCV treatment completion date&quot; O
-  return O.value
+  &quot;HCV medicine type&quot; MS
+  sort by end of effective.toInterval()
 /* End of HCV treatment completion date */
 
 /*
@@ -6717,13 +6691,12 @@ define &quot;HCV treatment completion date Value&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C viral load test date
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HCV viral load test date D.DE178&quot;:
-  [Observation: Concepts.&quot;HCV viral load test date - HIV.D.DE178&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;HCV viral load test date D.DE178 Value&quot;:
-  &quot;HCV viral load test date D.DE178&quot; O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom.&quot;HCV viral load&quot;
+
 /* End of HCV viral load test date D.DE178 */
 
 /*
@@ -6731,12 +6704,11 @@ define &quot;HCV viral load test date D.DE178 Value&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C viral load test result (qualitative)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HCV viral load test result D.DE179&quot;:
-  exists &quot;HCV viral load test result D.DE179 Observation&quot;
-define &quot;HCV viral load test result D.DE179 Observation&quot;:
-  [Observation: Concepts.&quot;HCV viral load test result - HIV.D.DE179&quot;] O
+  [Observation: Concepts.&quot;HCV test result - HIV.D.DE170&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
+
 /* End of HCV viral load test result D.DE179 */
 
 /*
@@ -6744,16 +6716,9 @@ define &quot;HCV viral load test result D.DE179 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV was detected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Detected D.DE180&quot;:
-  exists &quot;Detected D.DE180 Condition&quot;
-    or exists &quot;Detected D.DE180 Observation&quot;
-define &quot;Detected D.DE180 Condition&quot;:
-  [Condition: Concepts.&quot;Detected - HIV.D.DE180&quot;]
-define &quot;Detected D.DE180 Observation&quot;:
-  &quot;HCV viral load test result D.DE179 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Detected - HIV.D.DE180&quot;
+  &quot;HCV viral load test result D.DE179&quot; O where O.value ~ Concepts.&quot;Detected - HIV.D.DE180&quot;
 /* End of Detected D.DE180 */
 
 /*
@@ -6761,16 +6726,9 @@ define &quot;Detected D.DE180 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV was not detected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Not detected D.DE181&quot;:
-  exists &quot;Not detected D.DE181 Condition&quot;
-    or exists &quot;Not detected D.DE181 Observation&quot;
-define &quot;Not detected D.DE181 Condition&quot;:
-  [Condition: Concepts.&quot;Not detected - HIV.D.DE181&quot;]
-define &quot;Not detected D.DE181 Observation&quot;:
-  &quot;HCV viral load test result D.DE179 Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Not detected - HIV.D.DE181&quot;
+  &quot;HCV viral load test result D.DE179&quot; O where O.value ~ Concepts.&quot;Not detected - HIV.D.DE181&quot;
 /* End of Not detected D.DE181 */
 
 /*
@@ -6778,12 +6736,10 @@ define &quot;Not detected D.DE181 Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Type of medicine client is prescribed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HCV medicine type&quot;:
-  exists &quot;HCV medicine type Observation&quot;
-define &quot;HCV medicine type Observation&quot;:
-  [Observation: Concepts.&quot;HCV medicine type&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+[MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts.&quot;Positive - HIV.D.DE171&quot;)
 /* End of HCV medicine type */
 
 /*
@@ -6791,16 +6747,9 @@ define &quot;HCV medicine type Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Client is prescribed interferon
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Interferon&quot;:
-  exists &quot;Interferon Condition&quot;
-    or exists &quot;Interferon Observation&quot;
-define &quot;Interferon Condition&quot;:
-  [Condition: Concepts.&quot;Interferon&quot;]
-define &quot;Interferon Observation&quot;:
-  &quot;HCV medicine type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Interferon&quot;
+  &quot;HCV medicine type&quot; MS where (MS.medication ~ Concepts.&quot;Interferon&quot;)
 /* End of Interferon */
 
 /*
@@ -6808,16 +6757,9 @@ define &quot;Interferon Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Client is prescribed direct acting antivirals
 */
-// TODO: Replace placeholder with relevant CQL logic
+ 
 define &quot;Direct acting antivirals&quot;:
-  exists &quot;Direct acting antivirals Condition&quot;
-    or exists &quot;Direct acting antivirals Observation&quot;
-define &quot;Direct acting antivirals Condition&quot;:
-  [Condition: Concepts.&quot;Direct acting antivirals&quot;]
-define &quot;Direct acting antivirals Observation&quot;:
-  &quot;HCV medicine type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Direct acting antivirals&quot;
+  &quot;HCV medicine type&quot; MS where (MS.medication ~ Concepts.&quot;Direct acting antivirals&quot;)
 /* End of Direct acting antivirals */
 
 /*
@@ -6825,13 +6767,10 @@ define &quot;Direct acting antivirals Observation&quot;:
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Client is currently on TDF-based ART regimen
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Currently on TDF-based ART&quot;:
-  exists &quot;Currently on TDF-based ART Observation&quot;
-define &quot;Currently on TDF-based ART Observation&quot;:
-  [Observation: Concepts.&quot;Currently on TDF-based ART&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  &quot;TDF D.DE912&quot; MS where exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on TDF-based ART&quot;)
+  
 /* End of Currently on TDF-based ART */
 
 /*
@@ -9921,13 +9860,10 @@ define &quot;Other medications Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Date of cervical cancer screening test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Date of cervical cancer screening test&quot;:
-  [Observation: Concepts.&quot;Date of cervical cancer screening test&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;Date of cervical cancer screening test Value&quot;:
-  &quot;Date of cervical cancer screening test&quot; O
-  return O.value
+  &quot;Cervical cancer primary screening test type&quot; P
+  sort by start of performed.toInterval()
 /* End of Date of cervical cancer screening test */
 
 /*
@@ -9935,13 +9871,14 @@ define &quot;Date of cervical cancer screening test Value&quot;:
 @activity: HIV.D28 Offer other services
 @description: Client's lifetime number of screenings for cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Lifetime screening test number&quot;:
   [Observation: Concepts.&quot;Lifetime screening test number&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
+
 define &quot;Lifetime screening test number Value&quot;:
   &quot;Lifetime screening test number&quot; O
-  return O.value
+  return O.value as FHIR.string 
 /* End of Lifetime screening test number */
 
 /*
@@ -9949,12 +9886,11 @@ define &quot;Lifetime screening test number Value&quot;:
 @activity: HIV.D28 Offer other services
 @description: Type of cervical cancer screening test used in primary screening
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Cervical cancer primary screening test type&quot;:
-  exists &quot;Cervical cancer primary screening test type Observation&quot;
-define &quot;Cervical cancer primary screening test type Observation&quot;:
-  [Observation: Concepts.&quot;Cervical cancer primary screening test type&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [Procedure] P
+  where P.status = 'completed'
+  and P.category ~ ConceptsCustom.&quot;cervical cancer screening test&quot;
 /* End of Cervical cancer primary screening test type */
 
 /*
@@ -9962,16 +9898,10 @@ define &quot;Cervical cancer primary screening test type Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Screened for cervical cancer using HPV-DNA test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;HPV-DNA&quot;:
-  exists &quot;HPV-DNA Condition&quot;
-    or exists &quot;HPV-DNA Observation&quot;
-define &quot;HPV-DNA Condition&quot;:
-  [Condition: Concepts.&quot;HPV-DNA&quot;]
-define &quot;HPV-DNA Observation&quot;:
-  &quot;Cervical cancer primary screening test type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;HPV-DNA&quot;
+  &quot;Cervical cancer primary screening test type&quot; P
+  where P.code ~ Concepts.&quot;HPV-DNA&quot;
 /* End of HPV-DNA */
 
 /*
@@ -9979,16 +9909,10 @@ define &quot;HPV-DNA Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Screened for cervical cancer using visual inspection with acetic acid (VIA)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;VIA&quot;:
-  exists &quot;VIA Condition&quot;
-    or exists &quot;VIA Observation&quot;
-define &quot;VIA Condition&quot;:
-  [Condition: Concepts.&quot;VIA&quot;]
-define &quot;VIA Observation&quot;:
-  &quot;Cervical cancer primary screening test type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;VIA&quot;
+  &quot;Cervical cancer primary screening test type&quot; P
+  where P.code ~ Concepts.&quot;VIA&quot;
 /* End of VIA */
 
 /*
@@ -9996,16 +9920,10 @@ define &quot;VIA Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Screened for cervical cancer using cervical cytology
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Cervical cytology&quot;:
-  exists &quot;Cervical cytology Condition&quot;
-    or exists &quot;Cervical cytology Observation&quot;
-define &quot;Cervical cytology Condition&quot;:
-  [Condition: Concepts.&quot;Cervical cytology&quot;]
-define &quot;Cervical cytology Observation&quot;:
-  &quot;Cervical cancer primary screening test type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Cervical cytology&quot;
+    &quot;Cervical cancer primary screening test type&quot; P
+  where P.code ~ Concepts.&quot;Cervical cytology&quot;
 /* End of Cervical cytology */
 
 /*
@@ -10013,16 +9931,10 @@ define &quot;Cervical cytology Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Screened for cervical cancer using other method
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Other D.DE662&quot;:
-  exists &quot;Other D.DE662 Condition&quot;
-    or exists &quot;Other D.DE662 Observation&quot;
-define &quot;Other D.DE662 Condition&quot;:
-  [Condition: Concepts.&quot;Other - HIV.D.DE662&quot;]
-define &quot;Other D.DE662 Observation&quot;:
-  &quot;Cervical cancer primary screening test type Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Other - HIV.D.DE662&quot;
+  &quot;Cervical cancer primary screening test type&quot; P
+  where P.code ~  Concepts.&quot;Other - HIV.D.DE662&quot;
 /* End of Other D.DE662 */
 
 /*
@@ -10044,9 +9956,10 @@ define &quot;Date of diagnosis of cervical precancer lesions or invasive cervica
 @activity: HIV.D28 Offer other services
 @description: Client's screening outcome for cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Cervical cancer screening outcome&quot;:
-  exists &quot;Cervical cancer screening outcome Observation&quot;
+  &quot;Cervical cancer screening outcome Observation&quot;
+
 define &quot;Cervical cancer screening outcome Observation&quot;:
   [Observation: Concepts.&quot;Cervical cancer screening outcome&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -10057,12 +9970,10 @@ define &quot;Cervical cancer screening outcome Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Screening outcome for cervical precancer lesions is positive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Positive for cervical precancer lesions&quot;:
-  exists &quot;Positive for cervical precancer lesions Condition&quot;
-    or exists &quot;Positive for cervical precancer lesions Observation&quot;
-define &quot;Positive for cervical precancer lesions Condition&quot;:
-  [Condition: Concepts.&quot;Positive for cervical precancer lesions&quot;]
+  &quot;Positive for cervical precancer lesions Observation&quot;
+
 define &quot;Positive for cervical precancer lesions Observation&quot;:
   &quot;Cervical cancer screening outcome Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -10074,12 +9985,10 @@ define &quot;Positive for cervical precancer lesions Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Screening outcome for cervical precancer lesions is negative
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Negative for cervical precancer lesions&quot;:
-  exists &quot;Negative for cervical precancer lesions Condition&quot;
-    or exists &quot;Negative for cervical precancer lesions Observation&quot;
-define &quot;Negative for cervical precancer lesions Condition&quot;:
-  [Condition: Concepts.&quot;Negative for cervical precancer lesions&quot;]
+  &quot;Negative for cervical precancer lesions Observation&quot;
+
 define &quot;Negative for cervical precancer lesions Observation&quot;:
   &quot;Cervical cancer screening outcome Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -10091,12 +10000,10 @@ define &quot;Negative for cervical precancer lesions Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Type of cervical cancer diagnosis
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Cervical cancer diagnosis&quot;:
-  exists &quot;Cervical cancer diagnosis Observation&quot;
-define &quot;Cervical cancer diagnosis Observation&quot;:
-  [Observation: Concepts.&quot;Cervical cancer diagnosis&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  &quot;Cervical precancer lesions&quot; union &quot;Invasive cervical cancer&quot;
+
 /* End of Cervical cancer diagnosis */
 
 /*
@@ -10104,16 +10011,10 @@ define &quot;Cervical cancer diagnosis Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Client is diagnosed with cervical precancer lesions
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Cervical precancer lesions&quot;:
-  exists &quot;Cervical precancer lesions Condition&quot;
-    or exists &quot;Cervical precancer lesions Observation&quot;
-define &quot;Cervical precancer lesions Condition&quot;:
   [Condition: Concepts.&quot;Cervical precancer lesions&quot;]
-define &quot;Cervical precancer lesions Observation&quot;:
-  &quot;Cervical cancer diagnosis Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Cervical precancer lesions&quot;
+
 /* End of Cervical precancer lesions */
 
 /*
@@ -10121,16 +10022,10 @@ define &quot;Cervical precancer lesions Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Client is diagnosed with invasive cervical cancer disease
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Invasive cervical cancer&quot;:
-  exists &quot;Invasive cervical cancer Condition&quot;
-    or exists &quot;Invasive cervical cancer Observation&quot;
-define &quot;Invasive cervical cancer Condition&quot;:
   [Condition: Concepts.&quot;Invasive cervical cancer&quot;]
-define &quot;Invasive cervical cancer Observation&quot;:
-  &quot;Cervical cancer diagnosis Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Invasive cervical cancer&quot;
+
 /* End of Invasive cervical cancer */
 
 /*
@@ -10138,10 +10033,8 @@ define &quot;Invasive cervical cancer Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Cervical cancer stage at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Cervical cancer stage at diagnosis&quot;:
-  exists &quot;Cervical cancer stage at diagnosis Observation&quot;
-define &quot;Cervical cancer stage at diagnosis Observation&quot;:
   [Observation: Concepts.&quot;Cervical cancer stage at diagnosis&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Cervical cancer stage at diagnosis */
@@ -10151,16 +10044,10 @@ define &quot;Cervical cancer stage at diagnosis Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Stage 0 cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Stage 0&quot;:
-  exists &quot;Stage 0 Condition&quot;
-    or exists &quot;Stage 0 Observation&quot;
-define &quot;Stage 0 Condition&quot;:
-  [Condition: Concepts.&quot;Stage 0&quot;]
-define &quot;Stage 0 Observation&quot;:
-  &quot;Cervical cancer stage at diagnosis Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Stage 0&quot;
+  &quot;Cervical cancer stage at diagnosis&quot; O
+    where O.value ~ Concepts.&quot;Stage 0&quot;
 /* End of Stage 0 */
 
 /*
@@ -10168,16 +10055,10 @@ define &quot;Stage 0 Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Stage I cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Stage I&quot;:
-  exists &quot;Stage I Condition&quot;
-    or exists &quot;Stage I Observation&quot;
-define &quot;Stage I Condition&quot;:
-  [Condition: Concepts.&quot;Stage I&quot;]
-define &quot;Stage I Observation&quot;:
-  &quot;Cervical cancer stage at diagnosis Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Stage I&quot;
+  &quot;Cervical cancer stage at diagnosis&quot; O
+    where O.value ~ Concepts.&quot;Stage I&quot;
 /* End of Stage I */
 
 /*
@@ -10185,16 +10066,10 @@ define &quot;Stage I Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Stage II cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Stage II&quot;:
-  exists &quot;Stage II Condition&quot;
-    or exists &quot;Stage II Observation&quot;
-define &quot;Stage II Condition&quot;:
-  [Condition: Concepts.&quot;Stage II&quot;]
-define &quot;Stage II Observation&quot;:
-  &quot;Cervical cancer stage at diagnosis Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Stage II&quot;
+  &quot;Cervical cancer stage at diagnosis&quot; O
+    where O.value ~ Concepts.&quot;Stage II&quot;
 /* End of Stage II */
 
 /*
@@ -10202,16 +10077,10 @@ define &quot;Stage II Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Stage III cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Stage III&quot;:
-  exists &quot;Stage III Condition&quot;
-    or exists &quot;Stage III Observation&quot;
-define &quot;Stage III Condition&quot;:
-  [Condition: Concepts.&quot;Stage III&quot;]
-define &quot;Stage III Observation&quot;:
-  &quot;Cervical cancer stage at diagnosis Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Stage III&quot;
+  &quot;Cervical cancer stage at diagnosis&quot; O
+    where O.value ~ Concepts.&quot;Stage III&quot;
 /* End of Stage III */
 
 /*
@@ -10219,16 +10088,10 @@ define &quot;Stage III Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Stage IV cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Stage IV&quot;:
-  exists &quot;Stage IV Condition&quot;
-    or exists &quot;Stage IV Observation&quot;
-define &quot;Stage IV Condition&quot;:
-  [Condition: Concepts.&quot;Stage IV&quot;]
-define &quot;Stage IV Observation&quot;:
-  &quot;Cervical cancer stage at diagnosis Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Stage IV&quot;
+  &quot;Cervical cancer stage at diagnosis&quot; O
+    where O.value ~ Concepts.&quot;Stage IV&quot;
 /* End of Stage IV */
 
 /*
@@ -10236,13 +10099,11 @@ define &quot;Stage IV Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Date of treatment for cervical precancer lesions
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Date of treatment for cervical precancer lesions&quot;:
-  [Observation: Concepts.&quot;Date of treatment for cervical precancer lesions&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;Date of treatment for cervical precancer lesions Value&quot;:
-  &quot;Date of treatment for cervical precancer lesions&quot; O
-  return O.value
+  [Procedure] P
+  where P.status = 'completed'
+  and P.category ~ ConceptsCustom.&quot;cervical precancer lesion treatment&quot;
 /* End of Date of treatment for cervical precancer lesions */
 
 /*
@@ -10250,13 +10111,14 @@ define &quot;Date of treatment for cervical precancer lesions Value&quot;:
 @activity: HIV.D28 Offer other services
 @description: Client's lifetime number of treatments for invasive cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Invasive cervical cancer treatment episode&quot;:
   [Observation: Concepts.&quot;Invasive cervical cancer treatment episode&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
+
 define &quot;Invasive cervical cancer treatment episode Value&quot;:
-  &quot;Invasive cervical cancer treatment episode&quot; O
-  return O.value
+  &quot;Lifetime screening test number&quot; O
+  return O.value as FHIR.string 
 /* End of Invasive cervical cancer treatment episode */
 
 /*
@@ -10264,12 +10126,12 @@ define &quot;Invasive cervical cancer treatment episode Value&quot;:
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Invasive cervical cancer treatment method&quot;:
-  exists &quot;Invasive cervical cancer treatment method Observation&quot;
-define &quot;Invasive cervical cancer treatment method Observation&quot;:
-  [Observation: Concepts.&quot;Invasive cervical cancer treatment method&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [Procedure] P
+  where P.status = 'completed'
+  and P.category ~ ConceptsCustom.&quot;Invasive cervical cancer treatment&quot;
+
 /* End of Invasive cervical cancer treatment method */
 
 /*
@@ -10277,16 +10139,11 @@ define &quot;Invasive cervical cancer treatment method Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method is a conization
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Conization&quot;:
-  exists &quot;Conization Condition&quot;
-    or exists &quot;Conization Observation&quot;
-define &quot;Conization Condition&quot;:
-  [Condition: Concepts.&quot;Conization&quot;]
-define &quot;Conization Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Conization&quot;
+  &quot;Invasive cervical cancer treatment method&quot; P
+  where P.code ~ Concepts.&quot;Conization&quot;
+
 /* End of Conization */
 
 /*
@@ -10294,16 +10151,10 @@ define &quot;Conization Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method is a trachelectomy
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Trachelectomy&quot;:
-  exists &quot;Trachelectomy Condition&quot;
-    or exists &quot;Trachelectomy Observation&quot;
-define &quot;Trachelectomy Condition&quot;:
-  [Condition: Concepts.&quot;Trachelectomy&quot;]
-define &quot;Trachelectomy Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Trachelectomy&quot;
+  &quot;Invasive cervical cancer treatment method&quot; P
+  where P.code ~ Concepts.&quot;Trachelectomy&quot;
 /* End of Trachelectomy */
 
 /*
@@ -10311,16 +10162,10 @@ define &quot;Trachelectomy Observation&quot;:
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method is a hysterectomy
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Hysterectomy&quot;:
-  exists &quot;Hysterectomy Condition&quot;
-    or exists &quot;Hysterectomy Observation&quot;
-define &quot;Hysterectomy Condition&quot;:
-  [Condition: Concepts.&quot;Hysterectomy&quot;]
-define &quot;Hysterectomy Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Hysterectomy&quot;
+  &quot;Invasive cervical cancer treatment method&quot; P
+  where P.code ~ Concepts.&quot;Hysterectomy&quot;
 /* End of Hysterectomy */
 
 /*
@@ -10331,13 +10176,10 @@ define &quot;Hysterectomy Observation&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Management of invasive cervical cancer&quot;:
   exists &quot;Management of invasive cervical cancer Condition&quot;
-    or exists &quot;Management of invasive cervical cancer Observation&quot;
+
 define &quot;Management of invasive cervical cancer Condition&quot;:
   [Condition: Concepts.&quot;Management of invasive cervical cancer&quot;]
-define &quot;Management of invasive cervical cancer Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Management of invasive cervical cancer&quot;
+
 /* End of Management of invasive cervical cancer */
 
 /*
@@ -10348,13 +10190,10 @@ define &quot;Management of invasive cervical cancer Observation&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Radiotherapy&quot;:
   exists &quot;Radiotherapy Condition&quot;
-    or exists &quot;Radiotherapy Observation&quot;
+
 define &quot;Radiotherapy Condition&quot;:
   [Condition: Concepts.&quot;Radiotherapy&quot;]
-define &quot;Radiotherapy Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Radiotherapy&quot;
+
 /* End of Radiotherapy */
 
 /*
@@ -10365,13 +10204,10 @@ define &quot;Radiotherapy Observation&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Chemotherapy&quot;:
   exists &quot;Chemotherapy Condition&quot;
-    or exists &quot;Chemotherapy Observation&quot;
+
 define &quot;Chemotherapy Condition&quot;:
   [Condition: Concepts.&quot;Chemotherapy&quot;]
-define &quot;Chemotherapy Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Chemotherapy&quot;
+
 /* End of Chemotherapy */
 
 /*
@@ -10382,13 +10218,10 @@ define &quot;Chemotherapy Observation&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Chemoradiation&quot;:
   exists &quot;Chemoradiation Condition&quot;
-    or exists &quot;Chemoradiation Observation&quot;
+
 define &quot;Chemoradiation Condition&quot;:
   [Condition: Concepts.&quot;Chemoradiation&quot;]
-define &quot;Chemoradiation Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Chemoradiation&quot;
+
 /* End of Chemoradiation */
 
 /*
@@ -10399,13 +10232,10 @@ define &quot;Chemoradiation Observation&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Other D.DE739&quot;:
   exists &quot;Other D.DE739 Condition&quot;
-    or exists &quot;Other D.DE739 Observation&quot;
+
 define &quot;Other D.DE739 Condition&quot;:
   [Condition: Concepts.&quot;Other - HIV.D.DE739&quot;]
-define &quot;Other D.DE739 Observation&quot;:
-  &quot;Invasive cervical cancer treatment method Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Other - HIV.D.DE739&quot;
+
 /* End of Other D.DE739 */
 
 /*
@@ -11409,16 +11239,11 @@ define &quot;Terfenadine Observation&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: TDF currently being taken by, or considered for, client
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;TDF D.DE912&quot;:
-  exists &quot;TDF D.DE912 Condition&quot;
-    or exists &quot;TDF D.DE912 Observation&quot;
-define &quot;TDF D.DE912 Condition&quot;:
-  [Condition: Concepts.&quot;TDF - HIV.D.DE912&quot;]
-define &quot;TDF D.DE912 Observation&quot;:
-  &quot;Medication/drug Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;TDF - HIV.D.DE912&quot;
+  [MedicationStatement] MS
+    where MS.medication ~ Concepts.&quot;TDF - HIV.D.DE912&quot;
+
 /* End of TDF D.DE912 */
 
 /*
@@ -15363,7 +15188,7 @@ define &quot;Reporting date Value&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Wed, Oct 30, 2024 19:04+0000">2024-10-30</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Nov 7, 2024 20:58+0000">2024-11-07</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

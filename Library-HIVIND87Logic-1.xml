@@ -3,8 +3,10 @@
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
    <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
    <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="16">
+      <a:s r="113">
          <a:s>/**
  * Library: HIV.IND.87 Logic
  * Ref No: HEP.3C
@@ -132,56 +134,89 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
+      <def localId="5" locator="83:1-83:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="84:1-84:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="7" locator="85:1-85:31" localIdentifier="Config" path="http://smart.who.int/hiv/HIVConfig">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="7">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVConfig</a:s>
+               </a:s>
+               <a:s> called Config</a:s>
+            </a:s>
+         </annotation>
+      </def>
    </includes>
    <parameters>
-      <def localId="10" locator="85:1-85:88" name="Measurement Period" accessLevel="Public">
+      <def localId="13" locator="88:1-88:88" name="Measurement Period" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="10">
+            <a:s r="13">
                <a:s>// Indicator Definition
 parameter &quot;Measurement Period&quot; </a:s>
-               <a:s r="9">
+               <a:s r="12">
                   <a:s>Interval&lt;</a:s>
-                  <a:s r="8">
+                  <a:s r="11">
                      <a:s>Date</a:s>
                   </a:s>
                   <a:s>></a:s>
                </a:s>
                <a:s> default </a:s>
-               <a:s r="7">
-                  <a:s r="5">Interval[@2023-01-01, @2023-01-30]</a:s>
+               <a:s r="10">
+                  <a:s r="8">Interval[@2023-01-01, @2023-01-30]</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <default localId="7" locator="85:55-85:88" lowClosed="true" highClosed="true" xsi:type="Interval">
-            <low localId="5" locator="85:64-85:74" xsi:type="Date">
+         <default localId="10" locator="88:55-88:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="8" locator="88:64-88:74" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="1" xsi:type="Literal"/>
             </low>
-            <high localId="6" locator="85:77-85:87" xsi:type="Date">
+            <high localId="9" locator="88:77-88:87" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="30" xsi:type="Literal"/>
             </high>
          </default>
-         <parameterTypeSpecifier localId="9" locator="85:32-85:45" xsi:type="IntervalTypeSpecifier">
-            <pointType localId="8" locator="85:41-85:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         <parameterTypeSpecifier localId="12" locator="88:32-88:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="11" locator="88:41-88:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
          </parameterTypeSpecifier>
       </def>
    </parameters>
    <contexts>
-      <def locator="87:1-87:15" name="Patient"/>
+      <def locator="90:1-90:15" name="Patient"/>
    </contexts>
    <statements>
-      <def locator="87:1-87:15" name="Patient" context="Patient">
+      <def locator="90:1-90:15" name="Patient" context="Patient">
          <expression xsi:type="SingletonFrom">
-            <operand locator="87:1-87:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+            <operand locator="90:1-90:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="12" locator="94:1-95:6" name="Initial Population" context="Patient" accessLevel="Public">
+      <def localId="15" locator="97:1-98:6" name="Initial Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="12">
-               <a:s r="11">/* Populations */
+            <a:s r="15">
+               <a:s r="14">/* Populations */
 
 /*
  *Initial Population
@@ -191,12 +226,12 @@ define &quot;Initial Population&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="11" locator="95:3-95:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="14" locator="98:3-98:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="14" locator="104:1-105:6" name="Numerator" context="Patient" accessLevel="Public">
+      <def localId="48" locator="107:1-112:95" name="Numerator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="14">
-               <a:s r="13">/**
+            <a:s r="48">
+               <a:s>/**
  * Numerator
  * 
  * Definition: Number of pregnant women who tested positive for HBsAg during the reporting period
@@ -204,15 +239,219 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true</a:s>
+  </a:s>
+               <a:s r="47">
+                  <a:s r="17">
+                     <a:s r="16">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="17">
+                        <a:s>&quot;Currently pregnant SRV.DE7&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and
+  </a:s>
+                  <a:s r="46">
+                     <a:s>exists</a:s>
+                     <a:s r="45">
+                        <a:s>(</a:s>
+                        <a:s r="45">
+                           <a:s>
+                              <a:s r="19">
+                                 <a:s r="18">
+                                    <a:s>
+                                       <a:s>HE.&quot;Positive D.DE163&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> G</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  </a:s>
+                           <a:s r="44">
+                              <a:s>with </a:s>
+                              <a:s r="21">
+                                 <a:s r="20">
+                                    <a:s>
+                                       <a:s>HE.&quot;HBsAg test date D.DE161&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                              <a:s>
+  such that </a:s>
+                              <a:s r="43">
+                                 <a:s r="31">
+                                    <a:s r="25">
+                                       <a:s r="23">
+                                          <a:s r="22">
+                                             <a:s>G</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="23">
+                                             <a:s>partOf</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="25">
+                                          <a:s>references(</a:s>
+                                          <a:s r="24">
+                                             <a:s>P</a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> and </a:s>
+                                    <a:s r="30">
+                                       <a:s r="28">
+                                          <a:s r="27">
+                                             <a:s r="26">
+                                                <a:s>P</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="27">
+                                                <a:s>performed</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="28">
+                                             <a:s>toInterval()</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s r="30"> during </a:s>
+                                       <a:s r="29">
+                                          <a:s>&quot;Measurement Period&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> and
+  </a:s>
+                                 <a:s r="42">
+                                    <a:s>exists </a:s>
+                                    <a:s r="41">
+                                       <a:s>(</a:s>
+                                       <a:s r="41">
+                                          <a:s>
+                                             <a:s r="33">
+                                                <a:s r="32">
+                                                   <a:s>
+                                                      <a:s>HE.&quot;ANC contact date E.DE85&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> E</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> </a:s>
+                                          <a:s r="40">
+                                             <a:s>where </a:s>
+                                             <a:s r="40">
+                                                <a:s r="35">
+                                                   <a:s>start of </a:s>
+                                                   <a:s r="34">
+                                                      <a:s>E</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> = </a:s>
+                                                <a:s r="39">
+                                                   <a:s>start of </a:s>
+                                                   <a:s r="38">
+                                                      <a:s r="37">
+                                                         <a:s r="36">
+                                                            <a:s>P</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="37">
+                                                            <a:s>performed</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="38">
+                                                         <a:s>toInterval()</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="13" locator="105:3-105:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="47" locator="108:3-112:95" xsi:type="And">
+            <operand localId="17" locator="108:3-108:34" name="Currently pregnant SRV.DE7" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="46" locator="109:3-112:95" xsi:type="Exists">
+               <operand localId="45" locator="109:9-112:95" xsi:type="Query">
+                  <source localId="19" locator="109:10-109:32" alias="G">
+                     <expression localId="18" locator="109:10-109:30" name="Positive D.DE163" libraryName="HE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <relationship localId="44" locator="110:3-112:94" alias="P" xsi:type="With">
+                     <expression localId="20" locator="110:8-110:35" name="HBsAg test date D.DE161" libraryName="HE" xsi:type="ExpressionRef"/>
+                     <suchThat localId="43" locator="111:13-112:94" xsi:type="And">
+                        <operand localId="31" locator="111:13-111:91" xsi:type="And">
+                           <operand localId="25" locator="111:13-111:34" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                              <operand localId="23" locator="111:13-111:20" path="partOf" scope="G" xsi:type="Property"/>
+                              <operand localId="24" locator="111:33" name="P" xsi:type="AliasRef"/>
+                           </operand>
+                           <operand localId="30" locator="111:40-111:91" xsi:type="IncludedIn">
+                              <operand localId="28" locator="111:40-111:63" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                 <operand localId="27" locator="111:40-111:50" path="performed" scope="P" xsi:type="Property"/>
+                              </operand>
+                              <operand xsi:type="Interval">
+                                 <low xsi:type="ToDateTime">
+                                    <operand path="low" xsi:type="Property">
+                                       <source localId="29" locator="111:72-111:91" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </low>
+                                 <lowClosedExpression path="lowClosed" xsi:type="Property">
+                                    <source localId="29" locator="111:72-111:91" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </lowClosedExpression>
+                                 <high xsi:type="ToDateTime">
+                                    <operand path="high" xsi:type="Property">
+                                       <source localId="29" locator="111:72-111:91" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </high>
+                                 <highClosedExpression path="highClosed" xsi:type="Property">
+                                    <source localId="29" locator="111:72-111:91" name="Measurement Period" xsi:type="ParameterRef"/>
+                                 </highClosedExpression>
+                              </operand>
+                           </operand>
+                        </operand>
+                        <operand localId="42" locator="112:3-112:94" xsi:type="Exists">
+                           <operand localId="41" locator="112:10-112:94" xsi:type="Query">
+                              <source localId="33" locator="112:11-112:40" alias="E">
+                                 <expression localId="32" locator="112:11-112:38" name="ANC contact date E.DE85" libraryName="HE" xsi:type="ExpressionRef"/>
+                              </source>
+                              <where localId="40" locator="112:42-112:93" xsi:type="Equal">
+                                 <operand localId="35" locator="112:48-112:57" xsi:type="Start">
+                                    <operand localId="34" locator="112:57" name="E" xsi:type="AliasRef"/>
+                                 </operand>
+                                 <operand localId="39" locator="112:61-112:93" xsi:type="Start">
+                                    <operand localId="38" locator="112:70-112:93" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                       <operand localId="37" locator="112:70-112:80" path="performed" scope="P" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                              </where>
+                           </operand>
+                        </operand>
+                     </suchThat>
+                  </relationship>
+               </operand>
+            </operand>
+         </expression>
       </def>
-      <def localId="16" locator="115:1-116:6" name="Denominator" context="Patient" accessLevel="Public">
+      <def localId="73" locator="124:1-128:99" name="Denominator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="16">
-               <a:s r="15">/**
+            <a:s r="73">
+               <a:s>/**
  * Denominator
  *
  * Definition: Number of pregnant women tested for HBsAg during the reporting period
@@ -220,10 +459,407 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true</a:s>
+   </a:s>
+               <a:s r="72">
+                  <a:s r="50">
+                     <a:s r="49">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="50">
+                        <a:s>&quot;Currently pregnant SRV.DE7&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and
+   </a:s>
+                  <a:s r="71">
+                     <a:s>exists</a:s>
+                     <a:s r="70">
+                        <a:s>(</a:s>
+                        <a:s r="70">
+                           <a:s>
+                              <a:s r="52">
+                                 <a:s r="51">
+                                    <a:s>
+                                       <a:s>HE.&quot;HBsAg test date D.DE161&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> P</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+    </a:s>
+                           <a:s r="69">
+                              <a:s>where </a:s>
+                              <a:s r="69">
+                                 <a:s r="57">
+                                    <a:s r="55">
+                                       <a:s r="54">
+                                          <a:s r="53">
+                                             <a:s>P</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="54">
+                                             <a:s>performed</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="55">
+                                          <a:s>toInterval()</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="57"> during </a:s>
+                                    <a:s r="56">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> 
+  and </a:s>
+                                 <a:s r="68">
+                                    <a:s>exists </a:s>
+                                    <a:s r="67">
+                                       <a:s>(</a:s>
+                                       <a:s r="67">
+                                          <a:s>
+                                             <a:s r="59">
+                                                <a:s r="58">
+                                                   <a:s>
+                                                      <a:s>HE.&quot;ANC contact date E.DE85&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> E</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> </a:s>
+                                          <a:s r="66">
+                                             <a:s>where </a:s>
+                                             <a:s r="66">
+                                                <a:s r="61">
+                                                   <a:s>start of </a:s>
+                                                   <a:s r="60">
+                                                      <a:s>E</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> = </a:s>
+                                                <a:s r="65">
+                                                   <a:s>start of </a:s>
+                                                   <a:s r="64">
+                                                      <a:s r="63">
+                                                         <a:s r="62">
+                                                            <a:s>P</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="63">
+                                                            <a:s>performed</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="64">
+                                                         <a:s>toInterval()</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="15" locator="116:3-116:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="72" locator="125:4-128:99" xsi:type="And">
+            <operand localId="50" locator="125:4-125:35" name="Currently pregnant SRV.DE7" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="71" locator="126:4-128:99" xsi:type="Exists">
+               <operand localId="70" locator="126:10-128:99" xsi:type="Query">
+                  <source localId="52" locator="126:11-126:40" alias="P">
+                     <expression localId="51" locator="126:11-126:38" name="HBsAg test date D.DE161" libraryName="HE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="69" locator="127:5-128:98" xsi:type="And">
+                     <operand localId="57" locator="127:11-127:62" xsi:type="IncludedIn">
+                        <operand localId="55" locator="127:11-127:34" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                           <operand localId="54" locator="127:11-127:21" path="performed" scope="P" xsi:type="Property"/>
+                        </operand>
+                        <operand xsi:type="Interval">
+                           <low xsi:type="ToDateTime">
+                              <operand path="low" xsi:type="Property">
+                                 <source localId="56" locator="127:43-127:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </operand>
+                           </low>
+                           <lowClosedExpression path="lowClosed" xsi:type="Property">
+                              <source localId="56" locator="127:43-127:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                           </lowClosedExpression>
+                           <high xsi:type="ToDateTime">
+                              <operand path="high" xsi:type="Property">
+                                 <source localId="56" locator="127:43-127:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                              </operand>
+                           </high>
+                           <highClosedExpression path="highClosed" xsi:type="Property">
+                              <source localId="56" locator="127:43-127:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                           </highClosedExpression>
+                        </operand>
+                     </operand>
+                     <operand localId="68" locator="128:7-128:98" xsi:type="Exists">
+                        <operand localId="67" locator="128:14-128:98" xsi:type="Query">
+                           <source localId="59" locator="128:15-128:44" alias="E">
+                              <expression localId="58" locator="128:15-128:42" name="ANC contact date E.DE85" libraryName="HE" xsi:type="ExpressionRef"/>
+                           </source>
+                           <where localId="66" locator="128:46-128:97" xsi:type="Equal">
+                              <operand localId="61" locator="128:52-128:61" xsi:type="Start">
+                                 <operand localId="60" locator="128:61" name="E" xsi:type="AliasRef"/>
+                              </operand>
+                              <operand localId="65" locator="128:65-128:97" xsi:type="Start">
+                                 <operand localId="64" locator="128:74-128:97" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                    <operand localId="63" locator="128:74-128:84" path="performed" scope="P" xsi:type="Property"/>
+                                 </operand>
+                              </operand>
+                           </where>
+                        </operand>
+                     </operand>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="76" locator="137:1-138:42" name="Administrative Gender Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="76">
+               <a:s>/* end Populations */
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	</a:s>
+               <a:s r="75">
+                  <a:s r="74">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="75">
+                     <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="75" locator="138:2-138:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="79" locator="140:1-141:26" name="Age Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="79">
+               <a:s>define &quot;Age Stratifier&quot;:
+	</a:s>
+               <a:s r="78">
+                  <a:s r="77">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="78">
+                     <a:s>&quot;By Age Stratifier 2&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="78" locator="141:2-141:26" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="82" locator="143:1-144:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="82">
+               <a:s>define &quot;Geographic Region Stratifier&quot;:
+	</a:s>
+               <a:s r="81">
+                  <a:s r="80">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="81">
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="81" locator="144:2-144:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="85" locator="146:1-147:20" name="patientGroups Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="85">
+               <a:s>define &quot;patientGroups Stratifier&quot;:
+	</a:s>
+               <a:s r="84">
+                  <a:s r="83">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="84">
+                     <a:s>&quot;patientGroups&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="84" locator="147:2-147:20" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="88" locator="149:1-150:29" name="HIV Status" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="88">
+               <a:s>define &quot;HIV Status&quot;:
+  </a:s>
+               <a:s r="87">
+                  <a:s r="86">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="87">
+                     <a:s>&quot;HIV Status Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="87" locator="150:3-150:29" name="HIV Status Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="113" locator="153:1-158:40" name="Stratification" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="113">
+               <a:s>define &quot;Stratification&quot;:
+ </a:s>
+               <a:s r="112">
+                  <a:s r="108">
+                     <a:s r="106">
+                        <a:s r="101">
+                           <a:s r="98">
+                              <a:s r="96">
+                                 <a:s r="93">
+                                    <a:s r="91">
+                                       <a:s r="90">
+                                          <a:s r="89">
+                                             <a:s>HIE</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="90">
+                                             <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="91">
+                                          <a:s>code</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> 
+  + </a:s>
+                                    <a:s r="92">
+                                       <a:s>':'</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> + </a:s>
+                                 <a:s r="95">
+                                    <a:s r="94">
+                                       <a:s>HIE</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="95">
+                                       <a:s>&quot;By Age Stratifier 2&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
++ </a:s>
+                              <a:s r="97">
+                                 <a:s>':'</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> + </a:s>
+                           <a:s r="100">
+                              <a:s r="99">
+                                 <a:s>HIE</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="100">
+                                 <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
++ </a:s>
+                        <a:s r="105">
+                           <a:s>Combine(</a:s>
+                           <a:s r="103">
+                              <a:s r="102">
+                                 <a:s>HIE</a:s>
+                              </a:s>
+                              <a:s>.</a:s>
+                              <a:s r="103">
+                                 <a:s>patientGroups</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>, </a:s>
+                           <a:s r="104">
+                              <a:s>':'</a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
++ </a:s>
+                     <a:s r="107">
+                        <a:s>':'</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> + </a:s>
+                  <a:s r="111">
+                     <a:s r="110">
+                        <a:s r="109">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="110">
+                           <a:s>&quot;HIV Status Stratifier&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="111">
+                        <a:s>code</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="112" locator="154:2-158:40" xsi:type="Concatenate">
+            <operand localId="108" locator="154:2-158:5" xsi:type="Concatenate">
+               <operand localId="106" locator="154:2-157:33" xsi:type="Concatenate">
+                  <operand localId="101" locator="154:2-156:45" xsi:type="Concatenate">
+                     <operand localId="98" locator="154:2-156:5" xsi:type="Concatenate">
+                        <operand localId="96" locator="154:2-155:35" xsi:type="Concatenate">
+                           <operand localId="93" locator="154:2-155:7" xsi:type="Concatenate">
+                              <operand localId="91" locator="154:2-154:47" path="code" xsi:type="Property">
+                                 <source localId="90" locator="154:2-154:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+                              </operand>
+                              <operand localId="92" locator="155:5-155:7" valueType="t:String" value=":" xsi:type="Literal"/>
+                           </operand>
+                           <operand localId="95" locator="155:11-155:35" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
+                        </operand>
+                        <operand localId="97" locator="156:3-156:5" valueType="t:String" value=":" xsi:type="Literal"/>
+                     </operand>
+                     <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand localId="100" locator="156:9-156:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+                     </operand>
+                  </operand>
+                  <operand localId="105" locator="157:3-157:33" xsi:type="Combine">
+                     <source localId="103" locator="157:11-157:27" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
+                     <separator localId="104" locator="157:30-157:32" valueType="t:String" value=":" xsi:type="Literal"/>
+                  </operand>
+               </operand>
+               <operand localId="107" locator="158:3-158:5" valueType="t:String" value=":" xsi:type="Literal"/>
+            </operand>
+            <operand localId="111" locator="158:9-158:40" path="code" xsi:type="Property">
+               <source localId="110" locator="158:9-158:35" name="HIV Status Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
       </def>
    </statements>
 </library>

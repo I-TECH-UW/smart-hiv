@@ -67,6 +67,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+include HIVConfig called Config
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -86,10 +89,14 @@ define "Initial Population":
  * 
  * Definition: Number of women living with HIV who received treatment after being diagnosed with invasive cervical cancer
  * Calculation: COUNT of women with "HIV status"='HIV-positive' AND "Cervical cancer diagnosis"='Invasive cervical cancer' for a "Date of diagnosis of cervical precancer lesions or invasive cervical cancer" within the reporting period AND "Invasive cervical cancer treatment method" is NOT NULL
+ //can't just be not null because if had treatment in past then is true
  */
 
 define "Numerator":
-  true
+  HIE."Has HIV-positive Status" and 
+  HIE."Invasive cervical cancer" and
+  exists HE."Invasive cervical cancer treatment method" P
+  where P.performed after start of "Measurement Period" 
 
 
 /**
@@ -97,11 +104,33 @@ define "Numerator":
  *
  * Definition: Number of women living with HIV who were diagnosed with invasive cervical cancer
  * Calculation: COUNT of women with "HIV status"='HIV-positive' AND "Cervical cancer diagnosis"='Invasive cervical cancer' for a "Date of diagnosis of cervical precancer lesions or invasive cervical cancer" within the reporting period
+ //language should specify only invasive cancer
  */
 
 define "Denominator":
-  true
+  HIE."Has HIV-positive Status" and 
+  HIE."Invasive cervical cancer"
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "Invasive cervical cancer treatment episode Statifier":
+  HIE."Invasive cervical cancer treatment episode Value"
+
+
+define "Stratification":
+HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ ':' + (HIE."Invasive cervical cancer treatment episode Value")
+
+//treatment type not specified
