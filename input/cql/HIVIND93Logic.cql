@@ -52,6 +52,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+include HIVConfig called Config
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -74,7 +77,7 @@ define "Initial Population":
  */
                                                        
 define "Measure Population":
-  true
+  HIE."Has HIV-positive Status" and HIE."Date of cervical cancer screening test"
 
 
 /**
@@ -86,4 +89,24 @@ define "Measure Population":
 define function "Measure Observation"(Patient "Patient"):
   1
 /* end Populations */
+
+/*
+ * Disaggregators
+ */
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 2"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "Lifetime screening test number Statifier":
+  HIE."Lifetime screening test number Value"
+
+
+define "Stratification":
+HIE."By Age Stratifier 2"
++ ':' + HIE."By Geographic Region Stratifier"
++ ':' + (HIE."Lifetime screening test number Value")
+
 

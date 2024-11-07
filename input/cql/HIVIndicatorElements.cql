@@ -2738,13 +2738,11 @@ define "Indeterminate D.DE165":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date when client started treatment (TDF) for hepatitis B virus (HBV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HBV treatment TDF start date":
-  Elements."HBV treatment TDF start date" O
-    where O.effective.toInterval() during "Measurement Period"
-define "HBV treatment TDF start date Value":
-  "HBV treatment TDF start date" O
-  return O.value
+  exists(Elements."HBV treatment TDF start date" MS
+   where MS.effective.toInterval() during "Measurement Period")
+
 /* End of HBV treatment TDF start date */
 
 /*
@@ -2754,7 +2752,7 @@ define "HBV treatment TDF start date Value":
 */
 
 define "HCV test date D.DE169":
-  exists(Elements."HBsAg test date D.DE161" P
+  exists(Elements."HCV test date D.DE169" P
     where P.performed.toInterval() during "Measurement Period")
 
 /* End of HCV test date D.DE169 */
@@ -2764,11 +2762,9 @@ define "HCV test date D.DE169":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C virus test result (HCV antibody, HCV RNA or HCV core antigen)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV test result D.DE170":
-  exists "HCV test result D.DE170 Observation"
-define "HCV test result D.DE170 Observation":
-  Elements."HCV test result D.DE170 Observation" O
+ exists Elements."HCV test result D.DE170" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of HCV test result D.DE170 */
 
@@ -2777,16 +2773,9 @@ define "HCV test result D.DE170 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV test result was positive
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Positive D.DE171":
-  exists "Positive D.DE171 Condition"
-    or exists "Positive D.DE171 Observation"
-define "Positive D.DE171 Condition":
-  Elements."Positive D.DE171 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Positive D.DE171 Observation":
-  Elements."Positive D.DE171 Observation" O
+  exists Elements."Positive D.DE171" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Positive D.DE171 */
 
@@ -2795,16 +2784,9 @@ define "Positive D.DE171 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV test result was negative
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Negative D.DE172":
-  exists "Negative D.DE172 Condition"
-    or exists "Negative D.DE172 Observation"
-define "Negative D.DE172 Condition":
-  Elements."Negative D.DE172 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Negative D.DE172 Observation":
-  Elements."Negative D.DE172 Observation" O
+  exists Elements."Negative D.DE172" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Negative D.DE172 */
 
@@ -2813,16 +2795,9 @@ define "Negative D.DE172 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV test result was indeterminate
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Indeterminate D.DE173":
-  exists "Indeterminate D.DE173 Condition"
-    or exists "Indeterminate D.DE173 Observation"
-define "Indeterminate D.DE173 Condition":
-  Elements."Indeterminate D.DE173 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Indeterminate D.DE173 Observation":
-  Elements."Indeterminate D.DE173 Observation" O
+  exists Elements."Indeterminate D.DE173" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Indeterminate D.DE173 */
 
@@ -2831,13 +2806,10 @@ define "Indeterminate D.DE173 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date when client started treatment for hepatitis C virus (HCV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV treatment start date":
-  Elements."HCV treatment start date" O
-    where O.effective.toInterval() during "Measurement Period"
-define "HCV treatment start date Value":
-  "HCV treatment start date" O
-  return O.value
+  exists Elements."HCV medicine type" MS where start of MS.effective.toInterval() during "Measurement Period"
+
 /* End of HCV treatment start date */
 
 /*
@@ -2845,13 +2817,9 @@ define "HCV treatment start date Value":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Date when client completed treatment for hepatitis C virus (HCV)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV treatment completion date":
-  Elements."HCV treatment completion date" O
-    where O.effective.toInterval() during "Measurement Period"
-define "HCV treatment completion date Value":
-  "HCV treatment completion date" O
-  return O.value
+  exists Elements."HCV medicine type" MS where end of MS.effective.toInterval() during "Measurement Period"
 /* End of HCV treatment completion date */
 
 /*
@@ -2859,13 +2827,11 @@ define "HCV treatment completion date Value":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C viral load test date
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV viral load test date D.DE178":
-  Elements."HCV viral load test date D.DE178" O
-    where O.effective.toInterval() during "Measurement Period"
-define "HCV viral load test date D.DE178 Value":
-  "HCV viral load test date D.DE178" O
-  return O.value
+  exists Elements."HCV viral load test date D.DE178" P
+  where P.performed.toInterval() during "Measurement Period"
+
 /* End of HCV viral load test date D.DE178 */
 
 /*
@@ -2873,12 +2839,10 @@ define "HCV viral load test date D.DE178 Value":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Hepatitis C viral load test result (qualitative)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV viral load test result D.DE179":
-  exists "HCV viral load test result D.DE179 Observation"
-define "HCV viral load test result D.DE179 Observation":
-  Elements."HCV viral load test result D.DE179 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."HCV viral load test result D.DE179" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of HCV viral load test result D.DE179 */
 
 /*
@@ -2886,17 +2850,10 @@ define "HCV viral load test result D.DE179 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV was detected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Detected D.DE180":
-  exists "Detected D.DE180 Condition"
-    or exists "Detected D.DE180 Observation"
-define "Detected D.DE180 Condition":
-  Elements."Detected D.DE180 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Detected D.DE180 Observation":
-  Elements."Detected D.DE180 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Detected D.DE180" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of Detected D.DE180 */
 
 /*
@@ -2904,17 +2861,10 @@ define "Detected D.DE180 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: HCV was not detected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Not detected D.DE181":
-  exists "Not detected D.DE181 Condition"
-    or exists "Not detected D.DE181 Observation"
-define "Not detected D.DE181 Condition":
-  Elements."Not detected D.DE181 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Not detected D.DE181 Observation":
-  Elements."Not detected D.DE181 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Not detected D.DE181" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of Not detected D.DE181 */
 
 /*
@@ -2922,12 +2872,16 @@ define "Not detected D.DE181 Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Type of medicine client is prescribed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "HCV medicine type":
-  exists "HCV medicine type Observation"
-define "HCV medicine type Observation":
-  Elements."HCV medicine type Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."HCV medicine type"
+
+define "By HCV medicine type Stratifier":
+  case 
+      when "Interferon" then Concepts."Interferon"
+      when "Direct acting antivirals" then Concepts."Direct acting antivirals"
+      else null
+  end
 /* End of HCV medicine type */
 
 /*
@@ -2935,17 +2889,9 @@ define "HCV medicine type Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Client is prescribed interferon
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Interferon":
-  exists "Interferon Condition"
-    or exists "Interferon Observation"
-define "Interferon Condition":
-  Elements."Interferon Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Interferon Observation":
-  Elements."Interferon Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Interferon" MS where MS.effective.toInterval() during "Measurement Period"
 /* End of Interferon */
 
 /*
@@ -2953,17 +2899,9 @@ define "Interferon Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Client is prescribed direct acting antivirals
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Direct acting antivirals":
-  exists "Direct acting antivirals Condition"
-    or exists "Direct acting antivirals Observation"
-define "Direct acting antivirals Condition":
-  Elements."Direct acting antivirals Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Direct acting antivirals Observation":
-  Elements."Direct acting antivirals Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Direct acting antivirals" MS where MS.effective.toInterval() during "Measurement Period"
 /* End of Direct acting antivirals */
 
 /*
@@ -2971,12 +2909,10 @@ define "Direct acting antivirals Observation":
 @activity: HIV.D12 Determine recommended screenings and tests
 @description: Client is currently on TDF-based ART regimen
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Currently on TDF-based ART":
-  exists "Currently on TDF-based ART Observation"
-define "Currently on TDF-based ART Observation":
-  Elements."Currently on TDF-based ART Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."Currently on TDF-based ART" MS
+   where MS.effective.toInterval() during "Measurement Period")
 /* End of Currently on TDF-based ART */
 
 /*
@@ -3801,13 +3737,10 @@ define "Enhanced adherence counselling provided Observation":
 @activity: HIV.D28 Offer other services
 @description: Date of cervical cancer screening test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date of cervical cancer screening test":
-  Elements."Date of cervical cancer screening test" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date of cervical cancer screening test Value":
-  "Date of cervical cancer screening test" O
-  return O.value
+  exists Elements."Date of cervical cancer screening test" P
+  where P.performed during "Measurement Period" 
 /* End of Date of cervical cancer screening test */
 
 /*
@@ -3815,13 +3748,16 @@ define "Date of cervical cancer screening test Value":
 @activity: HIV.D28 Offer other services
 @description: Client's lifetime number of screenings for cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Lifetime screening test number":
-  Elements."Lifetime screening test number" O
-    where O.effective.toInterval() during "Measurement Period"
+  Last(Elements."Lifetime screening test number" O
+      where start of O.issued.toInterval() before end of "Measurement Period"
+      sort by issued)
+
+  
 define "Lifetime screening test number Value":
   "Lifetime screening test number" O
-  return O.value
+  return O.value as FHIR.string
 /* End of Lifetime screening test number */
 
 /*
@@ -3843,9 +3779,10 @@ define "Date of diagnosis of cervical precancer lesions or invasive cervical can
 @activity: HIV.D28 Offer other services
 @description: Client's screening outcome for cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Cervical cancer screening outcome":
   exists "Cervical cancer screening outcome Observation"
+
 define "Cervical cancer screening outcome Observation":
   Elements."Cervical cancer screening outcome Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -3858,12 +3795,8 @@ define "Cervical cancer screening outcome Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Positive for cervical precancer lesions":
-  exists "Positive for cervical precancer lesions Condition"
-    or exists "Positive for cervical precancer lesions Observation"
-define "Positive for cervical precancer lesions Condition":
-  Elements."Positive for cervical precancer lesions Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
+  exists "Positive for cervical precancer lesions Observation"
+
 define "Positive for cervical precancer lesions Observation":
   Elements."Positive for cervical precancer lesions Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -3876,12 +3809,8 @@ define "Positive for cervical precancer lesions Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Negative for cervical precancer lesions":
-  exists "Negative for cervical precancer lesions Condition"
-    or exists "Negative for cervical precancer lesions Observation"
-define "Negative for cervical precancer lesions Condition":
-  Elements."Negative for cervical precancer lesions Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
+  exists "Negative for cervical precancer lesions Observation"
+
 define "Negative for cervical precancer lesions Observation":
   Elements."Negative for cervical precancer lesions Observation" O
     where O.effective.toInterval() during "Measurement Period"
@@ -3892,12 +3821,11 @@ define "Negative for cervical precancer lesions Observation":
 @activity: HIV.D28 Offer other services
 @description: Type of cervical cancer diagnosis
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Cervical cancer diagnosis":
-  exists "Cervical cancer diagnosis Observation"
-define "Cervical cancer diagnosis Observation":
-  Elements."Cervical cancer diagnosis Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Cervical cancer diagnosis" C
+   where C.prevalenceInterval() overlaps "Measurement Period"
+
 /* End of Cervical cancer diagnosis */
 
 /*
@@ -3905,17 +3833,11 @@ define "Cervical cancer diagnosis Observation":
 @activity: HIV.D28 Offer other services
 @description: Client is diagnosed with cervical precancer lesions
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Cervical precancer lesions":
-  exists "Cervical precancer lesions Condition"
-    or exists "Cervical precancer lesions Observation"
-define "Cervical precancer lesions Condition":
-  Elements."Cervical precancer lesions Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Cervical precancer lesions Observation":
-  Elements."Cervical precancer lesions Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Cervical precancer lesions" C
+  where C.prevalenceInterval() overlaps "Measurement Period"
+   
 /* End of Cervical precancer lesions */
 
 /*
@@ -3923,17 +3845,11 @@ define "Cervical precancer lesions Observation":
 @activity: HIV.D28 Offer other services
 @description: Client is diagnosed with invasive cervical cancer disease
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Invasive cervical cancer":
-  exists "Invasive cervical cancer Condition"
-    or exists "Invasive cervical cancer Observation"
-define "Invasive cervical cancer Condition":
-  Elements."Invasive cervical cancer Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Invasive cervical cancer Observation":
-  Elements."Invasive cervical cancer Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Invasive cervical cancer" C
+  where C.prevalenceInterval() overlaps "Measurement Period"
+  
 /* End of Invasive cervical cancer */
 
 /*
@@ -3941,12 +3857,11 @@ define "Invasive cervical cancer Observation":
 @activity: HIV.D28 Offer other services
 @description: Cervical cancer stage at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Cervical cancer stage at diagnosis":
-  exists "Cervical cancer stage at diagnosis Observation"
-define "Cervical cancer stage at diagnosis Observation":
-  Elements."Cervical cancer stage at diagnosis Observation" O
+  exists Elements."Cervical cancer stage at diagnosis" O
     where O.effective.toInterval() during "Measurement Period"
+
 /* End of Cervical cancer stage at diagnosis */
 
 /*
@@ -3954,17 +3869,10 @@ define "Cervical cancer stage at diagnosis Observation":
 @activity: HIV.D28 Offer other services
 @description: Stage 0 cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Stage 0":
-  exists "Stage 0 Condition"
-    or exists "Stage 0 Observation"
-define "Stage 0 Condition":
-  Elements."Stage 0 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Stage 0 Observation":
-  Elements."Stage 0 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Stage 0" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of Stage 0 */
 
 /*
@@ -3972,17 +3880,10 @@ define "Stage 0 Observation":
 @activity: HIV.D28 Offer other services
 @description: Stage I cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Stage I":
-  exists "Stage I Condition"
-    or exists "Stage I Observation"
-define "Stage I Condition":
-  Elements."Stage I Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Stage I Observation":
-  Elements."Stage I Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Stage I" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of Stage I */
 
 /*
@@ -3990,17 +3891,10 @@ define "Stage I Observation":
 @activity: HIV.D28 Offer other services
 @description: Stage II cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Stage II":
-  exists "Stage II Condition"
-    or exists "Stage II Observation"
-define "Stage II Condition":
-  Elements."Stage II Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Stage II Observation":
-  Elements."Stage II Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Stage II" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of Stage II */
 
 /*
@@ -4008,17 +3902,10 @@ define "Stage II Observation":
 @activity: HIV.D28 Offer other services
 @description: Stage III cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Stage III":
-  exists "Stage III Condition"
-    or exists "Stage III Observation"
-define "Stage III Condition":
-  Elements."Stage III Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Stage III Observation":
-  Elements."Stage III Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Stage III" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of Stage III */
 
 /*
@@ -4026,31 +3913,31 @@ define "Stage III Observation":
 @activity: HIV.D28 Offer other services
 @description: Stage IV cervical cancer at diagnosis of cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+ 
 define "Stage IV":
-  exists "Stage IV Condition"
-    or exists "Stage IV Observation"
-define "Stage IV Condition":
-  Elements."Stage IV Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Stage IV Observation":
-  Elements."Stage IV Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Stage IV" O
+  where O.effective.toInterval() during "Measurement Period"
 /* End of Stage IV */
+
+define "By Cervical cancer stage at diagnosis of cervical cancer Stratifier":
+  case 
+      when "Stage 0" then Concepts."Stage 0"
+      when "Stage I" then Concepts."Stage I"
+      when "Stage II" then Concepts."Stage II"
+      when "Stage III" then Concepts."Stage III"
+      when "Stage IV" then Concepts."Stage IV"
+      else null
+  end
 
 /*
 @dataElement: HIV.D.DE718 - Date of treatment for cervical precancer lesions
 @activity: HIV.D28 Offer other services
 @description: Date of treatment for cervical precancer lesions
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date of treatment for cervical precancer lesions":
-  Elements."Date of treatment for cervical precancer lesions" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date of treatment for cervical precancer lesions Value":
-  "Date of treatment for cervical precancer lesions" O
-  return O.value
+  exists Elements."Date of treatment for cervical precancer lesions" P
+  where P.performed during "Measurement Period" 
 /* End of Date of treatment for cervical precancer lesions */
 
 /*
@@ -4058,13 +3945,15 @@ define "Date of treatment for cervical precancer lesions Value":
 @activity: HIV.D28 Offer other services
 @description: Client's lifetime number of treatments for invasive cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Invasive cervical cancer treatment episode":
-  Elements."Invasive cervical cancer treatment episode" O
-    where O.effective.toInterval() during "Measurement Period"
+  Last(Elements."Invasive cervical cancer treatment episode" O
+      where start of O.effective.toInterval() before end of "Measurement Period"
+      sort by effective)
+
 define "Invasive cervical cancer treatment episode Value":
   "Invasive cervical cancer treatment episode" O
-  return O.value
+  return O.value as FHIR.string
 /* End of Invasive cervical cancer treatment episode */
 
 /*
@@ -4072,12 +3961,11 @@ define "Invasive cervical cancer treatment episode Value":
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Invasive cervical cancer treatment method":
-  exists "Invasive cervical cancer treatment method Observation"
-define "Invasive cervical cancer treatment method Observation":
-  Elements."Invasive cervical cancer treatment method Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Invasive cervical cancer treatment method" P 
+  where P.performed during "Measurement Period" 
+
 /* End of Invasive cervical cancer treatment method */
 
 /*
@@ -4085,17 +3973,10 @@ define "Invasive cervical cancer treatment method Observation":
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method is a conization
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Conization":
-  exists "Conization Condition"
-    or exists "Conization Observation"
-define "Conization Condition":
-  Elements."Conization Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Conization Observation":
-  Elements."Conization Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Conization" P 
+  where P.performed during "Measurement Period" 
 /* End of Conization */
 
 /*
@@ -4103,17 +3984,10 @@ define "Conization Observation":
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method is a trachelectomy
 */
-// TODO: Replace placeholder with relevant CQL logic
+ 
 define "Trachelectomy":
-  exists "Trachelectomy Condition"
-    or exists "Trachelectomy Observation"
-define "Trachelectomy Condition":
-  Elements."Trachelectomy Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Trachelectomy Observation":
-  Elements."Trachelectomy Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Trachelectomy" P 
+  where P.performed during "Measurement Period" 
 /* End of Trachelectomy */
 
 /*
@@ -4121,17 +3995,10 @@ define "Trachelectomy Observation":
 @activity: HIV.D28 Offer other services
 @description: Invasive cervical cancer treatment method is a hysterectomy
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Hysterectomy":
-  exists "Hysterectomy Condition"
-    or exists "Hysterectomy Observation"
-define "Hysterectomy Condition":
-  Elements."Hysterectomy Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Hysterectomy Observation":
-  Elements."Hysterectomy Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Hysterectomy" P 
+  where P.performed during "Measurement Period" 
 /* End of Hysterectomy */
 
 /*
@@ -4142,14 +4009,12 @@ define "Hysterectomy Observation":
 // TODO: Replace placeholder with relevant CQL logic
 define "Management of invasive cervical cancer":
   exists "Management of invasive cervical cancer Condition"
-    or exists "Management of invasive cervical cancer Observation"
+
 define "Management of invasive cervical cancer Condition":
   Elements."Management of invasive cervical cancer Condition" C
     where C.prevalenceInterval() overlaps before "Measurement Period"
       or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Management of invasive cervical cancer Observation":
-  Elements."Management of invasive cervical cancer Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+
 /* End of Management of invasive cervical cancer */
 
 /*
@@ -4160,14 +4025,12 @@ define "Management of invasive cervical cancer Observation":
 // TODO: Replace placeholder with relevant CQL logic
 define "Radiotherapy":
   exists "Radiotherapy Condition"
-    or exists "Radiotherapy Observation"
+
 define "Radiotherapy Condition":
   Elements."Radiotherapy Condition" C
     where C.prevalenceInterval() overlaps before "Measurement Period"
       or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Radiotherapy Observation":
-  Elements."Radiotherapy Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+
 /* End of Radiotherapy */
 
 /*
@@ -4178,14 +4041,12 @@ define "Radiotherapy Observation":
 // TODO: Replace placeholder with relevant CQL logic
 define "Chemotherapy":
   exists "Chemotherapy Condition"
-    or exists "Chemotherapy Observation"
+
 define "Chemotherapy Condition":
   Elements."Chemotherapy Condition" C
     where C.prevalenceInterval() overlaps before "Measurement Period"
       or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Chemotherapy Observation":
-  Elements."Chemotherapy Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+
 /* End of Chemotherapy */
 
 /*
@@ -4196,14 +4057,12 @@ define "Chemotherapy Observation":
 // TODO: Replace placeholder with relevant CQL logic
 define "Chemoradiation":
   exists "Chemoradiation Condition"
-    or exists "Chemoradiation Observation"
+
 define "Chemoradiation Condition":
   Elements."Chemoradiation Condition" C
     where C.prevalenceInterval() overlaps before "Measurement Period"
       or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Chemoradiation Observation":
-  Elements."Chemoradiation Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+
 /* End of Chemoradiation */
 
 /*
@@ -4214,14 +4073,12 @@ define "Chemoradiation Observation":
 // TODO: Replace placeholder with relevant CQL logic
 define "Other D.DE739":
   exists "Other D.DE739 Condition"
-    or exists "Other D.DE739 Observation"
+
 define "Other D.DE739 Condition":
   Elements."Other D.DE739 Condition" C
     where C.prevalenceInterval() overlaps before "Measurement Period"
       or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Other D.DE739 Observation":
-  Elements."Other D.DE739 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+
 /* End of Other D.DE739 */
 
 /*

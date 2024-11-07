@@ -77,6 +77,10 @@ code "HBsAg test" : 'HBsAg test' from "missing concepts"
 code "Gonorrhoea test" : 'Gonorrhoea test' from "missing concepts"
 code "syphilis treatment" : 'syphilis treatment' from "missing concepts"
 code "Gonorrhoea treatment" : 'Gonorrhoea treatment' from "missing concepts"
-code "HCV test" : 'Gonorrhoea treatment' from "missing concepts"
+code "HCV test" : 'HCV test' from "missing concepts"
+code "HCV viral load" : 'HCV viral load' from "missing concepts"
+code "cervical cancer screening test" : 'cervical cancer screening test' from "missing concepts"
+code "cervical precancer lesion treatment" : 'cervical precancer lesion treatment' from "missing concepts"
+code "Invasive cervical cancer treatment" : 'Invasive cervical cancer treatment' from "missing concepts"
 
 valueset "Antenatal care contact": 'http://fhir.org/guides/who/anc-cds/ValueSet/antenatal-care-contact'
