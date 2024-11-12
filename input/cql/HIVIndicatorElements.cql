@@ -295,13 +295,14 @@ define "HIV status of partner or contact":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Visit date A.DE3":
-  Elements."Visit date A.DE3" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Visit date A.DE3 Value":
-  "Visit date A.DE3" O
-  return O.value
+define "HTS Visit":
+  Elements."HTS Visit" E
+    where E..toInterval() during "Measurement Period"
+
+define "Visit date":
+  "HTS Visit" E
+  return E.date
+
 /* End of Visit date A.DE3 */
 
 /*
@@ -1790,8 +1791,8 @@ define "Syphilis treatment start date B.DE254":
 */
 
 define "Gonorrhoea test date B.DE255":
-  exists(Elements."Gonorrhoea test date B.DE255" P
-    where P.performed.toInterval() during "Measurement Period")
+  "Gonorrhoea test result B.DE256" O
+  return O.effective
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
@@ -1801,8 +1802,9 @@ define "Gonorrhoea test date B.DE255":
 */
 
 define "Gonorrhoea test result B.DE256":
-    exists(Elements."Gonorrhoea test result B.DE256" O
-    where O.effective.toInterval() during "Measurement Period")
+    Elements."Gonorrhoea test result B.DE256" O
+    where O.effective.toInterval() during "Measurement Period"
+    
 /* End of Gonorrhoea test result B.DE256 */
 
 /*
@@ -1812,8 +1814,8 @@ define "Gonorrhoea test result B.DE256":
 */
 
 define "Positive B.DE257":
-  exists Elements."Positive B.DE257" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."Positive B.DE257" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of Positive B.DE257 */
 
 /*
@@ -2752,8 +2754,10 @@ define "HBV treatment TDF start date":
 */
 
 define "HCV test date D.DE169":
-  exists(Elements."HCV test date D.DE169" P
-    where P.performed.toInterval() during "Measurement Period")
+  Elements."HCV test date D.DE169" O
+    where P.effective during "Measurement Period"
+  return O.effective
+  
 
 /* End of HCV test date D.DE169 */
 
@@ -3850,6 +3854,16 @@ define "Invasive cervical cancer":
   exists Elements."Invasive cervical cancer" C
   where C.prevalenceInterval() overlaps "Measurement Period"
   
+define "Invasive cervical cancer diagnosis in the last 12 months":
+  HE."Invasive cervical cancer" C
+    where C.prevalenceInterval() starts before start of "Measurement Period"
+    and  C.prevalenceInterval() starts after (start of "Measurement Period" - 12 months)
+  
+define "Invasive cervical cancer outside the last 12 months":
+  HE."Invasive cervical cancer" C
+    where C.prevalenceInterval() starts before (start of "Measurement Period" - 12 months)
+    or  C.prevalenceInterval() starts after (start of "Measurement Period" - 24 months)
+
 /* End of Invasive cervical cancer */
 
 /*

@@ -52,6 +52,14 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+// Profiles:
+/*
+ - HIVStatusCondition
+ - HIVStatusObservation
+ - Patient
+ - InvasiveCervicalCancerDiagnosis
+ */
+
 library HIVIND96Logic
 
 // Included Libraries
@@ -87,10 +95,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and 
-  exists (HE."Invasive cervical cancer" C
-  where C.prevalenceInterval() starts before start of "Measurement Period"
-  and  C.prevalenceInterval() starts after (start of "Measurement Period" - 12 months)
-  )
+  exists (HIE."Invasive cervical cancer in the last 12 months" C)
   
 
 /**
@@ -100,11 +105,9 @@ define "Numerator":
  */
     
 define "Numerator Exclusions":
-  exists (HE."Invasive cervical cancer" C
-  where C.prevalenceInterval() starts before start of "Measurement Period"
-  and  C.prevalenceInterval() starts after (start of "Measurement Period" - 12 months)
-  and (HE."Death documented" after start of C.prevalenceInterval() and 
-   HE."Death documented" before (start of C.prevalenceInterval() + 12 months))
+  exists (HIE."Invasive cervical cancer in the last 12 months" C where 
+    ( HE."Death documented" after start of C.prevalenceInterval() and
+      HE."Death documented" before (start of C.prevalenceInterval() + 12 months))
   )
 
 
@@ -117,11 +120,8 @@ define "Numerator Exclusions":
 
 define "Denominator":
   HIE."Has HIV-positive Status" and 
-  exists (HE."Invasive cervical cancer" C
-  where C.prevalenceInterval() starts before start of "Measurement Period"
-  and  C.prevalenceInterval() starts after (start of "Measurement Period" - 12 months))
-    
-
+    exists(HIE."Invasive cervical cancer in the last 12 months" C)
+   
 /* end Populations */
 
 /*

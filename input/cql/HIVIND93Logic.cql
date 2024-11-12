@@ -43,6 +43,13 @@
  * Suggested Scoring Method: continuous-variable | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cv-measure-cqfm
  */
 
+ /* 
+  * Profiles:
+  * - HIVStatusCondition
+  * - HIVStatusObservation
+  * - HivCervicalCancerScreening
+  */
+  
 library HIVIND93Logic
 
 // Included Libraries

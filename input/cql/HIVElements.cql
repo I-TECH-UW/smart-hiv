@@ -138,13 +138,10 @@ define "Viral load tests received after ART intitiation":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Visit date A.DE3":
-  [Observation: Concepts."Visit date - HIV.A.DE3"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Visit date A.DE3 Value":
-  "Visit date A.DE3" O
-  return O.value
+  [Encounter: Concepts."Visit date - HIV.A.DE3"] E
+  return E.
+  
 /* End of Visit date A.DE3 */
 
 /*
@@ -289,17 +286,17 @@ define "Other A.DE23 Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: Encounter for HIV testing services visit
 */
-define "HTS Visit Encounter":
+define "HTS Visit":
   [Encounter] E
     where E.type.coding.code contains ConceptsCustom."HTS Visit".code
-
+    
 /*
 @dataElement: HIV.B.DE1 - Reason for visit
 @activity: HIV.B1 Determine reason for visit
 @description: Reason for HIV testing services visit
 */
 define "Reason for visit B.DE1":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   return E.reasonCode 
 /* End of Reason for visit B.DE1 */
 
@@ -309,7 +306,7 @@ define "Reason for visit B.DE1":
 @description: First encounter for screening for human immunodeficiency virus
 */
 define "First-time HIV test Encounter":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   where E.reasonCode.coding.code contains Concepts."First-time HIV test".code
 /* End of First-time HIV test */
 
@@ -320,7 +317,7 @@ define "First-time HIV test Encounter":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Retesting for HIV B.DE3 Encounter":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   where E.reasonCode.coding.code contains Concepts."Retesting for HIV - HIV.B.DE3".code
 /* End of Retesting for HIV B.DE3 */
 
@@ -331,7 +328,7 @@ define "Retesting for HIV B.DE3 Encounter":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV testing services visit Encounter":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   where E.reasonCode.coding.code contains Concepts."HIV testing services visit".code
 /* End of HIV testing services visit */
 
@@ -9539,7 +9536,8 @@ define "Lifetime screening test number Value":
 define "Cervical cancer primary screening test type":
   [Procedure] P
   where P.status = 'completed'
-  and P.category ~ ConceptsCustom."cervical cancer screening test"
+  and P.code ~ Concepts."Cervical cancer primary screening test type"
+  // and P.category ~ Concepts."Procedure" we could 
 /* End of Cervical cancer primary screening test type */
 
 /*
@@ -9591,13 +9589,7 @@ define "Other D.DE662":
 @activity: HIV.D28 Offer other services
 @description: Date of diagnosis of cervical precancer lesions or invasive cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer":
-  [Observation: Concepts."Date of diagnosis of cervical precancer lesions or invasive cervical cancer"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer Value":
-  "Date of diagnosis of cervical precancer lesions or invasive cervical cancer" O
-  return O.value
+
 /* End of Date of diagnosis of cervical precancer lesions or invasive cervical cancer */
 
 /*
@@ -9673,7 +9665,9 @@ define "Cervical precancer lesions":
 */
 
 define "Invasive cervical cancer":
-  [Condition: Concepts."Invasive cervical cancer"]
+  [Condition: Concepts."Invasive cervical cancer"] C
+    where C.status in { 'final', 'amended', 'corrected' }
+
 
 /* End of Invasive cervical cancer */
 
@@ -9752,7 +9746,7 @@ define "Stage IV":
 define "Date of treatment for cervical precancer lesions":
   [Procedure] P
   where P.status = 'completed'
-  and P.category ~ ConceptsCustom."cervical precancer lesion treatment"
+  and P.code in Concepts."Invasive cervical cancer treatment method Choices"
 /* End of Date of treatment for cervical precancer lesions */
 
 /*
@@ -9778,8 +9772,8 @@ define "Invasive cervical cancer treatment episode Value":
 
 define "Invasive cervical cancer treatment method":
   [Procedure] P
-  where P.status = 'completed'
-  and P.category ~ ConceptsCustom."Invasive cervical cancer treatment"
+  where P.status = completed
+  and P.code ~ Concepts."Invasive cervical cancer treatment method Choices"
 
 /* End of Invasive cervical cancer treatment method */
 

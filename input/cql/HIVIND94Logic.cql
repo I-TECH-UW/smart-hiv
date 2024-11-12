@@ -48,6 +48,14 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+/* 
+ * Profiles:
+ * - HIVStatusCondition
+ * - HIVStatusObservation
+ * - CervicalCancerScreening
+ * - CervicalCancerScreeningOutcome
+ */
+
 library HIVIND94Logic
 
 // Included Libraries

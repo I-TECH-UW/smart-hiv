@@ -6,7 +6,8 @@ Description: "This is an example of a PREP Product Prescription resource based o
 * status = #completed
 * intent = #order
 * medicationCodeableConcept = HIVConcepts#HIV.C.DE81
-* subject = Reference(Patient/example-hiv-patient) 
+* subject = Reference(Patient/ExampleHivPatient)
+ 
 * authoredOn = "2023-01-05T10:00:00Z" 
 
 Instance: ExampleCurrentPrepRegimenPrescription
@@ -17,5 +18,6 @@ Description: "This is an example of a current PrEP regimen prescription resource
 * status = #completed
 * intent = #order
 * medicationCodeableConcept = HIVConcepts#HIV.C.DE19 "TDF"
-* subject = Reference(Patient/example-hiv-patient) 
+* subject = Reference(Patient/ExampleHivPatient)
+ 
 * authoredOn = "2023-01-06T10:00:00Z" 

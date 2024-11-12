@@ -189,7 +189,7 @@ define "Other A.DE23 Observation":
 @description: Reason for HIV testing services visit
 */
 define "Reason for visit B.DE1":
-  Elements."HTS Visit Encounter" E
+  Elements."HTS Visit" E
     where E.partOf.references(EncounterId) 
     or E.period.start = Today
     return E.reasonCode

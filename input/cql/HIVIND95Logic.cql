@@ -58,6 +58,15 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+/* 
+ * Profiles:
+ * - HIVStatusCondition
+ * - HIVStatusObservation
+ * - Patient
+ * - InvasiveCervicalCancerDiagnosis
+ * - InvasiveCervicalCancerTreatment
+*/
+
 library HIVIND95Logic
 
 // Included Libraries
@@ -94,10 +103,9 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and 
-  HIE."Invasive cervical cancer" and
-  exists HE."Invasive cervical cancer treatment method" P
-  where P.performed after start of "Measurement Period" 
-
+  HIE."Invasive cervical cancer" C and
+  exists HIE."Invasive cervical cancer treatment method" P
+  where P.performed after start of C.prevalenceInterval()
 
 /**
  * Denominator
