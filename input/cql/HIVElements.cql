@@ -9507,7 +9507,7 @@ define "Other medications Observation":
 
 define "Date of cervical cancer screening test":
   "Cervical cancer primary screening test" O
-  sort by start of effective.toInterval()
+  return O.effective.toInterval().low
 /* End of Date of cervical cancer screening test */
 
 /*

@@ -3741,8 +3741,8 @@ define "Enhanced adherence counselling provided Observation":
 */
 
 define "Date of cervical cancer screening test":
-  exists Elements."Date of cervical cancer screening test" P
-  where P.performed during "Measurement Period" 
+  exists Elements."Date of cervical cancer screening test" d
+  where d during "Measurement Period" 
 /* End of Date of cervical cancer screening test */
 
 /*
