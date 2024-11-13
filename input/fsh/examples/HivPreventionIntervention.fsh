@@ -6,4 +6,4 @@ Description: "An example of an HIV Prevention Intervention observation resource 
 * code = HIVConcepts#HIV.PRV.DE2 "HIV Prevention Intervention"
 * subject = Reference(Patient/ExampleHivPatient)
 * effectiveDateTime = "2023-10-20T14:00:00Z"
-* valueCodeableConcept = HIVConcepts#HIV.PRV.DE2.1 "Condom distribution"
+* valueCodeableConcept = HIVConcepts#HIV.PRV.DE2 

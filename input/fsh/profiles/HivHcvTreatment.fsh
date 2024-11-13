@@ -5,4 +5,4 @@ Description: "HCV Treatment Regimen"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
 * ^title = "HCV Treatment"
-* code from  HIV.D.DE182 (required)
+* medicationCodeableConcept from  HIV.D.DE182 (required)

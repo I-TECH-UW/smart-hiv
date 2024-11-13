@@ -1,3 +1,9 @@
+#IND27:
+  - Two On Art concepts
+  - determine how detailed the ART Treatment Profile needs to be in terms of types of treatments
+  - Figure out MS vs EOC profiling
+    - The many regimens and details that can be attributed to ART need to be carefully profiled
+
 #IND70: 
     -  * HIV.A.DE3: Visit date | The date and time of the client's visit vs.  * HIV.SRV.DE15: Visit date | The date and time of the client's visit: I think we should use HIV.A since it's registration
 
@@ -25,3 +31,6 @@
 #IND92:
     - Check numerator and denominator logic
     - Check how HcvTreatment is encoded (procedure vs. medication statement)
+
+Other notes:
+- NO Code exists for Gonnorhea Treatment

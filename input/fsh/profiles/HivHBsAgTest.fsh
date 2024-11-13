@@ -6,4 +6,4 @@ Description: "A DAK-specific Hepatitis B virus test observation with possible re
 * ^experimental = true
 * ^title = "HBsAg Test"
 * code = HIVConcepts#HIV.D.DE162 "HBsAg test result"
-* valueCodeableConcept from ValueSet HIV.D.DE162 (required)
+* valueCodeableConcept from HIV.D.DE162 (required)

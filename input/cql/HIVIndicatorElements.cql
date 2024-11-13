@@ -297,11 +297,11 @@ define "HIV status of partner or contact":
 */
 define "HTS Visit":
   Elements."HTS Visit" E
-    where E..toInterval() during "Measurement Period"
+    where E.period.toInterval() during "Measurement Period"
 
 define "Visit date":
   "HTS Visit" E
-  return E.date
+  return E.period.start
 
 /* End of Visit date A.DE3 */
 
@@ -2754,11 +2754,9 @@ define "HBV treatment TDF start date":
 */
 
 define "HCV test date D.DE169":
-  Elements."HCV test date D.DE169" O
-    where P.effective during "Measurement Period"
-  return O.effective
+  "HCV test result D.DE170" O
+  return O.effective.toInterval().low
   
-
 /* End of HCV test date D.DE169 */
 
 /*
@@ -2768,7 +2766,7 @@ define "HCV test date D.DE169":
 */
 
 define "HCV test result D.DE170":
- exists Elements."HCV test result D.DE170" O
+  Elements."HCV test result D.DE170" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of HCV test result D.DE170 */
 
@@ -3769,13 +3767,6 @@ define "Lifetime screening test number Value":
 @activity: HIV.D28 Offer other services
 @description: Date of diagnosis of cervical precancer lesions or invasive cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer":
-  Elements."Date of diagnosis of cervical precancer lesions or invasive cervical cancer" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer Value":
-  "Date of diagnosis of cervical precancer lesions or invasive cervical cancer" O
-  return O.value
 /* End of Date of diagnosis of cervical precancer lesions or invasive cervical cancer */
 
 /*
@@ -3855,12 +3846,12 @@ define "Invasive cervical cancer":
   where C.prevalenceInterval() overlaps "Measurement Period"
   
 define "Invasive cervical cancer diagnosis in the last 12 months":
-  HE."Invasive cervical cancer" C
+  Elements."Invasive cervical cancer" C
     where C.prevalenceInterval() starts before start of "Measurement Period"
     and  C.prevalenceInterval() starts after (start of "Measurement Period" - 12 months)
   
 define "Invasive cervical cancer outside the last 12 months":
-  HE."Invasive cervical cancer" C
+  Elements."Invasive cervical cancer" C
     where C.prevalenceInterval() starts before (start of "Measurement Period" - 12 months)
     or  C.prevalenceInterval() starts after (start of "Measurement Period" - 24 months)
 
@@ -6471,17 +6462,7 @@ define "HIV-negative PRV.DE13 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client does not know contact's HIV status
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Unknown PRV.DE14":
-  exists "Unknown PRV.DE14 Condition"
-    or exists "Unknown PRV.DE14 Observation"
-define "Unknown PRV.DE14 Condition":
-  Elements."Unknown PRV.DE14 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Unknown PRV.DE14 Observation":
-  Elements."Unknown PRV.DE14 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+
 /* End of Unknown PRV.DE14 */
 
 /*

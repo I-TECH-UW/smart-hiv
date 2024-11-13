@@ -1,4 +1,4 @@
-Profile: HivCervicalCancerScreeningOutcomeObservation
+Profile: HivCervicalCancerScreeningOutcome
 Parent: Observation
 Description: "Profile for documenting the outcome of cervical cancer screening."
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"

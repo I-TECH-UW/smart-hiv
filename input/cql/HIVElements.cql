@@ -139,8 +139,8 @@ define "Viral load tests received after ART intitiation":
 @description: The date and time of the client's visit
 */
 define "Visit date A.DE3":
-  [Encounter: Concepts."Visit date - HIV.A.DE3"] E
-  return E.
+  [Encounter] E
+    where E.type.coding.code contains Concepts."HIV testing services visit".code
   
 /* End of Visit date A.DE3 */
 
@@ -6258,10 +6258,8 @@ define "HBV treatment TDF start date":
 */
 
 define "HCV test date D.DE169":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom."HCV test"
-
+  "HCV test result D.DE170" O
+  return O.effective.toInterval().low
 /* End of HCV test date D.DE169 */
 
 
@@ -9666,8 +9664,7 @@ define "Cervical precancer lesions":
 
 define "Invasive cervical cancer":
   [Condition: Concepts."Invasive cervical cancer"] C
-    where C.status in { 'final', 'amended', 'corrected' }
-
+    where exists (C.clinicalStatus.coding CStatus where CStatus.code in { 'active', 'recurrence', 'relapse' })
 
 /* End of Invasive cervical cancer */
 
@@ -9772,8 +9769,8 @@ define "Invasive cervical cancer treatment episode Value":
 
 define "Invasive cervical cancer treatment method":
   [Procedure] P
-  where P.status = completed
-  and P.code ~ Concepts."Invasive cervical cancer treatment method Choices"
+  where P.status in { 'completed', 'in-progress' }
+  and P.code in Concepts."Invasive cervical cancer treatment method Choices"
 
 /* End of Invasive cervical cancer treatment method */
 
@@ -14338,8 +14335,7 @@ define "HIV-positive PRV.DE12 Condition":
   [Condition: Concepts."HIV-positive - HIV.PRV.DE12"]
 define "HIV-positive PRV.DE12 Observation":
   "HIV status of contact Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV-positive - HIV.PRV.DE12"
+      where O.value ~ Concepts."HIV-positive - HIV.PRV.DE12"
 /* End of HIV-positive PRV.DE12 */
 
 /*
@@ -14368,8 +14364,10 @@ define "HIV-negative PRV.DE13 Observation":
 define "Unknown PRV.DE14":
   exists "Unknown PRV.DE14 Condition"
     or exists "Unknown PRV.DE14 Observation"
+
 define "Unknown PRV.DE14 Condition":
   [Condition: Concepts."Unknown - HIV.PRV.DE14"]
+
 define "Unknown PRV.DE14 Observation":
   "HIV status of contact Observation" O
     where O.status in { 'final', 'amended', 'corrected' }

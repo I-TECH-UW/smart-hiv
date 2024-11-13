@@ -7,4 +7,4 @@ Description: "Profile for documenting cervical cancer screening procedures."
 * ^experimental = true
 * ^title = "Cervical Cancer Screening Procedure"
 * category = http://snomed.info/sct#103693007 "Diagnostic procedure"
-* code from HIVScreeningTypesVS (required)
+* code = HIVConcepts#HIV.D.DE706
