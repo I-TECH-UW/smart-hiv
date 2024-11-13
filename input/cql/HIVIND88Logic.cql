@@ -113,8 +113,8 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HIE."Positive D.DE171" O)
-  and exists (HIE."Date accessed HIV prevention intervention" t where t = O.effective)
+  exists(HIE."Positive D.DE171" O
+  where exists HIE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval())
 
 
 /**
@@ -125,10 +125,11 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HIE."HCV test result D.DE170" O)
-  and exists (HIE."Date accessed HIV prevention intervention" t where t = O.effective)
+  exists(
+    HIE."HCV test result D.DE170" O
+    where exists(HIE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval()))
 
-/* end Populations */
+/* end Populations */ 
 
 /*
  * Disaggregators

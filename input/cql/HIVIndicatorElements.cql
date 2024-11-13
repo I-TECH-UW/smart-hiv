@@ -2777,7 +2777,7 @@ define "HCV test result D.DE170":
 */
 
 define "Positive D.DE171":
-  exists Elements."Positive D.DE171" O
+  Elements."Positive D.DE171" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Positive D.DE171 */
 
@@ -6405,7 +6405,7 @@ define "Other PRV.DE8":
 */
 
 define "Date accessed HIV prevention intervention":
-  exists (Elements."Date accessed HIV prevention intervention" t where t included in "Measurement Period")
+  Elements."Date accessed HIV prevention intervention" t where t included in "Measurement Period"
 /* End of Date accessed HIV prevention intervention */
 
 /*
