@@ -9506,8 +9506,8 @@ define "Other medications Observation":
 */
 
 define "Date of cervical cancer screening test":
-  "Cervical cancer primary screening test type" P
-  sort by start of performed.toInterval()
+  "Cervical cancer primary screening test" O
+  sort by start of effective.toInterval()
 /* End of Date of cervical cancer screening test */
 
 /*
@@ -9531,10 +9531,11 @@ define "Lifetime screening test number Value":
 @description: Type of cervical cancer screening test used in primary screening
 */
 
-define "Cervical cancer primary screening test type":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ Concepts."Cervical cancer primary screening test type"
+define "Cervical cancer primary screening test":
+  [Observation] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and O.code in Concepts."Cervical cancer primary screening test type Choices"
+
   // and P.category ~ Concepts."Procedure" we could 
 /* End of Cervical cancer primary screening test type */
 
@@ -9545,7 +9546,7 @@ define "Cervical cancer primary screening test type":
 */
 
 define "HPV-DNA":
-  "Cervical cancer primary screening test type" P
+  "Cervical cancer primary screening test" P
   where P.code ~ Concepts."HPV-DNA"
 /* End of HPV-DNA */
 
@@ -9556,7 +9557,7 @@ define "HPV-DNA":
 */
 
 define "VIA":
-  "Cervical cancer primary screening test type" P
+  "Cervical cancer primary screening test" P
   where P.code ~ Concepts."VIA"
 /* End of VIA */
 
@@ -9567,7 +9568,7 @@ define "VIA":
 */
 
 define "Cervical cytology":
-    "Cervical cancer primary screening test type" P
+    "Cervical cancer primary screening test" P
   where P.code ~ Concepts."Cervical cytology"
 /* End of Cervical cytology */
 
@@ -9578,7 +9579,7 @@ define "Cervical cytology":
 */
 
 define "Other D.DE662":
-  "Cervical cancer primary screening test type" P
+  "Cervical cancer primary screening test" P
   where P.code ~  Concepts."Other - HIV.D.DE662"
 /* End of Other D.DE662 */
 

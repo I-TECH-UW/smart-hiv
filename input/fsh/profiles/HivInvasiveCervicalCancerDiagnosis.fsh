@@ -5,4 +5,4 @@ Description: "Invasive cervical cancer diagnosis"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
 * ^title = "Invasive Cervical Cancer Diagnosis"
-* code = HIVConcepts#HIV.D.DE711
+* code from HIV.D.DE709

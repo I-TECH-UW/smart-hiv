@@ -7138,10 +7138,10 @@ define "Lifetime screening test number Value":
 @description: Type of cervical cancer screening test used in primary screening
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Cervical cancer primary screening test type":
+define "Cervical cancer primary screening test":
   exists "Cervical cancer primary screening test type Observation"
 define "Cervical cancer primary screening test type Observation":
-  Elements."Cervical cancer primary screening test type Observation" O
+  Elements."Cervical cancer primary screening test" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Cervical cancer primary screening test type */
