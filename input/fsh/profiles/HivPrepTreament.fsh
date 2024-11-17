@@ -1,5 +1,5 @@
-Profile: HivPrepProductPrescription
-Parent: MedicationRequest
+Profile: HivPrepTreatment
+Parent: HivTreatmentMedicationStatment
 Description: "A profile for MedicationRequest representing a prescription of a PrEP product."
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"

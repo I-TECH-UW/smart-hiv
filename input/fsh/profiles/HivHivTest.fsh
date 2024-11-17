@@ -1,4 +1,4 @@
-Profile: HivTest
+Profile: HivHivTest
 Parent: HivLabTestObservation
 Description: "An DAK-specific HIV test observation with possible results"
 * ^title = "HIV Test"

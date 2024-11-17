@@ -81,6 +81,11 @@
  * Suggested Scoring Method: continuous-variable | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cv-measure-cqfm
  */
 
+/**
+ * Profiles:
+ * 
+ */
+
 library HIVIND2Logic
 
 // Included Libraries

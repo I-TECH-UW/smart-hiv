@@ -34,3 +34,9 @@
 
 Other notes:
 - NO Code exists for Gonnorhea Treatment
+- VMMC code does not exist: SNOMED?     VMMC date ()
+    * HIV.B.DE197 (VMMC performed)
+    * HIV.B.DE198 (VMMC Date)
+    * HIV.PRV.DE7 (input option)
+    * HIV.C.DE133 (referral)
+- PrEP treatment: there are a couple valuesets for regimens, medications, etc. that need to be modeled. 

@@ -1,6 +1,6 @@
 ValueSet: HIV.D.DE789
 Title: "STI tested for ValueSet"
-Description: "Value set of sTI for which the client was tested"
+Description: "Value set of STI for which the client was tested"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablevalueset"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablevalueset"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"

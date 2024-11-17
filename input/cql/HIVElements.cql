@@ -14267,12 +14267,10 @@ define "STI services date":
 define "VMMC":
   [Procedure] P
   where P.status = 'completed'
-  and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
+  and P.code ~ Concepts."VMMC procedure"
 
 define "VMMC date":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
+  "VMMC" P
   return start of P.performed.toInterval()
 /* End of VMMC */
 
