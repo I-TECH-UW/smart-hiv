@@ -1,11 +1,11 @@
-Profile: HivPreferredThirdPepPrescription
-Parent: MedicationRequest
-Description: "A profile for MedicationRequest representing the preferred third PEP drug choice prescription."
+
+Profile: HivPepBackbonePreferredTreatment
+Parent: HivTreatmentMedicationStatment
+Description: "A profile for MedicationRequest representing a preferred PEP backbone prescription."
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
-* ^title = "Preferred Third PEP Prescription"
+* ^title = "Preferred PEP Backbone Treatment"
 * intent = #order
 * medication[x] only CodeableConcept
-* medicationCodeableConcept from HIV.C.DE99 (required)
-
+* medicationCodeableConcept from HIV.C.DE91 (required)

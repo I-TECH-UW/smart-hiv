@@ -39,4 +39,22 @@ Other notes:
     * HIV.B.DE198 (VMMC Date)
     * HIV.PRV.DE7 (input option)
     * HIV.C.DE133 (referral)
-- PrEP treatment: there are a couple valuesets for regimens, medications, etc. that need to be modeled. 
+
+## PrEP Treatment
+PrEP treatment: there are a couple valuesets for regimens, medications, etc. that need to be modeled. 
+  We shouldn't have all these medications statements like activePrEP and PrEP prescription, since it seems to 
+  have the same data. However, there are multiple valuesets:
+  * PrEP product prescribed Choices
+  * "PrEP for HIV prevention"
+  * "Current PrEP regimen Choices"
+  * PrEP Dosing type
+  * PrEP regimen prescribed
+
+## PeP Treatment
+Another multiple number of valuesets
+  * Preferred PEP backbone regimen
+  * Alternative PEP backbone regimen
+  * Preferred third PEP drug
+  * Alternative third PEP drug 
+  
+Can we just have a single profile for a MS that has any of these choices?
