@@ -10,4 +10,4 @@ Parent: Observation
 * issued ^short = "Time at which test results returned"
 * issued ^definition = "The point in time at which the test results were returned to the patient or provider"
 * value[x] only CodeableConcept
-* basedOn MS 0..1
+* basedOn MS
