@@ -1717,11 +1717,11 @@ define "Voluntary medical male circumcision VMMC":
   exists "Voluntary medical male circumcision VMMC Condition"
     or exists "Voluntary medical male circumcision VMMC Observation"
 define "Voluntary medical male circumcision VMMC Condition":
-  [Condition: Concepts."Voluntary medical male circumcision VMMC"]
+  [Condition: Concepts."Voluntary medical male circumcision VMMC referral"]
 define "Voluntary medical male circumcision VMMC Observation":
   "Prevention services offered and referrals B.DE149 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Voluntary medical male circumcision VMMC"
+      and O.value ~ Concepts."Voluntary medical male circumcision VMMC referral"
 /* End of Voluntary medical male circumcision VMMC */
 
 /*
@@ -14609,9 +14609,10 @@ define "Viral load test result SRV.DE13 Value":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-
+// TODO: MARK as visit?
 define "Visit date SRV.DE15":
   [Encounter] E
+  return E.period
 /* End of Visit date SRV.DE15 */
 
 /*

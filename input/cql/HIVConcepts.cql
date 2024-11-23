@@ -561,7 +561,7 @@ code "Follow-up appointment for PrEP": 'HIV.C.DE127' from "HIVConcepts" display 
 code "Other - HIV.C.DE128": 'HIV.C.DE128' from "HIVConcepts" display 'Other'
 code "Prevention services offered and referrals - HIV.C.DE131": 'HIV.C.DE131' from "HIVConcepts" display 'Prevention services offered and referrals'
 code "Male and female condoms and condom-compatible lubricants offered": 'HIV.C.DE132' from "HIVConcepts" display 'Male and female condoms and condom-compatible lubricants offered'
-code "Voluntary medical male circumcision VMMC referral": 'HIV.C.DE133' from "HIVConcepts" display 'Voluntary medical male circumcision VMMC referral'
+code "Voluntary medical male circumcision VMMC referral - HIV.C.DE133": 'HIV.C.DE133' from "HIVConcepts" display 'Voluntary medical male circumcision VMMC referral'
 code "Harm reduction for people who inject drugs - HIV.C.DE134": 'HIV.C.DE134' from "HIVConcepts" display 'Harm reduction for people who inject drugs'
 code "Behavioural interventions to support risk reduction - HIV.C.DE135": 'HIV.C.DE135' from "HIVConcepts" display 'Behavioural interventions to support risk reduction'
 code "Condom type": 'HIV.C.DE138' from "HIVConcepts" display 'Condom type'

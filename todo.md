@@ -58,3 +58,6 @@ Another multiple number of valuesets
   * Alternative third PEP drug 
   
 Can we just have a single profile for a MS that has any of these choices?
+
+## Visit Date
+We need to profile visit date and mark it as a specific type of encounter?
