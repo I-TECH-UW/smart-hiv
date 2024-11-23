@@ -6,6 +6,4 @@ Description: "Voluntary Medical Male Circumcision (VMMC) procedure"
 * ^experimental = true
 * ^title = "Voluntary Medical Male Circumcision (VMMC) Procedure"
 * code = HIVConcepts#HIV.B.DE197
-
-
-
+* performed[x] 1..1 MS

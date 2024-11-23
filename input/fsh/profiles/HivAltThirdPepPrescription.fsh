@@ -5,7 +5,6 @@ Description: "A profile for MedicationRequest representing an alternative Third 
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
 * ^title = "Alternative Third PEP Prescription"
-* intent = #order
 * medication[x] only CodeableConcept
 * medicationCodeableConcept from HIV.C.DE101 (required)
 

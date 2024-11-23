@@ -1,9 +1,8 @@
-Profile: HivVmmcProcedure
-Parent: Procedure
-Description: "A procedure to perform voluntary medical male circumcision"
-* ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
-* ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
-* ^experimental = true
-* ^title = "Vmcc Procedure"
-* code = HIVConcepts#HIV.B.DE153
-* performed[x] 1..1 MS
+Instance: HivVmmcProcedureExample
+InstanceOf: HivVmmcProcedure
+Title: "Example VMMC Procedure"
+Description: "An example of a VMMC procedure based on the HivVmmcProcedure profile."
+* status = #completed
+* code = HIVConcepts#HIV.B.DE197
+* subject = Reference(Patient/ExampleHivPatient)
+* performedDateTime = "2023-01-07T10:00:00Z"

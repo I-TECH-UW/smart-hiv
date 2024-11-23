@@ -5,6 +5,5 @@ Description: "A profile for MedicationRequest representing a prescription of a c
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
 * ^title = "Current PrEP Regimen Prescription"
-* intent = #order
 * medication[x] only CodeableConcept
 * medicationCodeableConcept from HIV.C.DE17 (required)

@@ -5,7 +5,6 @@ Description: "A profile for MedicationRequest representing an alternative PEP ba
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
 * ^title = "Alternative PEP Backbone Prescription"
-* intent = #order
 * medication[x] only CodeableConcept
 * medicationCodeableConcept from HIV.C.DE95 (required)
 

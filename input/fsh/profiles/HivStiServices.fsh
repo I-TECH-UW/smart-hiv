@@ -1,8 +1,8 @@
 Profile: HivStiServices
 Parent: Procedure
-Description: ""
+Description: "STI Services"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
-* ^title = ""
+* ^title = "STI Services"
 
