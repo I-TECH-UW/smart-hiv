@@ -1120,7 +1120,7 @@ define "VMMC_adverse_event":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC referral"
       and P.performed after start of "Measurement Period"
       and P.performed before end of "Measurement Period"
       and AE.date <= (P.performed + 30 days)
@@ -1150,7 +1150,7 @@ define "VMMC_adverse_event_Intraoperative":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC referral"
       and P.performed after start of "Measurement Period"
       and P.performed before end of "Measurement Period"
       and AE.date = P.performed
@@ -1160,7 +1160,7 @@ define "VMMC_adverse_event_Postoperative":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC referral"
       and P.performed after start of "Measurement Period"
       and P.performed before end of "Measurement Period"
       and AE.date <= (P.performed + 30 days)
@@ -6675,8 +6675,8 @@ define "Viral load test result SRV.DE13 Value":
 */
 
 define "Visit date SRV.DE15":
-  exists(Elements."Visit date SRV.DE15" E
-    where start of E.period.toInterval() during "Measurement Period")
+  exists(Elements."Visit date SRV.DE15" p
+    where start of p during "Measurement Period")
 /* End of Visit date SRV.DE15 */
 
 /*
