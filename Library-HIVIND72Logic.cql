@@ -107,6 +107,14 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+ /*
+  * Profiles:
+  * - HivGonorrhoeaTest
+  * - HivStatusObservation
+  * - HivStatusCondition
+  * - HivPreventionServices
+  */ 
+
 library HIVIND72Logic
 
 // Included Libraries
@@ -141,9 +149,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HE."Positive B.DE257" G
-  with HE."Gonorrhoea test date B.DE255" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  exists(HIE."Positive B.DE257")
 
 
 /**
@@ -154,9 +160,9 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HE."Gonorrhoea test date B.DE255" P
-  where P.performed.toInterval() during "Measurement Period"
-  and exists (HE."Date accessed HIV prevention intervention" t where t = start of P.performed.toInterval()))
+  exists(HE."Gonorrhoea test date B.DE255" d
+  where d during "Measurement Period"
+  and exists (HE."Date accessed HIV prevention intervention" t where t = d))
     
 
 /* end Populations */

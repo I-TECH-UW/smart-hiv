@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="218">
          <a:s>/**
@@ -1039,12 +1034,16 @@ define &quot;Numerator&quot;:
                                  </source>
                                  <where localId="40" locator="115:4-116:132" xsi:type="And">
                                     <operand localId="30" locator="115:10-115:162" xsi:type="Before">
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                        <operand locator="115:38-115:43" xsi:type="Start">
                                           <operand localId="22" locator="115:10-115:36" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                              <operand localId="21" locator="115:10-115:23" path="effective" scope="prep" xsi:type="Property"/>
                                           </operand>
                                        </operand>
                                        <operand localId="29" locator="115:52-115:162" xsi:type="Add">
+                                          <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                                           <operand localId="27" locator="115:53-115:135" xsi:type="Start">
                                              <operand localId="26" locator="115:62-115:135" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                                 <operand localId="25" locator="115:62-115:122" path="effective" xsi:type="Property">
@@ -1056,6 +1055,8 @@ define &quot;Numerator&quot;:
                                        </operand>
                                     </operand>
                                     <operand localId="39" locator="116:7-116:132" xsi:type="After">
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                        <operand locator="116:35-116:40" xsi:type="Start">
                                           <operand localId="33" locator="116:7-116:33" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                              <operand localId="32" locator="116:7-116:20" path="effective" scope="prep" xsi:type="Property"/>
@@ -1073,18 +1074,26 @@ define &quot;Numerator&quot;:
                               </operand>
                            </operand>
                            <operand localId="63" locator="119:3-120:111" xsi:type="Exists">
+                              <signature xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
                               <operand localId="62" locator="119:9-120:111" xsi:type="Query">
                                  <source localId="44" locator="119:10-119:20" alias="t">
                                     <expression localId="43" locator="119:10-119:18" name="OAMT" libraryName="HE" xsi:type="ExpressionRef"/>
                                  </source>
                                  <where localId="61" locator="119:22-120:110" xsi:type="And">
                                     <operand localId="53" locator="119:28-119:154" xsi:type="Before">
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                        <operand locator="119:30-119:35" xsi:type="Start">
                                           <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                             <signature name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
                                              <operand localId="45" locator="119:28" name="t" xsi:type="AliasRef"/>
                                           </operand>
                                        </operand>
                                        <operand localId="52" locator="119:44-119:154" xsi:type="Add">
+                                          <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                                           <operand localId="50" locator="119:45-119:127" xsi:type="Start">
                                              <operand localId="49" locator="119:54-119:127" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                                 <operand localId="48" locator="119:54-119:114" path="effective" xsi:type="Property">
@@ -1096,8 +1105,11 @@ define &quot;Numerator&quot;:
                                        </operand>
                                     </operand>
                                     <operand localId="60" locator="120:11-120:110" xsi:type="After">
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                        <operand locator="120:13-120:18" xsi:type="Start">
                                           <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                             <signature name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
                                              <operand localId="54" locator="120:11" name="t" xsi:type="AliasRef"/>
                                           </operand>
                                        </operand>
@@ -1114,18 +1126,25 @@ define &quot;Numerator&quot;:
                            </operand>
                         </operand>
                         <operand localId="89" locator="122:3-123:129" xsi:type="Exists">
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:DeviceUseStatement" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
                            <operand localId="88" locator="122:9-123:129" xsi:type="Query">
                               <source localId="66" locator="122:10-122:21" alias="DUS">
                                  <expression localId="65" locator="122:10-122:17" name="NSP" libraryName="HE" xsi:type="ExpressionRef"/>
                               </source>
                               <where localId="87" locator="122:23-123:128" xsi:type="And">
                                  <operand localId="77" locator="122:29-122:177" xsi:type="Before">
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                     <operand locator="122:53-122:58" xsi:type="Start">
                                        <operand localId="69" locator="122:29-122:51" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                           <operand localId="68" locator="122:29-122:38" path="timing" scope="DUS" xsi:type="Property"/>
                                        </operand>
                                     </operand>
                                     <operand localId="76" locator="122:67-122:177" xsi:type="Add">
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                                        <operand localId="74" locator="122:68-122:150" xsi:type="Start">
                                           <operand localId="73" locator="122:77-122:150" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                              <operand localId="72" locator="122:77-122:137" path="effective" xsi:type="Property">
@@ -1137,6 +1156,8 @@ define &quot;Numerator&quot;:
                                     </operand>
                                  </operand>
                                  <operand localId="86" locator="123:7-123:128" xsi:type="After">
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                     <operand locator="123:31-123:36" xsi:type="Start">
                                        <operand localId="80" locator="123:7-123:29" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                           <operand localId="79" locator="123:7-123:16" path="timing" scope="DUS" xsi:type="Property"/>
@@ -1155,18 +1176,25 @@ define &quot;Numerator&quot;:
                         </operand>
                      </operand>
                      <operand localId="115" locator="125:3-126:132" xsi:type="Exists">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
                         <operand localId="114" locator="125:9-126:132" xsi:type="Query">
                            <source localId="92" locator="125:10-125:30" alias="STI">
                               <expression localId="91" locator="125:10-125:26" name="STI services" libraryName="HE" xsi:type="ExpressionRef"/>
                            </source>
                            <where localId="113" locator="125:32-126:131" xsi:type="And">
                               <operand localId="103" locator="125:38-125:189" xsi:type="Before">
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                  <operand locator="125:65-125:70" xsi:type="Start">
                                     <operand localId="95" locator="125:38-125:63" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                        <operand localId="94" locator="125:38-125:50" path="performed" scope="STI" xsi:type="Property"/>
                                     </operand>
                                  </operand>
                                  <operand localId="102" locator="125:79-125:189" xsi:type="Add">
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                                     <operand localId="100" locator="125:80-125:162" xsi:type="Start">
                                        <operand localId="99" locator="125:89-125:162" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                           <operand localId="98" locator="125:89-125:149" path="effective" xsi:type="Property">
@@ -1178,6 +1206,8 @@ define &quot;Numerator&quot;:
                                  </operand>
                               </operand>
                               <operand localId="112" locator="126:7-126:131" xsi:type="After">
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                  <operand locator="126:34-126:39" xsi:type="Start">
                                     <operand localId="106" locator="126:7-126:32" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                        <operand localId="105" locator="126:7-126:19" path="performed" scope="STI" xsi:type="Property"/>
@@ -1196,18 +1226,25 @@ define &quot;Numerator&quot;:
                      </operand>
                   </operand>
                   <operand localId="141" locator="128:3-129:130" xsi:type="Exists">
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
                      <operand localId="140" locator="128:9-129:130" xsi:type="Query">
                         <source localId="118" locator="128:10-128:20" alias="V">
                            <expression localId="117" locator="128:10-128:18" name="VMMC" libraryName="HE" xsi:type="ExpressionRef"/>
                         </source>
                         <where localId="139" locator="128:22-129:129" xsi:type="And">
                            <operand localId="129" locator="128:28-128:177" xsi:type="Before">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                               <operand locator="128:53-128:58" xsi:type="Start">
                                  <operand localId="121" locator="128:28-128:51" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                     <operand localId="120" locator="128:28-128:38" path="performed" scope="V" xsi:type="Property"/>
                                  </operand>
                               </operand>
                               <operand localId="128" locator="128:67-128:177" xsi:type="Add">
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                                  <operand localId="126" locator="128:68-128:150" xsi:type="Start">
                                     <operand localId="125" locator="128:77-128:150" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                        <operand localId="124" locator="128:77-128:137" path="effective" xsi:type="Property">
@@ -1219,6 +1256,8 @@ define &quot;Numerator&quot;:
                               </operand>
                            </operand>
                            <operand localId="138" locator="129:7-129:129" xsi:type="After">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                               <operand locator="129:32-129:37" xsi:type="Start">
                                  <operand localId="132" locator="129:7-129:30" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                     <operand localId="131" locator="129:7-129:17" path="performed" scope="V" xsi:type="Property"/>
@@ -1237,18 +1276,25 @@ define &quot;Numerator&quot;:
                   </operand>
                </operand>
                <operand localId="167" locator="131:3-133:132" xsi:type="Exists">
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
                   <operand localId="166" locator="131:9-133:132" xsi:type="Query">
                      <source localId="144" locator="131:10-131:29" alias="O">
                         <expression localId="143" locator="131:10-131:27" name="Other PRV.DE8" libraryName="HE" xsi:type="ExpressionRef"/>
                      </source>
                      <where localId="165" locator="132:5-133:131" xsi:type="And">
                         <operand localId="155" locator="132:11-132:160" xsi:type="Before">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                            <operand locator="132:36-132:41" xsi:type="Start">
                               <operand localId="147" locator="132:11-132:34" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                  <operand localId="146" locator="132:11-132:21" path="effective" scope="O" xsi:type="Property"/>
                               </operand>
                            </operand>
                            <operand localId="154" locator="132:50-132:160" xsi:type="Add">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="152" locator="132:51-132:133" xsi:type="Start">
                                  <operand localId="151" locator="132:60-132:133" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                     <operand localId="150" locator="132:60-132:120" path="effective" xsi:type="Property">
@@ -1260,6 +1306,8 @@ define &quot;Numerator&quot;:
                            </operand>
                         </operand>
                         <operand localId="164" locator="133:9-133:131" xsi:type="After">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                            <operand locator="133:34-133:39" xsi:type="Start">
                               <operand localId="158" locator="133:9-133:32" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                  <operand localId="157" locator="133:9-133:19" path="effective" scope="O" xsi:type="Property"/>
@@ -1325,6 +1373,9 @@ define &quot;Denominator&quot;:
          </annotation>
          <expression localId="178" locator="147:3-148:56" xsi:type="And">
             <operand localId="175" locator="147:3-147:56" xsi:type="Exists">
+               <signature xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+               </signature>
                <operand localId="174" locator="147:9-147:56" name="Negative Tests within Measurement Period" libraryName="HIE" xsi:type="ExpressionRef"/>
             </operand>
             <operand localId="177" locator="148:7-148:56" name="At elevated risk for HIV acquisition B.DE225" libraryName="HIE" xsi:type="ExpressionRef"/>
@@ -1545,6 +1596,7 @@ define &quot;Administrative Gender Stratifier&quot;:
                      <operand localId="203" locator="176:3-176:5" valueType="t:String" value=":" xsi:type="Literal"/>
                   </operand>
                   <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                      <operand localId="206" locator="176:9-176:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                   </operand>
                </operand>

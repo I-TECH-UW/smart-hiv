@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="89">
          <a:s>/**
@@ -369,6 +363,9 @@ define &quot;Initial Population&quot;:
             </operand>
             <operand localId="44" locator="100:2-105:4" xsi:type="And">
                <operand localId="22" locator="100:2-100:48" xsi:type="Exists">
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
                   <operand localId="21" locator="100:8-100:48" xsi:type="Query">
                      <source localId="20" locator="100:9-100:47" alias="O">
                         <expression localId="19" locator="100:9-100:45" name="HIV Status Positive Observation" libraryName="HIE" xsi:type="ExpressionRef"/>
@@ -376,20 +373,27 @@ define &quot;Initial Population&quot;:
                   </operand>
                </operand>
                <operand localId="43" locator="101:8-105:4" xsi:type="Exists">
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="fhir:MedicationStatement" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
                   <operand localId="42" locator="101:14-105:4" xsi:type="Query">
                      <source localId="24" locator="101:15-101:34" alias="H">
                         <expression localId="23" locator="101:15-101:32" name="On ART H.DE47" libraryName="HE" xsi:type="ExpressionRef"/>
                      </source>
                      <where localId="41" locator="102:4-104:35" xsi:type="And">
                         <operand localId="29" locator="102:10-102:62" xsi:type="Before">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                            <operand locator="102:22-102:27" xsi:type="Start">
                               <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
                                  <operand asType="fhir:Period" xsi:type="As">
                                     <operand localId="26" locator="102:10-102:20" path="effective" scope="H" xsi:type="Property"/>
                                  </operand>
                               </operand>
                            </operand>
                            <operand xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="28" locator="102:36-102:62" xsi:type="End">
                                  <operand localId="27" locator="102:43-102:62" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -397,22 +401,38 @@ define &quot;Initial Population&quot;:
                         </operand>
                         <operand localId="40" locator="103:9-104:35" xsi:type="Or">
                            <operand localId="34" locator="103:10-103:61" xsi:type="After">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                               <operand locator="103:22-103:25" xsi:type="End">
+                                 <signature xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </signature>
                                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <signature name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
                                     <operand asType="fhir:Period" xsi:type="As">
                                        <operand localId="31" locator="103:10-103:20" path="effective" scope="H" xsi:type="Property"/>
                                     </operand>
                                  </operand>
                               </operand>
                               <operand xsi:type="ToDateTime">
+                                 <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                                  <operand localId="33" locator="103:33-103:61" xsi:type="Start">
+                                    <signature xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                    </signature>
                                     <operand localId="32" locator="103:42-103:61" name="Measurement Period" xsi:type="ParameterRef"/>
                                  </operand>
                               </operand>
                            </operand>
                            <operand localId="39" locator="104:8-104:34" xsi:type="Equivalent">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="37" locator="104:8-104:25" xsi:type="End">
+                                 <signature xsi:type="IntervalTypeSpecifier">
+                                    <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 </signature>
                                  <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <signature name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
                                     <operand asType="fhir:Period" xsi:type="As">
                                        <operand localId="36" locator="104:15-104:25" path="effective" scope="H" xsi:type="Property"/>
                                     </operand>
@@ -478,9 +498,15 @@ define &quot;Initial Population&quot;:
          </annotation>
          <expression localId="54" locator="108:4-110:48" xsi:type="Or">
             <operand localId="49" locator="108:4-108:45" xsi:type="Exists">
+               <signature xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
+               </signature>
                <operand localId="48" locator="108:10-108:45" name="HIV Status Positive Condition" libraryName="HE" xsi:type="ExpressionRef"/>
             </operand>
             <operand localId="53" locator="110:2-110:48" xsi:type="Exists">
+               <signature xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
+               </signature>
                <operand localId="52" locator="110:8-110:48" xsi:type="Query">
                   <source localId="51" locator="110:9-110:47" alias="O">
                      <expression localId="50" locator="110:9-110:45" name="HIV Status Positive Observation" libraryName="HIE" xsi:type="ExpressionRef"/>
@@ -684,6 +710,7 @@ define &quot;Time to start ART&quot;:
                   <operand localId="79" locator="139:3-139:5" valueType="t:String" value=":" xsi:type="Literal"/>
                </operand>
                <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="82" locator="139:9-139:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                </operand>
             </operand>

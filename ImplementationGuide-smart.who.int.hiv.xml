@@ -17,7 +17,7 @@
   <title value="WHO SMART Guidelines - HIV"/>
   <status value="draft"/>
   <experimental value="true"/>
-  <date value="2024-11-07T21:07:17+00:00"/>
+  <date value="2024-12-06T22:10:30+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -58,12 +58,12 @@
   <dependsOn id="hl7_fhir_uv_cpg">
     <uri value="http://hl7.org/fhir/uv/cpg/ImplementationGuide/hl7.fhir.uv.cpg"/>
     <packageId value="hl7.fhir.uv.cpg"/>
-    <version value="current"/>
+    <version value="2.0.0"/>
   </dependsOn>
   <dependsOn id="hl7_fhir_us_cqfmeasures">
     <uri value="http://hl7.org/fhir/us/cqfmeasures/ImplementationGuide/hl7.fhir.us.cqfmeasures"/>
     <packageId value="hl7.fhir.us.cqfmeasures"/>
-    <version value="current"/>
+    <version value="5.0.0"/>
   </dependsOn>
   <dependsOn id="fhir_cqf_common">
     <uri value="http://fhir.org/guides/cqf/common/ImplementationGuide/fhir.cqf.common"/>
@@ -352,7 +352,7 @@
       </extension>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency">
-      <valueCode value="hl7.fhir.uv.tools#0.2.0"/>
+      <valueCode value="hl7.fhir.uv.tools.r4#0.3.0"/>
     </extension>
     <extension url="http://hl7.org/fhir/tools/StructureDefinition/ig-parameter">
       <extension url="code">
@@ -757,6 +757,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivPepThirdAlternativeTreatment"/>
+      </reference>
+      <name value="Alternative Third PEP Treatment"/>
+      <description value="A profile for MedicationRequest representing the alternative third PEP drug choice prescription."/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="ValueSet"/>
       </extension>
       <reference>
@@ -764,6 +775,28 @@
       </reference>
       <name value="Antiretroviral (ARV) drugs received prior to enrolment ValueSet"/>
       <description value="Value set of whether or not the client received ARV drugs prior to enrolling into HIV care"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivAntiRetroviralEpisode"/>
+      </reference>
+      <name value="ART Episode of Care"/>
+      <description value="ART Episode of Care"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivAntiRetroviralTreatment"/>
+      </reference>
+      <name value="Art Regimen"/>
+      <description value="ART Regimen"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -1028,6 +1061,17 @@
       </reference>
       <name value="Cervical cancer primary screening test type ValueSet"/>
       <description value="Value set of type of cervical cancer screening test used in primary screening"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivCervicalCancerScreening"/>
+      </reference>
+      <name value="Cervical Cancer Screening"/>
+      <description value="Profile for documenting cervical cancer screening."/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -1607,6 +1651,17 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
+        <reference value="StructureDefinition/HivElevatedHivAcquisitionRiskCondition"/>
+      </reference>
+      <name value="Elevated HIV Acquisition Risk Condition"/>
+      <description value="A profile for a condition representing an elevated risk for HIV acquisition."/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
         <reference value="StructureDefinition/HivElevatedRiskForAcquisition"/>
       </reference>
       <name value="Elevated HIV Risk Acquisition Condition"/>
@@ -1659,25 +1714,36 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="MedicationRequest"/>
+        <valueString value="MedicationStatement"/>
       </extension>
       <reference>
-        <reference value="MedicationRequest/ExampleAltPepBackbonePrescription"/>
+        <reference value="MedicationStatement/ExampleAltPepBackbonePrescription"/>
       </reference>
       <name value="Example Alternative PEP Backbone Prescription"/>
       <description value="This is an example of an alternative PEP backbone prescription resource based on the AltPepBackbonePrescription profile."/>
-      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivAltPepBackbonePrescription"/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPepBackboneAlternativeTreatment"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="MedicationRequest"/>
+        <valueString value="MedicationStatement"/>
       </extension>
       <reference>
-        <reference value="MedicationRequest/ExampleAltThirdPepPrescription"/>
+        <reference value="MedicationStatement/ExampleAltThirdPepPrescription"/>
       </reference>
       <name value="Example Alternative Third PEP Prescription"/>
       <description value="This is an example of an alternative Third PEP prescription resource based on the AltThirdPepPrescription profile."/>
-      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivAltThirdPepPrescription"/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPepThirdAlternativeTreatment"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="Observation"/>
+      </extension>
+      <reference>
+        <reference value="Observation/ExampleCervicalCancerScreening"/>
+      </reference>
+      <name value="Example Cervical Cancer Screening Procedure"/>
+      <description value="An example of a cervical cancer screening procedure."/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivCervicalCancerScreening"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
@@ -1700,6 +1766,17 @@
       <name value="Example Elevated HIV Risk Condition"/>
       <description value="This is an example of an Elevated HIV Risk Condition resource based on the HivElevatedRiskForAcquisition profile."/>
       <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivElevatedRiskForAcquisition"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="Observation"/>
+      </extension>
+      <reference>
+        <reference value="Observation/ExampleHcvTestObservation"/>
+      </reference>
+      <name value="Example HCV Test Observation"/>
+      <description value="An example of an HCV test observation based on the HivHcvTest profile."/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivHcvTest"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
@@ -1750,51 +1827,95 @@
         <valueString value="Observation"/>
       </extension>
       <reference>
-        <reference value="Observation/HivTest"/>
+        <reference value="Observation/ExampleHivPreventionIntervention"/>
+      </reference>
+      <name value="Example HIV Prevention Intervention Observation"/>
+      <description value="An example of an HIV Prevention Intervention observation resource based on the HivPreventionIntervention profile."/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPreventionIntervention"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="Observation"/>
+      </extension>
+      <reference>
+        <reference value="Observation/ExampleHivTest"/>
       </reference>
       <name value="Example HIV Test Observation for Positive Result"/>
       <description value="This is an example of an HIV Test Observation resource based on the HivTest profile for a positive test result."/>
-      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivTest"/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivHivTest"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="MedicationRequest"/>
+        <valueString value="Condition"/>
       </extension>
       <reference>
-        <reference value="MedicationRequest/ExamplePreferredPepBackbonePrescription"/>
+        <reference value="Condition/ExampleHivInvasiveCervicalCancerDiagnosis"/>
+      </reference>
+      <name value="Example Invasive Cervical Cancer Diagnosis"/>
+      <description value="This is an example of an Invasive Cervical Cancer Diagnosis Condition resource based on the HivInvasiveCervicalCancerDiagnosis profile."/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerDiagnosis"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="Procedure"/>
+      </extension>
+      <reference>
+        <reference value="Procedure/ExampleHivInvasiveCervicalCancerTreatment"/>
+      </reference>
+      <name value="Example Invasive Cervical Cancer Treatment Procedure"/>
+      <description value="This is an example of an Invasive Cervical Cancer Treatment Procedure resource based on the HivInvasiveCervicalCancerTreatment profile."/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerTreatment"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="MedicationStatement"/>
+      </extension>
+      <reference>
+        <reference value="MedicationStatement/ExamplePreferredPepBackbonePrescription"/>
       </reference>
       <name value="Example Preferred PEP Backbone Prescription"/>
       <description value="This is an example of a preferred PEP backbone prescription resource based on the PreferredPepBackbonePrescription profile."/>
-      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPreferredPepBackbonePrescription"/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPepBackbonePreferredTreatment"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="MedicationRequest"/>
+        <valueString value="MedicationStatement"/>
       </extension>
       <reference>
-        <reference value="MedicationRequest/ExamplePreferredThirdPepPrescription"/>
+        <reference value="MedicationStatement/ExamplePreferredThirdPepPrescription"/>
       </reference>
       <name value="Example Preferred Third PEP Prescription"/>
       <description value="This is an example of a preferred third PEP prescription resource based on the PreferredThirdPepPrescription profile."/>
-      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPreferredThirdPepPrescription"/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPepThirdPreferredTreatment"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="MedicationRequest"/>
+        <valueString value="MedicationStatement"/>
       </extension>
       <reference>
-        <reference value="MedicationRequest/ExamplePrepProductPrescription"/>
+        <reference value="MedicationStatement/ExamplePrepProductPrescription"/>
       </reference>
       <name value="Example PrEP Product Prescription"/>
       <description value="This is an example of a PREP Product Prescription resource based on the PrepProductPrescription profile."/>
-      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPrepProductPrescription"/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPrepTreatment"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="Procedure"/>
+      </extension>
+      <reference>
+        <reference value="Procedure/HivVmmcProcedureExample"/>
+      </reference>
+      <name value="Example VMMC Procedure"/>
+      <description value="An example of a VMMC procedure based on the HivVmmcProcedure profile."/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivVmmcProcedure"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="Patient"/>
       </extension>
       <reference>
-        <reference value="Patient/example-hiv-patient"/>
+        <reference value="Patient/ExampleHivPatient"/>
       </reference>
       <name value="ExampleHivPatient"/>
       <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPatient"/>
@@ -1944,6 +2065,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivGonorhoeaTest"/>
+      </reference>
+      <name value="Gonorrhoea Test"/>
+      <description value="A DAK-specific Gonnorhoea test observation with possible results"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="ValueSet"/>
       </extension>
       <reference>
@@ -1962,6 +2094,28 @@
       </reference>
       <name value="Gonorrhoea test result ValueSet"/>
       <description value="Value set of result from Gonorrhoea test"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivGonorrhoeaTreatment"/>
+      </reference>
+      <name value="Gonorrhoea Treatment"/>
+      <description value="Gonorrhoea Treatment"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivHBsAgTest"/>
+      </reference>
+      <name value="HBsAg Test"/>
+      <description value="A DAK-specific Hepatitis B virus test observation with possible results"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -2010,6 +2164,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivHcvTest"/>
+      </reference>
+      <name value="HCV Test"/>
+      <description value="A DAK-specific Hepatitis C test observation with possible results"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="ValueSet"/>
       </extension>
       <reference>
@@ -2032,6 +2197,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivHcvTreatment"/>
+      </reference>
+      <name value="HCV Treatment"/>
+      <description value="HCV Treatment Regimen"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="ValueSet"/>
       </extension>
       <reference>
@@ -2039,6 +2215,17 @@
       </reference>
       <name value="HCV treatment regimen prescribed ValueSet"/>
       <description value="Value set of hepatitis C virus treatment regimen prescribed"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivHcvViralLoadTest"/>
+      </reference>
+      <name value="HCV Viral Load Test"/>
+      <description value="A DAK-specific HCV Viral Load observation with possible results"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -2131,6 +2318,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivCondition"/>
+      </reference>
+      <name value="HIV Condition"/>
+      <description value="Core profile for HIV IG Conditions"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="ValueSet"/>
       </extension>
       <reference>
@@ -2153,6 +2351,16 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivLabTestSpecimen"/>
+      </reference>
+      <name value="HIV Lab Test Specimen"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="Requirements"/>
       </extension>
       <reference>
@@ -2167,10 +2375,10 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
-        <reference value="StructureDefinition/HivPrepActive"/>
+        <reference value="StructureDefinition/HivPreventionIntervention"/>
       </reference>
-      <name value="HIV Prep Active"/>
-      <description value="A medication statement describing a patient on active PrEP"/>
+      <name value="HIV Prevention Intervention"/>
+      <description value="HIV prevention intervention"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -2288,7 +2496,7 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
-        <reference value="StructureDefinition/HivTest"/>
+        <reference value="StructureDefinition/HivHivTest"/>
       </reference>
       <name value="HIV Test"/>
       <description value="An DAK-specific HIV test observation with possible results"/>
@@ -2340,6 +2548,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivTreatmentMedicationStatement"/>
+      </reference>
+      <name value="HIV Treatment Medication Statement"/>
+      <description value="Core profile for HIV IG Treatment Medication Statments"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="ValueSet"/>
       </extension>
       <reference>
@@ -2347,6 +2566,17 @@
       </reference>
       <name value="HIV treatment outcome ValueSet"/>
       <description value="Value set of the outcome for the client which is used for reporting retention/attrition."/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivTreatmentProcedure"/>
+      </reference>
+      <name value="HIV Treatment Procedure"/>
+      <description value="Core profile for HIV IG Treatment Procedures"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -4661,9 +4891,40 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
+        <reference value="StructureDefinition/HivLabTestObservation"/>
+      </reference>
+      <name value="HivLabTestObservation"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivLabTestServiceRequest"/>
+      </reference>
+      <name value="HivLabTestServiceRequest"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
         <reference value="StructureDefinition/HivPatient"/>
       </reference>
       <name value="HivPatient"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivVmmcAdverseEvent"/>
+      </reference>
+      <name value="HivVmmcAdverseEvent"/>
+      <description value="An adverse event related to voluntary medical male circumcision"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -4686,6 +4947,17 @@
       </reference>
       <name value="HPV16/18 test result ValueSet"/>
       <description value="Value set of test result from HPV16/18 test"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivHtsVisit"/>
+      </reference>
+      <name value="HTS Visit"/>
+      <description value="Encounter for HIV testing services visit"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -4752,6 +5024,28 @@
       </reference>
       <name value="Intimate partner violence enquiry results ValueSet"/>
       <description value="Value set of result of medical inquiry for intimate partner violence"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivInvasiveCervicalCancerDiagnosis"/>
+      </reference>
+      <name value="Invasive Cervical Cancer Diagnosis"/>
+      <description value="Invasive cervical cancer diagnosis"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivInvasiveCervicalCancerTreatment"/>
+      </reference>
+      <name value="Invasive Cervical Cancer Treatment"/>
+      <description value="Invasive cervical cancer treatment"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -5441,7 +5735,7 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
-        <reference value="StructureDefinition/HivPreferredPepBackbonePrescription"/>
+        <reference value="StructureDefinition/HivPepBackboneAlternativeTreatment"/>
       </reference>
       <name value="Preferred PEP Backbone Prescription"/>
       <description value="A profile for MedicationRequest representing a preferred PEP backbone prescription."/>
@@ -5456,6 +5750,17 @@
       </reference>
       <name value="Preferred PEP backbone regimen ValueSet"/>
       <description value="Value set of preferred backbone regimen for PEP"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivPepBackbonePreferredTreatment"/>
+      </reference>
+      <name value="Preferred PEP Backbone Treatment"/>
+      <description value="A profile for MedicationRequest representing a preferred PEP backbone prescription."/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -5485,9 +5790,9 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
-        <reference value="StructureDefinition/HivPreferredThirdPepPrescription"/>
+        <reference value="StructureDefinition/HivPepThirdPreferredTreatment"/>
       </reference>
-      <name value="Preferred Third PEP Prescription"/>
+      <name value="Preferred Third PEP Treatment"/>
       <description value="A profile for MedicationRequest representing the preferred third PEP drug choice prescription."/>
       <exampleBoolean value="false"/>
     </resource>
@@ -5551,7 +5856,7 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
-        <reference value="StructureDefinition/HivPrepProductPrescription"/>
+        <reference value="StructureDefinition/HivPrepTreatment"/>
       </reference>
       <name value="PrEP Product Prescription"/>
       <description value="A profile for MedicationRequest representing a prescription of a PrEP product."/>
@@ -6296,6 +6601,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivStiServices"/>
+      </reference>
+      <name value="STI Services"/>
+      <description value="STI Services"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="ValueSet"/>
       </extension>
       <reference>
@@ -6335,7 +6651,7 @@
         <reference value="ValueSet/HIV.D.DE789"/>
       </reference>
       <name value="STI tested for ValueSet"/>
-      <description value="Value set of sTI for which the client was tested"/>
+      <description value="Value set of STI for which the client was tested"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -7029,6 +7345,17 @@
       </reference>
       <name value="VIA cervical cancer screening test result ValueSet"/>
       <description value="Value set of screening test result for VIA"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivVmmcProcedure"/>
+      </reference>
+      <name value="Voluntary Medical Male Circumcision (VMMC) Procedure"/>
+      <description value="Voluntary Medical Male Circumcision (VMMC) procedure"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>

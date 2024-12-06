@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="104">
          <a:s>/**
@@ -414,6 +409,7 @@ define &quot;Numerator&quot;:
                         </operand>
                         <operand xsi:type="Interval">
                            <low xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand path="low" xsi:type="Property">
                                  <source localId="23" locator="110:82-110:101" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -422,6 +418,7 @@ define &quot;Numerator&quot;:
                               <source localId="23" locator="110:82-110:101" name="Measurement Period" xsi:type="ParameterRef"/>
                            </lowClosedExpression>
                            <high xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand path="high" xsi:type="Property">
                                  <source localId="23" locator="110:82-110:101" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -440,6 +437,10 @@ define &quot;Numerator&quot;:
                         <relationship localId="34" locator="114:5-115:38" alias="O" xsi:type="With">
                            <expression localId="28" locator="114:10-114:36" name="Screen positive for TB" libraryName="HE" xsi:type="ExpressionRef"/>
                            <suchThat localId="33" locator="115:17-115:38" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                              <signature xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="31" locator="115:17-115:24" path="partOf" scope="P" xsi:type="Property"/>
                               <operand localId="32" locator="115:37" name="O" xsi:type="AliasRef"/>
                            </suchThat>
@@ -450,6 +451,7 @@ define &quot;Numerator&quot;:
                            </operand>
                            <operand xsi:type="Interval">
                               <low xsi:type="ToDateTime">
+                                 <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                                  <operand path="low" xsi:type="Property">
                                     <source localId="38" locator="116:43-116:62" name="Measurement Period" xsi:type="ParameterRef"/>
                                  </operand>
@@ -458,6 +460,7 @@ define &quot;Numerator&quot;:
                                  <source localId="38" locator="116:43-116:62" name="Measurement Period" xsi:type="ParameterRef"/>
                               </lowClosedExpression>
                               <high xsi:type="ToDateTime">
+                                 <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                                  <operand path="high" xsi:type="Property">
                                     <source localId="38" locator="116:43-116:62" name="Measurement Period" xsi:type="ParameterRef"/>
                                  </operand>
@@ -655,6 +658,7 @@ define &quot;Denominator&quot;:
                      </operand>
                      <operand xsi:type="Interval">
                         <low xsi:type="ToDateTime">
+                           <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                            <operand path="low" xsi:type="Property">
                               <source localId="58" locator="132:82-132:101" name="Measurement Period" xsi:type="ParameterRef"/>
                            </operand>
@@ -663,6 +667,7 @@ define &quot;Denominator&quot;:
                            <source localId="58" locator="132:82-132:101" name="Measurement Period" xsi:type="ParameterRef"/>
                         </lowClosedExpression>
                         <high xsi:type="ToDateTime">
+                           <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                            <operand path="high" xsi:type="Property">
                               <source localId="58" locator="132:82-132:101" name="Measurement Period" xsi:type="ParameterRef"/>
                            </operand>
@@ -681,6 +686,10 @@ define &quot;Denominator&quot;:
                      <relationship localId="69" locator="136:5-137:38" alias="O" xsi:type="With">
                         <expression localId="63" locator="136:10-136:36" name="Screen positive for TB" libraryName="HE" xsi:type="ExpressionRef"/>
                         <suchThat localId="68" locator="137:17-137:38" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                           <signature xsi:type="ListTypeSpecifier">
+                              <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                           </signature>
+                           <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                            <operand localId="66" locator="137:17-137:24" path="partOf" scope="P" xsi:type="Property"/>
                            <operand localId="67" locator="137:37" name="O" xsi:type="AliasRef"/>
                         </suchThat>
@@ -691,6 +700,7 @@ define &quot;Denominator&quot;:
                         </operand>
                         <operand xsi:type="Interval">
                            <low xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand path="low" xsi:type="Property">
                                  <source localId="73" locator="138:43-138:62" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -699,6 +709,7 @@ define &quot;Denominator&quot;:
                               <source localId="73" locator="138:43-138:62" name="Measurement Period" xsi:type="ParameterRef"/>
                            </lowClosedExpression>
                            <high xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand path="high" xsi:type="Property">
                                  <source localId="73" locator="138:43-138:62" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -848,6 +859,7 @@ define &quot;Administrative Gender Stratifier&quot;:
                <operand localId="99" locator="162:3-162:5" valueType="t:String" value=":" xsi:type="Literal"/>
             </operand>
             <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+               <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                <operand localId="102" locator="162:9-162:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
             </operand>
          </expression>

@@ -138,13 +138,10 @@ define "Viral load tests received after ART intitiation":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Visit date A.DE3":
-  [Observation: Concepts."Visit date - HIV.A.DE3"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Visit date A.DE3 Value":
-  "Visit date A.DE3" O
-  return O.value
+  [Encounter] E
+    where E.type.coding.code contains Concepts."HIV testing services visit".code
+  
 /* End of Visit date A.DE3 */
 
 /*
@@ -289,17 +286,17 @@ define "Other A.DE23 Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: Encounter for HIV testing services visit
 */
-define "HTS Visit Encounter":
+define "HTS Visit":
   [Encounter] E
     where E.type.coding.code contains ConceptsCustom."HTS Visit".code
-
+    
 /*
 @dataElement: HIV.B.DE1 - Reason for visit
 @activity: HIV.B1 Determine reason for visit
 @description: Reason for HIV testing services visit
 */
 define "Reason for visit B.DE1":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   return E.reasonCode 
 /* End of Reason for visit B.DE1 */
 
@@ -309,7 +306,7 @@ define "Reason for visit B.DE1":
 @description: First encounter for screening for human immunodeficiency virus
 */
 define "First-time HIV test Encounter":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   where E.reasonCode.coding.code contains Concepts."First-time HIV test".code
 /* End of First-time HIV test */
 
@@ -320,7 +317,7 @@ define "First-time HIV test Encounter":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Retesting for HIV B.DE3 Encounter":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   where E.reasonCode.coding.code contains Concepts."Retesting for HIV - HIV.B.DE3".code
 /* End of Retesting for HIV B.DE3 */
 
@@ -331,7 +328,7 @@ define "Retesting for HIV B.DE3 Encounter":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV testing services visit Encounter":
-  "HTS Visit Encounter" E
+  "HTS Visit" E
   where E.reasonCode.coding.code contains Concepts."HIV testing services visit".code
 /* End of HIV testing services visit */
 
@@ -1720,11 +1717,11 @@ define "Voluntary medical male circumcision VMMC":
   exists "Voluntary medical male circumcision VMMC Condition"
     or exists "Voluntary medical male circumcision VMMC Observation"
 define "Voluntary medical male circumcision VMMC Condition":
-  [Condition: Concepts."Voluntary medical male circumcision VMMC"]
+  [Condition: Concepts."Voluntary medical male circumcision VMMC referral"]
 define "Voluntary medical male circumcision VMMC Observation":
   "Prevention services offered and referrals B.DE149 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Voluntary medical male circumcision VMMC"
+      and O.value ~ Concepts."Voluntary medical male circumcision VMMC referral"
 /* End of Voluntary medical male circumcision VMMC */
 
 /*
@@ -6261,10 +6258,8 @@ define "HBV treatment TDF start date":
 */
 
 define "HCV test date D.DE169":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom."HCV test"
-
+  "HCV test result D.DE170" O
+  return O.effective.toInterval().low
 /* End of HCV test date D.DE169 */
 
 
@@ -9511,8 +9506,8 @@ define "Other medications Observation":
 */
 
 define "Date of cervical cancer screening test":
-  "Cervical cancer primary screening test type" P
-  sort by start of performed.toInterval()
+  "Cervical cancer primary screening test" O
+  return O.effective.toInterval().low
 /* End of Date of cervical cancer screening test */
 
 /*
@@ -9536,10 +9531,12 @@ define "Lifetime screening test number Value":
 @description: Type of cervical cancer screening test used in primary screening
 */
 
-define "Cervical cancer primary screening test type":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.category ~ ConceptsCustom."cervical cancer screening test"
+define "Cervical cancer primary screening test":
+  [Observation] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and O.code in Concepts."Cervical cancer primary screening test type Choices"
+
+  // and P.category ~ Concepts."Procedure" we could 
 /* End of Cervical cancer primary screening test type */
 
 /*
@@ -9549,7 +9546,7 @@ define "Cervical cancer primary screening test type":
 */
 
 define "HPV-DNA":
-  "Cervical cancer primary screening test type" P
+  "Cervical cancer primary screening test" P
   where P.code ~ Concepts."HPV-DNA"
 /* End of HPV-DNA */
 
@@ -9560,7 +9557,7 @@ define "HPV-DNA":
 */
 
 define "VIA":
-  "Cervical cancer primary screening test type" P
+  "Cervical cancer primary screening test" P
   where P.code ~ Concepts."VIA"
 /* End of VIA */
 
@@ -9571,7 +9568,7 @@ define "VIA":
 */
 
 define "Cervical cytology":
-    "Cervical cancer primary screening test type" P
+    "Cervical cancer primary screening test" P
   where P.code ~ Concepts."Cervical cytology"
 /* End of Cervical cytology */
 
@@ -9582,7 +9579,7 @@ define "Cervical cytology":
 */
 
 define "Other D.DE662":
-  "Cervical cancer primary screening test type" P
+  "Cervical cancer primary screening test" P
   where P.code ~  Concepts."Other - HIV.D.DE662"
 /* End of Other D.DE662 */
 
@@ -9591,13 +9588,7 @@ define "Other D.DE662":
 @activity: HIV.D28 Offer other services
 @description: Date of diagnosis of cervical precancer lesions or invasive cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer":
-  [Observation: Concepts."Date of diagnosis of cervical precancer lesions or invasive cervical cancer"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer Value":
-  "Date of diagnosis of cervical precancer lesions or invasive cervical cancer" O
-  return O.value
+
 /* End of Date of diagnosis of cervical precancer lesions or invasive cervical cancer */
 
 /*
@@ -9673,7 +9664,8 @@ define "Cervical precancer lesions":
 */
 
 define "Invasive cervical cancer":
-  [Condition: Concepts."Invasive cervical cancer"]
+  [Condition: Concepts."Invasive cervical cancer"] C
+    where exists (C.clinicalStatus.coding CStatus where CStatus.code in { 'active', 'recurrence', 'relapse' })
 
 /* End of Invasive cervical cancer */
 
@@ -9752,7 +9744,7 @@ define "Stage IV":
 define "Date of treatment for cervical precancer lesions":
   [Procedure] P
   where P.status = 'completed'
-  and P.category ~ ConceptsCustom."cervical precancer lesion treatment"
+  and P.code in Concepts."Invasive cervical cancer treatment method Choices"
 /* End of Date of treatment for cervical precancer lesions */
 
 /*
@@ -9778,8 +9770,8 @@ define "Invasive cervical cancer treatment episode Value":
 
 define "Invasive cervical cancer treatment method":
   [Procedure] P
-  where P.status = 'completed'
-  and P.category ~ ConceptsCustom."Invasive cervical cancer treatment"
+  where P.status in { 'completed', 'in-progress' }
+  and P.code in Concepts."Invasive cervical cancer treatment method Choices"
 
 /* End of Invasive cervical cancer treatment method */
 
@@ -14275,12 +14267,10 @@ define "STI services date":
 define "VMMC":
   [Procedure] P
   where P.status = 'completed'
-  and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
+  and P.code ~ Concepts."VMMC procedure"
 
 define "VMMC date":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ Concepts."Voluntary medical male circumcision VMMC"
+  "VMMC" P
   return start of P.performed.toInterval()
 /* End of VMMC */
 
@@ -14344,8 +14334,7 @@ define "HIV-positive PRV.DE12 Condition":
   [Condition: Concepts."HIV-positive - HIV.PRV.DE12"]
 define "HIV-positive PRV.DE12 Observation":
   "HIV status of contact Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."HIV-positive - HIV.PRV.DE12"
+      where O.value ~ Concepts."HIV-positive - HIV.PRV.DE12"
 /* End of HIV-positive PRV.DE12 */
 
 /*
@@ -14374,8 +14363,10 @@ define "HIV-negative PRV.DE13 Observation":
 define "Unknown PRV.DE14":
   exists "Unknown PRV.DE14 Condition"
     or exists "Unknown PRV.DE14 Observation"
+
 define "Unknown PRV.DE14 Condition":
   [Condition: Concepts."Unknown - HIV.PRV.DE14"]
+
 define "Unknown PRV.DE14 Observation":
   "HIV status of contact Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -14618,9 +14609,10 @@ define "Viral load test result SRV.DE13 Value":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-
+// TODO: MARK as visit?
 define "Visit date SRV.DE15":
   [Encounter] E
+  return E.period
 /* End of Visit date SRV.DE15 */
 
 /*

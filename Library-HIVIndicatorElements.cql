@@ -295,13 +295,14 @@ define "HIV status of partner or contact":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Visit date A.DE3":
-  Elements."Visit date A.DE3" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Visit date A.DE3 Value":
-  "Visit date A.DE3" O
-  return O.value
+define "HTS Visit":
+  Elements."HTS Visit" E
+    where E.period.toInterval() during "Measurement Period"
+
+define "Visit date":
+  "HTS Visit" E
+  return E.period.start
+
 /* End of Visit date A.DE3 */
 
 /*
@@ -1119,7 +1120,7 @@ define "VMMC_adverse_event":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC referral"
       and P.performed after start of "Measurement Period"
       and P.performed before end of "Measurement Period"
       and AE.date <= (P.performed + 30 days)
@@ -1149,7 +1150,7 @@ define "VMMC_adverse_event_Intraoperative":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC referral"
       and P.performed after start of "Measurement Period"
       and P.performed before end of "Measurement Period"
       and AE.date = P.performed
@@ -1159,7 +1160,7 @@ define "VMMC_adverse_event_Postoperative":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC"
+      and P.code ~  Concepts."Voluntary medical male circumcision VMMC referral"
       and P.performed after start of "Measurement Period"
       and P.performed before end of "Measurement Period"
       and AE.date <= (P.performed + 30 days)
@@ -1790,8 +1791,8 @@ define "Syphilis treatment start date B.DE254":
 */
 
 define "Gonorrhoea test date B.DE255":
-  exists(Elements."Gonorrhoea test date B.DE255" P
-    where P.performed.toInterval() during "Measurement Period")
+  "Gonorrhoea test result B.DE256" O
+  return O.effective
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
@@ -1801,8 +1802,9 @@ define "Gonorrhoea test date B.DE255":
 */
 
 define "Gonorrhoea test result B.DE256":
-    exists(Elements."Gonorrhoea test result B.DE256" O
-    where O.effective.toInterval() during "Measurement Period")
+    Elements."Gonorrhoea test result B.DE256" O
+    where O.effective.toInterval() during "Measurement Period"
+    
 /* End of Gonorrhoea test result B.DE256 */
 
 /*
@@ -1812,8 +1814,8 @@ define "Gonorrhoea test result B.DE256":
 */
 
 define "Positive B.DE257":
-  exists Elements."Positive B.DE257" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."Positive B.DE257" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of Positive B.DE257 */
 
 /*
@@ -2752,9 +2754,9 @@ define "HBV treatment TDF start date":
 */
 
 define "HCV test date D.DE169":
-  exists(Elements."HCV test date D.DE169" P
-    where P.performed.toInterval() during "Measurement Period")
-
+  "HCV test result D.DE170" O
+  return O.effective.toInterval().low
+  
 /* End of HCV test date D.DE169 */
 
 /*
@@ -2764,7 +2766,7 @@ define "HCV test date D.DE169":
 */
 
 define "HCV test result D.DE170":
- exists Elements."HCV test result D.DE170" O
+  Elements."HCV test result D.DE170" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of HCV test result D.DE170 */
 
@@ -2775,7 +2777,7 @@ define "HCV test result D.DE170":
 */
 
 define "Positive D.DE171":
-  exists Elements."Positive D.DE171" O
+  Elements."Positive D.DE171" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Positive D.DE171 */
 
@@ -3739,8 +3741,8 @@ define "Enhanced adherence counselling provided Observation":
 */
 
 define "Date of cervical cancer screening test":
-  exists Elements."Date of cervical cancer screening test" P
-  where P.performed during "Measurement Period" 
+  exists Elements."Date of cervical cancer screening test" d
+  where d during "Measurement Period" 
 /* End of Date of cervical cancer screening test */
 
 /*
@@ -3765,13 +3767,6 @@ define "Lifetime screening test number Value":
 @activity: HIV.D28 Offer other services
 @description: Date of diagnosis of cervical precancer lesions or invasive cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer":
-  Elements."Date of diagnosis of cervical precancer lesions or invasive cervical cancer" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date of diagnosis of cervical precancer lesions or invasive cervical cancer Value":
-  "Date of diagnosis of cervical precancer lesions or invasive cervical cancer" O
-  return O.value
 /* End of Date of diagnosis of cervical precancer lesions or invasive cervical cancer */
 
 /*
@@ -3850,6 +3845,16 @@ define "Invasive cervical cancer":
   exists Elements."Invasive cervical cancer" C
   where C.prevalenceInterval() overlaps "Measurement Period"
   
+define "Invasive cervical cancer diagnosis in the last 12 months":
+  Elements."Invasive cervical cancer" C
+    where C.prevalenceInterval() starts before start of "Measurement Period"
+    and  C.prevalenceInterval() starts after (start of "Measurement Period" - 12 months)
+  
+define "Invasive cervical cancer outside the last 12 months":
+  Elements."Invasive cervical cancer" C
+    where C.prevalenceInterval() starts before (start of "Measurement Period" - 12 months)
+    or  C.prevalenceInterval() starts after (start of "Measurement Period" - 24 months)
+
 /* End of Invasive cervical cancer */
 
 /*
@@ -6400,7 +6405,7 @@ define "Other PRV.DE8":
 */
 
 define "Date accessed HIV prevention intervention":
-  exists (Elements."Date accessed HIV prevention intervention" t where t included in "Measurement Period")
+  Elements."Date accessed HIV prevention intervention" t where t included in "Measurement Period"
 /* End of Date accessed HIV prevention intervention */
 
 /*
@@ -6457,17 +6462,7 @@ define "HIV-negative PRV.DE13 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: Client does not know contact's HIV status
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Unknown PRV.DE14":
-  exists "Unknown PRV.DE14 Condition"
-    or exists "Unknown PRV.DE14 Observation"
-define "Unknown PRV.DE14 Condition":
-  Elements."Unknown PRV.DE14 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Unknown PRV.DE14 Observation":
-  Elements."Unknown PRV.DE14 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+
 /* End of Unknown PRV.DE14 */
 
 /*
@@ -6680,8 +6675,8 @@ define "Viral load test result SRV.DE13 Value":
 */
 
 define "Visit date SRV.DE15":
-  exists(Elements."Visit date SRV.DE15" E
-    where start of E.period.toInterval() during "Measurement Period")
+  exists(Elements."Visit date SRV.DE15" p
+    where start of p during "Measurement Period")
 /* End of Visit date SRV.DE15 */
 
 /*

@@ -1,0 +1,44 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sct: <http://snomed.info/id/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://smart.who.int/hiv/Observation/ExampleCervicalCancerScreening> a fhir:Observation ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ExampleCervicalCancerScreening"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://smart.who.int/hiv/StructureDefinition/HivCervicalCancerScreening"^^xsd:anyURI ;
+       fhir:link <http://smart.who.int/hiv/StructureDefinition/HivCervicalCancerScreening>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: Observation ExampleCervicalCancerScreening</b></p><a name=\"ExampleCervicalCancerScreening\"> </a><a name=\"hcExampleCervicalCancerScreening\"> </a><a name=\"ExampleCervicalCancerScreening-en-US\"> </a><p><b>status</b>: completed</p><p><b>category</b>: <span title=\"Codes:{http://snomed.info/sct 103693007}\">Diagnostic procedure</span></p><p><b>code</b>: <span title=\"Codes:{http://smart.who.int/hiv/CodeSystem/HIVConcepts HIV.D.DE706}\">Cervical cancer screening outcome</span></p><p><b>subject</b>: <a href=\"Patient-ExampleHivPatient.html\">Anonymous Patient (no stated gender), DoB Unknown</a></p><p><b>effective</b>: 2020-01-01 13:00:00+0000</p></div>"
+  ] ; # 
+  fhir:status [ fhir:v "completed"] ; # 
+  fhir:category ( [
+     fhir:coding ( [
+       a sct:103693007 ;
+       fhir:system [ fhir:v "http://snomed.info/sct"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "103693007" ] ;
+       fhir:display [ fhir:v "Diagnostic procedure" ]
+     ] )
+  ] ) ; # 
+  fhir:code [
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://smart.who.int/hiv/CodeSystem/HIVConcepts"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "HIV.D.DE706" ]
+     ] )
+  ] ; # 
+  fhir:subject [
+     fhir:link <http://smart.who.int/hiv/Patient/ExampleHivPatient> ;
+     fhir:reference [ fhir:v "Patient/ExampleHivPatient" ]
+  ] ; # 
+  fhir:effective [ fhir:v "2020-01-01T13:00:00Z"^^xsd:dateTime] . # 
+
+# -------------------------------------------------------------------------------------
+

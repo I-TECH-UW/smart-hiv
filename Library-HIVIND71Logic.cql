@@ -91,6 +91,13 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+ /*
+  * Profiles:
+  * - HivGonorhoeaTest
+  * - HivStatusObservation
+  * - HivStatusCondition
+  */ 
+
 library HIVIND71Logic
 
 // Included Libraries
@@ -126,7 +133,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and
-  HIE."Gonorrhoea test date B.DE255"
+  HIE."Gonorrhoea test result B.DE256"
 
 
 /**
@@ -138,7 +145,7 @@ define "Numerator":
 
 define "Denominator":
   HIE."Has HIV-positive Status" and 
-  HIE."Visit date SRV.DE15"
+  HIE."Visit date"
     
 
 /* end Populations */

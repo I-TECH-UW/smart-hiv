@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-11-07
+            as of 2024-12-06
           
         
       </td>
@@ -349,7 +349,169 @@
   
 
 
-  <div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: Library HIVElements</b></p><a name="HIVElements"> </a><a name="hcHIVElements"> </a><a name="HIVElements-en-US"> </a><h2>Related Artifacts</h2><table class="grid"><tr><td>Depends On</td><td>Library WHOConcepts</td><td><a href="Library-WHOConcepts.html">WHOConcepts</a></td></tr><tr><td>Depends On</td><td>Library WC</td><td><a href="Library-WHOCommon.html">WHOCommon</a></td></tr><tr><td>Depends On</td><td>Library WE</td><td><a href="Library-WHOElements.html">WHOElements</a></td></tr><tr><td>Depends On</td><td>Library Concepts</td><td><a href="Library-HIVConcepts.html">HIVConcepts</a></td></tr><tr><td>Depends On</td><td>Library ConceptsCustom</td><td><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></td></tr><tr><td>Depends On</td><td>Library Common</td><td><a href="Library-HIVCommon.html">HIVCommon</a></td></tr></table><h2>Contents</h2><p><code>text/cql</code></p><pre><code>library HIVElements
+  <div xmlns="http://www.w3.org/1999/xhtml">
+<div>
+    <table class="grid dict">
+        
+        
+        <tr>
+            <th scope="row"><b>Title: </b></th>
+            <td style="padding-left: 4px;">HIVElements</td>
+        </tr>
+        
+
+        
+        
+        <tr>
+            <th scope="row"><b>Id: </b></th>
+            <td style="padding-left: 4px;">HIVElements</td>
+        </tr>
+        
+
+        
+        
+        <tr>
+            <th scope="row"><b>Version: </b></th>
+            <td style="padding-left: 4px;">0.3.0</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Url: </b></th>
+            <td style="padding-left: 4px;"><a href="Library-HIVElements.html">HIVElements</a></td>
+        </tr>
+        
+
+        
+
+        
+
+        
+        <tr>
+            <th scope="row"><b>Status: </b></th>
+            <td style="padding-left: 4px;">draft</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Experimental: </b></th>
+            <td style="padding-left: 4px;">true</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Type: </b></th>
+            <td style="padding-left: 4px;">
+                
+                    
+                        
+                        <p style="margin-bottom: 5px;">
+                            <b>system: </b> <span><a href="http://hl7.org/fhir/R4/codesystem-library-type.html">http://terminology.hl7.org/CodeSystem/library-type</a></span>
+                        </p>
+                        
+                        
+                        <p style="margin-bottom: 5px;">
+                            <b>code: </b> <span>logic-library</span>
+                        </p>
+                        
+                        
+                    
+                
+                
+            </td>
+        </tr>
+        
+
+        
+
+        
+        <tr>
+            <th scope="row"><b>Date: </b></th>
+            <td style="padding-left: 4px;">2024-12-06 22:10:30+0000</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Publisher: </b></th>
+            <td style="padding-left: 4px;">WHO</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Description: </b></th>
+            <td style="padding-left: 4px;"><div><p>Description not yet available for HIVElements.</p>
+</div></td>
+        </tr>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        <tr>
+            <th scope="row"><b>Related Artifacts: </b></th>
+            <td style="padding-left: 4px;">
+                
+                
+                
+                <p><b>Dependencies</b></p>
+                <ul>
+                  
+                    <li><a href="Library-WHOConcepts.html">WHOConcepts</a></li>
+                  
+                    <li><a href="Library-WHOCommon.html">WHOCommon</a></li>
+                  
+                    <li><a href="Library-WHOElements.html">WHOElements</a></li>
+                  
+                    <li><a href="Library-HIVConcepts.html">HIVConcepts</a></li>
+                  
+                    <li><a href="Library-HIVConceptsCustom.html">HIVConceptsCustom</a></li>
+                  
+                    <li><a href="Library-HIVCommon.html">HIVCommon</a></li>
+                  
+                </ul>
+                
+                
+                
+                
+                
+            </td>
+        </tr>
+        
+
+        
+
+        
+
+        
+        
+        <tr>
+          <td colspan="2">
+            <table>
+              <tr><th><a id="cql-content"><b>Content: </b></a> text/cql</th></tr>
+              <tr><td><pre><code class="language-cql">library HIVElements
 
 using FHIR version '4.0.1'
 
@@ -489,13 +651,10 @@ define &quot;Viral load tests received after ART intitiation&quot;:
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: Replace placeholder with relevant CQL logic
 define &quot;Visit date A.DE3&quot;:
-  [Observation: Concepts.&quot;Visit date - HIV.A.DE3&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;Visit date A.DE3 Value&quot;:
-  &quot;Visit date A.DE3&quot; O
-  return O.value
+  [Encounter] E
+    where E.type.coding.code contains Concepts.&quot;HIV testing services visit&quot;.code
+  
 /* End of Visit date A.DE3 */
 
 /*
@@ -640,17 +799,17 @@ define &quot;Other A.DE23 Observation&quot;:
 @activity: HIV.B1 Determine reason for visit
 @description: Encounter for HIV testing services visit
 */
-define &quot;HTS Visit Encounter&quot;:
+define &quot;HTS Visit&quot;:
   [Encounter] E
     where E.type.coding.code contains ConceptsCustom.&quot;HTS Visit&quot;.code
-
+    
 /*
 @dataElement: HIV.B.DE1 - Reason for visit
 @activity: HIV.B1 Determine reason for visit
 @description: Reason for HIV testing services visit
 */
 define &quot;Reason for visit B.DE1&quot;:
-  &quot;HTS Visit Encounter&quot; E
+  &quot;HTS Visit&quot; E
   return E.reasonCode 
 /* End of Reason for visit B.DE1 */
 
@@ -660,7 +819,7 @@ define &quot;Reason for visit B.DE1&quot;:
 @description: First encounter for screening for human immunodeficiency virus
 */
 define &quot;First-time HIV test Encounter&quot;:
-  &quot;HTS Visit Encounter&quot; E
+  &quot;HTS Visit&quot; E
   where E.reasonCode.coding.code contains Concepts.&quot;First-time HIV test&quot;.code
 /* End of First-time HIV test */
 
@@ -671,7 +830,7 @@ define &quot;First-time HIV test Encounter&quot;:
 */
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Retesting for HIV B.DE3 Encounter&quot;:
-  &quot;HTS Visit Encounter&quot; E
+  &quot;HTS Visit&quot; E
   where E.reasonCode.coding.code contains Concepts.&quot;Retesting for HIV - HIV.B.DE3&quot;.code
 /* End of Retesting for HIV B.DE3 */
 
@@ -682,7 +841,7 @@ define &quot;Retesting for HIV B.DE3 Encounter&quot;:
 */
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;HIV testing services visit Encounter&quot;:
-  &quot;HTS Visit Encounter&quot; E
+  &quot;HTS Visit&quot; E
   where E.reasonCode.coding.code contains Concepts.&quot;HIV testing services visit&quot;.code
 /* End of HIV testing services visit */
 
@@ -2071,11 +2230,11 @@ define &quot;Voluntary medical male circumcision VMMC&quot;:
   exists &quot;Voluntary medical male circumcision VMMC Condition&quot;
     or exists &quot;Voluntary medical male circumcision VMMC Observation&quot;
 define &quot;Voluntary medical male circumcision VMMC Condition&quot;:
-  [Condition: Concepts.&quot;Voluntary medical male circumcision VMMC&quot;]
+  [Condition: Concepts.&quot;Voluntary medical male circumcision VMMC referral&quot;]
 define &quot;Voluntary medical male circumcision VMMC Observation&quot;:
   &quot;Prevention services offered and referrals B.DE149 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Voluntary medical male circumcision VMMC&quot;
+      and O.value ~ Concepts.&quot;Voluntary medical male circumcision VMMC referral&quot;
 /* End of Voluntary medical male circumcision VMMC */
 
 /*
@@ -6612,10 +6771,8 @@ define &quot;HBV treatment TDF start date&quot;:
 */
 
 define &quot;HCV test date D.DE169&quot;:
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom.&quot;HCV test&quot;
-
+  &quot;HCV test result D.DE170&quot; O
+  return O.effective.toInterval().low
 /* End of HCV test date D.DE169 */
 
 
@@ -9862,8 +10019,8 @@ define &quot;Other medications Observation&quot;:
 */
 
 define &quot;Date of cervical cancer screening test&quot;:
-  &quot;Cervical cancer primary screening test type&quot; P
-  sort by start of performed.toInterval()
+  &quot;Cervical cancer primary screening test&quot; O
+  return O.effective.toInterval().low
 /* End of Date of cervical cancer screening test */
 
 /*
@@ -9887,10 +10044,12 @@ define &quot;Lifetime screening test number Value&quot;:
 @description: Type of cervical cancer screening test used in primary screening
 */
 
-define &quot;Cervical cancer primary screening test type&quot;:
-  [Procedure] P
-  where P.status = 'completed'
-  and P.category ~ ConceptsCustom.&quot;cervical cancer screening test&quot;
+define &quot;Cervical cancer primary screening test&quot;:
+  [Observation] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and O.code in Concepts.&quot;Cervical cancer primary screening test type Choices&quot;
+
+  // and P.category ~ Concepts.&quot;Procedure&quot; we could 
 /* End of Cervical cancer primary screening test type */
 
 /*
@@ -9900,7 +10059,7 @@ define &quot;Cervical cancer primary screening test type&quot;:
 */
 
 define &quot;HPV-DNA&quot;:
-  &quot;Cervical cancer primary screening test type&quot; P
+  &quot;Cervical cancer primary screening test&quot; P
   where P.code ~ Concepts.&quot;HPV-DNA&quot;
 /* End of HPV-DNA */
 
@@ -9911,7 +10070,7 @@ define &quot;HPV-DNA&quot;:
 */
 
 define &quot;VIA&quot;:
-  &quot;Cervical cancer primary screening test type&quot; P
+  &quot;Cervical cancer primary screening test&quot; P
   where P.code ~ Concepts.&quot;VIA&quot;
 /* End of VIA */
 
@@ -9922,7 +10081,7 @@ define &quot;VIA&quot;:
 */
 
 define &quot;Cervical cytology&quot;:
-    &quot;Cervical cancer primary screening test type&quot; P
+    &quot;Cervical cancer primary screening test&quot; P
   where P.code ~ Concepts.&quot;Cervical cytology&quot;
 /* End of Cervical cytology */
 
@@ -9933,7 +10092,7 @@ define &quot;Cervical cytology&quot;:
 */
 
 define &quot;Other D.DE662&quot;:
-  &quot;Cervical cancer primary screening test type&quot; P
+  &quot;Cervical cancer primary screening test&quot; P
   where P.code ~  Concepts.&quot;Other - HIV.D.DE662&quot;
 /* End of Other D.DE662 */
 
@@ -9942,13 +10101,7 @@ define &quot;Other D.DE662&quot;:
 @activity: HIV.D28 Offer other services
 @description: Date of diagnosis of cervical precancer lesions or invasive cervical cancer
 */
-// TODO: Replace placeholder with relevant CQL logic
-define &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot;:
-  [Observation: Concepts.&quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer Value&quot;:
-  &quot;Date of diagnosis of cervical precancer lesions or invasive cervical cancer&quot; O
-  return O.value
+
 /* End of Date of diagnosis of cervical precancer lesions or invasive cervical cancer */
 
 /*
@@ -10024,7 +10177,8 @@ define &quot;Cervical precancer lesions&quot;:
 */
 
 define &quot;Invasive cervical cancer&quot;:
-  [Condition: Concepts.&quot;Invasive cervical cancer&quot;]
+  [Condition: Concepts.&quot;Invasive cervical cancer&quot;] C
+    where exists (C.clinicalStatus.coding CStatus where CStatus.code in { 'active', 'recurrence', 'relapse' })
 
 /* End of Invasive cervical cancer */
 
@@ -10103,7 +10257,7 @@ define &quot;Stage IV&quot;:
 define &quot;Date of treatment for cervical precancer lesions&quot;:
   [Procedure] P
   where P.status = 'completed'
-  and P.category ~ ConceptsCustom.&quot;cervical precancer lesion treatment&quot;
+  and P.code in Concepts.&quot;Invasive cervical cancer treatment method Choices&quot;
 /* End of Date of treatment for cervical precancer lesions */
 
 /*
@@ -10129,8 +10283,8 @@ define &quot;Invasive cervical cancer treatment episode Value&quot;:
 
 define &quot;Invasive cervical cancer treatment method&quot;:
   [Procedure] P
-  where P.status = 'completed'
-  and P.category ~ ConceptsCustom.&quot;Invasive cervical cancer treatment&quot;
+  where P.status in { 'completed', 'in-progress' }
+  and P.code in Concepts.&quot;Invasive cervical cancer treatment method Choices&quot;
 
 /* End of Invasive cervical cancer treatment method */
 
@@ -14626,12 +14780,10 @@ define &quot;STI services date&quot;:
 define &quot;VMMC&quot;:
   [Procedure] P
   where P.status = 'completed'
-  and P.code ~ Concepts.&quot;Voluntary medical male circumcision VMMC&quot;
+  and P.code ~ Concepts.&quot;VMMC procedure&quot;
 
 define &quot;VMMC date&quot;:
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ Concepts.&quot;Voluntary medical male circumcision VMMC&quot;
+  &quot;VMMC&quot; P
   return start of P.performed.toInterval()
 /* End of VMMC */
 
@@ -14695,8 +14847,7 @@ define &quot;HIV-positive PRV.DE12 Condition&quot;:
   [Condition: Concepts.&quot;HIV-positive - HIV.PRV.DE12&quot;]
 define &quot;HIV-positive PRV.DE12 Observation&quot;:
   &quot;HIV status of contact Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;HIV-positive - HIV.PRV.DE12&quot;
+      where O.value ~ Concepts.&quot;HIV-positive - HIV.PRV.DE12&quot;
 /* End of HIV-positive PRV.DE12 */
 
 /*
@@ -14725,8 +14876,10 @@ define &quot;HIV-negative PRV.DE13 Observation&quot;:
 define &quot;Unknown PRV.DE14&quot;:
   exists &quot;Unknown PRV.DE14 Condition&quot;
     or exists &quot;Unknown PRV.DE14 Observation&quot;
+
 define &quot;Unknown PRV.DE14 Condition&quot;:
   [Condition: Concepts.&quot;Unknown - HIV.PRV.DE14&quot;]
+
 define &quot;Unknown PRV.DE14 Observation&quot;:
   &quot;HIV status of contact Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -14969,9 +15122,10 @@ define &quot;Viral load test result SRV.DE13 Value&quot;:
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-
+// TODO: MARK as visit?
 define &quot;Visit date SRV.DE15&quot;:
   [Encounter] E
+  return E.period
 /* End of Visit date SRV.DE15 */
 
 /*
@@ -15163,7 +15317,40 @@ define &quot;Reporting date Value&quot;:
  * Custom elements and logic for use DT and IND CQL Libraries
  */
 
-</code></pre><p><code>Content not shown - (</code><code>application/elm+xml</code>, size = 7Mb )</p></div>
+</code></pre></td></tr>
+            </table>
+          </td>
+        </tr>
+        
+        
+        
+        
+        
+        <tr>
+          <td colspan="2">
+            <table>
+              <tr><th><b>Content: </b> application/elm+xml</th></tr>
+              <tr><td><pre><code>Encoded data (10039080 characters)</code></pre></td></tr>
+            </table>
+          </td>
+        </tr>
+        
+        
+        
+        
+        <tr>
+          <td colspan="2">
+            <table>
+              <tr><th><b>Content: </b> application/elm+json</th></tr>
+              <tr><td><pre><code>Encoded data (17576460 characters)</code></pre></td></tr>
+            </table>
+          </td>
+        </tr>
+        
+        
+    </table>
+</div>
+</div>
 
   <!-- insert notes if present -->
   
@@ -15188,7 +15375,7 @@ define &quot;Reporting date Value&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Nov 7, 2024 21:07+0000">2024-11-07</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Dec 6, 2024 22:10+0000">2024-12-06</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

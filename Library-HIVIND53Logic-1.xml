@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="89">
          <a:s>/**
@@ -333,6 +328,9 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
             </a:s>
          </annotation>
          <expression localId="36" locator="88:3-91:43" xsi:type="Last">
+            <signature xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:MedicationRequest" xsi:type="NamedTypeSpecifier"/>
+            </signature>
             <source localId="35" locator="88:8-91:42" xsi:type="Query">
                <source localId="17" locator="88:8-88:51" alias="MR">
                   <expression localId="16" locator="88:8-88:48" xsi:type="Union">
@@ -349,12 +347,16 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
                            <expression dataType="fhir:Medication" templateId="http://hl7.org/fhir/StructureDefinition/Medication" xsi:type="Retrieve"/>
                            <suchThat xsi:type="And">
                               <operand xsi:type="Equal">
+                                 <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
                                  <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                    <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                                     <operand path="id" scope="M" xsi:type="Property"/>
                                  </operand>
                                  <operand xsi:type="Last">
                                     <source xsi:type="Split">
                                        <stringToSplit name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                          <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                                           <operand path="medication.reference" scope="MR" xsi:type="Property"/>
                                        </stringToSplit>
                                        <separator valueType="t:String" value="/" xsi:type="Literal"/>
@@ -362,10 +364,13 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
                                  </operand>
                               </operand>
                               <operand xsi:type="Equivalent">
+                                 <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
                                  <operand name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
                                     <operand path="code" xsi:type="Property"/>
                                  </operand>
                                  <operand xsi:type="ToConcept">
+                                    <signature name="t:Code" xsi:type="NamedTypeSpecifier"/>
                                     <operand locator="88:28-88:47" name="ART medication" libraryName="HCC" xsi:type="CodeRef"/>
                                  </operand>
                               </operand>
@@ -376,6 +381,12 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
                </source>
                <where localId="29" locator="89:3-90:70" xsi:type="And">
                   <operand localId="23" locator="89:9-89:71" xsi:type="Before">
+                     <signature xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
+                     <signature xsi:type="IntervalTypeSpecifier">
+                        <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     </signature>
                      <operand localId="20" locator="89:10-89:35" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                         <operand xsi:type="As">
                            <operand localId="19" locator="89:10-89:22" path="authoredOn" scope="MR" xsi:type="Property"/>
@@ -393,6 +404,7 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
                      <operand xsi:type="If">
                         <condition xsi:type="IsNull">
                            <operand xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="22" locator="89:44-89:70" xsi:type="End">
                                  <operand localId="21" locator="89:51-89:70" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -405,11 +417,13 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
                         </then>
                         <else lowClosed="true" highClosed="true" xsi:type="Interval">
                            <low xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="22" locator="89:44-89:70" xsi:type="End">
                                  <operand localId="21" locator="89:51-89:70" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
                            </low>
                            <high xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="22" locator="89:44-89:70" xsi:type="End">
                                  <operand localId="21" locator="89:51-89:70" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -423,6 +437,7 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
                      </operand>
                      <operand xsi:type="Interval">
                         <low xsi:type="ToDateTime">
+                           <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                            <operand path="low" xsi:type="Property">
                               <source localId="27" locator="90:51-90:70" name="Measurement Period" xsi:type="ParameterRef"/>
                            </operand>
@@ -431,6 +446,7 @@ define &quot;Last ART prescribed before end of measurement period&quot;:
                            <source localId="27" locator="90:51-90:70" name="Measurement Period" xsi:type="ParameterRef"/>
                         </lowClosedExpression>
                         <high xsi:type="ToDateTime">
+                           <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                            <operand path="high" xsi:type="Property">
                               <source localId="27" locator="90:51-90:70" name="Measurement Period" xsi:type="ParameterRef"/>
                            </operand>
@@ -549,14 +565,22 @@ define &quot;Numerator&quot;:
                <operand localId="43" locator="110:8-110:26" name="On ART H.DE47" libraryName="HIE" xsi:type="ExpressionRef"/>
             </operand>
             <operand localId="50" locator="111:8-111:129" xsi:type="GreaterOrEqual">
+               <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                <operand xsi:type="ToQuantity">
+                  <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="48" locator="111:9-111:116" precision="Month" xsi:type="DurationBetween">
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                      <operand xsi:type="Start">
                         <operand localId="47" locator="111:31-111:116" name="MedicationRequestPeriod" libraryName="HIC" xsi:type="FunctionRef">
                            <operand localId="46" locator="111:62-111:115" name="Last ART prescribed before end of measurement period" xsi:type="ExpressionRef"/>
                         </operand>
                      </operand>
                      <operand xsi:type="End">
+                        <signature xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
                         <operand localId="47" locator="111:31-111:116" name="MedicationRequestPeriod" libraryName="HIC" xsi:type="FunctionRef">
                            <operand localId="46" locator="111:62-111:115" name="Last ART prescribed before end of measurement period" xsi:type="ExpressionRef"/>
                         </operand>
@@ -782,6 +806,7 @@ define &quot;Administrative Gender Stratifier&quot;:
                   <operand localId="79" locator="147:3-147:5" valueType="t:String" value=":" xsi:type="Literal"/>
                </operand>
                <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="82" locator="147:9-147:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                </operand>
             </operand>

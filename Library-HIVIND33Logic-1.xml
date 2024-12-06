@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="91">
          <a:s>/**
@@ -393,8 +390,13 @@ define &quot;Numerator&quot;:
                </operand>
             </operand>
             <operand localId="43" locator="108:8-108:191" xsi:type="Less">
+               <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                <operand xsi:type="ToQuantity">
+                  <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="41" locator="108:9-108:179" precision="Month" xsi:type="DurationBetween">
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                      <operand localId="34" locator="108:24-108:113" xsi:type="Start">
                         <operand localId="33" locator="108:34-108:112" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                            <operand xsi:type="As">
@@ -416,6 +418,7 @@ define &quot;Numerator&quot;:
                         </operand>
                      </operand>
                      <operand xsi:type="ToDateTime">
+                        <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand localId="40" locator="108:119-108:179" xsi:type="DateFrom">
                            <operand localId="39" locator="108:130-108:178" xsi:type="Start">
                               <operand localId="38" locator="108:139-108:178" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
@@ -702,6 +705,7 @@ define &quot;Administrative Gender Stratifier&quot;:
                   <operand localId="81" locator="145:3-145:5" valueType="t:String" value=":" xsi:type="Literal"/>
                </operand>
                <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="84" locator="145:9-145:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                </operand>
             </operand>

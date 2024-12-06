@@ -1,0 +1,891 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion",
+         "signatureLevel" : "Overloads",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "60",
+            "s" : [ {
+               "value" : [ "/**\n * Library: HIV.IND.38 Logic\n * Ref No: VER.2\n * Short Name: Early infant diagnosis (EID) coverage\n *\n * Definition: % of HIV-exposed infants who receive a virological test for HIV within two months (and 12 months) of birth\n *\n * Numerator: Number of HIV-exposed infants born during the reporting period who received a virological HIV test within two months (and 12 months) of birth\n * Numerator Calculation: COUNT of infants who are an \"HIV-exposed infant or child\" with \"Infant date of birth\" within the reporting period AND with \"Date of viral load sample collection\" LESS THAN 2 months AFTER \"Infant date of birth\" AND \"HIV test type\"='Nucleic acid test for HIV'\n * Numerator Exclusions: \n *\n * Denominator: Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women.\n * Denominator Calculation: *Estimated number of HIV-positive women who delivered during the reporting period\n * Denominator Exclusions: \n *\n * Disaggregations:\n * • Test result (HIV-positive, HIV-negative, indeterminate, other) to enable calculation of the percentage positive and the percentage with an indeterminate result among HIV-exposed infants receiving a virological test \n *  • Age of infant (<2 months, 2-12 months) to allow the separate calculation of the proportion of exposed infants receiving virological testing within two months of birth and within 12 months of birth \n *  • Cities and other administrative regions of epidemiologic importance\n *\n * Disaggregation Elements: HIV test date (at 2 months, at 12 months) | Age of infant (<2 months, 2-12 months)\n *\n * Numerator and Denominator Elements:\n * Date of viral load sample collection \n *  HIV test type \n *  HIV-exposed infant or child \n *  Infant date of birth\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.B.DE81: HIV test type | Type of HIV test\n * HIV.B.DE82: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic\n * HIV.B.DE83: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay\n * HIV.B.DE84: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis\n * HIV.B.DE85: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic\n * HIV.B.DE86: HIV self-test | Antibody test for HIV performed by self-tester using a rapid diagnostic\n * HIV.B.DE110: HIV test date | Date of the HIV test\n * HIV.D.DE194: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.E.DE87: Infant date of birth | The infant's date of birth (DOB) if known\n * HIV.E.DE90: Age of infant | Infant age calculated using date of birth\n * HIV.E.DE112: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure\n * HIV.E.DE168: HIV test type | Type of HIV test\n * HIV.E.DE169: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic (RDT)\n * HIV.E.DE170: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay (EIA)\n * HIV.E.DE171: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis\n * HIV.E.DE172: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic\n * HIV.E.DE224: HIV test date | Date of the HIV test\n * HIV.G.DE8: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.SRV.DE1: HIV test date | Date of the HIV test\n * HIV.SRV.DE12: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.SRV.DE20: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure\n *\n * Additional Context\n * - what it measures: This indicator measures early HIV diagnosis in infants.\n * - rationale: • High coverage of early virological testing of infants helps initiate ART early in children with confirmed HIV infection and supports counselling on efforts to prevent seroconversion of those with a negative early test result. | • Current PMTCT guidelines recommend virological testing for HIV-exposed infants within two months of birth.\n * - method: For the numerator: Programme records (for example, PMTCT registers, laboratory records). |  | For the denominator: Modelling-based estimates (for example, Spectrum AIM) |  | The recommended reporting period is 12 months.\n * \n * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm\n */\n\n","library HIVIND38Logic" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "HIVIND38Logic",
+         "system" : "http://smart.who.int/hiv"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "locator" : "65:1-65:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "// Included Libraries\n","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIR" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '4.0.1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "2",
+            "locator" : "67:1-67:44",
+            "localIdentifier" : "HIC",
+            "path" : "http://smart.who.int/hiv/HIVCommon",
+            "version" : "0.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "HIVCommon" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'0.0.1'"," called ","HIC" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "3",
+            "locator" : "68:1-68:35",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "http://hl7.org/fhir/FHIRHelpers",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIRHelpers" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.1'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "4",
+            "locator" : "70:1-70:29",
+            "localIdentifier" : "WCom",
+            "path" : "http://smart.who.int/hiv/WHOCommon",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "WHOCommon" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","WCom" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "5",
+            "locator" : "71:1-71:29",
+            "localIdentifier" : "HE",
+            "path" : "http://smart.who.int/hiv/HIVElements",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "HIVElements" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","HE" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "6",
+            "locator" : "72:1-72:39",
+            "localIdentifier" : "HIE",
+            "path" : "http://smart.who.int/hiv/HIVIndicatorElements",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "HIVIndicatorElements" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","HIE" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "12",
+            "locator" : "75:1-75:88",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "// Indicator Definition\n","parameter ","\"Measurement Period\""," " ]
+                  }, {
+                     "r" : "11",
+                     "s" : [ {
+                        "value" : [ "Interval<" ]
+                     }, {
+                        "r" : "10",
+                        "s" : [ {
+                           "value" : [ "Date" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ " default " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "r" : "7",
+                        "value" : [ "Interval[","@2023-01-01",", ","@2023-01-30","]" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "default" : {
+               "localId" : "9",
+               "locator" : "75:55-75:88",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "low" : {
+                  "localId" : "7",
+                  "locator" : "75:64-75:74",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2023",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "localId" : "8",
+                  "locator" : "75:77-75:87",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2023",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "30",
+                     "type" : "Literal"
+                  }
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "localId" : "11",
+               "locator" : "75:32-75:45",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "10",
+                  "locator" : "75:41-75:44",
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "77:1-77:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "77:1-77:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "77:1-77:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "14",
+            "locator" : "84:1-85:6",
+            "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "r" : "13",
+                     "value" : [ "/* Populations */\n\n/*\n *Initial Population\n */\n\n","define ","\"Initial Population\"",":\n  ","true" ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "13",
+               "locator" : "85:3-85:6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "value" : "true",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "55",
+            "locator" : "95:1-103:105",
+            "name" : "Numerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "55",
+                  "s" : [ {
+                     "value" : [ "/**\n * Numerator\n * \n * Definition: Number of HIV-exposed infants born during the reporting period who received a virological HIV test within two months (and 12 months) of birth\n * Calculation: COUNT of infants who are an \"HIV-exposed infant or child\" with \"Infant date of birth\" within the reporting period AND with \"Date of viral load sample collection\" LESS THAN 2 months AFTER \"Infant date of birth\" AND \"HIV test type\"='Nucleic acid test for HIV'\n */\n\n\n","define ","\"Numerator\"",":\n  " ]
+                  }, {
+                     "r" : "54",
+                     "s" : [ {
+                        "r" : "30",
+                        "s" : [ {
+                           "value" : [ "exists" ]
+                        }, {
+                           "r" : "29",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "29",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "16",
+                                    "s" : [ {
+                                       "r" : "15",
+                                       "s" : [ {
+                                          "s" : [ {
+                                             "value" : [ "HIE",".","\"HIV-exposed infant or child E.DE112\"" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","O" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n  " ]
+                              }, {
+                                 "r" : "28",
+                                 "s" : [ {
+                                    "value" : [ "with " ]
+                                 }, {
+                                    "r" : "18",
+                                    "s" : [ {
+                                       "r" : "17",
+                                       "s" : [ {
+                                          "r" : "17",
+                                          "s" : [ {
+                                             "value" : [ "[","Patient","]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","P" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n      such that " ]
+                                 }, {
+                                    "r" : "27",
+                                    "s" : [ {
+                                       "r" : "22",
+                                       "s" : [ {
+                                          "r" : "20",
+                                          "s" : [ {
+                                             "r" : "19",
+                                             "s" : [ {
+                                                "value" : [ "O" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "20",
+                                             "s" : [ {
+                                                "value" : [ "subject" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "22",
+                                          "s" : [ {
+                                             "value" : [ "references","(" ]
+                                          }, {
+                                             "r" : "21",
+                                             "s" : [ {
+                                                "value" : [ "P" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ")" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " and " ]
+                                    }, {
+                                       "r" : "26",
+                                       "s" : [ {
+                                          "r" : "24",
+                                          "s" : [ {
+                                             "r" : "23",
+                                             "s" : [ {
+                                                "value" : [ "P" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "24",
+                                             "s" : [ {
+                                                "value" : [ "birthDate" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "r" : "26",
+                                          "value" : [ " ","during"," " ]
+                                       }, {
+                                          "r" : "25",
+                                          "s" : [ {
+                                             "value" : [ "\"Measurement Period\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n   and " ]
+                     }, {
+                        "r" : "53",
+                        "s" : [ {
+                           "value" : [ "exists" ]
+                        }, {
+                           "r" : "52",
+                           "s" : [ {
+                              "value" : [ "(\n    " ]
+                           }, {
+                              "r" : "52",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "32",
+                                    "s" : [ {
+                                       "r" : "31",
+                                       "s" : [ {
+                                          "s" : [ {
+                                             "value" : [ "HE",".","\"Nucleic acid test for HIV B.DE84\"" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","O" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " \n    " ]
+                              }, {
+                                 "r" : "51",
+                                 "s" : [ {
+                                    "value" : [ "with " ]
+                                 }, {
+                                    "r" : "34",
+                                    "s" : [ {
+                                       "r" : "33",
+                                       "s" : [ {
+                                          "r" : "33",
+                                          "s" : [ {
+                                             "value" : [ "[","Patient","]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","Pt" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n    such that " ]
+                                 }, {
+                                    "r" : "50",
+                                    "s" : [ {
+                                       "r" : "38",
+                                       "s" : [ {
+                                          "r" : "36",
+                                          "s" : [ {
+                                             "r" : "35",
+                                             "s" : [ {
+                                                "value" : [ "O" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "36",
+                                             "s" : [ {
+                                                "value" : [ "subject" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "38",
+                                          "s" : [ {
+                                             "value" : [ "references","(" ]
+                                          }, {
+                                             "r" : "37",
+                                             "s" : [ {
+                                                "value" : [ "Pt" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ")" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " \n    and " ]
+                                    }, {
+                                       "r" : "49",
+                                       "s" : [ {
+                                          "r" : "47",
+                                          "s" : [ {
+                                             "value" : [ "months between " ]
+                                          }, {
+                                             "r" : "42",
+                                             "s" : [ {
+                                                "value" : [ "start of " ]
+                                             }, {
+                                                "r" : "41",
+                                                "s" : [ {
+                                                   "r" : "40",
+                                                   "s" : [ {
+                                                      "r" : "39",
+                                                      "s" : [ {
+                                                         "value" : [ "O" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "40",
+                                                      "s" : [ {
+                                                         "value" : [ "effective" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "." ]
+                                                }, {
+                                                   "r" : "41",
+                                                   "s" : [ {
+                                                      "value" : [ "toInterval","()" ]
+                                                   } ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " and " ]
+                                          }, {
+                                             "r" : "46",
+                                             "s" : [ {
+                                                "r" : "43",
+                                                "s" : [ {
+                                                   "value" : [ "FHIRHelpers" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "46",
+                                                "s" : [ {
+                                                   "value" : [ "ToDate","(" ]
+                                                }, {
+                                                   "r" : "45",
+                                                   "s" : [ {
+                                                      "r" : "44",
+                                                      "s" : [ {
+                                                         "value" : [ "Pt" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "45",
+                                                      "s" : [ {
+                                                         "value" : [ "birthDate" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ ")" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " ","<"," " ]
+                                       }, {
+                                          "r" : "48",
+                                          "s" : [ {
+                                             "value" : [ "2 ","months" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "54",
+               "locator" : "96:3-103:105",
+               "type" : "And",
+               "operand" : [ {
+                  "localId" : "30",
+                  "locator" : "96:3-98:84",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "29",
+                     "locator" : "96:9-98:84",
+                     "type" : "Query",
+                     "source" : [ {
+                        "localId" : "16",
+                        "locator" : "96:10-96:52",
+                        "alias" : "O",
+                        "expression" : {
+                           "localId" : "15",
+                           "locator" : "96:10-96:50",
+                           "name" : "HIV-exposed infant or child E.DE112",
+                           "libraryName" : "HIE",
+                           "type" : "ExpressionRef"
+                        }
+                     } ],
+                     "relationship" : [ {
+                        "localId" : "28",
+                        "locator" : "97:3-98:83",
+                        "alias" : "P",
+                        "type" : "With",
+                        "expression" : {
+                           "localId" : "17",
+                           "locator" : "97:8-97:16",
+                           "dataType" : "{http://hl7.org/fhir}Patient",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                           "type" : "Retrieve"
+                        },
+                        "suchThat" : {
+                           "localId" : "27",
+                           "locator" : "98:17-98:83",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "22",
+                              "locator" : "98:17-98:39",
+                              "name" : "references",
+                              "libraryName" : "WCom",
+                              "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Reference",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Resource",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "localId" : "20",
+                                 "locator" : "98:17-98:25",
+                                 "path" : "subject",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }, {
+                                 "localId" : "21",
+                                 "locator" : "98:38",
+                                 "name" : "P",
+                                 "type" : "AliasRef"
+                              } ]
+                           }, {
+                              "localId" : "26",
+                              "locator" : "98:45-98:83",
+                              "type" : "In",
+                              "operand" : [ {
+                                 "name" : "ToDate",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "localId" : "24",
+                                    "locator" : "98:45-98:55",
+                                    "path" : "birthDate",
+                                    "scope" : "P",
+                                    "type" : "Property"
+                                 } ]
+                              }, {
+                                 "localId" : "25",
+                                 "locator" : "98:64-98:83",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef"
+                              } ]
+                           } ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "localId" : "53",
+                  "locator" : "99:8-103:105",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "52",
+                     "locator" : "99:14-103:105",
+                     "type" : "Query",
+                     "source" : [ {
+                        "localId" : "32",
+                        "locator" : "100:5-100:43",
+                        "alias" : "O",
+                        "expression" : {
+                           "localId" : "31",
+                           "locator" : "100:5-100:41",
+                           "name" : "Nucleic acid test for HIV B.DE84",
+                           "libraryName" : "HE",
+                           "type" : "ExpressionRef"
+                        }
+                     } ],
+                     "relationship" : [ {
+                        "localId" : "51",
+                        "locator" : "101:5-103:104",
+                        "alias" : "Pt",
+                        "type" : "With",
+                        "expression" : {
+                           "localId" : "33",
+                           "locator" : "101:10-101:18",
+                           "dataType" : "{http://hl7.org/fhir}Patient",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                           "type" : "Retrieve"
+                        },
+                        "suchThat" : {
+                           "localId" : "50",
+                           "locator" : "102:15-103:104",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "38",
+                              "locator" : "102:15-102:38",
+                              "name" : "references",
+                              "libraryName" : "WCom",
+                              "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}Reference",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Resource",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "localId" : "36",
+                                 "locator" : "102:15-102:23",
+                                 "path" : "subject",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }, {
+                                 "localId" : "37",
+                                 "locator" : "102:36-102:37",
+                                 "name" : "Pt",
+                                 "type" : "AliasRef"
+                              } ]
+                           }, {
+                              "localId" : "49",
+                              "locator" : "103:9-103:104",
+                              "type" : "Less",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "type" : "ToQuantity",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
+                                 "operand" : {
+                                    "localId" : "47",
+                                    "locator" : "103:9-103:93",
+                                    "precision" : "Month",
+                                    "type" : "DurationBetween",
+                                    "signature" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
+                                    "operand" : [ {
+                                       "localId" : "42",
+                                       "locator" : "103:24-103:56",
+                                       "type" : "Start",
+                                       "operand" : {
+                                          "localId" : "41",
+                                          "locator" : "103:33-103:56",
+                                          "name" : "toInterval",
+                                          "libraryName" : "WCom",
+                                          "type" : "FunctionRef",
+                                          "operand" : [ {
+                                             "localId" : "40",
+                                             "locator" : "103:33-103:43",
+                                             "path" : "effective",
+                                             "scope" : "O",
+                                             "type" : "Property"
+                                          } ]
+                                       }
+                                    }, {
+                                       "type" : "ToDateTime",
+                                       "signature" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Date",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
+                                       "operand" : {
+                                          "localId" : "46",
+                                          "locator" : "103:62-103:93",
+                                          "name" : "ToDate",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "operand" : [ {
+                                             "localId" : "45",
+                                             "locator" : "103:81-103:92",
+                                             "path" : "birthDate",
+                                             "scope" : "Pt",
+                                             "type" : "Property"
+                                          } ]
+                                       }
+                                    } ]
+                                 }
+                              }, {
+                                 "localId" : "48",
+                                 "locator" : "103:97-103:104",
+                                 "value" : 2,
+                                 "unit" : "months",
+                                 "type" : "Quantity"
+                              } ]
+                           } ]
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "57",
+            "locator" : "113:1-114:6",
+            "name" : "Denominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "57",
+                  "s" : [ {
+                     "r" : "56",
+                     "value" : [ "/**\n * Denominator - THiS SHOULDN'T BE PROPORTION\n *\n * Definition: Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women.\n * Calculation: *Estimated number of HIV-positive women who delivered during the reporting period\n */\n\n","define ","\"Denominator\"",":\n  ","true" ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "56",
+               "locator" : "114:3-114:6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "value" : "true",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "60",
+            "locator" : "124:1-125:38",
+            "name" : "Geographic Region Stratifier",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "60",
+                  "s" : [ {
+                     "value" : [ "/* end Populations */\n\n/*\n * Disaggregators\n */\n\n\n","define ","\"Geographic Region Stratifier\"",":\n\t" ]
+                  }, {
+                     "r" : "59",
+                     "s" : [ {
+                        "r" : "58",
+                        "s" : [ {
+                           "value" : [ "HIE" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "59",
+                        "s" : [ {
+                           "value" : [ "\"By Geographic Region Stratifier\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "59",
+               "locator" : "125:2-125:38",
+               "name" : "By Geographic Region Stratifier",
+               "libraryName" : "HIE",
+               "type" : "ExpressionRef"
+            }
+         } ]
+      }
+   }
+}

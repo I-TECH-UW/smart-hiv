@@ -3,8 +3,231 @@
 <PlanDefinition xmlns="http://hl7.org/fhir">
   <id value="HIV-A-Registration-PlanDefinition"/>
   <text>
-    <status value="generated"/><div xmlns="http://www.w3.org/1999/xhtml"><p class="res-header-id"><b>Generated Narrative: PlanDefinition HIV-A-Registration-PlanDefinition</b></p><a name="HIV-A-Registration-PlanDefinition"> </a><a name="hcHIV-A-Registration-PlanDefinition"> </a><a name="HIV-A-Registration-PlanDefinition-en-US"> </a><p><b>url</b>: <a href="PlanDefinition-HIV-A-Registration-PlanDefinition.html">PlanDefinition PlanDefinition - HIV.A. Registration</a></p><p><b>version</b>: 0.3.0</p><p><b>name</b>: PlanDefinition_HIV.A. Registration</p><p><b>title</b>: PlanDefinition - HIV.A. Registration</p><p><b>type</b>: <span title="Codes:{http://terminology.hl7.org/CodeSystem/plan-definition-type workflow-definition}">Workflow Definition</span></p><p><b>status</b>: Active</p><p><b>experimental</b>: true</p><p><b>date</b>: 2024-11-07 21:07:17+0000</p><p><b>publisher</b>: WHO</p><p><b>contact</b>: WHO: <a href="http://who.int">http://who.int</a></p><p><b>description</b>: </p><div><p>To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling.</p>
-</div><blockquote><p><b>action</b></p><p><b>title</b>: Registration business process</p><p><b>description</b>: To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling</p><blockquote><p><b>participant</b></p><p><b>type</b>: Patient</p><p><b>role</b>: <span title="Codes:">client</span></p></blockquote><blockquote><p><b>participant</b></p><p><b>type</b>: Practitioner</p><p><b>role</b>: <span title="Codes:">TrainedLayProvider</span></p></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.1</blockquote><p><b>title</b>: Arrive at facility</p><p><b>description</b>: Client arrives at the health facility.</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.2</td><td>Before Start</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Patient</td><td><span title="Codes:">client</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.2</blockquote><p><b>title</b>: Gather client’s details</p><p><b>description</b>: Ask the client whether he or she has previously been issued a unique identifier</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.3</td><td>Before Start</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Patient</td><td><span title="Codes:">client</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.3</blockquote><p><b>title</b>: Search for client record</p><p><b>description</b>: This search process can be done through a variety of means depending on what mechanisms are available in the record system. For example, clients can be searched for by name, unique identifier, or QR code. </p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.4</td><td>Before Start</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Practitioner</td><td><span title="Codes:">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.4</blockquote><p><b>title</b>: Match found?</p><p><b>description</b>: If multiple records are found and no unique ID, use option to merge records</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.7</td><td>Before Start</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Practitioner</td><td><span title="Codes:">TrainedLayProvider</span></td></tr></table><p><b>groupingBehavior</b>: Logical Group</p><p><b>selectionBehavior</b>: Exactly One</p><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.5</blockquote><p><b>title</b>: Create new client record</p><p><b>description</b>: If a previous unique identifier has been issued, use the same number to create the client record.</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.4</td><td>Before End</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Practitioner</td><td><span title="Codes:">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.6</blockquote><p><b>title</b>: Validate client details</p><p><b>description</b>: Review and update client record or ask for information and complete new client record:</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.4</td><td>Before End</td></tr></table><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.6.1</blockquote><p><b>title</b>: Review sociodemographic data with client</p><p><b>description</b>: Review client’s non-clinical information, such as name, address, contact information, etc.</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.6.2</td><td>Before Start</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Practitioner</td><td><span title="Codes:">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.6.2</blockquote><p><b>title</b>: Update needed?</p><p><b>description</b>: Has the client moved? Has the client changed contact information? Has any other sociodemographic information changed?</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.6.3</td><td>Before Start</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Practitioner</td><td><span title="Codes:">TrainedLayProvider</span></td></tr></table></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.6.3</blockquote><p><b>title</b>: Update client details</p><p><b>description</b>: Ask client to provide updated information if address or other details have changed since last contact</p><h3>RelatedActions</h3><table class="grid"><tr><td style="display: none">-</td><td><b>ActionId</b></td><td><b>Relationship</b></td></tr><tr><td style="display: none">*</td><td>HIV.A.7</td><td>Before Start</td></tr></table><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Practitioner</td><td><span title="Codes:">TrainedLayProvider</span></td></tr></table></blockquote></blockquote></blockquote><blockquote><p><b>action</b></p><blockquote><p><b>id</b></p>HIV.A.7</blockquote><p><b>title</b>: Check in client</p><p><b>description</b>: Add client to the relevant queue for services</p><h3>Participants</h3><table class="grid"><tr><td style="display: none">-</td><td><b>Type</b></td><td><b>Role</b></td></tr><tr><td style="display: none">*</td><td>Practitioner</td><td><span title="Codes:">TrainedLayProvider</span></td></tr></table></blockquote></blockquote></div>
+    <status value="extensions"/><div xmlns="http://www.w3.org/1999/xhtml">
+<div>
+    <table class="grid dict">
+        
+        <tr>
+            <th scope="row"><b>Id: </b></th>
+            <td style="padding-left: 4px;">HIV-A-Registration-PlanDefinition</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Url: </b></th>
+            <td style="padding-left: 4px;"><a href="PlanDefinition-HIV-A-Registration-PlanDefinition.html">PlanDefinition - HIV.A. Registration</a></td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Version: </b></th>
+            <td style="padding-left: 4px;">0.3.0</td>
+        </tr>
+        
+
+        
+
+        
+        <tr>
+            <th scope="row"><b>Title: </b></th>
+            <td style="padding-left: 4px;">PlanDefinition - HIV.A. Registration</td>
+        </tr>
+        
+
+        
+
+        
+
+        
+        <tr>
+            <th scope="row"><b>Experimental: </b></th>
+            <td style="padding-left: 4px;">true</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Type: </b></th>
+            <td style="padding-left: 4px;">
+                
+                    
+                        
+                        <p style="margin-bottom: 5px;">
+                            <b>system: </b> <span><a href="http://hl7.org/fhir/R4/codesystem-plan-definition-type.html">http://terminology.hl7.org/CodeSystem/plan-definition-type</a></span>
+                        </p>
+                        
+                        
+                        <p style="margin-bottom: 5px;">
+                            <b>code: </b> <span>workflow-definition</span>
+                        </p>
+                        
+                        
+                        <p style="margin-bottom: 5px;">
+                            <b>display: </b> <span>Workflow Definition</span>
+                        </p>
+                        
+                    
+                
+                
+            </td>
+        </tr>
+        
+
+        
+
+        
+        <tr>
+            <th scope="row"><b>Date: </b></th>
+            <td style="padding-left: 4px;">2024-12-06 22:10:30+0000</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Publisher: </b></th>
+            <td style="padding-left: 4px;">WHO</td>
+        </tr>
+        
+
+        
+        <tr>
+            <th scope="row"><b>Description: </b></th>
+            <td style="padding-left: 4px;"><div><p>To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling.</p>
+</div></td>
+        </tr>
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+        <tr>
+            <th scope="row"><b>Actions: </b></th>
+            <td style="padding-left: 4px;">
+                <table class="grid-dict">
+                    
+                    <tr>
+                        <td>
+                            
+                            <b> Registration business process:</b> To ensure client is found in the record system and personal details are updated or, if not located, entered into the system to be put into a queue awaiting counselling
+                            
+                            <br/>
+                            
+                            
+                            
+                            <b>Then:</b>
+                            <table class="grid-dict">
+                                
+                                <tr>
+                                    <td>
+                                        
+                                        <b> Arrive at facility:</b>
+                                        Client arrives at the health facility.
+                                        
+                                        <br/>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        
+                                        <b> Gather client’s details:</b>
+                                        Ask the client whether he or she has previously been issued a unique identifier
+                                        
+                                        <br/>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        
+                                        <b> Search for client record:</b>
+                                        This search process can be done through a variety of means depending on what mechanisms are available in the record system. For example, clients can be searched for by name, unique identifier, or QR code. 
+                                        
+                                        <br/>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        
+                                        <b> Match found?:</b>
+                                        If multiple records are found and no unique ID, use option to merge records
+                                        
+                                        <br/>
+                                        
+                                        
+                                        
+                                        <b>Then:</b> <i>Additional sub-actions not displayed</i>
+                                        
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>
+                                        
+                                        <b> Check in client:</b>
+                                        Add client to the relevant queue for services
+                                        
+                                        <br/>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+        
+    </table>
+</div>
+</div>
   </text>
   <url value="http://smart.who.int/hiv/PlanDefinition/HIV-A-Registration-PlanDefinition"/>
   <version value="0.3.0"/>
@@ -19,7 +242,7 @@
   </type>
   <status value="active"/>
   <experimental value="true"/>
-  <date value="2024-11-07T21:07:17+00:00"/>
+  <date value="2024-12-06T22:10:30+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>

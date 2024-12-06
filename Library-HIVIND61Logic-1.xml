@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="63">
          <a:s>/**
@@ -321,17 +318,29 @@ define &quot;Numerator&quot;:
                <operand localId="17" locator="84:9-84:62" name="ANC within pregnancy within measurement period" libraryName="HIE" xsi:type="ExpressionRef"/>
             </operand>
             <operand localId="34" locator="85:7-87:3" xsi:type="Exists">
+               <signature xsi:type="ListTypeSpecifier">
+                  <elementType name="fhir:Procedure" xsi:type="NamedTypeSpecifier"/>
+               </signature>
                <operand localId="33" locator="85:13-87:3" xsi:type="Query">
                   <source localId="20" locator="85:14-85:46" alias="P">
                      <expression localId="19" locator="85:14-85:44" name="Syphilis test date B.DE249" libraryName="HE" xsi:type="ExpressionRef"/>
                   </source>
                   <where localId="32" locator="86:5-86:108" xsi:type="Exists">
+                     <signature xsi:type="ListTypeSpecifier">
+                        <elementType xsi:type="IntervalTypeSpecifier">
+                           <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        </elementType>
+                     </signature>
                      <operand localId="31" locator="86:17-86:108" xsi:type="Query">
                         <source localId="22" locator="86:18-86:38" alias="t">
                            <expression localId="21" locator="86:18-86:36" name="all anc dates" libraryName="HIE" xsi:type="ExpressionRef"/>
                         </source>
                         <where localId="30" locator="86:40-86:107" xsi:type="Greater">
+                           <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
                            <operand localId="28" locator="86:46-86:103" precision="Day" xsi:type="DurationBetween">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                               <operand xsi:type="Start">
                                  <operand localId="27" locator="86:66-86:103" xsi:type="Intersect">
                                     <operand localId="23" locator="86:67" name="t" xsi:type="AliasRef"/>
@@ -388,6 +397,9 @@ define &quot;Denominator&quot;:
             </a:s>
          </annotation>
          <expression localId="39" locator="101:3-101:62" xsi:type="Exists">
+            <signature xsi:type="ListTypeSpecifier">
+               <elementType name="fhir:Encounter" xsi:type="NamedTypeSpecifier"/>
+            </signature>
             <operand localId="38" locator="101:9-101:62" name="ANC within pregnancy within measurement period" libraryName="HIE" xsi:type="ExpressionRef"/>
          </expression>
       </def>
@@ -520,6 +532,7 @@ define &quot;Age Stratifier&quot;:
                      <operand localId="52" locator="122:3-122:5" valueType="t:String" value=":" xsi:type="Literal"/>
                   </operand>
                   <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                      <operand localId="55" locator="122:9-122:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                   </operand>
                </operand>

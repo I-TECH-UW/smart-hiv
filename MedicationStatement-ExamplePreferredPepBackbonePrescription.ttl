@@ -1,0 +1,37 @@
+@prefix fhir: <http://hl7.org/fhir/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# - resource -------------------------------------------------------------------
+
+<http://smart.who.int/hiv/MedicationStatement/ExamplePreferredPepBackbonePrescription> a fhir:MedicationStatement ;
+  fhir:nodeRole fhir:treeRoot ;
+  fhir:id [ fhir:v "ExamplePreferredPepBackbonePrescription"] ; # 
+  fhir:meta [
+     fhir:profile ( [
+       fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPepBackbonePreferredTreatment"^^xsd:anyURI ;
+       fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepBackbonePreferredTreatment>
+     ] )
+  ] ; # 
+  fhir:text [
+     fhir:status [ fhir:v "generated" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: MedicationStatement ExamplePreferredPepBackbonePrescription</b></p><a name=\"ExamplePreferredPepBackbonePrescription\"> </a><a name=\"hcExamplePreferredPepBackbonePrescription\"> </a><a name=\"ExamplePreferredPepBackbonePrescription-en-US\"> </a><p><b>status</b>: Completed</p><p><b>medication</b>: <span title=\"Codes:{http://smart.who.int/hiv/CodeSystem/HIVConcepts HIV.C.DE92}\">TDF + 3TC</span></p><p><b>subject</b>: <a href=\"Patient-ExampleHivPatient.html\">Anonymous Patient (no stated gender), DoB Unknown</a></p><p><b>effective</b>: 2023-01-12 14:00:00+0000</p></div>"
+  ] ; # 
+  fhir:status [ fhir:v "completed"] ; # 
+  fhir:medication [
+     a fhir:CodeableConcept ;
+     fhir:coding ( [
+       fhir:system [ fhir:v "http://smart.who.int/hiv/CodeSystem/HIVConcepts"^^xsd:anyURI ] ;
+       fhir:code [ fhir:v "HIV.C.DE92" ] ;
+       fhir:display [ fhir:v "TDF + 3TC" ]
+     ] )
+  ] ; # 
+  fhir:subject [
+     fhir:link <http://smart.who.int/hiv/Patient/ExampleHivPatient> ;
+     fhir:reference [ fhir:v "Patient/ExampleHivPatient" ]
+  ] ; # 
+  fhir:effective [ fhir:v "2023-01-12T14:00:00Z"^^xsd:dateTime] . # 
+
+# -------------------------------------------------------------------------------------
+

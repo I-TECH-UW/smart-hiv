@@ -16,7 +16,7 @@
   "title" : "WHO SMART Guidelines - HIV",
   "status" : "draft",
   "experimental" : true,
-  "date" : "2024-11-07T21:07:17+00:00",
+  "date" : "2024-12-06T22:10:30+00:00",
   "publisher" : "WHO",
   "contact" : [{
     "name" : "WHO",
@@ -63,13 +63,13 @@
     "id" : "hl7_fhir_uv_cpg",
     "uri" : "http://hl7.org/fhir/uv/cpg/ImplementationGuide/hl7.fhir.uv.cpg",
     "packageId" : "hl7.fhir.uv.cpg",
-    "version" : "current"
+    "version" : "2.0.0"
   },
   {
     "id" : "hl7_fhir_us_cqfmeasures",
     "uri" : "http://hl7.org/fhir/us/cqfmeasures/ImplementationGuide/hl7.fhir.us.cqfmeasures",
     "packageId" : "hl7.fhir.us.cqfmeasures",
-    "version" : "current"
+    "version" : "5.0.0"
   },
   {
     "id" : "fhir_cqf_common",
@@ -465,7 +465,7 @@
     },
     {
       "url" : "http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency",
-      "valueCode" : "hl7.fhir.uv.tools#0.2.0"
+      "valueCode" : "hl7.fhir.uv.tools.r4#0.3.0"
     },
     {
       "extension" : [{
@@ -987,6 +987,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPepThirdAlternativeTreatment"
+      },
+      "name" : "Alternative Third PEP Treatment",
+      "description" : "A profile for MedicationRequest representing the alternative third PEP drug choice prescription.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -994,6 +1006,30 @@
       },
       "name" : "Antiretroviral (ARV) drugs received prior to enrolment ValueSet",
       "description" : "Value set of whether or not the client received ARV drugs prior to enrolling into HIV care",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivAntiRetroviralEpisode"
+      },
+      "name" : "ART Episode of Care",
+      "description" : "ART Episode of Care",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivAntiRetroviralTreatment"
+      },
+      "name" : "Art Regimen",
+      "description" : "ART Regimen",
       "exampleBoolean" : false
     },
     {
@@ -1282,6 +1318,18 @@
       },
       "name" : "Cervical cancer primary screening test type ValueSet",
       "description" : "Value set of type of cervical cancer screening test used in primary screening",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivCervicalCancerScreening"
+      },
+      "name" : "Cervical Cancer Screening",
+      "description" : "Profile for documenting cervical cancer screening.",
       "exampleBoolean" : false
     },
     {
@@ -1914,6 +1962,18 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
+        "reference" : "StructureDefinition/HivElevatedHivAcquisitionRiskCondition"
+      },
+      "name" : "Elevated HIV Acquisition Risk Condition",
+      "description" : "A profile for a condition representing an elevated risk for HIV acquisition.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
         "reference" : "StructureDefinition/HivElevatedRiskForAcquisition"
       },
       "name" : "Elevated HIV Risk Acquisition Condition",
@@ -1971,26 +2031,38 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "MedicationRequest"
+        "valueString" : "MedicationStatement"
       }],
       "reference" : {
-        "reference" : "MedicationRequest/ExampleAltPepBackbonePrescription"
+        "reference" : "MedicationStatement/ExampleAltPepBackbonePrescription"
       },
       "name" : "Example Alternative PEP Backbone Prescription",
       "description" : "This is an example of an alternative PEP backbone prescription resource based on the AltPepBackbonePrescription profile.",
-      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivAltPepBackbonePrescription"
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPepBackboneAlternativeTreatment"
     },
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "MedicationRequest"
+        "valueString" : "MedicationStatement"
       }],
       "reference" : {
-        "reference" : "MedicationRequest/ExampleAltThirdPepPrescription"
+        "reference" : "MedicationStatement/ExampleAltThirdPepPrescription"
       },
       "name" : "Example Alternative Third PEP Prescription",
       "description" : "This is an example of an alternative Third PEP prescription resource based on the AltThirdPepPrescription profile.",
-      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivAltThirdPepPrescription"
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPepThirdAlternativeTreatment"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Observation"
+      }],
+      "reference" : {
+        "reference" : "Observation/ExampleCervicalCancerScreening"
+      },
+      "name" : "Example Cervical Cancer Screening Procedure",
+      "description" : "An example of a cervical cancer screening procedure.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivCervicalCancerScreening"
     },
     {
       "extension" : [{
@@ -2015,6 +2087,18 @@
       "name" : "Example Elevated HIV Risk Condition",
       "description" : "This is an example of an Elevated HIV Risk Condition resource based on the HivElevatedRiskForAcquisition profile.",
       "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivElevatedRiskForAcquisition"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Observation"
+      }],
+      "reference" : {
+        "reference" : "Observation/ExampleHcvTestObservation"
+      },
+      "name" : "Example HCV Test Observation",
+      "description" : "An example of an HCV test observation based on the HivHcvTest profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivHcvTest"
     },
     {
       "extension" : [{
@@ -2070,47 +2154,95 @@
         "valueString" : "Observation"
       }],
       "reference" : {
-        "reference" : "Observation/HivTest"
+        "reference" : "Observation/ExampleHivPreventionIntervention"
+      },
+      "name" : "Example HIV Prevention Intervention Observation",
+      "description" : "An example of an HIV Prevention Intervention observation resource based on the HivPreventionIntervention profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPreventionIntervention"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Observation"
+      }],
+      "reference" : {
+        "reference" : "Observation/ExampleHivTest"
       },
       "name" : "Example HIV Test Observation for Positive Result",
       "description" : "This is an example of an HIV Test Observation resource based on the HivTest profile for a positive test result.",
-      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivTest"
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivHivTest"
     },
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "MedicationRequest"
+        "valueString" : "Condition"
       }],
       "reference" : {
-        "reference" : "MedicationRequest/ExamplePreferredPepBackbonePrescription"
+        "reference" : "Condition/ExampleHivInvasiveCervicalCancerDiagnosis"
+      },
+      "name" : "Example Invasive Cervical Cancer Diagnosis",
+      "description" : "This is an example of an Invasive Cervical Cancer Diagnosis Condition resource based on the HivInvasiveCervicalCancerDiagnosis profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerDiagnosis"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Procedure"
+      }],
+      "reference" : {
+        "reference" : "Procedure/ExampleHivInvasiveCervicalCancerTreatment"
+      },
+      "name" : "Example Invasive Cervical Cancer Treatment Procedure",
+      "description" : "This is an example of an Invasive Cervical Cancer Treatment Procedure resource based on the HivInvasiveCervicalCancerTreatment profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerTreatment"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "MedicationStatement"
+      }],
+      "reference" : {
+        "reference" : "MedicationStatement/ExamplePreferredPepBackbonePrescription"
       },
       "name" : "Example Preferred PEP Backbone Prescription",
       "description" : "This is an example of a preferred PEP backbone prescription resource based on the PreferredPepBackbonePrescription profile.",
-      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPreferredPepBackbonePrescription"
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPepBackbonePreferredTreatment"
     },
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "MedicationRequest"
+        "valueString" : "MedicationStatement"
       }],
       "reference" : {
-        "reference" : "MedicationRequest/ExamplePreferredThirdPepPrescription"
+        "reference" : "MedicationStatement/ExamplePreferredThirdPepPrescription"
       },
       "name" : "Example Preferred Third PEP Prescription",
       "description" : "This is an example of a preferred third PEP prescription resource based on the PreferredThirdPepPrescription profile.",
-      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPreferredThirdPepPrescription"
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPepThirdPreferredTreatment"
     },
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "MedicationRequest"
+        "valueString" : "MedicationStatement"
       }],
       "reference" : {
-        "reference" : "MedicationRequest/ExamplePrepProductPrescription"
+        "reference" : "MedicationStatement/ExamplePrepProductPrescription"
       },
       "name" : "Example PrEP Product Prescription",
       "description" : "This is an example of a PREP Product Prescription resource based on the PrepProductPrescription profile.",
-      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPrepProductPrescription"
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPrepTreatment"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Procedure"
+      }],
+      "reference" : {
+        "reference" : "Procedure/HivVmmcProcedureExample"
+      },
+      "name" : "Example VMMC Procedure",
+      "description" : "An example of a VMMC procedure based on the HivVmmcProcedure profile.",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivVmmcProcedure"
     },
     {
       "extension" : [{
@@ -2118,7 +2250,7 @@
         "valueString" : "Patient"
       }],
       "reference" : {
-        "reference" : "Patient/example-hiv-patient"
+        "reference" : "Patient/ExampleHivPatient"
       },
       "name" : "ExampleHivPatient",
       "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPatient"
@@ -2282,6 +2414,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivGonorhoeaTest"
+      },
+      "name" : "Gonorrhoea Test",
+      "description" : "A DAK-specific Gonnorhoea test observation with possible results",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -2301,6 +2445,30 @@
       },
       "name" : "Gonorrhoea test result ValueSet",
       "description" : "Value set of result from Gonorrhoea test",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivGonorrhoeaTreatment"
+      },
+      "name" : "Gonorrhoea Treatment",
+      "description" : "Gonorrhoea Treatment",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivHBsAgTest"
+      },
+      "name" : "HBsAg Test",
+      "description" : "A DAK-specific Hepatitis B virus test observation with possible results",
       "exampleBoolean" : false
     },
     {
@@ -2354,6 +2522,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivHcvTest"
+      },
+      "name" : "HCV Test",
+      "description" : "A DAK-specific Hepatitis C test observation with possible results",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -2378,6 +2558,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivHcvTreatment"
+      },
+      "name" : "HCV Treatment",
+      "description" : "HCV Treatment Regimen",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -2385,6 +2577,18 @@
       },
       "name" : "HCV treatment regimen prescribed ValueSet",
       "description" : "Value set of hepatitis C virus treatment regimen prescribed",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivHcvViralLoadTest"
+      },
+      "name" : "HCV Viral Load Test",
+      "description" : "A DAK-specific HCV Viral Load observation with possible results",
       "exampleBoolean" : false
     },
     {
@@ -2486,6 +2690,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivCondition"
+      },
+      "name" : "HIV Condition",
+      "description" : "Core profile for HIV IG Conditions",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -2510,6 +2726,17 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivLabTestSpecimen"
+      },
+      "name" : "HIV Lab Test Specimen",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "Requirements"
       }],
       "reference" : {
@@ -2525,10 +2752,10 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/HivPrepActive"
+        "reference" : "StructureDefinition/HivPreventionIntervention"
       },
-      "name" : "HIV Prep Active",
-      "description" : "A medication statement describing a patient on active PrEP",
+      "name" : "HIV Prevention Intervention",
+      "description" : "HIV prevention intervention",
       "exampleBoolean" : false
     },
     {
@@ -2657,7 +2884,7 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/HivTest"
+        "reference" : "StructureDefinition/HivHivTest"
       },
       "name" : "HIV Test",
       "description" : "An DAK-specific HIV test observation with possible results",
@@ -2714,6 +2941,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivTreatmentMedicationStatement"
+      },
+      "name" : "HIV Treatment Medication Statement",
+      "description" : "Core profile for HIV IG Treatment Medication Statments",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -2721,6 +2960,18 @@
       },
       "name" : "HIV treatment outcome ValueSet",
       "description" : "Value set of the outcome for the client which is used for reporting retention/attrition.",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivTreatmentProcedure"
+      },
+      "name" : "HIV Treatment Procedure",
+      "description" : "Core profile for HIV IG Treatment Procedures",
       "exampleBoolean" : false
     },
     {
@@ -5246,9 +5497,43 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
+        "reference" : "StructureDefinition/HivLabTestObservation"
+      },
+      "name" : "HivLabTestObservation",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivLabTestServiceRequest"
+      },
+      "name" : "HivLabTestServiceRequest",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
         "reference" : "StructureDefinition/HivPatient"
       },
       "name" : "HivPatient",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivVmmcAdverseEvent"
+      },
+      "name" : "HivVmmcAdverseEvent",
+      "description" : "An adverse event related to voluntary medical male circumcision",
       "exampleBoolean" : false
     },
     {
@@ -5273,6 +5558,18 @@
       },
       "name" : "HPV16/18 test result ValueSet",
       "description" : "Value set of test result from HPV16/18 test",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivHtsVisit"
+      },
+      "name" : "HTS Visit",
+      "description" : "Encounter for HIV testing services visit",
       "exampleBoolean" : false
     },
     {
@@ -5345,6 +5642,30 @@
       },
       "name" : "Intimate partner violence enquiry results ValueSet",
       "description" : "Value set of result of medical inquiry for intimate partner violence",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivInvasiveCervicalCancerDiagnosis"
+      },
+      "name" : "Invasive Cervical Cancer Diagnosis",
+      "description" : "Invasive cervical cancer diagnosis",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivInvasiveCervicalCancerTreatment"
+      },
+      "name" : "Invasive Cervical Cancer Treatment",
+      "description" : "Invasive cervical cancer treatment",
       "exampleBoolean" : false
     },
     {
@@ -6097,7 +6418,7 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/HivPreferredPepBackbonePrescription"
+        "reference" : "StructureDefinition/HivPepBackboneAlternativeTreatment"
       },
       "name" : "Preferred PEP Backbone Prescription",
       "description" : "A profile for MedicationRequest representing a preferred PEP backbone prescription.",
@@ -6113,6 +6434,18 @@
       },
       "name" : "Preferred PEP backbone regimen ValueSet",
       "description" : "Value set of preferred backbone regimen for PEP",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPepBackbonePreferredTreatment"
+      },
+      "name" : "Preferred PEP Backbone Treatment",
+      "description" : "A profile for MedicationRequest representing a preferred PEP backbone prescription.",
       "exampleBoolean" : false
     },
     {
@@ -6145,9 +6478,9 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/HivPreferredThirdPepPrescription"
+        "reference" : "StructureDefinition/HivPepThirdPreferredTreatment"
       },
-      "name" : "Preferred Third PEP Prescription",
+      "name" : "Preferred Third PEP Treatment",
       "description" : "A profile for MedicationRequest representing the preferred third PEP drug choice prescription.",
       "exampleBoolean" : false
     },
@@ -6217,7 +6550,7 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
-        "reference" : "StructureDefinition/HivPrepProductPrescription"
+        "reference" : "StructureDefinition/HivPrepTreatment"
       },
       "name" : "PrEP Product Prescription",
       "description" : "A profile for MedicationRequest representing a prescription of a PrEP product.",
@@ -7030,6 +7363,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivStiServices"
+      },
+      "name" : "STI Services",
+      "description" : "STI Services",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "ValueSet"
       }],
       "reference" : {
@@ -7072,7 +7417,7 @@
         "reference" : "ValueSet/HIV.D.DE789"
       },
       "name" : "STI tested for ValueSet",
-      "description" : "Value set of sTI for which the client was tested",
+      "description" : "Value set of STI for which the client was tested",
       "exampleBoolean" : false
     },
     {
@@ -7829,6 +8174,18 @@
       },
       "name" : "VIA cervical cancer screening test result ValueSet",
       "description" : "Value set of screening test result for VIA",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivVmmcProcedure"
+      },
+      "name" : "Voluntary Medical Male Circumcision (VMMC) Procedure",
+      "description" : "Voluntary Medical Male Circumcision (VMMC) procedure",
       "exampleBoolean" : false
     },
     {

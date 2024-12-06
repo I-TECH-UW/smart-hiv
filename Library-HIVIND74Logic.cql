@@ -82,6 +82,13 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+  /*
+  * Profiles:
+  * - HivGonorrhoeaTest
+  * - HivStatusObservation
+  * - HivStatusCondition
+  */ 
+
 library HIVIND74Logic
 
 // Included Libraries

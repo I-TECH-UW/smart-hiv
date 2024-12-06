@@ -98,6 +98,12 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+ /*
+  * Profiles:
+  * - HivGonorhoeaTest
+  * - HivPreventionIntervention
+  */ 
+ 
 library HIVIND70Logic
 
 // Included Libraries
@@ -132,7 +138,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."Gonorrhoea test date B.DE255"
+  HIE."Gonorrhoea test result B.DE256"
   and HIE."Date accessed HIV prevention intervention"
 
 

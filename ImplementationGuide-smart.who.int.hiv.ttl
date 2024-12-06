@@ -30,7 +30,7 @@
   fhir:title [ fhir:v "WHO SMART Guidelines - HIV"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
   fhir:experimental [ fhir:v "true"^^xsd:boolean] ; # 
-  fhir:date [ fhir:v "2024-11-07T21:07:17+00:00"^^xsd:dateTime] ; # 
+  fhir:date [ fhir:v "2024-12-06T22:10:30+00:00"^^xsd:dateTime] ; # 
   fhir:publisher [ fhir:v "WHO"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "WHO" ] ;
@@ -90,7 +90,7 @@
        fhir:link <http://hl7.org/fhir/uv/cpg/ImplementationGuide/hl7.fhir.uv.cpg>
      ] ;
      fhir:packageId [ fhir:v "hl7.fhir.uv.cpg" ] ;
-     fhir:version [ fhir:v "current" ]
+     fhir:version [ fhir:v "2.0.0" ]
   ] [
      fhir:id [ fhir:v "hl7_fhir_us_cqfmeasures" ] ;
      fhir:uri [
@@ -98,7 +98,7 @@
        fhir:link <http://hl7.org/fhir/us/cqfmeasures/ImplementationGuide/hl7.fhir.us.cqfmeasures>
      ] ;
      fhir:packageId [ fhir:v "hl7.fhir.us.cqfmeasures" ] ;
-     fhir:version [ fhir:v "current" ]
+     fhir:version [ fhir:v "5.0.0" ]
   ] [
      fhir:id [ fhir:v "fhir_cqf_common" ] ;
      fhir:uri [
@@ -426,7 +426,7 @@
        fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-parameter"^^xsd:anyURI ]
      ] [
        fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/ig-internal-dependency"^^xsd:anyURI ] ;
-       fhir:value [ fhir:v "hl7.fhir.uv.tools#0.2.0" ]
+       fhir:value [ fhir:v "hl7.fhir.uv.tools.r4#0.3.0" ]
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "code"^^xsd:anyURI ] ;
@@ -878,6 +878,18 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepThirdAlternativeTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivPepThirdAlternativeTreatment" ]
+       ] ;
+       fhir:name [ fhir:v "Alternative Third PEP Treatment" ] ;
+       fhir:description [ fhir:v "A profile for MedicationRequest representing the alternative third PEP drug choice prescription." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "ValueSet" ]
        ] ) ;
        fhir:reference [
@@ -886,6 +898,30 @@
        ] ;
        fhir:name [ fhir:v "Antiretroviral (ARV) drugs received prior to enrolment ValueSet" ] ;
        fhir:description [ fhir:v "Value set of whether or not the client received ARV drugs prior to enrolling into HIV care" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivAntiRetroviralEpisode> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivAntiRetroviralEpisode" ]
+       ] ;
+       fhir:name [ fhir:v "ART Episode of Care" ] ;
+       fhir:description [ fhir:v "ART Episode of Care" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivAntiRetroviralTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivAntiRetroviralTreatment" ]
+       ] ;
+       fhir:name [ fhir:v "Art Regimen" ] ;
+       fhir:description [ fhir:v "ART Regimen" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -1174,6 +1210,18 @@
        ] ;
        fhir:name [ fhir:v "Cervical cancer primary screening test type ValueSet" ] ;
        fhir:description [ fhir:v "Value set of type of cervical cancer screening test used in primary screening" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivCervicalCancerScreening> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivCervicalCancerScreening" ]
+       ] ;
+       fhir:name [ fhir:v "Cervical Cancer Screening" ] ;
+       fhir:description [ fhir:v "Profile for documenting cervical cancer screening." ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -1805,6 +1853,18 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivElevatedHivAcquisitionRiskCondition> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivElevatedHivAcquisitionRiskCondition" ]
+       ] ;
+       fhir:name [ fhir:v "Elevated HIV Acquisition Risk Condition" ] ;
+       fhir:description [ fhir:v "A profile for a condition representing an elevated risk for HIV acquisition." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
          fhir:link <http://smart.who.int/hiv/StructureDefinition/HivElevatedRiskForAcquisition> ;
          fhir:reference [ fhir:v "StructureDefinition/HivElevatedRiskForAcquisition" ]
        ] ;
@@ -1862,32 +1922,47 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "MedicationRequest" ]
+         fhir:value [ fhir:v "MedicationStatement" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/MedicationRequest/ExampleAltPepBackbonePrescription> ;
-         fhir:reference [ fhir:v "MedicationRequest/ExampleAltPepBackbonePrescription" ]
+         fhir:link <http://smart.who.int/hiv/MedicationStatement/ExampleAltPepBackbonePrescription> ;
+         fhir:reference [ fhir:v "MedicationStatement/ExampleAltPepBackbonePrescription" ]
        ] ;
        fhir:name [ fhir:v "Example Alternative PEP Backbone Prescription" ] ;
        fhir:description [ fhir:v "This is an example of an alternative PEP backbone prescription resource based on the AltPepBackbonePrescription profile." ] ;
        fhir:example [
-         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivAltPepBackbonePrescription"^^xsd:anyURI ;
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivAltPepBackbonePrescription>
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPepBackboneAlternativeTreatment"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepBackboneAlternativeTreatment>
        ]
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "MedicationRequest" ]
+         fhir:value [ fhir:v "MedicationStatement" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/MedicationRequest/ExampleAltThirdPepPrescription> ;
-         fhir:reference [ fhir:v "MedicationRequest/ExampleAltThirdPepPrescription" ]
+         fhir:link <http://smart.who.int/hiv/MedicationStatement/ExampleAltThirdPepPrescription> ;
+         fhir:reference [ fhir:v "MedicationStatement/ExampleAltThirdPepPrescription" ]
        ] ;
        fhir:name [ fhir:v "Example Alternative Third PEP Prescription" ] ;
        fhir:description [ fhir:v "This is an example of an alternative Third PEP prescription resource based on the AltThirdPepPrescription profile." ] ;
        fhir:example [
-         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivAltThirdPepPrescription"^^xsd:anyURI ;
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivAltThirdPepPrescription>
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPepThirdAlternativeTreatment"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepThirdAlternativeTreatment>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Observation" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/Observation/ExampleCervicalCancerScreening> ;
+         fhir:reference [ fhir:v "Observation/ExampleCervicalCancerScreening" ]
+       ] ;
+       fhir:name [ fhir:v "Example Cervical Cancer Screening Procedure" ] ;
+       fhir:description [ fhir:v "An example of a cervical cancer screening procedure." ] ;
+       fhir:example [
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivCervicalCancerScreening"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivCervicalCancerScreening>
        ]
      ] [
        fhir:extension ( [
@@ -1918,6 +1993,21 @@
        fhir:example [
          fhir:v "http://smart.who.int/hiv/StructureDefinition/HivElevatedRiskForAcquisition"^^xsd:anyURI ;
          fhir:link <http://smart.who.int/hiv/StructureDefinition/HivElevatedRiskForAcquisition>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Observation" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/Observation/ExampleHcvTestObservation> ;
+         fhir:reference [ fhir:v "Observation/ExampleHcvTestObservation" ]
+       ] ;
+       fhir:name [ fhir:v "Example HCV Test Observation" ] ;
+       fhir:description [ fhir:v "An example of an HCV test observation based on the HivHcvTest profile." ] ;
+       fhir:example [
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivHcvTest"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHcvTest>
        ]
      ] [
        fhir:extension ( [
@@ -1985,59 +2075,119 @@
          fhir:value [ fhir:v "Observation" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/Observation/HivTest> ;
-         fhir:reference [ fhir:v "Observation/HivTest" ]
+         fhir:link <http://smart.who.int/hiv/Observation/ExampleHivPreventionIntervention> ;
+         fhir:reference [ fhir:v "Observation/ExampleHivPreventionIntervention" ]
+       ] ;
+       fhir:name [ fhir:v "Example HIV Prevention Intervention Observation" ] ;
+       fhir:description [ fhir:v "An example of an HIV Prevention Intervention observation resource based on the HivPreventionIntervention profile." ] ;
+       fhir:example [
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPreventionIntervention"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPreventionIntervention>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Observation" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/Observation/ExampleHivTest> ;
+         fhir:reference [ fhir:v "Observation/ExampleHivTest" ]
        ] ;
        fhir:name [ fhir:v "Example HIV Test Observation for Positive Result" ] ;
        fhir:description [ fhir:v "This is an example of an HIV Test Observation resource based on the HivTest profile for a positive test result." ] ;
        fhir:example [
-         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivTest"^^xsd:anyURI ;
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivTest>
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivHivTest"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHivTest>
        ]
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "MedicationRequest" ]
+         fhir:value [ fhir:v "Condition" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/MedicationRequest/ExamplePreferredPepBackbonePrescription> ;
-         fhir:reference [ fhir:v "MedicationRequest/ExamplePreferredPepBackbonePrescription" ]
+         fhir:link <http://smart.who.int/hiv/Condition/ExampleHivInvasiveCervicalCancerDiagnosis> ;
+         fhir:reference [ fhir:v "Condition/ExampleHivInvasiveCervicalCancerDiagnosis" ]
+       ] ;
+       fhir:name [ fhir:v "Example Invasive Cervical Cancer Diagnosis" ] ;
+       fhir:description [ fhir:v "This is an example of an Invasive Cervical Cancer Diagnosis Condition resource based on the HivInvasiveCervicalCancerDiagnosis profile." ] ;
+       fhir:example [
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerDiagnosis"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerDiagnosis>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Procedure" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/Procedure/ExampleHivInvasiveCervicalCancerTreatment> ;
+         fhir:reference [ fhir:v "Procedure/ExampleHivInvasiveCervicalCancerTreatment" ]
+       ] ;
+       fhir:name [ fhir:v "Example Invasive Cervical Cancer Treatment Procedure" ] ;
+       fhir:description [ fhir:v "This is an example of an Invasive Cervical Cancer Treatment Procedure resource based on the HivInvasiveCervicalCancerTreatment profile." ] ;
+       fhir:example [
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerTreatment"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerTreatment>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "MedicationStatement" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/MedicationStatement/ExamplePreferredPepBackbonePrescription> ;
+         fhir:reference [ fhir:v "MedicationStatement/ExamplePreferredPepBackbonePrescription" ]
        ] ;
        fhir:name [ fhir:v "Example Preferred PEP Backbone Prescription" ] ;
        fhir:description [ fhir:v "This is an example of a preferred PEP backbone prescription resource based on the PreferredPepBackbonePrescription profile." ] ;
        fhir:example [
-         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPreferredPepBackbonePrescription"^^xsd:anyURI ;
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPreferredPepBackbonePrescription>
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPepBackbonePreferredTreatment"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepBackbonePreferredTreatment>
        ]
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "MedicationRequest" ]
+         fhir:value [ fhir:v "MedicationStatement" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/MedicationRequest/ExamplePreferredThirdPepPrescription> ;
-         fhir:reference [ fhir:v "MedicationRequest/ExamplePreferredThirdPepPrescription" ]
+         fhir:link <http://smart.who.int/hiv/MedicationStatement/ExamplePreferredThirdPepPrescription> ;
+         fhir:reference [ fhir:v "MedicationStatement/ExamplePreferredThirdPepPrescription" ]
        ] ;
        fhir:name [ fhir:v "Example Preferred Third PEP Prescription" ] ;
        fhir:description [ fhir:v "This is an example of a preferred third PEP prescription resource based on the PreferredThirdPepPrescription profile." ] ;
        fhir:example [
-         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPreferredThirdPepPrescription"^^xsd:anyURI ;
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPreferredThirdPepPrescription>
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPepThirdPreferredTreatment"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepThirdPreferredTreatment>
        ]
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "MedicationRequest" ]
+         fhir:value [ fhir:v "MedicationStatement" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/MedicationRequest/ExamplePrepProductPrescription> ;
-         fhir:reference [ fhir:v "MedicationRequest/ExamplePrepProductPrescription" ]
+         fhir:link <http://smart.who.int/hiv/MedicationStatement/ExamplePrepProductPrescription> ;
+         fhir:reference [ fhir:v "MedicationStatement/ExamplePrepProductPrescription" ]
        ] ;
        fhir:name [ fhir:v "Example PrEP Product Prescription" ] ;
        fhir:description [ fhir:v "This is an example of a PREP Product Prescription resource based on the PrepProductPrescription profile." ] ;
        fhir:example [
-         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPrepProductPrescription"^^xsd:anyURI ;
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPrepProductPrescription>
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPrepTreatment"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPrepTreatment>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Procedure" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/Procedure/HivVmmcProcedureExample> ;
+         fhir:reference [ fhir:v "Procedure/HivVmmcProcedureExample" ]
+       ] ;
+       fhir:name [ fhir:v "Example VMMC Procedure" ] ;
+       fhir:description [ fhir:v "An example of a VMMC procedure based on the HivVmmcProcedure profile." ] ;
+       fhir:example [
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivVmmcProcedure"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivVmmcProcedure>
        ]
      ] [
        fhir:extension ( [
@@ -2045,8 +2195,8 @@
          fhir:value [ fhir:v "Patient" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/Patient/example-hiv-patient> ;
-         fhir:reference [ fhir:v "Patient/example-hiv-patient" ]
+         fhir:link <http://smart.who.int/hiv/Patient/ExampleHivPatient> ;
+         fhir:reference [ fhir:v "Patient/ExampleHivPatient" ]
        ] ;
        fhir:name [ fhir:v "ExampleHivPatient" ] ;
        fhir:example [
@@ -2212,6 +2362,18 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivGonorhoeaTest> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivGonorhoeaTest" ]
+       ] ;
+       fhir:name [ fhir:v "Gonorrhoea Test" ] ;
+       fhir:description [ fhir:v "A DAK-specific Gonnorhoea test observation with possible results" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "ValueSet" ]
        ] ) ;
        fhir:reference [
@@ -2232,6 +2394,30 @@
        ] ;
        fhir:name [ fhir:v "Gonorrhoea test result ValueSet" ] ;
        fhir:description [ fhir:v "Value set of result from Gonorrhoea test" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivGonorrhoeaTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivGonorrhoeaTreatment" ]
+       ] ;
+       fhir:name [ fhir:v "Gonorrhoea Treatment" ] ;
+       fhir:description [ fhir:v "Gonorrhoea Treatment" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHBsAgTest> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivHBsAgTest" ]
+       ] ;
+       fhir:name [ fhir:v "HBsAg Test" ] ;
+       fhir:description [ fhir:v "A DAK-specific Hepatitis B virus test observation with possible results" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -2284,6 +2470,18 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHcvTest> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivHcvTest" ]
+       ] ;
+       fhir:name [ fhir:v "HCV Test" ] ;
+       fhir:description [ fhir:v "A DAK-specific Hepatitis C test observation with possible results" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "ValueSet" ]
        ] ) ;
        fhir:reference [
@@ -2308,6 +2506,18 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHcvTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivHcvTreatment" ]
+       ] ;
+       fhir:name [ fhir:v "HCV Treatment" ] ;
+       fhir:description [ fhir:v "HCV Treatment Regimen" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "ValueSet" ]
        ] ) ;
        fhir:reference [
@@ -2316,6 +2526,18 @@
        ] ;
        fhir:name [ fhir:v "HCV treatment regimen prescribed ValueSet" ] ;
        fhir:description [ fhir:v "Value set of hepatitis C virus treatment regimen prescribed" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHcvViralLoadTest> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivHcvViralLoadTest" ]
+       ] ;
+       fhir:name [ fhir:v "HCV Viral Load Test" ] ;
+       fhir:description [ fhir:v "A DAK-specific HCV Viral Load observation with possible results" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -2416,6 +2638,18 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivCondition> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivCondition" ]
+       ] ;
+       fhir:name [ fhir:v "HIV Condition" ] ;
+       fhir:description [ fhir:v "Core profile for HIV IG Conditions" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "ValueSet" ]
        ] ) ;
        fhir:reference [
@@ -2440,6 +2674,17 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestSpecimen> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivLabTestSpecimen" ]
+       ] ;
+       fhir:name [ fhir:v "HIV Lab Test Specimen" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "Requirements" ]
        ] ) ;
        fhir:reference [
@@ -2455,11 +2700,11 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPrepActive> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivPrepActive" ]
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPreventionIntervention> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivPreventionIntervention" ]
        ] ;
-       fhir:name [ fhir:v "HIV Prep Active" ] ;
-       fhir:description [ fhir:v "A medication statement describing a patient on active PrEP" ] ;
+       fhir:name [ fhir:v "HIV Prevention Intervention" ] ;
+       fhir:description [ fhir:v "HIV prevention intervention" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -2587,8 +2832,8 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivTest> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivTest" ]
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHivTest> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivHivTest" ]
        ] ;
        fhir:name [ fhir:v "HIV Test" ] ;
        fhir:description [ fhir:v "An DAK-specific HIV test observation with possible results" ] ;
@@ -2644,6 +2889,18 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivTreatmentMedicationStatement> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivTreatmentMedicationStatement" ]
+       ] ;
+       fhir:name [ fhir:v "HIV Treatment Medication Statement" ] ;
+       fhir:description [ fhir:v "Core profile for HIV IG Treatment Medication Statments" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "ValueSet" ]
        ] ) ;
        fhir:reference [
@@ -2652,6 +2909,18 @@
        ] ;
        fhir:name [ fhir:v "HIV treatment outcome ValueSet" ] ;
        fhir:description [ fhir:v "Value set of the outcome for the client which is used for reporting retention/attrition." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivTreatmentProcedure> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivTreatmentProcedure" ]
+       ] ;
+       fhir:name [ fhir:v "HIV Treatment Procedure" ] ;
+       fhir:description [ fhir:v "Core profile for HIV IG Treatment Procedures" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -5176,10 +5445,44 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestObservation> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivLabTestObservation" ]
+       ] ;
+       fhir:name [ fhir:v "HivLabTestObservation" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestServiceRequest> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivLabTestServiceRequest" ]
+       ] ;
+       fhir:name [ fhir:v "HivLabTestServiceRequest" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
          fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPatient> ;
          fhir:reference [ fhir:v "StructureDefinition/HivPatient" ]
        ] ;
        fhir:name [ fhir:v "HivPatient" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivVmmcAdverseEvent> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivVmmcAdverseEvent" ]
+       ] ;
+       fhir:name [ fhir:v "HivVmmcAdverseEvent" ] ;
+       fhir:description [ fhir:v "An adverse event related to voluntary medical male circumcision" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -5204,6 +5507,18 @@
        ] ;
        fhir:name [ fhir:v "HPV16/18 test result ValueSet" ] ;
        fhir:description [ fhir:v "Value set of test result from HPV16/18 test" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHtsVisit> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivHtsVisit" ]
+       ] ;
+       fhir:name [ fhir:v "HTS Visit" ] ;
+       fhir:description [ fhir:v "Encounter for HIV testing services visit" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -5276,6 +5591,30 @@
        ] ;
        fhir:name [ fhir:v "Intimate partner violence enquiry results ValueSet" ] ;
        fhir:description [ fhir:v "Value set of result of medical inquiry for intimate partner violence" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerDiagnosis> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivInvasiveCervicalCancerDiagnosis" ]
+       ] ;
+       fhir:name [ fhir:v "Invasive Cervical Cancer Diagnosis" ] ;
+       fhir:description [ fhir:v "Invasive cervical cancer diagnosis" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivInvasiveCervicalCancerTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivInvasiveCervicalCancerTreatment" ]
+       ] ;
+       fhir:name [ fhir:v "Invasive Cervical Cancer Treatment" ] ;
+       fhir:description [ fhir:v "Invasive cervical cancer treatment" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -6027,8 +6366,8 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPreferredPepBackbonePrescription> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivPreferredPepBackbonePrescription" ]
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepBackboneAlternativeTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivPepBackboneAlternativeTreatment" ]
        ] ;
        fhir:name [ fhir:v "Preferred PEP Backbone Prescription" ] ;
        fhir:description [ fhir:v "A profile for MedicationRequest representing a preferred PEP backbone prescription." ] ;
@@ -6044,6 +6383,18 @@
        ] ;
        fhir:name [ fhir:v "Preferred PEP backbone regimen ValueSet" ] ;
        fhir:description [ fhir:v "Value set of preferred backbone regimen for PEP" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepBackbonePreferredTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivPepBackbonePreferredTreatment" ]
+       ] ;
+       fhir:name [ fhir:v "Preferred PEP Backbone Treatment" ] ;
+       fhir:description [ fhir:v "A profile for MedicationRequest representing a preferred PEP backbone prescription." ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -6075,10 +6426,10 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPreferredThirdPepPrescription> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivPreferredThirdPepPrescription" ]
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPepThirdPreferredTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivPepThirdPreferredTreatment" ]
        ] ;
-       fhir:name [ fhir:v "Preferred Third PEP Prescription" ] ;
+       fhir:name [ fhir:v "Preferred Third PEP Treatment" ] ;
        fhir:description [ fhir:v "A profile for MedicationRequest representing the preferred third PEP drug choice prescription." ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
@@ -6147,8 +6498,8 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPrepProductPrescription> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivPrepProductPrescription" ]
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPrepTreatment> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivPrepTreatment" ]
        ] ;
        fhir:name [ fhir:v "PrEP Product Prescription" ] ;
        fhir:description [ fhir:v "A profile for MedicationRequest representing a prescription of a PrEP product." ] ;
@@ -6960,6 +7311,18 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivStiServices> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivStiServices" ]
+       ] ;
+       fhir:name [ fhir:v "STI Services" ] ;
+       fhir:description [ fhir:v "STI Services" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "ValueSet" ]
        ] ) ;
        fhir:reference [
@@ -7003,7 +7366,7 @@
          fhir:reference [ fhir:v "ValueSet/HIV.D.DE789" ]
        ] ;
        fhir:name [ fhir:v "STI tested for ValueSet" ] ;
-       fhir:description [ fhir:v "Value set of sTI for which the client was tested" ] ;
+       fhir:description [ fhir:v "Value set of STI for which the client was tested" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -7760,6 +8123,18 @@
        ] ;
        fhir:name [ fhir:v "VIA cervical cancer screening test result ValueSet" ] ;
        fhir:description [ fhir:v "Value set of screening test result for VIA" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivVmmcProcedure> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivVmmcProcedure" ]
+       ] ;
+       fhir:name [ fhir:v "Voluntary Medical Male Circumcision (VMMC) Procedure" ] ;
+       fhir:description [ fhir:v "Voluntary Medical Male Circumcision (VMMC) procedure" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [

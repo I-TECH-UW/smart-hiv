@@ -57,6 +57,10 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+ /* 
+  * Profiles:
+  * - 
+
 library HIVIND9Logic
 
 // Included Libraries
@@ -89,7 +93,6 @@ define "Initial Population":
 
 define "Numerator":
   true
-
 
 /**
  * Denominator

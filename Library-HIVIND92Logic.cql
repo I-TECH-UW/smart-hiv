@@ -74,6 +74,13 @@
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
  */
 
+/*
+ * Profiles:
+ * - HivStatus
+ * - HcvTreatment
+ * - HcvViralLoadResult
+ */
+ 
 library HIVIND92Logic
 
 // Included Libraries
@@ -109,10 +116,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and
-  exists(HE."Positive D.DE171" G
-  with HE."HCV test date D.DE169" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period") and
-  HIE."HCV treatment completion date" and
+  exists(HIE."HCV treatment completion date" d) and
   exists(
     HE."Not detected D.DE181" O 
     with HE."HCV viral load test date D.DE178" P

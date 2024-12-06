@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="24">
          <a:s>library WHOElements</a:s>
@@ -134,6 +131,7 @@
             </source>
             <where localId="13" locator="14:5-14:57" xsi:type="In">
                <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="8" locator="14:11-14:18" path="status" scope="O" xsi:type="Property"/>
                </operand>
                <operand localId="12" locator="14:23-14:57" xsi:type="List">
@@ -194,12 +192,15 @@
                <expression localId="16" locator="17:3-17:32" name="Pregnancy Status Observation" xsi:type="ExpressionRef"/>
             </source>
             <where localId="22" locator="18:5-18:39" xsi:type="Equivalent">
+               <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
                <operand name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
                   <operand asType="fhir:CodeableConcept" xsi:type="As">
                      <operand localId="19" locator="18:11-18:17" path="value" scope="O" xsi:type="Property"/>
                   </operand>
                </operand>
                <operand xsi:type="ToConcept">
+                  <signature name="t:Code" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="21" locator="18:21-18:39" name="Pregnant" libraryName="Concepts" xsi:type="CodeRef"/>
                </operand>
             </where>

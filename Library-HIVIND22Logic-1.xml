@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToDateTime has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToDateTime has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToDateTime has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToDateTime has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToString has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="119">
          <a:s>/**
@@ -515,6 +504,10 @@ define &quot;Measure Population&quot;:
                   <relationship localId="23" locator="108:5-109:44" alias="DIP" xsi:type="With">
                      <expression localId="17" locator="108:10-108:36" name="Drug-injecting partner" libraryName="HE" xsi:type="ExpressionRef"/>
                      <suchThat localId="22" locator="109:17-109:44" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                         <operand localId="20" locator="109:17-109:28" path="hasMember" scope="IC" xsi:type="Property"/>
                         <operand localId="21" locator="109:41-109:43" name="DIP" xsi:type="AliasRef"/>
                      </suchThat>
@@ -524,14 +517,22 @@ define &quot;Measure Population&quot;:
                      <suchThat localId="41" locator="111:17-113:55" xsi:type="And">
                         <operand localId="35" locator="111:17-112:56" xsi:type="And">
                            <operand localId="29" locator="111:17-111:44" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                              <signature xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="27" locator="111:17-111:28" path="hasMember" scope="IC" xsi:type="Property"/>
                               <operand localId="28" locator="111:41-111:43" name="HIV" xsi:type="AliasRef"/>
                            </operand>
                            <operand localId="34" locator="112:11-112:56" xsi:type="After">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                               <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
                                  <operand localId="31" locator="112:11-112:20" path="issued" scope="HIV" xsi:type="Property"/>
                               </operand>
                               <operand xsi:type="ToDateTime">
+                                 <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                                  <operand localId="33" locator="112:28-112:56" xsi:type="Start">
                                     <operand localId="32" locator="112:37-112:56" name="Measurement Period" xsi:type="ParameterRef"/>
                                  </operand>
@@ -539,10 +540,14 @@ define &quot;Measure Population&quot;:
                            </operand>
                         </operand>
                         <operand localId="40" locator="113:11-113:55" xsi:type="Before">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                            <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <signature name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="37" locator="113:11-113:20" path="issued" scope="HIV" xsi:type="Property"/>
                            </operand>
                            <operand xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="39" locator="113:29-113:55" xsi:type="End">
                                  <operand localId="38" locator="113:36-113:55" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -560,6 +565,10 @@ define &quot;Measure Population&quot;:
                   <relationship localId="53" locator="116:5-117:43" alias="SP" xsi:type="With">
                      <expression localId="47" locator="116:10-116:28" name="Sexual partner" libraryName="HE" xsi:type="ExpressionRef"/>
                      <suchThat localId="52" locator="117:17-117:43" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                        <signature xsi:type="ListTypeSpecifier">
+                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                        </signature>
+                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                         <operand localId="50" locator="117:17-117:28" path="hasMember" scope="IC" xsi:type="Property"/>
                         <operand localId="51" locator="117:41-117:42" name="SP" xsi:type="AliasRef"/>
                      </suchThat>
@@ -569,14 +578,22 @@ define &quot;Measure Population&quot;:
                      <suchThat localId="71" locator="119:17-121:55" xsi:type="And">
                         <operand localId="65" locator="119:17-120:56" xsi:type="And">
                            <operand localId="59" locator="119:17-119:44" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                              <signature xsi:type="ListTypeSpecifier">
+                                 <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                              </signature>
+                              <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="57" locator="119:17-119:28" path="hasMember" scope="IC" xsi:type="Property"/>
                               <operand localId="58" locator="119:41-119:43" name="HIV" xsi:type="AliasRef"/>
                            </operand>
                            <operand localId="64" locator="120:11-120:56" xsi:type="After">
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                               <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                                 <signature name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
                                  <operand localId="61" locator="120:11-120:20" path="issued" scope="HIV" xsi:type="Property"/>
                               </operand>
                               <operand xsi:type="ToDateTime">
+                                 <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                                  <operand localId="63" locator="120:28-120:56" xsi:type="Start">
                                     <operand localId="62" locator="120:37-120:56" name="Measurement Period" xsi:type="ParameterRef"/>
                                  </operand>
@@ -584,10 +601,14 @@ define &quot;Measure Population&quot;:
                            </operand>
                         </operand>
                         <operand localId="70" locator="121:11-121:55" xsi:type="Before">
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                            <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <signature name="fhir:instant" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="67" locator="121:11-121:20" path="issued" scope="HIV" xsi:type="Property"/>
                            </operand>
                            <operand xsi:type="ToDateTime">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="69" locator="121:29-121:55" xsi:type="End">
                                  <operand localId="68" locator="121:36-121:55" name="Measurement Period" xsi:type="ParameterRef"/>
                               </operand>
@@ -845,6 +866,7 @@ define &quot;Administrative Gender Stratifier&quot;:
                   <operand localId="109" locator="158:3-158:5" valueType="t:String" value=":" xsi:type="Literal"/>
                </operand>
                <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
                   <operand localId="112" locator="158:9-158:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                </operand>
             </operand>

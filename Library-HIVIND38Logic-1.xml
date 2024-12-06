@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
-   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="None" xsi:type="a:CqlToElmInfo"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function FHIRHelpers.ToInterval has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
-   <annotation message="The function WHOCommon.references has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime." errorType="semantic" errorSeverity="warning" xsi:type="a:CqlToElmError"/>
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:s r="60">
          <a:s>/**
@@ -410,6 +406,8 @@ define &quot;Numerator&quot;:
                      <expression localId="17" locator="97:8-97:16" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
                      <suchThat localId="27" locator="98:17-98:83" xsi:type="And">
                         <operand localId="22" locator="98:17-98:39" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                           <signature name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                            <operand localId="20" locator="98:17-98:25" path="subject" scope="O" xsi:type="Property"/>
                            <operand localId="21" locator="98:38" name="P" xsi:type="AliasRef"/>
                         </operand>
@@ -432,18 +430,26 @@ define &quot;Numerator&quot;:
                      <expression localId="33" locator="101:10-101:18" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
                      <suchThat localId="50" locator="102:15-103:104" xsi:type="And">
                         <operand localId="38" locator="102:15-102:38" name="references" libraryName="WCom" xsi:type="FunctionRef">
+                           <signature name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
                            <operand localId="36" locator="102:15-102:23" path="subject" scope="O" xsi:type="Property"/>
                            <operand localId="37" locator="102:36-102:37" name="Pt" xsi:type="AliasRef"/>
                         </operand>
                         <operand localId="49" locator="103:9-103:104" xsi:type="Less">
+                           <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
                            <operand xsi:type="ToQuantity">
+                              <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
                               <operand localId="47" locator="103:9-103:93" precision="Month" xsi:type="DurationBetween">
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                                  <operand localId="42" locator="103:24-103:56" xsi:type="Start">
                                     <operand localId="41" locator="103:33-103:56" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
                                        <operand localId="40" locator="103:33-103:43" path="effective" scope="O" xsi:type="Property"/>
                                     </operand>
                                  </operand>
                                  <operand xsi:type="ToDateTime">
+                                    <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                                     <operand localId="46" locator="103:62-103:93" name="ToDate" libraryName="FHIRHelpers" xsi:type="FunctionRef">
                                        <operand localId="45" locator="103:81-103:92" path="birthDate" scope="Pt" xsi:type="Property"/>
                                     </operand>
