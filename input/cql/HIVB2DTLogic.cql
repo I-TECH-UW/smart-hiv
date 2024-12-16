@@ -74,9 +74,9 @@ define "Guidance":
   when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age 10 or older"
     then 'Immediately take action or refer for care if client is showing this sign of a serious illness.'
   when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age under 10"
-    then '''This is a sign and/or symptom of a serious health condition.
+    then 'This is a sign or symptom of a serious health condition.
   
-Immediately take action or refer for care if client is showing this sign of a serious illness.'''
+Immediately take action or refer for care if client is showing this sign of a serious illness.'
   else null
   end
 

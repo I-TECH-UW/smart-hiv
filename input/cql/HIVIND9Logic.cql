@@ -59,7 +59,7 @@
 
  /* 
   * Profiles:
-  * - 
+  * - */
 
 library HIVIND9Logic
 

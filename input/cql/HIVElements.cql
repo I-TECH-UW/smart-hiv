@@ -2591,7 +2591,7 @@ define "At elevated risk for HIV acquisition B.DE225":
 */
 
 define "Syndrome/STI diagnosed B.DE226":
-    "Urethral discharge syndrome B.DE227" or "Vaginal discharge syndrome B.DE228" or "Lower Abdominal pain  B.DE229" or "Genital ulcer disease syndrome B.DE230" or
+    "Urethral discharge syndrome B.DE227" or "Vaginal discharge syndrome B.DE228" or "Lower Abdominal pain B.DE229" or "Genital ulcer disease syndrome B.DE230" or
   "Anorectal discharge B.DE231"
 
 define "Syndrome/STI diagnosed B.DE226 Observation":
@@ -2639,14 +2639,14 @@ define "Vaginal discharge syndrome B.DE228 Observation":
 @description: Client diagnosed with lower abdominal pain
 */
 
-define "Lower Abdominal pain  B.DE229":
-  exists "Lower Abdominal pain  B.DE229 Observation"
+define "Lower Abdominal pain B.DE229":
+  exists "Lower Abdominal pain B.DE229 Observation"
 
-define "Lower Abdominal pain  B.DE229 Observation":
+define "Lower Abdominal pain B.DE229 Observation":
   "Syndrome/STI diagnosed B.DE226 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Lower Abdominal pain  - HIV.B.DE229"
-/* End of Lower Abdominal pain  B.DE229 */
+/* End of Lower Abdominal pain B.DE229 */
 
 /*
 @dataElement: HIV.B.DE230 - Genital ulcer disease syndrome

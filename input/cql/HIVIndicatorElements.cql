@@ -1571,14 +1571,14 @@ define "STI syndrome":
   List<String>{
     if "Urethral discharge syndrome B.DE227" then 'Urethral Discharge' else null,
     if "Vaginal discharge syndrome B.DE228" then 'Vaginal Discharge' else null,
-    if "Lower Abdominal pain  B.DE229" then 'Lower Abdominal Pain' else null,
+    if "Lower Abdominal pain B.DE229" then 'Lower Abdominal Pain' else null,
     if "Genital ulcer disease syndrome B.DE230" then 'Genital Ulcer' else null,
     if "Anorectal discharge B.DE231" then 'Anorectal discharge ' else null
   }
 
 
 define "Syndrome/STI diagnosed B.DE226":
-  "Urethral discharge syndrome B.DE227" or "Vaginal discharge syndrome B.DE228" or "Lower Abdominal pain  B.DE229" or "Genital ulcer disease syndrome B.DE230" or
+  "Urethral discharge syndrome B.DE227" or "Vaginal discharge syndrome B.DE228" or "Lower Abdominal pain B.DE229" or "Genital ulcer disease syndrome B.DE230" or
   "Anorectal discharge B.DE231"
 
 define "Syndrome/STI diagnosed B.DE226 Observation":
@@ -1628,13 +1628,13 @@ define "Vaginal discharge syndrome B.DE228 Observation":
 @description: Client diagnosed with lower abdominal pain
 */
 
-define "Lower Abdominal pain  B.DE229":
-  exists "Lower Abdominal pain  B.DE229 Observation"
+define "Lower Abdominal pain B.DE229":
+  exists "Lower Abdominal pain B.DE229 Observation"
 
-define "Lower Abdominal pain  B.DE229 Observation":
-  Elements."Lower Abdominal pain  B.DE229 Observation" O
+define "Lower Abdominal pain B.DE229 Observation":
+  Elements."Lower Abdominal pain B.DE229 Observation" O
     where O.effective.toInterval() during "Measurement Period"
-/* End of Lower Abdominal pain  B.DE229 */
+/* End of Lower Abdominal pain B.DE229 */
 
 /*
 @dataElement: HIV.B.DE230 - Genital ulcer disease syndrome
@@ -6247,23 +6247,6 @@ define "Drugs out of stock  Observation":
     where O.effective.toInterval() during "Measurement Period"
 /* End of Drugs out of stock  */
 
-/*
-@dataElement: HIV.H.DE78 - Client lacks finances 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because client lacked finances 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Client lacks finances ":
-  exists "Client lacks finances  Condition"
-    or exists "Client lacks finances  Observation"
-define "Client lacks finances  Condition":
-  Elements."Client lacks finances  Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Client lacks finances  Observation":
-  Elements."Client lacks finances  Observation" O
-    where O.effective.toInterval() during "Measurement Period"
-/* End of Client lacks finances  */
 
 /*
 @dataElement: HIV.H.DE79 - Excluded HIV infection in infant
