@@ -69,8 +69,8 @@ define "methadone_prescribed at date":
     and MR.intent = 'order'
     and MR.medication ~ ConceptsCustom."methadone"
     //and "GetMedicationDailyDose"(MR.dosageInstruction, "DosesPerDay"(singleton from MR.dosageInstruction.timing.repeat.frequencyMax)) >= 60 'mg/d'
-    and Common.MedicationRequestPeriod(MR) starts before start of "Measurement Period"
-    and Common.MedicationRequestPeriod(MR) ends after end of "Measurement Period"
+    and MR.MedicationRequestPeriod() starts before start of "Measurement Period"
+    and MR.MedicationRequestPeriod() ends after end of "Measurement Period"
 
 define "OAMT_initiated":
 exists(
@@ -229,41 +229,46 @@ define hiv_exposure_type:
   }
 
 define setting:
-  List<String>{
-    if Community_testing then 'Community-level testing' else null,
-    if Facility_testing then 'Facility-level testing' else null
-  }
+  case
+    when Community_testing then Concepts."Community-level testing"
+    when Facility_testing then Concepts."Facility-level testing"
+    else null
+  end
 
 define anc:
-  List<String>{
-    if ANC_case then 'ANC case' else null
-  }
+  case
+    when "ANC contact date E.DE85" then ConceptsCustom."Antenatal care contact" 
+    else null
+  end
 
 define tb:
-  List<String>{
-    if TB_diagnosed then 'Diagnosed TB' else null,
-    if TB_presumptive then 'Presumptive TB' else null
-  }
+  case 
+      when "Diagnosed TB"  then Concepts."Diagnosed TB"
+      when "Presumptive TB D.DE945" then Concepts."Presumptive TB - HIV.D.DE945"
+      when "TB excluded" then Concepts."TB excluded"
+      else null
+  end
+
 
 define prep_product:
   List<String>{
-    if Elements."PREP Product Oral" then 'PREP Product Oral' else null,
-    if Elements."PREP Product long-acting device" then 'PREP Product long-acting device' else null,
-    if Elements."PREP Product long-acting injectable" then 'PREP Product long-acting injectable' else null
+    if "TDF + FTC C.DE18" or "TDF C.DE19" or "TDF + 3TC C.DE20" or "Other TDF-based regimen" then 'PREP Product Oral' else null,
+    if "Dapivirine vaginal ring DVR C.DE22" then 'PREP Product long-acting device' else null,
+    if "CAB-LA C.DE23" then 'PREP Product long-acting injectable' else null
   }
 
 define prep_experience:
   List<String>{
-    if Elements."PREP first time" then 'PREP first time' else null,
-    if Elements."PREP Continuing user" then 'PREP Continuing user' else null,
-    if Elements."PREP Restarting" then 'PREP Restarting' else null
+    if "First-time user C.DE25" then 'PREP first time' else null,
+    if "Continuing user" then 'PREP Continuing user' else null,
+    if "Restarting following a period of not taking PrEP" then 'PREP Restarting' else null
   }
 
 define prep_dosing:
   List<String>{
-    if Elements."Daily_oral_PrEP" then 'Daily oral PrEP' else null,
-    if Elements."Event_driven_PrEP" then 'Event driven PrEP' else null,
-    if Elements."other_dosing_PrEP" then 'Other PrEP dosing type' else null
+    if "Daily oral PrEP" then 'Daily oral PrEP' else null,
+    if "Event-driven PrEP 2+1+1" then 'Event driven PrEP' else null,
+    if "Other PrEP dosing type" then 'Other PrEP dosing type' else null
   }
 
 define "Treatment outcome category":
@@ -369,6 +374,13 @@ define "By Age Stratifier 3":
   end
 
 /* End of Age */
+
+define "By Age Stratifier 4":
+  case 
+      when "Age In Years" < 25 then '<25'
+      when "Age In Years" >= 25 then '25+'
+      else null
+  end
 
 
 
@@ -685,7 +697,8 @@ define patientGroups:
 */
 define "Sex worker":
   exists("Key population member type Observation" O
-    where O.value ~ Concepts."Sex worker - HIV.B.DE51")
+    where O.value ~ Concepts."Sex worker - HIV.B.DE51"
+    and O.effective.toInterval() during "Measurement Period")
 /* End of Sex worker B.DE51 */
 
 /*
@@ -695,7 +708,8 @@ define "Sex worker":
 */
 define "Men who have sex with men":
   exists("Key population member type Observation" O
-    where O.value ~ Concepts."Men who have sex with men")
+    where O.value ~ Concepts."Men who have sex with men"
+    and O.effective.toInterval() during "Measurement Period")
 /* End of Men who have sex with men */
 
 /*
@@ -705,7 +719,8 @@ define "Men who have sex with men":
 */
 define "Trans and gender-diverse people":
   exists("Key population member type Observation" O
-    where O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53")
+    where O.value ~ Concepts."Trans and gender-diverse people - HIV.B.DE53"
+    and O.effective.toInterval() during "Measurement Period")
 /* End of Trans and gender-diverse people B.DE53 */
 
 /*
@@ -714,8 +729,9 @@ define "Trans and gender-diverse people":
 @description: Client is a person who injects drugs
 */
 define "People who inject drugs":
-  "Key population member type Observation" O
+  exists("Key population member type Observation" O
     where O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
+    and O.effective.toInterval() during "Measurement Period")
 
 /* End of People who inject drugs B.DE54 */
 
@@ -726,7 +742,8 @@ define "People who inject drugs":
 */
 define "People living in prisons and other closed settings":
   exists("Key population member type Observation" O
-    where O.value ~ Concepts."People living in prisons and other closed settings")
+    where O.value ~ Concepts."People living in prisons and other closed settings"
+    and O.effective.toInterval() during "Measurement Period")
 /* End of People living in prisons and other closed settings */
 
 /*
@@ -882,6 +899,10 @@ define "Non-Self HIV test with date and results returned in measurement period":
 @description: Test result is HIV-positive
 */
 
+define "HIV-positive test result":
+  exists (Elements."HIV-positive test result" O
+  where O.effective.toInterval() during "Measurement Period")
+
 define "Non-Self HIV test date and results returned within measurement period for HIV-positive result":
   "Non-Self HIV test with date and results returned in measurement period" O
     where O.value ~ Concepts."HIV-positive - HIV.B.DE112"
@@ -890,8 +911,21 @@ define "Non-Self HIV test date and results returned within measurement period fo
 /* HIV-negative test */
 define "Negative HIV test within measurement period":
   Elements."HIV test" O
-  where O.effective.toInterval() overlaps "Measurement Period"
+  where O.effective.toInterval() during "Measurement Period"
     and O.value ~ Concepts."HIV-negative - HIV.B.DE113"
+
+
+/*
+@dataElement: HIV.B.DE113 - HIV-negative
+@activity: HIV.B7 Test for HIV using testing algorithm
+@description: Test result is HIV-negative
+*/
+define "HIV-negative test result":
+  exists (Elements."HIV-negative test result" O
+  where O.effective.toInterval() during "Measurement Period")
+
+
+/* End of HIV-negative B.DE113 */
 
 /*
 @dataElement: HIV.B.DE115 - HIV status
@@ -1101,13 +1135,9 @@ define "Other B.DE128 Observation":
 @activity: HIV.B21 Offer prevention options
 @description: Date on which a voluntary medical male circumcision procedure was performed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "VMMC procedure date":
-  Elements."VMMC procedure date" O
-    where O.effective.toInterval() during "Measurement Period"
-define "VMMC procedure date Value":
-  "VMMC procedure date" O
-  return O.value
+  exists(Elements."VMMC" V where V.performed.toInterval() during "Measurement Period")
 /* End of VMMC procedure date */
 
 /*
@@ -1120,9 +1150,8 @@ define "VMMC_adverse_event":
 [AdverseEvent] AE 
   with [Procedure] P
       such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts."Voluntary medical male circumcision VMMC referral"
-      and P.performed after start of "Measurement Period"
-      and P.performed before end of "Measurement Period"
+      and P.code ~  Concepts."VMMC"
+      and P.performed during "Measurement Period"
       and AE.date <= (P.performed + 30 days)
       and AE.date >= (P.performed)
   where AE.actuality = 'actual'
@@ -1174,12 +1203,9 @@ define "VMMC_adverse_event_timing":
       else null
   end
 
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Adverse event severity":
-  exists "Adverse event severity Observation"
-define "Adverse event severity Observation":
-  Elements."Adverse event severity Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Adverse event severity"
 /* End of Adverse event severity */
 
 /*
@@ -1187,17 +1213,9 @@ define "Adverse event severity Observation":
 @activity: HIV.B21 Offer prevention options
 @description: Severity of the adverse event associated with VMMC procedure was moderate
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Moderate":
-  exists "Moderate Condition"
-    or exists "Moderate Observation"
-define "Moderate Condition":
-  Elements."Moderate Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Moderate Observation":
-  Elements."Moderate Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+ exists Elements."Moderate"
 /* End of Moderate */
 
 /*
@@ -1205,17 +1223,9 @@ define "Moderate Observation":
 @activity: HIV.B21 Offer prevention options
 @description: Severity of the adverse event associated with VMMC procedure was severe
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Severe":
-  exists "Severe Condition"
-    or exists "Severe Observation"
-define "Severe Condition":
-  Elements."Severe Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Severe Observation":
-  Elements."Severe Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Severe"
 /* End of Severe */
 
 /*
@@ -1557,8 +1567,9 @@ define "Other B.DE222 Observation":
 */
 
 define "At elevated risk for HIV acquisition B.DE225":
-  exists(Elements."At elevated risk for HIV acquisition B.DE225" C
-    where C.prevalenceInterval() overlaps "Measurement Period")
+  exists(Elements."At elevated risk for HIV acquisition B.DE225" O
+    where O.effective.toInterval() during "Measurement Period")
+
 /* End of At elevated risk for HIV acquisition B.DE225 */
 
 /*
@@ -2076,6 +2087,20 @@ define "Other B.DE281 Observation":
 /* End of Other B.DE281 */
 
 /*
+@dataElement: HIV.C.DE10 - Currently on PrEP
+@activity: HIV.C3 Capture or update client history
+@description: The client is currently taking PrEP. Oral pre-exposure prophylaxis (PrEP) of HIV is the use of ARV drugs by people who are not infected with HIV to block the acquisition of HIV.
+*/
+
+/*@triggeredBy Encounter with location = community level testing*/
+
+define "Currently on PrEP":
+  exists (Elements."Currently on PrEP" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+
+/* End of Currently on PrEP */
+
+/*
 @dataElement: HIV.C.DE11 - PrEP dosing type
 @activity: HIV.C3 Capture or update client history
 @description: Way in which pre-exposure prophylaxis (PrEP) is taken (daily or event-driven)
@@ -2093,17 +2118,11 @@ define "PrEP dosing type Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Pre-exposure prophylaxis (PrEP) is taken every day
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Daily oral PrEP":
-  exists "Daily oral PrEP Condition"
-    or exists "Daily oral PrEP Observation"
-define "Daily oral PrEP Condition":
-  Elements."Daily oral PrEP Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Daily oral PrEP Observation":
-  Elements."Daily oral PrEP Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Daily oral PrEP" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+
 /* End of Daily oral PrEP */
 
 /*
@@ -2111,17 +2130,10 @@ define "Daily oral PrEP Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Event-driven pre-exposure prophylaxis (PrEP) is taken on an even-driven basis (2+1+1)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Event-driven PrEP 2+1+1":
-  exists "Event-driven PrEP 2+1+1 Condition"
-    or exists "Event-driven PrEP 2+1+1 Observation"
-define "Event-driven PrEP 2+1+1 Condition":
-  Elements."Event-driven PrEP 2+1+1 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Event-driven PrEP 2+1+1 Observation":
-  Elements."Event-driven PrEP 2+1+1 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Event-driven PrEP 2+1+1" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
 /* End of Event-driven PrEP 2+1+1 */
 
 /*
@@ -2129,18 +2141,77 @@ define "Event-driven PrEP 2+1+1 Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Other PrEP dosing type
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Other PrEP dosing type":
-  exists "Other PrEP dosing type Condition"
-    or exists "Other PrEP dosing type Observation"
-define "Other PrEP dosing type Condition":
-  Elements."Other PrEP dosing type Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Other PrEP dosing type Observation":
-  Elements."Other PrEP dosing type Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Other PrEP dosing type" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
 /* End of Other PrEP dosing type */
+
+/*
+@dataElement: HIV.C.DE18 - TDF + FTC
+@activity: HIV.C3 Capture or update client history
+@description: Treated with tenofovir disoproxil fumarate (TDF) and emtricitabine (FTC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
+*/
+
+define "TDF + FTC C.DE18":
+  exists (Elements."TDF + FTC C.DE18" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+/* End of TDF + FTC C.DE18 */
+
+/*
+@dataElement: HIV.C.DE19 - TDF
+@activity: HIV.C3 Capture or update client history
+@description: Treated with single-agent tenofovir disoproxil fumarate (TDF) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
+*/
+
+define "TDF C.DE19":
+  exists (Elements."TDF C.DE19" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+
+/* End of TDF C.DE19 */
+
+/*
+@dataElement: HIV.C.DE20 - TDF + 3TC
+@activity: HIV.C3 Capture or update client history
+@description: Treated with tenofovir disoproxil fumarate (TDF) and lamivudine (3TC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
+*/
+
+define "TDF + 3TC C.DE20":
+  exists (Elements."TDF + 3TC C.DE20" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+/* End of TDF + 3TC C.DE20 */
+
+/*
+@dataElement: HIV.C.DE21 - Other TDF-based regimen
+@activity: HIV.C3 Capture or update client history
+@description: Treated with other tenofovir disoproxil fumarate (TDF)-based regimen (oral PrEP)
+*/
+
+define "Other TDF-based regimen":
+  exists (Elements."Other TDF-based regimen" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+/* End of Other TDF-based regimen */
+
+/*
+@dataElement: HIV.C.DE22 - Dapivirine vaginal ring DVR
+@activity: HIV.C3 Capture or update client history
+@description: Dapivirine vaginal ring (DVR) for HIV prevention
+*/
+
+define "Dapivirine vaginal ring DVR C.DE22":
+  exists (Elements."Dapivirine vaginal ring DVR C.DE22" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+
+/*
+@dataElement: HIV.C.DE23 - CAB-LA
+@activity: HIV.C3 Capture or update client history
+@description: Long-acting injectable cabotegravir
+*/
+
+define "CAB-LA C.DE23":
+  exists (Elements."CAB-LA C.DE23" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
+/* End of CAB-LA C.DE23 */
 
 /*
 @dataElement: HIV.C.DE24 - Experience with PrEP
@@ -2160,17 +2231,10 @@ define "Experience with PrEP Observation":
 @activity: HIV.C3 Capture or update client history
 @description: The client has never used pre-exposure prophylaxis (PrEP) before (naive)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "First-time user C.DE25":
-  exists "First-time user C.DE25 Condition"
-    or exists "First-time user C.DE25 Observation"
-define "First-time user C.DE25 Condition":
-  Elements."First-time user C.DE25 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "First-time user C.DE25 Observation":
-  Elements."First-time user C.DE25 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+    exists (Elements."First-time user C.DE25" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
 /* End of First-time user C.DE25 */
 
 /*
@@ -2178,17 +2242,10 @@ define "First-time user C.DE25 Observation":
 @activity: HIV.C3 Capture or update client history
 @description: The client has used PrEP before and is continuing to use PrEP
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Continuing user":
-  exists "Continuing user Condition"
-    or exists "Continuing user Observation"
-define "Continuing user Condition":
-  Elements."Continuing user Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Continuing user Observation":
-  Elements."Continuing user Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Continuing user" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
 /* End of Continuing user */
 
 /*
@@ -2196,17 +2253,10 @@ define "Continuing user Observation":
 @activity: HIV.C3 Capture or update client history
 @description: The client is restarting PrEP following a period of not taking PrEP
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Restarting following a period of not taking PrEP":
-  exists "Restarting following a period of not taking PrEP Condition"
-    or exists "Restarting following a period of not taking PrEP Observation"
-define "Restarting following a period of not taking PrEP Condition":
-  Elements."Restarting following a period of not taking PrEP Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Restarting following a period of not taking PrEP Observation":
-  Elements."Restarting following a period of not taking PrEP Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Restarting following a period of not taking PrEP" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
 /* End of Restarting following a period of not taking PrEP */
 
 /*
@@ -2214,13 +2264,11 @@ define "Restarting following a period of not taking PrEP Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Date client completes PEP course
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date client completes PEP course":
-  Elements."Date client completes PEP course" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date client completes PEP course Value":
-  "Date client completes PEP course" O
-  return O.value
+  exists(Elements."Date client completes PEP course" MS 
+  where MS.effective.toInterval() during "Measurement Period")
+
 /* End of Date client completes PEP course */
 
 /*
@@ -2261,17 +2309,10 @@ define "HIV PREP Active":
     and (H.effective ends after start of "Measurement Period"
     or end of H.effective  ~  null)
    )
-// TODO: Replace placeholder with relevant CQL logic
+
 define "PrEP for HIV prevention":
-  exists "PrEP for HIV prevention Condition"
-    or exists "PrEP for HIV prevention Observation"
-define "PrEP for HIV prevention Condition":
-  Elements."PrEP for HIV prevention Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "PrEP for HIV prevention Observation":
-  Elements."PrEP for HIV prevention Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."PrEP for HIV prevention" MS
+  where MS.status = 'completed' and MS.effective.toInterval() during "Measurement Period")
 /* End of PrEP for HIV prevention */
 
 /*
@@ -2279,17 +2320,10 @@ define "PrEP for HIV prevention Observation":
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed post-exposure prophylaxis (PEP) for HIV prevention
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "PEP for HIV prevention":
-  exists "PEP for HIV prevention Condition"
-    or exists "PEP for HIV prevention Observation"
-define "PEP for HIV prevention Condition":
-  Elements."PEP for HIV prevention Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "PEP for HIV prevention Observation":
-  Elements."PEP for HIV prevention Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+exists(Elements."PEP for HIV prevention" MR
+  where MR.MedicationRequestPeriod() during "Measurement Period")
 /* End of PEP for HIV prevention */
 
 /*
@@ -2609,9 +2643,8 @@ define "Breastfeeding D.DE32 Observation":
 
 define "On ART D.DE38":
   exists(Elements."On ART D.DE38" ART
-   where ART.effective.toInterval() starts before end of "Measurement Period"
-    and (ART.effective.toInterval() ends after start of "Measurement Period")
-   )
+   where ART.effective.toInterval() during "Measurement Period")
+
 /* End of On ART D.DE38 */
 
 /*
@@ -3404,13 +3437,12 @@ define "Date medications prescribed D.DE458 Value":
 @activity: HIV.D23 Prescribe
 @description: Number of doses (quantity taken at a single point in time) of drugs prescribed/dispensed
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Dose of medications prescribed":
-  Elements."Dose of medications prescribed" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Dose of medications prescribed Value":
-  "Dose of medications prescribed" O
-  return O.value
+  [MedicationRequest] P
+    return P.dailyDose()
+
+
 /* End of Dose of medications prescribed */
 
 /*
@@ -3733,6 +3765,31 @@ define "Enhanced adherence counselling provided Observation":
   Elements."Enhanced adherence counselling provided Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Enhanced adherence counselling provided */
+
+/*
+@dataElement: HIV.D.DE552 - Buprenorphine
+@activity: HIV.D8 Capture or update client history
+@description: Opioid substitution to treat opioid dependence
+*/
+
+define "Buprenorphine D.DE552":
+  Elements."Buprenorphine D.DE552" MR
+        where MR.status = 'completed'
+        and MR.MedicationRequestPeriod() during "Measurement Period"
+
+
+/*
+@dataElement: HIV.D.DE555 - Methadone
+@activity: HIV.D8 Capture or update client history
+@description: Opioid substitution to treat opioid dependence
+*/
+define "Methadone D.DE555":
+  Elements."Methadone D.DE555" MR
+        where MR.status = 'completed'
+        and MR.MedicationRequestPeriod() during "Measurement Period"
+
+      
+/* End of Methadone D.DE555 */
 
 /*
 @dataElement: HIV.D.DE656 - Date of cervical cancer screening test
@@ -4833,11 +4890,9 @@ define "Other D.DE833 Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Final result of the TB investigation (bacteriological and/or clinical)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB diagnosis result":
-  exists "TB diagnosis result Observation"
-define "TB diagnosis result Observation":
-  Elements."TB diagnosis result Observation" O
+  exists Elements."TB diagnosis result" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of TB diagnosis result */
 
@@ -4846,25 +4901,9 @@ define "TB diagnosis result Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is diagnosed with TB disease
 */
-define TB_diagnosed:
-  exists(
-    ([Condition] C
-    where C.clinicalStatus ~ ConceptsCustom."active"
-    and exists(C.category CC where CC ~ ConceptsCustom."encounter-diagnosis")
-    and C.code ~ Concepts."Diagnosed TB"
-    and C.onset during "Measurement Period")
-  )
 
-// TODO: Replace placeholder with relevant CQL logic
 define "Diagnosed TB":
-  exists "Diagnosed TB Condition"
-    or exists "Diagnosed TB Observation"
-define "Diagnosed TB Condition":
-  Elements."Diagnosed TB Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Diagnosed TB Observation":
-  Elements."Diagnosed TB Observation" O
+  exists Elements."Diagnosed TB" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Diagnosed TB */
 
@@ -4873,16 +4912,9 @@ define "Diagnosed TB Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is not diagnosed with TB
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "TB excluded":
-  exists "TB excluded Condition"
-    or exists "TB excluded Observation"
-define "TB excluded Condition":
-  Elements."TB excluded Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "TB excluded Observation":
-  Elements."TB excluded Observation" O
+  exists Elements."TB excluded" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of TB excluded */
 
@@ -4891,20 +4923,9 @@ define "TB excluded Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client has signs or symptoms of tuberculosis (TB) without laboratory confirmation
 */
-define TB_presumptive:
-  exists(
-    ([Condition] C
-    where C.clinicalStatus ~ ConceptsCustom."active"
-    and exists(C.category CC where CC ~ ConceptsCustom."encounter-diagnosis")
-    and C.code ~ Concepts."Presumptive TB - HIV.D.DE945"
-    and C.onset during "Measurement Period")
-  )
 
-// TODO: Replace placeholder with relevant CQL logic
 define "Presumptive TB D.DE945":
-  exists "Presumptive TB D.DE945 Observation"
-define "Presumptive TB D.DE945 Observation":
-  Elements."Presumptive TB D.DE945 Observation" O
+  exists Elements."Presumptive TB D.DE945" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Presumptive TB D.DE945 */
 
@@ -6165,8 +6186,7 @@ define "Refused stopped treatment":
 */
 define "On ART H.DE47":
   exists(Elements."On ART H.DE47" ART
-   where ART.effective.toInterval() starts before end of "Measurement Period"
-    and (ART.effective.toInterval() ends after start of "Measurement Period")
+   where ART.effective.toInterval() during "Measurement Period"
    )
 /* End of On ART H.DE47 */
 
@@ -6470,13 +6490,10 @@ define "HIV-negative PRV.DE13 Observation":
 @activity: HIV.B21 Offer prevention options
 @description: Date client was provided with injecting equipment
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Date injecting equipment provided":
-  Elements."Date injecting equipment provided" O
-    where O.effective.toInterval() during "Measurement Period"
-define "Date injecting equipment provided Value":
-  "Date injecting equipment provided" O
-  return O.value
+  exists(Elements."Date injecting equipment provided" DUS
+  where DUS.timing.toInterval() during "Measurement Period")
 /* End of Date injecting equipment provided */
 
 /*
@@ -6518,6 +6535,33 @@ define "Retained on OAMT Observation":
   Elements."Retained on OAMT Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Retained on OAMT */
+
+
+/*
+@dataElement: HIV.PRV.DE22 - Client being inducted on OAMT
+@activity: HIV.B6 Capture or update client history
+@description: Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion
+*/
+
+define "Client being inducted on OAMT":
+exists (Elements."Client being inducted on OAMT" O
+where O.effective.toInterval() during "Measurement Period")
+
+/* End of Retained on OAMT */
+
+/*
+@dataElement: HIV.PRV.DE23 - Client on reducing doses of OAMT
+@activity: HIV.B6 Capture or update client history
+@description: Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion
+*/
+
+define "Client on reducing doses of OAMT":
+exists(Elements."Client on reducing doses of OAMT" O
+where O.effective.toInterval() during "Measurement Period")
+
+
+/* End of Retained on OAMT */
+
 
 /*
 @dataElement: HIV.PRV.DE25 - Date of loss to follow-up or OAMT stopped

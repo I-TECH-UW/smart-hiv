@@ -112,8 +112,8 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIE."patientGroups"
 
-// define "ANC Stratifier":
-//     HIC."anc"
+ define "ANC Stratifier":
+    HIE."anc"
 
 
 define "Stratification":
@@ -121,4 +121,4 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-// + Combine(HIC."anc", ':')
++ ':' + HIE."anc".code

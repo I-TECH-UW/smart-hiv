@@ -82,5 +82,6 @@ code "HCV viral load" : 'HCV viral load' from "missing concepts"
 code "cervical cancer screening test" : 'cervical cancer screening test' from "missing concepts"
 code "cervical precancer lesion treatment" : 'cervical precancer lesion treatment' from "missing concepts"
 code "Invasive cervical cancer treatment" : 'Invasive cervical cancer treatment' from "missing concepts"
+code "Antenatal care contact": 'Antenatal care contact' from "missing concepts"
 
-valueset "Antenatal care contact": 'http://fhir.org/guides/who/anc-cds/ValueSet/antenatal-care-contact'
+

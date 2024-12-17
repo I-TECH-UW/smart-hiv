@@ -139,5 +139,5 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':') 
-+ Combine(HIE.setting, ':')
+ + ':' + HIE."setting".code
 + Combine(HIE.prep_product, ':')
