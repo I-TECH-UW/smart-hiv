@@ -42,8 +42,8 @@
 
 	  <script src="assets/js/prism.js"></script>
 
-    <style type="text/css">h2{--heading-prefix:"5.1.9"}
-    h3,h4,h5,h6{--heading-prefix:"5.1.9"}</style>
+    <style type="text/css">h2{--heading-prefix:"5.1.14"}
+    h3,h4,h5,h6{--heading-prefix:"5.1.14"}</style>
     <div id="segment-header" class="segment">  <!-- segment-header -->
 
       <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2024-12-06
+            as of 2024-12-19
           
         
       </td>
@@ -409,7 +409,7 @@
                     
                         
                         <p style="margin-bottom: 5px;">
-                            <b>system: </b> <span><a href="http://hl7.org/fhir/R4/codesystem-library-type.html">http://terminology.hl7.org/CodeSystem/library-type</a></span>
+                            <b>system: </b> <span><a href="http://terminology.hl7.org/6.0.2/CodeSystem-library-type.html">http://terminology.hl7.org/CodeSystem/library-type</a></span>
                         </p>
                         
                         
@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2024-12-06 22:30:44+0000</td>
+            <td style="padding-left: 4px;">2024-12-19 17:58:53+0000</td>
         </tr>
         
 
@@ -479,29 +479,13 @@
                 <p><b>Dependencies</b></p>
                 <ul>
                   
+                    <li><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></li>
+                  
+                    <li><a href="Library-HIVConcepts.html">HIVConcepts</a></li>
+                  
+                    <li><a href="Library-HIVEncounterElements.html">HIVEncounterElements</a></li>
+                  
                     <li><a href="Library-WHOCommon.html">WHOCommon</a></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de90</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de91</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de205</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de206</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de92</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de93</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de82</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de103</code></li>
-                  
-                    <li><code>http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de104</code></li>
                   
                 </ul>
                 
@@ -522,183 +506,27 @@
               
                 <tr><th>Patient</th><th>Patient</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Age_greater_than_18_months</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
+                <tr><th>Assay 1 result</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Report as HIV-negative</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Assay 2 result</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Should Continue with Performing HIV Assay 2</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Assay 1</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Should Continue with Performing HIV Assay 1 repeated</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Non-reactive result</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Should Continue with Performing HIV Assay 3</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Report as HIV-negative</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Report as HIV-negative after assay 1 repeated</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Assay 3 result</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Report as HIV-inconclusive after assay 1 repeated</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Assay 2</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Report as HIV-inconclusive after assay 3</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
-              
-                <tr><th>Report as HIV-positive</th><th>Observation</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Assay 3</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
             </table>
           </td>
         </tr>
         
 
-        
-        <tr>
-          <th scope="row"><b>Data Requirements:</b></th>
-          <td style="padding-left: 4px;">
-            <table class="grid-dict">
-              <tr><th><b>Type</b></th><th><b>Profile</b></th><th><b>MS</b></th><th><b>Code Filter</b></th></tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>Observation</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/Observation</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-                <tr>
-                  <th>ServiceRequest</th>
-                  <th>http://hl7.org/fhir/StructureDefinition/ServiceRequest</th>
-                  <th/>
-                  <th>
-                    
-                  </th>
-                </tr>
-              
-            </table>
-          </td>
-        </tr>
         
 
         
@@ -711,164 +539,61 @@
 Library: HIV.B7.DT Logic
 
 @DecisionID: HIV.B7.DT
-@BusinessRule:
-@Trigger: 
-@Description: 
+@BusinessRule: WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
+@Trigger: HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy
+@Description: WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
 
-Test Using Algorithm
+Data Concepts:
 
-WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
-HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy
 */
 
 library HIVB7DTLogic
 
 using FHIR version '4.0.1'
 
-//codesystem &quot;Custom_Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts'
-codesystem &quot;HIV_DAK_Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts'
-//valueset &quot;TestresultofHIVassay1Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95'
-valueset &quot;Assay 1 reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95'
-valueset &quot;Assay 1&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de90'
-valueset &quot;Assay 2&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de91'
-valueset &quot;Assay 2 reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de205'
-valueset &quot;Assay 2 non-reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de206'
-valueset &quot;Assay 3&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de92'
-valueset &quot;Assay 1 repeated&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de93'
-valueset &quot;HIVtesttypeCodes&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de82'
-valueset &quot;Reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de103'
-valueset &quot;Non-reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de104'
-
+include HIVCommon version '0.0.1' called HIC
+include HIVConcepts called Concepts
+include HIVEncounterElements called Elements
 include FHIRHelpers version '4.0.1'
+
 include WHOCommon called WCom
-
-
-//code &quot;Assay 1 Reactive&quot;: 'HIV.B.DE95' from &quot;TestresultofHIVassay1Codes&quot; display 'Assay 1 reactive'
-//code &quot;Reactive&quot;: 'HIV.B.DE103' from &quot;HIV_DAK_Codes&quot; display 'Reactive'
-//code &quot;Non-reactive&quot;: 'HIV.B.DE104' from &quot;HIV_DAK_Codes&quot; display 'Non-reactive'
-code &quot;Rapid diagnostic test for HIV&quot;: 'HIV.B.DE82' from &quot;HIV_DAK_Codes&quot; display 'Rapid diagnostic test for HIV'
-code &quot;Enzyme immunoassay for HIV&quot;: 'HIV.B.DE83' from &quot;HIV_DAK_Codes&quot; display 'Enzyme immunoassay for HIV'
-//code &quot;Assay 1&quot;: 'HIV.B.DE90' from &quot;HIV_DAK_Codes&quot; display 'Assay 1'
-//code &quot;Assay 2&quot;: 'HIV.B.DE91' from &quot;HIV_DAK_Codes&quot; display 'Assay 2'
-//code &quot;Assay 3&quot;: 'HIV.B.DE92' from &quot;HIV_DAK_Codes&quot; display 'Assay 3'
-//code &quot;Assay 1 repeated&quot;: 'HIV.B.DE93' from &quot;HIV_DAK_Codes&quot; display 'Assay 1 repeated'
-//code &quot;Assay 2 reactive&quot;: 'HIV.E.DE205' from &quot;HIV_DAK_Codes&quot; display 'Assay 2 reactive'
-//code &quot;Assay 2 non-reactive&quot;: 'HIV.E.DE206' from &quot;HIV_DAK_Codes&quot; display 'Assay 2 non-reactive'
-//code &quot;Assay 1 reactive&quot;: 'HIV.B.DE95' from &quot;HIV_DAK_Codes&quot; display 'Assay 2 non-reactive'
-
- /*valueset &quot;Assay 2 reactive&quot;: 'HIV.E.DE205'*/
   
 context Patient
 
-define &quot;Age_greater_than_18_months&quot;:
-  AgeInMonthsAt(Today()) &gt;= 18
-
-
+/*
+ @output: &quot;Report as HIV-negative&quot;
+ */
 define &quot;Report as HIV-negative&quot;:
-  [Observation] O
-  //@triggeredBy order for Assay 1
-  with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.code in &quot;Assay 1&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot;
-  and O.value in &quot;Non-reactive&quot;
-  and &quot;Age_greater_than_18_months&quot;)
-
-/* Output observation as HIV negative */
-/*@triggeredBy Assay 1 */
-
-define &quot;Should Continue with Performing HIV Assay 2&quot;:
-  [Observation] O
-  //@triggeredBy  ~ order for Assay 1
- with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.code in &quot;Assay 1&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot;
-  and O.value in  &quot;Reactive&quot; 
-  and &quot;Age_greater_than_18_months&quot;)
-
-/* Output Service Request for Assay 2 */
-
-define &quot;Should Continue with Performing HIV Assay 1 repeated&quot;:
-  [Observation] O
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 2'&quot;
-  with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 1 reactive&quot; and SR.code in &quot;Assay 2&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot;
-  and O.value in &quot;Non-reactive&quot;
-  and &quot;Age_greater_than_18_months&quot;)
-
-/* Output Service Request for Continue with performing HIV 'Assay 1 repeated' */
-
-  define &quot;Should Continue with Performing HIV Assay 3&quot;:
-  [Observation] O
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 2'&quot;
-  with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 1 reactive&quot; and SR.code in &quot;Assay 2&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot; 
-  and O.value in &quot;Reactive&quot;
-  and &quot;Age_greater_than_18_months&quot;)
-
-  /* Output Service Request for Continue with performing Assay 3 */
-
-define &quot;Report as HIV-negative after assay 1 repeated&quot;:
-  [Observation] O
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 1 repeated'&quot;
-    with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 non-reactive&quot; and SR.code in &quot;Assay 1 repeated&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot; 
-  and O.value in &quot;Non-reactive&quot;
-  and &quot;Age_greater_than_18_months&quot;)
-
-/* Output observation as HIV negative */
-
-define &quot;Report as HIV-inconclusive after assay 1 repeated&quot;:
-  [Observation] O
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 1 repeated'&quot;
-    with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 non-reactive&quot; and SR.code in &quot;Assay 1 repeated&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot;
-  and O.value in &quot;Reactive&quot;
-  and &quot;Age_greater_than_18_months&quot;)
-
-/* Output observation as 'HIV-inconclusive' */
-/* Output PlanDefinition as Schedule retest date on &quot;Visit date&quot; + 14 days */
-
-define &quot;Report as HIV-inconclusive after assay 3&quot;:
-  [Observation] O
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 3'&quot;
-      with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 reactive&quot; and SR.code in &quot;Assay 3&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot;
-  and O.value in &quot;Non-reactive&quot;
-  and &quot;Age_greater_than_18_months&quot;)
-
-/* Output observation as 'HIV-inconclusive' */
-/* Output PlanDefinition as Schedule retest date on &quot;Visit date&quot; + 14 days */
-
-define &quot;Report as HIV-positive&quot;:
-  [Observation] O
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 3'&quot;
-        with [ServiceRequest] SR
-      such that O.basedOn.references(SR) and SR.reasonCode in &quot;Assay 2 reactive&quot; and SR.code in &quot;Assay 3&quot;
-  where (O.status in { 'final', 'amended' }
-  and O.code in &quot;HIVtesttypeCodes&quot;
-  and O.value in &quot;Reactive&quot;
-  and &quot;Age_greater_than_18_months&quot;)
-  
-
-/* Output observation as 'HIV-positive' */
+  case 
+  when &quot;Assay 1&quot; and &quot;Non-reactive result&quot;
+    then true
+  else null
+  end
 
 /*
-[Observation] needs to have the following codes and elements
-    where O.status ~ {'final', 'amended'}
-    and O.value ~ HIC.&quot;HIV-positive&quot;
-    */</code></pre></td></tr>
+ Supporting Logic
+ */
+define &quot;Assay 1&quot;:
+  exists(&quot;Assay 1 result&quot;) and not(exists(&quot;Assay 2 result&quot;))
+
+define &quot;Assay 2&quot;:
+  exists(&quot;Assay 2 result&quot;) and not(exists(&quot;Assay 3 result&quot;))
+
+define &quot;Assay 3&quot;:
+  exists(&quot;Assay 3 result&quot;)
+
+define &quot;Assay 1 result&quot;:
+  Elements.&quot;Test result of HIV assay 1 B.DE94&quot;
+
+define &quot;Assay 2 result&quot;:
+  Elements.&quot;Test result of HIV assay 2 B.DE98&quot;
+
+define &quot;Assay 3 result&quot;:
+  Elements.&quot;Test result of HIV assay 3 B.DE102&quot;
+
+define &quot;Non-reactive result&quot;:
+  false
+</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -881,7 +606,7 @@ define &quot;Report as HIV-positive&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (146464 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (18700 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -893,7 +618,7 @@ define &quot;Report as HIV-positive&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (270612 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (30880 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -926,7 +651,7 @@ define &quot;Report as HIV-positive&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Dec 6, 2024 22:30+0000">2024-12-06</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Dec 19, 2024 17:58+0000">2024-12-19</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

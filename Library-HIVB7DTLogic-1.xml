@@ -3,22 +3,20 @@
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
       <a:t name="DecisionID" value="HIV.B7.DT"/>
-      <a:t name="BusinessRule"/>
-      <a:t name="Trigger"/>
-      <a:t name="Description" value="Test Using Algorithm&#xa;&#xa;WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)&#xa;HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy"/>
-      <a:s r="325">
+      <a:t name="BusinessRule" value="WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)"/>
+      <a:t name="Trigger" value="HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy"/>
+      <a:t name="Description" value="WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)&#xa;&#xa;Data Concepts:"/>
+      <a:s r="22">
          <a:s>/**
 Library: HIV.B7.DT Logic
 
 @DecisionID: HIV.B7.DT
-@BusinessRule:
-@Trigger: 
-@Description: 
+@BusinessRule: WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
+@Trigger: HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy
+@Description: WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
 
-Test Using Algorithm
+Data Concepts:
 
-WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
-HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy
 */
 
 library HIVB7DTLogic</a:s>
@@ -28,7 +26,7 @@ library HIVB7DTLogic</a:s>
    <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
    <usings>
       <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
-      <def localId="1" locator="17:1-17:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+      <def localId="1" locator="15:1-15:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
          <annotation xsi:type="a:Annotation">
             <a:s r="1">
                <a:s>using </a:s>
@@ -41,9 +39,42 @@ library HIVB7DTLogic</a:s>
       </def>
    </usings>
    <includes>
-      <def localId="13" locator="33:1-33:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+      <def localId="2" locator="17:1-17:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
          <annotation xsi:type="a:Annotation">
-            <a:s r="13">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="18:1-18:35" localIdentifier="Concepts" path="http://smart.who.int/hiv/HIVConcepts">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVConcepts</a:s>
+               </a:s>
+               <a:s> called Concepts</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="19:1-19:44" localIdentifier="Elements" path="http://smart.who.int/hiv/HIVEncounterElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVEncounterElements</a:s>
+               </a:s>
+               <a:s> called Elements</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="20:1-20:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
                <a:s>include </a:s>
                <a:s>
                   <a:s>FHIRHelpers</a:s>
@@ -52,9 +83,9 @@ library HIVB7DTLogic</a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="14" locator="34:1-34:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+      <def localId="6" locator="22:1-22:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
          <annotation xsi:type="a:Annotation">
-            <a:s r="14">
+            <a:s r="6">
                <a:s>include </a:s>
                <a:s>
                   <a:s>WHOCommon</a:s>
@@ -64,2061 +95,241 @@ library HIVB7DTLogic</a:s>
          </annotation>
       </def>
    </includes>
-   <codeSystems>
-      <def localId="2" locator="20:1-20:91" name="HIV_DAK_Codes" id="http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="2">
-               <a:s>//codesystem &quot;Custom_Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts'
-codesystem &quot;HIV_DAK_Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/CodeSystem/HIV-DAKConcepts'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-   </codeSystems>
-   <valueSets>
-      <def localId="3" locator="22:1-22:85" name="Assay 1 reactive" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="3">
-               <a:s>//valueset &quot;TestresultofHIVassay1Codes&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95'
-valueset &quot;Assay 1 reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de95'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="4" locator="23:1-23:76" name="Assay 1" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de90" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="4">
-               <a:s>valueset &quot;Assay 1&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de90'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="5" locator="24:1-24:76" name="Assay 2" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de91" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="5">
-               <a:s>valueset &quot;Assay 2&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de91'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="6" locator="25:1-25:86" name="Assay 2 reactive" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de205" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="6">
-               <a:s>valueset &quot;Assay 2 reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de205'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="7" locator="26:1-26:90" name="Assay 2 non-reactive" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de206" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="7">
-               <a:s>valueset &quot;Assay 2 non-reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-e-de206'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="8" locator="27:1-27:76" name="Assay 3" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de92" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="8">
-               <a:s>valueset &quot;Assay 3&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de92'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="9" locator="28:1-28:85" name="Assay 1 repeated" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de93" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="9">
-               <a:s>valueset &quot;Assay 1 repeated&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de93'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="10" locator="29:1-29:85" name="HIVtesttypeCodes" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de82" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="10">
-               <a:s>valueset &quot;HIVtesttypeCodes&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de82'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="11" locator="30:1-30:78" name="Reactive" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de103" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="11">
-               <a:s>valueset &quot;Reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de103'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-      <def localId="12" locator="31:1-31:82" name="Non-reactive" id="http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de104" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="12">
-               <a:s>valueset &quot;Non-reactive&quot;: 'http://fhir.org/guides/who/hiv-dak/ValueSet/hiv-b-de104'</a:s>
-            </a:s>
-         </annotation>
-      </def>
-   </valueSets>
-   <codes>
-      <def localId="16" locator="40:1-40:111" name="Rapid diagnostic test for HIV" id="HIV.B.DE82" display="Rapid diagnostic test for HIV" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="16">
-               <a:s>//code &quot;Assay 1 Reactive&quot;: 'HIV.B.DE95' from &quot;TestresultofHIVassay1Codes&quot; display 'Assay 1 reactive'
-//code &quot;Reactive&quot;: 'HIV.B.DE103' from &quot;HIV_DAK_Codes&quot; display 'Reactive'
-//code &quot;Non-reactive&quot;: 'HIV.B.DE104' from &quot;HIV_DAK_Codes&quot; display 'Non-reactive'
-code &quot;Rapid diagnostic test for HIV&quot;: 'HIV.B.DE82' from </a:s>
-               <a:s r="15">
-                  <a:s>&quot;HIV_DAK_Codes&quot;</a:s>
-               </a:s>
-               <a:s> display 'Rapid diagnostic test for HIV'</a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="15" locator="40:57-40:71" name="HIV_DAK_Codes"/>
-      </def>
-      <def localId="18" locator="41:1-41:105" name="Enzyme immunoassay for HIV" id="HIV.B.DE83" display="Enzyme immunoassay for HIV" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="18">
-               <a:s>code &quot;Enzyme immunoassay for HIV&quot;: 'HIV.B.DE83' from </a:s>
-               <a:s r="17">
-                  <a:s>&quot;HIV_DAK_Codes&quot;</a:s>
-               </a:s>
-               <a:s> display 'Enzyme immunoassay for HIV'</a:s>
-            </a:s>
-         </annotation>
-         <codeSystem localId="17" locator="41:54-41:68" name="HIV_DAK_Codes"/>
-      </def>
-   </codes>
    <contexts>
-      <def locator="52:1-52:15" name="Patient"/>
+      <def locator="24:1-24:15" name="Patient"/>
    </contexts>
    <statements>
-      <def locator="52:1-52:15" name="Patient" context="Patient">
+      <def locator="24:1-24:15" name="Patient" context="Patient">
          <expression xsi:type="SingletonFrom">
-            <operand locator="52:1-52:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+            <operand locator="24:1-24:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="23" locator="54:1-55:30" name="Age_greater_than_18_months" context="Patient" accessLevel="Public">
+      <def localId="9" locator="48:1-49:46" name="Assay 1 result" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="23">
-               <a:s>define &quot;Age_greater_than_18_months&quot;:
+            <a:s r="9">
+               <a:s>define &quot;Assay 1 result&quot;:
   </a:s>
-               <a:s r="22">
-                  <a:s r="20">
-                     <a:s>AgeInMonthsAt(</a:s>
-                     <a:s r="19">
-                        <a:s>Today()</a:s>
+               <a:s r="8">
+                  <a:s r="7">
+                     <a:s>Elements</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="8">
+                     <a:s>&quot;Test result of HIV assay 1 B.DE94&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="8" locator="49:3-49:46" name="Test result of HIV assay 1 B.DE94" libraryName="Elements" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="14" locator="51:1-52:46" name="Assay 2 result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>define &quot;Assay 2 result&quot;:
+  </a:s>
+               <a:s r="13">
+                  <a:s r="12">
+                     <a:s>Elements</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="13">
+                     <a:s>&quot;Test result of HIV assay 2 B.DE98&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="52:3-52:46" name="Test result of HIV assay 2 B.DE98" libraryName="Elements" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="19" locator="39:1-40:60" name="Assay 1" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>/*
+ Supporting Logic
+ */
+define &quot;Assay 1&quot;:
+  </a:s>
+               <a:s r="18">
+                  <a:s r="11">
+                     <a:s>exists</a:s>
+                     <a:s r="10">
+                        <a:s>(</a:s>
+                        <a:s r="10">
+                           <a:s>&quot;Assay 1 result&quot;</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="17">
+                     <a:s>not</a:s>
+                     <a:s r="16">
+                        <a:s>(</a:s>
+                        <a:s r="16">
+                           <a:s>exists</a:s>
+                           <a:s r="15">
+                              <a:s>(</a:s>
+                              <a:s r="15">
+                                 <a:s>&quot;Assay 2 result&quot;</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="18" locator="40:3-40:60" xsi:type="And">
+            <operand localId="11" locator="40:3-40:26" xsi:type="Exists">
+               <operand localId="10" locator="40:9-40:26" name="Assay 1 result" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="17" locator="40:32-40:60" xsi:type="Not">
+               <operand localId="16" locator="40:35-40:60" xsi:type="Exists">
+                  <operand localId="15" locator="40:42-40:59" name="Assay 2 result" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="22" locator="57:1-58:7" name="Non-reactive result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s r="21">define &quot;Non-reactive result&quot;:
+  false</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="21" locator="58:3-58:7" valueType="t:Boolean" value="false" xsi:type="Literal"/>
+      </def>
+      <def localId="29" locator="29:1-34:5" name="Report as HIV-negative" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="output" value="&quot;Report as HIV-negative&quot;"/>
+            <a:s r="29">
+               <a:s>/*
+ @output: &quot;Report as HIV-negative&quot;
+ */
+define &quot;Report as HIV-negative&quot;:
+  </a:s>
+               <a:s r="28">
+                  <a:s>case 
+  </a:s>
+                  <a:s r="26">
+                     <a:s>when </a:s>
+                     <a:s r="24">
+                        <a:s r="20">
+                           <a:s>&quot;Assay 1&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="23">
+                           <a:s>&quot;Non-reactive result&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="25">
+    then true</a:s>
+                  </a:s>
+                  <a:s r="27">
+  else null
+  end</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="28" locator="30:3-34:5" xsi:type="Case">
+            <caseItem localId="26" locator="31:3-32:13">
+               <when localId="24" locator="31:8-31:42" xsi:type="And">
+                  <operand localId="20" locator="31:8-31:16" name="Assay 1" xsi:type="ExpressionRef"/>
+                  <operand localId="23" locator="31:22-31:42" name="Non-reactive result" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="25" locator="32:10-32:13" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+            </caseItem>
+            <else asType="t:Boolean" xsi:type="As">
+               <operand localId="27" locator="33:8-33:11" xsi:type="Null"/>
+            </else>
+         </expression>
+      </def>
+      <def localId="34" locator="54:1-55:47" name="Assay 3 result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>define &quot;Assay 3 result&quot;:
+  </a:s>
+               <a:s r="33">
+                  <a:s r="32">
+                     <a:s>Elements</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="33">
+                     <a:s>&quot;Test result of HIV assay 3 B.DE102&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="33" locator="55:3-55:47" name="Test result of HIV assay 3 B.DE102" libraryName="Elements" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="39" locator="42:1-43:60" name="Assay 2" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="39">
+               <a:s>define &quot;Assay 2&quot;:
+  </a:s>
+               <a:s r="38">
+                  <a:s r="31">
+                     <a:s>exists</a:s>
+                     <a:s r="30">
+                        <a:s>(</a:s>
+                        <a:s r="30">
+                           <a:s>&quot;Assay 2 result&quot;</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="37">
+                     <a:s>not</a:s>
+                     <a:s r="36">
+                        <a:s>(</a:s>
+                        <a:s r="36">
+                           <a:s>exists</a:s>
+                           <a:s r="35">
+                              <a:s>(</a:s>
+                              <a:s r="35">
+                                 <a:s>&quot;Assay 3 result&quot;</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="38" locator="43:3-43:60" xsi:type="And">
+            <operand localId="31" locator="43:3-43:26" xsi:type="Exists">
+               <operand localId="30" locator="43:9-43:26" name="Assay 2 result" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="37" locator="43:32-43:60" xsi:type="Not">
+               <operand localId="36" locator="43:35-43:60" xsi:type="Exists">
+                  <operand localId="35" locator="43:42-43:59" name="Assay 3 result" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="42" locator="45:1-46:26" name="Assay 3" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="42">
+               <a:s>define &quot;Assay 3&quot;:
+  </a:s>
+               <a:s r="41">
+                  <a:s>exists</a:s>
+                  <a:s r="40">
+                     <a:s>(</a:s>
+                     <a:s r="40">
+                        <a:s>&quot;Assay 3 result&quot;</a:s>
                      </a:s>
                      <a:s>)</a:s>
                   </a:s>
-                  <a:s r="21"> >= 18</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="22" locator="55:3-55:30" xsi:type="GreaterOrEqual">
-            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
-            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
-            <operand localId="20" locator="55:3-55:24" precision="Month" xsi:type="CalculateAgeAt">
-               <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
-               <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
-               <operand path="birthDate.value" xsi:type="Property">
-                  <source name="Patient" xsi:type="ExpressionRef"/>
-               </operand>
-               <operand localId="19" locator="55:17-55:23" xsi:type="Today"/>
-            </operand>
-            <operand localId="21" locator="55:29-55:30" valueType="t:Integer" value="18" xsi:type="Literal"/>
-         </expression>
-      </def>
-      <def localId="57" locator="58:1-66:35" name="Report as HIV-negative" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="57">
-               <a:s>define &quot;Report as HIV-negative&quot;:
-  </a:s>
-               <a:s r="56">
-                  <a:s>
-                     <a:s r="25">
-                        <a:s r="24">
-                           <a:s r="24">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy order for Assay 1
-  </a:s>
-                  <a:s r="37">
-                     <a:s>with </a:s>
-                     <a:s r="27">
-                        <a:s r="26">
-                           <a:s r="26">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="36">
-                        <a:s r="31">
-                           <a:s r="29">
-                              <a:s r="28">
-                                 <a:s>O</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="29">
-                                 <a:s>basedOn</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>.</a:s>
-                           <a:s r="31">
-                              <a:s>references(</a:s>
-                              <a:s r="30">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>)</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="35">
-                           <a:s r="33">
-                              <a:s r="32">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="33">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="34">
-                              <a:s>&quot;Assay 1&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="55">
-                     <a:s>where </a:s>
-                     <a:s r="55">
-                        <a:s>(</a:s>
-                        <a:s r="55">
-                           <a:s r="53">
-                              <a:s r="48">
-                                 <a:s r="43">
-                                    <a:s r="39">
-                                       <a:s r="38">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="39">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="42">
-                                       <a:s>{ </a:s>
-                                       <a:s r="40">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="41">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="47">
-                                    <a:s r="45">
-                                       <a:s r="44">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="45">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="46">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>
-  and </a:s>
-                              <a:s r="52">
-                                 <a:s r="50">
-                                    <a:s r="49">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="50">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in </a:s>
-                                 <a:s r="51">
-                                    <a:s>&quot;Non-reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>
-  and </a:s>
-                           <a:s r="54">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="56" locator="59:3-66:35" xsi:type="Query">
-            <source localId="25" locator="59:3-59:17" alias="O">
-               <expression localId="24" locator="59:3-59:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="37" locator="61:3-62:65" alias="SR" xsi:type="With">
-               <expression localId="26" locator="61:8-61:23" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="36" locator="62:17-62:65" xsi:type="And">
-                  <operand localId="31" locator="62:17-62:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                     <signature xsi:type="ListTypeSpecifier">
-                        <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                     </signature>
-                     <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                     <operand localId="29" locator="62:17-62:25" path="basedOn" scope="O" xsi:type="Property"/>
-                     <operand localId="30" locator="62:38-62:39" name="SR" xsi:type="AliasRef"/>
-                  </operand>
-                  <operand localId="35" locator="62:46-62:65" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="33" locator="62:46-62:52" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="34" locator="62:57-62:65" name="Assay 1" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="55" locator="63:3-66:35" xsi:type="And">
-               <operand localId="53" locator="63:10-65:31" xsi:type="And">
-                  <operand localId="48" locator="63:10-64:34" xsi:type="And">
-                     <operand localId="43" locator="63:10-63:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="39" locator="63:10-63:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="42" locator="63:22-63:43" xsi:type="List">
-                           <element localId="40" locator="63:24-63:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="41" locator="63:33-63:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="47" locator="64:7-64:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="45" locator="64:7-64:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="46" locator="64:17-64:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="52" locator="65:7-65:31" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="50" locator="65:7-65:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="51" locator="65:18-65:31" name="Non-reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="54" locator="66:7-66:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
-         </expression>
-      </def>
-      <def localId="91" locator="71:1-79:35" name="Should Continue with Performing HIV Assay 2" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="91">
-               <a:s>/* Output observation as HIV negative */
-/*@triggeredBy Assay 1 */
-
-define &quot;Should Continue with Performing HIV Assay 2&quot;:
-  </a:s>
-               <a:s r="90">
-                  <a:s>
-                     <a:s r="59">
-                        <a:s r="58">
-                           <a:s r="58">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy  ~ order for Assay 1
- </a:s>
-                  <a:s r="71">
-                     <a:s>with </a:s>
-                     <a:s r="61">
-                        <a:s r="60">
-                           <a:s r="60">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="70">
-                        <a:s r="65">
-                           <a:s r="63">
-                              <a:s r="62">
-                                 <a:s>O</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="63">
-                                 <a:s>basedOn</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>.</a:s>
-                           <a:s r="65">
-                              <a:s>references(</a:s>
-                              <a:s r="64">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>)</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="69">
-                           <a:s r="67">
-                              <a:s r="66">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="67">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="68">
-                              <a:s>&quot;Assay 1&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="89">
-                     <a:s>where </a:s>
-                     <a:s r="89">
-                        <a:s>(</a:s>
-                        <a:s r="89">
-                           <a:s r="87">
-                              <a:s r="82">
-                                 <a:s r="77">
-                                    <a:s r="73">
-                                       <a:s r="72">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="73">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="76">
-                                       <a:s>{ </a:s>
-                                       <a:s r="74">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="75">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="81">
-                                    <a:s r="79">
-                                       <a:s r="78">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="79">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="80">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>
-  and </a:s>
-                              <a:s r="86">
-                                 <a:s r="84">
-                                    <a:s r="83">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="84">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in  </a:s>
-                                 <a:s r="85">
-                                    <a:s>&quot;Reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> 
-  and </a:s>
-                           <a:s r="88">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="90" locator="72:3-79:35" xsi:type="Query">
-            <source localId="59" locator="72:3-72:17" alias="O">
-               <expression localId="58" locator="72:3-72:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="71" locator="74:2-75:65" alias="SR" xsi:type="With">
-               <expression localId="60" locator="74:7-74:22" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="70" locator="75:17-75:65" xsi:type="And">
-                  <operand localId="65" locator="75:17-75:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                     <signature xsi:type="ListTypeSpecifier">
-                        <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                     </signature>
-                     <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                     <operand localId="63" locator="75:17-75:25" path="basedOn" scope="O" xsi:type="Property"/>
-                     <operand localId="64" locator="75:38-75:39" name="SR" xsi:type="AliasRef"/>
-                  </operand>
-                  <operand localId="69" locator="75:46-75:65" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="67" locator="75:46-75:52" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="68" locator="75:57-75:65" name="Assay 1" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="89" locator="76:3-79:35" xsi:type="And">
-               <operand localId="87" locator="76:10-78:28" xsi:type="And">
-                  <operand localId="82" locator="76:10-77:34" xsi:type="And">
-                     <operand localId="77" locator="76:10-76:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="73" locator="76:10-76:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="76" locator="76:22-76:43" xsi:type="List">
-                           <element localId="74" locator="76:24-76:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="75" locator="76:33-76:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="81" locator="77:7-77:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="79" locator="77:7-77:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="80" locator="77:17-77:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="86" locator="78:7-78:28" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="84" locator="78:7-78:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="85" locator="78:19-78:28" name="Reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="88" locator="79:7-79:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
-         </expression>
-      </def>
-      <def localId="130" locator="83:1-91:35" name="Should Continue with Performing HIV Assay 1 repeated" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="130">
-               <a:s>/* Output Service Request for Assay 2 */
-
-define &quot;Should Continue with Performing HIV Assay 1 repeated&quot;:
-  </a:s>
-               <a:s r="129">
-                  <a:s>
-                     <a:s r="93">
-                        <a:s r="92">
-                           <a:s r="92">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 2'&quot;
-  </a:s>
-                  <a:s r="110">
-                     <a:s>with </a:s>
-                     <a:s r="95">
-                        <a:s r="94">
-                           <a:s r="94">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="109">
-                        <a:s r="104">
-                           <a:s r="99">
-                              <a:s r="97">
-                                 <a:s r="96">
-                                    <a:s>O</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="97">
-                                    <a:s>basedOn</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="99">
-                                 <a:s>references(</a:s>
-                                 <a:s r="98">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>)</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> and </a:s>
-                           <a:s r="103">
-                              <a:s r="101">
-                                 <a:s r="100">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="101">
-                                    <a:s>reasonCode</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> in </a:s>
-                              <a:s r="102">
-                                 <a:s>&quot;Assay 1 reactive&quot;</a:s>
-                              </a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="108">
-                           <a:s r="106">
-                              <a:s r="105">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="106">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="107">
-                              <a:s>&quot;Assay 2&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="128">
-                     <a:s>where </a:s>
-                     <a:s r="128">
-                        <a:s>(</a:s>
-                        <a:s r="128">
-                           <a:s r="126">
-                              <a:s r="121">
-                                 <a:s r="116">
-                                    <a:s r="112">
-                                       <a:s r="111">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="112">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="115">
-                                       <a:s>{ </a:s>
-                                       <a:s r="113">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="114">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="120">
-                                    <a:s r="118">
-                                       <a:s r="117">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="118">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="119">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>
-  and </a:s>
-                              <a:s r="125">
-                                 <a:s r="123">
-                                    <a:s r="122">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="123">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in </a:s>
-                                 <a:s r="124">
-                                    <a:s>&quot;Non-reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>
-  and </a:s>
-                           <a:s r="127">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="129" locator="84:3-91:35" xsi:type="Query">
-            <source localId="93" locator="84:3-84:17" alias="O">
-               <expression localId="92" locator="84:3-84:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="110" locator="86:3-87:105" alias="SR" xsi:type="With">
-               <expression localId="94" locator="86:8-86:23" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="109" locator="87:17-87:105" xsi:type="And">
-                  <operand localId="104" locator="87:17-87:80" xsi:type="And">
-                     <operand localId="99" locator="87:17-87:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="97" locator="87:17-87:25" path="basedOn" scope="O" xsi:type="Property"/>
-                        <operand localId="98" locator="87:38-87:39" name="SR" xsi:type="AliasRef"/>
-                     </operand>
-                     <operand localId="103" locator="87:46-87:80" xsi:type="AnyInValueSet">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <codes xsi:type="Query">
-                           <source alias="X">
-                              <expression localId="101" locator="87:46-87:58" path="reasonCode" scope="SR" xsi:type="Property"/>
-                           </source>
-                           <return distinct="false">
-                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand name="X" xsi:type="AliasRef"/>
-                              </expression>
-                           </return>
-                        </codes>
-                        <valueset localId="102" locator="87:63-87:80" name="Assay 1 reactive" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="108" locator="87:86-87:105" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="106" locator="87:86-87:92" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="107" locator="87:97-87:105" name="Assay 2" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="128" locator="88:3-91:35" xsi:type="And">
-               <operand localId="126" locator="88:10-90:31" xsi:type="And">
-                  <operand localId="121" locator="88:10-89:34" xsi:type="And">
-                     <operand localId="116" locator="88:10-88:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="112" locator="88:10-88:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="115" locator="88:22-88:43" xsi:type="List">
-                           <element localId="113" locator="88:24-88:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="114" locator="88:33-88:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="120" locator="89:7-89:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="118" locator="89:7-89:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="119" locator="89:17-89:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="125" locator="90:7-90:31" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="123" locator="90:7-90:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="124" locator="90:18-90:31" name="Non-reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="127" locator="91:7-91:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
-         </expression>
-      </def>
-      <def localId="169" locator="95:3-103:35" name="Should Continue with Performing HIV Assay 3" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="169">
-               <a:s>/* Output Service Request for Continue with performing HIV 'Assay 1 repeated' */
-
-  define &quot;Should Continue with Performing HIV Assay 3&quot;:
-  </a:s>
-               <a:s r="168">
-                  <a:s>
-                     <a:s r="132">
-                        <a:s r="131">
-                           <a:s r="131">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 2'&quot;
-  </a:s>
-                  <a:s r="149">
-                     <a:s>with </a:s>
-                     <a:s r="134">
-                        <a:s r="133">
-                           <a:s r="133">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="148">
-                        <a:s r="143">
-                           <a:s r="138">
-                              <a:s r="136">
-                                 <a:s r="135">
-                                    <a:s>O</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="136">
-                                    <a:s>basedOn</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="138">
-                                 <a:s>references(</a:s>
-                                 <a:s r="137">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>)</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> and </a:s>
-                           <a:s r="142">
-                              <a:s r="140">
-                                 <a:s r="139">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="140">
-                                    <a:s>reasonCode</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> in </a:s>
-                              <a:s r="141">
-                                 <a:s>&quot;Assay 1 reactive&quot;</a:s>
-                              </a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="147">
-                           <a:s r="145">
-                              <a:s r="144">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="145">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="146">
-                              <a:s>&quot;Assay 2&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="167">
-                     <a:s>where </a:s>
-                     <a:s r="167">
-                        <a:s>(</a:s>
-                        <a:s r="167">
-                           <a:s r="165">
-                              <a:s r="160">
-                                 <a:s r="155">
-                                    <a:s r="151">
-                                       <a:s r="150">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="151">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="154">
-                                       <a:s>{ </a:s>
-                                       <a:s r="152">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="153">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="159">
-                                    <a:s r="157">
-                                       <a:s r="156">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="157">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="158">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> 
-  and </a:s>
-                              <a:s r="164">
-                                 <a:s r="162">
-                                    <a:s r="161">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="162">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in </a:s>
-                                 <a:s r="163">
-                                    <a:s>&quot;Reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>
-  and </a:s>
-                           <a:s r="166">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="168" locator="96:3-103:35" xsi:type="Query">
-            <source localId="132" locator="96:3-96:17" alias="O">
-               <expression localId="131" locator="96:3-96:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="149" locator="98:3-99:105" alias="SR" xsi:type="With">
-               <expression localId="133" locator="98:8-98:23" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="148" locator="99:17-99:105" xsi:type="And">
-                  <operand localId="143" locator="99:17-99:80" xsi:type="And">
-                     <operand localId="138" locator="99:17-99:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="136" locator="99:17-99:25" path="basedOn" scope="O" xsi:type="Property"/>
-                        <operand localId="137" locator="99:38-99:39" name="SR" xsi:type="AliasRef"/>
-                     </operand>
-                     <operand localId="142" locator="99:46-99:80" xsi:type="AnyInValueSet">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <codes xsi:type="Query">
-                           <source alias="X">
-                              <expression localId="140" locator="99:46-99:58" path="reasonCode" scope="SR" xsi:type="Property"/>
-                           </source>
-                           <return distinct="false">
-                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand name="X" xsi:type="AliasRef"/>
-                              </expression>
-                           </return>
-                        </codes>
-                        <valueset localId="141" locator="99:63-99:80" name="Assay 1 reactive" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="147" locator="99:86-99:105" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="145" locator="99:86-99:92" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="146" locator="99:97-99:105" name="Assay 2" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="167" locator="100:3-103:35" xsi:type="And">
-               <operand localId="165" locator="100:10-102:27" xsi:type="And">
-                  <operand localId="160" locator="100:10-101:34" xsi:type="And">
-                     <operand localId="155" locator="100:10-100:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="151" locator="100:10-100:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="154" locator="100:22-100:43" xsi:type="List">
-                           <element localId="152" locator="100:24-100:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="153" locator="100:33-100:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="159" locator="101:7-101:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="157" locator="101:7-101:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="158" locator="101:17-101:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="164" locator="102:7-102:27" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="162" locator="102:7-102:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="163" locator="102:18-102:27" name="Reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="166" locator="103:7-103:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
-         </expression>
-      </def>
-      <def localId="208" locator="107:1-115:35" name="Report as HIV-negative after assay 1 repeated" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="208">
-               <a:s>/* Output Service Request for Continue with performing Assay 3 */
-
-define &quot;Report as HIV-negative after assay 1 repeated&quot;:
-  </a:s>
-               <a:s r="207">
-                  <a:s>
-                     <a:s r="171">
-                        <a:s r="170">
-                           <a:s r="170">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 1 repeated'&quot;
-    </a:s>
-                  <a:s r="188">
-                     <a:s>with </a:s>
-                     <a:s r="173">
-                        <a:s r="172">
-                           <a:s r="172">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="187">
-                        <a:s r="182">
-                           <a:s r="177">
-                              <a:s r="175">
-                                 <a:s r="174">
-                                    <a:s>O</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="175">
-                                    <a:s>basedOn</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="177">
-                                 <a:s>references(</a:s>
-                                 <a:s r="176">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>)</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> and </a:s>
-                           <a:s r="181">
-                              <a:s r="179">
-                                 <a:s r="178">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="179">
-                                    <a:s>reasonCode</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> in </a:s>
-                              <a:s r="180">
-                                 <a:s>&quot;Assay 2 non-reactive&quot;</a:s>
-                              </a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="186">
-                           <a:s r="184">
-                              <a:s r="183">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="184">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="185">
-                              <a:s>&quot;Assay 1 repeated&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="206">
-                     <a:s>where </a:s>
-                     <a:s r="206">
-                        <a:s>(</a:s>
-                        <a:s r="206">
-                           <a:s r="204">
-                              <a:s r="199">
-                                 <a:s r="194">
-                                    <a:s r="190">
-                                       <a:s r="189">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="190">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="193">
-                                       <a:s>{ </a:s>
-                                       <a:s r="191">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="192">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="198">
-                                    <a:s r="196">
-                                       <a:s r="195">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="196">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="197">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> 
-  and </a:s>
-                              <a:s r="203">
-                                 <a:s r="201">
-                                    <a:s r="200">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="201">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in </a:s>
-                                 <a:s r="202">
-                                    <a:s>&quot;Non-reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>
-  and </a:s>
-                           <a:s r="205">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="207" locator="108:3-115:35" xsi:type="Query">
-            <source localId="171" locator="108:3-108:17" alias="O">
-               <expression localId="170" locator="108:3-108:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="188" locator="110:5-111:118" alias="SR" xsi:type="With">
-               <expression localId="172" locator="110:10-110:25" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="187" locator="111:17-111:118" xsi:type="And">
-                  <operand localId="182" locator="111:17-111:84" xsi:type="And">
-                     <operand localId="177" locator="111:17-111:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="175" locator="111:17-111:25" path="basedOn" scope="O" xsi:type="Property"/>
-                        <operand localId="176" locator="111:38-111:39" name="SR" xsi:type="AliasRef"/>
-                     </operand>
-                     <operand localId="181" locator="111:46-111:84" xsi:type="AnyInValueSet">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <codes xsi:type="Query">
-                           <source alias="X">
-                              <expression localId="179" locator="111:46-111:58" path="reasonCode" scope="SR" xsi:type="Property"/>
-                           </source>
-                           <return distinct="false">
-                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand name="X" xsi:type="AliasRef"/>
-                              </expression>
-                           </return>
-                        </codes>
-                        <valueset localId="180" locator="111:63-111:84" name="Assay 2 non-reactive" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="186" locator="111:90-111:118" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="184" locator="111:90-111:96" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="185" locator="111:101-111:118" name="Assay 1 repeated" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="206" locator="112:3-115:35" xsi:type="And">
-               <operand localId="204" locator="112:10-114:31" xsi:type="And">
-                  <operand localId="199" locator="112:10-113:34" xsi:type="And">
-                     <operand localId="194" locator="112:10-112:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="190" locator="112:10-112:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="193" locator="112:22-112:43" xsi:type="List">
-                           <element localId="191" locator="112:24-112:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="192" locator="112:33-112:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="198" locator="113:7-113:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="196" locator="113:7-113:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="197" locator="113:17-113:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="203" locator="114:7-114:31" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="201" locator="114:7-114:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="202" locator="114:18-114:31" name="Non-reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="205" locator="115:7-115:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
-         </expression>
-      </def>
-      <def localId="247" locator="119:1-127:35" name="Report as HIV-inconclusive after assay 1 repeated" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="247">
-               <a:s>/* Output observation as HIV negative */
-
-define &quot;Report as HIV-inconclusive after assay 1 repeated&quot;:
-  </a:s>
-               <a:s r="246">
-                  <a:s>
-                     <a:s r="210">
-                        <a:s r="209">
-                           <a:s r="209">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 1 repeated'&quot;
-    </a:s>
-                  <a:s r="227">
-                     <a:s>with </a:s>
-                     <a:s r="212">
-                        <a:s r="211">
-                           <a:s r="211">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="226">
-                        <a:s r="221">
-                           <a:s r="216">
-                              <a:s r="214">
-                                 <a:s r="213">
-                                    <a:s>O</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="214">
-                                    <a:s>basedOn</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="216">
-                                 <a:s>references(</a:s>
-                                 <a:s r="215">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>)</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> and </a:s>
-                           <a:s r="220">
-                              <a:s r="218">
-                                 <a:s r="217">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="218">
-                                    <a:s>reasonCode</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> in </a:s>
-                              <a:s r="219">
-                                 <a:s>&quot;Assay 2 non-reactive&quot;</a:s>
-                              </a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="225">
-                           <a:s r="223">
-                              <a:s r="222">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="223">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="224">
-                              <a:s>&quot;Assay 1 repeated&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="245">
-                     <a:s>where </a:s>
-                     <a:s r="245">
-                        <a:s>(</a:s>
-                        <a:s r="245">
-                           <a:s r="243">
-                              <a:s r="238">
-                                 <a:s r="233">
-                                    <a:s r="229">
-                                       <a:s r="228">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="229">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="232">
-                                       <a:s>{ </a:s>
-                                       <a:s r="230">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="231">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="237">
-                                    <a:s r="235">
-                                       <a:s r="234">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="235">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="236">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>
-  and </a:s>
-                              <a:s r="242">
-                                 <a:s r="240">
-                                    <a:s r="239">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="240">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in </a:s>
-                                 <a:s r="241">
-                                    <a:s>&quot;Reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>
-  and </a:s>
-                           <a:s r="244">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="246" locator="120:3-127:35" xsi:type="Query">
-            <source localId="210" locator="120:3-120:17" alias="O">
-               <expression localId="209" locator="120:3-120:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="227" locator="122:5-123:118" alias="SR" xsi:type="With">
-               <expression localId="211" locator="122:10-122:25" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="226" locator="123:17-123:118" xsi:type="And">
-                  <operand localId="221" locator="123:17-123:84" xsi:type="And">
-                     <operand localId="216" locator="123:17-123:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="214" locator="123:17-123:25" path="basedOn" scope="O" xsi:type="Property"/>
-                        <operand localId="215" locator="123:38-123:39" name="SR" xsi:type="AliasRef"/>
-                     </operand>
-                     <operand localId="220" locator="123:46-123:84" xsi:type="AnyInValueSet">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <codes xsi:type="Query">
-                           <source alias="X">
-                              <expression localId="218" locator="123:46-123:58" path="reasonCode" scope="SR" xsi:type="Property"/>
-                           </source>
-                           <return distinct="false">
-                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand name="X" xsi:type="AliasRef"/>
-                              </expression>
-                           </return>
-                        </codes>
-                        <valueset localId="219" locator="123:63-123:84" name="Assay 2 non-reactive" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="225" locator="123:90-123:118" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="223" locator="123:90-123:96" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="224" locator="123:101-123:118" name="Assay 1 repeated" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="245" locator="124:3-127:35" xsi:type="And">
-               <operand localId="243" locator="124:10-126:27" xsi:type="And">
-                  <operand localId="238" locator="124:10-125:34" xsi:type="And">
-                     <operand localId="233" locator="124:10-124:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="229" locator="124:10-124:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="232" locator="124:22-124:43" xsi:type="List">
-                           <element localId="230" locator="124:24-124:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="231" locator="124:33-124:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="237" locator="125:7-125:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="235" locator="125:7-125:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="236" locator="125:17-125:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="242" locator="126:7-126:27" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="240" locator="126:7-126:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="241" locator="126:18-126:27" name="Reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="244" locator="127:7-127:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
-         </expression>
-      </def>
-      <def localId="286" locator="132:1-140:35" name="Report as HIV-inconclusive after assay 3" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="286">
-               <a:s>/* Output observation as 'HIV-inconclusive' */
-/* Output PlanDefinition as Schedule retest date on &quot;Visit date&quot; + 14 days */
-
-define &quot;Report as HIV-inconclusive after assay 3&quot;:
-  </a:s>
-               <a:s r="285">
-                  <a:s>
-                     <a:s r="249">
-                        <a:s r="248">
-                           <a:s r="248">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 3'&quot;
-      </a:s>
-                  <a:s r="266">
-                     <a:s>with </a:s>
-                     <a:s r="251">
-                        <a:s r="250">
-                           <a:s r="250">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="265">
-                        <a:s r="260">
-                           <a:s r="255">
-                              <a:s r="253">
-                                 <a:s r="252">
-                                    <a:s>O</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="253">
-                                    <a:s>basedOn</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="255">
-                                 <a:s>references(</a:s>
-                                 <a:s r="254">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>)</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> and </a:s>
-                           <a:s r="259">
-                              <a:s r="257">
-                                 <a:s r="256">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="257">
-                                    <a:s>reasonCode</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> in </a:s>
-                              <a:s r="258">
-                                 <a:s>&quot;Assay 2 reactive&quot;</a:s>
-                              </a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="264">
-                           <a:s r="262">
-                              <a:s r="261">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="262">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="263">
-                              <a:s>&quot;Assay 3&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="284">
-                     <a:s>where </a:s>
-                     <a:s r="284">
-                        <a:s>(</a:s>
-                        <a:s r="284">
-                           <a:s r="282">
-                              <a:s r="277">
-                                 <a:s r="272">
-                                    <a:s r="268">
-                                       <a:s r="267">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="268">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="271">
-                                       <a:s>{ </a:s>
-                                       <a:s r="269">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="270">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="276">
-                                    <a:s r="274">
-                                       <a:s r="273">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="274">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="275">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>
-  and </a:s>
-                              <a:s r="281">
-                                 <a:s r="279">
-                                    <a:s r="278">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="279">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in </a:s>
-                                 <a:s r="280">
-                                    <a:s>&quot;Non-reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>
-  and </a:s>
-                           <a:s r="283">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="285" locator="133:3-140:35" xsi:type="Query">
-            <source localId="249" locator="133:3-133:17" alias="O">
-               <expression localId="248" locator="133:3-133:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="266" locator="135:7-136:105" alias="SR" xsi:type="With">
-               <expression localId="250" locator="135:12-135:27" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="265" locator="136:17-136:105" xsi:type="And">
-                  <operand localId="260" locator="136:17-136:80" xsi:type="And">
-                     <operand localId="255" locator="136:17-136:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="253" locator="136:17-136:25" path="basedOn" scope="O" xsi:type="Property"/>
-                        <operand localId="254" locator="136:38-136:39" name="SR" xsi:type="AliasRef"/>
-                     </operand>
-                     <operand localId="259" locator="136:46-136:80" xsi:type="AnyInValueSet">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <codes xsi:type="Query">
-                           <source alias="X">
-                              <expression localId="257" locator="136:46-136:58" path="reasonCode" scope="SR" xsi:type="Property"/>
-                           </source>
-                           <return distinct="false">
-                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand name="X" xsi:type="AliasRef"/>
-                              </expression>
-                           </return>
-                        </codes>
-                        <valueset localId="258" locator="136:63-136:80" name="Assay 2 reactive" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="264" locator="136:86-136:105" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="262" locator="136:86-136:92" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="263" locator="136:97-136:105" name="Assay 3" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="284" locator="137:3-140:35" xsi:type="And">
-               <operand localId="282" locator="137:10-139:31" xsi:type="And">
-                  <operand localId="277" locator="137:10-138:34" xsi:type="And">
-                     <operand localId="272" locator="137:10-137:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="268" locator="137:10-137:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="271" locator="137:22-137:43" xsi:type="List">
-                           <element localId="269" locator="137:24-137:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="270" locator="137:33-137:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="276" locator="138:7-138:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="274" locator="138:7-138:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="275" locator="138:17-138:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="281" locator="139:7-139:31" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="279" locator="139:7-139:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="280" locator="139:18-139:31" name="Non-reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="283" locator="140:7-140:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
-         </expression>
-      </def>
-      <def localId="325" locator="145:1-153:35" name="Report as HIV-positive" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="325">
-               <a:s>/* Output observation as 'HIV-inconclusive' */
-/* Output PlanDefinition as Schedule retest date on &quot;Visit date&quot; + 14 days */
-
-define &quot;Report as HIV-positive&quot;:
-  </a:s>
-               <a:s r="324">
-                  <a:s>
-                     <a:s r="288">
-                        <a:s r="287">
-                           <a:s r="287">
-                              <a:s>[Observation]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> O</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  //@triggeredBy  ~ &quot;Continue with performing HIV 'Assay 3'&quot;
-        </a:s>
-                  <a:s r="305">
-                     <a:s>with </a:s>
-                     <a:s r="290">
-                        <a:s r="289">
-                           <a:s r="289">
-                              <a:s>[ServiceRequest]</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> SR</a:s>
-                     </a:s>
-                     <a:s>
-      such that </a:s>
-                     <a:s r="304">
-                        <a:s r="299">
-                           <a:s r="294">
-                              <a:s r="292">
-                                 <a:s r="291">
-                                    <a:s>O</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="292">
-                                    <a:s>basedOn</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="294">
-                                 <a:s>references(</a:s>
-                                 <a:s r="293">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>)</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> and </a:s>
-                           <a:s r="298">
-                              <a:s r="296">
-                                 <a:s r="295">
-                                    <a:s>SR</a:s>
-                                 </a:s>
-                                 <a:s>.</a:s>
-                                 <a:s r="296">
-                                    <a:s>reasonCode</a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s> in </a:s>
-                              <a:s r="297">
-                                 <a:s>&quot;Assay 2 reactive&quot;</a:s>
-                              </a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s> and </a:s>
-                        <a:s r="303">
-                           <a:s r="301">
-                              <a:s r="300">
-                                 <a:s>SR</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="301">
-                                 <a:s>code</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s> in </a:s>
-                           <a:s r="302">
-                              <a:s>&quot;Assay 3&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s>
-  </a:s>
-                  <a:s r="323">
-                     <a:s>where </a:s>
-                     <a:s r="323">
-                        <a:s>(</a:s>
-                        <a:s r="323">
-                           <a:s r="321">
-                              <a:s r="316">
-                                 <a:s r="311">
-                                    <a:s r="307">
-                                       <a:s r="306">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="307">
-                                          <a:s>status</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="310">
-                                       <a:s>{ </a:s>
-                                       <a:s r="308">
-                                          <a:s>'final'</a:s>
-                                       </a:s>
-                                       <a:s>, </a:s>
-                                       <a:s r="309">
-                                          <a:s>'amended'</a:s>
-                                       </a:s>
-                                       <a:s> }</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-  and </a:s>
-                                 <a:s r="315">
-                                    <a:s r="313">
-                                       <a:s r="312">
-                                          <a:s>O</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="313">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> in </a:s>
-                                    <a:s r="314">
-                                       <a:s>&quot;HIVtesttypeCodes&quot;</a:s>
-                                    </a:s>
-                                 </a:s>
-                              </a:s>
-                              <a:s>
-  and </a:s>
-                              <a:s r="320">
-                                 <a:s r="318">
-                                    <a:s r="317">
-                                       <a:s>O</a:s>
-                                    </a:s>
-                                    <a:s>.</a:s>
-                                    <a:s r="318">
-                                       <a:s>value</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> in </a:s>
-                                 <a:s r="319">
-                                    <a:s>&quot;Reactive&quot;</a:s>
-                                 </a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>
-  and </a:s>
-                           <a:s r="322">
-                              <a:s>&quot;Age_greater_than_18_months&quot;</a:s>
-                           </a:s>
-                        </a:s>
-                        <a:s>)</a:s>
-                     </a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="324" locator="146:3-153:35" xsi:type="Query">
-            <source localId="288" locator="146:3-146:17" alias="O">
-               <expression localId="287" locator="146:3-146:15" dataType="fhir:Observation" templateId="http://hl7.org/fhir/StructureDefinition/Observation" xsi:type="Retrieve"/>
-            </source>
-            <relationship localId="305" locator="148:9-149:105" alias="SR" xsi:type="With">
-               <expression localId="289" locator="148:14-148:29" dataType="fhir:ServiceRequest" templateId="http://hl7.org/fhir/StructureDefinition/ServiceRequest" xsi:type="Retrieve"/>
-               <suchThat localId="304" locator="149:17-149:105" xsi:type="And">
-                  <operand localId="299" locator="149:17-149:80" xsi:type="And">
-                     <operand localId="294" locator="149:17-149:40" name="references" libraryName="WCom" xsi:type="FunctionRef">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="fhir:Reference" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <signature name="fhir:Resource" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="292" locator="149:17-149:25" path="basedOn" scope="O" xsi:type="Property"/>
-                        <operand localId="293" locator="149:38-149:39" name="SR" xsi:type="AliasRef"/>
-                     </operand>
-                     <operand localId="298" locator="149:46-149:80" xsi:type="AnyInValueSet">
-                        <signature xsi:type="ListTypeSpecifier">
-                           <elementType name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        </signature>
-                        <codes xsi:type="Query">
-                           <source alias="X">
-                              <expression localId="296" locator="149:46-149:58" path="reasonCode" scope="SR" xsi:type="Property"/>
-                           </source>
-                           <return distinct="false">
-                              <expression name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <operand name="X" xsi:type="AliasRef"/>
-                              </expression>
-                           </return>
-                        </codes>
-                        <valueset localId="297" locator="149:63-149:80" name="Assay 2 reactive" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="303" locator="149:86-149:105" xsi:type="InValueSet">
-                     <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <operand localId="301" locator="149:86-149:92" path="code" scope="SR" xsi:type="Property"/>
-                     </code>
-                     <valueset localId="302" locator="149:97-149:105" name="Assay 3" preserve="true"/>
-                  </operand>
-               </suchThat>
-            </relationship>
-            <where localId="323" locator="150:3-153:35" xsi:type="And">
-               <operand localId="321" locator="150:10-152:27" xsi:type="And">
-                  <operand localId="316" locator="150:10-151:34" xsi:type="And">
-                     <operand localId="311" locator="150:10-150:43" xsi:type="In">
-                        <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <signature name="fhir:ObservationStatus" xsi:type="NamedTypeSpecifier"/>
-                           <operand localId="307" locator="150:10-150:17" path="status" scope="O" xsi:type="Property"/>
-                        </operand>
-                        <operand localId="310" locator="150:22-150:43" xsi:type="List">
-                           <element localId="308" locator="150:24-150:30" valueType="t:String" value="final" xsi:type="Literal"/>
-                           <element localId="309" locator="150:33-150:41" valueType="t:String" value="amended" xsi:type="Literal"/>
-                        </operand>
-                     </operand>
-                     <operand localId="315" locator="151:7-151:34" xsi:type="InValueSet">
-                        <signature name="t:Concept" xsi:type="NamedTypeSpecifier"/>
-                        <code name="ToConcept" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                           <operand localId="313" locator="151:7-151:12" path="code" scope="O" xsi:type="Property"/>
-                        </code>
-                        <valueset localId="314" locator="151:17-151:34" name="HIVtesttypeCodes" preserve="true"/>
-                     </operand>
-                  </operand>
-                  <operand localId="320" locator="152:7-152:27" xsi:type="InValueSet">
-                     <signature name="t:String" xsi:type="NamedTypeSpecifier"/>
-                     <code name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand asType="fhir:string" xsi:type="As">
-                           <operand localId="318" locator="152:7-152:13" path="value" scope="O" xsi:type="Property"/>
-                        </operand>
-                     </code>
-                     <valueset localId="319" locator="152:18-152:27" name="Reactive" preserve="true"/>
-                  </operand>
-               </operand>
-               <operand localId="322" locator="153:7-153:34" name="Age_greater_than_18_months" xsi:type="ExpressionRef"/>
-            </where>
+         <expression localId="41" locator="46:3-46:26" xsi:type="Exists">
+            <operand localId="40" locator="46:9-46:26" name="Assay 3 result" xsi:type="ExpressionRef"/>
          </expression>
       </def>
    </statements>

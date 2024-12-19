@@ -35,6 +35,8 @@ include WHOCommon called WCom
 include WHOConcepts called WCx
 include WHOEncounterElements called WElm
 
+parameter Today Date default Today()
+
 context Patient
 
  /*
@@ -42,8 +44,9 @@ context Patient
   @pseudocode: "HIV status" IN 'HIV-negative', 'Unknown'
   */
 define "HIV status negative or unknown":
-  exists(Elements."HIV status" S
-    where S in { Concepts."HIV-negative", Concepts."Unknown" }) 
+  exists(Elements."HIV Status Observation" S
+    where S.value ~ Concepts."HIV-negative"
+       or S.value ~ Concepts."Unknown") 
 
  /*
   @input: "Partner HIV reported positive"
@@ -58,7 +61,7 @@ define "Partner HIV positive":
   @pseudocode: "Sex partner's HIV treatment status"='Partner is not virally suppressed'
   */
 define "Sex partner's HIV treatment status is partner not virally suppressed":
-  exists(Elements."Sex partners HIV treatment status Observation" O
+  exists(Elements."Sex partners HIV treatment status" O
     where O.value ~ Concepts."Partner is not virally suppressed")
 
  /*
@@ -80,8 +83,7 @@ define "HIV burden of setting is low HIV burden setting":
   @pseudocode: "Key population member" = TRUE
   */
 define "Key population member":
-  exists(Elements."Key population member B.DE49 Observation" O
-    where O.value is true)
+  Elements."Is Key population member B.DE49"
 
  /*
   @input: "Currently pregnant"
@@ -111,7 +113,7 @@ define "Presumptive TB":
   @pseudocode: "Currently on PrEP"=True
   */
 define "Currently on PrEP":
-  exists(Elements."Currently on PrEP" O
+  exists(Elements."Currently on PrEP Observation" O
     where O.value is true)
 
  /*
@@ -119,7 +121,7 @@ define "Currently on PrEP":
   @pseudocode: "At elevated risk for HIV acquisition"=True
   */
 define "At elevated risk for HIV acquisition":
-  exists(Elements."At elevated risk for HIV acquisition" O
+  exists(Elements."At elevated risk for HIV acquisition PRV.DE1 Observation" O
     where O.value is true)
 
  /*
@@ -133,7 +135,7 @@ define "Schedule an annual follow-up test":
       then true
     when "HIV burden of setting is high HIV burden setting"
       then true
-    when "Key population memeber"
+    when "Key population member"
       then true
     when "At elevated risk for HIV acquisition"
       then true
@@ -182,9 +184,9 @@ define "Schedule a 'Follow-up test recommended date' during a third trimester vi
 define "Schedule a 'Follow-up test recommended date' at first ANC contact date":
   "Pregnant in low HIV burden setting" and 
   case
-  when "Key population member":
+  when "Key population member"
     then true
-  when "Partner has HIV and is not virally suppressed":
+  when "Partner has HIV and is not virally suppressed"
     then true
   when "At elevated risk for HIV acquisition"
     then true
@@ -195,37 +197,41 @@ define "Schedule a 'Follow-up test recommended date' at first ANC contact date":
  @dynamicValue: Guidance
  */
 define "Guidance":
-  case
-  when "Schedule an annual follow-up test"
-    then """Schedule an annual follow-up test.  
+  Combine({
+    if "Schedule an annual follow-up test"
+      then 'Schedule an annual follow-up test.  
 
-WHO guidance recommends annual retesting for people who have ongoing HIV-related risks in all settings. These include people with a known HIV-positive partner who is not virally suppressed on ART."""
-  when "Follow-up test recommended"
-    then """Recommend a follow-up test.  
+  WHO guidance recommends annual retesting for people who have ongoing HIV-related risks in all settings. These include people with a known HIV-positive partner who is not virally suppressed on ART.'
+      else '',
+    if "Follow-up test recommended"
+      then 'Recommend a follow-up test.  
 
-In certain conditions and situations, individuals who have been tested for HIV in the past can be advised to retest. These include: 
-* Individuals presenting with a diagnosis or receiving treatment for STIs or viral hepatitis, 
-* Individuals with a confirmed or presumptive TB diagnosis, 
-* Outpatients presenting with clinical conditions or symptoms indicative of HIV, individuals with recent HIV risk exposure."""
-  when "Schedule quarterly retesting for PrEP users"
-    then """Schedule quarterly retesting for PrEP users."""
-  when "Schedule an HIV test, syphilis test, hepatitis B test as early as possible during this pregnancy"
-    then """Schedule an HIV test, syphilis test, hepatitis B test as early as possible during this pregnancy
+  In certain conditions and situations, individuals who have been tested for HIV in the past can be advised to retest. These include: 
+  * Individuals presenting with a diagnosis or receiving treatment for STIs or viral hepatitis, 
+  * Individuals with a confirmed or presumptive TB diagnosis, 
+  * Outpatients presenting with clinical conditions or symptoms indicative of HIV, individuals with recent HIV risk exposure.'
+      else '',
+    if "Schedule quarterly retesting for PrEP users"
+      then 'Schedule quarterly retesting for PrEP users.'
+      else '',
+    if "Schedule an HIV test, syphilis test, hepatitis B test as early as possible during this pregnancy"
+      then 'Schedule an HIV test, syphilis test, hepatitis B test as early as possible during this pregnancy
 
-All pregnant women should be tested for HIV as well as syphilis and hepatitis B virus at least once and as early as possible during pregnancy."""
-  when "Schedule a 'Follow-up test recommended date' at first ANC contact date":
-    then """In low HIV burden settings, retesting all pregnant women is not warranted unless focused among women from key populations or at high ongoing risk, such as those from key populations or with partners with HIV who are not virally suppressed. Countries could consider one additional retest in the post-partum period, such as at 14 weeks, six months or nine months for women in high HIV burden or incidence districts or provinces, key populations or women with partners with HIV who are not virally suppressed."""
-  else null
-  end
+  All pregnant women should be tested for HIV as well as syphilis and hepatitis B virus at least once and as early as possible during pregnancy.'
+      else '',
+    if "Schedule a 'Follow-up test recommended date' at first ANC contact date"
+      then 'In low HIV burden settings, retesting all pregnant women is not warranted unless focused among women from key populations or at high ongoing risk, such as those from key populations or with partners with HIV who are not virally suppressed. Countries could consider one additional retest in the post-partum period, such as at 14 weeks, six months or nine months for women in high HIV burden or incidence districts or provinces, key populations or women with partners with HIV who are not virally suppressed.'
+      else ''
+  })
 
 /*
  @dynamicValue: "Date to schedule"
  */
-define "Schedule Follow-up Date"
+define "Schedule Follow-up Date":
   case
-  when "Schedule an annual follow-up test":
+  when "Schedule an annual follow-up test"
     then Today + 1 years
-  when "Schedule quarterly retesting for PrEP users":
+  when "Schedule quarterly retesting for PrEP users"
     then Today + 3 months
   else null
   end

@@ -17,7 +17,7 @@ Consolidated guidelines on HIV prevention, testing, treatment, service delivery 
 */
 
 library HIVB2DTLogic
-
+ 
 using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
@@ -27,21 +27,23 @@ include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
 
+parameter Today default Today()
+
 context Patient
 
  /*
-  @input: "Age 10 or older"
+  @input: "Age"
   @pseudocode: 'Age' >= 10 years
   */
 define "Age 10 or older":
-  AgeInYearsAt(Today()) >= 10
+  Elements."Current Patient Age In Years" >= 10
 
  /*
-  @input: "Age under 10"
+  @input: "Age"
   @pseudocode: 'Age' < 10 years
   */
 define "Age under 10":
-  AgeInYearsAt(Today()) < 10
+  Elements."Current Patient Age In Years" < 10
 
 /*
  @output: "Immediately take action or refer for care if a client is having this issue"
@@ -68,17 +70,22 @@ define "Use clinical judgement and consider local epidemiology to determine if s
  @dynamicValue: Guidance
  */
 define "Guidance":
-  case 
-  when "Immediately take action or refer for care if a client is having this issue" 
-    then 'Immediately take action or refer for care if a client is having this issue.'
-  when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age 10 or older"
-    then 'Immediately take action or refer for care if client is showing this sign of a serious illness.'
-  when "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age under 10"
-    then '''This is a sign and/or symptom of a serious health condition.
-  
-Immediately take action or refer for care if client is showing this sign of a serious illness.'''
-  else null
-  end
+  Combine({ 
+    if "Immediately take action or refer for care if a client is having this issue" 
+      then 'Immediately take action or refer for care if a client is having this issue.'
+      else '',
+    if "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age 10 or older"
+      then 'Immediately take action or refer for care if client is showing this sign of a serious illness.'
+      else '',
+    if "Immediately take action or refer for care if client is showing this sign of a serious illness" and "Age under 10"
+      then 'This is a sign and/or symptom of a serious health condition.
+    
+  Immediately take action or refer for care if client is showing this sign of a serious illness.'
+      else '',
+    if "Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill"
+      then 'Use clinical judgement and consider local epidemiology to determine if symptoms suggest client is seriously ill. '
+      else ''
+  })
 
 /*
  Supporting Logic

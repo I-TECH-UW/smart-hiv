@@ -2,7 +2,7 @@
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="9553">
+      <a:s r="9550">
          <a:s>library HIVIndicatorElements</a:s>
       </a:s>
    </annotation>
@@ -78024,17 +78024,28 @@ define &quot;HIV test date SRV.DE1&quot;:
             </return>
          </expression>
       </def>
-      <def localId="9303" locator="6586:1-6588:62" name="HIV test result SRV.DE2 Observation" context="Patient" accessLevel="Public">
+      <def localId="9303" locator="6584:1-6586:62" name="HIV test result SRV.DE2" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
+            <a:t name="dataElement" value="HIV.SRV.DE2 - HIV test result"/>
+            <a:t name="activity" value="HIV.B7 Test for HIV using testing algorithm"/>
+            <a:t name="description" value="The result from HIV testing after applying the testing algorithm&#xa; TODO: Replace placeholder with relevant CQL logic"/>
             <a:s r="9303">
-               <a:s>define &quot;HIV test result SRV.DE2 Observation&quot;:
+               <a:s>/* End of HIV test date SRV.DE1 */
+
+/*
+@dataElement: HIV.SRV.DE2 - HIV test result
+@activity: HIV.B7 Test for HIV using testing algorithm
+@description: The result from HIV testing after applying the testing algorithm
+*/
+// TODO: Replace placeholder with relevant CQL logic
+define &quot;HIV test result SRV.DE2&quot;:
   </a:s>
                <a:s r="9302">
                   <a:s>
                      <a:s r="9296">
                         <a:s r="9295">
                            <a:s>
-                              <a:s>Elements.&quot;HIV test result SRV.DE2 Observation&quot;</a:s>
+                              <a:s>Elements.&quot;HIV test result SRV.DE2&quot;</a:s>
                            </a:s>
                         </a:s>
                         <a:s> O</a:s>
@@ -78069,74 +78080,43 @@ define &quot;HIV test date SRV.DE1&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9302" locator="6587:3-6588:62" xsi:type="Query">
-            <source localId="9296" locator="6587:3-6587:50" alias="O">
-               <expression localId="9295" locator="6587:3-6587:48" name="HIV test result SRV.DE2 Observation" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9302" locator="6585:3-6586:62" xsi:type="Query">
+            <source localId="9296" locator="6585:3-6585:38" alias="O">
+               <expression localId="9295" locator="6585:3-6585:36" name="HIV test result SRV.DE2" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9301" locator="6588:5-6588:62" xsi:type="IncludedIn">
-               <operand localId="9299" locator="6588:11-6588:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9298" locator="6588:11-6588:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9301" locator="6586:5-6586:62" xsi:type="IncludedIn">
+               <operand localId="9299" locator="6586:11-6586:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9298" locator="6586:11-6586:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9300" locator="6588:43-6588:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9300" locator="6586:43-6586:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9300" locator="6588:43-6588:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9300" locator="6586:43-6586:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9300" locator="6588:43-6588:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9300" locator="6586:43-6586:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9300" locator="6588:43-6588:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9300" locator="6586:43-6586:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9306" locator="6584:1-6585:46" name="HIV test result SRV.DE2" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:t name="dataElement" value="HIV.SRV.DE2 - HIV test result"/>
-            <a:t name="activity" value="HIV.B7 Test for HIV using testing algorithm"/>
-            <a:t name="description" value="The result from HIV testing after applying the testing algorithm&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9306">
-               <a:s>/* End of HIV test date SRV.DE1 */
-
-/*
-@dataElement: HIV.SRV.DE2 - HIV test result
-@activity: HIV.B7 Test for HIV using testing algorithm
-@description: The result from HIV testing after applying the testing algorithm
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define &quot;HIV test result SRV.DE2&quot;:
-  </a:s>
-               <a:s r="9305">
-                  <a:s>exists </a:s>
-                  <a:s r="9304">
-                     <a:s>&quot;HIV test result SRV.DE2 Observation&quot;</a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="9305" locator="6585:3-6585:46" xsi:type="Exists">
-            <signature xsi:type="ListTypeSpecifier">
-               <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
-            </signature>
-            <operand localId="9304" locator="6585:10-6585:46" name="HIV test result SRV.DE2 Observation" xsi:type="ExpressionRef"/>
-         </expression>
-      </def>
-      <def localId="9315" locator="6597:1-6599:62" name="Baseline CD4 count SRV.DE3" context="Patient" accessLevel="Public">
+      <def localId="9312" locator="6595:1-6597:62" name="Baseline CD4 count SRV.DE3" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE3 - Baseline CD4 count"/>
             <a:t name="activity" value="HIV.D20 Diagnostics"/>
             <a:t name="description" value="CD4 count performed at HIV diagnosis"/>
-            <a:s r="9315">
+            <a:s r="9312">
                <a:s>/* End of HIV test result SRV.DE2 */
 
 /*
@@ -78147,10 +78127,10 @@ define &quot;HIV test result SRV.DE2&quot;:
 
 define &quot;Baseline CD4 count SRV.DE3&quot;:
   </a:s>
-               <a:s r="9314">
+               <a:s r="9311">
                   <a:s>
-                     <a:s r="9308">
-                        <a:s r="9307">
+                     <a:s r="9305">
+                        <a:s r="9304">
                            <a:s>
                               <a:s>Elements.&quot;Baseline CD4 count SRV.DE3&quot;</a:s>
                            </a:s>
@@ -78160,26 +78140,26 @@ define &quot;Baseline CD4 count SRV.DE3&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9313">
+                  <a:s r="9310">
                      <a:s>where </a:s>
-                     <a:s r="9313">
-                        <a:s r="9311">
-                           <a:s r="9310">
-                              <a:s r="9309">
+                     <a:s r="9310">
+                        <a:s r="9308">
+                           <a:s r="9307">
+                              <a:s r="9306">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9310">
+                              <a:s r="9307">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9311">
+                           <a:s r="9308">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9313"> during </a:s>
-                        <a:s r="9312">
+                        <a:s r="9310"> during </a:s>
+                        <a:s r="9309">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -78187,46 +78167,46 @@ define &quot;Baseline CD4 count SRV.DE3&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9314" locator="6598:3-6599:62" xsi:type="Query">
-            <source localId="9308" locator="6598:3-6598:41" alias="O">
-               <expression localId="9307" locator="6598:3-6598:39" name="Baseline CD4 count SRV.DE3" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9311" locator="6596:3-6597:62" xsi:type="Query">
+            <source localId="9305" locator="6596:3-6596:41" alias="O">
+               <expression localId="9304" locator="6596:3-6596:39" name="Baseline CD4 count SRV.DE3" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9313" locator="6599:5-6599:62" xsi:type="IncludedIn">
-               <operand localId="9311" locator="6599:11-6599:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9310" locator="6599:11-6599:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9310" locator="6597:5-6597:62" xsi:type="IncludedIn">
+               <operand localId="9308" locator="6597:11-6597:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9307" locator="6597:11-6597:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9312" locator="6599:43-6599:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9309" locator="6597:43-6597:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9312" locator="6599:43-6599:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9309" locator="6597:43-6597:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9312" locator="6599:43-6599:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9309" locator="6597:43-6597:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9312" locator="6599:43-6599:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9309" locator="6597:43-6597:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9322" locator="6600:1-6602:16" name="Baseline CD4 count SRV.DE3 Value" context="Patient" accessLevel="Public">
+      <def localId="9319" locator="6598:1-6600:16" name="Baseline CD4 count SRV.DE3 Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9322">
+            <a:s r="9319">
                <a:s>define &quot;Baseline CD4 count SRV.DE3 Value&quot;:
   </a:s>
-               <a:s r="9321">
+               <a:s r="9318">
                   <a:s>
-                     <a:s r="9317">
-                        <a:s r="9316">
+                     <a:s r="9314">
+                        <a:s r="9313">
                            <a:s>
                               <a:s>&quot;Baseline CD4 count SRV.DE3&quot;</a:s>
                            </a:s>
@@ -78236,14 +78216,14 @@ define &quot;Baseline CD4 count SRV.DE3&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9320">
+                  <a:s r="9317">
                      <a:s>return </a:s>
-                     <a:s r="9319">
-                        <a:s r="9318">
+                     <a:s r="9316">
+                        <a:s r="9315">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9319">
+                        <a:s r="9316">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -78251,21 +78231,21 @@ define &quot;Baseline CD4 count SRV.DE3&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9321" locator="6601:3-6602:16" xsi:type="Query">
-            <source localId="9317" locator="6601:3-6601:32" alias="O">
-               <expression localId="9316" locator="6601:3-6601:30" name="Baseline CD4 count SRV.DE3" xsi:type="ExpressionRef"/>
+         <expression localId="9318" locator="6599:3-6600:16" xsi:type="Query">
+            <source localId="9314" locator="6599:3-6599:32" alias="O">
+               <expression localId="9313" locator="6599:3-6599:30" name="Baseline CD4 count SRV.DE3" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9320" locator="6602:3-6602:16">
-               <expression localId="9319" locator="6602:10-6602:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9317" locator="6600:3-6600:16">
+               <expression localId="9316" locator="6600:10-6600:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9330" locator="6611:1-6612:105" name="Date of baseline CD4 count test SRV.DE4" context="Patient" accessLevel="Public">
+      <def localId="9327" locator="6609:1-6610:105" name="Date of baseline CD4 count test SRV.DE4" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE4 - Date of baseline CD4 count test"/>
             <a:t name="activity" value="HIV.D20 Diagnostics"/>
             <a:t name="description" value="Date and time when baseline CD4 count test was conducted"/>
-            <a:s r="9330">
+            <a:s r="9327">
                <a:s>/* End of Baseline CD4 count SRV.DE3 */
 
 /*
@@ -78276,14 +78256,14 @@ define &quot;Baseline CD4 count SRV.DE3&quot;:
 
 define &quot;Date of baseline CD4 count test SRV.DE4&quot;:
   </a:s>
-               <a:s r="9329">
+               <a:s r="9326">
                   <a:s>exists</a:s>
-                  <a:s r="9328">
+                  <a:s r="9325">
                      <a:s>(</a:s>
-                     <a:s r="9328">
+                     <a:s r="9325">
                         <a:s>
-                           <a:s r="9324">
-                              <a:s r="9323">
+                           <a:s r="9321">
+                              <a:s r="9320">
                                  <a:s>
                                     <a:s>Elements.&quot;Date of baseline CD4 count test SRV.DE4&quot;</a:s>
                                  </a:s>
@@ -78292,14 +78272,14 @@ define &quot;Date of baseline CD4 count test SRV.DE4&quot;:
                            </a:s>
                         </a:s>
                         <a:s> </a:s>
-                        <a:s r="9327">
+                        <a:s r="9324">
                            <a:s>where </a:s>
-                           <a:s r="9327">
-                              <a:s r="9325">
+                           <a:s r="9324">
+                              <a:s r="9322">
                                  <a:s>O</a:s>
                               </a:s>
-                              <a:s r="9327"> starts during </a:s>
-                              <a:s r="9326">
+                              <a:s r="9324"> starts during </a:s>
+                              <a:s r="9323">
                                  <a:s>&quot;Measurement Period&quot;</a:s>
                               </a:s>
                            </a:s>
@@ -78310,57 +78290,57 @@ define &quot;Date of baseline CD4 count test SRV.DE4&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9329" locator="6612:3-6612:105" xsi:type="Exists">
+         <expression localId="9326" locator="6610:3-6610:105" xsi:type="Exists">
             <signature xsi:type="ListTypeSpecifier">
                <elementType xsi:type="IntervalTypeSpecifier">
                   <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                </elementType>
             </signature>
-            <operand localId="9328" locator="6612:9-6612:105" xsi:type="Query">
-               <source localId="9324" locator="6612:10-6612:61" alias="O">
-                  <expression localId="9323" locator="6612:10-6612:59" name="Date of baseline CD4 count test SRV.DE4" libraryName="Elements" xsi:type="ExpressionRef"/>
+            <operand localId="9325" locator="6610:9-6610:105" xsi:type="Query">
+               <source localId="9321" locator="6610:10-6610:61" alias="O">
+                  <expression localId="9320" locator="6610:10-6610:59" name="Date of baseline CD4 count test SRV.DE4" libraryName="Elements" xsi:type="ExpressionRef"/>
                </source>
-               <where localId="9327" locator="6612:63-6612:104" xsi:type="In">
+               <where localId="9324" locator="6610:63-6610:104" xsi:type="In">
                   <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                   <signature xsi:type="IntervalTypeSpecifier">
                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                   </signature>
-                  <operand locator="6612:71-6612:76" xsi:type="Start">
+                  <operand locator="6610:71-6610:76" xsi:type="Start">
                      <signature xsi:type="IntervalTypeSpecifier">
                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                      </signature>
-                     <operand localId="9325" locator="6612:69" name="O" xsi:type="AliasRef"/>
+                     <operand localId="9322" locator="6610:69" name="O" xsi:type="AliasRef"/>
                   </operand>
                   <operand xsi:type="Interval">
                      <low xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="low" xsi:type="Property">
-                           <source localId="9326" locator="6612:85-6612:104" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9323" locator="6610:85-6610:104" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </low>
                      <lowClosedExpression path="lowClosed" xsi:type="Property">
-                        <source localId="9326" locator="6612:85-6612:104" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9323" locator="6610:85-6610:104" name="Measurement Period" xsi:type="ParameterRef"/>
                      </lowClosedExpression>
                      <high xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="high" xsi:type="Property">
-                           <source localId="9326" locator="6612:85-6612:104" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9323" locator="6610:85-6610:104" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </high>
                      <highClosedExpression path="highClosed" xsi:type="Property">
-                        <source localId="9326" locator="6612:85-6612:104" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9323" locator="6610:85-6610:104" name="Measurement Period" xsi:type="ParameterRef"/>
                      </highClosedExpression>
                   </operand>
                </where>
             </operand>
          </expression>
       </def>
-      <def localId="9339" locator="6621:1-6623:62" name="ART start date SRV.DE6" context="Patient" accessLevel="Public">
+      <def localId="9336" locator="6619:1-6621:62" name="ART start date SRV.DE6" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE6 - ART start date"/>
             <a:t name="activity" value="HIV.B8 Provide post-test counselling"/>
             <a:t name="description" value="The date on which the client started or restarted antiretroviral therapy (ART)&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9339">
+            <a:s r="9336">
                <a:s>/* End of Date of baseline CD4 count test SRV.DE4 */
 
 /*
@@ -78371,10 +78351,10 @@ define &quot;Date of baseline CD4 count test SRV.DE4&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;ART start date SRV.DE6&quot;:
   </a:s>
-               <a:s r="9338">
+               <a:s r="9335">
                   <a:s>
-                     <a:s r="9332">
-                        <a:s r="9331">
+                     <a:s r="9329">
+                        <a:s r="9328">
                            <a:s>
                               <a:s>Elements.&quot;ART start date SRV.DE6&quot;</a:s>
                            </a:s>
@@ -78384,26 +78364,26 @@ define &quot;ART start date SRV.DE6&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9337">
+                  <a:s r="9334">
                      <a:s>where </a:s>
-                     <a:s r="9337">
-                        <a:s r="9335">
-                           <a:s r="9334">
-                              <a:s r="9333">
+                     <a:s r="9334">
+                        <a:s r="9332">
+                           <a:s r="9331">
+                              <a:s r="9330">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9334">
+                              <a:s r="9331">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9335">
+                           <a:s r="9332">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9337"> during </a:s>
-                        <a:s r="9336">
+                        <a:s r="9334"> during </a:s>
+                        <a:s r="9333">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -78411,46 +78391,46 @@ define &quot;ART start date SRV.DE6&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9338" locator="6622:3-6623:62" xsi:type="Query">
-            <source localId="9332" locator="6622:3-6622:37" alias="O">
-               <expression localId="9331" locator="6622:3-6622:35" name="ART start date SRV.DE6" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9335" locator="6620:3-6621:62" xsi:type="Query">
+            <source localId="9329" locator="6620:3-6620:37" alias="O">
+               <expression localId="9328" locator="6620:3-6620:35" name="ART start date SRV.DE6" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9337" locator="6623:5-6623:62" xsi:type="IncludedIn">
-               <operand localId="9335" locator="6623:11-6623:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9334" locator="6623:11-6623:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9334" locator="6621:5-6621:62" xsi:type="IncludedIn">
+               <operand localId="9332" locator="6621:11-6621:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9331" locator="6621:11-6621:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9336" locator="6623:43-6623:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9333" locator="6621:43-6621:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9336" locator="6623:43-6623:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9333" locator="6621:43-6621:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9336" locator="6623:43-6623:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9333" locator="6621:43-6621:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9336" locator="6623:43-6623:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9333" locator="6621:43-6621:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9346" locator="6624:1-6626:16" name="ART start date SRV.DE6 Value" context="Patient" accessLevel="Public">
+      <def localId="9343" locator="6622:1-6624:16" name="ART start date SRV.DE6 Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9346">
+            <a:s r="9343">
                <a:s>define &quot;ART start date SRV.DE6 Value&quot;:
   </a:s>
-               <a:s r="9345">
+               <a:s r="9342">
                   <a:s>
-                     <a:s r="9341">
-                        <a:s r="9340">
+                     <a:s r="9338">
+                        <a:s r="9337">
                            <a:s>
                               <a:s>&quot;ART start date SRV.DE6&quot;</a:s>
                            </a:s>
@@ -78460,14 +78440,14 @@ define &quot;ART start date SRV.DE6&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9344">
+                  <a:s r="9341">
                      <a:s>return </a:s>
-                     <a:s r="9343">
-                        <a:s r="9342">
+                     <a:s r="9340">
+                        <a:s r="9339">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9343">
+                        <a:s r="9340">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -78475,24 +78455,24 @@ define &quot;ART start date SRV.DE6&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9345" locator="6625:3-6626:16" xsi:type="Query">
-            <source localId="9341" locator="6625:3-6625:28" alias="O">
-               <expression localId="9340" locator="6625:3-6625:26" name="ART start date SRV.DE6" xsi:type="ExpressionRef"/>
+         <expression localId="9342" locator="6623:3-6624:16" xsi:type="Query">
+            <source localId="9338" locator="6623:3-6623:28" alias="O">
+               <expression localId="9337" locator="6623:3-6623:26" name="ART start date SRV.DE6" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9344" locator="6626:3-6626:16">
-               <expression localId="9343" locator="6626:10-6626:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9341" locator="6624:3-6624:16">
+               <expression localId="9340" locator="6624:10-6624:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9359" locator="6637:1-6640:67" name="Currently pregnant SRV.DE7 Condition" context="Patient" accessLevel="Public">
+      <def localId="9356" locator="6635:1-6638:67" name="Currently pregnant SRV.DE7 Condition" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9359">
+            <a:s r="9356">
                <a:s>define &quot;Currently pregnant SRV.DE7 Condition&quot;:
   </a:s>
-               <a:s r="9358">
+               <a:s r="9355">
                   <a:s>
-                     <a:s r="9348">
-                        <a:s r="9347">
+                     <a:s r="9345">
+                        <a:s r="9344">
                            <a:s>
                               <a:s>Elements.&quot;Currently pregnant SRV.DE7 Condition&quot;</a:s>
                            </a:s>
@@ -78502,38 +78482,38 @@ define &quot;ART start date SRV.DE6&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9357">
+                  <a:s r="9354">
                      <a:s>where </a:s>
-                     <a:s r="9357">
-                        <a:s r="9352">
-                           <a:s r="9350">
-                              <a:s r="9349">
+                     <a:s r="9354">
+                        <a:s r="9349">
+                           <a:s r="9347">
+                              <a:s r="9346">
                                  <a:s>C</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9350">
+                              <a:s r="9347">
                                  <a:s>prevalenceInterval()</a:s>
                               </a:s>
                            </a:s>
-                           <a:s r="9352"> overlaps before </a:s>
-                           <a:s r="9351">
+                           <a:s r="9349"> overlaps before </a:s>
+                           <a:s r="9348">
                               <a:s>&quot;Measurement Period&quot;</a:s>
                            </a:s>
                         </a:s>
                         <a:s>
       or </a:s>
-                        <a:s r="9356">
-                           <a:s r="9354">
-                              <a:s r="9353">
+                        <a:s r="9353">
+                           <a:s r="9351">
+                              <a:s r="9350">
                                  <a:s>C</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9354">
+                              <a:s r="9351">
                                  <a:s>prevalenceInterval()</a:s>
                               </a:s>
                            </a:s>
-                           <a:s r="9356"> overlaps after </a:s>
-                           <a:s r="9355">
+                           <a:s r="9353"> overlaps after </a:s>
+                           <a:s r="9352">
                               <a:s>&quot;Measurement Period&quot;</a:s>
                            </a:s>
                         </a:s>
@@ -78542,70 +78522,70 @@ define &quot;ART start date SRV.DE6&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9358" locator="6638:3-6640:67" xsi:type="Query">
-            <source localId="9348" locator="6638:3-6638:51" alias="C">
-               <expression localId="9347" locator="6638:3-6638:49" name="Currently pregnant SRV.DE7 Condition" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9355" locator="6636:3-6638:67" xsi:type="Query">
+            <source localId="9345" locator="6636:3-6636:51" alias="C">
+               <expression localId="9344" locator="6636:3-6636:49" name="Currently pregnant SRV.DE7 Condition" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9357" locator="6639:5-6640:67" xsi:type="Or">
-               <operand localId="9352" locator="6639:11-6639:69" xsi:type="OverlapsBefore">
-                  <operand localId="9350" locator="6639:11-6639:32" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
-                     <operand localId="9349" locator="6639:11" name="C" xsi:type="AliasRef"/>
+            <where localId="9354" locator="6637:5-6638:67" xsi:type="Or">
+               <operand localId="9349" locator="6637:11-6637:69" xsi:type="OverlapsBefore">
+                  <operand localId="9347" locator="6637:11-6637:32" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
+                     <operand localId="9346" locator="6637:11" name="C" xsi:type="AliasRef"/>
                   </operand>
                   <operand xsi:type="Interval">
                      <low xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="low" xsi:type="Property">
-                           <source localId="9351" locator="6639:50-6639:69" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9348" locator="6637:50-6637:69" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </low>
                      <lowClosedExpression path="lowClosed" xsi:type="Property">
-                        <source localId="9351" locator="6639:50-6639:69" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9348" locator="6637:50-6637:69" name="Measurement Period" xsi:type="ParameterRef"/>
                      </lowClosedExpression>
                      <high xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="high" xsi:type="Property">
-                           <source localId="9351" locator="6639:50-6639:69" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9348" locator="6637:50-6637:69" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </high>
                      <highClosedExpression path="highClosed" xsi:type="Property">
-                        <source localId="9351" locator="6639:50-6639:69" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9348" locator="6637:50-6637:69" name="Measurement Period" xsi:type="ParameterRef"/>
                      </highClosedExpression>
                   </operand>
                </operand>
-               <operand localId="9356" locator="6640:10-6640:67" xsi:type="OverlapsAfter">
-                  <operand localId="9354" locator="6640:10-6640:31" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
-                     <operand localId="9353" locator="6640:10" name="C" xsi:type="AliasRef"/>
+               <operand localId="9353" locator="6638:10-6638:67" xsi:type="OverlapsAfter">
+                  <operand localId="9351" locator="6638:10-6638:31" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
+                     <operand localId="9350" locator="6638:10" name="C" xsi:type="AliasRef"/>
                   </operand>
                   <operand xsi:type="Interval">
                      <low xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="low" xsi:type="Property">
-                           <source localId="9355" locator="6640:48-6640:67" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9352" locator="6638:48-6638:67" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </low>
                      <lowClosedExpression path="lowClosed" xsi:type="Property">
-                        <source localId="9355" locator="6640:48-6640:67" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9352" locator="6638:48-6638:67" name="Measurement Period" xsi:type="ParameterRef"/>
                      </lowClosedExpression>
                      <high xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="high" xsi:type="Property">
-                           <source localId="9355" locator="6640:48-6640:67" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9352" locator="6638:48-6638:67" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </high>
                      <highClosedExpression path="highClosed" xsi:type="Property">
-                        <source localId="9355" locator="6640:48-6640:67" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9352" locator="6638:48-6638:67" name="Measurement Period" xsi:type="ParameterRef"/>
                      </highClosedExpression>
                   </operand>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9362" locator="6635:1-6636:47" name="Currently pregnant SRV.DE7" context="Patient" accessLevel="Public">
+      <def localId="9359" locator="6633:1-6634:47" name="Currently pregnant SRV.DE7" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE7 - Currently pregnant"/>
             <a:t name="activity" value="HIV.B6 Capture or update client history"/>
             <a:t name="description" value="Client is currently pregnant"/>
-            <a:s r="9362">
+            <a:s r="9359">
                <a:s>/* End of ART start date SRV.DE6 */
 
 /*
@@ -78616,27 +78596,27 @@ define &quot;ART start date SRV.DE6&quot;:
 
 define &quot;Currently pregnant SRV.DE7&quot;:
   </a:s>
-               <a:s r="9361">
+               <a:s r="9358">
                   <a:s>exists </a:s>
-                  <a:s r="9360">
+                  <a:s r="9357">
                      <a:s>&quot;Currently pregnant SRV.DE7 Condition&quot;</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9361" locator="6636:3-6636:47" xsi:type="Exists">
+         <expression localId="9358" locator="6634:3-6634:47" xsi:type="Exists">
             <signature xsi:type="ListTypeSpecifier">
                <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
             </signature>
-            <operand localId="9360" locator="6636:10-6636:47" name="Currently pregnant SRV.DE7 Condition" xsi:type="ExpressionRef"/>
+            <operand localId="9357" locator="6634:10-6634:47" name="Currently pregnant SRV.DE7 Condition" xsi:type="ExpressionRef"/>
          </expression>
       </def>
-      <def localId="9371" locator="6649:1-6651:62" name="Date of viral load sample collection SRV.DE12" context="Patient" accessLevel="Public">
+      <def localId="9368" locator="6647:1-6649:62" name="Date of viral load sample collection SRV.DE12" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE12 - Date of viral load sample collection"/>
             <a:t name="activity" value="HIV.D10 Counsel returning client"/>
             <a:t name="description" value="Date and time when the sample was collected to test the client's HIV viral load&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9371">
+            <a:s r="9368">
                <a:s>/* End of Currently pregnant SRV.DE7 */
 
 /*
@@ -78647,10 +78627,10 @@ define &quot;Currently pregnant SRV.DE7&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Date of viral load sample collection SRV.DE12&quot;:
   </a:s>
-               <a:s r="9370">
+               <a:s r="9367">
                   <a:s>
-                     <a:s r="9364">
-                        <a:s r="9363">
+                     <a:s r="9361">
+                        <a:s r="9360">
                            <a:s>
                               <a:s>Elements.&quot;Date of viral load sample collection SRV.DE12&quot;</a:s>
                            </a:s>
@@ -78660,26 +78640,26 @@ define &quot;Date of viral load sample collection SRV.DE12&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9369">
+                  <a:s r="9366">
                      <a:s>where </a:s>
-                     <a:s r="9369">
-                        <a:s r="9367">
-                           <a:s r="9366">
-                              <a:s r="9365">
+                     <a:s r="9366">
+                        <a:s r="9364">
+                           <a:s r="9363">
+                              <a:s r="9362">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9366">
+                              <a:s r="9363">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9367">
+                           <a:s r="9364">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9369"> during </a:s>
-                        <a:s r="9368">
+                        <a:s r="9366"> during </a:s>
+                        <a:s r="9365">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -78687,46 +78667,46 @@ define &quot;Date of viral load sample collection SRV.DE12&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9370" locator="6650:3-6651:62" xsi:type="Query">
-            <source localId="9364" locator="6650:3-6650:60" alias="O">
-               <expression localId="9363" locator="6650:3-6650:58" name="Date of viral load sample collection SRV.DE12" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9367" locator="6648:3-6649:62" xsi:type="Query">
+            <source localId="9361" locator="6648:3-6648:60" alias="O">
+               <expression localId="9360" locator="6648:3-6648:58" name="Date of viral load sample collection SRV.DE12" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9369" locator="6651:5-6651:62" xsi:type="IncludedIn">
-               <operand localId="9367" locator="6651:11-6651:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9366" locator="6651:11-6651:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9366" locator="6649:5-6649:62" xsi:type="IncludedIn">
+               <operand localId="9364" locator="6649:11-6649:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9363" locator="6649:11-6649:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9368" locator="6651:43-6651:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9365" locator="6649:43-6649:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9368" locator="6651:43-6651:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9365" locator="6649:43-6649:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9368" locator="6651:43-6651:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9365" locator="6649:43-6649:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9368" locator="6651:43-6651:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9365" locator="6649:43-6649:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9378" locator="6652:1-6654:16" name="Date of viral load sample collection SRV.DE12 Value" context="Patient" accessLevel="Public">
+      <def localId="9375" locator="6650:1-6652:16" name="Date of viral load sample collection SRV.DE12 Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9378">
+            <a:s r="9375">
                <a:s>define &quot;Date of viral load sample collection SRV.DE12 Value&quot;:
   </a:s>
-               <a:s r="9377">
+               <a:s r="9374">
                   <a:s>
-                     <a:s r="9373">
-                        <a:s r="9372">
+                     <a:s r="9370">
+                        <a:s r="9369">
                            <a:s>
                               <a:s>&quot;Date of viral load sample collection SRV.DE12&quot;</a:s>
                            </a:s>
@@ -78736,14 +78716,14 @@ define &quot;Date of viral load sample collection SRV.DE12&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9376">
+                  <a:s r="9373">
                      <a:s>return </a:s>
-                     <a:s r="9375">
-                        <a:s r="9374">
+                     <a:s r="9372">
+                        <a:s r="9371">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9375">
+                        <a:s r="9372">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -78751,21 +78731,21 @@ define &quot;Date of viral load sample collection SRV.DE12&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9377" locator="6653:3-6654:16" xsi:type="Query">
-            <source localId="9373" locator="6653:3-6653:51" alias="O">
-               <expression localId="9372" locator="6653:3-6653:49" name="Date of viral load sample collection SRV.DE12" xsi:type="ExpressionRef"/>
+         <expression localId="9374" locator="6651:3-6652:16" xsi:type="Query">
+            <source localId="9370" locator="6651:3-6651:51" alias="O">
+               <expression localId="9369" locator="6651:3-6651:49" name="Date of viral load sample collection SRV.DE12" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9376" locator="6654:3-6654:16">
-               <expression localId="9375" locator="6654:10-6654:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9373" locator="6652:3-6652:16">
+               <expression localId="9372" locator="6652:10-6652:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9387" locator="6663:1-6665:62" name="Viral load test result SRV.DE13" context="Patient" accessLevel="Public">
+      <def localId="9384" locator="6661:1-6663:62" name="Viral load test result SRV.DE13" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE13 - Viral load test result"/>
             <a:t name="activity" value="HIV.D20 Diagnostics"/>
             <a:t name="description" value="Result from the viral load test in number of copies/mL&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9387">
+            <a:s r="9384">
                <a:s>/* End of Date of viral load sample collection SRV.DE12 */
 
 /*
@@ -78776,10 +78756,10 @@ define &quot;Date of viral load sample collection SRV.DE12&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Viral load test result SRV.DE13&quot;:
   </a:s>
-               <a:s r="9386">
+               <a:s r="9383">
                   <a:s>
-                     <a:s r="9380">
-                        <a:s r="9379">
+                     <a:s r="9377">
+                        <a:s r="9376">
                            <a:s>
                               <a:s>Elements.&quot;Viral load test result SRV.DE13&quot;</a:s>
                            </a:s>
@@ -78789,26 +78769,26 @@ define &quot;Viral load test result SRV.DE13&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9385">
+                  <a:s r="9382">
                      <a:s>where </a:s>
-                     <a:s r="9385">
-                        <a:s r="9383">
-                           <a:s r="9382">
-                              <a:s r="9381">
+                     <a:s r="9382">
+                        <a:s r="9380">
+                           <a:s r="9379">
+                              <a:s r="9378">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9382">
+                              <a:s r="9379">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9383">
+                           <a:s r="9380">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9385"> during </a:s>
-                        <a:s r="9384">
+                        <a:s r="9382"> during </a:s>
+                        <a:s r="9381">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -78816,46 +78796,46 @@ define &quot;Viral load test result SRV.DE13&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9386" locator="6664:3-6665:62" xsi:type="Query">
-            <source localId="9380" locator="6664:3-6664:46" alias="O">
-               <expression localId="9379" locator="6664:3-6664:44" name="Viral load test result SRV.DE13" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9383" locator="6662:3-6663:62" xsi:type="Query">
+            <source localId="9377" locator="6662:3-6662:46" alias="O">
+               <expression localId="9376" locator="6662:3-6662:44" name="Viral load test result SRV.DE13" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9385" locator="6665:5-6665:62" xsi:type="IncludedIn">
-               <operand localId="9383" locator="6665:11-6665:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9382" locator="6665:11-6665:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9382" locator="6663:5-6663:62" xsi:type="IncludedIn">
+               <operand localId="9380" locator="6663:11-6663:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9379" locator="6663:11-6663:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9384" locator="6665:43-6665:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9381" locator="6663:43-6663:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9384" locator="6665:43-6665:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9381" locator="6663:43-6663:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9384" locator="6665:43-6665:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9381" locator="6663:43-6663:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9384" locator="6665:43-6665:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9381" locator="6663:43-6663:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9394" locator="6666:1-6668:16" name="Viral load test result SRV.DE13 Value" context="Patient" accessLevel="Public">
+      <def localId="9391" locator="6664:1-6666:16" name="Viral load test result SRV.DE13 Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9394">
+            <a:s r="9391">
                <a:s>define &quot;Viral load test result SRV.DE13 Value&quot;:
   </a:s>
-               <a:s r="9393">
+               <a:s r="9390">
                   <a:s>
-                     <a:s r="9389">
-                        <a:s r="9388">
+                     <a:s r="9386">
+                        <a:s r="9385">
                            <a:s>
                               <a:s>&quot;Viral load test result SRV.DE13&quot;</a:s>
                            </a:s>
@@ -78865,14 +78845,14 @@ define &quot;Viral load test result SRV.DE13&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9392">
+                  <a:s r="9389">
                      <a:s>return </a:s>
-                     <a:s r="9391">
-                        <a:s r="9390">
+                     <a:s r="9388">
+                        <a:s r="9387">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9391">
+                        <a:s r="9388">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -78880,21 +78860,21 @@ define &quot;Viral load test result SRV.DE13&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9393" locator="6667:3-6668:16" xsi:type="Query">
-            <source localId="9389" locator="6667:3-6667:37" alias="O">
-               <expression localId="9388" locator="6667:3-6667:35" name="Viral load test result SRV.DE13" xsi:type="ExpressionRef"/>
+         <expression localId="9390" locator="6665:3-6666:16" xsi:type="Query">
+            <source localId="9386" locator="6665:3-6665:37" alias="O">
+               <expression localId="9385" locator="6665:3-6665:35" name="Viral load test result SRV.DE13" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9392" locator="6668:3-6668:16">
-               <expression localId="9391" locator="6668:10-6668:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9389" locator="6666:3-6666:16">
+               <expression localId="9388" locator="6666:10-6666:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9403" locator="6677:1-6679:49" name="Visit date SRV.DE15" context="Patient" accessLevel="Public">
+      <def localId="9400" locator="6675:1-6677:49" name="Visit date SRV.DE15" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE15 - Visit date"/>
             <a:t name="activity" value="HIV.A2 Gather client details"/>
             <a:t name="description" value="The date and time of the client's visit"/>
-            <a:s r="9403">
+            <a:s r="9400">
                <a:s>/* End of Viral load test result SRV.DE13 */
 
 /*
@@ -78905,14 +78885,14 @@ define &quot;Viral load test result SRV.DE13&quot;:
 
 define &quot;Visit date SRV.DE15&quot;:
   </a:s>
-               <a:s r="9402">
+               <a:s r="9399">
                   <a:s>exists</a:s>
-                  <a:s r="9401">
+                  <a:s r="9398">
                      <a:s>(</a:s>
-                     <a:s r="9401">
+                     <a:s r="9398">
                         <a:s>
-                           <a:s r="9396">
-                              <a:s r="9395">
+                           <a:s r="9393">
+                              <a:s r="9392">
                                  <a:s>
                                     <a:s>Elements.&quot;Visit date SRV.DE15&quot;</a:s>
                                  </a:s>
@@ -78922,17 +78902,17 @@ define &quot;Visit date SRV.DE15&quot;:
                         </a:s>
                         <a:s>
     </a:s>
-                        <a:s r="9400">
+                        <a:s r="9397">
                            <a:s>where </a:s>
-                           <a:s r="9400">
-                              <a:s r="9398">
+                           <a:s r="9397">
+                              <a:s r="9395">
                                  <a:s>start of </a:s>
-                                 <a:s r="9397">
+                                 <a:s r="9394">
                                     <a:s>p</a:s>
                                  </a:s>
                               </a:s>
-                              <a:s r="9400"> during </a:s>
-                              <a:s r="9399">
+                              <a:s r="9397"> during </a:s>
+                              <a:s r="9396">
                                  <a:s>&quot;Measurement Period&quot;</a:s>
                               </a:s>
                            </a:s>
@@ -78943,58 +78923,58 @@ define &quot;Visit date SRV.DE15&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9402" locator="6678:3-6679:49" xsi:type="Exists">
+         <expression localId="9399" locator="6676:3-6677:49" xsi:type="Exists">
             <signature xsi:type="ListTypeSpecifier">
                <elementType name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
             </signature>
-            <operand localId="9401" locator="6678:9-6679:49" xsi:type="Query">
-               <source localId="9396" locator="6678:10-6678:41" alias="p">
-                  <expression localId="9395" locator="6678:10-6678:39" name="Visit date SRV.DE15" libraryName="Elements" xsi:type="ExpressionRef"/>
+            <operand localId="9398" locator="6676:9-6677:49" xsi:type="Query">
+               <source localId="9393" locator="6676:10-6676:41" alias="p">
+                  <expression localId="9392" locator="6676:10-6676:39" name="Visit date SRV.DE15" libraryName="Elements" xsi:type="ExpressionRef"/>
                </source>
-               <where localId="9400" locator="6679:5-6679:48" xsi:type="In">
+               <where localId="9397" locator="6677:5-6677:48" xsi:type="In">
                   <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                   <signature xsi:type="IntervalTypeSpecifier">
                      <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                   </signature>
-                  <operand localId="9398" locator="6679:11-6679:20" xsi:type="Start">
+                  <operand localId="9395" locator="6677:11-6677:20" xsi:type="Start">
                      <signature xsi:type="IntervalTypeSpecifier">
                         <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                      </signature>
                      <operand name="ToInterval" libraryName="FHIRHelpers" xsi:type="FunctionRef">
                         <signature name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="9397" locator="6679:20" name="p" xsi:type="AliasRef"/>
+                        <operand localId="9394" locator="6677:20" name="p" xsi:type="AliasRef"/>
                      </operand>
                   </operand>
                   <operand xsi:type="Interval">
                      <low xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="low" xsi:type="Property">
-                           <source localId="9399" locator="6679:29-6679:48" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9396" locator="6677:29-6677:48" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </low>
                      <lowClosedExpression path="lowClosed" xsi:type="Property">
-                        <source localId="9399" locator="6679:29-6679:48" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9396" locator="6677:29-6677:48" name="Measurement Period" xsi:type="ParameterRef"/>
                      </lowClosedExpression>
                      <high xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="high" xsi:type="Property">
-                           <source localId="9399" locator="6679:29-6679:48" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9396" locator="6677:29-6677:48" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </high>
                      <highClosedExpression path="highClosed" xsi:type="Property">
-                        <source localId="9399" locator="6679:29-6679:48" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9396" locator="6677:29-6677:48" name="Measurement Period" xsi:type="ParameterRef"/>
                      </highClosedExpression>
                   </operand>
                </where>
             </operand>
          </expression>
       </def>
-      <def localId="9412" locator="6688:1-6690:62" name="ANC contact date SRV.DE18" context="Patient" accessLevel="Public">
+      <def localId="9409" locator="6686:1-6688:62" name="ANC contact date SRV.DE18" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE18 - ANC contact date"/>
             <a:t name="activity" value="HIV.E1 Capture or update mother's history"/>
             <a:t name="description" value="The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9412">
+            <a:s r="9409">
                <a:s>/* End of Visit date SRV.DE15 */
 
 /*
@@ -79005,10 +78985,10 @@ define &quot;Visit date SRV.DE15&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;ANC contact date SRV.DE18&quot;:
   </a:s>
-               <a:s r="9411">
+               <a:s r="9408">
                   <a:s>
-                     <a:s r="9405">
-                        <a:s r="9404">
+                     <a:s r="9402">
+                        <a:s r="9401">
                            <a:s>
                               <a:s>Elements.&quot;ANC contact date SRV.DE18&quot;</a:s>
                            </a:s>
@@ -79018,26 +78998,26 @@ define &quot;ANC contact date SRV.DE18&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9410">
+                  <a:s r="9407">
                      <a:s>where </a:s>
-                     <a:s r="9410">
-                        <a:s r="9408">
-                           <a:s r="9407">
-                              <a:s r="9406">
+                     <a:s r="9407">
+                        <a:s r="9405">
+                           <a:s r="9404">
+                              <a:s r="9403">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9407">
+                              <a:s r="9404">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9408">
+                           <a:s r="9405">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9410"> during </a:s>
-                        <a:s r="9409">
+                        <a:s r="9407"> during </a:s>
+                        <a:s r="9406">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -79045,46 +79025,46 @@ define &quot;ANC contact date SRV.DE18&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9411" locator="6689:3-6690:62" xsi:type="Query">
-            <source localId="9405" locator="6689:3-6689:40" alias="O">
-               <expression localId="9404" locator="6689:3-6689:38" name="ANC contact date SRV.DE18" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9408" locator="6687:3-6688:62" xsi:type="Query">
+            <source localId="9402" locator="6687:3-6687:40" alias="O">
+               <expression localId="9401" locator="6687:3-6687:38" name="ANC contact date SRV.DE18" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9410" locator="6690:5-6690:62" xsi:type="IncludedIn">
-               <operand localId="9408" locator="6690:11-6690:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9407" locator="6690:11-6690:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9407" locator="6688:5-6688:62" xsi:type="IncludedIn">
+               <operand localId="9405" locator="6688:11-6688:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9404" locator="6688:11-6688:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9409" locator="6690:43-6690:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9406" locator="6688:43-6688:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9409" locator="6690:43-6690:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9406" locator="6688:43-6688:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9409" locator="6690:43-6690:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9406" locator="6688:43-6688:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9409" locator="6690:43-6690:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9406" locator="6688:43-6688:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9419" locator="6691:1-6693:16" name="ANC contact date SRV.DE18 Value" context="Patient" accessLevel="Public">
+      <def localId="9416" locator="6689:1-6691:16" name="ANC contact date SRV.DE18 Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9419">
+            <a:s r="9416">
                <a:s>define &quot;ANC contact date SRV.DE18 Value&quot;:
   </a:s>
-               <a:s r="9418">
+               <a:s r="9415">
                   <a:s>
-                     <a:s r="9414">
-                        <a:s r="9413">
+                     <a:s r="9411">
+                        <a:s r="9410">
                            <a:s>
                               <a:s>&quot;ANC contact date SRV.DE18&quot;</a:s>
                            </a:s>
@@ -79094,14 +79074,14 @@ define &quot;ANC contact date SRV.DE18&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9417">
+                  <a:s r="9414">
                      <a:s>return </a:s>
-                     <a:s r="9416">
-                        <a:s r="9415">
+                     <a:s r="9413">
+                        <a:s r="9412">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9416">
+                        <a:s r="9413">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -79109,24 +79089,24 @@ define &quot;ANC contact date SRV.DE18&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9418" locator="6692:3-6693:16" xsi:type="Query">
-            <source localId="9414" locator="6692:3-6692:31" alias="O">
-               <expression localId="9413" locator="6692:3-6692:29" name="ANC contact date SRV.DE18" xsi:type="ExpressionRef"/>
+         <expression localId="9415" locator="6690:3-6691:16" xsi:type="Query">
+            <source localId="9411" locator="6690:3-6690:31" alias="O">
+               <expression localId="9410" locator="6690:3-6690:29" name="ANC contact date SRV.DE18" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9417" locator="6693:3-6693:16">
-               <expression localId="9416" locator="6693:10-6693:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9414" locator="6691:3-6691:16">
+               <expression localId="9413" locator="6691:10-6691:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9428" locator="6704:1-6706:62" name="HIV-exposed infant or child SRV.DE20 Observation" context="Patient" accessLevel="Public">
+      <def localId="9425" locator="6702:1-6704:62" name="HIV-exposed infant or child SRV.DE20 Observation" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9428">
+            <a:s r="9425">
                <a:s>define &quot;HIV-exposed infant or child SRV.DE20 Observation&quot;:
   </a:s>
-               <a:s r="9427">
+               <a:s r="9424">
                   <a:s>
-                     <a:s r="9421">
-                        <a:s r="9420">
+                     <a:s r="9418">
+                        <a:s r="9417">
                            <a:s>
                               <a:s>Elements.&quot;HIV-exposed infant or child SRV.DE20 Observation&quot;</a:s>
                            </a:s>
@@ -79136,26 +79116,26 @@ define &quot;ANC contact date SRV.DE18&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9426">
+                  <a:s r="9423">
                      <a:s>where </a:s>
-                     <a:s r="9426">
-                        <a:s r="9424">
-                           <a:s r="9423">
-                              <a:s r="9422">
+                     <a:s r="9423">
+                        <a:s r="9421">
+                           <a:s r="9420">
+                              <a:s r="9419">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9423">
+                              <a:s r="9420">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9424">
+                           <a:s r="9421">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9426"> during </a:s>
-                        <a:s r="9425">
+                        <a:s r="9423"> during </a:s>
+                        <a:s r="9422">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -79163,43 +79143,43 @@ define &quot;ANC contact date SRV.DE18&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9427" locator="6705:3-6706:62" xsi:type="Query">
-            <source localId="9421" locator="6705:3-6705:63" alias="O">
-               <expression localId="9420" locator="6705:3-6705:61" name="HIV-exposed infant or child SRV.DE20 Observation" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9424" locator="6703:3-6704:62" xsi:type="Query">
+            <source localId="9418" locator="6703:3-6703:63" alias="O">
+               <expression localId="9417" locator="6703:3-6703:61" name="HIV-exposed infant or child SRV.DE20 Observation" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9426" locator="6706:5-6706:62" xsi:type="IncludedIn">
-               <operand localId="9424" locator="6706:11-6706:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9423" locator="6706:11-6706:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9423" locator="6704:5-6704:62" xsi:type="IncludedIn">
+               <operand localId="9421" locator="6704:11-6704:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9420" locator="6704:11-6704:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9425" locator="6706:43-6706:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9422" locator="6704:43-6704:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9425" locator="6706:43-6706:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9422" locator="6704:43-6704:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9425" locator="6706:43-6706:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9422" locator="6704:43-6704:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9425" locator="6706:43-6706:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9422" locator="6704:43-6704:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9431" locator="6702:1-6703:59" name="HIV-exposed infant or child SRV.DE20" context="Patient" accessLevel="Public">
+      <def localId="9428" locator="6700:1-6701:59" name="HIV-exposed infant or child SRV.DE20" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE20 - HIV-exposed infant or child"/>
             <a:t name="activity" value="HIV.F6 Check whether infant/child had HIV exposure"/>
             <a:t name="description" value="Whether the infant or child was determined to have had HIV exposure&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9431">
+            <a:s r="9428">
                <a:s>/* End of ANC contact date SRV.DE18 */
 
 /*
@@ -79210,30 +79190,30 @@ define &quot;ANC contact date SRV.DE18&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;HIV-exposed infant or child SRV.DE20&quot;:
   </a:s>
-               <a:s r="9430">
+               <a:s r="9427">
                   <a:s>exists </a:s>
-                  <a:s r="9429">
+                  <a:s r="9426">
                      <a:s>&quot;HIV-exposed infant or child SRV.DE20 Observation&quot;</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9430" locator="6703:3-6703:59" xsi:type="Exists">
+         <expression localId="9427" locator="6701:3-6701:59" xsi:type="Exists">
             <signature xsi:type="ListTypeSpecifier">
                <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
             </signature>
-            <operand localId="9429" locator="6703:10-6703:59" name="HIV-exposed infant or child SRV.DE20 Observation" xsi:type="ExpressionRef"/>
+            <operand localId="9426" locator="6701:10-6701:59" name="HIV-exposed infant or child SRV.DE20 Observation" xsi:type="ExpressionRef"/>
          </expression>
       </def>
-      <def localId="9440" locator="6717:1-6719:62" name="Final diagnosis of HIV-exposed infant SRV.DE22 Observation" context="Patient" accessLevel="Public">
+      <def localId="9437" locator="6715:1-6717:62" name="Final diagnosis of HIV-exposed infant SRV.DE22 Observation" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9440">
+            <a:s r="9437">
                <a:s>define &quot;Final diagnosis of HIV-exposed infant SRV.DE22 Observation&quot;:
   </a:s>
-               <a:s r="9439">
+               <a:s r="9436">
                   <a:s>
-                     <a:s r="9433">
-                        <a:s r="9432">
+                     <a:s r="9430">
+                        <a:s r="9429">
                            <a:s>
                               <a:s>Elements.&quot;Final diagnosis of HIV-exposed infant SRV.DE22 Observation&quot;</a:s>
                            </a:s>
@@ -79243,26 +79223,26 @@ define &quot;HIV-exposed infant or child SRV.DE20&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9438">
+                  <a:s r="9435">
                      <a:s>where </a:s>
-                     <a:s r="9438">
-                        <a:s r="9436">
-                           <a:s r="9435">
-                              <a:s r="9434">
+                     <a:s r="9435">
+                        <a:s r="9433">
+                           <a:s r="9432">
+                              <a:s r="9431">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9435">
+                              <a:s r="9432">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9436">
+                           <a:s r="9433">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9438"> during </a:s>
-                        <a:s r="9437">
+                        <a:s r="9435"> during </a:s>
+                        <a:s r="9434">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -79270,43 +79250,43 @@ define &quot;HIV-exposed infant or child SRV.DE20&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9439" locator="6718:3-6719:62" xsi:type="Query">
-            <source localId="9433" locator="6718:3-6718:73" alias="O">
-               <expression localId="9432" locator="6718:3-6718:71" name="Final diagnosis of HIV-exposed infant SRV.DE22 Observation" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9436" locator="6716:3-6717:62" xsi:type="Query">
+            <source localId="9430" locator="6716:3-6716:73" alias="O">
+               <expression localId="9429" locator="6716:3-6716:71" name="Final diagnosis of HIV-exposed infant SRV.DE22 Observation" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9438" locator="6719:5-6719:62" xsi:type="IncludedIn">
-               <operand localId="9436" locator="6719:11-6719:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9435" locator="6719:11-6719:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9435" locator="6717:5-6717:62" xsi:type="IncludedIn">
+               <operand localId="9433" locator="6717:11-6717:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9432" locator="6717:11-6717:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9437" locator="6719:43-6719:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9434" locator="6717:43-6717:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9437" locator="6719:43-6719:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9434" locator="6717:43-6717:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9437" locator="6719:43-6719:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9434" locator="6717:43-6717:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9437" locator="6719:43-6719:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9434" locator="6717:43-6717:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9443" locator="6715:1-6716:69" name="Final diagnosis of HIV-exposed infant SRV.DE22" context="Patient" accessLevel="Public">
+      <def localId="9440" locator="6713:1-6714:69" name="Final diagnosis of HIV-exposed infant SRV.DE22" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.SRV.DE22 - Final diagnosis of HIV-exposed infant"/>
             <a:t name="activity" value="HIV.F20 Record infant's/child's final HIV diagnosis"/>
             <a:t name="description" value="HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later).&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9443">
+            <a:s r="9440">
                <a:s>/* End of HIV-exposed infant or child SRV.DE20 */
 
 /*
@@ -79317,30 +79297,30 @@ define &quot;HIV-exposed infant or child SRV.DE20&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Final diagnosis of HIV-exposed infant SRV.DE22&quot;:
   </a:s>
-               <a:s r="9442">
+               <a:s r="9439">
                   <a:s>exists </a:s>
-                  <a:s r="9441">
+                  <a:s r="9438">
                      <a:s>&quot;Final diagnosis of HIV-exposed infant SRV.DE22 Observation&quot;</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9442" locator="6716:3-6716:69" xsi:type="Exists">
+         <expression localId="9439" locator="6714:3-6714:69" xsi:type="Exists">
             <signature xsi:type="ListTypeSpecifier">
                <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
             </signature>
-            <operand localId="9441" locator="6716:10-6716:69" name="Final diagnosis of HIV-exposed infant SRV.DE22 Observation" xsi:type="ExpressionRef"/>
+            <operand localId="9438" locator="6714:10-6714:69" name="Final diagnosis of HIV-exposed infant SRV.DE22 Observation" xsi:type="ExpressionRef"/>
          </expression>
       </def>
-      <def localId="9452" locator="6730:1-6732:62" name="Other priority populations Observation" context="Patient" accessLevel="Public">
+      <def localId="9449" locator="6728:1-6730:62" name="Other priority populations Observation" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9452">
+            <a:s r="9449">
                <a:s>define &quot;Other priority populations Observation&quot;:
   </a:s>
-               <a:s r="9451">
+               <a:s r="9448">
                   <a:s>
-                     <a:s r="9445">
-                        <a:s r="9444">
+                     <a:s r="9442">
+                        <a:s r="9441">
                            <a:s>
                               <a:s>Elements.&quot;Other priority populations Observation&quot;</a:s>
                            </a:s>
@@ -79350,26 +79330,26 @@ define &quot;Final diagnosis of HIV-exposed infant SRV.DE22&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9450">
+                  <a:s r="9447">
                      <a:s>where </a:s>
-                     <a:s r="9450">
-                        <a:s r="9448">
-                           <a:s r="9447">
-                              <a:s r="9446">
+                     <a:s r="9447">
+                        <a:s r="9445">
+                           <a:s r="9444">
+                              <a:s r="9443">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9447">
+                              <a:s r="9444">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9448">
+                           <a:s r="9445">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9450"> during </a:s>
-                        <a:s r="9449">
+                        <a:s r="9447"> during </a:s>
+                        <a:s r="9446">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -79377,43 +79357,43 @@ define &quot;Final diagnosis of HIV-exposed infant SRV.DE22&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9451" locator="6731:3-6732:62" xsi:type="Query">
-            <source localId="9445" locator="6731:3-6731:53" alias="O">
-               <expression localId="9444" locator="6731:3-6731:51" name="Other priority populations Observation" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9448" locator="6729:3-6730:62" xsi:type="Query">
+            <source localId="9442" locator="6729:3-6729:53" alias="O">
+               <expression localId="9441" locator="6729:3-6729:51" name="Other priority populations Observation" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9450" locator="6732:5-6732:62" xsi:type="IncludedIn">
-               <operand localId="9448" locator="6732:11-6732:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9447" locator="6732:11-6732:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9447" locator="6730:5-6730:62" xsi:type="IncludedIn">
+               <operand localId="9445" locator="6730:11-6730:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9444" locator="6730:11-6730:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9449" locator="6732:43-6732:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9446" locator="6730:43-6730:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9449" locator="6732:43-6732:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9446" locator="6730:43-6730:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9449" locator="6732:43-6732:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9446" locator="6730:43-6730:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9449" locator="6732:43-6732:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9446" locator="6730:43-6730:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9455" locator="6728:1-6729:49" name="Other priority populations" context="Patient" accessLevel="Public">
+      <def localId="9452" locator="6726:1-6727:49" name="Other priority populations" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.Config.DE19 - Other priority populations"/>
             <a:t name="activity" value="HIV.Configuration"/>
             <a:t name="description" value="Other populations of priority of HIV prevention and care in local context (provided during adaptation)&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9455">
+            <a:s r="9452">
                <a:s>/* End of Final diagnosis of HIV-exposed infant SRV.DE22 */
 
 /*
@@ -79424,27 +79404,27 @@ define &quot;Final diagnosis of HIV-exposed infant SRV.DE22&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Other priority populations&quot;:
   </a:s>
-               <a:s r="9454">
+               <a:s r="9451">
                   <a:s>exists </a:s>
-                  <a:s r="9453">
+                  <a:s r="9450">
                      <a:s>&quot;Other priority populations Observation&quot;</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9454" locator="6729:3-6729:49" xsi:type="Exists">
+         <expression localId="9451" locator="6727:3-6727:49" xsi:type="Exists">
             <signature xsi:type="ListTypeSpecifier">
                <elementType name="fhir:Observation" xsi:type="NamedTypeSpecifier"/>
             </signature>
-            <operand localId="9453" locator="6729:10-6729:49" name="Other priority populations Observation" xsi:type="ExpressionRef"/>
+            <operand localId="9450" locator="6727:10-6727:49" name="Other priority populations Observation" xsi:type="ExpressionRef"/>
          </expression>
       </def>
-      <def localId="9464" locator="6741:1-6743:62" name="Reporting period end date" context="Patient" accessLevel="Public">
+      <def localId="9461" locator="6739:1-6741:62" name="Reporting period end date" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.Config.DE20 - Reporting period end date"/>
             <a:t name="activity" value="HIV.Configuration"/>
             <a:t name="description" value="End date of the reporting period&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9464">
+            <a:s r="9461">
                <a:s>/* End of Other priority populations */
 
 /*
@@ -79455,10 +79435,10 @@ define &quot;Other priority populations&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Reporting period end date&quot;:
   </a:s>
-               <a:s r="9463">
+               <a:s r="9460">
                   <a:s>
-                     <a:s r="9457">
-                        <a:s r="9456">
+                     <a:s r="9454">
+                        <a:s r="9453">
                            <a:s>
                               <a:s>Elements.&quot;Reporting period end date&quot;</a:s>
                            </a:s>
@@ -79468,26 +79448,26 @@ define &quot;Reporting period end date&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9462">
+                  <a:s r="9459">
                      <a:s>where </a:s>
-                     <a:s r="9462">
-                        <a:s r="9460">
-                           <a:s r="9459">
-                              <a:s r="9458">
+                     <a:s r="9459">
+                        <a:s r="9457">
+                           <a:s r="9456">
+                              <a:s r="9455">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9459">
+                              <a:s r="9456">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9460">
+                           <a:s r="9457">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9462"> during </a:s>
-                        <a:s r="9461">
+                        <a:s r="9459"> during </a:s>
+                        <a:s r="9458">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -79495,46 +79475,46 @@ define &quot;Reporting period end date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9463" locator="6742:3-6743:62" xsi:type="Query">
-            <source localId="9457" locator="6742:3-6742:40" alias="O">
-               <expression localId="9456" locator="6742:3-6742:38" name="Reporting period end date" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9460" locator="6740:3-6741:62" xsi:type="Query">
+            <source localId="9454" locator="6740:3-6740:40" alias="O">
+               <expression localId="9453" locator="6740:3-6740:38" name="Reporting period end date" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9462" locator="6743:5-6743:62" xsi:type="IncludedIn">
-               <operand localId="9460" locator="6743:11-6743:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9459" locator="6743:11-6743:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9459" locator="6741:5-6741:62" xsi:type="IncludedIn">
+               <operand localId="9457" locator="6741:11-6741:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9456" locator="6741:11-6741:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9461" locator="6743:43-6743:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9458" locator="6741:43-6741:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9461" locator="6743:43-6743:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9458" locator="6741:43-6741:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9461" locator="6743:43-6743:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9458" locator="6741:43-6741:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9461" locator="6743:43-6743:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9458" locator="6741:43-6741:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9471" locator="6744:1-6746:16" name="Reporting period end date Value" context="Patient" accessLevel="Public">
+      <def localId="9468" locator="6742:1-6744:16" name="Reporting period end date Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9471">
+            <a:s r="9468">
                <a:s>define &quot;Reporting period end date Value&quot;:
   </a:s>
-               <a:s r="9470">
+               <a:s r="9467">
                   <a:s>
-                     <a:s r="9466">
-                        <a:s r="9465">
+                     <a:s r="9463">
+                        <a:s r="9462">
                            <a:s>
                               <a:s>&quot;Reporting period end date&quot;</a:s>
                            </a:s>
@@ -79544,14 +79524,14 @@ define &quot;Reporting period end date&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9469">
+                  <a:s r="9466">
                      <a:s>return </a:s>
-                     <a:s r="9468">
-                        <a:s r="9467">
+                     <a:s r="9465">
+                        <a:s r="9464">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9468">
+                        <a:s r="9465">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -79559,21 +79539,21 @@ define &quot;Reporting period end date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9470" locator="6745:3-6746:16" xsi:type="Query">
-            <source localId="9466" locator="6745:3-6745:31" alias="O">
-               <expression localId="9465" locator="6745:3-6745:29" name="Reporting period end date" xsi:type="ExpressionRef"/>
+         <expression localId="9467" locator="6743:3-6744:16" xsi:type="Query">
+            <source localId="9463" locator="6743:3-6743:31" alias="O">
+               <expression localId="9462" locator="6743:3-6743:29" name="Reporting period end date" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9469" locator="6746:3-6746:16">
-               <expression localId="9468" locator="6746:10-6746:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9466" locator="6744:3-6744:16">
+               <expression localId="9465" locator="6744:10-6744:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9480" locator="6755:1-6757:62" name="Reporting period start date" context="Patient" accessLevel="Public">
+      <def localId="9477" locator="6753:1-6755:62" name="Reporting period start date" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.Config.DE21 - Reporting period start date"/>
             <a:t name="activity" value="HIV.Configuration"/>
             <a:t name="description" value="Start date of the reporting period&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9480">
+            <a:s r="9477">
                <a:s>/* End of Reporting period end date */
 
 /*
@@ -79584,10 +79564,10 @@ define &quot;Reporting period end date&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Reporting period start date&quot;:
   </a:s>
-               <a:s r="9479">
+               <a:s r="9476">
                   <a:s>
-                     <a:s r="9473">
-                        <a:s r="9472">
+                     <a:s r="9470">
+                        <a:s r="9469">
                            <a:s>
                               <a:s>Elements.&quot;Reporting period start date&quot;</a:s>
                            </a:s>
@@ -79597,26 +79577,26 @@ define &quot;Reporting period start date&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9478">
+                  <a:s r="9475">
                      <a:s>where </a:s>
-                     <a:s r="9478">
-                        <a:s r="9476">
-                           <a:s r="9475">
-                              <a:s r="9474">
+                     <a:s r="9475">
+                        <a:s r="9473">
+                           <a:s r="9472">
+                              <a:s r="9471">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9475">
+                              <a:s r="9472">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9476">
+                           <a:s r="9473">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9478"> during </a:s>
-                        <a:s r="9477">
+                        <a:s r="9475"> during </a:s>
+                        <a:s r="9474">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -79624,46 +79604,46 @@ define &quot;Reporting period start date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9479" locator="6756:3-6757:62" xsi:type="Query">
-            <source localId="9473" locator="6756:3-6756:42" alias="O">
-               <expression localId="9472" locator="6756:3-6756:40" name="Reporting period start date" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9476" locator="6754:3-6755:62" xsi:type="Query">
+            <source localId="9470" locator="6754:3-6754:42" alias="O">
+               <expression localId="9469" locator="6754:3-6754:40" name="Reporting period start date" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9478" locator="6757:5-6757:62" xsi:type="IncludedIn">
-               <operand localId="9476" locator="6757:11-6757:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9475" locator="6757:11-6757:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9475" locator="6755:5-6755:62" xsi:type="IncludedIn">
+               <operand localId="9473" locator="6755:11-6755:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9472" locator="6755:11-6755:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9477" locator="6757:43-6757:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9474" locator="6755:43-6755:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9477" locator="6757:43-6757:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9474" locator="6755:43-6755:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9477" locator="6757:43-6757:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9474" locator="6755:43-6755:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9477" locator="6757:43-6757:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9474" locator="6755:43-6755:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9487" locator="6758:1-6760:16" name="Reporting period start date Value" context="Patient" accessLevel="Public">
+      <def localId="9484" locator="6756:1-6758:16" name="Reporting period start date Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9487">
+            <a:s r="9484">
                <a:s>define &quot;Reporting period start date Value&quot;:
   </a:s>
-               <a:s r="9486">
+               <a:s r="9483">
                   <a:s>
-                     <a:s r="9482">
-                        <a:s r="9481">
+                     <a:s r="9479">
+                        <a:s r="9478">
                            <a:s>
                               <a:s>&quot;Reporting period start date&quot;</a:s>
                            </a:s>
@@ -79673,14 +79653,14 @@ define &quot;Reporting period start date&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9485">
+                  <a:s r="9482">
                      <a:s>return </a:s>
-                     <a:s r="9484">
-                        <a:s r="9483">
+                     <a:s r="9481">
+                        <a:s r="9480">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9484">
+                        <a:s r="9481">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -79688,21 +79668,21 @@ define &quot;Reporting period start date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9486" locator="6759:3-6760:16" xsi:type="Query">
-            <source localId="9482" locator="6759:3-6759:33" alias="O">
-               <expression localId="9481" locator="6759:3-6759:31" name="Reporting period start date" xsi:type="ExpressionRef"/>
+         <expression localId="9483" locator="6757:3-6758:16" xsi:type="Query">
+            <source localId="9479" locator="6757:3-6757:33" alias="O">
+               <expression localId="9478" locator="6757:3-6757:31" name="Reporting period start date" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9485" locator="6760:3-6760:16">
-               <expression localId="9484" locator="6760:10-6760:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9482" locator="6758:3-6758:16">
+               <expression localId="9481" locator="6758:10-6758:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9496" locator="6769:1-6771:62" name="Reporting date" context="Patient" accessLevel="Public">
+      <def localId="9493" locator="6767:1-6769:62" name="Reporting date" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:t name="dataElement" value="HIV.Config.DE22 - Reporting date"/>
             <a:t name="activity" value="HIV.Configuration"/>
             <a:t name="description" value="Reporting date, for surveys performed on a specific date&#xa; TODO: Replace placeholder with relevant CQL logic"/>
-            <a:s r="9496">
+            <a:s r="9493">
                <a:s>/* End of Reporting period start date */
 
 /*
@@ -79713,10 +79693,10 @@ define &quot;Reporting period start date&quot;:
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Reporting date&quot;:
   </a:s>
-               <a:s r="9495">
+               <a:s r="9492">
                   <a:s>
-                     <a:s r="9489">
-                        <a:s r="9488">
+                     <a:s r="9486">
+                        <a:s r="9485">
                            <a:s>
                               <a:s>Elements.&quot;Reporting date&quot;</a:s>
                            </a:s>
@@ -79726,26 +79706,26 @@ define &quot;Reporting date&quot;:
                   </a:s>
                   <a:s>
     </a:s>
-                  <a:s r="9494">
+                  <a:s r="9491">
                      <a:s>where </a:s>
-                     <a:s r="9494">
-                        <a:s r="9492">
-                           <a:s r="9491">
-                              <a:s r="9490">
+                     <a:s r="9491">
+                        <a:s r="9489">
+                           <a:s r="9488">
+                              <a:s r="9487">
                                  <a:s>O</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9491">
+                              <a:s r="9488">
                                  <a:s>effective</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9492">
+                           <a:s r="9489">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9494"> during </a:s>
-                        <a:s r="9493">
+                        <a:s r="9491"> during </a:s>
+                        <a:s r="9490">
                            <a:s>&quot;Measurement Period&quot;</a:s>
                         </a:s>
                      </a:s>
@@ -79753,46 +79733,46 @@ define &quot;Reporting date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9495" locator="6770:3-6771:62" xsi:type="Query">
-            <source localId="9489" locator="6770:3-6770:29" alias="O">
-               <expression localId="9488" locator="6770:3-6770:27" name="Reporting date" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9492" locator="6768:3-6769:62" xsi:type="Query">
+            <source localId="9486" locator="6768:3-6768:29" alias="O">
+               <expression localId="9485" locator="6768:3-6768:27" name="Reporting date" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9494" locator="6771:5-6771:62" xsi:type="IncludedIn">
-               <operand localId="9492" locator="6771:11-6771:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9491" locator="6771:11-6771:21" path="effective" scope="O" xsi:type="Property"/>
+            <where localId="9491" locator="6769:5-6769:62" xsi:type="IncludedIn">
+               <operand localId="9489" locator="6769:11-6769:34" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9488" locator="6769:11-6769:21" path="effective" scope="O" xsi:type="Property"/>
                </operand>
                <operand xsi:type="Interval">
                   <low xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="low" xsi:type="Property">
-                        <source localId="9493" locator="6771:43-6771:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9490" locator="6769:43-6769:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </low>
                   <lowClosedExpression path="lowClosed" xsi:type="Property">
-                     <source localId="9493" locator="6771:43-6771:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9490" locator="6769:43-6769:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </lowClosedExpression>
                   <high xsi:type="ToDateTime">
                      <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                      <operand path="high" xsi:type="Property">
-                        <source localId="9493" locator="6771:43-6771:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9490" locator="6769:43-6769:62" name="Measurement Period" xsi:type="ParameterRef"/>
                      </operand>
                   </high>
                   <highClosedExpression path="highClosed" xsi:type="Property">
-                     <source localId="9493" locator="6771:43-6771:62" name="Measurement Period" xsi:type="ParameterRef"/>
+                     <source localId="9490" locator="6769:43-6769:62" name="Measurement Period" xsi:type="ParameterRef"/>
                   </highClosedExpression>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9503" locator="6772:1-6774:16" name="Reporting date Value" context="Patient" accessLevel="Public">
+      <def localId="9500" locator="6770:1-6772:16" name="Reporting date Value" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9503">
+            <a:s r="9500">
                <a:s>define &quot;Reporting date Value&quot;:
   </a:s>
-               <a:s r="9502">
+               <a:s r="9499">
                   <a:s>
-                     <a:s r="9498">
-                        <a:s r="9497">
+                     <a:s r="9495">
+                        <a:s r="9494">
                            <a:s>
                               <a:s>&quot;Reporting date&quot;</a:s>
                            </a:s>
@@ -79802,14 +79782,14 @@ define &quot;Reporting date&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9501">
+                  <a:s r="9498">
                      <a:s>return </a:s>
-                     <a:s r="9500">
-                        <a:s r="9499">
+                     <a:s r="9497">
+                        <a:s r="9496">
                            <a:s>O</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9500">
+                        <a:s r="9497">
                            <a:s>value</a:s>
                         </a:s>
                      </a:s>
@@ -79817,18 +79797,18 @@ define &quot;Reporting date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9502" locator="6773:3-6774:16" xsi:type="Query">
-            <source localId="9498" locator="6773:3-6773:20" alias="O">
-               <expression localId="9497" locator="6773:3-6773:18" name="Reporting date" xsi:type="ExpressionRef"/>
+         <expression localId="9499" locator="6771:3-6772:16" xsi:type="Query">
+            <source localId="9495" locator="6771:3-6771:20" alias="O">
+               <expression localId="9494" locator="6771:3-6771:18" name="Reporting date" xsi:type="ExpressionRef"/>
             </source>
-            <return localId="9501" locator="6774:3-6774:16">
-               <expression localId="9500" locator="6774:10-6774:16" path="value" scope="O" xsi:type="Property"/>
+            <return localId="9498" locator="6772:3-6772:16">
+               <expression localId="9497" locator="6772:10-6772:16" path="value" scope="O" xsi:type="Property"/>
             </return>
          </expression>
       </def>
-      <def localId="9514" locator="6782:2-6784:92" name="ANC within pregnancy" context="Patient" accessLevel="Public">
+      <def localId="9511" locator="6780:2-6782:92" name="ANC within pregnancy" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9514">
+            <a:s r="9511">
                <a:s>/* End of Reporting date */
 
 
@@ -79838,10 +79818,10 @@ define &quot;Reporting date&quot;:
 
  define &quot;ANC within pregnancy&quot;:
   </a:s>
-               <a:s r="9513">
+               <a:s r="9510">
                   <a:s>
-                     <a:s r="9505">
-                        <a:s r="9504">
+                     <a:s r="9502">
+                        <a:s r="9501">
                            <a:s>
                               <a:s>Elements.&quot;Antenatal care contact&quot;</a:s>
                            </a:s>
@@ -79851,35 +79831,35 @@ define &quot;Reporting date&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9512">
+                  <a:s r="9509">
                      <a:s>where </a:s>
-                     <a:s r="9512">
-                        <a:s r="9508">
-                           <a:s r="9507">
-                              <a:s r="9506">
+                     <a:s r="9509">
+                        <a:s r="9505">
+                           <a:s r="9504">
+                              <a:s r="9503">
                                  <a:s>E</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9507">
+                              <a:s r="9504">
                                  <a:s>period</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9508">
+                           <a:s r="9505">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9512"> during </a:s>
-                        <a:s r="9511">
-                           <a:s r="9510">
+                        <a:s r="9509"> during </a:s>
+                        <a:s r="9508">
+                           <a:s r="9507">
                               <a:s>First(</a:s>
-                              <a:s r="9509">
+                              <a:s r="9506">
                                  <a:s>&quot;Currently pregnant B.DE29&quot;</a:s>
                               </a:s>
                               <a:s>)</a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9511">
+                           <a:s r="9508">
                               <a:s>prevalenceInterval()</a:s>
                            </a:s>
                         </a:s>
@@ -79888,14 +79868,14 @@ define &quot;Reporting date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9513" locator="6783:3-6784:92" xsi:type="Query">
-            <source localId="9505" locator="6783:3-6783:37" alias="E">
-               <expression localId="9504" locator="6783:3-6783:35" name="Antenatal care contact" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9510" locator="6781:3-6782:92" xsi:type="Query">
+            <source localId="9502" locator="6781:3-6781:37" alias="E">
+               <expression localId="9501" locator="6781:3-6781:35" name="Antenatal care contact" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9512" locator="6784:3-6784:92" xsi:type="IncludedIn">
-               <operand localId="9508" locator="6784:9-6784:29" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+            <where localId="9509" locator="6782:3-6782:92" xsi:type="IncludedIn">
+               <operand localId="9505" locator="6782:9-6782:29" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
                   <operand xsi:type="As">
-                     <operand localId="9507" locator="6784:9-6784:16" path="period" scope="E" xsi:type="Property"/>
+                     <operand localId="9504" locator="6782:9-6782:16" path="period" scope="E" xsi:type="Property"/>
                      <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
                         <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
                         <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
@@ -79907,26 +79887,26 @@ define &quot;Reporting date&quot;:
                      </asTypeSpecifier>
                   </operand>
                </operand>
-               <operand localId="9511" locator="6784:38-6784:92" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9510" locator="6784:38-6784:71" xsi:type="First">
+               <operand localId="9508" locator="6782:38-6782:92" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9507" locator="6782:38-6782:71" xsi:type="First">
                      <signature xsi:type="ListTypeSpecifier">
                         <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
                      </signature>
-                     <source localId="9509" locator="6784:44-6784:70" name="Currently pregnant B.DE29" xsi:type="ExpressionRef"/>
+                     <source localId="9506" locator="6782:44-6782:70" name="Currently pregnant B.DE29" xsi:type="ExpressionRef"/>
                   </operand>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9529" locator="6786:1-6789:30" name="ANC within pregnancy dates" context="Patient" accessLevel="Public">
+      <def localId="9526" locator="6784:1-6787:30" name="ANC within pregnancy dates" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9529">
+            <a:s r="9526">
                <a:s>define &quot;ANC within pregnancy dates&quot;:
   </a:s>
-               <a:s r="9528">
+               <a:s r="9525">
                   <a:s>
-                     <a:s r="9516">
-                        <a:s r="9515">
+                     <a:s r="9513">
+                        <a:s r="9512">
                            <a:s>
                               <a:s>Elements.&quot;Antenatal care contact&quot;</a:s>
                            </a:s>
@@ -79936,35 +79916,35 @@ define &quot;Reporting date&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9523">
+                  <a:s r="9520">
                      <a:s>where </a:s>
-                     <a:s r="9523">
-                        <a:s r="9519">
-                           <a:s r="9518">
-                              <a:s r="9517">
+                     <a:s r="9520">
+                        <a:s r="9516">
+                           <a:s r="9515">
+                              <a:s r="9514">
                                  <a:s>E</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9518">
+                              <a:s r="9515">
                                  <a:s>period</a:s>
                               </a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9519">
+                           <a:s r="9516">
                               <a:s>toInterval()</a:s>
                            </a:s>
                         </a:s>
-                        <a:s r="9523"> during </a:s>
-                        <a:s r="9522">
-                           <a:s r="9521">
+                        <a:s r="9520"> during </a:s>
+                        <a:s r="9519">
+                           <a:s r="9518">
                               <a:s>First(</a:s>
-                              <a:s r="9520">
+                              <a:s r="9517">
                                  <a:s>&quot;Currently pregnant B.DE29&quot;</a:s>
                               </a:s>
                               <a:s>)</a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9522">
+                           <a:s r="9519">
                               <a:s>prevalenceInterval()</a:s>
                            </a:s>
                         </a:s>
@@ -79972,20 +79952,20 @@ define &quot;Reporting date&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9527">
+                  <a:s r="9524">
                      <a:s>return </a:s>
-                     <a:s r="9526">
-                        <a:s r="9525">
-                           <a:s r="9524">
+                     <a:s r="9523">
+                        <a:s r="9522">
+                           <a:s r="9521">
                               <a:s>E</a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="9525">
+                           <a:s r="9522">
                               <a:s>period</a:s>
                            </a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="9526">
+                        <a:s r="9523">
                            <a:s>toInterval()</a:s>
                         </a:s>
                      </a:s>
@@ -79993,14 +79973,14 @@ define &quot;Reporting date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9528" locator="6787:3-6789:30" xsi:type="Query">
-            <source localId="9516" locator="6787:3-6787:37" alias="E">
-               <expression localId="9515" locator="6787:3-6787:35" name="Antenatal care contact" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9525" locator="6785:3-6787:30" xsi:type="Query">
+            <source localId="9513" locator="6785:3-6785:37" alias="E">
+               <expression localId="9512" locator="6785:3-6785:35" name="Antenatal care contact" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9523" locator="6788:3-6788:92" xsi:type="IncludedIn">
-               <operand localId="9519" locator="6788:9-6788:29" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+            <where localId="9520" locator="6786:3-6786:92" xsi:type="IncludedIn">
+               <operand localId="9516" locator="6786:9-6786:29" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
                   <operand xsi:type="As">
-                     <operand localId="9518" locator="6788:9-6788:16" path="period" scope="E" xsi:type="Property"/>
+                     <operand localId="9515" locator="6786:9-6786:16" path="period" scope="E" xsi:type="Property"/>
                      <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
                         <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
                         <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
@@ -80012,19 +79992,19 @@ define &quot;Reporting date&quot;:
                      </asTypeSpecifier>
                   </operand>
                </operand>
-               <operand localId="9522" locator="6788:38-6788:92" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
-                  <operand localId="9521" locator="6788:38-6788:71" xsi:type="First">
+               <operand localId="9519" locator="6786:38-6786:92" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
+                  <operand localId="9518" locator="6786:38-6786:71" xsi:type="First">
                      <signature xsi:type="ListTypeSpecifier">
                         <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
                      </signature>
-                     <source localId="9520" locator="6788:44-6788:70" name="Currently pregnant B.DE29" xsi:type="ExpressionRef"/>
+                     <source localId="9517" locator="6786:44-6786:70" name="Currently pregnant B.DE29" xsi:type="ExpressionRef"/>
                   </operand>
                </operand>
             </where>
-            <return localId="9527" locator="6789:3-6789:30">
-               <expression localId="9526" locator="6789:10-6789:30" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+            <return localId="9524" locator="6787:3-6787:30">
+               <expression localId="9523" locator="6787:10-6787:30" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
                   <operand xsi:type="As">
-                     <operand localId="9525" locator="6789:10-6789:17" path="period" scope="E" xsi:type="Property"/>
+                     <operand localId="9522" locator="6787:10-6787:17" path="period" scope="E" xsi:type="Property"/>
                      <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
                         <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
                         <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
@@ -80039,15 +80019,15 @@ define &quot;Reporting date&quot;:
             </return>
          </expression>
       </def>
-      <def localId="9546" locator="6791:2-6794:55" name="ANC within pregnancy within measurement period" context="Patient" accessLevel="Public">
+      <def localId="9543" locator="6789:2-6792:55" name="ANC within pregnancy within measurement period" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9546">
+            <a:s r="9543">
                <a:s>define &quot;ANC within pregnancy within measurement period&quot;:
   </a:s>
-               <a:s r="9545">
+               <a:s r="9542">
                   <a:s>
-                     <a:s r="9531">
-                        <a:s r="9530">
+                     <a:s r="9528">
+                        <a:s r="9527">
                            <a:s>
                               <a:s>Elements.&quot;Antenatal care contact&quot;</a:s>
                            </a:s>
@@ -80057,60 +80037,60 @@ define &quot;Reporting date&quot;:
                   </a:s>
                   <a:s>
   </a:s>
-                  <a:s r="9544">
+                  <a:s r="9541">
                      <a:s>where </a:s>
-                     <a:s r="9544">
-                        <a:s r="9538">
-                           <a:s r="9534">
-                              <a:s r="9533">
-                                 <a:s r="9532">
+                     <a:s r="9541">
+                        <a:s r="9535">
+                           <a:s r="9531">
+                              <a:s r="9530">
+                                 <a:s r="9529">
                                     <a:s>E</a:s>
                                  </a:s>
                                  <a:s>.</a:s>
-                                 <a:s r="9533">
+                                 <a:s r="9530">
                                     <a:s>period</a:s>
                                  </a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9534">
+                              <a:s r="9531">
                                  <a:s>toInterval()</a:s>
                               </a:s>
                            </a:s>
-                           <a:s r="9538"> during </a:s>
-                           <a:s r="9537">
-                              <a:s r="9536">
+                           <a:s r="9535"> during </a:s>
+                           <a:s r="9534">
+                              <a:s r="9533">
                                  <a:s>First(</a:s>
-                                 <a:s r="9535">
+                                 <a:s r="9532">
                                     <a:s>&quot;Currently pregnant B.DE29&quot;</a:s>
                                  </a:s>
                                  <a:s>)</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9537">
+                              <a:s r="9534">
                                  <a:s>prevalenceInterval()</a:s>
                               </a:s>
                            </a:s>
                         </a:s>
                         <a:s>
   and </a:s>
-                        <a:s r="9543">
-                           <a:s r="9541">
-                              <a:s r="9540">
-                                 <a:s r="9539">
+                        <a:s r="9540">
+                           <a:s r="9538">
+                              <a:s r="9537">
+                                 <a:s r="9536">
                                     <a:s>E</a:s>
                                  </a:s>
                                  <a:s>.</a:s>
-                                 <a:s r="9540">
+                                 <a:s r="9537">
                                     <a:s>period</a:s>
                                  </a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="9541">
+                              <a:s r="9538">
                                  <a:s>toInterval()</a:s>
                               </a:s>
                            </a:s>
-                           <a:s r="9543"> during </a:s>
-                           <a:s r="9542">
+                           <a:s r="9540"> during </a:s>
+                           <a:s r="9539">
                               <a:s>&quot;Measurement Period&quot;</a:s>
                            </a:s>
                         </a:s>
@@ -80119,15 +80099,15 @@ define &quot;Reporting date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9545" locator="6792:3-6794:55" xsi:type="Query">
-            <source localId="9531" locator="6792:3-6792:37" alias="E">
-               <expression localId="9530" locator="6792:3-6792:35" name="Antenatal care contact" libraryName="Elements" xsi:type="ExpressionRef"/>
+         <expression localId="9542" locator="6790:3-6792:55" xsi:type="Query">
+            <source localId="9528" locator="6790:3-6790:37" alias="E">
+               <expression localId="9527" locator="6790:3-6790:35" name="Antenatal care contact" libraryName="Elements" xsi:type="ExpressionRef"/>
             </source>
-            <where localId="9544" locator="6793:3-6794:55" xsi:type="And">
-               <operand localId="9538" locator="6793:9-6793:92" xsi:type="IncludedIn">
-                  <operand localId="9534" locator="6793:9-6793:29" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+            <where localId="9541" locator="6791:3-6792:55" xsi:type="And">
+               <operand localId="9535" locator="6791:9-6791:92" xsi:type="IncludedIn">
+                  <operand localId="9531" locator="6791:9-6791:29" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
                      <operand xsi:type="As">
-                        <operand localId="9533" locator="6793:9-6793:16" path="period" scope="E" xsi:type="Property"/>
+                        <operand localId="9530" locator="6791:9-6791:16" path="period" scope="E" xsi:type="Property"/>
                         <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
                            <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
                            <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
@@ -80139,19 +80119,19 @@ define &quot;Reporting date&quot;:
                         </asTypeSpecifier>
                      </operand>
                   </operand>
-                  <operand localId="9537" locator="6793:38-6793:92" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
-                     <operand localId="9536" locator="6793:38-6793:71" xsi:type="First">
+                  <operand localId="9534" locator="6791:38-6791:92" name="prevalenceInterval" libraryName="WC" xsi:type="FunctionRef">
+                     <operand localId="9533" locator="6791:38-6791:71" xsi:type="First">
                         <signature xsi:type="ListTypeSpecifier">
                            <elementType name="fhir:Condition" xsi:type="NamedTypeSpecifier"/>
                         </signature>
-                        <source localId="9535" locator="6793:44-6793:70" name="Currently pregnant B.DE29" xsi:type="ExpressionRef"/>
+                        <source localId="9532" locator="6791:44-6791:70" name="Currently pregnant B.DE29" xsi:type="ExpressionRef"/>
                      </operand>
                   </operand>
                </operand>
-               <operand localId="9543" locator="6794:7-6794:55" xsi:type="IncludedIn">
-                  <operand localId="9541" locator="6794:7-6794:27" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
+               <operand localId="9540" locator="6792:7-6792:55" xsi:type="IncludedIn">
+                  <operand localId="9538" locator="6792:7-6792:27" name="toInterval" libraryName="WC" xsi:type="FunctionRef">
                      <operand xsi:type="As">
-                        <operand localId="9540" locator="6794:7-6794:14" path="period" scope="E" xsi:type="Property"/>
+                        <operand localId="9537" locator="6792:7-6792:14" path="period" scope="E" xsi:type="Property"/>
                         <asTypeSpecifier xsi:type="ChoiceTypeSpecifier">
                            <choice name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
                            <choice name="fhir:Period" xsi:type="NamedTypeSpecifier"/>
@@ -80167,36 +80147,36 @@ define &quot;Reporting date&quot;:
                      <low xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="low" xsi:type="Property">
-                           <source localId="9542" locator="6794:36-6794:55" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9539" locator="6792:36-6792:55" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </low>
                      <lowClosedExpression path="lowClosed" xsi:type="Property">
-                        <source localId="9542" locator="6794:36-6794:55" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9539" locator="6792:36-6792:55" name="Measurement Period" xsi:type="ParameterRef"/>
                      </lowClosedExpression>
                      <high xsi:type="ToDateTime">
                         <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
                         <operand path="high" xsi:type="Property">
-                           <source localId="9542" locator="6794:36-6794:55" name="Measurement Period" xsi:type="ParameterRef"/>
+                           <source localId="9539" locator="6792:36-6792:55" name="Measurement Period" xsi:type="ParameterRef"/>
                         </operand>
                      </high>
                      <highClosedExpression path="highClosed" xsi:type="Property">
-                        <source localId="9542" locator="6794:36-6794:55" name="Measurement Period" xsi:type="ParameterRef"/>
+                        <source localId="9539" locator="6792:36-6792:55" name="Measurement Period" xsi:type="ParameterRef"/>
                      </highClosedExpression>
                   </operand>
                </operand>
             </where>
          </expression>
       </def>
-      <def localId="9550" locator="6796:1-6797:39" name="all anc dates" context="Patient" accessLevel="Public">
+      <def localId="9547" locator="6794:1-6795:39" name="all anc dates" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9550">
+            <a:s r="9547">
                <a:s>define &quot;all anc dates&quot;:
   </a:s>
-               <a:s r="9549">
+               <a:s r="9546">
                   <a:s>flatten</a:s>
-                  <a:s r="9548">
+                  <a:s r="9545">
                      <a:s>{</a:s>
-                     <a:s r="9547">
+                     <a:s r="9544">
                         <a:s>&quot;ANC within pregnancy dates&quot;</a:s>
                      </a:s>
                      <a:s>}</a:s>
@@ -80204,33 +80184,33 @@ define &quot;Reporting date&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9549" locator="6797:3-6797:39" xsi:type="Flatten">
-            <operand localId="9548" locator="6797:10-6797:39" xsi:type="List">
-               <element localId="9547" locator="6797:11-6797:38" name="ANC within pregnancy dates" xsi:type="ExpressionRef"/>
+         <expression localId="9546" locator="6795:3-6795:39" xsi:type="Flatten">
+            <operand localId="9545" locator="6795:10-6795:39" xsi:type="List">
+               <element localId="9544" locator="6795:11-6795:38" name="ANC within pregnancy dates" xsi:type="ExpressionRef"/>
             </operand>
          </expression>
       </def>
-      <def localId="9553" locator="6799:1-6800:37" name="first anc date" context="Patient" accessLevel="Public">
+      <def localId="9550" locator="6797:1-6798:37" name="first anc date" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="9553">
+            <a:s r="9550">
                <a:s>define &quot;first anc date&quot;:
   </a:s>
-               <a:s r="9552">
+               <a:s r="9549">
                   <a:s>First(</a:s>
-                  <a:s r="9551">
+                  <a:s r="9548">
                      <a:s>&quot;ANC within pregnancy dates&quot;</a:s>
                   </a:s>
                   <a:s>)</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="9552" locator="6800:3-6800:37" xsi:type="First">
+         <expression localId="9549" locator="6798:3-6798:37" xsi:type="First">
             <signature xsi:type="ListTypeSpecifier">
                <elementType xsi:type="IntervalTypeSpecifier">
                   <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
                </elementType>
             </signature>
-            <source localId="9551" locator="6800:9-6800:36" name="ANC within pregnancy dates" xsi:type="ExpressionRef"/>
+            <source localId="9548" locator="6798:9-6798:36" name="ANC within pregnancy dates" xsi:type="ExpressionRef"/>
          </expression>
       </def>
    </statements>

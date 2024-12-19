@@ -6582,9 +6582,7 @@ define "HIV test date SRV.DE1 Value":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "HIV test result SRV.DE2":
-  exists "HIV test result SRV.DE2 Observation"
-define "HIV test result SRV.DE2 Observation":
-  Elements."HIV test result SRV.DE2 Observation" O
+  Elements."HIV test result SRV.DE2" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of HIV test result SRV.DE2 */
 
