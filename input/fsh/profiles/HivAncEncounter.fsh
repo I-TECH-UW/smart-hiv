@@ -1,9 +1,8 @@
-Profile: HivHtsVisit
+Profile: HivAncEncounter
 Parent: HivEncounter
-Description: "Encounter for HIV testing services visit"
+Description: "Client encounter for Antenatal care services"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
-* ^title = "HTS Visit"
+* ^title = "ANC Encounter"
 
-//* type.conding contains ConceptsCustom."HTS Visit".code
