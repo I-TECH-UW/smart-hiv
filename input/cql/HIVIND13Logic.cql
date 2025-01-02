@@ -45,6 +45,9 @@
  * - method: Individual-level data obtained from programme records
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ 
+ * Profiles: HivOamtTreatment
+ 
  */
 
 library HIVIND13Logic

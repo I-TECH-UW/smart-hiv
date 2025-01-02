@@ -73,6 +73,7 @@
 
  /* 
   * Profiles:
+  * - HivStatus
   * - HivHcvTest
   */
 

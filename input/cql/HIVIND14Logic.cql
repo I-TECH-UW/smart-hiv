@@ -51,6 +51,8 @@
  * - method: Individual-level data obtained from programme records
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ 
+ * Profiles: HivTreatmentMedicationRequest, HivOamtEpisodeOfCare
  */
 
 library HIVIND14Logic
@@ -61,6 +63,8 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -83,7 +87,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  exists(HIE."buprenorphine_prescribed >= 8mg") or exists(HIE."methadone_prescribed >= 60mg") 
 
 /**
  * Numerator Exclusions
@@ -92,7 +96,7 @@ define "Numerator":
  */
     
 define "Numerator Exclusions":
-  false
+  HIE."Client inducted on OAMT" or HIE."Client on reducing doses of OAMT"
 
 /**
  * Denominator
@@ -102,7 +106,7 @@ define "Numerator Exclusions":
  */
 
 define "Denominator":
-  true
+  exists("HIE"."methadone_prescribed at date") or exists("HIE"."buprenorphine_prescribed at date")
     
 /**
 * Denominator Exclusions
@@ -111,7 +115,7 @@ define "Denominator":
 */
 
 define "Denominator Exclusions":
-  false
+    HIE."Client inducted on OAMT" or HIE."Client on reducing doses of OAMT"
 
 /* end Populations */
 
