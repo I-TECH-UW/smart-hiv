@@ -560,10 +560,8 @@ define "Currently pregnant B.DE29":
 @activity: HIV.B6 Capture or update client history
 @description: Infant is being breastfed by mother
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Breastfeeding B.DE32":
-  exists "Breastfeeding B.DE32 Observation"
-define "Breastfeeding B.DE32 Observation":
   [Observation: Concepts."Breastfeeding - HIV.B.DE32"] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
@@ -5385,12 +5383,11 @@ define "Current ART regimen Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The preferred first-line ART regimen for the client according to WHO (or national) guidelines
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Preferred first-line ART regimen":
-  exists "Preferred first-line ART regimen Observation"
-define "Preferred first-line ART regimen Observation":
-  [Observation: Concepts."Preferred first-line ART regimen"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+[MedicationStatement] MS
+    where MS.status = 'completed'
+    and MS.medication ~ Concepts."Preferred first-line ART regimen"
 /* End of Preferred first-line ART regimen */
 
 /*
@@ -5398,12 +5395,11 @@ define "Preferred first-line ART regimen Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The alternative first-line ART regimen for the client according to WHO (or national) guidelines
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Alternative first-line ART regimen":
-  exists "Alternative first-line ART regimen Observation"
-define "Alternative first-line ART regimen Observation":
-  [Observation: Concepts."Alternative first-line ART regimen"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+  [MedicationStatement] MS
+    where MS.status = 'completed'
+    and MS.medication ~ Concepts."Alternative first-line ART regimen"
 /* End of Alternative first-line ART regimen */
 
 /*
@@ -5411,12 +5407,11 @@ define "Alternative first-line ART regimen Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The first-line ART regimen for the client under special circumstances according to WHO (or national) guidelines
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "First-line ART regimen under special circumstances":
-  exists "First-line ART regimen under special circumstances Observation"
-define "First-line ART regimen under special circumstances Observation":
-  [Observation: Concepts."First-line ART regimen under special circumstances"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+    [MedicationStatement] MS
+    where MS.status = 'completed'
+    and MS.medication ~ Concepts."First-line ART regimen under special circumstances"
 /* End of First-line ART regimen under special circumstances */
 
 /*
@@ -5424,12 +5419,11 @@ define "First-line ART regimen under special circumstances Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The preferred second-line ART regimen for the client according to WHO (or national) guidelines
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Preferred second-line ART regimen":
-  exists "Preferred second-line ART regimen Observation"
-define "Preferred second-line ART regimen Observation":
-  [Observation: Concepts."Preferred second-line ART regimen"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+    [MedicationStatement] MS
+    where MS.status = 'completed'
+    and MS.medication ~ Concepts."Preferred second-line ART regimen"
 /* End of Preferred second-line ART regimen */
 
 /*
@@ -5437,12 +5431,11 @@ define "Preferred second-line ART regimen Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The alternative second-line ART regimen for the client according to WHO (or national) guidelines
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Alternative second-line ART regimen":
-  exists "Alternative second-line ART regimen Observation"
-define "Alternative second-line ART regimen Observation":
-  [Observation: Concepts."Alternative second-line ART regimen"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+    [MedicationStatement] MS
+    where MS.status = 'completed'
+    and MS.medication ~ Concepts."Alternative second-line ART regimen"
 /* End of Alternative second-line ART regimen */
 
 /*
@@ -6411,7 +6404,7 @@ define "Toxicity/side effects D.DE218 Observation":
 @activity: HIV.D10 Counsel returning client
 @description: Client stopped ART because of severe illness, hospitalization
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Severe illness, hospitalization D.DE219":
   exists "Severe illness, hospitalization D.DE219 Condition"
     or exists "Severe illness, hospitalization D.DE219 Observation"
@@ -8439,16 +8432,11 @@ define "Type of treatment-limiting toxicity Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to GI issues (nausea, diarrhoea, abdominal pain, vomiting)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Gastrointestinal":
-  exists "Gastrointestinal Condition"
-    or exists "Gastrointestinal Observation"
-define "Gastrointestinal Condition":
-  [Condition: Concepts."Gastrointestinal"]
-define "Gastrointestinal Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Gastrointestinal"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Gastrointestinal"
 /* End of Gastrointestinal */
 
 /*
@@ -8456,16 +8444,11 @@ define "Gastrointestinal Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to skin issues (rash, hypersensitivity reaction)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Skin issues":
-  exists "Skin issues Condition"
-    or exists "Skin issues Observation"
-define "Skin issues Condition":
-  [Condition: Concepts."Skin issues"]
-define "Skin issues Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Skin issues"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Skin issues"
 /* End of Skin issues */
 
 /*
@@ -8473,16 +8456,11 @@ define "Skin issues Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to peripheral neuropathy (burning/numbness/ tingling)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Peripheral neuropathy":
-  exists "Peripheral neuropathy Condition"
-    or exists "Peripheral neuropathy Observation"
-define "Peripheral neuropathy Condition":
-  [Condition: Concepts."Peripheral neuropathy"]
-define "Peripheral neuropathy Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Peripheral neuropathy"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~  Concepts."Peripheral neuropathy"
 /* End of Peripheral neuropathy */
 
 /*
@@ -8490,16 +8468,11 @@ define "Peripheral neuropathy Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to central nervous system symptoms (dizzy, anxiety, nightmare, depression, seizures)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Central nervous system symptoms":
-  exists "Central nervous system symptoms Condition"
-    or exists "Central nervous system symptoms Observation"
-define "Central nervous system symptoms Condition":
-  [Condition: Concepts."Central nervous system symptoms"]
-define "Central nervous system symptoms Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Central nervous system symptoms"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Central nervous system symptoms"
 /* End of Central nervous system symptoms */
 
 /*
@@ -8507,16 +8480,11 @@ define "Central nervous system symptoms Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to weight gain
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Weight gain":
-  exists "Weight gain Condition"
-    or exists "Weight gain Observation"
-define "Weight gain Condition":
-  [Condition: Concepts."Weight gain"]
-define "Weight gain Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Weight gain"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Weight gain"
 /* End of Weight gain */
 
 /*
@@ -8524,16 +8492,11 @@ define "Weight gain Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to hepatic dysfunction (jaundice)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Hepatic dysfunction":
-  exists "Hepatic dysfunction Condition"
-    or exists "Hepatic dysfunction Observation"
-define "Hepatic dysfunction Condition":
-  [Condition: Concepts."Hepatic dysfunction"]
-define "Hepatic dysfunction Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Hepatic dysfunction"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Hepatic dysfunction"
 /* End of Hepatic dysfunction */
 
 /*
@@ -8541,16 +8504,11 @@ define "Hepatic dysfunction Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to haematological (anaemia, neutropenia) disorders
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Haematological disorders":
-  exists "Haematological disorders Condition"
-    or exists "Haematological disorders Observation"
-define "Haematological disorders Condition":
-  [Condition: Concepts."Haematological disorders"]
-define "Haematological disorders Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Haematological disorders"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Haematological disorders"
 /* End of Haematological disorders */
 
 /*
@@ -8558,16 +8516,11 @@ define "Haematological disorders Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to fatigue
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Fatigue":
-  exists "Fatigue Condition"
-    or exists "Fatigue Observation"
-define "Fatigue Condition":
-  [Condition: Concepts."Fatigue"]
-define "Fatigue Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Fatigue"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Fatigue"
 /* End of Fatigue */
 
 /*
@@ -8575,16 +8528,11 @@ define "Fatigue Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to headache
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Headache D.DE475":
-  exists "Headache D.DE475 Condition"
-    or exists "Headache D.DE475 Observation"
-define "Headache D.DE475 Condition":
-  [Condition: Concepts."Headache - HIV.D.DE475"]
-define "Headache D.DE475 Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Headache - HIV.D.DE475"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~  Concepts."Headache - HIV.D.DE475"
 /* End of Headache D.DE475 */
 
 /*
@@ -8592,16 +8540,11 @@ define "Headache D.DE475 Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to bone dysfunction (fractures, osteopenia)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Bone dysfunction":
-  exists "Bone dysfunction Condition"
-    or exists "Bone dysfunction Observation"
-define "Bone dysfunction Condition":
-  [Condition: Concepts."Bone dysfunction"]
-define "Bone dysfunction Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Bone dysfunction"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~  Concepts."Bone dysfunction"
 /* End of Bone dysfunction */
 
 /*
@@ -8609,16 +8552,11 @@ define "Bone dysfunction Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to metabolic symptoms (body fat changes, hyperglycaemia, dyslipidaemia)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Metabolic symptoms":
-  exists "Metabolic symptoms Condition"
-    or exists "Metabolic symptoms Observation"
-define "Metabolic symptoms Condition":
-  [Condition: Concepts."Metabolic symptoms"]
-define "Metabolic symptoms Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Metabolic symptoms"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Metabolic symptoms"
 /* End of Metabolic symptoms */
 
 /*
@@ -8626,16 +8564,11 @@ define "Metabolic symptoms Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to kidney dysfunction (nephrolithiasis, renal insufficiency)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Kidney dysfunction":
-  exists "Kidney dysfunction Condition"
-    or exists "Kidney dysfunction Observation"
-define "Kidney dysfunction Condition":
-  [Condition: Concepts."Kidney dysfunction"]
-define "Kidney dysfunction Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Kidney dysfunction"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~  Concepts."Kidney dysfunction"
 /* End of Kidney dysfunction */
 
 /*
@@ -8643,16 +8576,11 @@ define "Kidney dysfunction Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client experienced an unexpected adverse drug reaction
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Unexpected adverse drug reaction":
-  exists "Unexpected adverse drug reaction Condition"
-    or exists "Unexpected adverse drug reaction Observation"
-define "Unexpected adverse drug reaction Condition":
-  [Condition: Concepts."Unexpected adverse drug reaction"]
-define "Unexpected adverse drug reaction Observation":
-  "Type of treatment-limiting toxicity Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Unexpected adverse drug reaction"
+  [AdverseEvent] AE 
+  where AE.actuality = 'actual'
+  and AE.event ~ Concepts."Unexpected adverse drug reaction"
 /* End of Unexpected adverse drug reaction */
 
 /*
@@ -11947,7 +11875,7 @@ define "Completed Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: When the pregnant woman or mother initiated ART, for women living with HIV.
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Timing of ART initiation":
   exists "Timing of ART initiation Observation"
 define "Timing of ART initiation Observation":
@@ -11960,13 +11888,8 @@ define "Timing of ART initiation Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: The pregnant woman was already on antiretroviral therapy (ART) at first antenatal care visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Already on ART at first antenatal care visit":
-  exists "Already on ART at first antenatal care visit Condition"
-    or exists "Already on ART at first antenatal care visit Observation"
-define "Already on ART at first antenatal care visit Condition":
-  [Condition: Concepts."Already on ART at first antenatal care visit"]
-define "Already on ART at first antenatal care visit Observation":
   "Timing of ART initiation Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Already on ART at first antenatal care visit"
@@ -11977,13 +11900,8 @@ define "Already on ART at first antenatal care visit Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: The pregnant woman started ART during her pregnancy
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Newly on ART during pregnancy":
-  exists "Newly on ART during pregnancy Condition"
-    or exists "Newly on ART during pregnancy Observation"
-define "Newly on ART during pregnancy Condition":
-  [Condition: Concepts."Newly on ART during pregnancy"]
-define "Newly on ART during pregnancy Observation":
   "Timing of ART initiation Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Newly on ART during pregnancy"
@@ -11994,13 +11912,8 @@ define "Newly on ART during pregnancy Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: The woman started ART during labour and delivery
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Newly on ART during labour and delivery":
-  exists "Newly on ART during labour and delivery Condition"
-    or exists "Newly on ART during labour and delivery Observation"
-define "Newly on ART during labour and delivery Condition":
-  [Condition: Concepts."Newly on ART during labour and delivery"]
-define "Newly on ART during labour and delivery Observation":
   "Timing of ART initiation Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Newly on ART during labour and delivery"
@@ -12573,10 +12486,8 @@ define "EID test number 2 Observation":
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Early infant diagnosis test number 1 test result
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "EID test number 1 test result":
-  exists "EID test number 1 test result Observation"
-define "EID test number 1 test result Observation":
   [Observation: Concepts."EID test number 1 test result"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of EID test number 1 test result */
@@ -12586,14 +12497,9 @@ define "EID test number 1 test result Observation":
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Positive HIV test result from the nucleic acid test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Positive E.DE187":
-  exists "Positive E.DE187 Condition"
-    or exists "Positive E.DE187 Observation"
-define "Positive E.DE187 Condition":
-  [Condition: Concepts."Positive - HIV.E.DE187"]
-define "Positive E.DE187 Observation":
-  "EID test number 1 test result Observation" O
+  "EID test number 1 test result" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Positive - HIV.E.DE187"
 /* End of Positive E.DE187 */
@@ -12603,14 +12509,9 @@ define "Positive E.DE187 Observation":
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Negative HIV test result from the nucleic acid test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Negative E.DE188":
-  exists "Negative E.DE188 Condition"
-    or exists "Negative E.DE188 Observation"
-define "Negative E.DE188 Condition":
-  [Condition: Concepts."Negative - HIV.E.DE188"]
-define "Negative E.DE188 Observation":
-  "EID test number 1 test result Observation" O
+  "EID test number 1 test result" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Negative - HIV.E.DE188"
 /* End of Negative E.DE188 */
@@ -12620,14 +12521,9 @@ define "Negative E.DE188 Observation":
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Indeterminate HIV test result from the nucleic acid test
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Indeterminate E.DE189":
-  exists "Indeterminate E.DE189 Condition"
-    or exists "Indeterminate E.DE189 Observation"
-define "Indeterminate E.DE189 Condition":
-  [Condition: Concepts."Indeterminate - HIV.E.DE189"]
-define "Indeterminate E.DE189 Observation":
-  "EID test number 1 test result Observation" O
+  "EID test number 1 test result" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Indeterminate - HIV.E.DE189"
 /* End of Indeterminate E.DE189 */
