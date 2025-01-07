@@ -488,13 +488,9 @@ define "Social contact B.DE12 Observation":
 @activity: HIV.B1 Determine reason for visit
 @description: Date and time when the client had suspected exposure to HIV
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Date/time of suspected exposure to HIV B.DE14":
   [Observation: Concepts."Date/time of suspected exposure to HIV - HIV.B.DE14"] O
     where O.status in { 'final', 'amended', 'corrected' }
-define "Date/time of suspected exposure to HIV B.DE14 Value":
-  "Date/time of suspected exposure to HIV B.DE14" O
-  return O.value
 /* End of Date/time of suspected exposure to HIV B.DE14 */
 
 /*
@@ -953,12 +949,6 @@ define "Assay 0 B.DE89 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The first test in the HIV testing strategy
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Assay 1 B.DE90":
-  exists "Assay 1 B.DE90 Condition"
-    or exists "Assay 1 B.DE90 Observation"
-define "Assay 1 B.DE90 Condition":
-  [Condition: Concepts."Assay 1 - HIV.B.DE90"]
 define "Assay 1 B.DE90 Observation":
   "Assay number in testing strategy B.DE88 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -970,12 +960,6 @@ define "Assay 1 B.DE90 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The second test in the HIV testing strategy
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Assay 2 B.DE91":
-  exists "Assay 2 B.DE91 Condition"
-    or exists "Assay 2 B.DE91 Observation"
-define "Assay 2 B.DE91 Condition":
-  [Condition: Concepts."Assay 2 - HIV.B.DE91"]
 define "Assay 2 B.DE91 Observation":
   "Assay number in testing strategy B.DE88 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -987,12 +971,6 @@ define "Assay 2 B.DE91 Observation":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The third test in the HIV testing strategy
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Assay 3 B.DE92":
-  exists "Assay 3 B.DE92 Condition"
-    or exists "Assay 3 B.DE92 Observation"
-define "Assay 3 B.DE92 Condition":
-  [Condition: Concepts."Assay 3 - HIV.B.DE92"]
 define "Assay 3 B.DE92 Observation":
   "Assay number in testing strategy B.DE88 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -3430,45 +3408,9 @@ define "Restarting following a period of not taking PrEP Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "PEP history":
-  exists "PEP history Observation"
-define "PEP history Observation":
   [Observation: Concepts."PEP history"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of PEP history */
-
-/*
-@dataElement: HIV.C.DE32 - First-time user
-@activity: HIV.C3 Capture or update client history
-@description: The client has never used post-exposure prophylaxis (PEP) before
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "First-time user C.DE32":
-  exists "First-time user C.DE32 Condition"
-    or exists "First-time user C.DE32 Observation"
-define "First-time user C.DE32 Condition":
-  [Condition: Concepts."First-time user - HIV.C.DE32"]
-define "First-time user C.DE32 Observation":
-  "PEP history Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."First-time user - HIV.C.DE32"
-/* End of First-time user C.DE32 */
-
-/*
-@dataElement: HIV.C.DE33 - Repeat user
-@activity: HIV.C3 Capture or update client history
-@description: The client has used post-exposure prophylaxis (PEP) before
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Repeat user":
-  exists "Repeat user Condition"
-    or exists "Repeat user Observation"
-define "Repeat user Condition":
-  [Condition: Concepts."Repeat user"]
-define "Repeat user Observation":
-  "PEP history Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Repeat user"
-/* End of Repeat user */
 
 /*
 @dataElement: HIV.C.DE35 - Date client completes PEP course
@@ -3489,81 +3431,10 @@ define "Date client completes PEP course Value":
 @activity: HIV.C3 Capture or update client history
 @description: Signs the client is at a substantial risk of HIV infection
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Signs of substantial risk of HIV infection C.DE36":
-  exists "Signs of substantial risk of HIV infection C.DE36 Observation"
-define "Signs of substantial risk of HIV infection C.DE36 Observation":
   [Observation: Concepts."Signs of substantial risk of HIV infection - HIV.C.DE36"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Signs of substantial risk of HIV infection C.DE36 */
-
-/*
-@dataElement: HIV.C.DE37 - No condom use during sex with more than one partner in the past 6 months
-@activity: HIV.C3 Capture or update client history
-@description: Recent vaginal or anal sexual intercourse without a condom with more than one partner
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "No condom use during sex with more than one partner in the past 6 months C.DE37":
-  exists "No condom use during sex with more than one partner in the past 6 months C.DE37 Condition"
-    or exists "No condom use during sex with more than one partner in the past 6 months C.DE37 Observation"
-define "No condom use during sex with more than one partner in the past 6 months C.DE37 Condition":
-  [Condition: Concepts."No condom use during sex with more than one partner in the past 6 months - HIV.C.DE37"]
-define "No condom use during sex with more than one partner in the past 6 months C.DE37 Observation":
-  "Signs of substantial risk of HIV infection C.DE36 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."No condom use during sex with more than one partner in the past 6 months - HIV.C.DE37"
-/* End of No condom use during sex with more than one partner in the past 6 months C.DE37 */
-
-/*
-@dataElement: HIV.C.DE38 - STI in the past 6 months
-@activity: HIV.C3 Capture or update client history
-@description: A recent history (in the last 6 months) of a sexually transmitted infection (STI ) by laboratory testing, self-report or syndromic STI treatment
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "STI in the past 6 months C.DE38":
-  exists "STI in the past 6 months C.DE38 Condition"
-    or exists "STI in the past 6 months C.DE38 Observation"
-define "STI in the past 6 months C.DE38 Condition":
-  [Condition: Concepts."STI in the past 6 months - HIV.C.DE38"]
-define "STI in the past 6 months C.DE38 Observation":
-  "Signs of substantial risk of HIV infection C.DE36 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."STI in the past 6 months - HIV.C.DE38"
-/* End of STI in the past 6 months C.DE38 */
-
-/*
-@dataElement: HIV.C.DE39 - A sexual partner in the past 6 months had one or more HIV risk factors
-@activity: HIV.C3 Capture or update client history
-@description: A recent sex partner of the client had HIV risk factors
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "A sexual partner in the past 6 months had one or more HIV risk factors C.DE39":
-  exists "A sexual partner in the past 6 months had one or more HIV risk factors C.DE39 Condition"
-    or exists "A sexual partner in the past 6 months had one or more HIV risk factors C.DE39 Observation"
-define "A sexual partner in the past 6 months had one or more HIV risk factors C.DE39 Condition":
-  [Condition: Concepts."A sexual partner in the past 6 months had one or more HIV risk factors - HIV.C.DE39"]
-define "A sexual partner in the past 6 months had one or more HIV risk factors C.DE39 Observation":
-  "Signs of substantial risk of HIV infection C.DE36 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."A sexual partner in the past 6 months had one or more HIV risk factors - HIV.C.DE39"
-/* End of A sexual partner in the past 6 months had one or more HIV risk factors C.DE39 */
-
-/*
-@dataElement: HIV.C.DE40 - PrEP requested by client
-@activity: HIV.C3 Capture or update client history
-@description: Client is requesting PrEP, reflecting a decision-making process has already taken place and suggesting of substantial risk of HIV
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "PrEP requested by client C.DE40":
-  exists "PrEP requested by client C.DE40 Condition"
-    or exists "PrEP requested by client C.DE40 Observation"
-define "PrEP requested by client C.DE40 Condition":
-  [Condition: Concepts."PrEP requested by client - HIV.C.DE40"]
-define "PrEP requested by client C.DE40 Observation":
-  "Signs of substantial risk of HIV infection C.DE36 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."PrEP requested by client - HIV.C.DE40"
-/* End of PrEP requested by client C.DE40 */
 
 /*
 @dataElement: HIV.C.DE46 - Acute HIV infection symptoms
@@ -3721,96 +3592,9 @@ define "Rash Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Sex partners HIV treatment status":
-  exists "Sex partners HIV treatment status Observation"
-define "Sex partners HIV treatment status Observation":
   [Observation: Concepts."Sex partners HIV treatment status"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Sex partners HIV treatment status */
-
-/*
-@dataElement: HIV.C.DE56 - Not on ART
-@activity: HIV.C3 Capture or update client history
-@description: Sex partner is HIV-positive and not on ART
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Not on ART":
-  exists "Not on ART Condition"
-    or exists "Not on ART Observation"
-define "Not on ART Condition":
-  [Condition: Concepts."Not on ART"]
-define "Not on ART Observation":
-  "Sex partners HIV treatment status Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Not on ART"
-/* End of Not on ART */
-
-/*
-@dataElement: HIV.C.DE57 - On ART less than 6 months
-@activity: HIV.C3 Capture or update client history
-@description: Sex partner is HIV-positive and is on ART less than 6 months. ART may take up to 6 months to suppress viral load. In studies of serodiscordant couples, pre-exposure prophylaxis (PrEP) has provided a useful bridge to full viral suppression by the partner during that time.
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "On ART less than 6 months":
-  exists "On ART less than 6 months Condition"
-    or exists "On ART less than 6 months Observation"
-define "On ART less than 6 months Condition":
-  [Condition: Concepts."On ART less than 6 months"]
-define "On ART less than 6 months Observation":
-  "Sex partners HIV treatment status Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."On ART less than 6 months"
-/* End of On ART less than 6 months */
-
-/*
-@dataElement: HIV.C.DE58 - Partner has suspected low adherence to ART
-@activity: HIV.C3 Capture or update client history
-@description: Sex partner is HIV-positive and is suspected to have low adherence to ART. There have been gaps in the partner's treatment adherence or the couple is not communicating openly about treatment adherence and viral load test results.
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Partner has suspected low adherence to ART":
-  exists "Partner has suspected low adherence to ART Condition"
-    or exists "Partner has suspected low adherence to ART Observation"
-define "Partner has suspected low adherence to ART Condition":
-  [Condition: Concepts."Partner has suspected low adherence to ART"]
-define "Partner has suspected low adherence to ART Observation":
-  "Sex partners HIV treatment status Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Partner has suspected low adherence to ART"
-/* End of Partner has suspected low adherence to ART */
-
-/*
-@dataElement: HIV.C.DE59 - Partner is not virally suppressed
-@activity: HIV.C3 Capture or update client history
-@description: Sex partner is HIV-positive and not virally suppressed
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Partner is not virally suppressed":
-  exists "Partner is not virally suppressed Condition"
-    or exists "Partner is not virally suppressed Observation"
-define "Partner is not virally suppressed Condition":
-  [Condition: Concepts."Partner is not virally suppressed"]
-define "Partner is not virally suppressed Observation":
-  "Sex partners HIV treatment status Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Partner is not virally suppressed"
-/* End of Partner is not virally suppressed */
-
-/*
-@dataElement: HIV.C.DE60 - Partner is virally suppressed and has been on ART for 6 months or more
-@activity: HIV.C3 Capture or update client history
-@description: Sex partner is HIV-positive and virally suppressed with 6 months or more on ART
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Partner is virally suppressed and has been on ART for 6 months or more":
-  exists "Partner is virally suppressed and has been on ART for 6 months or more Condition"
-    or exists "Partner is virally suppressed and has been on ART for 6 months or more Observation"
-define "Partner is virally suppressed and has been on ART for 6 months or more Condition":
-  [Condition: Concepts."Partner is virally suppressed and has been on ART for 6 months or more"]
-define "Partner is virally suppressed and has been on ART for 6 months or more Observation":
-  "Sex partners HIV treatment status Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Partner is virally suppressed and has been on ART for 6 months or more"
-/* End of Partner is virally suppressed and has been on ART for 6 months or more */
 
 /*
 @dataElement: HIV.C.DE61 - Suitable for PrEP
@@ -4309,11 +4093,6 @@ define "Low estimated creatinine clearance Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Acute HIV infection symptoms C.DE116":
-  exists "Acute HIV infection symptoms C.DE116 Condition"
-    or exists "Acute HIV infection symptoms C.DE116 Observation"
-define "Acute HIV infection symptoms C.DE116 Condition":
-  [Condition: Concepts."Acute HIV infection symptoms - HIV.C.DE116"]
-define "Acute HIV infection symptoms C.DE116 Observation":
   "Contraindications to PrEP usage Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Acute HIV infection symptoms - HIV.C.DE116"
@@ -4326,11 +4105,6 @@ define "Acute HIV infection symptoms C.DE116 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Probable recent exposure to HIV":
-  exists "Probable recent exposure to HIV Condition"
-    or exists "Probable recent exposure to HIV Observation"
-define "Probable recent exposure to HIV Condition":
-  [Condition: Concepts."Probable recent exposure to HIV"]
-define "Probable recent exposure to HIV Observation":
   "Contraindications to PrEP usage Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Probable recent exposure to HIV"
@@ -5049,115 +4823,10 @@ define "Services for responding to violence against women C.DE169 Observation":
 @activity: HIV.D1 Determine reason for visit
 @description: Whether visit was scheduled or unscheduled, clinical only, or for ARV drug pick-up
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Reason for visit D.DE1":
-  exists "Reason for visit D.DE1 Observation"
-define "Reason for visit D.DE1 Observation":
   [Observation: Concepts."Reason for visit - HIV.D.DE1"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Reason for visit D.DE1 */
-
-/*
-@dataElement: HIV.D.DE2 - First clinical visit
-@activity: HIV.D1 Determine reason for visit
-@description: The client's first appointment for clinical care by a provider at the facility
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "First clinical visit":
-  exists "First clinical visit Condition"
-    or exists "First clinical visit Observation"
-define "First clinical visit Condition":
-  [Condition: Concepts."First clinical visit"]
-define "First clinical visit Observation":
-  "Reason for visit D.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."First clinical visit"
-/* End of First clinical visit */
-
-/*
-@dataElement: HIV.D.DE3 - Clinical visit
-@activity: HIV.D1 Determine reason for visit
-@description: Appointment for clinical care by a provider
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Clinical visit D.DE3":
-  exists "Clinical visit D.DE3 Condition"
-    or exists "Clinical visit D.DE3 Observation"
-define "Clinical visit D.DE3 Condition":
-  [Condition: Concepts."Clinical visit - HIV.D.DE3"]
-define "Clinical visit D.DE3 Observation":
-  "Reason for visit D.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Clinical visit - HIV.D.DE3"
-/* End of Clinical visit D.DE3 */
-
-/*
-@dataElement: HIV.D.DE4 - ART initiation
-@activity: HIV.D1 Determine reason for visit
-@description: Appointment for initiation of ART
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "ART initiation":
-  exists "ART initiation Condition"
-    or exists "ART initiation Observation"
-define "ART initiation Condition":
-  [Condition: Concepts."ART initiation"]
-define "ART initiation Observation":
-  "Reason for visit D.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."ART initiation"
-/* End of ART initiation */
-
-/*
-@dataElement: HIV.D.DE5 - ART drug pick up
-@activity: HIV.D1 Determine reason for visit
-@description: Appointment for an antiretroviral drug pick up
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "ART drug pick up":
-  exists "ART drug pick up Condition"
-    or exists "ART drug pick up Observation"
-define "ART drug pick up Condition":
-  [Condition: Concepts."ART drug pick up"]
-define "ART drug pick up Observation":
-  "Reason for visit D.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."ART drug pick up"
-/* End of ART drug pick up */
-
-/*
-@dataElement: HIV.D.DE6 - Issues and concerns
-@activity: HIV.D1 Determine reason for visit
-@description: Visit to address issues and concerns
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Issues and concerns":
-  exists "Issues and concerns Condition"
-    or exists "Issues and concerns Observation"
-define "Issues and concerns Condition":
-  [Condition: Concepts."Issues and concerns"]
-define "Issues and concerns Observation":
-  "Reason for visit D.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Issues and concerns"
-/* End of Issues and concerns */
-
-/*
-@dataElement: HIV.D.DE7 - Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer
-@activity: HIV.D1 Determine reason for visit
-@description: Appointment for a post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE7":
-  exists "Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE7 Condition"
-    or exists "Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE7 Observation"
-define "Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE7 Condition":
-  [Condition: Concepts."Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer - HIV.D.DE7"]
-define "Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE7 Observation":
-  "Reason for visit D.DE1 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer - HIV.D.DE7"
-/* End of Post-treatment follow-up visit for cervical precancer lesions or invasive cervical cancer D.DE7 */
 
 /*
 @dataElement: HIV.D.DE9 - Body temperature
@@ -13873,10 +13542,7 @@ define "Inconclusive G.DE73 Observation":
 @activity: HIV.B6 Capture or update client history
 @description: HIV status of the partner or contact given by the index case
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "HIV status of partner or contact":
-  exists "HIV status of partner or contact Observation"
-define "HIV status of partner or contact Observation":
   [Observation: Concepts."HIV status of partner or contact"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of HIV status of partner or contact */
@@ -14490,10 +14156,7 @@ define "HIV test date SRV.DE1 Value":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: The result from HIV testing after applying the testing algorithm
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "HIV test result SRV.DE2":
-  exists "HIV test result SRV.DE2 Observation"
-define "HIV test result SRV.DE2 Observation":
   [Observation: Concepts."HIV test result - HIV.SRV.DE2"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of HIV test result SRV.DE2 */

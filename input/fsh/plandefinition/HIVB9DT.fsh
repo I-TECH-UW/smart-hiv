@@ -206,3 +206,16 @@ Usage: #definition
           * description = "HIV Screening"
           * language = #text/cql
           * expression = "'171121004' from \"SNOMED-CT\" display 'HIV screening'"
+  * action[+]
+    * textEquivalent = "Send retest recommendation to provider"
+    * condition[+]
+      * kind = #applicability
+      * expression
+        * language = #text/cql-identifier
+        * expression = "Guidance"
+    * definitionCanonical = Canonical(HIVGuidanceCommunicationRequestActivity)
+    * dynamicValue[+]
+      * path = "description"
+      * expression
+        * language = #text/cql-identifier
+        * expression = "Guidance"
