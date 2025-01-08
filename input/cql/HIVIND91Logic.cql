@@ -118,9 +118,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and
-  exists(HE."Positive D.DE171" G
-  with HE."HCV test date D.DE169" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period") and
+  exists(HIE."Positive D.DE171" O where O.effective.toInterval() during "Measurement Period") and
   HIE."HCV treatment start date"
 
 
@@ -134,9 +132,7 @@ define "Numerator":
 
 define "Denominator":
   HIE."Has HIV-positive Status" and
-  exists(HE."Positive D.DE171" G
-  with HE."HCV test date D.DE169" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  exists(HIE."Positive D.DE171" O where O.effective.toInterval() during "Measurement Period")
     
 
 /* end Populations */
@@ -150,7 +146,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -164,7 +160,7 @@ define "By HCV medicine type Stratifier":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 2"
+  + ':' + HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
 + HIE."By HCV medicine type Stratifier".code 

@@ -92,10 +92,9 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and
-  exists(HE."Positive for cervical precancer lesions" G
-  with HE."Date of cervical cancer screening test" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
-  and exists(HE."Date of treatment for cervical precancer lesions" T where months between start of T.performed.toInterval() and end of P.performed.toInterval() < 6 months))
+  exists(HE."Positive for cervical precancer lesions" O
+  where O.effective.toInterval() during "Measurement Period"
+  and exists(HE."Date of treatment for cervical precancer lesions" T where months between start of T.performed.toInterval() and start of O.effective.toInterval() < 6 months))
 
 
 /**
@@ -107,9 +106,8 @@ define "Numerator":
 
 define "Denominator":
   HIE."Has HIV-positive Status" and
-  exists(HE."Positive for cervical precancer lesions" G
-  with HE."Date of cervical cancer screening test" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  exists(HE."Positive for cervical precancer lesions" O
+  where O.effective.toInterval() during "Measurement Period")
     
 
 /* end Populations */
@@ -119,7 +117,7 @@ define "Denominator":
  */
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -128,7 +126,7 @@ define "Geographic Region Stratifier":
 
 
 define "Stratification":
-HIE."By Age Stratifier 2"
+HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 
 //need to add provider

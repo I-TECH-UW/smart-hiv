@@ -99,8 +99,8 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."HCV test date D.DE169" and 
-  HIE."Date accessed HIV prevention intervention"
+  exists(HIE."HCV test date D.DE169") and 
+  exists(HIE."Date accessed HIV prevention intervention")
 
 
 /**
@@ -111,7 +111,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."Date accessed HIV prevention intervention"
+  exists(HIE."Date accessed HIV prevention intervention")
     
 
 /* end Populations */
@@ -125,7 +125,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -139,7 +139,7 @@ define "HIV Status":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 2"
+  + ':' + HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
 + ':' + HIE."HIV Status Stratifier".code 

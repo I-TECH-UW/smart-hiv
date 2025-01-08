@@ -102,7 +102,7 @@ define function "Measure Observation"(Patient "Patient"):
  */
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -112,7 +112,7 @@ define "Lifetime screening test number Statifier":
 
 
 define "Stratification":
-HIE."By Age Stratifier 2"
+HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + ':' + (HIE."Lifetime screening test number Value")
 

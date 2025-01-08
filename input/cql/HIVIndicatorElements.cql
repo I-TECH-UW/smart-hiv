@@ -411,6 +411,25 @@ define "By Age Stratifier 7":
       else null
   end
 
+//(0–4, 5–14, 15–24, 25+ years) 
+define "By Age Stratifier 8":
+  case 
+      when "Age In Years" <= 4 then '0-4'
+      when "Age In Years" <= 14 then '5-14'
+      when "Age In Years" <= 24 then '15-24'
+      when "Age In Years" >= 25 then '25+'
+      else null
+  end
+
+define "By Age Stratifier 9":
+  case 
+      when "Age In Years" >= 15 and "Age In Years"<= 19 then '15-19'
+      when "Age In Years" <= 24 then '20-24'
+      when "Age In Years" <= 29 then '25–29'
+      when "Age In Years" <= 49 then '30–49'
+      when "Age In Years" >= 50 then '50+'
+      else null
+  end
 
 /*
 @dataElement: HIV.A.DE18 - Gender
@@ -625,6 +644,7 @@ define "pregnancy stratifier":
   
 /* End of Currently pregnant B.DE29 */
 
+/*
 @dataElement: HIV.B.DE32 - Breastfeeding
 @activity: HIV.B6 Capture or update client history
 @description: Infant is being breastfed by mother
@@ -964,12 +984,7 @@ define "HIV-negative test result":
 @activity: HIV.B7 Test for HIV using testing algorithm
 @description: HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.
 */
-// define "HIV Status":
-//   case 
-//       when exists("HIV Positive Condition") then Concepts."HIV-positive - HIV.B.DE116"
-//       when not exists("HIV Positive Condition") and exists(Elements."HIV Negative Observation" O where O.issued before end of "Measurement Period") then  Concepts."HIV-negative - HIV.B.DE117"
-//       else Concepts."Unknown - HIV.B.DE118"
-//   end
+
 
 define "HIV Status Stratifier":
   case 
@@ -2020,12 +2035,16 @@ define "Other B.DE267 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Type of diagnostic test used for Neisseria gonorrhoeae
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Neisseria gonorrhoeae test type B.DE276":
-  exists "Neisseria gonorrhoeae test type B.DE276 Observation"
-define "Neisseria gonorrhoeae test type B.DE276 Observation":
-  Elements."Neisseria gonorrhoeae test type B.DE276 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  case 
+      when "NAAT B.DE277" then Concepts."NAAT - HIV.B.DE277"
+      when "POC Test B.DE278" then Concepts."POC Test - HIV.B.DE278"
+      when "Culture B.DE279" then Concepts."Culture - HIV.B.DE279"
+      when "Microscopy B.DE280" then Concepts."Microscopy - HIV.B.DE280"
+      when "Other B.DE281" then Concepts."Other - HIV.B.DE281"
+      else null
+  end
 /* End of Neisseria gonorrhoeae test type B.DE276 */
 
 /*
@@ -2033,17 +2052,10 @@ define "Neisseria gonorrhoeae test type B.DE276 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Nucleic Acid Amplification Test (NAAT) used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "NAAT B.DE277":
-  exists "NAAT B.DE277 Condition"
-    or exists "NAAT B.DE277 Observation"
-define "NAAT B.DE277 Condition":
-  Elements."NAAT B.DE277 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "NAAT B.DE277 Observation":
-  Elements."NAAT B.DE277 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."NAAT B.DE277" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of NAAT B.DE277 */
 
 /*
@@ -2051,17 +2063,10 @@ define "NAAT B.DE277 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Point-of-care (POC) test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "POC Test B.DE278":
-  exists "POC Test B.DE278 Condition"
-    or exists "POC Test B.DE278 Observation"
-define "POC Test B.DE278 Condition":
-  Elements."POC Test B.DE278 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "POC Test B.DE278 Observation":
-  Elements."POC Test B.DE278 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."POC Test B.DE278" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of POC Test B.DE278 */
 
 /*
@@ -2069,17 +2074,10 @@ define "POC Test B.DE278 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Culture test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Culture B.DE279":
-  exists "Culture B.DE279 Condition"
-    or exists "Culture B.DE279 Observation"
-define "Culture B.DE279 Condition":
-  Elements."Culture B.DE279 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Culture B.DE279 Observation":
-  Elements."Culture B.DE279 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+exists(Elements."Culture B.DE279" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of Culture B.DE279 */
 
 /*
@@ -2087,17 +2085,10 @@ define "Culture B.DE279 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Microscopy test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Microscopy B.DE280":
-  exists "Microscopy B.DE280 Condition"
-    or exists "Microscopy B.DE280 Observation"
-define "Microscopy B.DE280 Condition":
-  Elements."Microscopy B.DE280 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Microscopy B.DE280 Observation":
-  Elements."Microscopy B.DE280 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(Elements."Microscopy B.DE280" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of Microscopy B.DE280 */
 
 /*
@@ -2105,17 +2096,10 @@ define "Microscopy B.DE280 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other type of test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Other B.DE281":
-  exists "Other B.DE281 Condition"
-    or exists "Other B.DE281 Observation"
-define "Other B.DE281 Condition":
-  Elements."Other B.DE281 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Other B.DE281 Observation":
-  Elements."Other B.DE281 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Other B.DE281" O
+    where O.effective.toInterval() during "Measurement Period")
 /* End of Other B.DE281 */
 
 /*
@@ -3972,7 +3956,15 @@ define "Invasive cervical cancer treatment episode Value":
 
 define "Invasive cervical cancer treatment method":
   exists Elements."Invasive cervical cancer treatment method" P 
-  where P.performed during "Measurement Period" 
+  where P.performed.toInterval() during "Measurement Period" 
+
+define "Invasive cervical cancer treatment method stratifier":
+  case 
+      when "Conization"  then Concepts."Conization"
+      when "Trachelectomy" then Concepts."Trachelectomy"
+      when "Hysterectomy" then Concepts."Hysterectomy"
+      else null
+  end
 
 /* End of Invasive cervical cancer treatment method */
 
@@ -4149,12 +4141,18 @@ define "DSD ART start date":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Type of DSD ART model client is enrolled in (country-specific)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "DSD ART models":
-  exists "DSD ART models Observation"
-define "DSD ART models Observation":
-  Elements."DSD ART models Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+    case
+    when "Fast track ART refill" then Concepts."Fast track ART refill"
+    when "Facility adherence club" then Concepts."Facility adherence club"
+    when "Community ART distribution point" then Concepts."Community ART distribution point"
+    when "CHW/peer educator community ART group" then Concepts."CHW/peer educator community ART group"
+    when "Patient/client community ART group" then Concepts."Patient/client community ART group"
+    when "Other DSD ART model" then Concepts."Other DSD ART model"
+    else null
+  end
+
 /* End of DSD ART models */
 
 /*
@@ -4162,17 +4160,22 @@ define "DSD ART models Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in fast track ART refill (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Fast track ART refill":
-  exists "Fast track ART refill Condition"
-    or exists "Fast track ART refill Observation"
-define "Fast track ART refill Condition":
-  Elements."Fast track ART refill Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Fast track ART refill Observation":
-  Elements."Fast track ART refill Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Fast track ART refill")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+  )
 /* End of Fast track ART refill */
 
 /*
@@ -4180,17 +4183,22 @@ define "Fast track ART refill Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in facility adherence club (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Facility adherence club":
-  exists "Facility adherence club Condition"
-    or exists "Facility adherence club Observation"
-define "Facility adherence club Condition":
-  Elements."Facility adherence club Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Facility adherence club Observation":
-  Elements."Facility adherence club Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Facility adherence club")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+  )
 /* End of Facility adherence club */
 
 /*
@@ -4198,17 +4206,22 @@ define "Facility adherence club Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in community ART distribution point (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Community ART distribution point":
-  exists "Community ART distribution point Condition"
-    or exists "Community ART distribution point Observation"
-define "Community ART distribution point Condition":
-  Elements."Community ART distribution point Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Community ART distribution point Observation":
-  Elements."Community ART distribution point Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Community ART distribution point")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+  )
 /* End of Community ART distribution point */
 
 /*
@@ -4216,17 +4229,22 @@ define "Community ART distribution point Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in community health worker/peer educator community ART group (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "CHW/peer educator community ART group":
-  exists "CHW/peer educator community ART group Condition"
-    or exists "CHW/peer educator community ART group Observation"
-define "CHW/peer educator community ART group Condition":
-  Elements."CHW/peer educator community ART group Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "CHW/peer educator community ART group Observation":
-  Elements."CHW/peer educator community ART group Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."CHW/peer educator community ART group")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+  )
 /* End of CHW/peer educator community ART group */
 
 /*
@@ -4234,17 +4252,22 @@ define "CHW/peer educator community ART group Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in patient/client community ART group (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Patient/client community ART group":
-  exists "Patient/client community ART group Condition"
-    or exists "Patient/client community ART group Observation"
-define "Patient/client community ART group Condition":
-  Elements."Patient/client community ART group Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Patient/client community ART group Observation":
-  Elements."Patient/client community ART group Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Patient/client community ART group")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+  )
 /* End of Patient/client community ART group */
 
 /*
@@ -4252,17 +4275,22 @@ define "Patient/client community ART group Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in another DSD ART model
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Other DSD ART model":
-  exists "Other DSD ART model Condition"
-    or exists "Other DSD ART model Observation"
-define "Other DSD ART model Condition":
-  Elements."Other DSD ART model Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Other DSD ART model Observation":
-  Elements."Other DSD ART model Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists(
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Other DSD ART model")
+    and (exists (
+      EOC.statusHistory H
+      where H.period starts after start of "Measurement Period"
+      and H.period starts before end of "Measurement Period"
+    ) 
+    or (
+      EOC.period starts after start of "Measurement Period"
+      and EOC.period starts before end of "Measurement Period"
+    )
+    )
+  )
 /* End of Other DSD ART model */
 
 /*
@@ -4882,7 +4910,7 @@ define "Presumptive TB D.DE945":
 */
 
 define "Date of TB diagnosis":
-  start of First(Elements."Date of TB diagnosis") during "Measurement Period"
+  exists(Elements."Date of TB diagnosis" C where C during "Measurement Period")
 
 /* End of Date of TB diagnosis */
 
@@ -6688,8 +6716,8 @@ define "Viral load test result SRV.DE13 Value":
 */
 
 define "Visit date SRV.DE15":
-  exists(Elements."Visit date SRV.DE15" p
-    where start of p during "Measurement Period")
+  exists(Elements."Visit date SRV.DE15" E
+    where start of E during "Measurement Period")
 /* End of Visit date SRV.DE15 */
 
 /*

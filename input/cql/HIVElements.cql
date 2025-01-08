@@ -85,11 +85,7 @@ define "PEP Prescription":
       or MR.medication as CodeableConcept in Concepts."Preferred third PEP drug Choices"
       or MR.medication as CodeableConcept in Concepts."Alternative third PEP drug Choices")
 
-define "routine viral load sample collection":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom."viral load test"
-  and exists(P.reasonCode RC where RC ~ Concepts."Routine viral load test")
+
 
 define "viral load sample collection":
   [Procedure] P
@@ -2975,10 +2971,8 @@ define "Other B.DE267 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Type of diagnostic test used for Neisseria gonorrhoeae
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Neisseria gonorrhoeae test type B.DE276":
-  exists "Neisseria gonorrhoeae test type B.DE276 Observation"
-define "Neisseria gonorrhoeae test type B.DE276 Observation":
   [Observation: Concepts."Neisseria gonorrhoeae test type - HIV.B.DE276"] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Neisseria gonorrhoeae test type B.DE276 */
@@ -2988,16 +2982,10 @@ define "Neisseria gonorrhoeae test type B.DE276 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Nucleic Acid Amplification Test (NAAT) used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "NAAT B.DE277":
-  exists "NAAT B.DE277 Condition"
-    or exists "NAAT B.DE277 Observation"
-define "NAAT B.DE277 Condition":
-  [Condition: Concepts."NAAT - HIV.B.DE277"]
-define "NAAT B.DE277 Observation":
-  "Neisseria gonorrhoeae test type B.DE276 Observation" O
+  [Observation: Concepts."NAAT - HIV.B.DE277"] O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."NAAT - HIV.B.DE277"
 /* End of NAAT B.DE277 */
 
 /*
@@ -3005,16 +2993,11 @@ define "NAAT B.DE277 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Point-of-care (POC) test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "POC Test B.DE278":
-  exists "POC Test B.DE278 Condition"
-    or exists "POC Test B.DE278 Observation"
-define "POC Test B.DE278 Condition":
-  [Condition: Concepts."POC Test - HIV.B.DE278"]
-define "POC Test B.DE278 Observation":
-  "Neisseria gonorrhoeae test type B.DE276 Observation" O
+  [Observation: Concepts."POC Test - HIV.B.DE278"] O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."POC Test - HIV.B.DE278"
+
 /* End of POC Test B.DE278 */
 
 /*
@@ -3022,16 +3005,10 @@ define "POC Test B.DE278 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Culture test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Culture B.DE279":
-  exists "Culture B.DE279 Condition"
-    or exists "Culture B.DE279 Observation"
-define "Culture B.DE279 Condition":
-  [Condition: Concepts."Culture - HIV.B.DE279"]
-define "Culture B.DE279 Observation":
-  "Neisseria gonorrhoeae test type B.DE276 Observation" O
+  [Observation: Concepts."Culture - HIV.B.DE279"] O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Culture - HIV.B.DE279"
 /* End of Culture B.DE279 */
 
 /*
@@ -3039,16 +3016,10 @@ define "Culture B.DE279 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Microscopy test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+ 
 define "Microscopy B.DE280":
-  exists "Microscopy B.DE280 Condition"
-    or exists "Microscopy B.DE280 Observation"
-define "Microscopy B.DE280 Condition":
-  [Condition: Concepts."Microscopy - HIV.B.DE280"]
-define "Microscopy B.DE280 Observation":
-  "Neisseria gonorrhoeae test type B.DE276 Observation" O
+  [Observation: Concepts."Microscopy - HIV.B.DE280"] O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Microscopy - HIV.B.DE280"
 /* End of Microscopy B.DE280 */
 
 /*
@@ -3056,16 +3027,11 @@ define "Microscopy B.DE280 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other type of test used
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Other B.DE281":
-  exists "Other B.DE281 Condition"
-    or exists "Other B.DE281 Observation"
-define "Other B.DE281 Condition":
-  [Condition: Concepts."Other - HIV.B.DE281"]
-define "Other B.DE281 Observation":
-  "Neisseria gonorrhoeae test type B.DE276 Observation" O
+  [Observation: Concepts."Other - HIV.B.DE281"] O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Other - HIV.B.DE281"
+
 /* End of Other B.DE281 */
 
 /*
@@ -7845,6 +7811,15 @@ define "Routine viral load test Observation":
   "Reason for HIV viral load test Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Routine viral load test"
+
+define "routine viral load sample collection":
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom."viral load test"
+  and exists(P.reasonCode RC where RC ~ Concepts."Routine viral load test")
+
+
+
 /* End of Routine viral load test */
 
 /*
@@ -9831,12 +9806,10 @@ define "DSD ART statusHistory":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Type of DSD ART model client is enrolled in (country-specific)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "DSD ART models":
-  exists "DSD ART models Observation"
-define "DSD ART models Observation":
-  [Observation: Concepts."DSD ART models"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."DSD ART models")
 /* End of DSD ART models */
 
 /*
@@ -9844,16 +9817,10 @@ define "DSD ART models Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in fast track ART refill (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Fast track ART refill":
-  exists "Fast track ART refill Condition"
-    or exists "Fast track ART refill Observation"
-define "Fast track ART refill Condition":
-  [Condition: Concepts."Fast track ART refill"]
-define "Fast track ART refill Observation":
-  "DSD ART models Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Fast track ART refill"
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Fast track ART refill")
 /* End of Fast track ART refill */
 
 /*
@@ -9861,16 +9828,10 @@ define "Fast track ART refill Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in facility adherence club (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Facility adherence club":
-  exists "Facility adherence club Condition"
-    or exists "Facility adherence club Observation"
-define "Facility adherence club Condition":
-  [Condition: Concepts."Facility adherence club"]
-define "Facility adherence club Observation":
-  "DSD ART models Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Facility adherence club"
+    [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Facility adherence club")
 /* End of Facility adherence club */
 
 /*
@@ -9878,16 +9839,10 @@ define "Facility adherence club Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in community ART distribution point (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Community ART distribution point":
-  exists "Community ART distribution point Condition"
-    or exists "Community ART distribution point Observation"
-define "Community ART distribution point Condition":
-  [Condition: Concepts."Community ART distribution point"]
-define "Community ART distribution point Observation":
-  "DSD ART models Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Community ART distribution point"
+  [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Community ART distribution point")
 /* End of Community ART distribution point */
 
 /*
@@ -9895,16 +9850,10 @@ define "Community ART distribution point Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in community health worker/peer educator community ART group (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "CHW/peer educator community ART group":
-  exists "CHW/peer educator community ART group Condition"
-    or exists "CHW/peer educator community ART group Observation"
-define "CHW/peer educator community ART group Condition":
-  [Condition: Concepts."CHW/peer educator community ART group"]
-define "CHW/peer educator community ART group Observation":
-  "DSD ART models Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."CHW/peer educator community ART group"
+  [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~  Concepts."CHW/peer educator community ART group")
 /* End of CHW/peer educator community ART group */
 
 /*
@@ -9912,16 +9861,10 @@ define "CHW/peer educator community ART group Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in patient/client community ART group (DSD ART model)
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Patient/client community ART group":
-  exists "Patient/client community ART group Condition"
-    or exists "Patient/client community ART group Observation"
-define "Patient/client community ART group Condition":
-  [Condition: Concepts."Patient/client community ART group"]
-define "Patient/client community ART group Observation":
-  "DSD ART models Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Patient/client community ART group"
+  [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Patient/client community ART group")
 /* End of Patient/client community ART group */
 
 /*
@@ -9929,16 +9872,10 @@ define "Patient/client community ART group Observation":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in another DSD ART model
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Other DSD ART model":
-  exists "Other DSD ART model Condition"
-    or exists "Other DSD ART model Observation"
-define "Other DSD ART model Condition":
-  [Condition: Concepts."Other DSD ART model"]
-define "Other DSD ART model Observation":
-  "DSD ART models Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Other DSD ART model"
+  [EpisodeOfCare] EOC
+    where exists(EOC.type T where T ~ Concepts."Other DSD ART model")
 /* End of Other DSD ART model */
 
 /*
@@ -14344,7 +14281,7 @@ define "Viral load test result SRV.DE13 Value":
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-// TODO: MARK as visit?
+
 define "Visit date SRV.DE15":
   [Encounter] E
   return E.period
