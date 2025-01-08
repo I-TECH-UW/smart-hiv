@@ -180,6 +180,9 @@ define "HIV Status":
 define "Neisseria gonorrhoeae test type B.DE276":
   HIE."Neisseria gonorrhoeae test type B.DE276"
 
+define "Type of specimen B.DE261":
+  HIE."Type of specimen B.DE261"
+
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier 9"
@@ -188,5 +191,4 @@ define "Stratification":
 + Combine(HIE."HIV prevention intervention", ':')
 + ':' + HIE."HIV Status Stratifier".code 
 + ':' + HIE."Neisseria gonorrhoeae test type B.DE276".code 
-
-//need to add anatomic site sampled 
++ ':' + HIE."Type of specimen B.DE261".code 

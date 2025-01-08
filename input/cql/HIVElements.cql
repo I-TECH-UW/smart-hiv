@@ -2869,16 +2869,9 @@ define "Type of specimen B.DE261 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Blood specimen to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Blood B.DE262":
-  exists "Blood B.DE262 Condition"
-    or exists "Blood B.DE262 Observation"
-define "Blood B.DE262 Condition":
-  [Condition: Concepts."Blood - HIV.B.DE262"]
-define "Blood B.DE262 Observation":
-  "Type of specimen B.DE261 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Blood - HIV.B.DE262"
+  "Gonorrhoea test result B.DE256" O where O.method ~ Concepts."Blood - HIV.B.DE262"
 /* End of Blood B.DE262 */
 
 /*
@@ -2886,16 +2879,9 @@ define "Blood B.DE262 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urine specimen to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Urine B.DE263":
-  exists "Urine B.DE263 Condition"
-    or exists "Urine B.DE263 Observation"
-define "Urine B.DE263 Condition":
-  [Condition: Concepts."Urine - HIV.B.DE263"]
-define "Urine B.DE263 Observation":
-  "Type of specimen B.DE261 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Urine - HIV.B.DE263"
+  "Gonorrhoea test result B.DE256" O where O.method ~ Concepts."Urine - HIV.B.DE263"
 /* End of Urine B.DE263 */
 
 /*
@@ -2903,16 +2889,9 @@ define "Urine B.DE263 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Cervical or vaginal swab to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Cervical or vaginal swab B.DE264":
-  exists "Cervical or vaginal swab B.DE264 Condition"
-    or exists "Cervical or vaginal swab B.DE264 Observation"
-define "Cervical or vaginal swab B.DE264 Condition":
-  [Condition: Concepts."Cervical or vaginal swab - HIV.B.DE264"]
-define "Cervical or vaginal swab B.DE264 Observation":
-  "Type of specimen B.DE261 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Cervical or vaginal swab - HIV.B.DE264"
+  "Gonorrhoea test result B.DE256" O where O.method ~ Concepts."Cervical or vaginal swab - HIV.B.DE264"
 /* End of Cervical or vaginal swab B.DE264 */
 
 /*
@@ -2920,16 +2899,9 @@ define "Cervical or vaginal swab B.DE264 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urethral or penile swab to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Urethral or penile swab B.DE265":
-  exists "Urethral or penile swab B.DE265 Condition"
-    or exists "Urethral or penile swab B.DE265 Observation"
-define "Urethral or penile swab B.DE265 Condition":
-  [Condition: Concepts."Urethral or penile swab - HIV.B.DE265"]
-define "Urethral or penile swab B.DE265 Observation":
-  "Type of specimen B.DE261 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Urethral or penile swab - HIV.B.DE265"
+  "Gonorrhoea test result B.DE256" O where O.method ~ Concepts."Urethral or penile swab - HIV.B.DE265"
 /* End of Urethral or penile swab B.DE265 */
 
 /*
@@ -2939,14 +2911,7 @@ define "Urethral or penile swab B.DE265 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Rectal swab B.DE266":
-  exists "Rectal swab B.DE266 Condition"
-    or exists "Rectal swab B.DE266 Observation"
-define "Rectal swab B.DE266 Condition":
-  [Condition: Concepts."Rectal swab - HIV.B.DE266"]
-define "Rectal swab B.DE266 Observation":
-  "Type of specimen B.DE261 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Rectal swab - HIV.B.DE266"
+  "Gonorrhoea test result B.DE256" O where O.method ~ Concepts."Rectal swab - HIV.B.DE266"
 /* End of Rectal swab B.DE266 */
 
 /*
@@ -2956,14 +2921,7 @@ define "Rectal swab B.DE266 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Other B.DE267":
-  exists "Other B.DE267 Condition"
-    or exists "Other B.DE267 Observation"
-define "Other B.DE267 Condition":
-  [Condition: Concepts."Other - HIV.B.DE267"]
-define "Other B.DE267 Observation":
-  "Type of specimen B.DE261 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Other - HIV.B.DE267"
+  "Gonorrhoea test result B.DE256" O where O.method ~ Concepts."Other - HIV.B.DE267"
 /* End of Other B.DE267 */
 
 /*

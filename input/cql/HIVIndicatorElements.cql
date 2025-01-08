@@ -1914,12 +1914,18 @@ define "Gonorrhoea treatment start date B.DE260":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Type of specimen to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Type of specimen B.DE261":
-  exists "Type of specimen B.DE261 Observation"
-define "Type of specimen B.DE261 Observation":
-  Elements."Type of specimen B.DE261 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  case 
+      when "Blood B.DE262"then Concepts."Blood - HIV.B.DE262"
+      when "Urine B.DE263" then Concepts."Urine - HIV.B.DE263"
+      when "Cervical or vaginal swab B.DE264" then Concepts."Cervical or vaginal swab - HIV.B.DE264"
+      when "Urethral or penile swab B.DE265" then Concepts."Urethral or penile swab - HIV.B.DE265"
+      when "Rectal swab B.DE266" then Concepts."Rectal swab - HIV.B.DE266"
+      when "Other B.DE267" then Concepts."Other - HIV.B.DE267"
+      else null
+  end
+
 /* End of Type of specimen B.DE261 */
 
 /*
@@ -1927,17 +1933,9 @@ define "Type of specimen B.DE261 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Blood specimen to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Blood B.DE262":
-  exists "Blood B.DE262 Condition"
-    or exists "Blood B.DE262 Observation"
-define "Blood B.DE262 Condition":
-  Elements."Blood B.DE262 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Blood B.DE262 Observation":
-  Elements."Blood B.DE262 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Blood B.DE262" O where O.effective.toInterval() during "Measurement Period")
 /* End of Blood B.DE262 */
 
 /*
@@ -1945,17 +1943,9 @@ define "Blood B.DE262 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urine specimen to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Urine B.DE263":
-  exists "Urine B.DE263 Condition"
-    or exists "Urine B.DE263 Observation"
-define "Urine B.DE263 Condition":
-  Elements."Urine B.DE263 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Urine B.DE263 Observation":
-  Elements."Urine B.DE263 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Urine B.DE263" O where O.effective.toInterval() during "Measurement Period")
 /* End of Urine B.DE263 */
 
 /*
@@ -1963,17 +1953,10 @@ define "Urine B.DE263 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Cervical or vaginal swab to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+ 
 define "Cervical or vaginal swab B.DE264":
-  exists "Cervical or vaginal swab B.DE264 Condition"
-    or exists "Cervical or vaginal swab B.DE264 Observation"
-define "Cervical or vaginal swab B.DE264 Condition":
-  Elements."Cervical or vaginal swab B.DE264 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Cervical or vaginal swab B.DE264 Observation":
-  Elements."Cervical or vaginal swab B.DE264 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Cervical or vaginal swab B.DE264" O where O.effective.toInterval() during "Measurement Period")
+
 /* End of Cervical or vaginal swab B.DE264 */
 
 /*
@@ -1981,17 +1964,10 @@ define "Cervical or vaginal swab B.DE264 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urethral or penile swab to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Urethral or penile swab B.DE265":
-  exists "Urethral or penile swab B.DE265 Condition"
-    or exists "Urethral or penile swab B.DE265 Observation"
-define "Urethral or penile swab B.DE265 Condition":
-  Elements."Urethral or penile swab B.DE265 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Urethral or penile swab B.DE265 Observation":
-  Elements."Urethral or penile swab B.DE265 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Urethral or penile swab B.DE265" O where O.effective.toInterval() during "Measurement Period")
+
 /* End of Urethral or penile swab B.DE265 */
 
 /*
@@ -1999,17 +1975,10 @@ define "Urethral or penile swab B.DE265 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Rectal swab to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Rectal swab B.DE266":
-  exists "Rectal swab B.DE266 Condition"
-    or exists "Rectal swab B.DE266 Observation"
-define "Rectal swab B.DE266 Condition":
-  Elements."Rectal swab B.DE266 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Rectal swab B.DE266 Observation":
-  Elements."Rectal swab B.DE266 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Rectal swab B.DE266" O where O.effective.toInterval() during "Measurement Period")
+
 /* End of Rectal swab B.DE266 */
 
 /*
@@ -2017,17 +1986,10 @@ define "Rectal swab B.DE266 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other specimen type to be collected
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Other B.DE267":
-  exists "Other B.DE267 Condition"
-    or exists "Other B.DE267 Observation"
-define "Other B.DE267 Condition":
-  Elements."Other B.DE267 Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Other B.DE267 Observation":
-  Elements."Other B.DE267 Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Other B.DE267"O where O.effective.toInterval() during "Measurement Period")
+
 /* End of Other B.DE267 */
 
 /*
