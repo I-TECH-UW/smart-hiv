@@ -28,12 +28,12 @@
 //       where H.period is not null))
 
 Profile: HivOamTreatment
-Parent: HivEpisodeOfCare
+Parent: EpisodeOfCare
 Description: "Episode of care for opioid agonist maintenance treatment (OAMT)"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
 * ^title = "Opioid Agonist Maintenance Treatment (OAMT)"
-* medication[x] only CodeableConcept
-* medicationCodeableConcept from HIV.PRV.DE4 (required)
+// * medication[x] only CodeableConcept
+// * medicationCodeableConcept from HIV.PRV.DE4 (required)
 

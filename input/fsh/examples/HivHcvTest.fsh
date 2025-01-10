@@ -8,4 +8,4 @@ Description: "An example of an HCV test observation based on the HivHcvTest prof
 * subject = Reference(Patient/ExampleHivPatient)
 * effectiveDateTime = "2023-11-01T10:00:00Z"
 * issued = "2023-11-02T15:00:00Z"
-* valueCodeableConcept = HIVConcepts#HIV.D.DE170
+* valueCodeableConcept = HIVConcepts#HIV.D.DE171 "Positive"

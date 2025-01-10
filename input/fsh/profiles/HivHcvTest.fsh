@@ -1,4 +1,4 @@
-Profile: HivHcvTestD
+Profile: HivHcvTest
 Parent: HivLabTestObservation
 Description: "A DAK-specific Hepatitis C test observation with possible results"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
@@ -8,7 +8,7 @@ Description: "A DAK-specific Hepatitis C test observation with possible results"
 * code = HIVConcepts#HIV.D.DE170 "HCV test result"
 * valueCodeableConcept from HIV.D.DE170 (required)
 
-Profile: HivHcvTest
+Profile: HivHcvTestD
 Parent: HivLabTestObservation
 Description: "A DAK-specific Hepatitis C test observation with possible results"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
