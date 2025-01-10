@@ -94,8 +94,8 @@ define "Numerator":
   HIE."Has HIV-positive Status" and
   exists(HE."Positive for cervical precancer lesions" G
   with HE."Date of cervical cancer screening test" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
-  and exists(HE."Date of treatment for cervical precancer lesions" T where months between start of T.performed.toInterval() and end of P.performed.toInterval() < 6 months))
+  such that P during "Measurement Period"
+  and exists(HE."Date of treatment for cervical precancer lesions" T where months between start of T.performed.toInterval() and P < 6 months))
 
 
 /**
@@ -109,7 +109,7 @@ define "Denominator":
   HIE."Has HIV-positive Status" and
   exists(HE."Positive for cervical precancer lesions" G
   with HE."Date of cervical cancer screening test" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  such that P during "Measurement Period")
     
 
 /* end Populations */

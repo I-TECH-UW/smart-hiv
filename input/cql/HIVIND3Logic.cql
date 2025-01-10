@@ -87,6 +87,10 @@
  * - method: Individual-level data obtained from programme records. |  | If individual-level data are not available, the indicator can be reported using aggregate programme data. Because de-duplication is not possible, individuals prescribed multiple | PrEP products or formulations at different times during the reporting period may be counted multiple times, and the number reported may be greater than the number of unique individuals receiving PrEP during the reporting period.
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivPrepTreatment
+ * - HivPepTreatment
  */
 
 library HIVIND3Logic

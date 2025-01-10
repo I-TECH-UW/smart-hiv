@@ -122,10 +122,13 @@ define "Initial Population":
  */
 
 define "Numerator":
-  Count((HE."Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval())))>1
-
+  Count(
+    (HIE."Syndrome/STI diagnosed B.DE226 Condition" C
+    where exists (
+      HE."Date accessed HIV prevention intervention" t
+      where t = start of C.prevalenceInterval()
+    ))
+  ) > 1
 
 /**
  * Denominator
@@ -135,9 +138,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HE."Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval()))
+  exists(HIE."Date accessed HIV prevention intervention")
     
 
 /* end Populations */

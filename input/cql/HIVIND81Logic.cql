@@ -64,6 +64,11 @@
  * - method: Patient monitoring tools (electronic or paper), for example, hepatitis and HIV testing service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/electronic information systems
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivStatus
+ * - HivHtsVisit
+ * - HivHbsAgTest
  */
 
 library HIVIND81Logic

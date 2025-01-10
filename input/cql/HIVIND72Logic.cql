@@ -149,7 +149,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HIE."Positive B.DE257")
+  HIE."Positive B.DE257"
 
 
 /**
@@ -160,11 +160,9 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HE."Gonorrhoea test date B.DE255" d
-  where d during "Measurement Period"
-  and exists (HE."Date accessed HIV prevention intervention" t where t = d))
+  exists(HIE."Gonorrhoea test date B.DE255" d
+    where exists(HE."Date accessed HIV prevention intervention" t where t = d))
     
-
 /* end Populations */
 
 /*

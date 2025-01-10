@@ -116,9 +116,9 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status"
-  and exists(HE."Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Visit date SRV.DE15" t where start of t.period.toInterval() = start of O.effective.toInterval()))
+  and exists(HIE."Syndrome/STI diagnosed B.DE226 Condition" C
+    where exists (HE."Visit date SRV.DE15" t where start of t.toInterval() = start of C.prevalenceInterval())
+  )
 
 
 /**

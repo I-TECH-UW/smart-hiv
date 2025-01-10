@@ -120,7 +120,7 @@ define "Numerator":
   HIE."Has HIV-positive Status" and
   exists(HE."Positive D.DE171" G
   with HE."HCV test date D.DE169" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period") and
+  such that P during "Measurement Period") and
   HIE."HCV treatment start date"
 
 
@@ -136,7 +136,7 @@ define "Denominator":
   HIE."Has HIV-positive Status" and
   exists(HE."Positive D.DE171" G
   with HE."HCV test date D.DE169" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  such that P during "Measurement Period")
     
 
 /* end Populations */

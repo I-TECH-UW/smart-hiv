@@ -73,6 +73,7 @@
 
  /* 
   * Profiles:
+  * - HivStatus
   * - HivHcvTest
   */
 
@@ -122,7 +123,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE."Has HIV-positive Status" and HIE."HCV test date D.DE169"
+  HIE."Has HIV-positive Status" and exists(HIE."HCV test date D.DE169")
     
 /* end Populations */
 

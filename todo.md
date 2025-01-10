@@ -63,3 +63,15 @@ Can we just have a single profile for a MS that has any of these choices?
 We need to profile visit date and mark it as a specific type of encounter?
 
 ## Medication Request vs. Medication Statement: Guidelines?
+
+
+# PROFILES:
+- HivStatusObservation
+- HivStatusCondition
+- HivPatient
+- HivInvasiveCervicalCancerDiagnosis
+- HivInvasiveCervicalCancerTreatment
+- HivCervicalCancerScreeningOutcome
+- HivCervicalCancerScreening
+- HivHcvTest
+- HivHbsAgTest

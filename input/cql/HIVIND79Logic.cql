@@ -82,6 +82,10 @@
 
 THE DEFINITION IS INCONSISTENT WITH THE CONTEXT - no mention of HIV prevention services.
 
+ * Profiles:
+ * HivHtsVisit
+ * HivStatus
+ * HivSyndromeStiDiagnosisCondition
  */
 
 library HIVIND79Logic
@@ -118,10 +122,14 @@ define "Initial Population":
  */
 
 define "Numerator":
-HIE."Has HIV-positive Status"
-  and Count((HE."Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Visit date SRV.DE15" t where start of t.period.toInterval() = start of O.effective.toInterval())))>1
+  HIE."Has HIV-positive Status"
+  and Count(
+    (HIE."Syndrome/STI diagnosed B.DE226 Condition" C
+    where exists (
+      HE."Visit date SRV.DE15" t
+      where start of t.toInterval() = start of C.prevalenceInterval()
+    ))
+  ) > 1
 
 
 /**
