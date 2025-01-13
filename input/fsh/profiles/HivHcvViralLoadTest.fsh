@@ -4,7 +4,7 @@ Description: "A DAK-specific HCV Viral Load observation with possible results"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^title = "HCV Viral Load Test"
-* code = HIVConcepts#HIV.D.DE179 "HCV test result"
+* code = HIVConcepts#HIV.D.DE179 " 'HCV viral load test result"
 * valueCodeableConcept from HIV.D.DE179 (required)
 
 Profile: HcvViralLoadTest

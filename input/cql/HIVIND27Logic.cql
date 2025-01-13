@@ -76,8 +76,10 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+
 include HIVElements called HE
-include HIVIndicatorElements called HIE
+include HIVIndicatorElements called HIE 
+
 include HIVConfig called Config
 include HIVConcepts called Concepts
 

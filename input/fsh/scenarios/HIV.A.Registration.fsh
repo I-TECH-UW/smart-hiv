@@ -1,7 +1,7 @@
 Instance: HIV.A.REGISTRATION
 InstanceOf: ExampleScenario
 Usage: #definition
-* url = "http://smart.who.int/hiv/ExampleScenario/HIV.A.REGISTRATION.SCENARIO"
+* url = "http://smart.who.int/hiv/ExampleScenario/HIV.A.REGISTRATION"
 * status = #active
 * name = "HIV.A.REGISTRATION SCENARIO"
 * actor[0].actorId = "patient"

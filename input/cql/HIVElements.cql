@@ -2173,9 +2173,9 @@ define "VMMC procedure date":
 */
 
 define "Adverse event severity":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
+      such that AE.suspectEntity.instance.references(P) and P.status = 'completed'
       and P.code ~  Concepts."VMMC"
   where AE.actuality = 'actual'
 
@@ -2905,7 +2905,7 @@ define "Culture B.DE279":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Microscopy test used
 */
- 
+
 define "Microscopy B.DE280":
   [Observation: Concepts."Microscopy - HIV.B.DE280"] O
     where O.status in { 'final', 'amended', 'corrected' }
@@ -3021,7 +3021,7 @@ define "Current PrEP regimen Observation":
 
 define "TDF + FTC C.DE18":
   "Currently on PrEP" MS
-  where MS.medication ~ Concepts."TDF + FTC - HIV.C.DE18" 
+  where MS.medication ~ Concepts."TDF + FTC - HIV.C.DE18"
 /* End of TDF + FTC C.DE18 */
 
 /*
@@ -3032,7 +3032,7 @@ define "TDF + FTC C.DE18":
 
 define "TDF C.DE19":
   "Currently on PrEP" MS
-  where MS.medication ~ Concepts."TDF - HIV.C.DE19" 
+  where MS.medication ~ Concepts."TDF - HIV.C.DE19"
 
 /* End of TDF C.DE19 */
 
@@ -3111,7 +3111,7 @@ define "First-time user C.DE25":
 
 define "Continuing user":
   "Currently on PrEP" MS
-  where exists(MS.statusReason SR where SR ~ Concepts."Continuing user") 
+  where exists(MS.statusReason SR where SR ~ Concepts."Continuing user")
 
 /* End of Continuing user */
 
@@ -7989,7 +7989,7 @@ define "Type of treatment-limiting toxicity Observation":
 */
 
 define "Gastrointestinal":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Gastrointestinal"
 /* End of Gastrointestinal */
@@ -8001,7 +8001,7 @@ define "Gastrointestinal":
 */
 
 define "Skin issues":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Skin issues"
 /* End of Skin issues */
@@ -8013,7 +8013,7 @@ define "Skin issues":
 */
 
 define "Peripheral neuropathy":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~  Concepts."Peripheral neuropathy"
 /* End of Peripheral neuropathy */
@@ -8025,7 +8025,7 @@ define "Peripheral neuropathy":
 */
 
 define "Central nervous system symptoms":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Central nervous system symptoms"
 /* End of Central nervous system symptoms */
@@ -8037,7 +8037,7 @@ define "Central nervous system symptoms":
 */
 
 define "Weight gain":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Weight gain"
 /* End of Weight gain */
@@ -8049,7 +8049,7 @@ define "Weight gain":
 */
 
 define "Hepatic dysfunction":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Hepatic dysfunction"
 /* End of Hepatic dysfunction */
@@ -8061,7 +8061,7 @@ define "Hepatic dysfunction":
 */
 
 define "Haematological disorders":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Haematological disorders"
 /* End of Haematological disorders */
@@ -8073,7 +8073,7 @@ define "Haematological disorders":
 */
 
 define "Fatigue":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Fatigue"
 /* End of Fatigue */
@@ -8085,7 +8085,7 @@ define "Fatigue":
 */
 
 define "Headache D.DE475":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~  Concepts."Headache - HIV.D.DE475"
 /* End of Headache D.DE475 */
@@ -8097,7 +8097,7 @@ define "Headache D.DE475":
 */
 
 define "Bone dysfunction":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~  Concepts."Bone dysfunction"
 /* End of Bone dysfunction */
@@ -8109,7 +8109,7 @@ define "Bone dysfunction":
 */
 
 define "Metabolic symptoms":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Metabolic symptoms"
 /* End of Metabolic symptoms */
@@ -8121,7 +8121,7 @@ define "Metabolic symptoms":
 */
 
 define "Kidney dysfunction":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~  Concepts."Kidney dysfunction"
 /* End of Kidney dysfunction */
@@ -8133,7 +8133,7 @@ define "Kidney dysfunction":
 */
 
 define "Unexpected adverse drug reaction":
-  [AdverseEvent] AE 
+  [AdverseEvent] AE
   where AE.actuality = 'actual'
   and AE.event ~ Concepts."Unexpected adverse drug reaction"
 /* End of Unexpected adverse drug reaction */
@@ -11485,7 +11485,7 @@ define "Health facility":
 define "Home":
   "Place of delivery" O
   with [Location] L
-      such that O.subject.references(L) 
+      such that O.subject.references(L)
       and L.physicalType ~ Concepts."Home"
       
 /* End of Home */
@@ -11499,7 +11499,7 @@ define "Home":
 define "Other E.DE70":
   "Place of delivery" O
   with [Location] L
-      such that O.subject.references(L) 
+      such that O.subject.references(L)
       and L.physicalType ~ Concepts."Other - HIV.E.DE70"
 /* End of Other E.DE70 */
 
@@ -13635,7 +13635,7 @@ define "Date OAMT initiated":
 define "Currently on OAMT":
   [MedicationStatement] MS
     where exists(MS.reasonCode C where C ~ Concepts."OAMT")
-    
+
 /* End of Currently on OAMT */
 
 /*

@@ -74,7 +74,7 @@ define "methadone_prescribed at date":
 
 define "methadone_prescribed >= 60mg":
   "methadone_prescribed at date" MR
-    where exists(MR.dosageInstruction d 
+    where exists(MR.dosageInstruction d
       where exists d.doseAndRate dr
        where dr.dose.value >= 60)
 
@@ -89,7 +89,7 @@ define "buprenorphine_prescribed at date":
 
 define "buprenorphine_prescribed >= 8mg":
   "buprenorphine_prescribed at date" MR
-    where exists(MR.dosageInstruction d 
+    where exists(MR.dosageInstruction d
       where exists d.doseAndRate dr
        where dr.dose.value >= 60)
 
@@ -257,12 +257,12 @@ define setting:
 
 define anc:
   case
-    when "ANC contact date E.DE85" then ConceptsCustom."Antenatal care contact" 
+    when "ANC contact date E.DE85" then ConceptsCustom."Antenatal care contact"
     else null
   end
 
 define tb:
-  case 
+  case
       when "Diagnosed TB"  then Concepts."Diagnosed TB"
       when "Presumptive TB D.DE945" then Concepts."Presumptive TB - HIV.D.DE945"
       when "TB excluded" then Concepts."TB excluded"
@@ -396,14 +396,14 @@ define "By Age Stratifier 3":
 /* End of Age */
 
 define "By Age Stratifier 4":
-  case 
+  case
       when "Age In Years" < 25 then '<25'
       when "Age In Years" >= 25 then '25+'
       else null
   end
 
 define "By Age Stratifier 5":
-  case 
+  case
       when "Age In Years" < 15 and "Age In Years"<= 19 then '<15'
       when "Age In Years" >= 15 and "Age In Years"<= 19 then '15-19'
       when "Age In Years" <= 24 then '20-24'
@@ -414,7 +414,7 @@ define "By Age Stratifier 5":
 
 //(<0–4, 5–9, 10–14, 15-19, >19 years)
 define "By Age Stratifier 6":
-  case 
+  case
       when "Age In Years" < 5  then '<0–4'
       when "Age In Years"<= 9 then '5–9'
       when "Age In Years" <= 14 then '10–14'
@@ -425,15 +425,15 @@ define "By Age Stratifier 6":
 
   //<2 months, 2-12 months
 define "By Age Stratifier 7":
-  case 
+  case
       when "Age In Months" < 2  then '<2 months'
       when "Age In Months"<= 12 then '2-12 months'
       else null
   end
 
-//(0–4, 5–14, 15–24, 25+ years) 
+//(0–4, 5–14, 15–24, 25+ years)
 define "By Age Stratifier 8":
-  case 
+  case
       when "Age In Years" <= 4 then '0-4'
       when "Age In Years" <= 14 then '5-14'
       when "Age In Years" <= 24 then '15-24'
@@ -442,7 +442,7 @@ define "By Age Stratifier 8":
   end
 
 define "By Age Stratifier 9":
-  case 
+  case
       when "Age In Years" >= 15 and "Age In Years"<= 19 then '15-19'
       when "Age In Years" <= 24 then '20-24'
       when "Age In Years" <= 29 then '25–29'
@@ -654,7 +654,7 @@ define "pregnancy stratifier":
     when exists("Breastfeeding B.DE32") then Concepts."Breastfeeding - HIV.B.DE32"
     else null
   end
-  
+
 /* End of Currently pregnant B.DE29 */
 
 /*
@@ -1683,7 +1683,7 @@ define "Anorectal discharge B.DE231":
 */
 define "Sent for testing B.DE232":
   Elements."Sent for testing B.DE232" C
-    where C.prevalenceInterval() overlaps "Measurement Period" 
+    where C.prevalenceInterval() overlaps "Measurement Period"
 /* End of Sent for testing B.DE232 */
 
 /*
@@ -1850,7 +1850,7 @@ define "Gonorrhoea treatment start date B.DE260":
 */
 
 define "Type of specimen B.DE261":
-  case 
+  case
       when "Blood B.DE262"then Concepts."Blood - HIV.B.DE262"
       when "Urine B.DE263" then Concepts."Urine - HIV.B.DE263"
       when "Cervical or vaginal swab B.DE264" then Concepts."Cervical or vaginal swab - HIV.B.DE264"
@@ -1887,7 +1887,7 @@ define "Urine B.DE263":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Cervical or vaginal swab to be collected
 */
- 
+
 define "Cervical or vaginal swab B.DE264":
   exists (Elements."Cervical or vaginal swab B.DE264" O where O.effective.toInterval() during "Measurement Period")
 
@@ -1933,7 +1933,7 @@ define "Other B.DE267":
 */
 
 define "Neisseria gonorrhoeae test type B.DE276":
-  case 
+  case
       when "NAAT B.DE277" then Concepts."NAAT - HIV.B.DE277"
       when "POC Test B.DE278" then Concepts."POC Test - HIV.B.DE278"
       when "Culture B.DE279" then Concepts."Culture - HIV.B.DE279"
@@ -2178,7 +2178,7 @@ define "Restarting following a period of not taking PrEP":
 */
 
 define "Date client completes PEP course":
-  exists(Elements."Date client completes PEP course" MS 
+  exists(Elements."Date client completes PEP course" MS
   where MS.effective.toInterval() during "Measurement Period")
 
 /* End of Date client completes PEP course */
@@ -2606,7 +2606,7 @@ define "Restarting ART":
 */
 
 define "Current ART regimen":
-  case 
+  case
       when exists(Elements."Preferred first-line ART regimen" MS where MS.effective.toInterval() during "Measurement Period") then Concepts."Preferred first-line ART regimen"
       when exists(Elements."Alternative first-line ART regimen" MS where MS.effective.toInterval() during "Measurement Period") then Concepts."Alternative first-line ART regimen"
       when exists(Elements."First-line ART regimen under special circumstances" MS where MS.effective.toInterval() during "Measurement Period") then Concepts."First-line ART regimen under special circumstances"
@@ -3354,7 +3354,7 @@ define "Number of days medications prescribed Value":
 */
 
 define "Type of treatment-limiting toxicity":
-    case 
+    case
         when "Gastrointestinal" then  Concepts."Gastrointestinal"
         when "Skin issues" then  Concepts."Skin issues"
         when "Peripheral neuropathy" then  Concepts."Peripheral neuropathy"
@@ -3457,7 +3457,7 @@ define "Fatigue":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to headache
 */
- 
+
 define "Headache D.DE475":
   exists Elements."Headache D.DE475" AE where AE.date during "Measurement Period"
 /* End of Headache D.DE475 */
@@ -3477,7 +3477,7 @@ define "Bone dysfunction":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to metabolic symptoms (body fat changes, hyperglycaemia, dyslipidaemia)
 */
- 
+
 define "Metabolic symptoms":
   exists Elements."Metabolic symptoms" AE where AE.date during "Measurement Period"
 /* End of Metabolic symptoms */
@@ -3487,7 +3487,7 @@ define "Metabolic symptoms":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to kidney dysfunction (nephrolithiasis, renal insufficiency)
 */
- 
+
 define "Kidney dysfunction":
   exists Elements."Kidney dysfunction" AE where AE.date during "Measurement Period"
 /* End of Kidney dysfunction */
@@ -3497,7 +3497,7 @@ define "Kidney dysfunction":
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client experienced an unexpected adverse drug reaction
 */
- 
+
 define "Unexpected adverse drug reaction":
   exists Elements."Unexpected adverse drug reaction" AE where AE.date during "Measurement Period"
 /* End of Unexpected adverse drug reaction */
@@ -3584,7 +3584,7 @@ define "Methadone D.DE555":
         where MR.status = 'completed'
         and MR.MedicationRequestPeriod() during "Measurement Period"
 
-      
+
 /* End of Methadone D.DE555 */
 
 /*
@@ -3821,7 +3821,7 @@ define "Invasive cervical cancer treatment episode Value":
 */
 
 define "Invasive cervical cancer treatment method":
-  Elements."Invasive cervical cancer treatment method" P 
+  Elements."Invasive cervical cancer treatment method" P
   where P.performed during "Measurement Period" 
 
 /* End of Invasive cervical cancer treatment method */
@@ -4022,7 +4022,7 @@ define "Fast track ART refill":
       EOC.statusHistory H
       where H.period starts after start of "Measurement Period"
       and H.period starts before end of "Measurement Period"
-    ) 
+    )
     or (
       EOC.period starts after start of "Measurement Period"
       and EOC.period starts before end of "Measurement Period"
@@ -4045,7 +4045,7 @@ define "Facility adherence club":
       EOC.statusHistory H
       where H.period starts after start of "Measurement Period"
       and H.period starts before end of "Measurement Period"
-    ) 
+    )
     or (
       EOC.period starts after start of "Measurement Period"
       and EOC.period starts before end of "Measurement Period"
@@ -4068,7 +4068,7 @@ define "Community ART distribution point":
       EOC.statusHistory H
       where H.period starts after start of "Measurement Period"
       and H.period starts before end of "Measurement Period"
-    ) 
+    )
     or (
       EOC.period starts after start of "Measurement Period"
       and EOC.period starts before end of "Measurement Period"
@@ -4091,7 +4091,7 @@ define "CHW/peer educator community ART group":
       EOC.statusHistory H
       where H.period starts after start of "Measurement Period"
       and H.period starts before end of "Measurement Period"
-    ) 
+    )
     or (
       EOC.period starts after start of "Measurement Period"
       and EOC.period starts before end of "Measurement Period"
@@ -4114,7 +4114,7 @@ define "Patient/client community ART group":
       EOC.statusHistory H
       where H.period starts after start of "Measurement Period"
       and H.period starts before end of "Measurement Period"
-    ) 
+    )
     or (
       EOC.period starts after start of "Measurement Period"
       and EOC.period starts before end of "Measurement Period"
@@ -4137,7 +4137,7 @@ define "Other DSD ART model":
       EOC.statusHistory H
       where H.period starts after start of "Measurement Period"
       and H.period starts before end of "Measurement Period"
-    ) 
+    )
     or (
       EOC.period starts after start of "Measurement Period"
       and EOC.period starts before end of "Measurement Period"
@@ -5192,7 +5192,7 @@ define "Is Infant Patient":
 @description: Whether the infant or child was determined to have had HIV exposure
 */
 define "is HIV-exposed infant or child E.DE112":
-  "Is Infant Patient" and 
+  "Is Infant Patient" and
   exists(Elements."HIV-exposed infant or child E.DE112" O
     where O.effective.toInterval() during "Measurement Period")
 
@@ -5379,7 +5379,7 @@ define "Registered in birth cohort Observation":
 */
 
 define "EID test number 1 test result":
-  case 
+  case
       when "Positive E.DE187"  then Concepts."Positive - HIV.E.DE187"
       when "Negative E.DE188" then Concepts."Negative - HIV.E.DE188"
       when "Indeterminate E.DE189"then Concepts."Indeterminate - HIV.E.DE189"
@@ -5388,23 +5388,23 @@ define "EID test number 1 test result":
 
 define "Positive E.DE187":
 exists(
-    Elements."Positive E.DE187" O 
+    Elements."Positive E.DE187" O
     with [Patient] Pt
-    such that O.subject.references(Pt) 
+    such that O.subject.references(Pt)
     and months between start of O.effective.toInterval() and FHIRHelpers.ToDate(Pt.birthDate) < 2 months)
 
 define "Negative E.DE188":
 exists(
-    Elements."Negative E.DE188" O 
+    Elements."Negative E.DE188" O
     with [Patient] Pt
-    such that O.subject.references(Pt) 
+    such that O.subject.references(Pt)
     and months between start of O.effective.toInterval() and FHIRHelpers.ToDate(Pt.birthDate) < 2 months)
 
 define "Indeterminate E.DE189":
 exists(
-    Elements."Indeterminate E.DE189" O 
+    Elements."Indeterminate E.DE189" O
     with [Patient] Pt
-    such that O.subject.references(Pt) 
+    such that O.subject.references(Pt)
     and months between start of O.effective.toInterval() and FHIRHelpers.ToDate(Pt.birthDate) < 2 months)
 
 
@@ -6076,9 +6076,9 @@ define "Drugs out of stock  Observation":
 /* End of Drugs out of stock  */
 
 /*
-@dataElement: HIV.H.DE78 - Client lacks finances 
+@dataElement: HIV.H.DE78 - Client lacks finances
 @activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because client lacked finances 
+@description: Client stopped ART because client lacked finances
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Client lacks finances ":
