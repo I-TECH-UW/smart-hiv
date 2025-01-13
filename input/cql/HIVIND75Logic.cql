@@ -116,8 +116,10 @@ define "Initial Population":
  */
 
 define "Numerator":
-HIE."Has HIV-positive Status"
-  and HIE."Positive B.DE257"
+HIE."Has HIV-positive Status" and
+  exists(HE."Positive B.DE257" G
+  with HE."Gonorrhoea test date B.DE255" P
+  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
   and HIE."Gonorrhoea treatment start date B.DE260"
 
 
@@ -130,8 +132,10 @@ HIE."Has HIV-positive Status"
  */
 
 define "Denominator":
-  HIE."Has HIV-positive Status"
-  and HIE."Positive B.DE257"
+HIE."Has HIV-positive Status" and
+  exists(HE."Positive B.DE257" G
+  with HE."Gonorrhoea test date B.DE255" P
+  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
     
 
 /* end Populations */
@@ -144,7 +148,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -154,6 +158,6 @@ define "patientGroups Stratifier":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 2"
+  + ':' + HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')

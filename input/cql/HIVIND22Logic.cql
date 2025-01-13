@@ -109,16 +109,14 @@ define "Measure Population":
       such that IC.hasMember.references(DIP)
     with HIE."HIV test results returned in measurement period" HIV
       such that IC.hasMember.references(HIV)
-      and HIV.issued after start of "Measurement Period"
-      and HIV.issued before end of "Measurement Period")
+      and HIV.issued.toInterval() during "Measurement Period")
     or 
     exists(HE."Partner or contact of an index case" IC
     with HE."Sexual partner" SP
       such that IC.hasMember.references(SP)
       with HIE."HIV test results returned in measurement period" HIV
       such that IC.hasMember.references(HIV)
-      and HIV.issued after start of "Measurement Period"
-      and HIV.issued before end of "Measurement Period")
+      and HIV.issued.toInterval() during "Measurement Period")
 
 
 

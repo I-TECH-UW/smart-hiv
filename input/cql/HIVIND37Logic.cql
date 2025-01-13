@@ -92,6 +92,7 @@ define "Initial Population":
  * Calculation: COUNT of clients with "HIV status"='HIV-positive' AND "Place of delivery" is a 'Health facility' AND "Delivery date" is in the reporting period AND "Date of viral load sample collection" is on "Delivery date" AND "Viral load test result" LESS THAN 1000 copies/mL
  */
 
+//health facility birth
 define "First Health facility":
   (First(HE."Health facility"))
 
@@ -137,8 +138,10 @@ define "Age Stratifier":
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
+define "Timing of ART initiation":
+  HIE."Timing of ART initiation"
+
 define "Stratification":
  HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
-
- // need to add  Timing of ART initiation (during pregnancy, on ART at first ANC visit)
++ HIE."Timing of ART initiation".code 
