@@ -84,10 +84,11 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 context Patient
 /* Populations */
 
+//use the last ART presciption authored before end of measurement period
 define "Last ART prescribed before end of measurement period":
   Last([MedicationRequest: HCC."ART medication"] MR
   where (MR.authoredOn.toInterval() before end of "Measurement Period")
-  and Common.MedicationRequestPeriod(MR) overlaps "Measurement Period"
+  and MR.MedicationRequestPeriod() overlaps "Measurement Period"
   sort by start of authoredOn.toInterval())
 
 
@@ -108,7 +109,7 @@ define "Initial Population":
 define "Numerator":
   HIE."Has HIV-positive Status"
    and HIE."On ART H.DE47"
-   and (duration in months of Common.MedicationRequestPeriod("Last ART prescribed before end of measurement period") >= 3 months)
+   and (duration in months of "Last ART prescribed before end of measurement period".MedicationRequestPeriod() >= 3 months)
 
 
 /**
@@ -133,7 +134,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier"
+	HIE."By Age Stratifier 8"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -143,6 +144,6 @@ define "patientGroups Stratifier":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
+  + ':' + HIE."By Age Stratifier 8"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')

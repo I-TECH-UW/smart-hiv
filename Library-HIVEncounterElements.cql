@@ -1344,13 +1344,9 @@ define "Date/time of suspected exposure to HIV C.DE9 Value":
 @activity: HIV.C3 Capture or update client history
 @description: The client is currently taking PrEP. Oral pre-exposure prophylaxis (PrEP) of HIV is the use of ARV drugs by people who are not infected with HIV to block the acquisition of HIV.
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Currently on PrEP":
-  exists "Currently on PrEP Observation"
-define "Currently on PrEP Observation":
-  Elements."Currently on PrEP Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Currently on PrEP" O
+    where O.effective.toInterval() starts on or before Today
 /* End of Currently on PrEP */
 
 /*
@@ -1372,17 +1368,8 @@ define "Current PrEP regimen Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Treated with tenofovir disoproxil fumarate (TDF) and emtricitabine (FTC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "TDF + FTC C.DE18":
-  exists "TDF + FTC C.DE18 Condition"
-    or exists "TDF + FTC C.DE18 Observation"
-define "TDF + FTC C.DE18 Condition":
-  Elements."TDF + FTC C.DE18 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "TDF + FTC C.DE18 Observation":
-  Elements."TDF + FTC C.DE18 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  exists Elements."TDF + FTC C.DE18"
 /* End of TDF + FTC C.DE18 */
 
 /*
@@ -1390,35 +1377,18 @@ define "TDF + FTC C.DE18 Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Treated with single-agent tenofovir disoproxil fumarate (TDF) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "TDF C.DE19":
-  exists "TDF C.DE19 Condition"
-    or exists "TDF C.DE19 Observation"
-define "TDF C.DE19 Condition":
-  Elements."TDF C.DE19 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "TDF C.DE19 Observation":
-  Elements."TDF C.DE19 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
-/* End of TDF C.DE19 */
+  Elements."TDF C.DE19" MS
+    where MS.effective.toInterval() starts on or before Today
 
 /*
 @dataElement: HIV.C.DE20 - TDF + 3TC
 @activity: HIV.C3 Capture or update client history
 @description: Treated with tenofovir disoproxil fumarate (TDF) and lamivudine (3TC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "TDF + 3TC C.DE20":
-  exists "TDF + 3TC C.DE20 Condition"
-    or exists "TDF + 3TC C.DE20 Observation"
-define "TDF + 3TC C.DE20 Condition":
-  Elements."TDF + 3TC C.DE20 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "TDF + 3TC C.DE20 Observation":
-  Elements."TDF + 3TC C.DE20 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."TDF + 3TC C.DE20" MS
+    where MS.effective.toInterval() starts on or before Today
 /* End of TDF + 3TC C.DE20 */
 
 /*
@@ -1426,17 +1396,9 @@ define "TDF + 3TC C.DE20 Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Treated with other tenofovir disoproxil fumarate (TDF)-based regimen (oral PrEP)
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Other TDF-based regimen":
-  exists "Other TDF-based regimen Condition"
-    or exists "Other TDF-based regimen Observation"
-define "Other TDF-based regimen Condition":
-  Elements."Other TDF-based regimen Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Other TDF-based regimen Observation":
-  Elements."Other TDF-based regimen Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Other TDF-based regimen" MS
+    where MS.effective.toInterval() starts on or before Today
 /* End of Other TDF-based regimen */
 
 /*
@@ -1444,17 +1406,9 @@ define "Other TDF-based regimen Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Dapivirine vaginal ring (DVR) for HIV prevention
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Dapivirine vaginal ring DVR C.DE22":
-  exists "Dapivirine vaginal ring DVR C.DE22 Condition"
-    or exists "Dapivirine vaginal ring DVR C.DE22 Observation"
-define "Dapivirine vaginal ring DVR C.DE22 Condition":
-  Elements."Dapivirine vaginal ring DVR C.DE22 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Dapivirine vaginal ring DVR C.DE22 Observation":
-  Elements."Dapivirine vaginal ring DVR C.DE22 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Dapivirine vaginal ring DVR C.DE22" MS
+    where MS.effective.toInterval() starts on or before Today
 /* End of Dapivirine vaginal ring DVR C.DE22 */
 
 /*
@@ -1462,17 +1416,9 @@ define "Dapivirine vaginal ring DVR C.DE22 Observation":
 @activity: HIV.C3 Capture or update client history
 @description: Long-acting injectable cabotegravir
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "CAB-LA C.DE23":
-  exists "CAB-LA C.DE23 Condition"
-    or exists "CAB-LA C.DE23 Observation"
-define "CAB-LA C.DE23 Condition":
-  Elements."CAB-LA C.DE23 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "CAB-LA C.DE23 Observation":
-  Elements."CAB-LA C.DE23 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."CAB-LA C.DE23" MS
+    where MS.effective.toInterval() starts on or before Today
 /* End of CAB-LA C.DE23 */
 
 /*
@@ -2710,11 +2656,9 @@ define "Current ART regimen Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Preferred first-line ART regimen":
-  exists "Preferred first-line ART regimen Observation"
-define "Preferred first-line ART regimen Observation":
-  Elements."Preferred first-line ART regimen Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Preferred first-line ART regimen" MS
+    where MS.effective.toInterval() starts on or before Today
+    or MS.context.references(EncounterId)
 /* End of Preferred first-line ART regimen */
 
 /*
@@ -2724,11 +2668,9 @@ define "Preferred first-line ART regimen Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Alternative first-line ART regimen":
-  exists "Alternative first-line ART regimen Observation"
-define "Alternative first-line ART regimen Observation":
-  Elements."Alternative first-line ART regimen Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Alternative first-line ART regimen" MS
+    where MS.effective.toInterval() starts on or before Today
+    or MS.context.references(EncounterId)
 /* End of Alternative first-line ART regimen */
 
 /*
@@ -2738,11 +2680,9 @@ define "Alternative first-line ART regimen Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "First-line ART regimen under special circumstances":
-  exists "First-line ART regimen under special circumstances Observation"
-define "First-line ART regimen under special circumstances Observation":
-  Elements."First-line ART regimen under special circumstances Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."First-line ART regimen under special circumstances" MS
+    where MS.effective.toInterval() starts on or before Today
+    or MS.context.references(EncounterId)
 /* End of First-line ART regimen under special circumstances */
 
 /*
@@ -2750,13 +2690,10 @@ define "First-line ART regimen under special circumstances Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The preferred second-line ART regimen for the client according to WHO (or national) guidelines
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Preferred second-line ART regimen":
-  exists "Preferred second-line ART regimen Observation"
-define "Preferred second-line ART regimen Observation":
-  Elements."Preferred second-line ART regimen Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Preferred second-line ART regimen" MS
+    where MS.effective.toInterval() starts on or before Today
+    or MS.context.references(EncounterId)
 /* End of Preferred second-line ART regimen */
 
 /*
@@ -2764,13 +2701,10 @@ define "Preferred second-line ART regimen Observation":
 @activity: HIV.D8 Capture or update client history
 @description: The alternative second-line ART regimen for the client according to WHO (or national) guidelines
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Alternative second-line ART regimen":
-  exists "Alternative second-line ART regimen Observation"
-define "Alternative second-line ART regimen Observation":
-  Elements."Alternative second-line ART regimen Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Alternative second-line ART regimen" MS
+    where MS.effective.toInterval() starts on or before Today
+    or MS.context.references(EncounterId)
 /* End of Alternative second-line ART regimen */
 
 /*
@@ -4651,15 +4585,8 @@ define "Antivirals Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Buprenorphine D.DE552":
-  exists "Buprenorphine D.DE552 Condition"
-    or exists "Buprenorphine D.DE552 Observation"
-define "Buprenorphine D.DE552 Condition":
-  Elements."Buprenorphine D.DE552 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Buprenorphine D.DE552 Observation":
-  Elements."Buprenorphine D.DE552 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Buprenorphine D.DE552" MR
+    where MR.authoredOn.toInterval() starts on or before Today
 /* End of Buprenorphine D.DE552 */
 
 /*
@@ -4703,17 +4630,9 @@ define "Hormonal family planning method Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Opioid substitution to treat opioid dependence
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Methadone D.DE555":
-  exists "Methadone D.DE555 Condition"
-    or exists "Methadone D.DE555 Observation"
-define "Methadone D.DE555 Condition":
-  Elements."Methadone D.DE555 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Methadone D.DE555 Observation":
-  Elements."Methadone D.DE555 Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Methadone D.DE555" MR
+    where MR.authoredOn.toInterval() starts on or before Today
 /* End of Methadone D.DE555 */
 
 /*
@@ -5658,11 +5577,8 @@ define "Extrapulmonary TB D.DE937 Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Final result of the TB investigation (bacteriological and/or clinical)
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "TB diagnosis result":
-  exists "TB diagnosis result Observation"
-define "TB diagnosis result Observation":
-  Elements."TB diagnosis result Observation" O
+  Elements."TB diagnosis result" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of TB diagnosis result */
@@ -5674,13 +5590,7 @@ define "TB diagnosis result Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Diagnosed TB":
-  exists "Diagnosed TB Condition"
-    or exists "Diagnosed TB Observation"
-define "Diagnosed TB Condition":
-  Elements."Diagnosed TB Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Diagnosed TB Observation":
-  Elements."Diagnosed TB Observation" O
+  Elements."Diagnosed TB" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Diagnosed TB */
@@ -5690,15 +5600,8 @@ define "Diagnosed TB Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client is not diagnosed with TB
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "TB excluded":
-  exists "TB excluded Condition"
-    or exists "TB excluded Observation"
-define "TB excluded Condition":
-  Elements."TB excluded Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "TB excluded Observation":
-  Elements."TB excluded Observation" O
+  Elements."TB excluded" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of TB excluded */
@@ -5708,11 +5611,8 @@ define "TB excluded Observation":
 @activity: HIV.D8 Capture or update client history
 @description: Client has signs or symptoms of tuberculosis (TB) without laboratory confirmation
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Presumptive TB D.DE945":
-  exists "Presumptive TB D.DE945 Observation"
-define "Presumptive TB D.DE945 Observation":
-  Elements."Presumptive TB D.DE945 Observation" O
+  Elements."Presumptive TB D.DE945" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Presumptive TB D.DE945 */
@@ -6643,11 +6543,8 @@ define "EID test number 2 Observation":
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Early infant diagnosis test number 1 test result
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "EID test number 1 test result":
-  exists "EID test number 1 test result Observation"
-define "EID test number 1 test result Observation":
-  Elements."EID test number 1 test result Observation" O
+  Elements."EID test number 1 test result" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of EID test number 1 test result */
@@ -6659,13 +6556,7 @@ define "EID test number 1 test result Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Positive E.DE187":
-  exists "Positive E.DE187 Condition"
-    or exists "Positive E.DE187 Observation"
-define "Positive E.DE187 Condition":
-  Elements."Positive E.DE187 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Positive E.DE187 Observation":
-  Elements."Positive E.DE187 Observation" O
+  Elements."Positive E.DE187" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Positive E.DE187 */
@@ -6677,13 +6568,7 @@ define "Positive E.DE187 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Negative E.DE188":
-  exists "Negative E.DE188 Condition"
-    or exists "Negative E.DE188 Observation"
-define "Negative E.DE188 Condition":
-  Elements."Negative E.DE188 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Negative E.DE188 Observation":
-  Elements."Negative E.DE188 Observation" O
+  Elements."Negative E.DE188" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Negative E.DE188 */
@@ -6695,13 +6580,7 @@ define "Negative E.DE188 Observation":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Indeterminate E.DE189":
-  exists "Indeterminate E.DE189 Condition"
-    or exists "Indeterminate E.DE189 Observation"
-define "Indeterminate E.DE189 Condition":
-  Elements."Indeterminate E.DE189 Condition" C
-    where C.prevalenceInterval() starts on or before Today
-define "Indeterminate E.DE189 Observation":
-  Elements."Indeterminate E.DE189 Observation" O
+  Elements."Indeterminate E.DE189" O
     where O.encounter.references(EncounterId)
       or O.effective.toInterval() starts on or before Today
 /* End of Indeterminate E.DE189 */

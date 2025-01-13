@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "61",
+            "r" : "71",
             "s" : [ {
                "value" : [ "/**\n * Library: HIV.IND.19 Logic\n * Ref No: HTS.2\n * Short Name: HTS test volume and positivity\n *\n * Definition: Number of HIV tests performed (volume) and the % of HIV-positive results returned to people (positivity)\n *\n * Numerator: Number of tests conducted in which a new HIV-positive result or diagnosis was returned to a person during the reporting period (positivity)\n * Numerator Calculation: COUNT of tests with \"HIV test result\"='HIV-positive' AND ((\"Date HIV test results returned\" in the reporting period) OR (\"HIV diagnosis date\" in the reporting period))\n * Numerator Exclusions: Self-testing\n *\n * Denominator: Number of tests performed where results were returned to a person during the reporting period (testing volume)\n * Denominator Calculation: COUNT of tests with \"HIV test date\" AND \"Date HIV test results returned\" in the reporting period\n * Denominator Exclusions: Self-testing\n *\n * Disaggregations:\n * • Gender (female, male, other*) \n *  • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–29, 30–34, 35–39, 40–44, 45–49, 50+ years)** \n *  • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)*** \n *  • TB status (presumptive TB, diagnosed TB, none) \n *  • Testing entry point: \n *  - Facility-level testing: Provider-initiated testing and counselling in clinics or emergency facilities, ANC clinics (including labour and delivery), voluntary counselling and testing (within a health facility setting), family planning clinics (only in high HIV burden settings), TB clinics, other facility-level testing \n *  - Community-level testing: Mobile testing (for example, through vans or temporary testing facilities), voluntary counselling and testing centres (not within a health facility setting), other community-based testing. \n *  • Cities and other administrative regions of epidemiologic importance\n *\n * Disaggregation Elements: Gender | Age | Key population member type | TB diagnosis result | Presumptive TB\n *\n * Numerator and Denominator Elements:\n * Date HIV test results returned \n *  HIV diagnosis date \n *  HIV test date \n *  HIV test result\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth\n * HIV.A.DE18: Gender* | Gender of the client*\n * HIV.A.DE19: Female | Client identifies as female\n * HIV.A.DE20: Male | Client identifies as male\n * HIV.A.DE21: Transgender male | Client identifies as transgender male\n * HIV.A.DE22: Transgender female | Client identifies as transgender female\n * HIV.A.DE23: Other | Additional category\n * HIV.B.DE50: Key population member type* | The type of key population that the client is included in\n * HIV.B.DE51: Sex worker | Client is a sex worker\n * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men\n * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse\n * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs\n * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting\n * HIV.B.DE60: Date HIV test results returned | Date HIV test result returned to client\n * HIV.B.DE71: HIV diagnosis date | Date diagnosis was returned to client\n * HIV.B.DE110: HIV test date | Date of the HIV test\n * HIV.B.DE111: HIV test result | The result from HIV testing after applying the testing algorithm\n * HIV.B.DE112: HIV-positive | Test result is HIV-positive\n * HIV.B.DE113: HIV-negative | Test result is HIV-negative\n * HIV.B.DE114: HIV-inconclusive | Test result is HIV-inconclusive\n * HIV.D.DE282: Presumptive TB | Client's comorbidities or coinfections or symptoms of these include presumptive TB\n * HIV.D.DE939: TB diagnosis result | Final result of the TB investigation (bacteriological and/or clinical)\n * HIV.D.DE940: Diagnosed TB | Client is diagnosed with TB disease\n * HIV.D.DE941: TB excluded | Client is not diagnosed with TB\n * HIV.D.DE945: Presumptive TB | Client has signs or symptoms of tuberculosis (TB) without laboratory confirmation\n * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in\n * HIV.E.DE115: Sex worker | Infant's mother is a sex worker\n * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs\n * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse\n * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting\n * HIV.E.DE224: HIV test date | Date of the HIV test\n * HIV.SRV.DE1: HIV test date | Date of the HIV test\n * HIV.SRV.DE2: HIV test result | The result from HIV testing after applying the testing algorithm\n *\n * Additional Context\n * - what it measures: This indicator measures HIV test volume and positivity across service delivery approaches and populations.\n * - rationale: • Knowledge of HIV status is the entry point for people living with HIV to treatment and the continuum of care, and for those who test HIV-negative and remain at risk to prevention interventions. | • Testing volume disaggregated by age, sex, testing approach and HIV status helps to assess the gaps among various settings, contexts and populations and better target service delivery.\n * - method: For the numerator and denominator: Patient monitoring tools, for example, HIV testing service records, HTS or lab registers, logbooks and reporting forms at facility and community levels or EMRs. Reported data should be a count of the number of tests conducted and their results were returned to a person and not the number of unique persons who tested during the reporting period. The method of measurement intends to prevent double counting when multiple assays are used to confirm an HIV-positive diagnosis according to the national testing algorithm. This indicator does not include self-testing.\n * \n * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm\n */\n\n","library HIVIND19Logic" ]
             } ]
@@ -391,7 +391,7 @@
             }
          }, {
             "localId" : "25",
-            "locator" : "135:1-136:42",
+            "locator" : "113:1-114:42",
             "name" : "Administrative Gender Stratifier",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -400,7 +400,7 @@
                "s" : {
                   "r" : "25",
                   "s" : [ {
-                     "value" : [ "//     exists(HE.\"HIV Positive Condition\" C\n// \twhere C.onset during \"Measurement Period\")\n// \tor \n// \texists(HIE.\"HIV Positive Observation\" O\n// \twhere (O.issued before end of \"Measurement Period\"\n// \tand O.issued after start of \"Measurement Period\")\n// \t) \n\n// define \"numeratorExclusion\":\n// \texists(HIC.\"HIV Positive Observation - HIV Self Test\" O\n// \twhere (O.issued before end of \"Measurement Period\"\n// \tand O.issued after start of \"Measurement Period\")\n// \t) \n\n// define \"denominator\":\n\n\n// define \"denominatorExclusion\":\n// \texists(HIC.\"HIV Positive Observation - HIV Self Test\" O\n// \twhere (O.issued before end of \"Measurement Period\"\n// \tand O.issued after start of \"Measurement Period\")\n// \t) \n\n/*\n * Disaggregators\n */\n \n","define ","\"Administrative Gender Stratifier\"",":\n\t" ]
+                     "value" : [ "/*\n * Disaggregators\n */\n \n","define ","\"Administrative Gender Stratifier\"",":\n\t" ]
                   }, {
                      "r" : "24",
                      "s" : [ {
@@ -421,14 +421,14 @@
             } ],
             "expression" : {
                "localId" : "24",
-               "locator" : "136:2-136:42",
+               "locator" : "114:2-114:42",
                "name" : "By Administrative Gender Stratifier",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
             }
          }, {
             "localId" : "28",
-            "locator" : "138:1-139:24",
+            "locator" : "116:1-117:24",
             "name" : "Age Stratifier",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -458,14 +458,14 @@
             } ],
             "expression" : {
                "localId" : "27",
-               "locator" : "139:2-139:24",
+               "locator" : "117:2-117:24",
                "name" : "By Age Stratifier",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
             }
          }, {
             "localId" : "31",
-            "locator" : "141:1-142:38",
+            "locator" : "119:1-120:38",
             "name" : "Geographic Region Stratifier",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -495,14 +495,14 @@
             } ],
             "expression" : {
                "localId" : "30",
-               "locator" : "142:2-142:38",
+               "locator" : "120:2-120:38",
                "name" : "By Geographic Region Stratifier",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
             }
          }, {
             "localId" : "34",
-            "locator" : "144:1-145:20",
+            "locator" : "122:1-123:20",
             "name" : "patientGroups Stratifier",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -532,14 +532,14 @@
             } ],
             "expression" : {
                "localId" : "33",
-               "locator" : "145:2-145:20",
+               "locator" : "123:2-123:20",
                "name" : "patientGroups",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
             }
          }, {
             "localId" : "37",
-            "locator" : "147:1-148:17",
+            "locator" : "125:1-126:17",
             "name" : "Setting",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -569,90 +569,191 @@
             } ],
             "expression" : {
                "localId" : "36",
-               "locator" : "148:5-148:17",
+               "locator" : "126:5-126:17",
                "name" : "setting",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "61",
-            "locator" : "153:1-158:27",
+            "localId" : "40",
+            "locator" : "128:2-129:13",
+            "name" : "TB Stratifier",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "40",
+                  "s" : [ {
+                     "value" : [ "","define ","\"TB Stratifier\"",":\n     " ]
+                  }, {
+                     "r" : "39",
+                     "s" : [ {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "HIE" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "39",
+                        "s" : [ {
+                           "value" : [ "\"tb\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "39",
+               "locator" : "129:6-129:13",
+               "name" : "tb",
+               "libraryName" : "HIE",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "71",
+            "locator" : "131:1-137:21",
             "name" : "Stratification",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "61",
+                  "r" : "71",
                   "s" : [ {
-                     "value" : [ "// define \"TB Stratifier\":\n//     HIC.\"tb\"\n\n","define ","\"Stratification\"",":\n " ]
+                     "value" : [ "","define ","\"Stratification\"",":\n " ]
                   }, {
-                     "r" : "60",
+                     "r" : "70",
                      "s" : [ {
-                        "r" : "55",
+                        "r" : "66",
                         "s" : [ {
-                           "r" : "50",
+                           "r" : "64",
                            "s" : [ {
-                              "r" : "47",
+                              "r" : "60",
                               "s" : [ {
-                                 "r" : "45",
+                                 "r" : "58",
                                  "s" : [ {
-                                    "r" : "42",
+                                    "r" : "53",
                                     "s" : [ {
-                                       "r" : "40",
+                                       "r" : "50",
                                        "s" : [ {
-                                          "r" : "39",
+                                          "r" : "48",
                                           "s" : [ {
-                                             "r" : "38",
+                                             "r" : "45",
                                              "s" : [ {
-                                                "value" : [ "HIE" ]
+                                                "r" : "43",
+                                                "s" : [ {
+                                                   "r" : "42",
+                                                   "s" : [ {
+                                                      "r" : "41",
+                                                      "s" : [ {
+                                                         "value" : [ "HIE" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "42",
+                                                      "s" : [ {
+                                                         "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "." ]
+                                                }, {
+                                                   "r" : "43",
+                                                   "s" : [ {
+                                                      "value" : [ "code" ]
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "value" : [ " \n  + " ]
+                                             }, {
+                                                "r" : "44",
+                                                "s" : [ {
+                                                   "value" : [ "':'" ]
+                                                } ]
                                              } ]
                                           }, {
-                                             "value" : [ "." ]
+                                             "value" : [ " + " ]
                                           }, {
-                                             "r" : "39",
+                                             "r" : "47",
                                              "s" : [ {
-                                                "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                                "r" : "46",
+                                                "s" : [ {
+                                                   "value" : [ "HIE" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "47",
+                                                "s" : [ {
+                                                   "value" : [ "\"By Age Stratifier\"" ]
+                                                } ]
                                              } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n+ " ]
+                                       }, {
+                                          "r" : "49",
+                                          "s" : [ {
+                                             "value" : [ "':'" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " + " ]
+                                    }, {
+                                       "r" : "52",
+                                       "s" : [ {
+                                          "r" : "51",
+                                          "s" : [ {
+                                             "value" : [ "HIE" ]
                                           } ]
                                        }, {
                                           "value" : [ "." ]
                                        }, {
-                                          "r" : "40",
+                                          "r" : "52",
                                           "s" : [ {
-                                             "value" : [ "code" ]
+                                             "value" : [ "\"By Geographic Region Stratifier\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n+ " ]
+                                 }, {
+                                    "r" : "57",
+                                    "s" : [ {
+                                       "value" : [ "Combine","(" ]
+                                    }, {
+                                       "r" : "55",
+                                       "s" : [ {
+                                          "r" : "54",
+                                          "s" : [ {
+                                             "value" : [ "HIE" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "55",
+                                          "s" : [ {
+                                             "value" : [ "patientGroups" ]
                                           } ]
                                        } ]
                                     }, {
-                                       "value" : [ " \n  + " ]
+                                       "value" : [ ", " ]
                                     }, {
-                                       "r" : "41",
+                                       "r" : "56",
                                        "s" : [ {
                                           "value" : [ "':'" ]
                                        } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " + " ]
-                                 }, {
-                                    "r" : "44",
-                                    "s" : [ {
-                                       "r" : "43",
-                                       "s" : [ {
-                                          "value" : [ "HIE" ]
-                                       } ]
                                     }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "44",
-                                       "s" : [ {
-                                          "value" : [ "\"By Age Stratifier\"" ]
-                                       } ]
+                                       "value" : [ ")" ]
                                     } ]
                                  } ]
                               }, {
-                                 "value" : [ "\n+ " ]
+                                 "value" : [ "\n + " ]
                               }, {
-                                 "r" : "46",
+                                 "r" : "59",
                                  "s" : [ {
                                     "value" : [ "':'" ]
                                  } ]
@@ -660,197 +761,212 @@
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "49",
+                              "r" : "63",
                               "s" : [ {
-                                 "r" : "48",
+                                 "r" : "62",
                                  "s" : [ {
-                                    "value" : [ "HIE" ]
+                                    "r" : "61",
+                                    "s" : [ {
+                                       "value" : [ "HIE" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "62",
+                                    "s" : [ {
+                                       "value" : [ "\"setting\"" ]
+                                    } ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "49",
+                                 "r" : "63",
                                  "s" : [ {
-                                    "value" : [ "\"By Geographic Region Stratifier\"" ]
+                                    "value" : [ "code" ]
                                  } ]
                               } ]
                            } ]
                         }, {
                            "value" : [ "\n+ " ]
                         }, {
-                           "r" : "54",
+                           "r" : "65",
                            "s" : [ {
-                              "value" : [ "Combine","(" ]
-                           }, {
-                              "r" : "52",
-                              "s" : [ {
-                                 "r" : "51",
-                                 "s" : [ {
-                                    "value" : [ "HIE" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "52",
-                                 "s" : [ {
-                                    "value" : [ "patientGroups" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ", " ]
-                           }, {
-                              "r" : "53",
-                              "s" : [ {
-                                 "value" : [ "':'" ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
+                              "value" : [ "':'" ]
                            } ]
                         } ]
                      }, {
-                        "value" : [ "\n+ " ]
+                        "value" : [ " + " ]
                      }, {
-                        "r" : "59",
+                        "r" : "69",
                         "s" : [ {
-                           "value" : [ "Combine","(" ]
-                        }, {
-                           "r" : "57",
+                           "r" : "68",
                            "s" : [ {
-                              "r" : "56",
+                              "r" : "67",
                               "s" : [ {
                                  "value" : [ "HIE" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "57",
+                              "r" : "68",
                               "s" : [ {
-                                 "value" : [ "setting" ]
+                                 "value" : [ "\"tb\"" ]
                               } ]
                            } ]
                         }, {
-                           "value" : [ ", " ]
+                           "value" : [ "." ]
                         }, {
-                           "r" : "58",
+                           "r" : "69",
                            "s" : [ {
-                              "value" : [ "':'" ]
+                              "value" : [ "code" ]
                            } ]
-                        }, {
-                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "60",
-               "locator" : "154:2-158:27",
+               "localId" : "70",
+               "locator" : "132:2-137:21",
                "type" : "Concatenate",
                "operand" : [ {
-                  "localId" : "55",
-                  "locator" : "154:2-157:33",
+                  "localId" : "66",
+                  "locator" : "132:2-137:5",
                   "type" : "Concatenate",
                   "operand" : [ {
-                     "localId" : "50",
-                     "locator" : "154:2-156:45",
+                     "localId" : "64",
+                     "locator" : "132:2-136:27",
                      "type" : "Concatenate",
                      "operand" : [ {
-                        "localId" : "47",
-                        "locator" : "154:2-156:5",
+                        "localId" : "60",
+                        "locator" : "132:2-136:6",
                         "type" : "Concatenate",
                         "operand" : [ {
-                           "localId" : "45",
-                           "locator" : "154:2-155:33",
+                           "localId" : "58",
+                           "locator" : "132:2-135:33",
                            "type" : "Concatenate",
                            "operand" : [ {
-                              "localId" : "42",
-                              "locator" : "154:2-155:7",
+                              "localId" : "53",
+                              "locator" : "132:2-134:45",
                               "type" : "Concatenate",
                               "operand" : [ {
-                                 "localId" : "40",
-                                 "locator" : "154:2-154:47",
-                                 "path" : "code",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "39",
-                                    "locator" : "154:2-154:42",
-                                    "name" : "By Administrative Gender Stratifier",
+                                 "localId" : "50",
+                                 "locator" : "132:2-134:5",
+                                 "type" : "Concatenate",
+                                 "operand" : [ {
+                                    "localId" : "48",
+                                    "locator" : "132:2-133:33",
+                                    "type" : "Concatenate",
+                                    "operand" : [ {
+                                       "localId" : "45",
+                                       "locator" : "132:2-133:7",
+                                       "type" : "Concatenate",
+                                       "operand" : [ {
+                                          "localId" : "43",
+                                          "locator" : "132:2-132:47",
+                                          "path" : "code",
+                                          "type" : "Property",
+                                          "source" : {
+                                             "localId" : "42",
+                                             "locator" : "132:2-132:42",
+                                             "name" : "By Administrative Gender Stratifier",
+                                             "libraryName" : "HIE",
+                                             "type" : "ExpressionRef"
+                                          }
+                                       }, {
+                                          "localId" : "44",
+                                          "locator" : "133:5-133:7",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : ":",
+                                          "type" : "Literal"
+                                       } ]
+                                    }, {
+                                       "localId" : "47",
+                                       "locator" : "133:11-133:33",
+                                       "name" : "By Age Stratifier",
+                                       "libraryName" : "HIE",
+                                       "type" : "ExpressionRef"
+                                    } ]
+                                 }, {
+                                    "localId" : "49",
+                                    "locator" : "134:3-134:5",
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : ":",
+                                    "type" : "Literal"
+                                 } ]
+                              }, {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "signature" : [ {
+                                    "name" : "{http://hl7.org/fhir}string",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
+                                 "operand" : [ {
+                                    "localId" : "52",
+                                    "locator" : "134:9-134:45",
+                                    "name" : "By Geographic Region Stratifier",
                                     "libraryName" : "HIE",
                                     "type" : "ExpressionRef"
-                                 }
-                              }, {
-                                 "localId" : "41",
-                                 "locator" : "155:5-155:7",
+                                 } ]
+                              } ]
+                           }, {
+                              "localId" : "57",
+                              "locator" : "135:3-135:33",
+                              "type" : "Combine",
+                              "source" : {
+                                 "localId" : "55",
+                                 "locator" : "135:11-135:27",
+                                 "name" : "patientGroups",
+                                 "libraryName" : "HIE",
+                                 "type" : "ExpressionRef"
+                              },
+                              "separator" : {
+                                 "localId" : "56",
+                                 "locator" : "135:30-135:32",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : ":",
                                  "type" : "Literal"
-                              } ]
-                           }, {
-                              "localId" : "44",
-                              "locator" : "155:11-155:33",
-                              "name" : "By Age Stratifier",
-                              "libraryName" : "HIE",
-                              "type" : "ExpressionRef"
+                              }
                            } ]
                         }, {
-                           "localId" : "46",
-                           "locator" : "156:3-156:5",
+                           "localId" : "59",
+                           "locator" : "136:4-136:6",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : ":",
                            "type" : "Literal"
                         } ]
                      }, {
-                        "name" : "ToString",
-                        "libraryName" : "FHIRHelpers",
-                        "type" : "FunctionRef",
-                        "signature" : [ {
-                           "name" : "{http://hl7.org/fhir}string",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "localId" : "49",
-                           "locator" : "156:9-156:45",
-                           "name" : "By Geographic Region Stratifier",
+                        "localId" : "63",
+                        "locator" : "136:10-136:27",
+                        "path" : "code",
+                        "type" : "Property",
+                        "source" : {
+                           "localId" : "62",
+                           "locator" : "136:10-136:22",
+                           "name" : "setting",
                            "libraryName" : "HIE",
                            "type" : "ExpressionRef"
-                        } ]
+                        }
                      } ]
                   }, {
-                     "localId" : "54",
-                     "locator" : "157:3-157:33",
-                     "type" : "Combine",
-                     "source" : {
-                        "localId" : "52",
-                        "locator" : "157:11-157:27",
-                        "name" : "patientGroups",
-                        "libraryName" : "HIE",
-                        "type" : "ExpressionRef"
-                     },
-                     "separator" : {
-                        "localId" : "53",
-                        "locator" : "157:30-157:32",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : ":",
-                        "type" : "Literal"
-                     }
-                  } ]
-               }, {
-                  "localId" : "59",
-                  "locator" : "158:3-158:27",
-                  "type" : "Combine",
-                  "source" : {
-                     "localId" : "57",
-                     "locator" : "158:11-158:21",
-                     "name" : "setting",
-                     "libraryName" : "HIE",
-                     "type" : "ExpressionRef"
-                  },
-                  "separator" : {
-                     "localId" : "58",
-                     "locator" : "158:24-158:26",
+                     "localId" : "65",
+                     "locator" : "137:3-137:5",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : ":",
                      "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "69",
+                  "locator" : "137:9-137:21",
+                  "path" : "code",
+                  "type" : "Property",
+                  "source" : {
+                     "localId" : "68",
+                     "locator" : "137:9-137:16",
+                     "name" : "tb",
+                     "libraryName" : "HIE",
+                     "type" : "ExpressionRef"
                   }
                } ]
             }

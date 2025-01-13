@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2025-01-02
+            as of 2025-01-13
           
         
       </td>
@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-02 00:27:00+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 13:43:27+0000</td>
         </tr>
         
 
@@ -470,7 +470,69 @@
         
 
         
+        <tr>
+            <th scope="row"><b>Related Artifacts: </b></th>
+            <td style="padding-left: 4px;">
+                
+                
+                
+                <p><b>Dependencies</b></p>
+                <ul>
+                  
+                    <li><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></li>
+                  
+                    <li><a href="Library-WHOCommon.html">WHOCommon</a></li>
+                  
+                    <li><a href="Library-HIVElements.html">HIVElements</a></li>
+                  
+                    <li><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></li>
+                  
+                    <li><a href="Library-HIVConfig.html">HIVConfig</a></li>
+                  
+                </ul>
+                
+                
+                
+                
+                
+            </td>
+        </tr>
+        
 
+        
+        <tr>
+          <th scope="row"><b>Parameters: </b></th>
+          <td style="padding-left: 4px;">
+            <table class="grid-dict">
+              <tr><th><b>Name</b></th><th><b>Type</b></th><th><b>Min</b></th><th><b>Max</b></th><th><b>In/Out</b></th></tr>
+              
+                <tr><th>Measurement Period</th><th>Period</th><th>0</th><th>1</th><th>In</th></tr>
+              
+                <tr><th>Patient</th><th>Patient</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Initial Population</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Numerator</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Denominator</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Administrative Gender Stratifier</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Age Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Geographic Region Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>patientGroups Stratifier</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
+              
+                <tr><th>Neisseria gonorrhoeae test type B.DE276</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Type of specimen B.DE261</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+            </table>
+          </td>
+        </tr>
         
 
         
@@ -622,7 +684,7 @@ define &quot;Initial Population&quot;:
 
 define &quot;Numerator&quot;:
   HIE.&quot;Has HIV-positive Status&quot; and
-  exists(HIE.&quot;Positive B.DE257&quot; G)
+  HIE.&quot;Positive B.DE257&quot;
 
 /**
  * Denominator
@@ -633,7 +695,7 @@ define &quot;Numerator&quot;:
 
 define &quot;Denominator&quot;:
   HIE.&quot;Has HIV-positive Status&quot; and
-  HIE.&quot;Gonorrhoea test result B.DE256&quot;:
+  exists(HIE.&quot;Gonorrhoea test result B.DE256&quot;)
     
 
 /* end Populations */
@@ -646,7 +708,7 @@ define &quot;Administrative Gender Stratifier&quot;:
 	HIE.&quot;By Administrative Gender Stratifier&quot;
 
 define &quot;Age Stratifier&quot;:
-	HIE.&quot;By Age Stratifier 2&quot;
+	HIE.&quot;By Age Stratifier 9&quot;
 
 define &quot;Geographic Region Stratifier&quot;:
 	HIE.&quot;By Geographic Region Stratifier&quot;
@@ -654,14 +716,19 @@ define &quot;Geographic Region Stratifier&quot;:
 define &quot;patientGroups Stratifier&quot;:
 	HIE.&quot;patientGroups&quot;
 
+define &quot;Neisseria gonorrhoeae test type B.DE276&quot;:
+  HIE.&quot;Neisseria gonorrhoeae test type B.DE276&quot;
+
+define &quot;Type of specimen B.DE261&quot;:
+  HIE.&quot;Type of specimen B.DE261&quot;
+
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
-  + ':' + HIE.&quot;By Age Stratifier 2&quot;
+  + ':' + HIE.&quot;By Age Stratifier 9&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIE.patientGroups, ':')
-
-
-//need to add Diagnostic test used and anatomic site sampled </code></pre></td></tr>
++ ':' + HIE.&quot;Neisseria gonorrhoeae test type B.DE276&quot;.code
++ ':' + HIE.&quot;Type of specimen B.DE261&quot;.code </code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -674,7 +741,19 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code/></pre></td></tr>
+              <tr><td><pre><code>Encoded data (41636 characters)</code></pre></td></tr>
+            </table>
+          </td>
+        </tr>
+        
+        
+        
+        
+        <tr>
+          <td colspan="2">
+            <table>
+              <tr><th><b>Content: </b> application/elm+json</th></tr>
+              <tr><td><pre><code>Encoded data (65332 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -707,7 +786,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Jan 2, 2025 00:27+0000">2025-01-02</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 13:43+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

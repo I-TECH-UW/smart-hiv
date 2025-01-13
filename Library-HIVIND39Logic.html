@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2025-01-02
+            as of 2025-01-13
           
         
       </td>
@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-02 00:27:00+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 13:43:27+0000</td>
         </tr>
         
 
@@ -482,6 +482,10 @@
                     <li><code>http://smart.who.int/hiv/Library/HIVCommon|0.0.1</code></li>
                   
                     <li><a href="Library-WHOCommon.html">WHOCommon</a></li>
+                  
+                    <li><a href="Library-HIVElements.html">HIVElements</a></li>
+                  
+                    <li><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></li>
                   
                 </ul>
                 
@@ -576,6 +580,15 @@
  * - method: For the numerator: Programme records (for example, PMTCT registers) | a) For the programme-based/service delivery denominator: Programme records, labour and delivery registers | b) For the population-based denominator: Modelling-based estimates (for example, Spectrum AIM). |  | Note: The population-based denominator is a proxy measure for the number of infants born to HIV-infected women. |  | The recommended reporting period is 12 months.
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivInfant
+ * - HivMother
+ * - HivChildDelivery
+ * - HivAntiRetroviralTreatment
+ * - HivStatus
+ * - HivOnArt
+ * 
  */
 
 library HIVIND39Logic
@@ -587,6 +600,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -609,8 +625,8 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
-
+  HIE.&quot;is HIV-exposed infant or child E.DE112&quot; and 
+    exists(HE.&quot;ART start date&quot; d where date from d same day as Patient.birthDate)
 
 /**
  * Denominator
@@ -620,9 +636,8 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
-    
-
+  HIE.&quot;Has HIV-positive Status&quot; and
+    HIE.&quot;Has Delivery in Health Facility&quot;
 /* end Populations */
 
 </code></pre></td></tr>
@@ -638,7 +653,7 @@ define &quot;Denominator&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (14952 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (22396 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -650,7 +665,7 @@ define &quot;Denominator&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (20144 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (33292 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -683,7 +698,7 @@ define &quot;Denominator&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Jan 2, 2025 00:27+0000">2025-01-02</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 13:43+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

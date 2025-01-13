@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2025-01-02
+            as of 2025-01-13
           
         
       </td>
@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-02 00:27:00+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 13:43:27+0000</td>
         </tr>
         
 
@@ -516,11 +516,17 @@
               
                 <tr><th>Administrative Gender Stratifier</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Age Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+                <tr><th>Age Stratifier 6</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Geographic Region Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>patientGroups Stratifier</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
+              
+                <tr><th>Current ART regimen</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>pregnancy stratifier</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Type of treatment-limiting toxicity</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
@@ -753,8 +759,8 @@ define &quot;Denominator&quot;:
 define &quot;Administrative Gender Stratifier&quot;:
 	HIE.&quot;By Administrative Gender Stratifier&quot;
 
-define &quot;Age Stratifier&quot;:
-	HIE.&quot;By Age Stratifier&quot;
+define &quot;Age Stratifier 6&quot;:
+	HIE.&quot;By Age Stratifier 6&quot;
 
 define &quot;Geographic Region Stratifier&quot;:
 	HIE.&quot;By Geographic Region Stratifier&quot;
@@ -762,18 +768,25 @@ define &quot;Geographic Region Stratifier&quot;:
 define &quot;patientGroups Stratifier&quot;:
 	HIE.&quot;patientGroups&quot;
 
+define &quot;Current ART regimen&quot;:
+  HIE.&quot;Current ART regimen&quot;
+
+define &quot;pregnancy stratifier&quot;:
+  HIE.&quot;pregnancy stratifier&quot;
+
+define &quot;Type of treatment-limiting toxicity&quot;:
+  HIE.&quot;Type of treatment-limiting toxicity&quot;
+
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
-  + ':' + HIE.&quot;By Age Stratifier&quot;
+  + ':' + HIE.&quot;By Age Stratifier 6&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIE.patientGroups, ':')
++ HIE.&quot;Current ART regimen&quot;.code 
++ HIE.&quot;Type of treatment-limiting toxicity&quot;.code
++ HIE.&quot;pregnancy stratifier&quot;.code
 
-/*
-need to add
-*  • ART regimen 
- *  • Pregnancy status 
- *  • Type of toxicity (gastrointestinal, skin, peripheral neuropathy, central nervous system, weight gain, hepatic dysfunction, haematological, fatigue, headache, bone dysfunction, metabolic, kidney dysfunction) 
-*/</code></pre></td></tr>
+</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -786,7 +799,7 @@ need to add
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (91764 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (100172 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -798,7 +811,7 @@ need to add
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (155148 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (170360 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -831,7 +844,7 @@ need to add
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Jan 2, 2025 00:27+0000">2025-01-02</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 13:43+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

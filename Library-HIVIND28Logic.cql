@@ -81,6 +81,8 @@ include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 include HIVElements called HE
 include HIVIndicatorElements called HIE
+include HIVConcepts called Concepts
+include HIVConfig called Config
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -94,46 +96,40 @@ define "Initial Population":
 
 
 define "numerator":
-//MINUS | COUNT of clients with "HIV status"='HIV-positive' AND "On ART"=True on the reporting period end date
-   (
-    HIE."Has death documented"
-   or HIE."Has transferred out"
-   or HIE."Is lost to follow-up"
-   )
-   and (((
-    //saying needs to not be counted this measurement period but should have counted this period or last period
-   HIE."Has HIV-positive Status"
-   and HIE."On ART H.DE47"
-   )
-   ) or
-   (
-    //Accounts for end of last period
-    HIE."Has HIV-positive Status at last measurment period"
-   and exists(HE."On ART H.DE47" ART
-   where ART.effective starts before (end of "Measurement Period" - duration in days of "Measurement Period")
-    and ART.effective ends after (start of "Measurement Period" - duration in days of "Measurement Period")
-   )
-   )
-   )
+//HIV Positive
+HIE."Has HIV-positive Status"
+   and exists(HE."On ART H.DE47" A
+    with [EpisodeOfCare] EOC
+      such that A.context.references(EOC) and 
+      //On ART during last measurement period or started ART during this measurement period
+      ((A.effective.toInterval() starts before (end of "Measurement Period" - duration in days of "Measurement Period")
+    and A.effective.toInterval() ends after (start of "Measurement Period" - duration in days of "Measurement Period"))
+    or (date from start of HE."First On ART".effective.toInterval() during "Measurement Period"))
+     and
+      //and either Transferred out
+      (exists(EOC.type T where T ~ Concepts."On ART - HIV.H.DE47")
+      and EOC.status = 'finished' and EOC.period.toInterval() ends during "Measurement Period")
+      or exists (
+      EOC.statusHistory H
+      where H.status = 'finished'
+      and H.period.toInterval() ends during "Measurement Period")
+      //or Lost to follow up
+      or (A.effective.toInterval() ends before (end of "Measurement Period" - Config."LTFU Days")
+   //or death   
+   or HIE."Has death documented"))
 
 
 
  define "denominator":
-   (((
-    //saying needs to not be counted this measurement period but should have counted this period or last period
-   HIE."Has HIV-positive Status"
-   and HIE."On ART H.DE47"
-   )
-   ) or
-   (
-    //Accounts for end of last period
-    HIE."Has HIV-positive Status at last measurment period"
-   and exists(HE."On ART H.DE47" ART
-   where ART.effective starts before (end of "Measurement Period" - duration in days of "Measurement Period")
-    and ART.effective ends after (start of "Measurement Period" - duration in days of "Measurement Period")
-   )
-   )
-   )
+   //HIV Positive
+HIE."Has HIV-positive Status"
+   and exists(HE."On ART H.DE47" A
+    with [EpisodeOfCare] EOC
+      such that A.context.references(EOC) and 
+      //On ART during last measurement period or started ART during this measurement period
+      ((A.effective.toInterval() starts before (end of "Measurement Period" - duration in days of "Measurement Period")
+    and A.effective.toInterval() ends after (start of "Measurement Period" - duration in days of "Measurement Period"))
+    or (date from start of HE."First On ART".effective.toInterval() during "Measurement Period")))
 
 
 

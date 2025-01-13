@@ -2,7 +2,7 @@
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="16">
+      <a:s r="47">
          <a:s>/**
  * Library: HIV.IND.12 Logic
  * Ref No: PRV.12
@@ -116,56 +116,130 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
+      <def localId="5" locator="70:1-70:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="71:1-71:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
    </includes>
    <parameters>
-      <def localId="10" locator="71:1-71:88" name="Measurement Period" accessLevel="Public">
+      <def localId="12" locator="74:1-74:92" name="Measurement Period" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="10">
+            <a:s r="12">
                <a:s>// Indicator Definition
 parameter &quot;Measurement Period&quot; </a:s>
-               <a:s r="9">
+               <a:s r="11">
                   <a:s>Interval&lt;</a:s>
-                  <a:s r="8">
-                     <a:s>Date</a:s>
+                  <a:s r="10">
+                     <a:s>DateTime</a:s>
                   </a:s>
                   <a:s>></a:s>
                </a:s>
                <a:s> default </a:s>
-               <a:s r="7">
-                  <a:s r="5">Interval[@2023-01-01, @2023-01-30]</a:s>
+               <a:s r="9">
+                  <a:s r="7">Interval[@2023-01-01, @2023-01-30]</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <default localId="7" locator="71:55-71:88" lowClosed="true" highClosed="true" xsi:type="Interval">
-            <low localId="5" locator="71:64-71:74" xsi:type="Date">
-               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
-               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
-               <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+         <default xsi:type="Interval">
+            <low xsi:type="ToDateTime">
+               <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+               <operand path="low" xsi:type="Property">
+                  <source localId="9" locator="74:59-74:92" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low localId="7" locator="74:68-74:78" xsi:type="Date">
+                        <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                        <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                        <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     </low>
+                     <high localId="8" locator="74:81-74:91" xsi:type="Date">
+                        <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                        <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                        <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+                     </high>
+                  </source>
+               </operand>
             </low>
-            <high localId="6" locator="71:77-71:87" xsi:type="Date">
-               <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
-               <month valueType="t:Integer" value="1" xsi:type="Literal"/>
-               <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+            <lowClosedExpression path="lowClosed" xsi:type="Property">
+               <source localId="9" locator="74:59-74:92" lowClosed="true" highClosed="true" xsi:type="Interval">
+                  <low localId="7" locator="74:68-74:78" xsi:type="Date">
+                     <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                     <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+                  </low>
+                  <high localId="8" locator="74:81-74:91" xsi:type="Date">
+                     <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                     <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+                  </high>
+               </source>
+            </lowClosedExpression>
+            <high xsi:type="ToDateTime">
+               <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+               <operand path="high" xsi:type="Property">
+                  <source localId="9" locator="74:59-74:92" lowClosed="true" highClosed="true" xsi:type="Interval">
+                     <low localId="7" locator="74:68-74:78" xsi:type="Date">
+                        <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                        <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                        <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     </low>
+                     <high localId="8" locator="74:81-74:91" xsi:type="Date">
+                        <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                        <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                        <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+                     </high>
+                  </source>
+               </operand>
             </high>
+            <highClosedExpression path="highClosed" xsi:type="Property">
+               <source localId="9" locator="74:59-74:92" lowClosed="true" highClosed="true" xsi:type="Interval">
+                  <low localId="7" locator="74:68-74:78" xsi:type="Date">
+                     <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                     <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     <day valueType="t:Integer" value="1" xsi:type="Literal"/>
+                  </low>
+                  <high localId="8" locator="74:81-74:91" xsi:type="Date">
+                     <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
+                     <month valueType="t:Integer" value="1" xsi:type="Literal"/>
+                     <day valueType="t:Integer" value="30" xsi:type="Literal"/>
+                  </high>
+               </source>
+            </highClosedExpression>
          </default>
-         <parameterTypeSpecifier localId="9" locator="71:32-71:45" xsi:type="IntervalTypeSpecifier">
-            <pointType localId="8" locator="71:41-71:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         <parameterTypeSpecifier localId="11" locator="74:32-74:49" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="74:41-74:48" name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
          </parameterTypeSpecifier>
       </def>
    </parameters>
    <contexts>
-      <def locator="73:1-73:15" name="Patient"/>
+      <def locator="76:1-76:15" name="Patient"/>
    </contexts>
    <statements>
-      <def locator="73:1-73:15" name="Patient" context="Patient">
+      <def locator="76:1-76:15" name="Patient" context="Patient">
          <expression xsi:type="SingletonFrom">
-            <operand locator="73:1-73:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+            <operand locator="76:1-76:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="12" locator="80:1-81:6" name="Initial Population" context="Patient" accessLevel="Public">
+      <def localId="14" locator="83:1-84:6" name="Initial Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="12">
-               <a:s r="11">/* Populations */
+            <a:s r="14">
+               <a:s r="13">/* Populations */
 
 /*
  *Initial Population
@@ -175,39 +249,244 @@ define &quot;Initial Population&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="11" locator="81:3-81:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="13" locator="84:3-84:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="14" locator="90:1-91:6" name="Numerator" context="Patient" accessLevel="Public">
+      <def localId="22" locator="93:1-94:94" name="Measure Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="14">
-               <a:s r="13">/**
+            <a:s r="22">
+               <a:s>/**
  * Numerator
  * 
  * Definition: Total PYFU on OAMT during defined reporting period. | Calculated from the sum of the time on OAMT of each OAMT recipient during the reporting period.
  * Calculation: SUM of [DIFFERENCE in MIN(&quot;Date OAMT initiated&quot;, &quot;Reporting period start date&quot;) and MAX(&quot;Date of loss to follow-up or OAMT stopped&quot;, &quot;Reporting period end date&quot;)] for all clients with &quot;Medications prescribed&quot; IN 'Methadone', 'Buprenorphine'
  */
 
-define &quot;Numerator&quot;:
-  true</a:s>
+define &quot;Measure Population&quot;:
+  </a:s>
+               <a:s r="21">
+                  <a:s r="17">
+                     <a:s>exists</a:s>
+                     <a:s r="16">
+                        <a:s>(</a:s>
+                        <a:s r="16">
+                           <a:s r="15">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="16">
+                              <a:s>&quot;buprenorphine_prescribed at date&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> or </a:s>
+                  <a:s r="20">
+                     <a:s>exists</a:s>
+                     <a:s r="19">
+                        <a:s>(</a:s>
+                        <a:s r="19">
+                           <a:s r="18">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="19">
+                              <a:s>&quot;methadone_prescribed at date&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="13" locator="91:3-91:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="21" locator="94:3-94:94" xsi:type="Or">
+            <operand localId="17" locator="94:3-94:48" xsi:type="Exists">
+               <operand localId="16" locator="94:9-94:48" name="buprenorphine_prescribed at date" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="20" locator="94:53-94:94" xsi:type="Exists">
+               <operand localId="19" locator="94:59-94:94" name="methadone_prescribed at date" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
       </def>
-      <def localId="16" locator="101:1-102:6" name="Denominator" context="Patient" accessLevel="Public">
+      <def localId="47" locator="97:1-116:3" name="Measure Observation" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="16">
-               <a:s r="15">/**
- * Denominator
- *
- * Definition: a) Programme/service provider level: estimated PYFU for all opioid dependent people accessing service during defined reporting period | b) Population level: estimated PYFU for total population of opioid dependent people in relevant geographic area during defined reporting period
- * Calculation: Service level: Not calculated in DAK |  | Population denominator:  | *Estimated PYFU for all opioid-dependent people accessing service during defined reporting period |  | Note: Can be reported only as numerator; by population or service level if these denominator estimates available.
- */
+            <a:s r="47">
+               <a:s>define &quot;Measure Observation&quot;:
+  </a:s>
+               <a:s r="46">
+                  <a:s r="35">
+                     <a:s>(
+    </a:s>
+                     <a:s r="35">
+                        <a:s>difference in days between
+    </a:s>
+                        <a:s r="31">
+                           <a:s>Min(
+      </a:s>
+                           <a:s r="30">
+                              <a:s>{
+        </a:s>
+                              <a:s r="26">
+                                 <a:s>ToDate(</a:s>
+                                 <a:s r="25">
+                                    <a:s>First(</a:s>
+                                    <a:s r="24">
+                                       <a:s r="23">
+                                          <a:s>HIE</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="24">
+                                          <a:s>&quot;OAMT start&quot;</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>, 
+        </a:s>
+                              <a:s r="29">
+                                 <a:s>ToDate(</a:s>
+                                 <a:s r="28">
+                                    <a:s>start of </a:s>
+                                    <a:s r="27">
+                                       <a:s>&quot;Measurement Period&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>
+      }</a:s>
+                           </a:s>
+                           <a:s>
+    )</a:s>
+                        </a:s>
+                        <a:s>
 
-define &quot;Denominator&quot;:
-  true</a:s>
+    and </a:s>
+                        <a:s r="34">
+                           <a:s>ToDate(</a:s>
+                           <a:s r="33">
+                              <a:s>start of </a:s>
+                              <a:s r="32">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+                  <a:s>
+  +
+  </a:s>
+                  <a:s r="45">
+                     <a:s>(
+    </a:s>
+                     <a:s r="45">
+                        <a:s>difference in days between </a:s>
+                        <a:s r="37">
+                           <a:s>end of </a:s>
+                           <a:s r="36">
+                              <a:s>&quot;Measurement Period&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    and </a:s>
+                        <a:s r="44">
+                           <a:s>Coalesce(
+        </a:s>
+                           <a:s r="41">
+                              <a:s>ToDate(</a:s>
+                              <a:s r="40">
+                                 <a:s>First(</a:s>
+                                 <a:s r="39">
+                                    <a:s r="38">
+                                       <a:s>HIE</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="39">
+                                       <a:s>&quot;OAMT end&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                           <a:s>, 
+        </a:s>
+                           <a:s r="43">
+                              <a:s>end of </a:s>
+                              <a:s r="42">
+                                 <a:s>&quot;Measurement Period&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+      )</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="15" locator="102:3-102:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="46" locator="98:3-116:3" xsi:type="Add">
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <operand localId="35" locator="98:3-108:3" precision="Day" xsi:type="DifferenceBetween">
+               <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="31" locator="100:5-105:5" xsi:type="Min">
+                  <signature xsi:type="ListTypeSpecifier">
+                     <elementType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                  </signature>
+                  <source localId="30" locator="101:7-104:7" xsi:type="List">
+                     <element localId="26" locator="102:9-102:39" xsi:type="ToDate">
+                        <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="25" locator="102:16-102:38" xsi:type="First">
+                           <source localId="24" locator="102:22-102:37" name="OAMT start" libraryName="HIE" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </element>
+                     <element localId="29" locator="103:9-103:45" xsi:type="ToDate">
+                        <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="28" locator="103:16-103:44" xsi:type="Start">
+                           <operand localId="27" locator="103:25-103:44" name="Measurement Period" xsi:type="ParameterRef"/>
+                        </operand>
+                     </element>
+                  </source>
+               </operand>
+               <operand localId="34" locator="107:9-107:45" xsi:type="ToDate">
+                  <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="33" locator="107:16-107:44" xsi:type="Start">
+                     <operand localId="32" locator="107:25-107:44" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="45" locator="110:3-116:3" precision="Day" xsi:type="DifferenceBetween">
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="37" locator="111:32-111:58" xsi:type="End">
+                  <operand localId="36" locator="111:39-111:58" name="Measurement Period" xsi:type="ParameterRef"/>
+               </operand>
+               <operand localId="44" locator="112:9-115:7" xsi:type="Coalesce">
+                  <operand xsi:type="ToDateTime">
+                     <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="41" locator="113:9-113:37" xsi:type="ToDate">
+                        <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="40" locator="113:16-113:36" xsi:type="First">
+                           <source localId="39" locator="113:22-113:35" name="OAMT end" libraryName="HIE" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="43" locator="114:9-114:35" xsi:type="End">
+                     <operand localId="42" locator="114:16-114:35" name="Measurement Period" xsi:type="ParameterRef"/>
+                  </operand>
+               </operand>
+            </operand>
+         </expression>
       </def>
    </statements>
 </library>

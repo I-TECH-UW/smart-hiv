@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "82",
+            "r" : "83",
             "s" : [ {
                "value" : [ "/**\n * Library: HIV.IND.16 Logic\n * Ref No: PRV.16\n * Short Name: VMMC adverse events\n *\n * Definition: a) Number or (b) % of adverse events during the reporting period\n *\n * Numerator: Number of people experiencing at least one moderate or severe adverse event during or following circumcision surgery during the reporting period\n * Numerator Calculation: COUNT of clients with \"VMMC procedure date\" in the reporting period AND \"Adverse event severity\" IN 'Moderate', 'Severe' AND \"Timing of adverse event\" LESS THAN 30 days from \"VMMC procedure date\"\n * Numerator Exclusions: \n *\n * Denominator: a) 1 | b) Total number of individuals under going VMMC performed according to national standard during the reporting period\n * Denominator Calculation: a) 1 | b) COUNT of clients with a \"VMMC procedure date\" in the reporting period\n * Denominator Exclusions: \n *\n * Disaggregations:\n * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years) \n *  • Type and seriousness of adverse event \n *  • Timing of adverse event (intraoperative, postoperative) \n *  • Service site \n *  • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith- based, international, nongovernmental) \n *  • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.) \n *  • Cities and other administrative regions of epidemiologic importance \n *  \n *\n * Disaggregation Elements: Age | Adverse event severity | Timing of adverse event | Type of adverse VMMC event\n *\n * Numerator and Denominator Elements:\n * Adverse event severity \n *  Timing of adverse event \n *  VMMC procedure date\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth\n * HIV.B.DE198: VMMC procedure date | Date on which a voluntary medical male circumcision procedure was performed\n * HIV.B.DE201: Adverse event severity | Severity of the adverse event associated with voluntary medical male circumcision (VMMC) procedure\n * HIV.B.DE202: Moderate | Severity of the adverse event associated with VMMC procedure was moderate\n * HIV.B.DE203: Severe | Severity of the adverse event associated with VMMC procedure was severe\n * HIV.B.DE204: Timing of adverse event | When the adverse event associated with VMMC procedure occurred\n * HIV.B.DE205: Intraoperative | The adverse event associated with VMMC procedure occurred during the procedure\n * HIV.B.DE206: Postoperative | The adverse event associated with VMMC procedure occurred within the first 30 days after the procedure\n * HIV.B.DE207: Type of adverse VMMC event | Type of adverse event associated with voluntary medical male circumcision (VMMC) procedure\n * HIV.B.DE208: Abnormal pain | Client experienced abnormal pain\n * HIV.B.DE209: Anaesthesia-related effects | Client had anaesthesia-related effects\n * HIV.B.DE210: Bleeding | Client had bleeding\n * HIV.B.DE211: Damage to the penis | Client had damage to the penis\n * HIV.B.DE212: Difficulty urinating | Client had difficulty urinating\n * HIV.B.DE213: Excessive bleeding | Client experienced excessive bleeding\n * HIV.B.DE214: Excessive skin removal | Client experienced excessive skin removal\n * HIV.B.DE215: Excessive swelling | Client experienced excessive swelling\n * HIV.B.DE216: Haematoma | Client experienced haematoma\n * HIV.B.DE217: Infection | Client experienced infection\n * HIV.B.DE218: Injury to glans | Client experienced injury to glans\n * HIV.B.DE219: Scar or disfigurement | Client experienced scar or disfigurement\n * HIV.B.DE220: Sharps injury to personnel | During VMMC procedure there was sharps injury to personnel\n * HIV.B.DE221: Wound disruption | Client experienced wound disruption\n * HIV.B.DE222: Other | Client experienced other adverse VMMC event\n *\n * Additional Context\n * - what it measures: • This indicator measures whether VMMC services meet national standards of safety and effectiveness.\n * - rationale: • Staff conducting medical circumcisions must have appropriate training and access to proper equipment. | • Trends in adverse events may indicate where service providers need additional support. | • Intraoperative adverse events may include pain, excessive bleeding, anaesthesia-related effects, excessive skin removal, damage to the penis, sharps injury to personnel. Postoperative adverse events may include abnormal pain, excessive swelling, infection, haematoma, bleeding, difficulty urinating, wound disruption, scar or disfigurement, injury to glans, excessive skin removal. | • Moderate or severe adverse events include complications resulting in death or hospitalization within 30 days or permanent disability.\n * - method: Individual-level data obtained from programme records |  | This indicator can be reported as simply the absolute number of men experiencing adverse events occurring in the reporting period or can be reported as a proportion of the number of procedures conducted.\n * \n * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm\n */\n\n","library HIVIND16Logic" ]
             } ]
@@ -623,7 +623,7 @@
                      }, {
                         "r" : "38",
                         "s" : [ {
-                           "value" : [ "\"By Age Stratifier 3\"" ]
+                           "value" : [ "\"By Age Stratifier 2\"" ]
                         } ]
                      } ]
                   } ]
@@ -632,7 +632,7 @@
             "expression" : {
                "localId" : "38",
                "locator" : "131:2-131:26",
-               "name" : "By Age Stratifier 3",
+               "name" : "By Age Stratifier 2",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
             }
@@ -785,7 +785,7 @@
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "82",
+            "localId" : "83",
             "locator" : "149:1-155:44",
             "name" : "Stratification",
             "context" : "Patient",
@@ -793,140 +793,146 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "82",
+                  "r" : "83",
                   "s" : [ {
                      "value" : [ "//provider type not provided?\n//service site not provided?\n\n","define ","\"Stratification\"",":\n " ]
                   }, {
-                     "r" : "81",
+                     "r" : "82",
                      "s" : [ {
-                        "r" : "77",
+                        "r" : "78",
                         "s" : [ {
-                           "r" : "75",
+                           "r" : "76",
                            "s" : [ {
-                              "r" : "71",
+                              "r" : "72",
                               "s" : [ {
-                                 "r" : "69",
+                                 "r" : "70",
                                  "s" : [ {
-                                    "r" : "64",
+                                    "r" : "66",
                                     "s" : [ {
-                                       "r" : "61",
+                                       "r" : "64",
                                        "s" : [ {
-                                          "r" : "59",
+                                          "r" : "61",
                                           "s" : [ {
-                                             "r" : "56",
+                                             "r" : "59",
                                              "s" : [ {
-                                                "r" : "54",
+                                                "r" : "56",
                                                 "s" : [ {
-                                                   "r" : "53",
+                                                   "r" : "54",
                                                    "s" : [ {
-                                                      "r" : "52",
+                                                      "r" : "53",
                                                       "s" : [ {
-                                                         "value" : [ "HIE" ]
+                                                         "r" : "52",
+                                                         "s" : [ {
+                                                            "value" : [ "HIE" ]
+                                                         } ]
+                                                      }, {
+                                                         "value" : [ "." ]
+                                                      }, {
+                                                         "r" : "53",
+                                                         "s" : [ {
+                                                            "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                                         } ]
                                                       } ]
                                                    }, {
                                                       "value" : [ "." ]
                                                    }, {
-                                                      "r" : "53",
+                                                      "r" : "54",
                                                       "s" : [ {
-                                                         "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                                         "value" : [ "code" ]
                                                       } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " \n  + " ]
+                                                }, {
+                                                   "r" : "55",
+                                                   "s" : [ {
+                                                      "value" : [ "':'" ]
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "value" : [ " + " ]
+                                             }, {
+                                                "r" : "58",
+                                                "s" : [ {
+                                                   "r" : "57",
+                                                   "s" : [ {
+                                                      "value" : [ "HIE" ]
                                                    } ]
                                                 }, {
                                                    "value" : [ "." ]
                                                 }, {
-                                                   "r" : "54",
+                                                   "r" : "58",
                                                    "s" : [ {
-                                                      "value" : [ "code" ]
+                                                      "value" : [ "\"By Age Stratifier 2\"" ]
                                                    } ]
                                                 } ]
-                                             }, {
-                                                "value" : [ " \n  + " ]
-                                             }, {
-                                                "r" : "55",
-                                                "s" : [ {
-                                                   "value" : [ "':'" ]
-                                                } ]
                                              } ]
                                           }, {
-                                             "value" : [ " + " ]
+                                             "value" : [ "\n+ " ]
                                           }, {
-                                             "r" : "58",
+                                             "r" : "60",
                                              "s" : [ {
-                                                "r" : "57",
-                                                "s" : [ {
-                                                   "value" : [ "HIE" ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "." ]
-                                             }, {
-                                                "r" : "58",
-                                                "s" : [ {
-                                                   "value" : [ "\"By Age Stratifier\"" ]
-                                                } ]
+                                                "value" : [ "':'" ]
                                              } ]
                                           } ]
                                        }, {
-                                          "value" : [ "\n+ " ]
-                                       }, {
-                                          "r" : "60",
-                                          "s" : [ {
-                                             "value" : [ "':'" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " + " ]
-                                    }, {
-                                       "r" : "63",
-                                       "s" : [ {
-                                          "r" : "62",
-                                          "s" : [ {
-                                             "value" : [ "HIE" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
+                                          "value" : [ " + " ]
                                        }, {
                                           "r" : "63",
                                           "s" : [ {
-                                             "value" : [ "\"By Geographic Region Stratifier\"" ]
+                                             "r" : "62",
+                                             "s" : [ {
+                                                "value" : [ "HIE" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "63",
+                                             "s" : [ {
+                                                "value" : [ "\"By Geographic Region Stratifier\"" ]
+                                             } ]
                                           } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n + " ]
+                                    }, {
+                                       "r" : "65",
+                                       "s" : [ {
+                                          "value" : [ "':'" ]
                                        } ]
                                     } ]
                                  }, {
-                                    "value" : [ "\n+ " ]
+                                    "value" : [ " + " ]
                                  }, {
-                                    "r" : "68",
+                                    "r" : "69",
                                     "s" : [ {
-                                       "value" : [ "Combine","(" ]
-                                    }, {
-                                       "r" : "66",
+                                       "r" : "68",
                                        "s" : [ {
-                                          "r" : "65",
+                                          "r" : "67",
                                           "s" : [ {
                                              "value" : [ "HIE" ]
                                           } ]
                                        }, {
                                           "value" : [ "." ]
                                        }, {
-                                          "r" : "66",
+                                          "r" : "68",
                                           "s" : [ {
-                                             "value" : [ "setting" ]
+                                             "value" : [ "\"setting\"" ]
                                           } ]
                                        } ]
                                     }, {
-                                       "value" : [ ", " ]
+                                       "value" : [ "." ]
                                     }, {
-                                       "r" : "67",
+                                       "r" : "69",
                                        "s" : [ {
-                                          "value" : [ "':'" ]
+                                          "value" : [ "code" ]
                                        } ]
-                                    }, {
-                                       "value" : [ ")" ]
                                     } ]
                                  } ]
                               }, {
                                  "value" : [ "\n+ " ]
                               }, {
-                                 "r" : "70",
+                                 "r" : "71",
                                  "s" : [ {
                                     "value" : [ "':'" ]
                                  } ]
@@ -934,18 +940,18 @@
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "74",
+                              "r" : "75",
                               "s" : [ {
-                                 "r" : "73",
+                                 "r" : "74",
                                  "s" : [ {
-                                    "r" : "72",
+                                    "r" : "73",
                                     "s" : [ {
                                        "value" : [ "HIE" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "73",
+                                    "r" : "74",
                                     "s" : [ {
                                        "value" : [ "\"VMMC_adverse_event_type\"" ]
                                     } ]
@@ -953,7 +959,7 @@
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "74",
+                                 "r" : "75",
                                  "s" : [ {
                                     "value" : [ "code" ]
                                  } ]
@@ -962,7 +968,7 @@
                         }, {
                            "value" : [ " \n+ " ]
                         }, {
-                           "r" : "76",
+                           "r" : "77",
                            "s" : [ {
                               "value" : [ "':'" ]
                            } ]
@@ -970,18 +976,18 @@
                      }, {
                         "value" : [ " + " ]
                      }, {
-                        "r" : "80",
+                        "r" : "81",
                         "s" : [ {
-                           "r" : "79",
+                           "r" : "80",
                            "s" : [ {
-                              "r" : "78",
+                              "r" : "79",
                               "s" : [ {
                                  "value" : [ "HIE" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "79",
+                              "r" : "80",
                               "s" : [ {
                                  "value" : [ "\"VMMC_adverse_event_timing\"" ]
                               } ]
@@ -989,7 +995,7 @@
                         }, {
                            "value" : [ "." ]
                         }, {
-                           "r" : "80",
+                           "r" : "81",
                            "s" : [ {
                               "value" : [ "code" ]
                            } ]
@@ -999,123 +1005,128 @@
                }
             } ],
             "expression" : {
-               "localId" : "81",
+               "localId" : "82",
                "locator" : "150:2-155:44",
                "type" : "Concatenate",
                "operand" : [ {
-                  "localId" : "77",
+                  "localId" : "78",
                   "locator" : "150:2-155:5",
                   "type" : "Concatenate",
                   "operand" : [ {
-                     "localId" : "75",
+                     "localId" : "76",
                      "locator" : "150:2-154:42",
                      "type" : "Concatenate",
                      "operand" : [ {
-                        "localId" : "71",
+                        "localId" : "72",
                         "locator" : "150:2-154:5",
                         "type" : "Concatenate",
                         "operand" : [ {
-                           "localId" : "69",
+                           "localId" : "70",
                            "locator" : "150:2-153:27",
                            "type" : "Concatenate",
                            "operand" : [ {
-                              "localId" : "64",
-                              "locator" : "150:2-152:45",
+                              "localId" : "66",
+                              "locator" : "150:2-153:6",
                               "type" : "Concatenate",
                               "operand" : [ {
-                                 "localId" : "61",
-                                 "locator" : "150:2-152:5",
+                                 "localId" : "64",
+                                 "locator" : "150:2-152:45",
                                  "type" : "Concatenate",
                                  "operand" : [ {
-                                    "localId" : "59",
-                                    "locator" : "150:2-151:33",
+                                    "localId" : "61",
+                                    "locator" : "150:2-152:5",
                                     "type" : "Concatenate",
                                     "operand" : [ {
-                                       "localId" : "56",
-                                       "locator" : "150:2-151:7",
+                                       "localId" : "59",
+                                       "locator" : "150:2-151:35",
                                        "type" : "Concatenate",
                                        "operand" : [ {
-                                          "localId" : "54",
-                                          "locator" : "150:2-150:47",
-                                          "path" : "code",
-                                          "type" : "Property",
-                                          "source" : {
-                                             "localId" : "53",
-                                             "locator" : "150:2-150:42",
-                                             "name" : "By Administrative Gender Stratifier",
-                                             "libraryName" : "HIE",
-                                             "type" : "ExpressionRef"
-                                          }
+                                          "localId" : "56",
+                                          "locator" : "150:2-151:7",
+                                          "type" : "Concatenate",
+                                          "operand" : [ {
+                                             "localId" : "54",
+                                             "locator" : "150:2-150:47",
+                                             "path" : "code",
+                                             "type" : "Property",
+                                             "source" : {
+                                                "localId" : "53",
+                                                "locator" : "150:2-150:42",
+                                                "name" : "By Administrative Gender Stratifier",
+                                                "libraryName" : "HIE",
+                                                "type" : "ExpressionRef"
+                                             }
+                                          }, {
+                                             "localId" : "55",
+                                             "locator" : "151:5-151:7",
+                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                             "value" : ":",
+                                             "type" : "Literal"
+                                          } ]
                                        }, {
-                                          "localId" : "55",
-                                          "locator" : "151:5-151:7",
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : ":",
-                                          "type" : "Literal"
+                                          "localId" : "58",
+                                          "locator" : "151:11-151:35",
+                                          "name" : "By Age Stratifier 2",
+                                          "libraryName" : "HIE",
+                                          "type" : "ExpressionRef"
                                        } ]
                                     }, {
-                                       "localId" : "58",
-                                       "locator" : "151:11-151:33",
-                                       "name" : "By Age Stratifier",
+                                       "localId" : "60",
+                                       "locator" : "152:3-152:5",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : ":",
+                                       "type" : "Literal"
+                                    } ]
+                                 }, {
+                                    "name" : "ToString",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}string",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
+                                    "operand" : [ {
+                                       "localId" : "63",
+                                       "locator" : "152:9-152:45",
+                                       "name" : "By Geographic Region Stratifier",
                                        "libraryName" : "HIE",
                                        "type" : "ExpressionRef"
                                     } ]
-                                 }, {
-                                    "localId" : "60",
-                                    "locator" : "152:3-152:5",
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : ":",
-                                    "type" : "Literal"
                                  } ]
                               }, {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "signature" : [ {
-                                    "name" : "{http://hl7.org/fhir}string",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ],
-                                 "operand" : [ {
-                                    "localId" : "63",
-                                    "locator" : "152:9-152:45",
-                                    "name" : "By Geographic Region Stratifier",
-                                    "libraryName" : "HIE",
-                                    "type" : "ExpressionRef"
-                                 } ]
-                              } ]
-                           }, {
-                              "localId" : "68",
-                              "locator" : "153:3-153:27",
-                              "type" : "Combine",
-                              "source" : {
-                                 "localId" : "66",
-                                 "locator" : "153:11-153:21",
-                                 "name" : "setting",
-                                 "libraryName" : "HIE",
-                                 "type" : "ExpressionRef"
-                              },
-                              "separator" : {
-                                 "localId" : "67",
-                                 "locator" : "153:24-153:26",
+                                 "localId" : "65",
+                                 "locator" : "153:4-153:6",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : ":",
                                  "type" : "Literal"
+                              } ]
+                           }, {
+                              "localId" : "69",
+                              "locator" : "153:10-153:27",
+                              "path" : "code",
+                              "type" : "Property",
+                              "source" : {
+                                 "localId" : "68",
+                                 "locator" : "153:10-153:22",
+                                 "name" : "setting",
+                                 "libraryName" : "HIE",
+                                 "type" : "ExpressionRef"
                               }
                            } ]
                         }, {
-                           "localId" : "70",
+                           "localId" : "71",
                            "locator" : "154:3-154:5",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : ":",
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "74",
+                        "localId" : "75",
                         "locator" : "154:9-154:42",
                         "path" : "code",
                         "type" : "Property",
                         "source" : {
-                           "localId" : "73",
+                           "localId" : "74",
                            "locator" : "154:9-154:37",
                            "name" : "VMMC_adverse_event_type",
                            "libraryName" : "HIE",
@@ -1123,19 +1134,19 @@
                         }
                      } ]
                   }, {
-                     "localId" : "76",
+                     "localId" : "77",
                      "locator" : "155:3-155:5",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : ":",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "80",
+                  "localId" : "81",
                   "locator" : "155:9-155:44",
                   "path" : "code",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "79",
+                     "localId" : "80",
                      "locator" : "155:9-155:39",
                      "name" : "VMMC_adverse_event_timing",
                      "libraryName" : "HIE",

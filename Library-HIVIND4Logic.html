@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2025-01-02
+            as of 2025-01-13
           
         
       </td>
@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-02 00:27:00+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 13:43:27+0000</td>
         </tr>
         
 
@@ -522,7 +522,7 @@
               
                 <tr><th>prep product</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Setting</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Setting</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
@@ -609,6 +609,10 @@
  * - method: Individual-level data obtained from programme records. Either the volume of PrEP prescribed or the volume of product dispensed can be used if this is available, for example from pharmacy data. |  | The total volume of PrEP product prescribed (or dispensed) can then be used to derive the total number of days (or months/years) of product use based on the duration of HIV prevention provided by each unit of product. Such an indicator could be described, for example, as | the number of person-years of PrEP protection provided. This measure can then be used to examine the level of PrEP availability to monitor trends and for modelling the impact of PrEP at the population level. It can also be used to derive the following additional indicators useful for understanding the quantity of PrEP product available relative to need: |  | a) numerator:total number of days available for product use; denominator: total number of PrEP recipients | b) numerator:total number of days available for product use; denominator: estimates of the total number of people who would benefit from PrEP
  * 
  * Suggested Scoring Method: continuous-variable | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cv-measure-cqfm
+ * 
+ * Profiles:
+ * - HivPrepTreatment
+ * - HivPepTreatment (4 types)
  */
 
 library HIVIND4Logic
@@ -680,7 +684,7 @@ define &quot;Stratification&quot;:
   + ':' + HIE.&quot;By Age Stratifier 3&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIE.patientGroups, ':') 
-+ Combine(HIE.setting, ':')
+ + ':' + HIE.&quot;setting&quot;.code
 + Combine(HIE.prep_product, ':')
 </code></pre></td></tr>
             </table>
@@ -695,7 +699,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (42340 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (43184 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -707,7 +711,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (69248 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (70752 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -740,7 +744,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Thu, Jan 2, 2025 00:27+0000">2025-01-02</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 13:43+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
