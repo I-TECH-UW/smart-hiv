@@ -117,7 +117,7 @@ define "Numerator":
  */
 
 define "Denominator":
- HIE."Has HIV-positive Status" and HIE."On ART" and exists(HIE."TB preventive treatment TPT start date in measurement period")
+ HIE."Has HIV-positive Status" and HIE."On ART" and exists(HIE."TB preventive treatment TPT start date in previous measurement period")
     
 /* end Populations */
 

@@ -1209,6 +1209,8 @@ code "Date injecting equipment provided": 'HIV.PRV.DE15' from "HIVConcepts" disp
 code "Date OAMT initiated": 'HIV.PRV.DE17' from "HIVConcepts" display 'Date OAMT initiated'
 code "Currently on OAMT": 'HIV.PRV.DE20' from "HIVConcepts" display 'Currently on OAMT'
 code "Retained on OAMT": 'HIV.PRV.DE21' from "HIVConcepts" display 'Retained on OAMT'
+code "Client being inducted on OAMT": 'HIV.PRV.DE22' from "HIVConcepts" display 'Client being inducted on OAMT'
+code "Client on reducing doses of OAMT": 'HIV.PRV.DE23' from "HIVConcepts" display 'Client on reducing doses of OAMT'
 code "Date of loss to follow-up or OAMT stopped": 'HIV.PRV.DE25' from "HIVConcepts" display 'Date of loss to follow-up or OAMT stopped'
 code "Date medications prescribed - HIV.PRV.DE27": 'HIV.PRV.DE27' from "HIVConcepts" display 'Date medications prescribed'
 code "Number of days prescribed - HIV.PRV.DE28": 'HIV.PRV.DE28' from "HIVConcepts" display 'Number of days prescribed'

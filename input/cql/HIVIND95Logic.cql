@@ -102,12 +102,10 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."Has HIV-positive Status"
-  and exists(
-    HIE."Invasive cervical cancer" C
-      with HIE."Invasive cervical cancer treatment method" P
-        such that P.performed after start of C.prevalenceInterval()
-  )
+  HIE."Has HIV-positive Status" and 
+  exists(HE."Invasive cervical cancer" C 
+  where exists (HE."Invasive cervical cancer treatment method" P
+  where P.performed.toInterval() after start of C.prevalenceInterval()))
 
 /**
  * Denominator
@@ -129,7 +127,7 @@ define "Denominator":
  */
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -137,10 +135,14 @@ define "Geographic Region Stratifier":
 define "Invasive cervical cancer treatment episode Statifier":
   HIE."Invasive cervical cancer treatment episode Value"
 
+// define "Invasive cervical cancer treatment method stratifier":
+//   HIE."Invasive cervical cancer treatment method stratifier"
+
 
 define "Stratification":
-HIE."By Age Stratifier 2"
+HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + ':' + (HIE."Invasive cervical cancer treatment episode Value")
+//+ ':' + HIE."Invasive cervical cancer treatment method stratifier".code 
 
 //treatment type not specified
