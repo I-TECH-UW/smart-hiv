@@ -4317,17 +4317,17 @@ define "Vaginal discharge syndrome D.DE780 Observation":
 @description: Client diagnosed with lower abdominal pain
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Lower Abdominal pain  D.DE781":
-  exists "Lower Abdominal pain  D.DE781 Condition"
-    or exists "Lower Abdominal pain  D.DE781 Observation"
-define "Lower Abdominal pain  D.DE781 Condition":
-  Elements."Lower Abdominal pain  D.DE781 Condition" C
+define "Lower Abdominal pain D.DE781":
+  exists "Lower Abdominal pain D.DE781 Condition"
+    or exists "Lower Abdominal pain D.DE781 Observation"
+define "Lower Abdominal pain D.DE781 Condition":
+  Elements."Lower Abdominal pain D.DE781 Condition" C
     where C.prevalenceInterval() overlaps before "Measurement Period"
       or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Lower Abdominal pain  D.DE781 Observation":
-  Elements."Lower Abdominal pain  D.DE781 Observation" O
+define "Lower Abdominal pain D.DE781 Observation":
+  Elements."Lower Abdominal pain D.DE781 Observation" O
     where O.effective.toInterval() during "Measurement Period"
-/* End of Lower Abdominal pain  D.DE781 */
+/* End of Lower Abdominal pain D.DE781 */
 
 /*
 @dataElement: HIV.D.DE782 - Genital ulcer disease syndrome
@@ -6228,24 +6228,6 @@ define "Severe illness, hospitalization H.DE76 Observation":
   Elements."Severe illness, hospitalization H.DE76 Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Severe illness, hospitalization H.DE76 */
-
-/*
-@dataElement: HIV.H.DE77 - Drugs out of stock 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because of drugs being out of stock 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Drugs out of stock ":
-  exists "Drugs out of stock  Condition"
-    or exists "Drugs out of stock  Observation"
-define "Drugs out of stock  Condition":
-  Elements."Drugs out of stock  Condition" C
-    where C.prevalenceInterval() overlaps before "Measurement Period"
-      or C.prevalenceInterval() overlaps after "Measurement Period"
-define "Drugs out of stock  Observation":
-  Elements."Drugs out of stock  Observation" O
-    where O.effective.toInterval() during "Measurement Period"
-/* End of Drugs out of stock  */
 
 
 /*

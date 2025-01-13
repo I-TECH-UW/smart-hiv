@@ -9905,16 +9905,16 @@ define "Vaginal discharge syndrome D.DE780 Observation":
 @description: Client diagnosed with lower abdominal pain
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Lower Abdominal pain  D.DE781":
-  exists "Lower Abdominal pain  D.DE781 Condition"
-    or exists "Lower Abdominal pain  D.DE781 Observation"
-define "Lower Abdominal pain  D.DE781 Condition":
+define "Lower Abdominal pain D.DE781":
+  exists "Lower Abdominal pain D.DE781 Condition"
+    or exists "Lower Abdominal pain D.DE781 Observation"
+define "Lower Abdominal pain D.DE781 Condition":
   [Condition: Concepts."Lower Abdominal pain  - HIV.D.DE781"]
-define "Lower Abdominal pain  D.DE781 Observation":
+define "Lower Abdominal pain D.DE781 Observation":
   "Syndrome/STI diagnosed D.DE778 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Lower Abdominal pain  - HIV.D.DE781"
-/* End of Lower Abdominal pain  D.DE781 */
+/* End of Lower Abdominal pain D.DE781 */
 
 /*
 @dataElement: HIV.D.DE782 - Genital ulcer disease syndrome

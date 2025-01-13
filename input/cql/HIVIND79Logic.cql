@@ -121,7 +121,7 @@ define "Numerator":
 HIE."Has HIV-positive Status"
   and Count((HE."Syndrome/STI diagnosed B.DE226 Observation" O
     where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Visit date SRV.DE15" t where start of t.period.toInterval() = start of O.effective.toInterval())))>1
+  and exists (HE."Visit date SRV.DE15" visitPeriod where start of visitPeriod.toInterval() = start of O.effective.toInterval())))>1
 
 
 /**
