@@ -137,7 +137,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier"
+	HIE."By Age Stratifier 8"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -145,10 +145,12 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIE."patientGroups"
 
+define "DSD ART models":
+  HIE."DSD ART models"
+
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
+  + ':' + HIE."By Age Stratifier 8"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-
-//need DSD group
++  HIE."DSD ART models".code 

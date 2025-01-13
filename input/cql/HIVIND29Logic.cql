@@ -123,7 +123,6 @@ define "Numerator":
     where VL.value < 1000
     )
 
-
 /**
  * Denominator
  *

@@ -71,6 +71,10 @@
  * - method: Patient monitoring tools (electronic or paper), for example, hepatitis and HIV testing service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/electronic information systems
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivStatus
+ * - HivHbsAgTest
  */
 
 library HIVIND85Logic
@@ -109,7 +113,8 @@ define "Initial Population":
 define "Numerator":
   exists(HE."Positive D.DE163" G
   with HE."HBsAg test date D.DE161" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period"
+  and exists (HE."Date accessed HIV prevention intervention" t where t = start of P.performed.toInterval()))
 
 
 /**
@@ -135,7 +140,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -149,7 +154,7 @@ define "HIV Status":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 2"
+  + ':' + HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
 + ':' + HIE."HIV Status Stratifier".code 

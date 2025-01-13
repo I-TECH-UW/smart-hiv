@@ -95,19 +95,24 @@ define "Initial Population":
 
 
 define "numerator":
-   exists(HIE."HIV Status Positive Condition" C)
-	or 
-	exists(HIE."HIV Status Positive Observation" O)
-   and exists(HE."On ART H.DE47" H
-   where H.effective starts before end of "Measurement Period"
-    and (H.effective ends after start of "Measurement Period"
-    or end of H.effective  ~  null)
-   )
+   exists(HIE."HIV Status Positive Condition" C where C.onset.toInterval() during "Measurement Period")
+	
+   or 
+
+	exists(HIE."HIV Status Positive Observation" O
+  where O.issued.toInterval() during "Measurement Period"
+  or O.effective.toInterval() during "Measurement Period") 
+
+   and HIE."On ART H.DE47"
 
 define "denominator":
-   exists(HE."HIV Status Positive Condition")
-	or 
-	exists(HIE."HIV Status Positive Observation" O)
+   exists(HIE."HIV Status Positive Condition" C where C.onset.toInterval() during "Measurement Period")
+	
+   or 
+
+	exists(HIE."HIV Status Positive Observation" O
+  where O.issued.toInterval() during "Measurement Period"
+  or O.effective.toInterval() during "Measurement Period") 
 
 /*
  * Disaggregators
@@ -125,17 +130,16 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIE."patientGroups"
 
-// define "TB Stratifier":
-//     HIC."tb"
+ define "TB Stratifier":
+     HIE."tb"
 
 define "Time to start ART":
 	HE."Time to start ART"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
- //not working
- //+ ':' + HIC."Time to start ART".code
+ + ':' + HE."Time to start ART".code
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-//+ Combine(HIC.tb, ':')
++ ':' + HIE."tb".code

@@ -68,6 +68,10 @@
  * - method: Individual-level data obtained from programme records. Either the volume of PrEP prescribed or the volume of product dispensed can be used if this is available, for example from pharmacy data. |  | The total volume of PrEP product prescribed (or dispensed) can then be used to derive the total number of days (or months/years) of product use based on the duration of HIV prevention provided by each unit of product. Such an indicator could be described, for example, as | the number of person-years of PrEP protection provided. This measure can then be used to examine the level of PrEP availability to monitor trends and for modelling the impact of PrEP at the population level. It can also be used to derive the following additional indicators useful for understanding the quantity of PrEP product available relative to need: |  | a) numerator:total number of days available for product use; denominator: total number of PrEP recipients | b) numerator:total number of days available for product use; denominator: estimates of the total number of people who would benefit from PrEP
  * 
  * Suggested Scoring Method: continuous-variable | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cv-measure-cqfm
+ * 
+ * Profiles:
+ * - HivPrepTreatment
+ * - HivPepTreatment (4 types)
  */
 
 library HIVIND4Logic
@@ -139,5 +143,5 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':') 
-+ Combine(HIE.setting, ':')
+ + ':' + HIE."setting".code
 + Combine(HIE.prep_product, ':')

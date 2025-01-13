@@ -128,7 +128,7 @@ define "Denominator":
 
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -137,6 +137,6 @@ define "HIV Status":
   HIE."HIV Status Stratifier"
 
 define "Stratification":
-HIE."By Age Stratifier 2"
+HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + ':' + HIE."HIV Status Stratifier".code 

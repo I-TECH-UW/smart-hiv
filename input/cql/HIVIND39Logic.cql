@@ -51,6 +51,15 @@
  * - method: For the numerator: Programme records (for example, PMTCT registers) | a) For the programme-based/service delivery denominator: Programme records, labour and delivery registers | b) For the population-based denominator: Modelling-based estimates (for example, Spectrum AIM). |  | Note: The population-based denominator is a proxy measure for the number of infants born to HIV-infected women. |  | The recommended reporting period is 12 months.
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivInfant
+ * - HivMother
+ * - HivChildDelivery
+ * - HivAntiRetroviralTreatment
+ * - HivStatus
+ * - HivOnArt
+ * 
  */
 
 library HIVIND39Logic
@@ -62,6 +71,9 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -84,8 +96,8 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
-
+  HIE."is HIV-exposed infant or child E.DE112" and 
+    exists(HE."ART start date" d where date from d same day as Patient.birthDate)
 
 /**
  * Denominator
@@ -95,8 +107,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
-    
-
+  HIE."Has HIV-positive Status" and
+    HIE."Has Delivery in Health Facility"
 /* end Populations */
 
