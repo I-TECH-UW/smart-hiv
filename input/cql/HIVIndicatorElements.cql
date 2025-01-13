@@ -1597,8 +1597,8 @@ define "Other B.DE222 Observation":
 */
 
 define "At elevated risk for HIV acquisition B.DE225":
-  exists(Elements."At elevated risk for HIV acquisition B.DE225" O
-    where O.effective.toInterval() during "Measurement Period")
+  exists(Elements."At elevated risk for HIV acquisition B.DE225" C
+    where C.prevalenceInterval() overlaps "Measurement Period")
 
 /* End of At elevated risk for HIV acquisition B.DE225 */
 

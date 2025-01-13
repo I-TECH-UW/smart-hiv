@@ -2540,8 +2540,8 @@ define "HIV retest prior to starting ART conducted Observation":
 */
 
 define "At elevated risk for HIV acquisition B.DE225":
-  [Observation] O
-    where O.code ~ Concepts."At elevated risk for HIV acquisition - HIV.B.DE225"
+  [Condition] C
+    where C.code ~ Concepts."At elevated risk for HIV acquisition - HIV.B.DE225"
 
 /* End of At elevated risk for HIV acquisition B.DE225 */
 
