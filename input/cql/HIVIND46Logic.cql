@@ -158,10 +158,12 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIE."patientGroups"
 
+define "pregnancy stratifier":
+  HIE."pregnancy stratifier"
+
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-
-//add Pregnant or breastfeeding women 
++ HIE."pregnancy stratifier".code

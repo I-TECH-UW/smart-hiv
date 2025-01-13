@@ -4,6 +4,7 @@ codesystem "HIVConceptsCustom": 'http://smart.who.int/hiv/CodeSystem/HIVConcepts
 codesystem "ConditionCategoryCodes": 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem "ConditionClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/condition-clinical'
 codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/observation-category'
+codesystem "missing concepts": 'missing concepts'
 codesystem "Devicestatement-status": 'http://hl7.org/fhir/device-statement-status'
 codesystem "SNOMEDCT:2018-03": 'urn:oid:2.16.840.1.113883.6.96' version 'urn:hl7:version:2018-03'
 codesystem "SNOMEDCT": 'urn:oid:2.16.840.1.113883.6.96'
@@ -63,19 +64,24 @@ code "Two to four times a day (qualifier value)": '396111001' from "SNOMEDCT" di
 code "HTS Visit": 'HTS Visit' from "HIVConceptsCustom"
 
 //not currently provided
-code "needle-syringe": 'needle syringe' from "HIVConceptsCustom"
-code "methadone": 'methadone' from "HIVConceptsCustom"
-code "buprenorphine": 'buprenorphine' from "HIVConceptsCustom"
-code "viral load test": 'viral load test' from "HIVConceptsCustom"
-code "delivery": 'delivery' from "HIVConceptsCustom"
-code "tb treatment": 'tb treatment' from "HIVConceptsCustom"
-code "ART medication": 'ART medication' from "HIVConceptsCustom"
-code "DSD ART eligibility assessed" : 'DSD ART eligibility assessed' from "HIVConceptsCustom"
-code "syphilis test" : 'syphilis test' from "HIVConceptsCustom"
-code "syphilis treatment" : 'syphilis treatment' from "HIVConceptsCustom"
-code "Gonorrhoea test" : 'gonorrhoea test' from "HIVConceptsCustom"
-code "Gonorrhoea treatment" : 'gonorrhoea treatment' from "HIVConceptsCustom"
-code "HBsAg test" : 'HBsAg test' from "HIVConceptsCustom"
-code "HCV viral load" : 'HCV viral load' from "HIVConceptsCustom"
+code "needle-syringe": 'needle syringe' from "missing concepts"
+code "methadone": 'methadone' from "missing concepts"
+code "buprenorphine": 'buprenorphine' from "missing concepts"
+code "viral load test": 'viral load test' from "missing concepts"
+code "delivery": 'delivery' from "missing concepts"
+code "tb treatment": 'tb treatment' from "missing concepts"
+code "ART medication": 'ART medication' from "missing concepts"
+code "DSD ART eligibility assessed" : 'DSD ART eligibility assessed' from "missing concepts"
+code "syphilis test" : 'syphilis test' from "missing concepts"
+code "HBsAg test" : 'HBsAg test' from "missing concepts"
+code "Gonorrhoea test" : 'Gonorrhoea test' from "missing concepts"
+code "syphilis treatment" : 'syphilis treatment' from "missing concepts"
+code "Gonorrhoea treatment" : 'Gonorrhoea treatment' from "missing concepts"
+code "HCV test" : 'HCV test' from "missing concepts"
+code "HCV viral load" : 'HCV viral load' from "missing concepts"
+code "cervical cancer screening test" : 'cervical cancer screening test' from "missing concepts"
+code "cervical precancer lesion treatment" : 'cervical precancer lesion treatment' from "missing concepts"
+code "Invasive cervical cancer treatment" : 'Invasive cervical cancer treatment' from "missing concepts"
+code "Antenatal care contact": 'Antenatal care contact' from "missing concepts"
 
-valueset "Antenatal care contact": 'http://fhir.org/guides/who/anc-cds/ValueSet/antenatal-care-contact'
+

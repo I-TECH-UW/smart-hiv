@@ -120,6 +120,16 @@ define "Denominator":
  * Disaggregators
  */
 
+define "Age Stratifier":
+	HIE."By Age Stratifier 7"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
+
+define "EID test number 1 test result":
+  HIE."EID test number 1 test result"
+
+define "Stratification":
+ HIE."By Age Stratifier 7"
++ ':' + HIE."By Geographic Region Stratifier"
++ HIE."EID test number 1 test result".code 

@@ -95,15 +95,10 @@ define "Initial Population":
 
 
 define "numerator":
-    exists(HIE."PEP Prescribed before start of Measurement Period and Completed" MS
-	where (MS.effective ends during "Measurement Period")
-   ) 
-
+    HIE."PEP for HIV prevention" and HIE."Date client completes PEP course"
 
 define "denominator":
-    exists(HIE."PEP Prescribed during Measurement Period and Completed" MS
-	where not (MS.effective ends after end of "Measurement Period")
-   ) 
+    HIE."PEP for HIV prevention" 
 
 /*
  * Disaggregators
@@ -137,7 +132,7 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
+ + ':' + HIE."setting".code
 + Combine(HIE.prep_product, ':')
 + Combine(HIE."hiv_exposure_type", ':')
 

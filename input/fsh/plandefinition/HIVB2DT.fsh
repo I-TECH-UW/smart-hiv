@@ -24,9 +24,8 @@ Usage: #definition
     * condition[+]
       * kind = #applicability
       * expression
-        * language = #text/cql-identifier
-        * expression = "Guidance"
-    * definitionCanonical = Canonical(HIVGuidanceCommunicationRequestActivity)
+        * language = #text/cql
+        * expression = "exists(Guidance)"
     * dynamicValue[+]
       * path = "description"
       * expression

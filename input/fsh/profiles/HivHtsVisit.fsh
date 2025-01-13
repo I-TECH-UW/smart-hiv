@@ -1,5 +1,5 @@
 Profile: HivHtsVisit
-Parent: HivEncounter
+Parent: Encounter
 Description: "Encounter for HIV testing services visit"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
