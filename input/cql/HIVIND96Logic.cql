@@ -95,7 +95,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and 
-  exists (HIE."Invasive cervical cancer in the last 12 months" C)
+  exists (HIE."Invasive cervical cancer diagnosis in the last 12 months" C)
   
 
 /**
@@ -105,7 +105,7 @@ define "Numerator":
  */
     
 define "Numerator Exclusions":
-  exists (HIE."Invasive cervical cancer in the last 12 months" C where 
+  exists (HIE."Invasive cervical cancer diagnosis in the last 12 months" C where 
     ( HE."Death documented" after start of C.prevalenceInterval() and
       HE."Death documented" before (start of C.prevalenceInterval() + 12 months))
   )
@@ -120,7 +120,7 @@ define "Numerator Exclusions":
 
 define "Denominator":
   HIE."Has HIV-positive Status" and 
-    exists(HIE."Invasive cervical cancer in the last 12 months" C)
+    exists(HIE."Invasive cervical cancer diagnosis in the last 12 months" C)
    
 /* end Populations */
 

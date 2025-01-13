@@ -1236,3 +1236,6 @@ code "Other priority populations": 'HIV.Config.DE19' from "HIVConcepts" display 
 code "Reporting period end date": 'HIV.Config.DE20' from "HIVConcepts" display 'Reporting period end date'
 code "Reporting period start date": 'HIV.Config.DE21' from "HIVConcepts" display 'Reporting period start date'
 code "Reporting date": 'HIV.Config.DE22' from "HIVConcepts" display 'Reporting date'
+
+// Additional
+code "Live birth": 'HIV.E.DE48' from "HIVConcepts" display 'Live birth'

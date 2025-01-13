@@ -67,6 +67,9 @@ include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
 
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
@@ -87,8 +90,14 @@ define "Initial Population":
  * Calculation: COUNT of women with "HIV status"='HIV-positive' AND "Delivery date" in the reporting period AND (("On ART"=True at labour and delivery) OR ("On ART"=True during pregnancy, for this pregnancy))
  */
 
+// TODO: figure out how do we indicate this vs. another pregnancy, and this labor/delivery vs. another, and how this relates to measurement period
+
 define "Numerator":
-  true
+  HIE."Has HIV-positive Status" and
+  exists(HIE."Live Birth Delivery" BirthDelivery
+    where BirthDelivery.effective.toInterval() during "Measurement Period"
+  )
+
 
 
 /**

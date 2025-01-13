@@ -72,7 +72,14 @@
  * - method: Patient monitoring tools (electronic or paper), EMR/electronic information systems
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * Profiles: 
+ * - HivHbsAgTest
+ * - HivHbsAgTestResult
+ * - HivStatus
+ 
  */
+
+
 
 library HIVIND90Logic
 

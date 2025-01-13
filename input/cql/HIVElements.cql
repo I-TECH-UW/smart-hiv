@@ -2569,12 +2569,14 @@ define "At elevated risk for HIV acquisition B.DE225":
 */
 
 define "Syndrome/STI diagnosed B.DE226":
-    "Urethral discharge syndrome B.DE227" or "Vaginal discharge syndrome B.DE228" or "Lower Abdominal pain  B.DE229" or "Genital ulcer disease syndrome B.DE230" or
-  "Anorectal discharge B.DE231"
+    exists("Urethral discharge syndrome B.DE227") or exists("Vaginal discharge syndrome B.DE228") or exists("Lower Abdominal pain  B.DE229") or exists("Genital ulcer disease syndrome B.DE230") or
+    exists("Anorectal discharge B.DE231")
 
-define "Syndrome/STI diagnosed B.DE226 Observation":
-  [Observation: Concepts."Syndrome/STI diagnosed - HIV.B.DE226"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+define "Syndrome/STI diagnosed B.DE226 Condition":
+  [Condition] C
+    where C.code in Concepts."Syndrome/STI diagnosed - HIV.B.DE226 Choices"
+      and C.verificationStatus.text = 'confirmed'
+
 /* End of Syndrome/STI diagnosed B.DE226 */
 
 /*
@@ -2584,14 +2586,7 @@ define "Syndrome/STI diagnosed B.DE226 Observation":
 */
 
 define "Urethral discharge syndrome B.DE227":
-  exists "Urethral discharge syndrome B.DE227 Condition"
-    or exists "Urethral discharge syndrome B.DE227 Observation"
-define "Urethral discharge syndrome B.DE227 Condition":
   [Condition: Concepts."Urethral discharge syndrome - HIV.B.DE227"]
-define "Urethral discharge syndrome B.DE227 Observation":
-  "Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Urethral discharge syndrome - HIV.B.DE227"
 /* End of Urethral discharge syndrome B.DE227 */
 
 /*
@@ -2599,16 +2594,8 @@ define "Urethral discharge syndrome B.DE227 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with vaginal discharge syndrome
 */
-
 define "Vaginal discharge syndrome B.DE228":
-  exists "Vaginal discharge syndrome B.DE228 Condition"
-    or exists "Vaginal discharge syndrome B.DE228 Observation"
-define "Vaginal discharge syndrome B.DE228 Condition":
   [Condition: Concepts."Vaginal discharge syndrome - HIV.B.DE228"]
-define "Vaginal discharge syndrome B.DE228 Observation":
-  "Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Vaginal discharge syndrome - HIV.B.DE228"
 /* End of Vaginal discharge syndrome B.DE228 */
 
 /*
@@ -2616,14 +2603,9 @@ define "Vaginal discharge syndrome B.DE228 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-
 define "Lower Abdominal pain  B.DE229":
-  exists "Lower Abdominal pain  B.DE229 Observation"
+  [Condition: Concepts."Lower Abdominal pain  - HIV.B.DE229"]
 
-define "Lower Abdominal pain  B.DE229 Observation":
-  "Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Lower Abdominal pain  - HIV.B.DE229"
 /* End of Lower Abdominal pain  B.DE229 */
 
 /*
@@ -2633,14 +2615,8 @@ define "Lower Abdominal pain  B.DE229 Observation":
 */
 
 define "Genital ulcer disease syndrome B.DE230":
-  exists "Genital ulcer disease syndrome B.DE230 Condition"
-    or exists "Genital ulcer disease syndrome B.DE230 Observation"
-define "Genital ulcer disease syndrome B.DE230 Condition":
   [Condition: Concepts."Genital ulcer disease syndrome - HIV.B.DE230"]
-define "Genital ulcer disease syndrome B.DE230 Observation":
-  "Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Genital ulcer disease syndrome - HIV.B.DE230"
+
 /* End of Genital ulcer disease syndrome B.DE230 */
 
 /*
@@ -2648,14 +2624,8 @@ define "Genital ulcer disease syndrome B.DE230 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with anorectal discharge
 */
-
 define "Anorectal discharge B.DE231":
-  exists "Anorectal discharge B.DE231 Observation"
-
-define "Anorectal discharge B.DE231 Observation":
-  "Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Anorectal discharge - HIV.B.DE231"
+  [Condition: Concepts."Anorectal discharge - HIV.B.DE231"]
 /* End of Anorectal discharge B.DE231 */
 
 /*
@@ -2663,16 +2633,8 @@ define "Anorectal discharge B.DE231 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Specimen sent for testing
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Sent for testing B.DE232":
-  exists "Sent for testing B.DE232 Condition"
-    or exists "Sent for testing B.DE232 Observation"
-define "Sent for testing B.DE232 Condition":
   [Condition: Concepts."Sent for testing - HIV.B.DE232"]
-define "Sent for testing B.DE232 Observation":
-  "Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Sent for testing - HIV.B.DE232"
 /* End of Sent for testing B.DE232 */
 
 /*
@@ -2680,16 +2642,8 @@ define "Sent for testing B.DE232 Observation":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other syndrome/STI diagnosed
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Other B.DE233":
-  exists "Other B.DE233 Condition"
-    or exists "Other B.DE233 Observation"
-define "Other B.DE233 Condition":
   [Condition: Concepts."Other - HIV.B.DE233"]
-define "Other B.DE233 Observation":
-  "Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Other - HIV.B.DE233"
 /* End of Other B.DE233 */
 
 /*
@@ -2784,9 +2738,8 @@ define "Syphilis treatment start date B.DE254":
 */
 
 define "Gonorrhoea test date B.DE255":
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom."Gonorrhoea test"
+  "Gonorrhoea test result B.DE256" O
+  return O.effective
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
@@ -11800,7 +11753,6 @@ define "Completed Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: When the pregnant woman or mother initiated ART, for women living with HIV.
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Timing of ART initiation":
   exists "Timing of ART initiation Observation"
 define "Timing of ART initiation Observation":
@@ -11864,13 +11816,12 @@ define "Newly on ART during labour and delivery Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: Date on which the woman delivered
 */
-// TODO: Replace placeholder with relevant CQL logic
-define "Delivery date":
-  [Observation: Concepts."Delivery date"] O
+define "Live Birth Delivery":
+  [Observation: Concepts."Live birth"] O
     where O.status in { 'final', 'amended', 'corrected' }
-define "Delivery date Value":
-  "Delivery date" O
-  return O.value
+define "Delivery date":
+  "Live Birth Delivery" O
+  return O.effective
 /* End of Delivery date */
 
 /*
@@ -11880,7 +11831,9 @@ define "Delivery date Value":
 */
 
 define "Place of delivery":
-  [Procedure: ConceptsCustom."delivery"]
+  [Observation: Concepts."Place of delivery"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+    and O.value is not null
 
 /* End of Place of delivery */
 
@@ -11891,9 +11844,9 @@ define "Place of delivery":
 */
 
 define "Health facility":
-  "Place of delivery" P
+  "Place of delivery" O
   with [Location] L
-      such that P.location.references(L) 
+      such that O.value is FHIR.Reference and O.subject.reference = L.id
       and L.physicalType ~ Concepts."Health facility"
       
 /* End of Health facility */
@@ -11905,9 +11858,9 @@ define "Health facility":
 */
 
 define "Home":
-  "Place of delivery" P
+  "Place of delivery" O
   with [Location] L
-      such that P.location.references(L) 
+      such that O.subject.references(L) 
       and L.physicalType ~ Concepts."Home"
       
 /* End of Home */
@@ -11919,9 +11872,9 @@ define "Home":
 */
 
 define "Other E.DE70":
-  "Place of delivery" P
+  "Place of delivery" O
   with [Location] L
-      such that P.location.references(L) 
+      such that O.subject.references(L) 
       and L.physicalType ~ Concepts."Other - HIV.E.DE70"
 /* End of Other E.DE70 */
 
@@ -11981,8 +11934,8 @@ define "Age of infant in years":
 @activity: HIV.F6 Check whether infant/child had HIV exposure
 @description: Whether the infant or child was determined to have had HIV exposure
 */
-
 define "HIV-exposed infant or child E.DE112":
+
   [Observation: Concepts."HIV-exposed infant or child - HIV.E.DE112"] O
     where O.status in { 'final', 'amended', 'corrected' }
 
@@ -14058,13 +14011,8 @@ define "Date injecting equipment provided Value":
 @activity: HIV.B21 Offer prevention options
 @description: Date client initiated opioid agonist maintenance treatment (OAMT)
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Date OAMT initiated":
-  [Observation: Concepts."Date OAMT initiated"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-define "Date OAMT initiated Value":
-  "Date OAMT initiated" O
-  return O.value
+  true
 /* End of Date OAMT initiated */
 
 /*
@@ -14074,11 +14022,9 @@ define "Date OAMT initiated Value":
 */
 // TODO: Replace placeholder with relevant CQL logic
 define "Currently on OAMT":
-  exists "Currently on OAMT Observation"
-define "Currently on OAMT Observation":
-  [Observation: Concepts."Currently on OAMT"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  [MedicationStatement] MS
+    where exists(MS.reasonCode C where C ~ Concepts."OAMT")
+    
 /* End of Currently on OAMT */
 
 /*

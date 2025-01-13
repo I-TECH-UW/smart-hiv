@@ -102,7 +102,7 @@ define "Numerator":
   and exists(
     HIE."Viral load test result D.DE387" VL
     with HE."viral load sample collection" P 
-    such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
+    such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".effective.toInterval()
     where VL.value < 1000
     )
 
@@ -121,7 +121,7 @@ define "Denominator":
   and exists(
     HIE."Viral load test result D.DE387" VL
     with HE."viral load sample collection" P 
-    such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".performed.toInterval()
+    such that VL.partOf.references(P) and start of P.performed.toInterval() = start of "First Health facility".effective.toInterval()
     )
 
 /* end Populations */

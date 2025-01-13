@@ -138,8 +138,8 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."Gonorrhoea test result B.DE256"
-  and HIE."Date accessed HIV prevention intervention"
+  exists(HIE."Gonorrhoea test result B.DE256")
+  and exists(HIE."Date accessed HIV prevention intervention")
 
 
 /**

@@ -1,9 +1,8 @@
-Profile: HivHtsVisit
-Parent: HivEncounter
-Description: "Encounter for HIV testing services visit"
+Profile: HivEncounter
+Parent: Encounter
+Description: "Client encounter for HIV-related services"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
-* ^title = "HTS Visit"
+* ^title = "HIV Encounter"
 
-//* type.conding contains ConceptsCustom."HTS Visit".code

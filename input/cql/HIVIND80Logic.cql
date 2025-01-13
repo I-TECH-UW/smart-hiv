@@ -62,6 +62,11 @@
  * - method: Patient monitoring tools (electronic or paper), for example, hepatitis and HIV testing service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/electronic information systems
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivStatus
+ * - HivHbsAgTest
+ * - HivPreventionIntervention
  */
 
 library HIVIND80Logic
@@ -99,7 +104,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."HBsAg test date D.DE161" and 
-  HIE."Date accessed HIV prevention intervention"
+  exists(HIE."Date accessed HIV prevention intervention")
 
 /**
  * Denominator

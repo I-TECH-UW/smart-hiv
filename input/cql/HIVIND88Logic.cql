@@ -75,6 +75,7 @@
 
  /* 
   * Profiles:
+  * - HivStatus
   * - HivHcvTest
   * - HivPreventionIntervention
   */

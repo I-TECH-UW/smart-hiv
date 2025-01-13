@@ -102,10 +102,12 @@ define "Initial Population":
  */
 
 define "Numerator":
-  HIE."Has HIV-positive Status" and 
-  HIE."Invasive cervical cancer" C and
-  exists HIE."Invasive cervical cancer treatment method" P
-  where P.performed after start of C.prevalenceInterval()
+  HIE."Has HIV-positive Status"
+  and exists(
+    HIE."Invasive cervical cancer" C
+      with HIE."Invasive cervical cancer treatment method" P
+        such that P.performed after start of C.prevalenceInterval()
+  )
 
 /**
  * Denominator
@@ -117,7 +119,7 @@ define "Numerator":
 
 define "Denominator":
   HIE."Has HIV-positive Status" and 
-  HIE."Invasive cervical cancer"
+  exists HIE."Invasive cervical cancer"
     
 
 /* end Populations */

@@ -139,7 +139,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and
-  exists(HIE."Positive B.DE257" G)
+  HIE."Positive B.DE257" G
 
 /**
  * Denominator
@@ -150,7 +150,7 @@ define "Numerator":
 
 define "Denominator":
   HIE."Has HIV-positive Status" and
-  HIE."Gonorrhoea test result B.DE256":
+  exists(HIE."Gonorrhoea test result B.DE256")
     
 
 /* end Populations */
