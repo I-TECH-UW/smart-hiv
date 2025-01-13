@@ -104,13 +104,16 @@ define "Initial Population":
 
 
 define "numerator":
-    HIE."PEP for HIV prevention" and
-    exists (HE."HIV-positive test result" O
-  where start of O.effective.toInterval() in Interval[start of First(HE."PEP for HIV prevention").MedicationRequestPeriod(),end of "Measurement Period" + 3 months])
+    exists(HIE."HIV Test Positive After PEP Prescribed during Measurement Period" O
+	where (O.issued after start of "Measurement Period")
+   ) 
 
 
 define "denominator":
-    HIE."PEP for HIV prevention"
+    exists(HE."PEP Prescription" MR
+	where (MR.authoredOn after start of "Measurement Period"
+    and MR.authoredOn before end of "Measurement Period")
+   ) 
 
 
 
@@ -148,6 +151,6 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
- + ':' + HIE."setting".code
++ Combine(HIE.setting, ':')
 + Combine(HIE.prep_product, ':')
 + Combine(HIE."hiv_exposure_type", ':')

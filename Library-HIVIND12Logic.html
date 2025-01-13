@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 16:44:09+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
         </tr>
         
 
@@ -483,10 +483,6 @@
                   
                     <li><a href="Library-WHOCommon.html">WHOCommon</a></li>
                   
-                    <li><a href="Library-HIVElements.html">HIVElements</a></li>
-                  
-                    <li><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></li>
-                  
                 </ul>
                 
                 
@@ -510,9 +506,9 @@
               
                 <tr><th>Initial Population</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Measure Population</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
+                <tr><th>Numerator</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>Measure Observation</th><th>integer</th><th>0</th><th>1</th><th>Out</th></tr>
+                <tr><th>Denominator</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
             </table>
           </td>
@@ -596,11 +592,8 @@ include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
 
-include HIVElements called HE
-include HIVIndicatorElements called HIE
-
 // Indicator Definition
-parameter &quot;Measurement Period&quot; Interval&lt;DateTime&gt; default Interval[@2023-01-01, @2023-01-30]
+parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
 
 context Patient
 /* Populations */
@@ -619,37 +612,20 @@ define &quot;Initial Population&quot;:
  * Calculation: SUM of [DIFFERENCE in MIN(&quot;Date OAMT initiated&quot;, &quot;Reporting period start date&quot;) and MAX(&quot;Date of loss to follow-up or OAMT stopped&quot;, &quot;Reporting period end date&quot;)] for all clients with &quot;Medications prescribed&quot; IN 'Methadone', 'Buprenorphine'
  */
 
-define &quot;Measure Population&quot;:
-  exists(HIE.&quot;buprenorphine_prescribed at date&quot;) or exists(HIE.&quot;methadone_prescribed at date&quot;)
+define &quot;Numerator&quot;:
+  true
 
 
-define &quot;Measure Observation&quot;:
-  (
-    difference in days between
-    Min(
-      {
-        ToDate(First(HIE.&quot;OAMT start&quot;)), 
-        ToDate(start of &quot;Measurement Period&quot;)
-      }
-    )
-
-    and ToDate(start of &quot;Measurement Period&quot;)
-  )
-  +
-  (
-    difference in days between end of &quot;Measurement Period&quot;
-    and Coalesce(
-        ToDate(First(HIE.&quot;OAMT end&quot;)), 
-        end of &quot;Measurement Period&quot;
-      )
-  )
-  
 /**
  * Denominator
  *
  * Definition: a) Programme/service provider level: estimated PYFU for all opioid dependent people accessing service during defined reporting period | b) Population level: estimated PYFU for total population of opioid dependent people in relevant geographic area during defined reporting period
  * Calculation: Service level: Not calculated in DAK |  | Population denominator:  | *Estimated PYFU for all opioid-dependent people accessing service during defined reporting period |  | Note: Can be reported only as numerator; by population or service level if these denominator estimates available.
  */
+
+define &quot;Denominator&quot;:
+  true
+    
 
 /* end Populations */
 
@@ -666,7 +642,7 @@ define &quot;Measure Observation&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (32828 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (15172 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -678,7 +654,7 @@ define &quot;Measure Observation&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (55616 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (20412 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -711,7 +687,7 @@ define &quot;Measure Observation&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 16:44+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

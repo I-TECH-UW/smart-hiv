@@ -2,7 +2,7 @@
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="60">
+      <a:s r="51">
          <a:s>/**
  * Library: HIV.IND.18 Logic
  * Ref No: HTS.1
@@ -316,160 +316,113 @@ define &quot;Administrative Gender Stratifier&quot;:
          </annotation>
          <expression localId="31" locator="113:2-113:20" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="35" locator="115:2-116:13" name="ANC Stratifier" context="Patient" accessLevel="Public">
+      <def localId="51" locator="119:1-123:33" name="Stratification" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="35">
-               <a:s>define &quot;ANC Stratifier&quot;:
-    </a:s>
-               <a:s r="34">
-                  <a:s r="33">
-                     <a:s>HIE</a:s>
-                  </a:s>
-                  <a:s>.</a:s>
-                  <a:s r="34">
-                     <a:s>&quot;anc&quot;</a:s>
-                  </a:s>
-               </a:s>
-            </a:s>
-         </annotation>
-         <expression localId="34" locator="116:5-116:13" name="anc" libraryName="HIE" xsi:type="ExpressionRef"/>
-      </def>
-      <def localId="60" locator="119:1-124:22" name="Stratification" context="Patient" accessLevel="Public">
-         <annotation xsi:type="a:Annotation">
-            <a:s r="60">
-               <a:s>define &quot;Stratification&quot;:
+            <a:s r="51">
+               <a:s>// define &quot;ANC Stratifier&quot;:
+//     HIC.&quot;anc&quot;
+
+
+define &quot;Stratification&quot;:
  </a:s>
-               <a:s r="59">
-                  <a:s r="55">
-                     <a:s r="53">
-                        <a:s r="48">
-                           <a:s r="45">
-                              <a:s r="43">
-                                 <a:s r="40">
-                                    <a:s r="38">
-                                       <a:s r="37">
-                                          <a:s r="36">
-                                             <a:s>HIE</a:s>
-                                          </a:s>
-                                          <a:s>.</a:s>
-                                          <a:s r="37">
-                                             <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
-                                          </a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="38">
-                                          <a:s>code</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> 
-  + </a:s>
-                                    <a:s r="39">
-                                       <a:s>':'</a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s> + </a:s>
-                                 <a:s r="42">
-                                    <a:s r="41">
+               <a:s r="50">
+                  <a:s r="45">
+                     <a:s r="42">
+                        <a:s r="40">
+                           <a:s r="37">
+                              <a:s r="35">
+                                 <a:s r="34">
+                                    <a:s r="33">
                                        <a:s>HIE</a:s>
                                     </a:s>
                                     <a:s>.</a:s>
-                                    <a:s r="42">
-                                       <a:s>&quot;By Age Stratifier 2&quot;</a:s>
+                                    <a:s r="34">
+                                       <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
                                     </a:s>
                                  </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="35">
+                                    <a:s>code</a:s>
+                                 </a:s>
                               </a:s>
-                              <a:s>
-+ </a:s>
-                              <a:s r="44">
+                              <a:s> 
+  + </a:s>
+                              <a:s r="36">
                                  <a:s>':'</a:s>
                               </a:s>
                            </a:s>
                            <a:s> + </a:s>
-                           <a:s r="47">
-                              <a:s r="46">
+                           <a:s r="39">
+                              <a:s r="38">
                                  <a:s>HIE</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="47">
-                                 <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                              <a:s r="39">
+                                 <a:s>&quot;By Age Stratifier 2&quot;</a:s>
                               </a:s>
                            </a:s>
                         </a:s>
                         <a:s>
 + </a:s>
-                        <a:s r="52">
-                           <a:s>Combine(</a:s>
-                           <a:s r="50">
-                              <a:s r="49">
-                                 <a:s>HIE</a:s>
-                              </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="50">
-                                 <a:s>patientGroups</a:s>
-                              </a:s>
-                           </a:s>
-                           <a:s>, </a:s>
-                           <a:s r="51">
-                              <a:s>':'</a:s>
-                           </a:s>
-                           <a:s>)</a:s>
+                        <a:s r="41">
+                           <a:s>':'</a:s>
                         </a:s>
                      </a:s>
-                     <a:s>
-+ </a:s>
-                     <a:s r="54">
-                        <a:s>':'</a:s>
-                     </a:s>
-                  </a:s>
-                  <a:s> + </a:s>
-                  <a:s r="58">
-                     <a:s r="57">
-                        <a:s r="56">
+                     <a:s> + </a:s>
+                     <a:s r="44">
+                        <a:s r="43">
                            <a:s>HIE</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="57">
-                           <a:s>&quot;anc&quot;</a:s>
+                        <a:s r="44">
+                           <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
                         </a:s>
                      </a:s>
-                     <a:s>.</a:s>
-                     <a:s r="58">
-                        <a:s>code</a:s>
+                  </a:s>
+                  <a:s>
++ </a:s>
+                  <a:s r="49">
+                     <a:s>Combine(</a:s>
+                     <a:s r="47">
+                        <a:s r="46">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="47">
+                           <a:s>patientGroups</a:s>
+                        </a:s>
                      </a:s>
+                     <a:s>, </a:s>
+                     <a:s r="48">
+                        <a:s>':'</a:s>
+                     </a:s>
+                     <a:s>)</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="59" locator="120:2-124:22" xsi:type="Concatenate">
-            <operand localId="55" locator="120:2-124:5" xsi:type="Concatenate">
-               <operand localId="53" locator="120:2-123:33" xsi:type="Concatenate">
-                  <operand localId="48" locator="120:2-122:45" xsi:type="Concatenate">
-                     <operand localId="45" locator="120:2-122:5" xsi:type="Concatenate">
-                        <operand localId="43" locator="120:2-121:35" xsi:type="Concatenate">
-                           <operand localId="40" locator="120:2-121:7" xsi:type="Concatenate">
-                              <operand localId="38" locator="120:2-120:47" path="code" xsi:type="Property">
-                                 <source localId="37" locator="120:2-120:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
-                              </operand>
-                              <operand localId="39" locator="121:5-121:7" valueType="t:String" value=":" xsi:type="Literal"/>
-                           </operand>
-                           <operand localId="42" locator="121:11-121:35" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="50" locator="120:2-123:33" xsi:type="Concatenate">
+            <operand localId="45" locator="120:2-122:45" xsi:type="Concatenate">
+               <operand localId="42" locator="120:2-122:5" xsi:type="Concatenate">
+                  <operand localId="40" locator="120:2-121:35" xsi:type="Concatenate">
+                     <operand localId="37" locator="120:2-121:7" xsi:type="Concatenate">
+                        <operand localId="35" locator="120:2-120:47" path="code" xsi:type="Property">
+                           <source localId="34" locator="120:2-120:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                         </operand>
-                        <operand localId="44" locator="122:3-122:5" valueType="t:String" value=":" xsi:type="Literal"/>
+                        <operand localId="36" locator="121:5-121:7" valueType="t:String" value=":" xsi:type="Literal"/>
                      </operand>
-                     <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                        <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                        <operand localId="47" locator="122:9-122:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
-                     </operand>
+                     <operand localId="39" locator="121:11-121:35" name="By Age Stratifier 2" libraryName="HIE" xsi:type="ExpressionRef"/>
                   </operand>
-                  <operand localId="52" locator="123:3-123:33" xsi:type="Combine">
-                     <source localId="50" locator="123:11-123:27" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
-                     <separator localId="51" locator="123:30-123:32" valueType="t:String" value=":" xsi:type="Literal"/>
-                  </operand>
+                  <operand localId="41" locator="122:3-122:5" valueType="t:String" value=":" xsi:type="Literal"/>
                </operand>
-               <operand localId="54" locator="124:3-124:5" valueType="t:String" value=":" xsi:type="Literal"/>
+               <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                  <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                  <operand localId="44" locator="122:9-122:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+               </operand>
             </operand>
-            <operand localId="58" locator="124:9-124:22" path="code" xsi:type="Property">
-               <source localId="57" locator="124:9-124:17" name="anc" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="49" locator="123:3-123:33" xsi:type="Combine">
+               <source localId="47" locator="123:11-123:27" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <separator localId="48" locator="123:30-123:32" valueType="t:String" value=":" xsi:type="Literal"/>
             </operand>
          </expression>
       </def>

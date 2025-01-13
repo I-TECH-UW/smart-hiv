@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "47",
+            "r" : "16",
             "s" : [ {
                "value" : [ "/**\n * Library: HIV.IND.12 Logic\n * Ref No: PRV.12\n * Short Name: Total person-years on OAMT\n *\n * Definition: % of person-years of follow-up (PYFU) on OAMT among opioid dependent people\n *\n * Numerator: Total PYFU on OAMT during defined reporting period. | Calculated from the sum of the time on OAMT of each OAMT recipient during the reporting period.\n * Numerator Calculation: SUM of [DIFFERENCE in MIN(\"Date OAMT initiated\", \"Reporting period start date\") and MAX(\"Date of loss to follow-up or OAMT stopped\", \"Reporting period end date\")] for all clients with \"Medications prescribed\" IN 'Methadone', 'Buprenorphine'\n * Numerator Exclusions: \n *\n * Denominator: a) Programme/service provider level: estimated PYFU for all opioid dependent people accessing service during defined reporting period | b) Population level: estimated PYFU for total population of opioid dependent people in relevant geographic area during defined reporting period\n * Denominator Calculation: Service level: Not calculated in DAK |  | Population denominator:  | *Estimated PYFU for all opioid-dependent people accessing service during defined reporting period |  | Note: Can be reported only as numerator; by population or service level if these denominator estimates available.\n * Denominator Exclusions: \n *\n * Disaggregations:\n * • Gender (female, male, other*) \n *  • Age (15–19, 20–24, 25–49, 50+ years) \n *  • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith-based, international, nongovernmental) \n *  • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.) \n *  • Cities and other administrative regions of epidemiologic importance\n *\n * Disaggregation Elements: Gender | Age\n *\n * Numerator and Denominator Elements:\n * Date OAMT initiated \n *  Date of loss to follow-up or OAMT stopped \n *  Medications prescribed \n *  Reporting period end date \n *  Reporting period start date\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth\n * HIV.A.DE18: Gender* | Gender of the client*\n * HIV.A.DE19: Female | Client identifies as female\n * HIV.A.DE20: Male | Client identifies as male\n * HIV.A.DE21: Transgender male | Client identifies as transgender male\n * HIV.A.DE22: Transgender female | Client identifies as transgender female\n * HIV.A.DE23: Other | Additional category\n * HIV.C.DE75: Medications prescribed | Medications the client was prescribed\n * HIV.C.DE76: PrEP for HIV prevention | Client was prescribed pre-exposure prophylaxis (PrEP) for HIV prevention\n * HIV.C.DE77: PEP for HIV prevention | Client was prescribed post-exposure prophylaxis (PEP) for HIV prevention\n * HIV.C.DE78: Other | Client was prescribed other medications\n * HIV.D.DE457: Medications prescribed | Name or regimen code of all other medications prescribed during the visit\n * HIV.PRV.DE17: Date OAMT initiated | Date client initiated opioid agonist maintenance treatment (OAMT)\n * HIV.PRV.DE25: Date of loss to follow-up or OAMT stopped | Date of loss to follow-up or opioid agonist maintenance treatment (OAMT) stopped\n * HIV.Config.DE20: Reporting period end date | End date of the reporting period\n * HIV.Config.DE21: Reporting period start date | Start date of the reporting period\n *\n * Additional Context\n * - what it measures: Measure of the proportion of person time in which individuals who are opioid dependent are covered by OAMT.\n * - rationale: Evidence demonstrates that HIV risk is reduced among individuals who are opioid dependent during periods when receiving OAMT.\n * - method: Individual-level data obtained from programme records.\n * \n * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm\n */\n\n","library HIVIND12Logic" ]
             } ]
@@ -111,68 +111,28 @@
                   } ]
                }
             } ]
-         }, {
-            "localId" : "5",
-            "locator" : "70:1-70:29",
-            "localIdentifier" : "HE",
-            "path" : "http://smart.who.int/hiv/HIVElements",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "5",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "HIVElements" ]
-                     } ]
-                  }, {
-                     "value" : [ " called ","HE" ]
-                  } ]
-               }
-            } ]
-         }, {
-            "localId" : "6",
-            "locator" : "71:1-71:39",
-            "localIdentifier" : "HIE",
-            "path" : "http://smart.who.int/hiv/HIVIndicatorElements",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "6",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "HIVIndicatorElements" ]
-                     } ]
-                  }, {
-                     "value" : [ " called ","HIE" ]
-                  } ]
-               }
-            } ]
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "12",
-            "locator" : "74:1-74:92",
+            "localId" : "10",
+            "locator" : "71:1-71:88",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "10",
                   "s" : [ {
                      "value" : [ "// Indicator Definition\n","parameter ","\"Measurement Period\""," " ]
                   }, {
-                     "r" : "11",
+                     "r" : "9",
                      "s" : [ {
                         "value" : [ "Interval<" ]
                      }, {
-                        "r" : "10",
+                        "r" : "8",
                         "s" : [ {
-                           "value" : [ "DateTime" ]
+                           "value" : [ "Date" ]
                         } ]
                      }, {
                         "value" : [ ">" ]
@@ -180,243 +140,69 @@
                   }, {
                      "value" : [ " default " ]
                   }, {
-                     "r" : "9",
+                     "r" : "7",
                      "s" : [ {
-                        "r" : "7",
+                        "r" : "5",
                         "value" : [ "Interval[","@2023-01-01",", ","@2023-01-30","]" ]
                      } ]
                   } ]
                }
             } ],
             "default" : {
+               "localId" : "7",
+               "locator" : "71:55-71:88",
+               "lowClosed" : true,
+               "highClosed" : true,
                "type" : "Interval",
                "low" : {
-                  "type" : "ToDateTime",
-                  "signature" : [ {
-                     "name" : "{urn:hl7-org:elm-types:r1}Date",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
-                  "operand" : {
-                     "path" : "low",
-                     "type" : "Property",
-                     "source" : {
-                        "localId" : "9",
-                        "locator" : "74:59-74:92",
-                        "lowClosed" : true,
-                        "highClosed" : true,
-                        "type" : "Interval",
-                        "low" : {
-                           "localId" : "7",
-                           "locator" : "74:68-74:78",
-                           "type" : "Date",
-                           "year" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2023",
-                              "type" : "Literal"
-                           },
-                           "month" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           },
-                           "day" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           }
-                        },
-                        "high" : {
-                           "localId" : "8",
-                           "locator" : "74:81-74:91",
-                           "type" : "Date",
-                           "year" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2023",
-                              "type" : "Literal"
-                           },
-                           "month" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           },
-                           "day" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "30",
-                              "type" : "Literal"
-                           }
-                        }
-                     }
-                  }
-               },
-               "lowClosedExpression" : {
-                  "path" : "lowClosed",
-                  "type" : "Property",
-                  "source" : {
-                     "localId" : "9",
-                     "locator" : "74:59-74:92",
-                     "lowClosed" : true,
-                     "highClosed" : true,
-                     "type" : "Interval",
-                     "low" : {
-                        "localId" : "7",
-                        "locator" : "74:68-74:78",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2023",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        }
-                     },
-                     "high" : {
-                        "localId" : "8",
-                        "locator" : "74:81-74:91",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2023",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "30",
-                           "type" : "Literal"
-                        }
-                     }
+                  "localId" : "5",
+                  "locator" : "71:64-71:74",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2023",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
                   }
                },
                "high" : {
-                  "type" : "ToDateTime",
-                  "signature" : [ {
-                     "name" : "{urn:hl7-org:elm-types:r1}Date",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
-                  "operand" : {
-                     "path" : "high",
-                     "type" : "Property",
-                     "source" : {
-                        "localId" : "9",
-                        "locator" : "74:59-74:92",
-                        "lowClosed" : true,
-                        "highClosed" : true,
-                        "type" : "Interval",
-                        "low" : {
-                           "localId" : "7",
-                           "locator" : "74:68-74:78",
-                           "type" : "Date",
-                           "year" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2023",
-                              "type" : "Literal"
-                           },
-                           "month" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           },
-                           "day" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           }
-                        },
-                        "high" : {
-                           "localId" : "8",
-                           "locator" : "74:81-74:91",
-                           "type" : "Date",
-                           "year" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2023",
-                              "type" : "Literal"
-                           },
-                           "month" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           },
-                           "day" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "30",
-                              "type" : "Literal"
-                           }
-                        }
-                     }
-                  }
-               },
-               "highClosedExpression" : {
-                  "path" : "highClosed",
-                  "type" : "Property",
-                  "source" : {
-                     "localId" : "9",
-                     "locator" : "74:59-74:92",
-                     "lowClosed" : true,
-                     "highClosed" : true,
-                     "type" : "Interval",
-                     "low" : {
-                        "localId" : "7",
-                        "locator" : "74:68-74:78",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2023",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        }
-                     },
-                     "high" : {
-                        "localId" : "8",
-                        "locator" : "74:81-74:91",
-                        "type" : "Date",
-                        "year" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2023",
-                           "type" : "Literal"
-                        },
-                        "month" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
-                           "type" : "Literal"
-                        },
-                        "day" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "30",
-                           "type" : "Literal"
-                        }
-                     }
+                  "localId" : "6",
+                  "locator" : "71:77-71:87",
+                  "type" : "Date",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2023",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "30",
+                     "type" : "Literal"
                   }
                }
             },
             "parameterTypeSpecifier" : {
-               "localId" : "11",
-               "locator" : "74:32-74:49",
+               "localId" : "9",
+               "locator" : "71:32-71:45",
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
-                  "localId" : "10",
-                  "locator" : "74:41-74:48",
-                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "localId" : "8",
+                  "locator" : "71:41-71:44",
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "NamedTypeSpecifier"
                }
             }
@@ -424,28 +210,51 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "76:1-76:15",
+            "locator" : "73:1-73:15",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "76:1-76:15",
+            "locator" : "73:1-73:15",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "locator" : "76:1-76:15",
+                  "locator" : "73:1-73:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
                   "type" : "Retrieve"
                }
             }
          }, {
-            "localId" : "14",
-            "locator" : "83:1-84:6",
+            "localId" : "12",
+            "locator" : "80:1-81:6",
             "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "r" : "11",
+                     "value" : [ "/* Populations */\n\n/*\n *Initial Population\n */\n\n","define ","\"Initial Population\"",":\n  ","true" ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "locator" : "81:3-81:6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "value" : "true",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "14",
+            "locator" : "90:1-91:6",
+            "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -454,469 +263,39 @@
                   "r" : "14",
                   "s" : [ {
                      "r" : "13",
-                     "value" : [ "/* Populations */\n\n/*\n *Initial Population\n */\n\n","define ","\"Initial Population\"",":\n  ","true" ]
+                     "value" : [ "/**\n * Numerator\n * \n * Definition: Total PYFU on OAMT during defined reporting period. | Calculated from the sum of the time on OAMT of each OAMT recipient during the reporting period.\n * Calculation: SUM of [DIFFERENCE in MIN(\"Date OAMT initiated\", \"Reporting period start date\") and MAX(\"Date of loss to follow-up or OAMT stopped\", \"Reporting period end date\")] for all clients with \"Medications prescribed\" IN 'Methadone', 'Buprenorphine'\n */\n\n","define ","\"Numerator\"",":\n  ","true" ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "13",
-               "locator" : "84:3-84:6",
+               "locator" : "91:3-91:6",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "true",
                "type" : "Literal"
             }
          }, {
-            "localId" : "22",
-            "locator" : "93:1-94:94",
-            "name" : "Measure Population",
+            "localId" : "16",
+            "locator" : "101:1-102:6",
+            "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "22",
+                  "r" : "16",
                   "s" : [ {
-                     "value" : [ "/**\n * Numerator\n * \n * Definition: Total PYFU on OAMT during defined reporting period. | Calculated from the sum of the time on OAMT of each OAMT recipient during the reporting period.\n * Calculation: SUM of [DIFFERENCE in MIN(\"Date OAMT initiated\", \"Reporting period start date\") and MAX(\"Date of loss to follow-up or OAMT stopped\", \"Reporting period end date\")] for all clients with \"Medications prescribed\" IN 'Methadone', 'Buprenorphine'\n */\n\n","define ","\"Measure Population\"",":\n  " ]
-                  }, {
-                     "r" : "21",
-                     "s" : [ {
-                        "r" : "17",
-                        "s" : [ {
-                           "value" : [ "exists" ]
-                        }, {
-                           "r" : "16",
-                           "s" : [ {
-                              "value" : [ "(" ]
-                           }, {
-                              "r" : "16",
-                              "s" : [ {
-                                 "r" : "15",
-                                 "s" : [ {
-                                    "value" : [ "HIE" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "16",
-                                 "s" : [ {
-                                    "value" : [ "\"buprenorphine_prescribed at date\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " or " ]
-                     }, {
-                        "r" : "20",
-                        "s" : [ {
-                           "value" : [ "exists" ]
-                        }, {
-                           "r" : "19",
-                           "s" : [ {
-                              "value" : [ "(" ]
-                           }, {
-                              "r" : "19",
-                              "s" : [ {
-                                 "r" : "18",
-                                 "s" : [ {
-                                    "value" : [ "HIE" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "19",
-                                 "s" : [ {
-                                    "value" : [ "\"methadone_prescribed at date\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
-                           } ]
-                        } ]
-                     } ]
+                     "r" : "15",
+                     "value" : [ "/**\n * Denominator\n *\n * Definition: a) Programme/service provider level: estimated PYFU for all opioid dependent people accessing service during defined reporting period | b) Population level: estimated PYFU for total population of opioid dependent people in relevant geographic area during defined reporting period\n * Calculation: Service level: Not calculated in DAK |  | Population denominator:  | *Estimated PYFU for all opioid-dependent people accessing service during defined reporting period |  | Note: Can be reported only as numerator; by population or service level if these denominator estimates available.\n */\n\n","define ","\"Denominator\"",":\n  ","true" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "21",
-               "locator" : "94:3-94:94",
-               "type" : "Or",
-               "operand" : [ {
-                  "localId" : "17",
-                  "locator" : "94:3-94:48",
-                  "type" : "Exists",
-                  "operand" : {
-                     "localId" : "16",
-                     "locator" : "94:9-94:48",
-                     "name" : "buprenorphine_prescribed at date",
-                     "libraryName" : "HIE",
-                     "type" : "ExpressionRef"
-                  }
-               }, {
-                  "localId" : "20",
-                  "locator" : "94:53-94:94",
-                  "type" : "Exists",
-                  "operand" : {
-                     "localId" : "19",
-                     "locator" : "94:59-94:94",
-                     "name" : "methadone_prescribed at date",
-                     "libraryName" : "HIE",
-                     "type" : "ExpressionRef"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "47",
-            "locator" : "97:1-116:3",
-            "name" : "Measure Observation",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "47",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Measure Observation\"",":\n  " ]
-                  }, {
-                     "r" : "46",
-                     "s" : [ {
-                        "r" : "35",
-                        "s" : [ {
-                           "value" : [ "(\n    " ]
-                        }, {
-                           "r" : "35",
-                           "s" : [ {
-                              "value" : [ "difference in days between\n    " ]
-                           }, {
-                              "r" : "31",
-                              "s" : [ {
-                                 "value" : [ "Min","(\n      " ]
-                              }, {
-                                 "r" : "30",
-                                 "s" : [ {
-                                    "value" : [ "{\n        " ]
-                                 }, {
-                                    "r" : "26",
-                                    "s" : [ {
-                                       "value" : [ "ToDate","(" ]
-                                    }, {
-                                       "r" : "25",
-                                       "s" : [ {
-                                          "value" : [ "First","(" ]
-                                       }, {
-                                          "r" : "24",
-                                          "s" : [ {
-                                             "r" : "23",
-                                             "s" : [ {
-                                                "value" : [ "HIE" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "24",
-                                             "s" : [ {
-                                                "value" : [ "\"OAMT start\"" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ ")" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", \n        " ]
-                                 }, {
-                                    "r" : "29",
-                                    "s" : [ {
-                                       "value" : [ "ToDate","(" ]
-                                    }, {
-                                       "r" : "28",
-                                       "s" : [ {
-                                          "value" : [ "start of " ]
-                                       }, {
-                                          "r" : "27",
-                                          "s" : [ {
-                                             "value" : [ "\"Measurement Period\"" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n      }" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n    )" ]
-                              } ]
-                           }, {
-                              "value" : [ "\n\n    and " ]
-                           }, {
-                              "r" : "34",
-                              "s" : [ {
-                                 "value" : [ "ToDate","(" ]
-                              }, {
-                                 "r" : "33",
-                                 "s" : [ {
-                                    "value" : [ "start of " ]
-                                 }, {
-                                    "r" : "32",
-                                    "s" : [ {
-                                       "value" : [ "\"Measurement Period\"" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ ")" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n  )" ]
-                        } ]
-                     }, {
-                        "value" : [ "\n  +\n  " ]
-                     }, {
-                        "r" : "45",
-                        "s" : [ {
-                           "value" : [ "(\n    " ]
-                        }, {
-                           "r" : "45",
-                           "s" : [ {
-                              "value" : [ "difference in days between " ]
-                           }, {
-                              "r" : "37",
-                              "s" : [ {
-                                 "value" : [ "end of " ]
-                              }, {
-                                 "r" : "36",
-                                 "s" : [ {
-                                    "value" : [ "\"Measurement Period\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n    and " ]
-                           }, {
-                              "r" : "44",
-                              "s" : [ {
-                                 "value" : [ "Coalesce","(\n        " ]
-                              }, {
-                                 "r" : "41",
-                                 "s" : [ {
-                                    "value" : [ "ToDate","(" ]
-                                 }, {
-                                    "r" : "40",
-                                    "s" : [ {
-                                       "value" : [ "First","(" ]
-                                    }, {
-                                       "r" : "39",
-                                       "s" : [ {
-                                          "r" : "38",
-                                          "s" : [ {
-                                             "value" : [ "HIE" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "39",
-                                          "s" : [ {
-                                             "value" : [ "\"OAMT end\"" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              }, {
-                                 "value" : [ ", \n        " ]
-                              }, {
-                                 "r" : "43",
-                                 "s" : [ {
-                                    "value" : [ "end of " ]
-                                 }, {
-                                    "r" : "42",
-                                    "s" : [ {
-                                       "value" : [ "\"Measurement Period\"" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      )" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n  )" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "46",
-               "locator" : "98:3-116:3",
-               "type" : "Add",
-               "signature" : [ {
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "35",
-                  "locator" : "98:3-108:3",
-                  "precision" : "Day",
-                  "type" : "DifferenceBetween",
-                  "signature" : [ {
-                     "name" : "{urn:hl7-org:elm-types:r1}Date",
-                     "type" : "NamedTypeSpecifier"
-                  }, {
-                     "name" : "{urn:hl7-org:elm-types:r1}Date",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
-                  "operand" : [ {
-                     "localId" : "31",
-                     "locator" : "100:5-105:5",
-                     "type" : "Min",
-                     "signature" : [ {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ],
-                     "source" : {
-                        "localId" : "30",
-                        "locator" : "101:7-104:7",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "26",
-                           "locator" : "102:9-102:39",
-                           "type" : "ToDate",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "localId" : "25",
-                              "locator" : "102:16-102:38",
-                              "type" : "First",
-                              "source" : {
-                                 "localId" : "24",
-                                 "locator" : "102:22-102:37",
-                                 "name" : "OAMT start",
-                                 "libraryName" : "HIE",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }, {
-                           "localId" : "29",
-                           "locator" : "103:9-103:45",
-                           "type" : "ToDate",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "localId" : "28",
-                              "locator" : "103:16-103:44",
-                              "type" : "Start",
-                              "operand" : {
-                                 "localId" : "27",
-                                 "locator" : "103:25-103:44",
-                                 "name" : "Measurement Period",
-                                 "type" : "ParameterRef"
-                              }
-                           }
-                        } ]
-                     }
-                  }, {
-                     "localId" : "34",
-                     "locator" : "107:9-107:45",
-                     "type" : "ToDate",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : {
-                        "localId" : "33",
-                        "locator" : "107:16-107:44",
-                        "type" : "Start",
-                        "operand" : {
-                           "localId" : "32",
-                           "locator" : "107:25-107:44",
-                           "name" : "Measurement Period",
-                           "type" : "ParameterRef"
-                        }
-                     }
-                  } ]
-               }, {
-                  "localId" : "45",
-                  "locator" : "110:3-116:3",
-                  "precision" : "Day",
-                  "type" : "DifferenceBetween",
-                  "signature" : [ {
-                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                     "type" : "NamedTypeSpecifier"
-                  }, {
-                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
-                  "operand" : [ {
-                     "localId" : "37",
-                     "locator" : "111:32-111:58",
-                     "type" : "End",
-                     "operand" : {
-                        "localId" : "36",
-                        "locator" : "111:39-111:58",
-                        "name" : "Measurement Period",
-                        "type" : "ParameterRef"
-                     }
-                  }, {
-                     "localId" : "44",
-                     "locator" : "112:9-115:7",
-                     "type" : "Coalesce",
-                     "operand" : [ {
-                        "type" : "ToDateTime",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : {
-                           "localId" : "41",
-                           "locator" : "113:9-113:37",
-                           "type" : "ToDate",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "localId" : "40",
-                              "locator" : "113:16-113:36",
-                              "type" : "First",
-                              "source" : {
-                                 "localId" : "39",
-                                 "locator" : "113:22-113:35",
-                                 "name" : "OAMT end",
-                                 "libraryName" : "HIE",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }
-                     }, {
-                        "localId" : "43",
-                        "locator" : "114:9-114:35",
-                        "type" : "End",
-                        "operand" : {
-                           "localId" : "42",
-                           "locator" : "114:16-114:35",
-                           "name" : "Measurement Period",
-                           "type" : "ParameterRef"
-                        }
-                     } ]
-                  } ]
-               } ]
+               "localId" : "15",
+               "locator" : "102:3-102:6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "value" : "true",
+               "type" : "Literal"
             }
          } ]
       }

@@ -82,11 +82,13 @@ define "Initial Population":
 
 
 define "numerator":
-    HIE."People who inject drugs" and HIE."Date injecting equipment provided"
+    exists(HE."Needle Syringe Dispensed" DUS
+	where (DUS.timing during "Measurement Period")
+   ) 
 
 
 define "denominator":
-    HIE."People who inject drugs"
+    exists(HIE."People who inject drugs") 
 
 /*
  * Disaggregators
@@ -96,7 +98,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 4"
+	HIE."By Age Stratifier 3"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -111,7 +113,7 @@ define "Setting":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 4"
+  + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
- + ':' + HIE."setting".code
++ Combine(HIE.setting, ':')

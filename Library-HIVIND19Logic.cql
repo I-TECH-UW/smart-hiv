@@ -105,6 +105,28 @@ define "denominator":
 	Count(HIE."Non-Self HIV test with date and results returned in measurement period")
 
 
+//     exists(HE."HIV Positive Condition" C
+// 	where C.onset during "Measurement Period")
+// 	or 
+// 	exists(HIE."HIV Positive Observation" O
+// 	where (O.issued before end of "Measurement Period"
+// 	and O.issued after start of "Measurement Period")
+// 	) 
+
+// define "numeratorExclusion":
+// 	exists(HIC."HIV Positive Observation - HIV Self Test" O
+// 	where (O.issued before end of "Measurement Period"
+// 	and O.issued after start of "Measurement Period")
+// 	) 
+
+// define "denominator":
+
+
+// define "denominatorExclusion":
+// 	exists(HIC."HIV Positive Observation - HIV Self Test" O
+// 	where (O.issued before end of "Measurement Period"
+// 	and O.issued after start of "Measurement Period")
+// 	) 
 
 /*
  * Disaggregators
@@ -125,13 +147,13 @@ define "patientGroups Stratifier":
 define "Setting":
     HIE."setting"
 
- define "TB Stratifier":
-     HIE."tb"
+// define "TB Stratifier":
+//     HIC."tb"
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
- + ':' + HIE."setting".code
-+ ':' + HIE."tb".code
++ Combine(HIE.setting, ':')
+//+ Combine(HIC.tb, ':')

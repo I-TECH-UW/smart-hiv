@@ -87,7 +87,9 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 
 context Patient
 define "Measure Population":
-  HIE."PEP for HIV prevention"
+  exists(HE."PEP Prescription" MR
+  where MR.authoredOn before end of  "Measurement Period"
+  and  MR.authoredOn after start of  "Measurement Period")
 
 /*
  * As defined by Member States
@@ -134,6 +136,6 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
- + ':' + HIE."setting".code
++ Combine(HIE.setting, ':')
 + Combine(HIE.prep_product, ':')
 + Combine(HIE."hiv_exposure_type", ':')

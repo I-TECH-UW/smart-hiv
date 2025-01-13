@@ -95,8 +95,7 @@ define "Initial Population":
 
 define "Numerator":
   HIE."Has HIV-positive Status" and 
-    exists(HE."Invasive cervical cancer" C 
-  where C.prevalenceInterval() during Interval[start of "Measurement Period" - 12 months, start of "Measurement Period"])
+  exists (HIE."Invasive cervical cancer in the last 12 months" C)
   
 
 /**
@@ -106,8 +105,7 @@ define "Numerator":
  */
     
 define "Numerator Exclusions":
-exists(HE."Invasive cervical cancer" C 
-  where
+  exists (HIE."Invasive cervical cancer in the last 12 months" C where 
     ( HE."Death documented" after start of C.prevalenceInterval() and
       HE."Death documented" before (start of C.prevalenceInterval() + 12 months))
   )
@@ -122,9 +120,7 @@ exists(HE."Invasive cervical cancer" C
 
 define "Denominator":
   HIE."Has HIV-positive Status" and 
-    exists(HE."Invasive cervical cancer" C 
-  where C.prevalenceInterval() during Interval[start of "Measurement Period" - 12 months, start of "Measurement Period"])
-  
+    exists(HIE."Invasive cervical cancer in the last 12 months" C)
    
 /* end Populations */
 
@@ -133,7 +129,7 @@ define "Denominator":
  */
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 9"
+	HIE."By Age Stratifier 2"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -143,6 +139,6 @@ define "Cervical cancer stage at diagnosis of cervical cancer Stratifier":
 
 
 define "Stratification":
-HIE."By Age Stratifier 9"
+HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
 + HIE."By Cervical cancer stage at diagnosis of cervical cancer Stratifier".code 

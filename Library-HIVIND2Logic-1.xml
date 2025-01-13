@@ -2,7 +2,7 @@
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="84">
+      <a:s r="83">
          <a:s>/**
  * Library: HIV.IND.2 Logic
  * Ref No: PRV.2
@@ -88,9 +88,7 @@
 
 /**
  * Profiles:
- * - HivPrepTreatment
- * - HivCurrentPrepRegimenPrescription
- * - 
+ * 
  */
 
 library HIVIND2Logic</a:s>
@@ -100,7 +98,7 @@ library HIVIND2Logic</a:s>
    <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
    <usings>
       <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
-      <def localId="1" locator="94:1-94:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+      <def localId="1" locator="92:1-92:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
          <annotation xsi:type="a:Annotation">
             <a:s r="1">
                <a:s>// Included Libraries
@@ -114,7 +112,7 @@ using </a:s>
       </def>
    </usings>
    <includes>
-      <def localId="2" locator="96:1-96:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+      <def localId="2" locator="94:1-94:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
          <annotation xsi:type="a:Annotation">
             <a:s r="2">
                <a:s>include </a:s>
@@ -125,7 +123,7 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="3" locator="97:1-97:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+      <def localId="3" locator="95:1-95:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
          <annotation xsi:type="a:Annotation">
             <a:s r="3">
                <a:s>include </a:s>
@@ -136,7 +134,7 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="4" locator="98:1-98:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+      <def localId="4" locator="96:1-96:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
          <annotation xsi:type="a:Annotation">
             <a:s r="4">
                <a:s>include </a:s>
@@ -147,7 +145,7 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="5" locator="100:1-100:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+      <def localId="5" locator="98:1-98:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
          <annotation xsi:type="a:Annotation">
             <a:s r="5">
                <a:s>include </a:s>
@@ -158,7 +156,7 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="6" locator="101:1-101:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+      <def localId="6" locator="99:1-99:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
          <annotation xsi:type="a:Annotation">
             <a:s r="6">
                <a:s>include </a:s>
@@ -171,7 +169,7 @@ using </a:s>
       </def>
    </includes>
    <parameters>
-      <def localId="12" locator="104:1-104:88" name="Measurement Period" accessLevel="Public">
+      <def localId="12" locator="102:1-102:88" name="Measurement Period" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="12">
                <a:s>// Indicator Definition
@@ -189,33 +187,33 @@ parameter &quot;Measurement Period&quot; </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <default localId="9" locator="104:55-104:88" lowClosed="true" highClosed="true" xsi:type="Interval">
-            <low localId="7" locator="104:64-104:74" xsi:type="Date">
+         <default localId="9" locator="102:55-102:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="7" locator="102:64-102:74" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="1" xsi:type="Literal"/>
             </low>
-            <high localId="8" locator="104:77-104:87" xsi:type="Date">
+            <high localId="8" locator="102:77-102:87" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="30" xsi:type="Literal"/>
             </high>
          </default>
-         <parameterTypeSpecifier localId="11" locator="104:32-104:45" xsi:type="IntervalTypeSpecifier">
-            <pointType localId="10" locator="104:41-104:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         <parameterTypeSpecifier localId="11" locator="102:32-102:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="102:41-102:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
          </parameterTypeSpecifier>
       </def>
    </parameters>
    <contexts>
-      <def locator="106:1-106:15" name="Patient"/>
+      <def locator="104:1-104:15" name="Patient"/>
    </contexts>
    <statements>
-      <def locator="106:1-106:15" name="Patient" context="Patient">
+      <def locator="104:1-104:15" name="Patient" context="Patient">
          <expression xsi:type="SingletonFrom">
-            <operand locator="106:1-106:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+            <operand locator="104:1-104:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="15" locator="107:1-108:32" name="Measure Population" context="Patient" accessLevel="Public">
+      <def localId="15" locator="105:1-106:24" name="Measure Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="15">
                <a:s>define &quot;Measure Population&quot;:
@@ -226,14 +224,14 @@ parameter &quot;Measurement Period&quot; </a:s>
                   </a:s>
                   <a:s>.</a:s>
                   <a:s r="14">
-                     <a:s>&quot;PrEP for HIV prevention&quot;</a:s>
+                     <a:s>&quot;HIV PREP Active&quot;</a:s>
                   </a:s>
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="14" locator="108:4-108:32" name="PrEP for HIV prevention" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="14" locator="106:4-106:24" name="HIV PREP Active" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="17" locator="113:1-114:6" name="Initial Population" context="Patient" accessLevel="Public">
+      <def localId="17" locator="111:1-112:6" name="Initial Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="17">
                <a:s r="16">/*
@@ -243,9 +241,9 @@ define &quot;Initial Population&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="16" locator="114:3-114:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="16" locator="112:3-112:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="20" locator="120:1-121:3" name="Measure Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
+      <def localId="20" locator="118:1-119:3" name="Measure Observation" context="Patient" accessLevel="Public" xsi:type="FunctionDef">
          <annotation xsi:type="a:Annotation">
             <a:s r="20">
                <a:s>/*
@@ -259,12 +257,12 @@ define function &quot;Measure Observation&quot;(Patient &quot;Patient&quot;):
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="19" locator="121:3" valueType="t:Integer" value="1" xsi:type="Literal"/>
+         <expression localId="19" locator="119:3" valueType="t:Integer" value="1" xsi:type="Literal"/>
          <operand name="Patient">
-            <operandTypeSpecifier localId="18" locator="120:47-120:55" name="fhir:Patient" xsi:type="NamedTypeSpecifier"/>
+            <operandTypeSpecifier localId="18" locator="118:47-118:55" name="fhir:Patient" xsi:type="NamedTypeSpecifier"/>
          </operand>
       </def>
-      <def localId="23" locator="128:1-129:42" name="Administrative Gender Stratifier" context="Patient" accessLevel="Public">
+      <def localId="23" locator="126:1-127:42" name="Administrative Gender Stratifier" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="23">
                <a:s>/*
@@ -284,9 +282,9 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="22" locator="129:2-129:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="22" locator="127:2-127:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="26" locator="131:1-132:26" name="Age Stratifier" context="Patient" accessLevel="Public">
+      <def localId="26" locator="129:1-130:26" name="Age Stratifier" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="26">
                <a:s>define &quot;Age Stratifier&quot;:
@@ -302,9 +300,9 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="25" locator="132:2-132:26" name="By Age Stratifier 3" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="25" locator="130:2-130:26" name="By Age Stratifier 3" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="29" locator="134:1-135:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+      <def localId="29" locator="132:1-133:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="29">
                <a:s>define &quot;Geographic Region Stratifier&quot;:
@@ -320,9 +318,9 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="28" locator="135:2-135:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="28" locator="133:2-133:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="32" locator="137:1-138:20" name="patientGroups Stratifier" context="Patient" accessLevel="Public">
+      <def localId="32" locator="135:1-136:20" name="patientGroups Stratifier" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="32">
                <a:s>define &quot;patientGroups Stratifier&quot;:
@@ -338,9 +336,9 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="31" locator="138:2-138:20" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="31" locator="136:2-136:20" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="35" locator="140:1-141:15" name="Setting" context="Patient" accessLevel="Public">
+      <def localId="35" locator="138:1-139:15" name="Setting" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="35">
                <a:s>define &quot;Setting&quot;:
@@ -356,9 +354,9 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="34" locator="141:3-141:15" name="setting" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="34" locator="139:3-139:15" name="setting" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="38" locator="143:1-144:20" name="prep product" context="Patient" accessLevel="Public">
+      <def localId="38" locator="141:1-142:20" name="prep product" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="38">
                <a:s>define &quot;prep product&quot;:
@@ -374,9 +372,9 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="37" locator="144:3-144:20" name="prep_product" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="37" locator="142:3-142:20" name="prep_product" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="41" locator="146:1-147:23" name="prep_experience" context="Patient" accessLevel="Public">
+      <def localId="41" locator="144:1-145:23" name="prep_experience" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="41">
                <a:s>define &quot;prep_experience&quot;:
@@ -392,9 +390,9 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="40" locator="147:3-147:23" name="prep_experience" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="40" locator="145:3-145:23" name="prep_experience" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="44" locator="149:1-150:19" name="prep_dosing" context="Patient" accessLevel="Public">
+      <def localId="44" locator="147:1-148:19" name="prep_dosing" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
             <a:s r="44">
                <a:s>define &quot;prep_dosing&quot;:
@@ -410,132 +408,128 @@ define &quot;Administrative Gender Stratifier&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="43" locator="150:3-150:19" name="prep_dosing" libraryName="HIE" xsi:type="ExpressionRef"/>
+         <expression localId="43" locator="148:3-148:19" name="prep_dosing" libraryName="HIE" xsi:type="ExpressionRef"/>
       </def>
-      <def localId="84" locator="154:1-162:31" name="Stratification" context="Patient" accessLevel="Public">
+      <def localId="83" locator="152:1-160:31" name="Stratification" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="84">
+            <a:s r="83">
                <a:s>// Provider type concepts are not found in DD
 
 define &quot;Stratification&quot;:
  </a:s>
-               <a:s r="83">
-                  <a:s r="78">
-                     <a:s r="73">
-                        <a:s r="68">
-                           <a:s r="64">
-                              <a:s r="62">
-                                 <a:s r="57">
-                                    <a:s r="54">
-                                       <a:s r="52">
-                                          <a:s r="49">
-                                             <a:s r="47">
-                                                <a:s r="46">
-                                                   <a:s r="45">
-                                                      <a:s>HIE</a:s>
-                                                   </a:s>
-                                                   <a:s>.</a:s>
-                                                   <a:s r="46">
-                                                      <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
-                                                   </a:s>
+               <a:s r="82">
+                  <a:s r="77">
+                     <a:s r="72">
+                        <a:s r="67">
+                           <a:s r="62">
+                              <a:s r="57">
+                                 <a:s r="54">
+                                    <a:s r="52">
+                                       <a:s r="49">
+                                          <a:s r="47">
+                                             <a:s r="46">
+                                                <a:s r="45">
+                                                   <a:s>HIE</a:s>
                                                 </a:s>
                                                 <a:s>.</a:s>
-                                                <a:s r="47">
-                                                   <a:s>code</a:s>
+                                                <a:s r="46">
+                                                   <a:s>&quot;By Administrative Gender Stratifier&quot;</a:s>
                                                 </a:s>
                                              </a:s>
-                                             <a:s> 
-  + </a:s>
-                                             <a:s r="48">
-                                                <a:s>':'</a:s>
-                                             </a:s>
-                                          </a:s>
-                                          <a:s> + </a:s>
-                                          <a:s r="51">
-                                             <a:s r="50">
-                                                <a:s>HIE</a:s>
-                                             </a:s>
                                              <a:s>.</a:s>
-                                             <a:s r="51">
-                                                <a:s>&quot;By Age Stratifier 3&quot;</a:s>
+                                             <a:s r="47">
+                                                <a:s>code</a:s>
                                              </a:s>
                                           </a:s>
+                                          <a:s> 
+  + </a:s>
+                                          <a:s r="48">
+                                             <a:s>':'</a:s>
+                                          </a:s>
                                        </a:s>
-                                       <a:s>
+                                       <a:s> + </a:s>
+                                       <a:s r="51">
+                                          <a:s r="50">
+                                             <a:s>HIE</a:s>
+                                          </a:s>
+                                          <a:s>.</a:s>
+                                          <a:s r="51">
+                                             <a:s>&quot;By Age Stratifier&quot;</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>
 + </a:s>
-                                       <a:s r="53">
-                                          <a:s>':'</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s> + </a:s>
-                                    <a:s r="56">
-                                       <a:s r="55">
-                                          <a:s>HIE</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="56">
-                                          <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
-                                       </a:s>
-                                    </a:s>
-                                 </a:s>
-                                 <a:s>
-+ </a:s>
-                                 <a:s r="61">
-                                    <a:s>Combine(</a:s>
-                                    <a:s r="59">
-                                       <a:s r="58">
-                                          <a:s>HIE</a:s>
-                                       </a:s>
-                                       <a:s>.</a:s>
-                                       <a:s r="59">
-                                          <a:s>patientGroups</a:s>
-                                       </a:s>
-                                    </a:s>
-                                    <a:s>, </a:s>
-                                    <a:s r="60">
+                                    <a:s r="53">
                                        <a:s>':'</a:s>
                                     </a:s>
-                                    <a:s>)</a:s>
+                                 </a:s>
+                                 <a:s> + </a:s>
+                                 <a:s r="56">
+                                    <a:s r="55">
+                                       <a:s>HIE</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="56">
+                                       <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                                    </a:s>
                                  </a:s>
                               </a:s>
                               <a:s>
- + </a:s>
-                              <a:s r="63">
-                                 <a:s>':'</a:s>
++ </a:s>
+                              <a:s r="61">
+                                 <a:s>Combine(</a:s>
+                                 <a:s r="59">
+                                    <a:s r="58">
+                                       <a:s>HIE</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="59">
+                                       <a:s>patientGroups</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>, </a:s>
+                                 <a:s r="60">
+                                    <a:s>':'</a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
                               </a:s>
                            </a:s>
-                           <a:s> + </a:s>
-                           <a:s r="67">
-                              <a:s r="66">
-                                 <a:s r="65">
+                           <a:s>
++ </a:s>
+                           <a:s r="66">
+                              <a:s>Combine(</a:s>
+                              <a:s r="64">
+                                 <a:s r="63">
                                     <a:s>HIE</a:s>
                                  </a:s>
                                  <a:s>.</a:s>
-                                 <a:s r="66">
-                                    <a:s>&quot;setting&quot;</a:s>
+                                 <a:s r="64">
+                                    <a:s>setting</a:s>
                                  </a:s>
                               </a:s>
-                              <a:s>.</a:s>
-                              <a:s r="67">
-                                 <a:s>code</a:s>
+                              <a:s>, </a:s>
+                              <a:s r="65">
+                                 <a:s>':'</a:s>
                               </a:s>
+                              <a:s>)</a:s>
                            </a:s>
                         </a:s>
                         <a:s>
 + </a:s>
-                        <a:s r="72">
+                        <a:s r="71">
                            <a:s>Combine(</a:s>
-                           <a:s r="70">
-                              <a:s r="69">
+                           <a:s r="69">
+                              <a:s r="68">
                                  <a:s>HIE</a:s>
                               </a:s>
                               <a:s>.</a:s>
-                              <a:s r="70">
+                              <a:s r="69">
                                  <a:s>prep_product</a:s>
                               </a:s>
                            </a:s>
                            <a:s>, </a:s>
-                           <a:s r="71">
+                           <a:s r="70">
                               <a:s>':'</a:s>
                            </a:s>
                            <a:s>)</a:s>
@@ -543,19 +537,19 @@ define &quot;Stratification&quot;:
                      </a:s>
                      <a:s>
 + </a:s>
-                     <a:s r="77">
+                     <a:s r="76">
                         <a:s>Combine(</a:s>
-                        <a:s r="75">
-                           <a:s r="74">
+                        <a:s r="74">
+                           <a:s r="73">
                               <a:s>HIE</a:s>
                            </a:s>
                            <a:s>.</a:s>
-                           <a:s r="75">
+                           <a:s r="74">
                               <a:s>prep_experience</a:s>
                            </a:s>
                         </a:s>
                         <a:s>, </a:s>
-                        <a:s r="76">
+                        <a:s r="75">
                            <a:s>':'</a:s>
                         </a:s>
                         <a:s>)</a:s>
@@ -563,19 +557,19 @@ define &quot;Stratification&quot;:
                   </a:s>
                   <a:s>
 + </a:s>
-                  <a:s r="82">
+                  <a:s r="81">
                      <a:s>Combine(</a:s>
-                     <a:s r="80">
-                        <a:s r="79">
+                     <a:s r="79">
+                        <a:s r="78">
                            <a:s>HIE</a:s>
                         </a:s>
                         <a:s>.</a:s>
-                        <a:s r="80">
+                        <a:s r="79">
                            <a:s>prep_dosing</a:s>
                         </a:s>
                      </a:s>
                      <a:s>, </a:s>
-                     <a:s r="81">
+                     <a:s r="80">
                         <a:s>':'</a:s>
                      </a:s>
                      <a:s>)</a:s>
@@ -583,54 +577,52 @@ define &quot;Stratification&quot;:
                </a:s>
             </a:s>
          </annotation>
-         <expression localId="83" locator="155:2-162:31" xsi:type="Concatenate">
-            <operand localId="78" locator="155:2-161:35" xsi:type="Concatenate">
-               <operand localId="73" locator="155:2-160:32" xsi:type="Concatenate">
-                  <operand localId="68" locator="155:2-159:27" xsi:type="Concatenate">
-                     <operand localId="64" locator="155:2-159:6" xsi:type="Concatenate">
-                        <operand localId="62" locator="155:2-158:33" xsi:type="Concatenate">
-                           <operand localId="57" locator="155:2-157:45" xsi:type="Concatenate">
-                              <operand localId="54" locator="155:2-157:5" xsi:type="Concatenate">
-                                 <operand localId="52" locator="155:2-156:35" xsi:type="Concatenate">
-                                    <operand localId="49" locator="155:2-156:7" xsi:type="Concatenate">
-                                       <operand localId="47" locator="155:2-155:47" path="code" xsi:type="Property">
-                                          <source localId="46" locator="155:2-155:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
-                                       </operand>
-                                       <operand localId="48" locator="156:5-156:7" valueType="t:String" value=":" xsi:type="Literal"/>
+         <expression localId="82" locator="153:2-160:31" xsi:type="Concatenate">
+            <operand localId="77" locator="153:2-159:35" xsi:type="Concatenate">
+               <operand localId="72" locator="153:2-158:32" xsi:type="Concatenate">
+                  <operand localId="67" locator="153:2-157:27" xsi:type="Concatenate">
+                     <operand localId="62" locator="153:2-156:33" xsi:type="Concatenate">
+                        <operand localId="57" locator="153:2-155:45" xsi:type="Concatenate">
+                           <operand localId="54" locator="153:2-155:5" xsi:type="Concatenate">
+                              <operand localId="52" locator="153:2-154:33" xsi:type="Concatenate">
+                                 <operand localId="49" locator="153:2-154:7" xsi:type="Concatenate">
+                                    <operand localId="47" locator="153:2-153:47" path="code" xsi:type="Property">
+                                       <source localId="46" locator="153:2-153:42" name="By Administrative Gender Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                                     </operand>
-                                    <operand localId="51" locator="156:11-156:35" name="By Age Stratifier 3" libraryName="HIE" xsi:type="ExpressionRef"/>
+                                    <operand localId="48" locator="154:5-154:7" valueType="t:String" value=":" xsi:type="Literal"/>
                                  </operand>
-                                 <operand localId="53" locator="157:3-157:5" valueType="t:String" value=":" xsi:type="Literal"/>
+                                 <operand localId="51" locator="154:11-154:33" name="By Age Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                               </operand>
-                              <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
-                                 <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
-                                 <operand localId="56" locator="157:9-157:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
-                              </operand>
+                              <operand localId="53" locator="155:3-155:5" valueType="t:String" value=":" xsi:type="Literal"/>
                            </operand>
-                           <operand localId="61" locator="158:3-158:33" xsi:type="Combine">
-                              <source localId="59" locator="158:11-158:27" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
-                              <separator localId="60" locator="158:30-158:32" valueType="t:String" value=":" xsi:type="Literal"/>
+                           <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                              <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+                              <operand localId="56" locator="155:9-155:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
                            </operand>
                         </operand>
-                        <operand localId="63" locator="159:4-159:6" valueType="t:String" value=":" xsi:type="Literal"/>
+                        <operand localId="61" locator="156:3-156:33" xsi:type="Combine">
+                           <source localId="59" locator="156:11-156:27" name="patientGroups" libraryName="HIE" xsi:type="ExpressionRef"/>
+                           <separator localId="60" locator="156:30-156:32" valueType="t:String" value=":" xsi:type="Literal"/>
+                        </operand>
                      </operand>
-                     <operand localId="67" locator="159:10-159:27" path="code" xsi:type="Property">
-                        <source localId="66" locator="159:10-159:22" name="setting" libraryName="HIE" xsi:type="ExpressionRef"/>
+                     <operand localId="66" locator="157:3-157:27" xsi:type="Combine">
+                        <source localId="64" locator="157:11-157:21" name="setting" libraryName="HIE" xsi:type="ExpressionRef"/>
+                        <separator localId="65" locator="157:24-157:26" valueType="t:String" value=":" xsi:type="Literal"/>
                      </operand>
                   </operand>
-                  <operand localId="72" locator="160:3-160:32" xsi:type="Combine">
-                     <source localId="70" locator="160:11-160:26" name="prep_product" libraryName="HIE" xsi:type="ExpressionRef"/>
-                     <separator localId="71" locator="160:29-160:31" valueType="t:String" value=":" xsi:type="Literal"/>
+                  <operand localId="71" locator="158:3-158:32" xsi:type="Combine">
+                     <source localId="69" locator="158:11-158:26" name="prep_product" libraryName="HIE" xsi:type="ExpressionRef"/>
+                     <separator localId="70" locator="158:29-158:31" valueType="t:String" value=":" xsi:type="Literal"/>
                   </operand>
                </operand>
-               <operand localId="77" locator="161:3-161:35" xsi:type="Combine">
-                  <source localId="75" locator="161:11-161:29" name="prep_experience" libraryName="HIE" xsi:type="ExpressionRef"/>
-                  <separator localId="76" locator="161:32-161:34" valueType="t:String" value=":" xsi:type="Literal"/>
+               <operand localId="76" locator="159:3-159:35" xsi:type="Combine">
+                  <source localId="74" locator="159:11-159:29" name="prep_experience" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  <separator localId="75" locator="159:32-159:34" valueType="t:String" value=":" xsi:type="Literal"/>
                </operand>
             </operand>
-            <operand localId="82" locator="162:3-162:31" xsi:type="Combine">
-               <source localId="80" locator="162:11-162:25" name="prep_dosing" libraryName="HIE" xsi:type="ExpressionRef"/>
-               <separator localId="81" locator="162:28-162:30" valueType="t:String" value=":" xsi:type="Literal"/>
+            <operand localId="81" locator="160:3-160:31" xsi:type="Combine">
+               <source localId="79" locator="160:11-160:25" name="prep_dosing" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <separator localId="80" locator="160:28-160:30" valueType="t:String" value=":" xsi:type="Literal"/>
             </operand>
          </expression>
       </def>

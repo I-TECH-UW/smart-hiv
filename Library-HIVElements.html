@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 16:44:09+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
         </tr>
         
 
@@ -598,7 +598,11 @@ define &quot;PEP Prescription&quot;:
       or MR.medication as CodeableConcept in Concepts.&quot;Preferred third PEP drug Choices&quot;
       or MR.medication as CodeableConcept in Concepts.&quot;Alternative third PEP drug Choices&quot;)
 
-
+define &quot;routine viral load sample collection&quot;:
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom.&quot;viral load test&quot;
+  and exists(P.reasonCode RC where RC ~ Concepts.&quot;Routine viral load test&quot;)
 
 define &quot;viral load sample collection&quot;:
   [Procedure] P
@@ -1065,8 +1069,10 @@ define &quot;Currently pregnant B.DE29&quot;:
 @activity: HIV.B6 Capture or update client history
 @description: Infant is being breastfed by mother
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Breastfeeding B.DE32&quot;:
+  exists &quot;Breastfeeding B.DE32 Observation&quot;
+define &quot;Breastfeeding B.DE32 Observation&quot;:
   [Observation: Concepts.&quot;Breastfeeding - HIV.B.DE32&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
@@ -2671,12 +2677,13 @@ define &quot;Date/time of follow-up appointment B.DE195 Value&quot;:
 @activity: HIV.B21 Offer prevention options
 @description: Date on which a voluntary medical male circumcision procedure was performed
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;VMMC procedure date&quot;:
-  &quot;VMMC&quot; P
-  return start of P.performed.toInterval()
-
-
+  [Observation: Concepts.&quot;VMMC procedure date&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;VMMC procedure date Value&quot;:
+  &quot;VMMC procedure date&quot; O
+  return O.value
 /* End of VMMC procedure date */
 
 /*
@@ -2684,15 +2691,12 @@ define &quot;VMMC procedure date&quot;:
 @activity: HIV.B21 Offer prevention options
 @description: Severity of the adverse event associated with voluntary medical male circumcision (VMMC) procedure
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Adverse event severity&quot;:
-  [AdverseEvent] AE 
-  with [Procedure] P
-      such that AE.suspectEntity.instance.references(P) and P.status = 'completed' 
-      and P.code ~  Concepts.&quot;VMMC&quot;
-  where AE.actuality = 'actual'
-
-
+  exists &quot;Adverse event severity Observation&quot;
+define &quot;Adverse event severity Observation&quot;:
+  [Observation: Concepts.&quot;Adverse event severity&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of Adverse event severity */
 
 /*
@@ -2700,10 +2704,16 @@ define &quot;Adverse event severity&quot;:
 @activity: HIV.B21 Offer prevention options
 @description: Severity of the adverse event associated with VMMC procedure was moderate
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Moderate&quot;:
-  &quot;Adverse event severity&quot; VMAC
-    where (VMAC.severity = ConceptsCustom.&quot;moderate&quot;)
+  exists &quot;Moderate Condition&quot;
+    or exists &quot;Moderate Observation&quot;
+define &quot;Moderate Condition&quot;:
+  [Condition: Concepts.&quot;Moderate&quot;]
+define &quot;Moderate Observation&quot;:
+  &quot;Adverse event severity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Moderate&quot;
 /* End of Moderate */
 
 /*
@@ -2711,10 +2721,16 @@ define &quot;Moderate&quot;:
 @activity: HIV.B21 Offer prevention options
 @description: Severity of the adverse event associated with VMMC procedure was severe
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Severe&quot;:
-  &quot;Adverse event severity&quot; VMAC
-    where (VMAC.severity = ConceptsCustom.&quot;severe&quot;)
+  exists &quot;Severe Condition&quot;
+    or exists &quot;Severe Observation&quot;
+define &quot;Severe Condition&quot;:
+  [Condition: Concepts.&quot;Severe&quot;]
+define &quot;Severe Observation&quot;:
+  &quot;Adverse event severity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Severe&quot;
 /* End of Severe */
 
 /*
@@ -3055,6 +3071,7 @@ define &quot;HIV retest prior to starting ART conducted Observation&quot;:
 define &quot;At elevated risk for HIV acquisition B.DE225&quot;:
   [Condition] C
     where C.code ~ Concepts.&quot;At elevated risk for HIV acquisition - HIV.B.DE225&quot;
+      and C.verificationStatus.text = 'confirmed'
 
 /* End of At elevated risk for HIV acquisition B.DE225 */
 
@@ -3065,14 +3082,12 @@ define &quot;At elevated risk for HIV acquisition B.DE225&quot;:
 */
 
 define &quot;Syndrome/STI diagnosed B.DE226&quot;:
-    exists(&quot;Urethral discharge syndrome B.DE227&quot;) or exists(&quot;Vaginal discharge syndrome B.DE228&quot;) or exists(&quot;Lower Abdominal pain  B.DE229&quot;) or exists(&quot;Genital ulcer disease syndrome B.DE230&quot;) or
-    exists(&quot;Anorectal discharge B.DE231&quot;)
+    &quot;Urethral discharge syndrome B.DE227&quot; or &quot;Vaginal discharge syndrome B.DE228&quot; or &quot;Lower Abdominal pain  B.DE229&quot; or &quot;Genital ulcer disease syndrome B.DE230&quot; or
+  &quot;Anorectal discharge B.DE231&quot;
 
-define &quot;Syndrome/STI diagnosed B.DE226 Condition&quot;:
-  [Condition] C
-    where C.code in Concepts.&quot;Syndrome/STI diagnosed - HIV.B.DE226 Choices&quot;
-      and C.verificationStatus.text = 'confirmed'
-
+define &quot;Syndrome/STI diagnosed B.DE226 Observation&quot;:
+  [Observation: Concepts.&quot;Syndrome/STI diagnosed - HIV.B.DE226&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of Syndrome/STI diagnosed B.DE226 */
 
 /*
@@ -3082,7 +3097,14 @@ define &quot;Syndrome/STI diagnosed B.DE226 Condition&quot;:
 */
 
 define &quot;Urethral discharge syndrome B.DE227&quot;:
+  exists &quot;Urethral discharge syndrome B.DE227 Condition&quot;
+    or exists &quot;Urethral discharge syndrome B.DE227 Observation&quot;
+define &quot;Urethral discharge syndrome B.DE227 Condition&quot;:
   [Condition: Concepts.&quot;Urethral discharge syndrome - HIV.B.DE227&quot;]
+define &quot;Urethral discharge syndrome B.DE227 Observation&quot;:
+  &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Urethral discharge syndrome - HIV.B.DE227&quot;
 /* End of Urethral discharge syndrome B.DE227 */
 
 /*
@@ -3090,8 +3112,16 @@ define &quot;Urethral discharge syndrome B.DE227&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with vaginal discharge syndrome
 */
+
 define &quot;Vaginal discharge syndrome B.DE228&quot;:
+  exists &quot;Vaginal discharge syndrome B.DE228 Condition&quot;
+    or exists &quot;Vaginal discharge syndrome B.DE228 Observation&quot;
+define &quot;Vaginal discharge syndrome B.DE228 Condition&quot;:
   [Condition: Concepts.&quot;Vaginal discharge syndrome - HIV.B.DE228&quot;]
+define &quot;Vaginal discharge syndrome B.DE228 Observation&quot;:
+  &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Vaginal discharge syndrome - HIV.B.DE228&quot;
 /* End of Vaginal discharge syndrome B.DE228 */
 
 /*
@@ -3099,9 +3129,14 @@ define &quot;Vaginal discharge syndrome B.DE228&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-define &quot;Lower Abdominal pain  B.DE229&quot;:
-  [Condition: Concepts.&quot;Lower Abdominal pain  - HIV.B.DE229&quot;]
 
+define &quot;Lower Abdominal pain  B.DE229&quot;:
+  exists &quot;Lower Abdominal pain  B.DE229 Observation&quot;
+
+define &quot;Lower Abdominal pain  B.DE229 Observation&quot;:
+  &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Lower Abdominal pain  - HIV.B.DE229&quot;
 /* End of Lower Abdominal pain  B.DE229 */
 
 /*
@@ -3111,8 +3146,14 @@ define &quot;Lower Abdominal pain  B.DE229&quot;:
 */
 
 define &quot;Genital ulcer disease syndrome B.DE230&quot;:
+  exists &quot;Genital ulcer disease syndrome B.DE230 Condition&quot;
+    or exists &quot;Genital ulcer disease syndrome B.DE230 Observation&quot;
+define &quot;Genital ulcer disease syndrome B.DE230 Condition&quot;:
   [Condition: Concepts.&quot;Genital ulcer disease syndrome - HIV.B.DE230&quot;]
-
+define &quot;Genital ulcer disease syndrome B.DE230 Observation&quot;:
+  &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Genital ulcer disease syndrome - HIV.B.DE230&quot;
 /* End of Genital ulcer disease syndrome B.DE230 */
 
 /*
@@ -3120,8 +3161,14 @@ define &quot;Genital ulcer disease syndrome B.DE230&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with anorectal discharge
 */
+
 define &quot;Anorectal discharge B.DE231&quot;:
-  [Condition: Concepts.&quot;Anorectal discharge - HIV.B.DE231&quot;]
+  exists &quot;Anorectal discharge B.DE231 Observation&quot;
+
+define &quot;Anorectal discharge B.DE231 Observation&quot;:
+  &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Anorectal discharge - HIV.B.DE231&quot;
 /* End of Anorectal discharge B.DE231 */
 
 /*
@@ -3129,8 +3176,16 @@ define &quot;Anorectal discharge B.DE231&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Specimen sent for testing
 */
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Sent for testing B.DE232&quot;:
+  exists &quot;Sent for testing B.DE232 Condition&quot;
+    or exists &quot;Sent for testing B.DE232 Observation&quot;
+define &quot;Sent for testing B.DE232 Condition&quot;:
   [Condition: Concepts.&quot;Sent for testing - HIV.B.DE232&quot;]
+define &quot;Sent for testing B.DE232 Observation&quot;:
+  &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Sent for testing - HIV.B.DE232&quot;
 /* End of Sent for testing B.DE232 */
 
 /*
@@ -3138,8 +3193,16 @@ define &quot;Sent for testing B.DE232&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other syndrome/STI diagnosed
 */
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Other B.DE233&quot;:
+  exists &quot;Other B.DE233 Condition&quot;
+    or exists &quot;Other B.DE233 Observation&quot;
+define &quot;Other B.DE233 Condition&quot;:
   [Condition: Concepts.&quot;Other - HIV.B.DE233&quot;]
+define &quot;Other B.DE233 Observation&quot;:
+  &quot;Syndrome/STI diagnosed B.DE226 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Other - HIV.B.DE233&quot;
 /* End of Other B.DE233 */
 
 /*
@@ -3234,8 +3297,9 @@ define &quot;Syphilis treatment start date B.DE254&quot;:
 */
 
 define &quot;Gonorrhoea test date B.DE255&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O
-  return O.effective
+  [Procedure] P
+  where P.status = 'completed'
+  and P.code ~ ConceptsCustom.&quot;Gonorrhoea test&quot;
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
@@ -3313,9 +3377,16 @@ define &quot;Type of specimen B.DE261 Observation&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Blood specimen to be collected
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Blood B.DE262&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O where O.method ~ Concepts.&quot;Blood - HIV.B.DE262&quot;
+  exists &quot;Blood B.DE262 Condition&quot;
+    or exists &quot;Blood B.DE262 Observation&quot;
+define &quot;Blood B.DE262 Condition&quot;:
+  [Condition: Concepts.&quot;Blood - HIV.B.DE262&quot;]
+define &quot;Blood B.DE262 Observation&quot;:
+  &quot;Type of specimen B.DE261 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Blood - HIV.B.DE262&quot;
 /* End of Blood B.DE262 */
 
 /*
@@ -3323,9 +3394,16 @@ define &quot;Blood B.DE262&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urine specimen to be collected
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Urine B.DE263&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O where O.method ~ Concepts.&quot;Urine - HIV.B.DE263&quot;
+  exists &quot;Urine B.DE263 Condition&quot;
+    or exists &quot;Urine B.DE263 Observation&quot;
+define &quot;Urine B.DE263 Condition&quot;:
+  [Condition: Concepts.&quot;Urine - HIV.B.DE263&quot;]
+define &quot;Urine B.DE263 Observation&quot;:
+  &quot;Type of specimen B.DE261 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Urine - HIV.B.DE263&quot;
 /* End of Urine B.DE263 */
 
 /*
@@ -3333,9 +3411,16 @@ define &quot;Urine B.DE263&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Cervical or vaginal swab to be collected
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Cervical or vaginal swab B.DE264&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O where O.method ~ Concepts.&quot;Cervical or vaginal swab - HIV.B.DE264&quot;
+  exists &quot;Cervical or vaginal swab B.DE264 Condition&quot;
+    or exists &quot;Cervical or vaginal swab B.DE264 Observation&quot;
+define &quot;Cervical or vaginal swab B.DE264 Condition&quot;:
+  [Condition: Concepts.&quot;Cervical or vaginal swab - HIV.B.DE264&quot;]
+define &quot;Cervical or vaginal swab B.DE264 Observation&quot;:
+  &quot;Type of specimen B.DE261 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Cervical or vaginal swab - HIV.B.DE264&quot;
 /* End of Cervical or vaginal swab B.DE264 */
 
 /*
@@ -3343,9 +3428,16 @@ define &quot;Cervical or vaginal swab B.DE264&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Urethral or penile swab to be collected
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Urethral or penile swab B.DE265&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O where O.method ~ Concepts.&quot;Urethral or penile swab - HIV.B.DE265&quot;
+  exists &quot;Urethral or penile swab B.DE265 Condition&quot;
+    or exists &quot;Urethral or penile swab B.DE265 Observation&quot;
+define &quot;Urethral or penile swab B.DE265 Condition&quot;:
+  [Condition: Concepts.&quot;Urethral or penile swab - HIV.B.DE265&quot;]
+define &quot;Urethral or penile swab B.DE265 Observation&quot;:
+  &quot;Type of specimen B.DE261 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Urethral or penile swab - HIV.B.DE265&quot;
 /* End of Urethral or penile swab B.DE265 */
 
 /*
@@ -3355,7 +3447,14 @@ define &quot;Urethral or penile swab B.DE265&quot;:
 */
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Rectal swab B.DE266&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O where O.method ~ Concepts.&quot;Rectal swab - HIV.B.DE266&quot;
+  exists &quot;Rectal swab B.DE266 Condition&quot;
+    or exists &quot;Rectal swab B.DE266 Observation&quot;
+define &quot;Rectal swab B.DE266 Condition&quot;:
+  [Condition: Concepts.&quot;Rectal swab - HIV.B.DE266&quot;]
+define &quot;Rectal swab B.DE266 Observation&quot;:
+  &quot;Type of specimen B.DE261 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Rectal swab - HIV.B.DE266&quot;
 /* End of Rectal swab B.DE266 */
 
 /*
@@ -3365,7 +3464,14 @@ define &quot;Rectal swab B.DE266&quot;:
 */
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Other B.DE267&quot;:
-  &quot;Gonorrhoea test result B.DE256&quot; O where O.method ~ Concepts.&quot;Other - HIV.B.DE267&quot;
+  exists &quot;Other B.DE267 Condition&quot;
+    or exists &quot;Other B.DE267 Observation&quot;
+define &quot;Other B.DE267 Condition&quot;:
+  [Condition: Concepts.&quot;Other - HIV.B.DE267&quot;]
+define &quot;Other B.DE267 Observation&quot;:
+  &quot;Type of specimen B.DE261 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Other - HIV.B.DE267&quot;
 /* End of Other B.DE267 */
 
 /*
@@ -3373,8 +3479,10 @@ define &quot;Other B.DE267&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Type of diagnostic test used for Neisseria gonorrhoeae
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Neisseria gonorrhoeae test type B.DE276&quot;:
+  exists &quot;Neisseria gonorrhoeae test type B.DE276 Observation&quot;
+define &quot;Neisseria gonorrhoeae test type B.DE276 Observation&quot;:
   [Observation: Concepts.&quot;Neisseria gonorrhoeae test type - HIV.B.DE276&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of Neisseria gonorrhoeae test type B.DE276 */
@@ -3384,10 +3492,16 @@ define &quot;Neisseria gonorrhoeae test type B.DE276&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Nucleic Acid Amplification Test (NAAT) used
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;NAAT B.DE277&quot;:
-  [Observation: Concepts.&quot;NAAT - HIV.B.DE277&quot;] O
+  exists &quot;NAAT B.DE277 Condition&quot;
+    or exists &quot;NAAT B.DE277 Observation&quot;
+define &quot;NAAT B.DE277 Condition&quot;:
+  [Condition: Concepts.&quot;NAAT - HIV.B.DE277&quot;]
+define &quot;NAAT B.DE277 Observation&quot;:
+  &quot;Neisseria gonorrhoeae test type B.DE276 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;NAAT - HIV.B.DE277&quot;
 /* End of NAAT B.DE277 */
 
 /*
@@ -3395,11 +3509,16 @@ define &quot;NAAT B.DE277&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Point-of-care (POC) test used
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;POC Test B.DE278&quot;:
-  [Observation: Concepts.&quot;POC Test - HIV.B.DE278&quot;] O
+  exists &quot;POC Test B.DE278 Condition&quot;
+    or exists &quot;POC Test B.DE278 Observation&quot;
+define &quot;POC Test B.DE278 Condition&quot;:
+  [Condition: Concepts.&quot;POC Test - HIV.B.DE278&quot;]
+define &quot;POC Test B.DE278 Observation&quot;:
+  &quot;Neisseria gonorrhoeae test type B.DE276 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
-
+      and O.value ~ Concepts.&quot;POC Test - HIV.B.DE278&quot;
 /* End of POC Test B.DE278 */
 
 /*
@@ -3407,10 +3526,16 @@ define &quot;POC Test B.DE278&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Culture test used
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Culture B.DE279&quot;:
-  [Observation: Concepts.&quot;Culture - HIV.B.DE279&quot;] O
+  exists &quot;Culture B.DE279 Condition&quot;
+    or exists &quot;Culture B.DE279 Observation&quot;
+define &quot;Culture B.DE279 Condition&quot;:
+  [Condition: Concepts.&quot;Culture - HIV.B.DE279&quot;]
+define &quot;Culture B.DE279 Observation&quot;:
+  &quot;Neisseria gonorrhoeae test type B.DE276 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Culture - HIV.B.DE279&quot;
 /* End of Culture B.DE279 */
 
 /*
@@ -3418,10 +3543,16 @@ define &quot;Culture B.DE279&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Microscopy test used
 */
- 
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Microscopy B.DE280&quot;:
-  [Observation: Concepts.&quot;Microscopy - HIV.B.DE280&quot;] O
+  exists &quot;Microscopy B.DE280 Condition&quot;
+    or exists &quot;Microscopy B.DE280 Observation&quot;
+define &quot;Microscopy B.DE280 Condition&quot;:
+  [Condition: Concepts.&quot;Microscopy - HIV.B.DE280&quot;]
+define &quot;Microscopy B.DE280 Observation&quot;:
+  &quot;Neisseria gonorrhoeae test type B.DE276 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Microscopy - HIV.B.DE280&quot;
 /* End of Microscopy B.DE280 */
 
 /*
@@ -3429,11 +3560,16 @@ define &quot;Microscopy B.DE280&quot;:
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Other type of test used
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Other B.DE281&quot;:
-  [Observation: Concepts.&quot;Other - HIV.B.DE281&quot;] O
+  exists &quot;Other B.DE281 Condition&quot;
+    or exists &quot;Other B.DE281 Observation&quot;
+define &quot;Other B.DE281 Condition&quot;:
+  [Condition: Concepts.&quot;Other - HIV.B.DE281&quot;]
+define &quot;Other B.DE281 Observation&quot;:
+  &quot;Neisseria gonorrhoeae test type B.DE276 Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
-
+      and O.value ~ Concepts.&quot;Other - HIV.B.DE281&quot;
 /* End of Other B.DE281 */
 
 /*
@@ -3458,12 +3594,81 @@ define &quot;Date/time of suspected exposure to HIV C.DE9 Value&quot;:
 
 /*@triggeredBy Encounter with location = community level testing*/
 
-define &quot;Currently on PrEP&quot;:
-  [MedicationStatement] MS
+define &quot;PREP Product Oral&quot;:
+  exists([MedicationStatement] MS
     where MS.status = 'completed'
     and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
-    and MS.medication ~ Concepts.&quot;PrEP for HIV prevention&quot;
+    and (MS.medication ~ Concepts.&quot;TDF + FTC - HIV.C.DE18&quot; or
+    MS.medication ~ Concepts.&quot;TDF - HIV.C.DE19&quot; or
+    MS.medication ~ Concepts.&quot;TDF + 3TC - HIV.C.DE20&quot; or
+    MS.medication ~ Concepts.&quot;Other TDF-based regimen&quot;)
+  )
 
+define &quot;PREP Product long-acting device&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and MS.medication ~ Concepts.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;
+  )
+
+define &quot;PREP Product long-acting injectable&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and MS.medication ~ Concepts.&quot;CAB-LA - HIV.C.DE23&quot;
+  )
+  
+define &quot;PREP first time&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ Concepts.&quot;First-time user - HIV.C.DE25&quot;)
+  )
+
+define &quot;PREP Continuing user&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ Concepts.&quot;Continuing user&quot;)
+  )
+  
+define &quot;PREP Restarting&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and exists(MS.statusReason SR where SR ~ Concepts.&quot;Restarting following a period of not taking PrEP&quot;)
+  )
+
+define &quot;Daily_oral_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts.&quot;Daily oral PrEP&quot;)
+  )
+
+define &quot;Event_driven_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts.&quot;Event-driven PrEP 2+1+1&quot;) 
+  )
+
+define &quot;other_dosing_PrEP&quot;:
+  exists([MedicationStatement] MS
+    where MS.status = 'completed'
+    and exists(MS.reasonCode C where C ~ Concepts.&quot;Currently on PrEP&quot;)
+    and exists(MS.dosage.additionalInstruction AI where AI ~ Concepts.&quot;Other PrEP dosing type&quot;) 
+  )
+
+
+
+// TODO: Replace placeholder with relevant CQL logic
+define &quot;Currently on PrEP&quot;:
+  exists &quot;Currently on PrEP Observation&quot;
+define &quot;Currently on PrEP Observation&quot;:
+  [Observation: Concepts.&quot;Currently on PrEP&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value is true
 /* End of Currently on PrEP */
 
 /*
@@ -3484,10 +3689,16 @@ define &quot;PrEP dosing type Observation&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Pre-exposure prophylaxis (PrEP) is taken every day
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Daily oral PrEP&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where exists(MS.dosage.additionalInstruction AI where AI ~ Concepts.&quot;Daily oral PrEP&quot;)
+  exists &quot;Daily oral PrEP Condition&quot;
+    or exists &quot;Daily oral PrEP Observation&quot;
+define &quot;Daily oral PrEP Condition&quot;:
+  [Condition: Concepts.&quot;Daily oral PrEP&quot;]
+define &quot;Daily oral PrEP Observation&quot;:
+  &quot;PrEP dosing type Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Daily oral PrEP&quot;
 /* End of Daily oral PrEP */
 
 /*
@@ -3495,10 +3706,16 @@ define &quot;Daily oral PrEP&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Event-driven pre-exposure prophylaxis (PrEP) is taken on an even-driven basis (2+1+1)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Event-driven PrEP 2+1+1&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where exists(MS.dosage.additionalInstruction AI where AI ~ Concepts.&quot;Event-driven PrEP 2+1+1&quot;)
+  exists &quot;Event-driven PrEP 2+1+1 Condition&quot;
+    or exists &quot;Event-driven PrEP 2+1+1 Observation&quot;
+define &quot;Event-driven PrEP 2+1+1 Condition&quot;:
+  [Condition: Concepts.&quot;Event-driven PrEP 2+1+1&quot;]
+define &quot;Event-driven PrEP 2+1+1 Observation&quot;:
+  &quot;PrEP dosing type Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Event-driven PrEP 2+1+1&quot;
 /* End of Event-driven PrEP 2+1+1 */
 
 /*
@@ -3506,11 +3723,16 @@ define &quot;Event-driven PrEP 2+1+1&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Other PrEP dosing type
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Other PrEP dosing type&quot;:
-   &quot;Currently on PrEP&quot; MS
-  where exists(MS.dosage.additionalInstruction AI where AI ~ Concepts.&quot;Other PrEP dosing type&quot;)
-
+  exists &quot;Other PrEP dosing type Condition&quot;
+    or exists &quot;Other PrEP dosing type Observation&quot;
+define &quot;Other PrEP dosing type Condition&quot;:
+  [Condition: Concepts.&quot;Other PrEP dosing type&quot;]
+define &quot;Other PrEP dosing type Observation&quot;:
+  &quot;PrEP dosing type Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Other PrEP dosing type&quot;
 /* End of Other PrEP dosing type */
 
 /*
@@ -3531,10 +3753,16 @@ define &quot;Current PrEP regimen Observation&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Treated with tenofovir disoproxil fumarate (TDF) and emtricitabine (FTC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;TDF + FTC C.DE18&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where MS.medication ~ Concepts.&quot;TDF + FTC - HIV.C.DE18&quot; 
+  exists &quot;TDF + FTC C.DE18 Condition&quot;
+    or exists &quot;TDF + FTC C.DE18 Observation&quot;
+define &quot;TDF + FTC C.DE18 Condition&quot;:
+  [Condition: Concepts.&quot;TDF + FTC - HIV.C.DE18&quot;]
+define &quot;TDF + FTC C.DE18 Observation&quot;:
+  &quot;Current PrEP regimen Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;TDF + FTC - HIV.C.DE18&quot;
 /* End of TDF + FTC C.DE18 */
 
 /*
@@ -3542,11 +3770,16 @@ define &quot;TDF + FTC C.DE18&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Treated with single-agent tenofovir disoproxil fumarate (TDF) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;TDF C.DE19&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where MS.medication ~ Concepts.&quot;TDF - HIV.C.DE19&quot; 
-
+  exists &quot;TDF C.DE19 Condition&quot;
+    or exists &quot;TDF C.DE19 Observation&quot;
+define &quot;TDF C.DE19 Condition&quot;:
+  [Condition: Concepts.&quot;TDF - HIV.C.DE19&quot;]
+define &quot;TDF C.DE19 Observation&quot;:
+  &quot;Current PrEP regimen Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;TDF - HIV.C.DE19&quot;
 /* End of TDF C.DE19 */
 
 /*
@@ -3554,10 +3787,16 @@ define &quot;TDF C.DE19&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Treated with tenofovir disoproxil fumarate (TDF) and lamivudine (3TC) pre-exposure prophylaxis (PrEP) regimen (oral PrEP)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;TDF + 3TC C.DE20&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where MS.medication ~ Concepts.&quot;TDF + 3TC - HIV.C.DE20&quot;
+  exists &quot;TDF + 3TC C.DE20 Condition&quot;
+    or exists &quot;TDF + 3TC C.DE20 Observation&quot;
+define &quot;TDF + 3TC C.DE20 Condition&quot;:
+  [Condition: Concepts.&quot;TDF + 3TC - HIV.C.DE20&quot;]
+define &quot;TDF + 3TC C.DE20 Observation&quot;:
+  &quot;Current PrEP regimen Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;TDF + 3TC - HIV.C.DE20&quot;
 /* End of TDF + 3TC C.DE20 */
 
 /*
@@ -3565,10 +3804,16 @@ define &quot;TDF + 3TC C.DE20&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Treated with other tenofovir disoproxil fumarate (TDF)-based regimen (oral PrEP)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Other TDF-based regimen&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where MS.medication ~ Concepts.&quot;Other TDF-based regimen&quot;
+  exists &quot;Other TDF-based regimen Condition&quot;
+    or exists &quot;Other TDF-based regimen Observation&quot;
+define &quot;Other TDF-based regimen Condition&quot;:
+  [Condition: Concepts.&quot;Other TDF-based regimen&quot;]
+define &quot;Other TDF-based regimen Observation&quot;:
+  &quot;Current PrEP regimen Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Other TDF-based regimen&quot;
 /* End of Other TDF-based regimen */
 
 /*
@@ -3576,20 +3821,33 @@ define &quot;Other TDF-based regimen&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Dapivirine vaginal ring (DVR) for HIV prevention
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Dapivirine vaginal ring DVR C.DE22&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where MS.medication ~ Concepts.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;
+  exists &quot;Dapivirine vaginal ring DVR C.DE22 Condition&quot;
+    or exists &quot;Dapivirine vaginal ring DVR C.DE22 Observation&quot;
+define &quot;Dapivirine vaginal ring DVR C.DE22 Condition&quot;:
+  [Condition: Concepts.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;]
+define &quot;Dapivirine vaginal ring DVR C.DE22 Observation&quot;:
+  &quot;Current PrEP regimen Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;
+/* End of Dapivirine vaginal ring DVR C.DE22 */
 
 /*
 @dataElement: HIV.C.DE23 - CAB-LA
 @activity: HIV.C3 Capture or update client history
 @description: Long-acting injectable cabotegravir
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;CAB-LA C.DE23&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where MS.medication ~ Concepts.&quot;CAB-LA - HIV.C.DE23&quot;
+  exists &quot;CAB-LA C.DE23 Condition&quot;
+    or exists &quot;CAB-LA C.DE23 Observation&quot;
+define &quot;CAB-LA C.DE23 Condition&quot;:
+  [Condition: Concepts.&quot;CAB-LA - HIV.C.DE23&quot;]
+define &quot;CAB-LA C.DE23 Observation&quot;:
+  &quot;Current PrEP regimen Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;CAB-LA - HIV.C.DE23&quot;
 /* End of CAB-LA C.DE23 */
 
 /*
@@ -3610,10 +3868,16 @@ define &quot;Experience with PrEP Observation&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: The client has never used pre-exposure prophylaxis (PrEP) before (naive)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;First-time user C.DE25&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where exists(MS.statusReason SR where SR ~ Concepts.&quot;First-time user - HIV.C.DE25&quot;)
+  exists &quot;First-time user C.DE25 Condition&quot;
+    or exists &quot;First-time user C.DE25 Observation&quot;
+define &quot;First-time user C.DE25 Condition&quot;:
+  [Condition: Concepts.&quot;First-time user - HIV.C.DE25&quot;]
+define &quot;First-time user C.DE25 Observation&quot;:
+  &quot;Experience with PrEP Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;First-time user - HIV.C.DE25&quot;
 /* End of First-time user C.DE25 */
 
 /*
@@ -3621,11 +3885,16 @@ define &quot;First-time user C.DE25&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: The client has used PrEP before and is continuing to use PrEP
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Continuing user&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where exists(MS.statusReason SR where SR ~ Concepts.&quot;Continuing user&quot;) 
-
+  exists &quot;Continuing user Condition&quot;
+    or exists &quot;Continuing user Observation&quot;
+define &quot;Continuing user Condition&quot;:
+  [Condition: Concepts.&quot;Continuing user&quot;]
+define &quot;Continuing user Observation&quot;:
+  &quot;Experience with PrEP Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Continuing user&quot;
 /* End of Continuing user */
 
 /*
@@ -3633,10 +3902,16 @@ define &quot;Continuing user&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: The client is restarting PrEP following a period of not taking PrEP
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Restarting following a period of not taking PrEP&quot;:
-  &quot;Currently on PrEP&quot; MS
-  where exists(MS.statusReason SR where SR ~ Concepts.&quot;Restarting following a period of not taking PrEP&quot;)
+  exists &quot;Restarting following a period of not taking PrEP Condition&quot;
+    or exists &quot;Restarting following a period of not taking PrEP Observation&quot;
+define &quot;Restarting following a period of not taking PrEP Condition&quot;:
+  [Condition: Concepts.&quot;Restarting following a period of not taking PrEP&quot;]
+define &quot;Restarting following a period of not taking PrEP Observation&quot;:
+  &quot;Experience with PrEP Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Restarting following a period of not taking PrEP&quot;
 /* End of Restarting following a period of not taking PrEP */
 
 /*
@@ -3655,12 +3930,13 @@ define &quot;PEP history&quot;:
 @activity: HIV.C3 Capture or update client history
 @description: Date client completes PEP course
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Date client completes PEP course&quot;:
-  [MedicationStatement] MS
-  where (MS.status = 'completed'
-  and exists(MS.reasonCode C where C ~ Concepts.&quot;PEP for HIV prevention&quot;)
-  )
+  [Observation: Concepts.&quot;Date client completes PEP course&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Date client completes PEP course Value&quot;:
+  &quot;Date client completes PEP course&quot; O
+  return O.value
 /* End of Date client completes PEP course */
 
 /*
@@ -3879,11 +4155,16 @@ define &quot;Medications prescribed C.DE75 Observation&quot;:
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed pre-exposure prophylaxis (PrEP) for HIV prevention
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;PrEP for HIV prevention&quot;:
-  [MedicationStatement] MS
-    where MS.status = 'completed'
-    and MS.medication ~ Concepts.&quot;PrEP for HIV prevention&quot;
+  exists &quot;PrEP for HIV prevention Condition&quot;
+    or exists &quot;PrEP for HIV prevention Observation&quot;
+define &quot;PrEP for HIV prevention Condition&quot;:
+  [Condition: Concepts.&quot;PrEP for HIV prevention&quot;]
+define &quot;PrEP for HIV prevention Observation&quot;:
+  &quot;Medications prescribed C.DE75 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;PrEP for HIV prevention&quot;
 /* End of PrEP for HIV prevention */
 
 /*
@@ -3891,13 +4172,16 @@ define &quot;PrEP for HIV prevention&quot;:
 @activity: HIV.C23 Prescribe or administer PrEP or PEP
 @description: Client was prescribed post-exposure prophylaxis (PEP) for HIV prevention
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;PEP for HIV prevention&quot;:
-  [MedicationRequest] MR
-      where MR.status = 'completed'
-      and MR.intent = 'order'
-      and MR.medication ~ Concepts.&quot;PEP for HIV prevention&quot;
-
+  exists &quot;PEP for HIV prevention Condition&quot;
+    or exists &quot;PEP for HIV prevention Observation&quot;
+define &quot;PEP for HIV prevention Condition&quot;:
+  [Condition: Concepts.&quot;PEP for HIV prevention&quot;]
+define &quot;PEP for HIV prevention Observation&quot;:
+  &quot;Medications prescribed C.DE75 Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;PEP for HIV prevention&quot;
 /* End of PEP for HIV prevention */
 
 /*
@@ -5442,11 +5726,12 @@ define &quot;Current ART regimen Observation&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: The preferred first-line ART regimen for the client according to WHO (or national) guidelines
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Preferred first-line ART regimen&quot;:
-[MedicationStatement] MS
-    where MS.status = 'completed'
-    and MS.medication ~ Concepts.&quot;Preferred first-line ART regimen&quot;
+  exists &quot;Preferred first-line ART regimen Observation&quot;
+define &quot;Preferred first-line ART regimen Observation&quot;:
+  [Observation: Concepts.&quot;Preferred first-line ART regimen&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of Preferred first-line ART regimen */
 
 /*
@@ -5454,11 +5739,12 @@ define &quot;Preferred first-line ART regimen&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: The alternative first-line ART regimen for the client according to WHO (or national) guidelines
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Alternative first-line ART regimen&quot;:
-  [MedicationStatement] MS
-    where MS.status = 'completed'
-    and MS.medication ~ Concepts.&quot;Alternative first-line ART regimen&quot;
+  exists &quot;Alternative first-line ART regimen Observation&quot;
+define &quot;Alternative first-line ART regimen Observation&quot;:
+  [Observation: Concepts.&quot;Alternative first-line ART regimen&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of Alternative first-line ART regimen */
 
 /*
@@ -5466,11 +5752,12 @@ define &quot;Alternative first-line ART regimen&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: The first-line ART regimen for the client under special circumstances according to WHO (or national) guidelines
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;First-line ART regimen under special circumstances&quot;:
-    [MedicationStatement] MS
-    where MS.status = 'completed'
-    and MS.medication ~ Concepts.&quot;First-line ART regimen under special circumstances&quot;
+  exists &quot;First-line ART regimen under special circumstances Observation&quot;
+define &quot;First-line ART regimen under special circumstances Observation&quot;:
+  [Observation: Concepts.&quot;First-line ART regimen under special circumstances&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of First-line ART regimen under special circumstances */
 
 /*
@@ -5478,11 +5765,12 @@ define &quot;First-line ART regimen under special circumstances&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: The preferred second-line ART regimen for the client according to WHO (or national) guidelines
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Preferred second-line ART regimen&quot;:
-    [MedicationStatement] MS
-    where MS.status = 'completed'
-    and MS.medication ~ Concepts.&quot;Preferred second-line ART regimen&quot;
+  exists &quot;Preferred second-line ART regimen Observation&quot;
+define &quot;Preferred second-line ART regimen Observation&quot;:
+  [Observation: Concepts.&quot;Preferred second-line ART regimen&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of Preferred second-line ART regimen */
 
 /*
@@ -5490,11 +5778,12 @@ define &quot;Preferred second-line ART regimen&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: The alternative second-line ART regimen for the client according to WHO (or national) guidelines
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Alternative second-line ART regimen&quot;:
-    [MedicationStatement] MS
-    where MS.status = 'completed'
-    and MS.medication ~ Concepts.&quot;Alternative second-line ART regimen&quot;
+  exists &quot;Alternative second-line ART regimen Observation&quot;
+define &quot;Alternative second-line ART regimen Observation&quot;:
+  [Observation: Concepts.&quot;Alternative second-line ART regimen&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of Alternative second-line ART regimen */
 
 /*
@@ -6463,7 +6752,7 @@ define &quot;Toxicity/side effects D.DE218 Observation&quot;:
 @activity: HIV.D10 Counsel returning client
 @description: Client stopped ART because of severe illness, hospitalization
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Severe illness, hospitalization D.DE219&quot;:
   exists &quot;Severe illness, hospitalization D.DE219 Condition&quot;
     or exists &quot;Severe illness, hospitalization D.DE219 Observation&quot;
@@ -7904,15 +8193,6 @@ define &quot;Routine viral load test Observation&quot;:
   &quot;Reason for HIV viral load test Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Routine viral load test&quot;
-
-define &quot;routine viral load sample collection&quot;:
-  [Procedure] P
-  where P.status = 'completed'
-  and P.code ~ ConceptsCustom.&quot;viral load test&quot;
-  and exists(P.reasonCode RC where RC ~ Concepts.&quot;Routine viral load test&quot;)
-
-
-
 /* End of Routine viral load test */
 
 /*
@@ -8448,10 +8728,13 @@ define &quot;Date medications prescribed D.DE458 Value&quot;:
 @activity: HIV.D23 Prescribe
 @description: Number of doses (quantity taken at a single point in time) of drugs prescribed/dispensed
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Dose of medications prescribed&quot;:
-  [MedicationRequest] P
-    return P.dailyDose()
+  [Observation: Concepts.&quot;Dose of medications prescribed&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Dose of medications prescribed Value&quot;:
+  &quot;Dose of medications prescribed&quot; O
+  return O.value
 /* End of Dose of medications prescribed */
 
 /*
@@ -8500,11 +8783,16 @@ define &quot;Type of treatment-limiting toxicity Observation&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to GI issues (nausea, diarrhoea, abdominal pain, vomiting)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Gastrointestinal&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Gastrointestinal&quot;
+  exists &quot;Gastrointestinal Condition&quot;
+    or exists &quot;Gastrointestinal Observation&quot;
+define &quot;Gastrointestinal Condition&quot;:
+  [Condition: Concepts.&quot;Gastrointestinal&quot;]
+define &quot;Gastrointestinal Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Gastrointestinal&quot;
 /* End of Gastrointestinal */
 
 /*
@@ -8512,11 +8800,16 @@ define &quot;Gastrointestinal&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to skin issues (rash, hypersensitivity reaction)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Skin issues&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Skin issues&quot;
+  exists &quot;Skin issues Condition&quot;
+    or exists &quot;Skin issues Observation&quot;
+define &quot;Skin issues Condition&quot;:
+  [Condition: Concepts.&quot;Skin issues&quot;]
+define &quot;Skin issues Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Skin issues&quot;
 /* End of Skin issues */
 
 /*
@@ -8524,11 +8817,16 @@ define &quot;Skin issues&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to peripheral neuropathy (burning/numbness/ tingling)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Peripheral neuropathy&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~  Concepts.&quot;Peripheral neuropathy&quot;
+  exists &quot;Peripheral neuropathy Condition&quot;
+    or exists &quot;Peripheral neuropathy Observation&quot;
+define &quot;Peripheral neuropathy Condition&quot;:
+  [Condition: Concepts.&quot;Peripheral neuropathy&quot;]
+define &quot;Peripheral neuropathy Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Peripheral neuropathy&quot;
 /* End of Peripheral neuropathy */
 
 /*
@@ -8536,11 +8834,16 @@ define &quot;Peripheral neuropathy&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to central nervous system symptoms (dizzy, anxiety, nightmare, depression, seizures)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Central nervous system symptoms&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Central nervous system symptoms&quot;
+  exists &quot;Central nervous system symptoms Condition&quot;
+    or exists &quot;Central nervous system symptoms Observation&quot;
+define &quot;Central nervous system symptoms Condition&quot;:
+  [Condition: Concepts.&quot;Central nervous system symptoms&quot;]
+define &quot;Central nervous system symptoms Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Central nervous system symptoms&quot;
 /* End of Central nervous system symptoms */
 
 /*
@@ -8548,11 +8851,16 @@ define &quot;Central nervous system symptoms&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to weight gain
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Weight gain&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Weight gain&quot;
+  exists &quot;Weight gain Condition&quot;
+    or exists &quot;Weight gain Observation&quot;
+define &quot;Weight gain Condition&quot;:
+  [Condition: Concepts.&quot;Weight gain&quot;]
+define &quot;Weight gain Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Weight gain&quot;
 /* End of Weight gain */
 
 /*
@@ -8560,11 +8868,16 @@ define &quot;Weight gain&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to hepatic dysfunction (jaundice)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Hepatic dysfunction&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Hepatic dysfunction&quot;
+  exists &quot;Hepatic dysfunction Condition&quot;
+    or exists &quot;Hepatic dysfunction Observation&quot;
+define &quot;Hepatic dysfunction Condition&quot;:
+  [Condition: Concepts.&quot;Hepatic dysfunction&quot;]
+define &quot;Hepatic dysfunction Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Hepatic dysfunction&quot;
 /* End of Hepatic dysfunction */
 
 /*
@@ -8572,11 +8885,16 @@ define &quot;Hepatic dysfunction&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to haematological (anaemia, neutropenia) disorders
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Haematological disorders&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Haematological disorders&quot;
+  exists &quot;Haematological disorders Condition&quot;
+    or exists &quot;Haematological disorders Observation&quot;
+define &quot;Haematological disorders Condition&quot;:
+  [Condition: Concepts.&quot;Haematological disorders&quot;]
+define &quot;Haematological disorders Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Haematological disorders&quot;
 /* End of Haematological disorders */
 
 /*
@@ -8584,11 +8902,16 @@ define &quot;Haematological disorders&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to fatigue
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Fatigue&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Fatigue&quot;
+  exists &quot;Fatigue Condition&quot;
+    or exists &quot;Fatigue Observation&quot;
+define &quot;Fatigue Condition&quot;:
+  [Condition: Concepts.&quot;Fatigue&quot;]
+define &quot;Fatigue Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Fatigue&quot;
 /* End of Fatigue */
 
 /*
@@ -8596,11 +8919,16 @@ define &quot;Fatigue&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to headache
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Headache D.DE475&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~  Concepts.&quot;Headache - HIV.D.DE475&quot;
+  exists &quot;Headache D.DE475 Condition&quot;
+    or exists &quot;Headache D.DE475 Observation&quot;
+define &quot;Headache D.DE475 Condition&quot;:
+  [Condition: Concepts.&quot;Headache - HIV.D.DE475&quot;]
+define &quot;Headache D.DE475 Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Headache - HIV.D.DE475&quot;
 /* End of Headache D.DE475 */
 
 /*
@@ -8608,11 +8936,16 @@ define &quot;Headache D.DE475&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to bone dysfunction (fractures, osteopenia)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Bone dysfunction&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~  Concepts.&quot;Bone dysfunction&quot;
+  exists &quot;Bone dysfunction Condition&quot;
+    or exists &quot;Bone dysfunction Observation&quot;
+define &quot;Bone dysfunction Condition&quot;:
+  [Condition: Concepts.&quot;Bone dysfunction&quot;]
+define &quot;Bone dysfunction Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Bone dysfunction&quot;
 /* End of Bone dysfunction */
 
 /*
@@ -8620,11 +8953,16 @@ define &quot;Bone dysfunction&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to metabolic symptoms (body fat changes, hyperglycaemia, dyslipidaemia)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Metabolic symptoms&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Metabolic symptoms&quot;
+  exists &quot;Metabolic symptoms Condition&quot;
+    or exists &quot;Metabolic symptoms Observation&quot;
+define &quot;Metabolic symptoms Condition&quot;:
+  [Condition: Concepts.&quot;Metabolic symptoms&quot;]
+define &quot;Metabolic symptoms Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Metabolic symptoms&quot;
 /* End of Metabolic symptoms */
 
 /*
@@ -8632,11 +8970,16 @@ define &quot;Metabolic symptoms&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Treatment-limiting toxicity due to kidney dysfunction (nephrolithiasis, renal insufficiency)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Kidney dysfunction&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~  Concepts.&quot;Kidney dysfunction&quot;
+  exists &quot;Kidney dysfunction Condition&quot;
+    or exists &quot;Kidney dysfunction Observation&quot;
+define &quot;Kidney dysfunction Condition&quot;:
+  [Condition: Concepts.&quot;Kidney dysfunction&quot;]
+define &quot;Kidney dysfunction Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Kidney dysfunction&quot;
 /* End of Kidney dysfunction */
 
 /*
@@ -8644,11 +8987,16 @@ define &quot;Kidney dysfunction&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client experienced an unexpected adverse drug reaction
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Unexpected adverse drug reaction&quot;:
-  [AdverseEvent] AE 
-  where AE.actuality = 'actual'
-  and AE.event ~ Concepts.&quot;Unexpected adverse drug reaction&quot;
+  exists &quot;Unexpected adverse drug reaction Condition&quot;
+    or exists &quot;Unexpected adverse drug reaction Observation&quot;
+define &quot;Unexpected adverse drug reaction Condition&quot;:
+  [Condition: Concepts.&quot;Unexpected adverse drug reaction&quot;]
+define &quot;Unexpected adverse drug reaction Observation&quot;:
+  &quot;Type of treatment-limiting toxicity Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Unexpected adverse drug reaction&quot;
 /* End of Unexpected adverse drug reaction */
 
 /*
@@ -9213,13 +9561,16 @@ define &quot;buprenorphine_prescribed&quot;:
         where MR.status = 'completed'
         and MR.intent = 'order'
         and MR.medication ~ ConceptsCustom.&quot;buprenorphine&quot;
-
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Buprenorphine D.DE552&quot;:
-  [MedicationRequest] MR
-        where MR.intent = 'order'
-        and MR.medication ~ ConceptsCustom.&quot;buprenorphine&quot;
-
+  exists &quot;Buprenorphine D.DE552 Condition&quot;
+    or exists &quot;Buprenorphine D.DE552 Observation&quot;
+define &quot;Buprenorphine D.DE552 Condition&quot;:
+  [Condition: Concepts.&quot;Buprenorphine - HIV.D.DE552&quot;]
+define &quot;Buprenorphine D.DE552 Observation&quot;:
+  &quot;Current medications Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Buprenorphine - HIV.D.DE552&quot;
 /* End of Buprenorphine D.DE552 */
 
 /*
@@ -9267,11 +9618,16 @@ define &quot;methadone_prescribed&quot;:
         and MR.intent = 'order'
         and MR.medication ~ ConceptsCustom.&quot;methadone&quot;
 
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Methadone D.DE555&quot;:
-  [MedicationRequest] MR
-        where MR.intent = 'order'
-        and MR.medication ~ ConceptsCustom.&quot;methadone&quot;
+  exists &quot;Methadone D.DE555 Condition&quot;
+    or exists &quot;Methadone D.DE555 Observation&quot;
+define &quot;Methadone D.DE555 Condition&quot;:
+  [Condition: Concepts.&quot;Methadone - HIV.D.DE555&quot;]
+define &quot;Methadone D.DE555 Observation&quot;:
+  &quot;Current medications Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Methadone - HIV.D.DE555&quot;
 /* End of Methadone D.DE555 */
 
 /*
@@ -9899,10 +10255,12 @@ define &quot;DSD ART statusHistory&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Type of DSD ART model client is enrolled in (country-specific)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;DSD ART models&quot;:
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts.&quot;DSD ART models&quot;)
+  exists &quot;DSD ART models Observation&quot;
+define &quot;DSD ART models Observation&quot;:
+  [Observation: Concepts.&quot;DSD ART models&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
 /* End of DSD ART models */
 
 /*
@@ -9910,10 +10268,16 @@ define &quot;DSD ART models&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in fast track ART refill (DSD ART model)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Fast track ART refill&quot;:
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts.&quot;Fast track ART refill&quot;)
+  exists &quot;Fast track ART refill Condition&quot;
+    or exists &quot;Fast track ART refill Observation&quot;
+define &quot;Fast track ART refill Condition&quot;:
+  [Condition: Concepts.&quot;Fast track ART refill&quot;]
+define &quot;Fast track ART refill Observation&quot;:
+  &quot;DSD ART models Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Fast track ART refill&quot;
 /* End of Fast track ART refill */
 
 /*
@@ -9921,10 +10285,16 @@ define &quot;Fast track ART refill&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in facility adherence club (DSD ART model)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Facility adherence club&quot;:
-    [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts.&quot;Facility adherence club&quot;)
+  exists &quot;Facility adherence club Condition&quot;
+    or exists &quot;Facility adherence club Observation&quot;
+define &quot;Facility adherence club Condition&quot;:
+  [Condition: Concepts.&quot;Facility adherence club&quot;]
+define &quot;Facility adherence club Observation&quot;:
+  &quot;DSD ART models Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Facility adherence club&quot;
 /* End of Facility adherence club */
 
 /*
@@ -9932,10 +10302,16 @@ define &quot;Facility adherence club&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in community ART distribution point (DSD ART model)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Community ART distribution point&quot;:
-  [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts.&quot;Community ART distribution point&quot;)
+  exists &quot;Community ART distribution point Condition&quot;
+    or exists &quot;Community ART distribution point Observation&quot;
+define &quot;Community ART distribution point Condition&quot;:
+  [Condition: Concepts.&quot;Community ART distribution point&quot;]
+define &quot;Community ART distribution point Observation&quot;:
+  &quot;DSD ART models Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Community ART distribution point&quot;
 /* End of Community ART distribution point */
 
 /*
@@ -9943,10 +10319,16 @@ define &quot;Community ART distribution point&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in community health worker/peer educator community ART group (DSD ART model)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;CHW/peer educator community ART group&quot;:
-  [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~  Concepts.&quot;CHW/peer educator community ART group&quot;)
+  exists &quot;CHW/peer educator community ART group Condition&quot;
+    or exists &quot;CHW/peer educator community ART group Observation&quot;
+define &quot;CHW/peer educator community ART group Condition&quot;:
+  [Condition: Concepts.&quot;CHW/peer educator community ART group&quot;]
+define &quot;CHW/peer educator community ART group Observation&quot;:
+  &quot;DSD ART models Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;CHW/peer educator community ART group&quot;
 /* End of CHW/peer educator community ART group */
 
 /*
@@ -9954,10 +10336,16 @@ define &quot;CHW/peer educator community ART group&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in patient/client community ART group (DSD ART model)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Patient/client community ART group&quot;:
-  [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts.&quot;Patient/client community ART group&quot;)
+  exists &quot;Patient/client community ART group Condition&quot;
+    or exists &quot;Patient/client community ART group Observation&quot;
+define &quot;Patient/client community ART group Condition&quot;:
+  [Condition: Concepts.&quot;Patient/client community ART group&quot;]
+define &quot;Patient/client community ART group Observation&quot;:
+  &quot;DSD ART models Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Patient/client community ART group&quot;
 /* End of Patient/client community ART group */
 
 /*
@@ -9965,10 +10353,16 @@ define &quot;Patient/client community ART group&quot;:
 @activity: HIV.D21 Determine regimen and treatment options
 @description: Client is enrolled in another DSD ART model
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Other DSD ART model&quot;:
-  [EpisodeOfCare] EOC
-    where exists(EOC.type T where T ~ Concepts.&quot;Other DSD ART model&quot;)
+  exists &quot;Other DSD ART model Condition&quot;
+    or exists &quot;Other DSD ART model Observation&quot;
+define &quot;Other DSD ART model Condition&quot;:
+  [Condition: Concepts.&quot;Other DSD ART model&quot;]
+define &quot;Other DSD ART model Observation&quot;:
+  &quot;DSD ART models Observation&quot; O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value ~ Concepts.&quot;Other DSD ART model&quot;
 /* End of Other DSD ART model */
 
 /*
@@ -11081,8 +11475,10 @@ define &quot;Extrapulmonary TB D.DE937 Observation&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: Final result of the TB investigation (bacteriological and/or clinical)
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;TB diagnosis result&quot;:
+  exists &quot;TB diagnosis result Observation&quot;
+define &quot;TB diagnosis result Observation&quot;:
   [Observation: Concepts.&quot;TB diagnosis result&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of TB diagnosis result */
@@ -11092,9 +11488,14 @@ define &quot;TB diagnosis result&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: Client is diagnosed with TB disease
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Diagnosed TB&quot;:
-  &quot;TB diagnosis result&quot; O
+  exists &quot;Diagnosed TB Condition&quot;
+    or exists &quot;Diagnosed TB Observation&quot;
+define &quot;Diagnosed TB Condition&quot;:
+  [Condition: Concepts.&quot;Diagnosed TB&quot;]
+define &quot;Diagnosed TB Observation&quot;:
+  &quot;TB diagnosis result Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Diagnosed TB&quot;
 /* End of Diagnosed TB */
@@ -11104,9 +11505,14 @@ define &quot;Diagnosed TB&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: Client is not diagnosed with TB
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;TB excluded&quot;:
-  &quot;TB diagnosis result&quot; O
+  exists &quot;TB excluded Condition&quot;
+    or exists &quot;TB excluded Observation&quot;
+define &quot;TB excluded Condition&quot;:
+  [Condition: Concepts.&quot;TB excluded&quot;]
+define &quot;TB excluded Observation&quot;:
+  &quot;TB diagnosis result Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;TB excluded&quot;
 /* End of TB excluded */
@@ -11116,11 +11522,13 @@ define &quot;TB excluded&quot;:
 @activity: HIV.D8 Capture or update client history
 @description: Client has signs or symptoms of tuberculosis (TB) without laboratory confirmation
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Presumptive TB D.DE945&quot;:
-  &quot;TB diagnosis result&quot; O
+  exists &quot;Presumptive TB D.DE945 Observation&quot;
+define &quot;Presumptive TB D.DE945 Observation&quot;:
+  [Observation: Concepts.&quot;Presumptive TB - HIV.D.DE945&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;Presumptive TB - HIV.D.DE945&quot;
+      and O.value is true
 /* End of Presumptive TB D.DE945 */
 
 /*
@@ -11130,8 +11538,8 @@ define &quot;Presumptive TB D.DE945&quot;:
 */
 
 define &quot;Date of TB diagnosis&quot;:
-  [Observation: Concepts.&quot;Diagnosed TB&quot;] C
-  return C.effective.toInterval()
+  [Condition: Concepts.&quot;Diagnosed TB&quot;] C
+  return C.prevalenceInterval()
 /* End of Date of TB diagnosis */
 
 /*
@@ -11918,8 +12326,13 @@ define &quot;Timing of ART initiation Observation&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: The pregnant woman was already on antiretroviral therapy (ART) at first antenatal care visit
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Already on ART at first antenatal care visit&quot;:
+  exists &quot;Already on ART at first antenatal care visit Condition&quot;
+    or exists &quot;Already on ART at first antenatal care visit Observation&quot;
+define &quot;Already on ART at first antenatal care visit Condition&quot;:
+  [Condition: Concepts.&quot;Already on ART at first antenatal care visit&quot;]
+define &quot;Already on ART at first antenatal care visit Observation&quot;:
   &quot;Timing of ART initiation Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Already on ART at first antenatal care visit&quot;
@@ -11930,8 +12343,13 @@ define &quot;Already on ART at first antenatal care visit&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: The pregnant woman started ART during her pregnancy
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Newly on ART during pregnancy&quot;:
+  exists &quot;Newly on ART during pregnancy Condition&quot;
+    or exists &quot;Newly on ART during pregnancy Observation&quot;
+define &quot;Newly on ART during pregnancy Condition&quot;:
+  [Condition: Concepts.&quot;Newly on ART during pregnancy&quot;]
+define &quot;Newly on ART during pregnancy Observation&quot;:
   &quot;Timing of ART initiation Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Newly on ART during pregnancy&quot;
@@ -11942,8 +12360,13 @@ define &quot;Newly on ART during pregnancy&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: The woman started ART during labour and delivery
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Newly on ART during labour and delivery&quot;:
+  exists &quot;Newly on ART during labour and delivery Condition&quot;
+    or exists &quot;Newly on ART during labour and delivery Observation&quot;
+define &quot;Newly on ART during labour and delivery Condition&quot;:
+  [Condition: Concepts.&quot;Newly on ART during labour and delivery&quot;]
+define &quot;Newly on ART during labour and delivery Observation&quot;:
   &quot;Timing of ART initiation Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Newly on ART during labour and delivery&quot;
@@ -11954,12 +12377,13 @@ define &quot;Newly on ART during labour and delivery&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: Date on which the woman delivered
 */
-define &quot;Live Birth Delivery&quot;:
-  [Observation: Concepts.&quot;Live birth&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Delivery date&quot;:
-  &quot;Live Birth Delivery&quot; O
-  return O.effective
+  [Observation: Concepts.&quot;Delivery date&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Delivery date Value&quot;:
+  &quot;Delivery date&quot; O
+  return O.value
 /* End of Delivery date */
 
 /*
@@ -11969,9 +12393,7 @@ define &quot;Delivery date&quot;:
 */
 
 define &quot;Place of delivery&quot;:
-  [Observation: Concepts.&quot;Place of delivery&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-    and O.value is not null
+  [Procedure: ConceptsCustom.&quot;delivery&quot;]
 
 /* End of Place of delivery */
 
@@ -11982,9 +12404,9 @@ define &quot;Place of delivery&quot;:
 */
 
 define &quot;Health facility&quot;:
-  &quot;Place of delivery&quot; O
+  &quot;Place of delivery&quot; P
   with [Location] L
-      such that O.value is FHIR.Reference and O.subject.reference = L.id
+      such that P.location.references(L) 
       and L.physicalType ~ Concepts.&quot;Health facility&quot;
       
 /* End of Health facility */
@@ -11996,9 +12418,9 @@ define &quot;Health facility&quot;:
 */
 
 define &quot;Home&quot;:
-  &quot;Place of delivery&quot; O
+  &quot;Place of delivery&quot; P
   with [Location] L
-      such that O.subject.references(L) 
+      such that P.location.references(L) 
       and L.physicalType ~ Concepts.&quot;Home&quot;
       
 /* End of Home */
@@ -12010,9 +12432,9 @@ define &quot;Home&quot;:
 */
 
 define &quot;Other E.DE70&quot;:
-  &quot;Place of delivery&quot; O
+  &quot;Place of delivery&quot; P
   with [Location] L
-      such that O.subject.references(L) 
+      such that P.location.references(L) 
       and L.physicalType ~ Concepts.&quot;Other - HIV.E.DE70&quot;
 /* End of Other E.DE70 */
 
@@ -12023,8 +12445,7 @@ define &quot;Other E.DE70&quot;:
 */
 
 define &quot;Antenatal care contact&quot;:
-  [Encounter] E
-    where E.type.coding.code contains ConceptsCustom.&quot;Antenatal care contact&quot;.code
+  [&quot;Encounter&quot;: type in ConceptsCustom.&quot;Antenatal care contact&quot;]
 
 define &quot;ANC contact date E.DE85&quot;:
   &quot;Antenatal care contact&quot; E
@@ -12073,8 +12494,8 @@ define &quot;Age of infant in years&quot;:
 @activity: HIV.F6 Check whether infant/child had HIV exposure
 @description: Whether the infant or child was determined to have had HIV exposure
 */
-define &quot;HIV-exposed infant or child E.DE112&quot;:
 
+define &quot;HIV-exposed infant or child E.DE112&quot;:
   [Observation: Concepts.&quot;HIV-exposed infant or child - HIV.E.DE112&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 
@@ -12517,8 +12938,10 @@ define &quot;EID test number 2 Observation&quot;:
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Early infant diagnosis test number 1 test result
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;EID test number 1 test result&quot;:
+  exists &quot;EID test number 1 test result Observation&quot;
+define &quot;EID test number 1 test result Observation&quot;:
   [Observation: Concepts.&quot;EID test number 1 test result&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
 /* End of EID test number 1 test result */
@@ -12528,9 +12951,14 @@ define &quot;EID test number 1 test result&quot;:
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Positive HIV test result from the nucleic acid test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Positive E.DE187&quot;:
-  &quot;EID test number 1 test result&quot; O
+  exists &quot;Positive E.DE187 Condition&quot;
+    or exists &quot;Positive E.DE187 Observation&quot;
+define &quot;Positive E.DE187 Condition&quot;:
+  [Condition: Concepts.&quot;Positive - HIV.E.DE187&quot;]
+define &quot;Positive E.DE187 Observation&quot;:
+  &quot;EID test number 1 test result Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Positive - HIV.E.DE187&quot;
 /* End of Positive E.DE187 */
@@ -12540,9 +12968,14 @@ define &quot;Positive E.DE187&quot;:
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Negative HIV test result from the nucleic acid test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Negative E.DE188&quot;:
-  &quot;EID test number 1 test result&quot; O
+  exists &quot;Negative E.DE188 Condition&quot;
+    or exists &quot;Negative E.DE188 Observation&quot;
+define &quot;Negative E.DE188 Condition&quot;:
+  [Condition: Concepts.&quot;Negative - HIV.E.DE188&quot;]
+define &quot;Negative E.DE188 Observation&quot;:
+  &quot;EID test number 1 test result Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Negative - HIV.E.DE188&quot;
 /* End of Negative E.DE188 */
@@ -12552,9 +12985,14 @@ define &quot;Negative E.DE188&quot;:
 @activity: HIV.F8 Test infant/child for HIV using testing algorithm
 @description: Indeterminate HIV test result from the nucleic acid test
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Indeterminate E.DE189&quot;:
-  &quot;EID test number 1 test result&quot; O
+  exists &quot;Indeterminate E.DE189 Condition&quot;
+    or exists &quot;Indeterminate E.DE189 Observation&quot;
+define &quot;Indeterminate E.DE189 Condition&quot;:
+  [Condition: Concepts.&quot;Indeterminate - HIV.E.DE189&quot;]
+define &quot;Indeterminate E.DE189 Observation&quot;:
+  &quot;EID test number 1 test result Observation&quot; O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts.&quot;Indeterminate - HIV.E.DE189&quot;
 /* End of Indeterminate E.DE189 */
@@ -14119,15 +14557,13 @@ define &quot;Unknown PRV.DE14 Observation&quot;:
 @activity: HIV.B21 Offer prevention options
 @description: Date client was provided with injecting equipment
 */
-
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Date injecting equipment provided&quot;:
-  [DeviceUseStatement] DUS
-  with [Device] D
-    such that DUS.device.references(D)
-    and D.type ~ ConceptsCustom.&quot;needle-syringe&quot;
-  where DUS.status = 'completed'
-
-
+  [Observation: Concepts.&quot;Date injecting equipment provided&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Date injecting equipment provided Value&quot;:
+  &quot;Date injecting equipment provided&quot; O
+  return O.value
 /* End of Date injecting equipment provided */
 
 /*
@@ -14135,8 +14571,13 @@ define &quot;Date injecting equipment provided&quot;:
 @activity: HIV.B21 Offer prevention options
 @description: Date client initiated opioid agonist maintenance treatment (OAMT)
 */
+// TODO: Replace placeholder with relevant CQL logic
 define &quot;Date OAMT initiated&quot;:
-  true
+  [Observation: Concepts.&quot;Date OAMT initiated&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+define &quot;Date OAMT initiated Value&quot;:
+  &quot;Date OAMT initiated&quot; O
+  return O.value
 /* End of Date OAMT initiated */
 
 /*
@@ -14146,9 +14587,11 @@ define &quot;Date OAMT initiated&quot;:
 */
 // TODO: Replace placeholder with relevant CQL logic
 define &quot;Currently on OAMT&quot;:
-  [MedicationStatement] MS
-    where exists(MS.reasonCode C where C ~ Concepts.&quot;OAMT&quot;)
-    
+  exists &quot;Currently on OAMT Observation&quot;
+define &quot;Currently on OAMT Observation&quot;:
+  [Observation: Concepts.&quot;Currently on OAMT&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value is true
 /* End of Currently on OAMT */
 
 /*
@@ -14164,26 +14607,6 @@ define &quot;Retained on OAMT Observation&quot;:
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
 /* End of Retained on OAMT */
-
-
-/*
-@dataElement: HIV.PRV.DE22 - Client being inducted on OAMT
-@activity: HIV.B6 Capture or update client history
-@description: Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion
-*/
-
-define &quot;Client being inducted on OAMT&quot;:
-  [Observation: Concepts.&quot;Client being inducted on OAMT&quot;]
-
-/*
-@dataElement: HIV.PRV.DE23 - Client on reducing doses of OAMT
-@activity: HIV.B6 Capture or update client history
-@description: Client is retained on opioid agonist maintenance treatment (OAMT) at reporting date, defined according to country/program to account for medication dispensed and LTFU criterion
-*/
-
-define &quot;Client on reducing doses of OAMT&quot;:
-  [Observation: Concepts.&quot;Client on reducing doses of OAMT&quot;]
-
 
 /*
 @dataElement: HIV.PRV.DE25 - Date of loss to follow-up or OAMT stopped
@@ -14362,7 +14785,7 @@ define &quot;Viral load test result SRV.DE13 Value&quot;:
 @activity: HIV.A2 Gather client details
 @description: The date and time of the client's visit
 */
-
+// TODO: MARK as visit?
 define &quot;Visit date SRV.DE15&quot;:
   [Encounter] E
   return E.period
@@ -14570,7 +14993,7 @@ define &quot;Reporting date Value&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (9287172 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (9799944 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -14582,7 +15005,7 @@ define &quot;Reporting date Value&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (16268304 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (17167748 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -14615,7 +15038,7 @@ define &quot;Reporting date Value&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 16:44+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

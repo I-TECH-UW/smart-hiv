@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "817",
+            "r" : "684",
             "s" : [ {
                "value" : [ "","library HIVCommon version '0.0.1'" ]
             } ]
@@ -5236,14 +5236,13 @@
             "name" : "MedicationRequestPeriod",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "fluent" : true,
             "type" : "FunctionDef",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
                   "r" : "481",
                   "s" : [ {
-                     "value" : [ "","define fluent function MedicationRequestPeriod(Request MedicationRequest):\n  " ]
+                     "value" : [ "","define function MedicationRequestPeriod(Request FHIR.MedicationRequest):\n  " ]
                   }, {
                      "r" : "480",
                      "s" : [ {
@@ -6860,7 +6859,7 @@
                "name" : "Request",
                "operandTypeSpecifier" : {
                   "localId" : "365",
-                  "locator" : "149:58-149:74",
+                  "locator" : "149:51-149:72",
                   "name" : "{http://hl7.org/fhir}MedicationRequest",
                   "type" : "NamedTypeSpecifier"
                }
@@ -8295,1900 +8294,26 @@
                }
             } ]
          }, {
-            "localId" : "673",
-            "locator" : "212:1-226:37",
-            "name" : "dailyDose",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "fluent" : true,
-            "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "673",
-                  "s" : [ {
-                     "value" : [ "//define function \"GetMedicationDailyDose\"(dosage Quantity, dosesPerDay Decimal):\n  //dosage * Quantity { value: dosesPerDay, unit: '/d' }\n\n\n","define fluent function dailyDose(Request \"MedicationRequest\"):\n  " ]
-                  }, {
-                     "r" : "672",
-                     "s" : [ {
-                        "r" : "672",
-                        "s" : [ {
-                           "s" : [ {
-                              "r" : "608",
-                              "s" : [ {
-                                 "r" : "607",
-                                 "s" : [ {
-                                    "s" : [ {
-                                       "value" : [ "Request" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","R" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n    " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "let\n      " ]
-                           }, {
-                              "r" : "612",
-                              "s" : [ {
-                                 "value" : [ "dosage",": " ]
-                              }, {
-                                 "r" : "611",
-                                 "s" : [ {
-                                    "value" : [ "singleton from " ]
-                                 }, {
-                                    "r" : "610",
-                                    "s" : [ {
-                                       "r" : "609",
-                                       "s" : [ {
-                                          "value" : [ "R" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "610",
-                                       "s" : [ {
-                                          "value" : [ "dosageInstruction" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "616",
-                              "s" : [ {
-                                 "value" : [ "doseAndRate",": " ]
-                              }, {
-                                 "r" : "615",
-                                 "s" : [ {
-                                    "value" : [ "singleton from " ]
-                                 }, {
-                                    "r" : "614",
-                                    "s" : [ {
-                                       "r" : "613",
-                                       "s" : [ {
-                                          "value" : [ "dosage" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "614",
-                                       "s" : [ {
-                                          "value" : [ "doseAndRate" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "619",
-                              "s" : [ {
-                                 "value" : [ "timing",": " ]
-                              }, {
-                                 "r" : "618",
-                                 "s" : [ {
-                                    "r" : "617",
-                                    "s" : [ {
-                                       "value" : [ "dosage" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "618",
-                                    "s" : [ {
-                                       "value" : [ "timing" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "627",
-                              "s" : [ {
-                                 "value" : [ "frequency",": " ]
-                              }, {
-                                 "r" : "626",
-                                 "s" : [ {
-                                    "value" : [ "Coalesce","(" ]
-                                 }, {
-                                    "r" : "622",
-                                    "s" : [ {
-                                       "r" : "621",
-                                       "s" : [ {
-                                          "r" : "620",
-                                          "s" : [ {
-                                             "value" : [ "timing" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "621",
-                                          "s" : [ {
-                                             "value" : [ "repeat" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "622",
-                                       "s" : [ {
-                                          "value" : [ "frequencyMax" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "625",
-                                    "s" : [ {
-                                       "r" : "624",
-                                       "s" : [ {
-                                          "r" : "623",
-                                          "s" : [ {
-                                             "value" : [ "timing" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "624",
-                                          "s" : [ {
-                                             "value" : [ "repeat" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "625",
-                                       "s" : [ {
-                                          "value" : [ "frequency" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "636",
-                              "s" : [ {
-                                 "value" : [ "period",": " ]
-                              }, {
-                                 "r" : "635",
-                                 "s" : [ {
-                                    "value" : [ "System",".","Quantity"," { " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "value",": " ]
-                                    }, {
-                                       "r" : "630",
-                                       "s" : [ {
-                                          "r" : "629",
-                                          "s" : [ {
-                                             "r" : "628",
-                                             "s" : [ {
-                                                "value" : [ "timing" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "629",
-                                             "s" : [ {
-                                                "value" : [ "repeat" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "630",
-                                          "s" : [ {
-                                             "value" : [ "period" ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "unit",": " ]
-                                    }, {
-                                       "r" : "634",
-                                       "s" : [ {
-                                          "r" : "633",
-                                          "s" : [ {
-                                             "r" : "632",
-                                             "s" : [ {
-                                                "r" : "631",
-                                                "s" : [ {
-                                                   "value" : [ "timing" ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "." ]
-                                             }, {
-                                                "r" : "632",
-                                                "s" : [ {
-                                                   "value" : [ "repeat" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "633",
-                                             "s" : [ {
-                                                "value" : [ "periodUnit" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "634",
-                                          "s" : [ {
-                                             "value" : [ "value" ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " }" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "641",
-                              "s" : [ {
-                                 "value" : [ "doseRange",": " ]
-                              }, {
-                                 "r" : "640",
-                                 "s" : [ {
-                                    "r" : "638",
-                                    "s" : [ {
-                                       "r" : "637",
-                                       "s" : [ {
-                                          "value" : [ "doseAndRate" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "638",
-                                       "s" : [ {
-                                          "value" : [ "dose" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " as " ]
-                                 }, {
-                                    "r" : "639",
-                                    "s" : [ {
-                                       "value" : [ "Range" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "646",
-                              "s" : [ {
-                                 "value" : [ "doseQuantity",": " ]
-                              }, {
-                                 "r" : "645",
-                                 "s" : [ {
-                                    "r" : "643",
-                                    "s" : [ {
-                                       "r" : "642",
-                                       "s" : [ {
-                                          "value" : [ "doseAndRate" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "643",
-                                       "s" : [ {
-                                          "value" : [ "dose" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " as " ]
-                                 }, {
-                                    "r" : "644",
-                                    "s" : [ {
-                                       "value" : [ "SimpleQuantity" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "651",
-                              "s" : [ {
-                                 "value" : [ "dose",": " ]
-                              }, {
-                                 "r" : "650",
-                                 "s" : [ {
-                                    "value" : [ "Coalesce","(" ]
-                                 }, {
-                                    "r" : "648",
-                                    "s" : [ {
-                                       "r" : "647",
-                                       "s" : [ {
-                                          "value" : [ "doseRange" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "648",
-                                       "s" : [ {
-                                          "value" : [ "high" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "649",
-                                    "s" : [ {
-                                       "value" : [ "doseQuantity" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "661",
-                              "s" : [ {
-                                 "value" : [ "dosesPerDay",": " ]
-                              }, {
-                                 "r" : "660",
-                                 "s" : [ {
-                                    "value" : [ "Coalesce","(" ]
-                                 }, {
-                                    "r" : "654",
-                                    "s" : [ {
-                                       "value" : [ "ToDaily","(" ]
-                                    }, {
-                                       "r" : "652",
-                                       "s" : [ {
-                                          "value" : [ "frequency" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "653",
-                                       "s" : [ {
-                                          "value" : [ "period" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "658",
-                                    "s" : [ {
-                                       "value" : [ "Count","(" ]
-                                    }, {
-                                       "r" : "657",
-                                       "s" : [ {
-                                          "r" : "656",
-                                          "s" : [ {
-                                             "r" : "655",
-                                             "s" : [ {
-                                                "value" : [ "timing" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "656",
-                                             "s" : [ {
-                                                "value" : [ "repeat" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "657",
-                                          "s" : [ {
-                                             "value" : [ "timeOfDay" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "r" : "659",
-                                    "value" : [ ", ","1.0",")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "665",
-                              "s" : [ {
-                                 "value" : [ "quantity",": " ]
-                              }, {
-                                 "r" : "664",
-                                 "s" : [ {
-                                    "r" : "663",
-                                    "s" : [ {
-                                       "r" : "662",
-                                       "s" : [ {
-                                          "value" : [ "R" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "663",
-                                       "s" : [ {
-                                          "value" : [ "dispenseRequest" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "664",
-                                    "s" : [ {
-                                       "value" : [ "quantity" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n    " ]
-                        }, {
-                           "r" : "671",
-                           "s" : [ {
-                              "value" : [ "return\n      " ]
-                           }, {
-                              "r" : "670",
-                              "s" : [ {
-                                 "r" : "666",
-                                 "s" : [ {
-                                    "value" : [ "quantity" ]
-                                 } ]
-                              }, {
-                                 "value" : [ " / " ]
-                              }, {
-                                 "r" : "669",
-                                 "s" : [ {
-                                    "value" : [ "(" ]
-                                 }, {
-                                    "r" : "669",
-                                    "s" : [ {
-                                       "r" : "667",
-                                       "s" : [ {
-                                          "value" : [ "dose" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " * " ]
-                                    }, {
-                                       "r" : "668",
-                                       "s" : [ {
-                                          "value" : [ "dosesPerDay" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "672",
-               "locator" : "213:3-226:37",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "608",
-                  "locator" : "213:3-213:11",
-                  "alias" : "R",
-                  "expression" : {
-                     "localId" : "607",
-                     "locator" : "213:3-213:9",
-                     "name" : "Request",
-                     "type" : "OperandRef"
-                  }
-               } ],
-               "let" : [ {
-                  "localId" : "612",
-                  "locator" : "215:7-215:48",
-                  "identifier" : "dosage",
-                  "expression" : {
-                     "localId" : "611",
-                     "locator" : "215:15-215:48",
-                     "type" : "SingletonFrom",
-                     "signature" : [ {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}Dosage",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ],
-                     "operand" : {
-                        "localId" : "610",
-                        "locator" : "215:30-215:48",
-                        "path" : "dosageInstruction",
-                        "scope" : "R",
-                        "type" : "Property"
-                     }
-                  }
-               }, {
-                  "localId" : "616",
-                  "locator" : "216:7-216:52",
-                  "identifier" : "doseAndRate",
-                  "expression" : {
-                     "localId" : "615",
-                     "locator" : "216:20-216:52",
-                     "type" : "SingletonFrom",
-                     "signature" : [ {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ],
-                     "operand" : {
-                        "localId" : "614",
-                        "locator" : "216:35-216:52",
-                        "path" : "doseAndRate",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "613",
-                           "locator" : "216:35-216:40",
-                           "name" : "dosage",
-                           "type" : "QueryLetRef"
-                        }
-                     }
-                  }
-               }, {
-                  "localId" : "619",
-                  "locator" : "217:7-217:27",
-                  "identifier" : "timing",
-                  "expression" : {
-                     "localId" : "618",
-                     "locator" : "217:15-217:27",
-                     "path" : "timing",
-                     "type" : "Property",
-                     "source" : {
-                        "localId" : "617",
-                        "locator" : "217:15-217:20",
-                        "name" : "dosage",
-                        "type" : "QueryLetRef"
-                     }
-                  }
-               }, {
-                  "localId" : "627",
-                  "locator" : "218:7-218:78",
-                  "identifier" : "frequency",
-                  "expression" : {
-                     "localId" : "626",
-                     "locator" : "218:18-218:78",
-                     "type" : "Coalesce",
-                     "signature" : [ {
-                        "name" : "{http://hl7.org/fhir}positiveInt",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{http://hl7.org/fhir}positiveInt",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "622",
-                        "locator" : "218:27-218:52",
-                        "path" : "frequencyMax",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "621",
-                           "locator" : "218:27-218:39",
-                           "path" : "repeat",
-                           "type" : "Property",
-                           "source" : {
-                              "localId" : "620",
-                              "locator" : "218:27-218:32",
-                              "name" : "timing",
-                              "type" : "QueryLetRef"
-                           }
-                        }
-                     }, {
-                        "localId" : "625",
-                        "locator" : "218:55-218:77",
-                        "path" : "frequency",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "624",
-                           "locator" : "218:55-218:67",
-                           "path" : "repeat",
-                           "type" : "Property",
-                           "source" : {
-                              "localId" : "623",
-                              "locator" : "218:55-218:60",
-                              "name" : "timing",
-                              "type" : "QueryLetRef"
-                           }
-                        }
-                     } ]
-                  }
-               }, {
-                  "localId" : "636",
-                  "locator" : "219:7-219:99",
-                  "identifier" : "period",
-                  "expression" : {
-                     "localId" : "635",
-                     "locator" : "219:15-219:99",
-                     "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "type" : "Instance",
-                     "element" : [ {
-                        "name" : "value",
-                        "value" : {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "localId" : "630",
-                              "locator" : "219:40-219:59",
-                              "path" : "period",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "629",
-                                 "locator" : "219:40-219:52",
-                                 "path" : "repeat",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "628",
-                                    "locator" : "219:40-219:45",
-                                    "name" : "timing",
-                                    "type" : "QueryLetRef"
-                                 }
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "unit",
-                        "value" : {
-                           "localId" : "634",
-                           "locator" : "219:68-219:97",
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "localId" : "633",
-                              "locator" : "219:68-219:91",
-                              "path" : "periodUnit",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "632",
-                                 "locator" : "219:68-219:80",
-                                 "path" : "repeat",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "631",
-                                    "locator" : "219:68-219:73",
-                                    "name" : "timing",
-                                    "type" : "QueryLetRef"
-                                 }
-                              }
-                           }
-                        }
-                     } ]
-                  }
-               }, {
-                  "localId" : "641",
-                  "locator" : "220:7-220:42",
-                  "identifier" : "doseRange",
-                  "expression" : {
-                     "localId" : "640",
-                     "locator" : "220:18-220:42",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "638",
-                        "locator" : "220:18-220:33",
-                        "path" : "dose",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "637",
-                           "locator" : "220:18-220:28",
-                           "name" : "doseAndRate",
-                           "type" : "QueryLetRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "639",
-                        "locator" : "220:38-220:42",
-                        "name" : "{http://hl7.org/fhir}Range",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }
-               }, {
-                  "localId" : "646",
-                  "locator" : "221:7-221:54",
-                  "identifier" : "doseQuantity",
-                  "expression" : {
-                     "localId" : "645",
-                     "locator" : "221:21-221:54",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "643",
-                        "locator" : "221:21-221:36",
-                        "path" : "dose",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "642",
-                           "locator" : "221:21-221:31",
-                           "name" : "doseAndRate",
-                           "type" : "QueryLetRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "644",
-                        "locator" : "221:41-221:54",
-                        "name" : "{http://hl7.org/fhir}SimpleQuantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }
-               }, {
-                  "localId" : "651",
-                  "locator" : "222:7-222:50",
-                  "identifier" : "dose",
-                  "expression" : {
-                     "localId" : "650",
-                     "locator" : "222:13-222:50",
-                     "type" : "Coalesce",
-                     "signature" : [ {
-                        "name" : "{http://hl7.org/fhir}SimpleQuantity",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{http://hl7.org/fhir}SimpleQuantity",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "648",
-                        "locator" : "222:22-222:35",
-                        "path" : "high",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "647",
-                           "locator" : "222:22-222:30",
-                           "name" : "doseRange",
-                           "type" : "QueryLetRef"
-                        }
-                     }, {
-                        "localId" : "649",
-                        "locator" : "222:38-222:49",
-                        "name" : "doseQuantity",
-                        "type" : "QueryLetRef"
-                     } ]
-                  }
-               }, {
-                  "localId" : "661",
-                  "locator" : "223:7-223:92",
-                  "identifier" : "dosesPerDay",
-                  "expression" : {
-                     "localId" : "660",
-                     "locator" : "223:20-223:92",
-                     "type" : "Coalesce",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "654",
-                        "locator" : "223:29-223:54",
-                        "name" : "ToDaily",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "name" : "ToInteger",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "localId" : "652",
-                              "locator" : "223:37-223:45",
-                              "name" : "frequency",
-                              "type" : "QueryLetRef"
-                           } ]
-                        }, {
-                           "localId" : "653",
-                           "locator" : "223:48-223:53",
-                           "name" : "period",
-                           "type" : "QueryLetRef"
-                        } ]
-                     }, {
-                        "type" : "ToDecimal",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : {
-                           "localId" : "658",
-                           "locator" : "223:57-223:86",
-                           "type" : "Count",
-                           "source" : {
-                              "localId" : "657",
-                              "locator" : "223:63-223:85",
-                              "path" : "timeOfDay",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "656",
-                                 "locator" : "223:63-223:75",
-                                 "path" : "repeat",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "655",
-                                    "locator" : "223:63-223:68",
-                                    "name" : "timing",
-                                    "type" : "QueryLetRef"
-                                 }
-                              }
-                           }
-                        }
-                     }, {
-                        "localId" : "659",
-                        "locator" : "223:89-223:91",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value" : "1.0",
-                        "type" : "Literal"
-                     } ]
-                  }
-               }, {
-                  "localId" : "665",
-                  "locator" : "224:7-224:42",
-                  "identifier" : "quantity",
-                  "expression" : {
-                     "localId" : "664",
-                     "locator" : "224:17-224:42",
-                     "path" : "quantity",
-                     "type" : "Property",
-                     "source" : {
-                        "localId" : "663",
-                        "locator" : "224:17-224:33",
-                        "path" : "dispenseRequest",
-                        "scope" : "R",
-                        "type" : "Property"
-                     }
-                  }
-               } ],
-               "relationship" : [ ],
-               "return" : {
-                  "localId" : "671",
-                  "locator" : "225:5-226:37",
-                  "expression" : {
-                     "localId" : "670",
-                     "locator" : "226:7-226:37",
-                     "type" : "Divide",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "name" : "ToQuantity",
-                        "libraryName" : "FHIRHelpers",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "localId" : "666",
-                           "locator" : "226:7-226:14",
-                           "name" : "quantity",
-                           "type" : "QueryLetRef"
-                        } ]
-                     }, {
-                        "localId" : "669",
-                        "locator" : "226:18-226:37",
-                        "type" : "Multiply",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "name" : "ToQuantity",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "localId" : "667",
-                              "locator" : "226:19-226:22",
-                              "name" : "dose",
-                              "type" : "QueryLetRef"
-                           } ]
-                        }, {
-                           "type" : "ToQuantity",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "localId" : "668",
-                              "locator" : "226:26-226:36",
-                              "name" : "dosesPerDay",
-                              "type" : "QueryLetRef"
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            },
-            "operand" : [ {
-               "name" : "Request",
-               "operandTypeSpecifier" : {
-                  "localId" : "606",
-                  "locator" : "212:42-212:60",
-                  "name" : "{http://hl7.org/fhir}MedicationRequest",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "localId" : "738",
-            "locator" : "228:1-241:39",
-            "name" : "dailyDose",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "fluent" : true,
-            "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "738",
-                  "s" : [ {
-                     "value" : [ "","define fluent function dailyDose(Dispense \"MedicationDispense\"):\n  " ]
-                  }, {
-                     "r" : "737",
-                     "s" : [ {
-                        "r" : "737",
-                        "s" : [ {
-                           "s" : [ {
-                              "r" : "676",
-                              "s" : [ {
-                                 "r" : "675",
-                                 "s" : [ {
-                                    "s" : [ {
-                                       "value" : [ "Dispense" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","D" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n    " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "let\n      " ]
-                           }, {
-                              "r" : "680",
-                              "s" : [ {
-                                 "value" : [ "dosage",": " ]
-                              }, {
-                                 "r" : "679",
-                                 "s" : [ {
-                                    "value" : [ "singleton from " ]
-                                 }, {
-                                    "r" : "678",
-                                    "s" : [ {
-                                       "r" : "677",
-                                       "s" : [ {
-                                          "value" : [ "D" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "678",
-                                       "s" : [ {
-                                          "value" : [ "dosageInstruction" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "684",
-                              "s" : [ {
-                                 "value" : [ "doseAndRate",": " ]
-                              }, {
-                                 "r" : "683",
-                                 "s" : [ {
-                                    "value" : [ "singleton from " ]
-                                 }, {
-                                    "r" : "682",
-                                    "s" : [ {
-                                       "r" : "681",
-                                       "s" : [ {
-                                          "value" : [ "dosage" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "682",
-                                       "s" : [ {
-                                          "value" : [ "doseAndRate" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "687",
-                              "s" : [ {
-                                 "value" : [ "timing",": " ]
-                              }, {
-                                 "r" : "686",
-                                 "s" : [ {
-                                    "r" : "685",
-                                    "s" : [ {
-                                       "value" : [ "dosage" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "686",
-                                    "s" : [ {
-                                       "value" : [ "timing" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "695",
-                              "s" : [ {
-                                 "value" : [ "frequency",": " ]
-                              }, {
-                                 "r" : "694",
-                                 "s" : [ {
-                                    "value" : [ "Coalesce","(" ]
-                                 }, {
-                                    "r" : "690",
-                                    "s" : [ {
-                                       "r" : "689",
-                                       "s" : [ {
-                                          "r" : "688",
-                                          "s" : [ {
-                                             "value" : [ "timing" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "689",
-                                          "s" : [ {
-                                             "value" : [ "repeat" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "690",
-                                       "s" : [ {
-                                          "value" : [ "frequencyMax" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "693",
-                                    "s" : [ {
-                                       "r" : "692",
-                                       "s" : [ {
-                                          "r" : "691",
-                                          "s" : [ {
-                                             "value" : [ "timing" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "692",
-                                          "s" : [ {
-                                             "value" : [ "repeat" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "693",
-                                       "s" : [ {
-                                          "value" : [ "frequency" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "704",
-                              "s" : [ {
-                                 "value" : [ "period",": " ]
-                              }, {
-                                 "r" : "703",
-                                 "s" : [ {
-                                    "value" : [ "System",".","Quantity"," { " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "value",": " ]
-                                    }, {
-                                       "r" : "698",
-                                       "s" : [ {
-                                          "r" : "697",
-                                          "s" : [ {
-                                             "r" : "696",
-                                             "s" : [ {
-                                                "value" : [ "timing" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "697",
-                                             "s" : [ {
-                                                "value" : [ "repeat" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "698",
-                                          "s" : [ {
-                                             "value" : [ "period" ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "unit",": " ]
-                                    }, {
-                                       "r" : "702",
-                                       "s" : [ {
-                                          "r" : "701",
-                                          "s" : [ {
-                                             "r" : "700",
-                                             "s" : [ {
-                                                "r" : "699",
-                                                "s" : [ {
-                                                   "value" : [ "timing" ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "." ]
-                                             }, {
-                                                "r" : "700",
-                                                "s" : [ {
-                                                   "value" : [ "repeat" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "701",
-                                             "s" : [ {
-                                                "value" : [ "periodUnit" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "702",
-                                          "s" : [ {
-                                             "value" : [ "value" ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " }" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "709",
-                              "s" : [ {
-                                 "value" : [ "doseRange",": " ]
-                              }, {
-                                 "r" : "708",
-                                 "s" : [ {
-                                    "r" : "706",
-                                    "s" : [ {
-                                       "r" : "705",
-                                       "s" : [ {
-                                          "value" : [ "doseAndRate" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "706",
-                                       "s" : [ {
-                                          "value" : [ "dose" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " as " ]
-                                 }, {
-                                    "r" : "707",
-                                    "s" : [ {
-                                       "value" : [ "Range" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "714",
-                              "s" : [ {
-                                 "value" : [ "doseQuantity",": " ]
-                              }, {
-                                 "r" : "713",
-                                 "s" : [ {
-                                    "r" : "711",
-                                    "s" : [ {
-                                       "r" : "710",
-                                       "s" : [ {
-                                          "value" : [ "doseAndRate" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "711",
-                                       "s" : [ {
-                                          "value" : [ "dose" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " as " ]
-                                 }, {
-                                    "r" : "712",
-                                    "s" : [ {
-                                       "value" : [ "SimpleQuantity" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "719",
-                              "s" : [ {
-                                 "value" : [ "dose",": " ]
-                              }, {
-                                 "r" : "718",
-                                 "s" : [ {
-                                    "value" : [ "Coalesce","(" ]
-                                 }, {
-                                    "r" : "716",
-                                    "s" : [ {
-                                       "r" : "715",
-                                       "s" : [ {
-                                          "value" : [ "doseRange" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "716",
-                                       "s" : [ {
-                                          "value" : [ "high" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "717",
-                                    "s" : [ {
-                                       "value" : [ "doseQuantity" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ",\n      " ]
-                           }, {
-                              "r" : "729",
-                              "s" : [ {
-                                 "value" : [ "dosesPerDay",": " ]
-                              }, {
-                                 "r" : "728",
-                                 "s" : [ {
-                                    "value" : [ "Coalesce","(" ]
-                                 }, {
-                                    "r" : "722",
-                                    "s" : [ {
-                                       "value" : [ "ToDaily","(" ]
-                                    }, {
-                                       "r" : "720",
-                                       "s" : [ {
-                                          "value" : [ "frequency" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "721",
-                                       "s" : [ {
-                                          "value" : [ "period" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "726",
-                                    "s" : [ {
-                                       "value" : [ "Count","(" ]
-                                    }, {
-                                       "r" : "725",
-                                       "s" : [ {
-                                          "r" : "724",
-                                          "s" : [ {
-                                             "r" : "723",
-                                             "s" : [ {
-                                                "value" : [ "timing" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "724",
-                                             "s" : [ {
-                                                "value" : [ "repeat" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "725",
-                                          "s" : [ {
-                                             "value" : [ "timeOfDay" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "r" : "727",
-                                    "value" : [ ", ","1.0",")" ]
-                                 } ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n    " ]
-                        }, {
-                           "r" : "736",
-                           "s" : [ {
-                              "value" : [ "return\n      " ]
-                           }, {
-                              "r" : "735",
-                              "s" : [ {
-                                 "r" : "731",
-                                 "s" : [ {
-                                    "r" : "730",
-                                    "s" : [ {
-                                       "value" : [ "D" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "731",
-                                    "s" : [ {
-                                       "value" : [ "quantity" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " / " ]
-                              }, {
-                                 "r" : "734",
-                                 "s" : [ {
-                                    "value" : [ "(" ]
-                                 }, {
-                                    "r" : "734",
-                                    "s" : [ {
-                                       "r" : "732",
-                                       "s" : [ {
-                                          "value" : [ "dose" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " * " ]
-                                    }, {
-                                       "r" : "733",
-                                       "s" : [ {
-                                          "value" : [ "dosesPerDay" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "737",
-               "locator" : "229:3-241:39",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "676",
-                  "locator" : "229:3-229:12",
-                  "alias" : "D",
-                  "expression" : {
-                     "localId" : "675",
-                     "locator" : "229:3-229:10",
-                     "name" : "Dispense",
-                     "type" : "OperandRef"
-                  }
-               } ],
-               "let" : [ {
-                  "localId" : "680",
-                  "locator" : "231:7-231:48",
-                  "identifier" : "dosage",
-                  "expression" : {
-                     "localId" : "679",
-                     "locator" : "231:15-231:48",
-                     "type" : "SingletonFrom",
-                     "signature" : [ {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}Dosage",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ],
-                     "operand" : {
-                        "localId" : "678",
-                        "locator" : "231:30-231:48",
-                        "path" : "dosageInstruction",
-                        "scope" : "D",
-                        "type" : "Property"
-                     }
-                  }
-               }, {
-                  "localId" : "684",
-                  "locator" : "232:7-232:52",
-                  "identifier" : "doseAndRate",
-                  "expression" : {
-                     "localId" : "683",
-                     "locator" : "232:20-232:52",
-                     "type" : "SingletonFrom",
-                     "signature" : [ {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ],
-                     "operand" : {
-                        "localId" : "682",
-                        "locator" : "232:35-232:52",
-                        "path" : "doseAndRate",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "681",
-                           "locator" : "232:35-232:40",
-                           "name" : "dosage",
-                           "type" : "QueryLetRef"
-                        }
-                     }
-                  }
-               }, {
-                  "localId" : "687",
-                  "locator" : "233:7-233:27",
-                  "identifier" : "timing",
-                  "expression" : {
-                     "localId" : "686",
-                     "locator" : "233:15-233:27",
-                     "path" : "timing",
-                     "type" : "Property",
-                     "source" : {
-                        "localId" : "685",
-                        "locator" : "233:15-233:20",
-                        "name" : "dosage",
-                        "type" : "QueryLetRef"
-                     }
-                  }
-               }, {
-                  "localId" : "695",
-                  "locator" : "234:7-234:78",
-                  "identifier" : "frequency",
-                  "expression" : {
-                     "localId" : "694",
-                     "locator" : "234:18-234:78",
-                     "type" : "Coalesce",
-                     "signature" : [ {
-                        "name" : "{http://hl7.org/fhir}positiveInt",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{http://hl7.org/fhir}positiveInt",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "690",
-                        "locator" : "234:27-234:52",
-                        "path" : "frequencyMax",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "689",
-                           "locator" : "234:27-234:39",
-                           "path" : "repeat",
-                           "type" : "Property",
-                           "source" : {
-                              "localId" : "688",
-                              "locator" : "234:27-234:32",
-                              "name" : "timing",
-                              "type" : "QueryLetRef"
-                           }
-                        }
-                     }, {
-                        "localId" : "693",
-                        "locator" : "234:55-234:77",
-                        "path" : "frequency",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "692",
-                           "locator" : "234:55-234:67",
-                           "path" : "repeat",
-                           "type" : "Property",
-                           "source" : {
-                              "localId" : "691",
-                              "locator" : "234:55-234:60",
-                              "name" : "timing",
-                              "type" : "QueryLetRef"
-                           }
-                        }
-                     } ]
-                  }
-               }, {
-                  "localId" : "704",
-                  "locator" : "235:7-235:99",
-                  "identifier" : "period",
-                  "expression" : {
-                     "localId" : "703",
-                     "locator" : "235:15-235:99",
-                     "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "type" : "Instance",
-                     "element" : [ {
-                        "name" : "value",
-                        "value" : {
-                           "name" : "ToDecimal",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "localId" : "698",
-                              "locator" : "235:40-235:59",
-                              "path" : "period",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "697",
-                                 "locator" : "235:40-235:52",
-                                 "path" : "repeat",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "696",
-                                    "locator" : "235:40-235:45",
-                                    "name" : "timing",
-                                    "type" : "QueryLetRef"
-                                 }
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "unit",
-                        "value" : {
-                           "localId" : "702",
-                           "locator" : "235:68-235:97",
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "localId" : "701",
-                              "locator" : "235:68-235:91",
-                              "path" : "periodUnit",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "700",
-                                 "locator" : "235:68-235:80",
-                                 "path" : "repeat",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "699",
-                                    "locator" : "235:68-235:73",
-                                    "name" : "timing",
-                                    "type" : "QueryLetRef"
-                                 }
-                              }
-                           }
-                        }
-                     } ]
-                  }
-               }, {
-                  "localId" : "709",
-                  "locator" : "236:7-236:42",
-                  "identifier" : "doseRange",
-                  "expression" : {
-                     "localId" : "708",
-                     "locator" : "236:18-236:42",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "706",
-                        "locator" : "236:18-236:33",
-                        "path" : "dose",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "705",
-                           "locator" : "236:18-236:28",
-                           "name" : "doseAndRate",
-                           "type" : "QueryLetRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "707",
-                        "locator" : "236:38-236:42",
-                        "name" : "{http://hl7.org/fhir}Range",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }
-               }, {
-                  "localId" : "714",
-                  "locator" : "237:7-237:54",
-                  "identifier" : "doseQuantity",
-                  "expression" : {
-                     "localId" : "713",
-                     "locator" : "237:21-237:54",
-                     "strict" : false,
-                     "type" : "As",
-                     "operand" : {
-                        "localId" : "711",
-                        "locator" : "237:21-237:36",
-                        "path" : "dose",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "710",
-                           "locator" : "237:21-237:31",
-                           "name" : "doseAndRate",
-                           "type" : "QueryLetRef"
-                        }
-                     },
-                     "asTypeSpecifier" : {
-                        "localId" : "712",
-                        "locator" : "237:41-237:54",
-                        "name" : "{http://hl7.org/fhir}SimpleQuantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }
-               }, {
-                  "localId" : "719",
-                  "locator" : "238:7-238:50",
-                  "identifier" : "dose",
-                  "expression" : {
-                     "localId" : "718",
-                     "locator" : "238:13-238:50",
-                     "type" : "Coalesce",
-                     "signature" : [ {
-                        "name" : "{http://hl7.org/fhir}SimpleQuantity",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{http://hl7.org/fhir}SimpleQuantity",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "716",
-                        "locator" : "238:22-238:35",
-                        "path" : "high",
-                        "type" : "Property",
-                        "source" : {
-                           "localId" : "715",
-                           "locator" : "238:22-238:30",
-                           "name" : "doseRange",
-                           "type" : "QueryLetRef"
-                        }
-                     }, {
-                        "localId" : "717",
-                        "locator" : "238:38-238:49",
-                        "name" : "doseQuantity",
-                        "type" : "QueryLetRef"
-                     } ]
-                  }
-               }, {
-                  "localId" : "729",
-                  "locator" : "239:7-239:92",
-                  "identifier" : "dosesPerDay",
-                  "expression" : {
-                     "localId" : "728",
-                     "locator" : "239:20-239:92",
-                     "type" : "Coalesce",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "722",
-                        "locator" : "239:29-239:54",
-                        "name" : "ToDaily",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "name" : "ToInteger",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "localId" : "720",
-                              "locator" : "239:37-239:45",
-                              "name" : "frequency",
-                              "type" : "QueryLetRef"
-                           } ]
-                        }, {
-                           "localId" : "721",
-                           "locator" : "239:48-239:53",
-                           "name" : "period",
-                           "type" : "QueryLetRef"
-                        } ]
-                     }, {
-                        "type" : "ToDecimal",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : {
-                           "localId" : "726",
-                           "locator" : "239:57-239:86",
-                           "type" : "Count",
-                           "source" : {
-                              "localId" : "725",
-                              "locator" : "239:63-239:85",
-                              "path" : "timeOfDay",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "724",
-                                 "locator" : "239:63-239:75",
-                                 "path" : "repeat",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "723",
-                                    "locator" : "239:63-239:68",
-                                    "name" : "timing",
-                                    "type" : "QueryLetRef"
-                                 }
-                              }
-                           }
-                        }
-                     }, {
-                        "localId" : "727",
-                        "locator" : "239:89-239:91",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value" : "1.0",
-                        "type" : "Literal"
-                     } ]
-                  }
-               } ],
-               "relationship" : [ ],
-               "return" : {
-                  "localId" : "736",
-                  "locator" : "240:5-241:39",
-                  "expression" : {
-                     "localId" : "735",
-                     "locator" : "241:7-241:39",
-                     "type" : "Divide",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "name" : "ToQuantity",
-                        "libraryName" : "FHIRHelpers",
-                        "type" : "FunctionRef",
-                        "operand" : [ {
-                           "localId" : "731",
-                           "locator" : "241:7-241:16",
-                           "path" : "quantity",
-                           "scope" : "D",
-                           "type" : "Property"
-                        } ]
-                     }, {
-                        "localId" : "734",
-                        "locator" : "241:20-241:39",
-                        "type" : "Multiply",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "name" : "ToQuantity",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "localId" : "732",
-                              "locator" : "241:21-241:24",
-                              "name" : "dose",
-                              "type" : "QueryLetRef"
-                           } ]
-                        }, {
-                           "type" : "ToQuantity",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "localId" : "733",
-                              "locator" : "241:28-241:38",
-                              "name" : "dosesPerDay",
-                              "type" : "QueryLetRef"
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            },
-            "operand" : [ {
-               "name" : "Dispense",
-               "operandTypeSpecifier" : {
-                  "localId" : "674",
-                  "locator" : "228:43-228:62",
-                  "name" : "{http://hl7.org/fhir}MedicationDispense",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "localId" : "752",
-            "locator" : "254:3-257:60",
+            "localId" : "619",
+            "locator" : "227:3-230:60",
             "name" : "STI_testing",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "752",
+                  "r" : "619",
                   "s" : [ {
-                     "value" : [ "//need to define\n  ","define ","STI_testing",":\n    " ]
+                     "value" : [ "//define function \"GetMedicationDailyDose\"(dosage Quantity, dosesPerDay Decimal):\n  //dosage * Quantity { value: dosesPerDay, unit: '/d' }\n\n\n\n\n\n\n\n\n\n\n\n\n  \n  \n\n\n//need to define\n  ","define ","STI_testing",":\n    " ]
                   }, {
-                     "r" : "751",
+                     "r" : "618",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "740",
+                           "r" : "607",
                            "s" : [ {
-                              "r" : "739",
+                              "r" : "606",
                               "s" : [ {
-                                 "r" : "739",
+                                 "r" : "606",
                                  "s" : [ {
                                     "value" : [ "[","Procedure","]" ]
                                  } ]
@@ -10200,24 +8325,24 @@
                      }, {
                         "value" : [ "\n  " ]
                      }, {
-                        "r" : "750",
+                        "r" : "617",
                         "s" : [ {
                            "value" : [ "where " ]
                         }, {
-                           "r" : "750",
+                           "r" : "617",
                            "s" : [ {
-                              "r" : "744",
+                              "r" : "611",
                               "s" : [ {
-                                 "r" : "742",
+                                 "r" : "609",
                                  "s" : [ {
-                                    "r" : "741",
+                                    "r" : "608",
                                     "s" : [ {
                                        "value" : [ "P" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "742",
+                                    "r" : "609",
                                     "s" : [ {
                                        "value" : [ "status" ]
                                     } ]
@@ -10225,7 +8350,7 @@
                               }, {
                                  "value" : [ " ","="," " ]
                               }, {
-                                 "r" : "743",
+                                 "r" : "610",
                                  "s" : [ {
                                     "value" : [ "'completed'" ]
                                  } ]
@@ -10233,18 +8358,18 @@
                            }, {
                               "value" : [ "\n  and " ]
                            }, {
-                              "r" : "749",
+                              "r" : "616",
                               "s" : [ {
-                                 "r" : "746",
+                                 "r" : "613",
                                  "s" : [ {
-                                    "r" : "745",
+                                    "r" : "612",
                                     "s" : [ {
                                        "value" : [ "P" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "746",
+                                    "r" : "613",
                                     "s" : [ {
                                        "value" : [ "code" ]
                                     } ]
@@ -10252,16 +8377,16 @@
                               }, {
                                  "value" : [ " ","~"," " ]
                               }, {
-                                 "r" : "748",
+                                 "r" : "615",
                                  "s" : [ {
-                                    "r" : "747",
+                                    "r" : "614",
                                     "s" : [ {
                                        "value" : [ "Concepts" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "748",
+                                    "r" : "615",
                                     "s" : [ {
                                        "value" : [ "\"STI testing and treatment services\"" ]
                                     } ]
@@ -10274,16 +8399,16 @@
                }
             } ],
             "expression" : {
-               "localId" : "751",
-               "locator" : "255:5-257:60",
+               "localId" : "618",
+               "locator" : "228:5-230:60",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "740",
-                  "locator" : "255:5-255:17",
+                  "localId" : "607",
+                  "locator" : "228:5-228:17",
                   "alias" : "P",
                   "expression" : {
-                     "localId" : "739",
-                     "locator" : "255:5-255:15",
+                     "localId" : "606",
+                     "locator" : "228:5-228:15",
                      "dataType" : "{http://hl7.org/fhir}Procedure",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
                      "type" : "Retrieve"
@@ -10291,12 +8416,12 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "750",
-                  "locator" : "256:3-257:60",
+                  "localId" : "617",
+                  "locator" : "229:3-230:60",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "744",
-                     "locator" : "256:9-256:30",
+                     "localId" : "611",
+                     "locator" : "229:9-229:30",
                      "type" : "Equal",
                      "signature" : [ {
                         "name" : "{urn:hl7-org:elm-types:r1}String",
@@ -10314,22 +8439,22 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "localId" : "742",
-                           "locator" : "256:9-256:16",
+                           "localId" : "609",
+                           "locator" : "229:9-229:16",
                            "path" : "status",
                            "scope" : "P",
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "743",
-                        "locator" : "256:20-256:30",
+                        "localId" : "610",
+                        "locator" : "229:20-229:30",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "completed",
                         "type" : "Literal"
                      } ]
                   }, {
-                     "localId" : "749",
-                     "locator" : "257:7-257:60",
+                     "localId" : "616",
+                     "locator" : "230:7-230:60",
                      "type" : "Equivalent",
                      "signature" : [ {
                         "name" : "{urn:hl7-org:elm-types:r1}Concept",
@@ -10343,8 +8468,8 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "746",
-                           "locator" : "257:7-257:12",
+                           "localId" : "613",
+                           "locator" : "230:7-230:12",
                            "path" : "code",
                            "scope" : "P",
                            "type" : "Property"
@@ -10356,8 +8481,8 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "748",
-                           "locator" : "257:16-257:60",
+                           "localId" : "615",
+                           "locator" : "230:16-230:60",
                            "name" : "STI testing and treatment services",
                            "libraryName" : "Concepts",
                            "type" : "CodeRef"
@@ -10367,8 +8492,8 @@
                }
             }
          }, {
-            "localId" : "793",
-            "locator" : "263:1-273:5",
+            "localId" : "660",
+            "locator" : "236:1-246:5",
             "name" : "ExtractMedicationCode",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -10376,30 +8501,30 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "793",
+                  "r" : "660",
                   "s" : [ {
                      "value" : [ "/**\n * @description Takes a choice between a Medication and a CodeableConcept and returns just the code of the medication\n */\n","define function ExtractMedicationCode(choice Choice<FHIR.CodeableConcept, FHIR.Reference>):\n  " ]
                   }, {
-                     "r" : "792",
+                     "r" : "659",
                      "s" : [ {
-                        "r" : "792",
+                        "r" : "659",
                         "s" : [ {
                            "value" : [ "case\n\t  " ]
                         }, {
-                           "r" : "762",
+                           "r" : "629",
                            "s" : [ {
                               "value" : [ "when " ]
                            }, {
-                              "r" : "758",
+                              "r" : "625",
                               "s" : [ {
-                                 "r" : "756",
+                                 "r" : "623",
                                  "s" : [ {
                                     "value" : [ "choice" ]
                                  } ]
                               }, {
                                  "value" : [ " is " ]
                               }, {
-                                 "r" : "757",
+                                 "r" : "624",
                                  "s" : [ {
                                     "value" : [ "FHIR",".","CodeableConcept" ]
                                  } ]
@@ -10407,16 +8532,16 @@
                            }, {
                               "value" : [ " then\n    \t" ]
                            }, {
-                              "r" : "761",
+                              "r" : "628",
                               "s" : [ {
-                                 "r" : "759",
+                                 "r" : "626",
                                  "s" : [ {
                                     "value" : [ "choice" ]
                                  } ]
                               }, {
                                  "value" : [ " as " ]
                               }, {
-                                 "r" : "760",
+                                 "r" : "627",
                                  "s" : [ {
                                     "value" : [ "FHIR",".","CodeableConcept" ]
                                  } ]
@@ -10425,20 +8550,20 @@
                         }, {
                            "value" : [ "\n    " ]
                         }, {
-                           "r" : "783",
+                           "r" : "650",
                            "s" : [ {
                               "value" : [ "when " ]
                            }, {
-                              "r" : "765",
+                              "r" : "632",
                               "s" : [ {
-                                 "r" : "763",
+                                 "r" : "630",
                                  "s" : [ {
                                     "value" : [ "choice" ]
                                  } ]
                               }, {
                                  "value" : [ " is " ]
                               }, {
-                                 "r" : "764",
+                                 "r" : "631",
                                  "s" : [ {
                                     "value" : [ "FHIR",".","Reference" ]
                                  } ]
@@ -10446,18 +8571,18 @@
                            }, {
                               "value" : [ " then\n      " ]
                            }, {
-                              "r" : "782",
+                              "r" : "649",
                               "s" : [ {
                                  "value" : [ "First","(" ]
                               }, {
-                                 "r" : "781",
+                                 "r" : "648",
                                  "s" : [ {
                                     "s" : [ {
-                                       "r" : "767",
+                                       "r" : "634",
                                        "s" : [ {
-                                          "r" : "766",
+                                          "r" : "633",
                                           "s" : [ {
-                                             "r" : "766",
+                                             "r" : "633",
                                              "s" : [ {
                                                 "value" : [ "[","Medication","]" ]
                                              } ]
@@ -10469,22 +8594,22 @@
                                  }, {
                                     "value" : [ " \n        " ]
                                  }, {
-                                    "r" : "775",
+                                    "r" : "642",
                                     "s" : [ {
                                        "value" : [ "where " ]
                                     }, {
-                                       "r" : "775",
+                                       "r" : "642",
                                        "s" : [ {
-                                          "r" : "769",
+                                          "r" : "636",
                                           "s" : [ {
-                                             "r" : "768",
+                                             "r" : "635",
                                              "s" : [ {
                                                 "value" : [ "M" ]
                                              } ]
                                           }, {
                                              "value" : [ "." ]
                                           }, {
-                                             "r" : "769",
+                                             "r" : "636",
                                              "s" : [ {
                                                 "value" : [ "id" ]
                                              } ]
@@ -10492,24 +8617,24 @@
                                        }, {
                                           "value" : [ " ","="," " ]
                                        }, {
-                                          "r" : "774",
+                                          "r" : "641",
                                           "s" : [ {
                                              "value" : [ "Last","(" ]
                                           }, {
-                                             "r" : "773",
+                                             "r" : "640",
                                              "s" : [ {
                                                 "value" : [ "Split","(" ]
                                              }, {
-                                                "r" : "771",
+                                                "r" : "638",
                                                 "s" : [ {
-                                                   "r" : "770",
+                                                   "r" : "637",
                                                    "s" : [ {
                                                       "value" : [ "choice" ]
                                                    } ]
                                                 }, {
                                                    "value" : [ "." ]
                                                 }, {
-                                                   "r" : "771",
+                                                   "r" : "638",
                                                    "s" : [ {
                                                       "value" : [ "reference" ]
                                                    } ]
@@ -10517,7 +8642,7 @@
                                              }, {
                                                 "value" : [ ", " ]
                                              }, {
-                                                "r" : "772",
+                                                "r" : "639",
                                                 "s" : [ {
                                                    "value" : [ "'/'" ]
                                                 } ]
@@ -10532,22 +8657,22 @@
                                  }, {
                                     "value" : [ "\n        " ]
                                  }, {
-                                    "r" : "780",
+                                    "r" : "647",
                                     "s" : [ {
                                        "value" : [ "return " ]
                                     }, {
-                                       "r" : "779",
+                                       "r" : "646",
                                        "s" : [ {
-                                          "r" : "777",
+                                          "r" : "644",
                                           "s" : [ {
-                                             "r" : "776",
+                                             "r" : "643",
                                              "s" : [ {
                                                 "value" : [ "M" ]
                                              } ]
                                           }, {
                                              "value" : [ "." ]
                                           }, {
-                                             "r" : "777",
+                                             "r" : "644",
                                              "s" : [ {
                                                 "value" : [ "code" ]
                                              } ]
@@ -10555,7 +8680,7 @@
                                        }, {
                                           "value" : [ " as " ]
                                        }, {
-                                          "r" : "778",
+                                          "r" : "645",
                                           "s" : [ {
                                              "value" : [ "FHIR",".","CodeableConcept" ]
                                           } ]
@@ -10569,39 +8694,39 @@
                         }, {
                            "value" : [ "\n    else\n      " ]
                         }, {
-                           "r" : "791",
+                           "r" : "658",
                            "s" : [ {
                               "value" : [ "Message","(" ]
                            }, {
-                              "r" : "786",
+                              "r" : "653",
                               "s" : [ {
-                                 "r" : "784",
+                                 "r" : "651",
                                  "value" : [ "null"," as " ]
                               }, {
-                                 "r" : "785",
+                                 "r" : "652",
                                  "s" : [ {
                                     "value" : [ "FHIR",".","CodeableConcept" ]
                                  } ]
                               } ]
                            }, {
-                              "r" : "787",
+                              "r" : "654",
                               "value" : [ ", ","true",", " ]
                            }, {
-                              "r" : "788",
+                              "r" : "655",
                               "s" : [ {
                                  "value" : [ "'1'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "789",
+                              "r" : "656",
                               "s" : [ {
                                  "value" : [ "'Error'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "790",
+                              "r" : "657",
                               "s" : [ {
                                  "value" : [ "'Cannot compute a medication code'" ]
                               } ]
@@ -10616,82 +8741,82 @@
                }
             } ],
             "expression" : {
-               "localId" : "792",
-               "locator" : "264:3-273:5",
+               "localId" : "659",
+               "locator" : "237:3-246:5",
                "type" : "Case",
                "caseItem" : [ {
-                  "localId" : "762",
-                  "locator" : "265:4-266:35",
+                  "localId" : "629",
+                  "locator" : "238:4-239:35",
                   "when" : {
-                     "localId" : "758",
-                     "locator" : "265:9-265:38",
+                     "localId" : "625",
+                     "locator" : "238:9-238:38",
                      "type" : "Is",
                      "operand" : {
-                        "localId" : "756",
-                        "locator" : "265:9-265:14",
+                        "localId" : "623",
+                        "locator" : "238:9-238:14",
                         "name" : "choice",
                         "type" : "OperandRef"
                      },
                      "isTypeSpecifier" : {
-                        "localId" : "757",
-                        "locator" : "265:19-265:38",
+                        "localId" : "624",
+                        "locator" : "238:19-238:38",
                         "name" : "{http://hl7.org/fhir}CodeableConcept",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "then" : {
-                     "localId" : "761",
-                     "locator" : "266:6-266:35",
+                     "localId" : "628",
+                     "locator" : "239:6-239:35",
                      "strict" : false,
                      "type" : "As",
                      "operand" : {
-                        "localId" : "759",
-                        "locator" : "266:6-266:11",
+                        "localId" : "626",
+                        "locator" : "239:6-239:11",
                         "name" : "choice",
                         "type" : "OperandRef"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "760",
-                        "locator" : "266:16-266:35",
+                        "localId" : "627",
+                        "locator" : "239:16-239:35",
                         "name" : "{http://hl7.org/fhir}CodeableConcept",
                         "type" : "NamedTypeSpecifier"
                      }
                   }
                }, {
-                  "localId" : "783",
-                  "locator" : "267:5-270:46",
+                  "localId" : "650",
+                  "locator" : "240:5-243:46",
                   "when" : {
-                     "localId" : "765",
-                     "locator" : "267:10-267:33",
+                     "localId" : "632",
+                     "locator" : "240:10-240:33",
                      "type" : "Is",
                      "operand" : {
-                        "localId" : "763",
-                        "locator" : "267:10-267:15",
+                        "localId" : "630",
+                        "locator" : "240:10-240:15",
                         "name" : "choice",
                         "type" : "OperandRef"
                      },
                      "isTypeSpecifier" : {
-                        "localId" : "764",
-                        "locator" : "267:20-267:33",
+                        "localId" : "631",
+                        "locator" : "240:20-240:33",
                         "name" : "{http://hl7.org/fhir}Reference",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "then" : {
-                     "localId" : "782",
-                     "locator" : "268:7-270:46",
+                     "localId" : "649",
+                     "locator" : "241:7-243:46",
                      "type" : "First",
                      "source" : {
-                        "localId" : "781",
-                        "locator" : "268:13-270:45",
+                        "localId" : "648",
+                        "locator" : "241:13-243:45",
                         "type" : "Query",
                         "source" : [ {
-                           "localId" : "767",
-                           "locator" : "268:13-268:26",
+                           "localId" : "634",
+                           "locator" : "241:13-241:26",
                            "alias" : "M",
                            "expression" : {
-                              "localId" : "766",
-                              "locator" : "268:13-268:24",
+                              "localId" : "633",
+                              "locator" : "241:13-241:24",
                               "dataType" : "{http://hl7.org/fhir}Medication",
                               "templateId" : "http://hl7.org/fhir/StructureDefinition/Medication",
                               "type" : "Retrieve"
@@ -10699,8 +8824,8 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "localId" : "775",
-                           "locator" : "269:9-269:55",
+                           "localId" : "642",
+                           "locator" : "242:9-242:55",
                            "type" : "Equal",
                            "signature" : [ {
                               "name" : "{urn:hl7-org:elm-types:r1}String",
@@ -10718,19 +8843,19 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "localId" : "769",
-                                 "locator" : "269:15-269:18",
+                                 "localId" : "636",
+                                 "locator" : "242:15-242:18",
                                  "path" : "id",
                                  "scope" : "M",
                                  "type" : "Property"
                               } ]
                            }, {
-                              "localId" : "774",
-                              "locator" : "269:22-269:55",
+                              "localId" : "641",
+                              "locator" : "242:22-242:55",
                               "type" : "Last",
                               "source" : {
-                                 "localId" : "773",
-                                 "locator" : "269:27-269:54",
+                                 "localId" : "640",
+                                 "locator" : "242:27-242:54",
                                  "type" : "Split",
                                  "stringToSplit" : {
                                     "name" : "ToString",
@@ -10741,21 +8866,21 @@
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "localId" : "771",
-                                       "locator" : "269:33-269:48",
+                                       "localId" : "638",
+                                       "locator" : "242:33-242:48",
                                        "path" : "reference",
                                        "type" : "Property",
                                        "source" : {
-                                          "localId" : "770",
-                                          "locator" : "269:33-269:38",
+                                          "localId" : "637",
+                                          "locator" : "242:33-242:38",
                                           "name" : "choice",
                                           "type" : "OperandRef"
                                        }
                                     } ]
                                  },
                                  "separator" : {
-                                    "localId" : "772",
-                                    "locator" : "269:51-269:53",
+                                    "localId" : "639",
+                                    "locator" : "242:51-242:53",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "/",
                                     "type" : "Literal"
@@ -10764,23 +8889,23 @@
                            } ]
                         },
                         "return" : {
-                           "localId" : "780",
-                           "locator" : "270:9-270:45",
+                           "localId" : "647",
+                           "locator" : "243:9-243:45",
                            "expression" : {
-                              "localId" : "779",
-                              "locator" : "270:16-270:45",
+                              "localId" : "646",
+                              "locator" : "243:16-243:45",
                               "strict" : false,
                               "type" : "As",
                               "operand" : {
-                                 "localId" : "777",
-                                 "locator" : "270:16-270:21",
+                                 "localId" : "644",
+                                 "locator" : "243:16-243:21",
                                  "path" : "code",
                                  "scope" : "M",
                                  "type" : "Property"
                               },
                               "asTypeSpecifier" : {
-                                 "localId" : "778",
-                                 "locator" : "270:26-270:45",
+                                 "localId" : "645",
+                                 "locator" : "243:26-243:45",
                                  "name" : "{http://hl7.org/fhir}CodeableConcept",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -10790,8 +8915,8 @@
                   }
                } ],
                "else" : {
-                  "localId" : "791",
-                  "locator" : "272:7-272:99",
+                  "localId" : "658",
+                  "locator" : "245:7-245:99",
                   "type" : "Message",
                   "signature" : [ {
                      "name" : "{http://hl7.org/fhir}CodeableConcept",
@@ -10810,46 +8935,46 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "source" : {
-                     "localId" : "786",
-                     "locator" : "272:15-272:42",
+                     "localId" : "653",
+                     "locator" : "245:15-245:42",
                      "strict" : false,
                      "type" : "As",
                      "operand" : {
-                        "localId" : "784",
-                        "locator" : "272:15-272:18",
+                        "localId" : "651",
+                        "locator" : "245:15-245:18",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "785",
-                        "locator" : "272:23-272:42",
+                        "localId" : "652",
+                        "locator" : "245:23-245:42",
                         "name" : "{http://hl7.org/fhir}CodeableConcept",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "condition" : {
-                     "localId" : "787",
-                     "locator" : "272:45-272:48",
+                     "localId" : "654",
+                     "locator" : "245:45-245:48",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
                   },
                   "code" : {
-                     "localId" : "788",
-                     "locator" : "272:51-272:53",
+                     "localId" : "655",
+                     "locator" : "245:51-245:53",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "severity" : {
-                     "localId" : "789",
-                     "locator" : "272:56-272:62",
+                     "localId" : "656",
+                     "locator" : "245:56-245:62",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Error",
                      "type" : "Literal"
                   },
                   "message" : {
-                     "localId" : "790",
-                     "locator" : "272:65-272:98",
+                     "localId" : "657",
+                     "locator" : "245:65-245:98",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Cannot compute a medication code",
                      "type" : "Literal"
@@ -10859,25 +8984,25 @@
             "operand" : [ {
                "name" : "choice",
                "operandTypeSpecifier" : {
-                  "localId" : "755",
-                  "locator" : "263:46-263:89",
+                  "localId" : "622",
+                  "locator" : "236:46-236:89",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "753",
-                     "locator" : "263:53-263:72",
+                     "localId" : "620",
+                     "locator" : "236:53-236:72",
                      "name" : "{http://hl7.org/fhir}CodeableConcept",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "754",
-                     "locator" : "263:75-263:88",
+                     "localId" : "621",
+                     "locator" : "236:75-236:88",
                      "name" : "{http://hl7.org/fhir}Reference",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             } ]
          }, {
-            "localId" : "808",
-            "locator" : "278:1-282:5",
+            "localId" : "675",
+            "locator" : "251:1-255:5",
             "name" : "getObservationCode",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -10886,32 +9011,32 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "808",
+                  "r" : "675",
                   "s" : [ {
                      "value" : [ "/**\n * @description Returns the code of an Observation CodeableConcept\n */\n","define fluent function getObservationCode(observation FHIR.Observation):\n  " ]
                   }, {
-                     "r" : "807",
+                     "r" : "674",
                      "s" : [ {
-                        "r" : "807",
+                        "r" : "674",
                         "s" : [ {
                            "value" : [ "case \n    " ]
                         }, {
-                           "r" : "805",
+                           "r" : "672",
                            "s" : [ {
                               "value" : [ "when " ]
                            }, {
-                              "r" : "798",
+                              "r" : "665",
                               "s" : [ {
-                                 "r" : "796",
+                                 "r" : "663",
                                  "s" : [ {
-                                    "r" : "795",
+                                    "r" : "662",
                                     "s" : [ {
                                        "value" : [ "observation" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "796",
+                                    "r" : "663",
                                     "s" : [ {
                                        "value" : [ "code" ]
                                     } ]
@@ -10919,7 +9044,7 @@
                               }, {
                                  "value" : [ " is " ]
                               }, {
-                                 "r" : "797",
+                                 "r" : "664",
                                  "s" : [ {
                                     "value" : [ "FHIR",".","CodeableConcept" ]
                                  } ]
@@ -10927,26 +9052,26 @@
                            }, {
                               "value" : [ " then " ]
                            }, {
-                              "r" : "804",
+                              "r" : "671",
                               "s" : [ {
-                                 "r" : "803",
+                                 "r" : "670",
                                  "s" : [ {
-                                    "r" : "802",
+                                    "r" : "669",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "802",
+                                       "r" : "669",
                                        "s" : [ {
-                                          "r" : "800",
+                                          "r" : "667",
                                           "s" : [ {
-                                             "r" : "799",
+                                             "r" : "666",
                                              "s" : [ {
                                                 "value" : [ "observation" ]
                                              } ]
                                           }, {
                                              "value" : [ "." ]
                                           }, {
-                                             "r" : "800",
+                                             "r" : "667",
                                              "s" : [ {
                                                 "value" : [ "value" ]
                                              } ]
@@ -10954,7 +9079,7 @@
                                        }, {
                                           "value" : [ " as " ]
                                        }, {
-                                          "r" : "801",
+                                          "r" : "668",
                                           "s" : [ {
                                              "value" : [ "CodeableConcept" ]
                                           } ]
@@ -10965,7 +9090,7 @@
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "803",
+                                    "r" : "670",
                                     "s" : [ {
                                        "value" : [ "coding" ]
                                     } ]
@@ -10973,14 +9098,14 @@
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "804",
+                                 "r" : "671",
                                  "s" : [ {
                                     "value" : [ "code" ]
                                  } ]
                               } ]
                            } ]
                         }, {
-                           "r" : "806",
+                           "r" : "673",
                            "value" : [ "\n    else ","null","\n  end" ]
                         } ]
                      } ]
@@ -10988,66 +9113,66 @@
                }
             } ],
             "expression" : {
-               "localId" : "807",
-               "locator" : "279:3-282:5",
+               "localId" : "674",
+               "locator" : "252:3-255:5",
                "type" : "Case",
                "caseItem" : [ {
-                  "localId" : "805",
-                  "locator" : "280:5-280:105",
+                  "localId" : "672",
+                  "locator" : "253:5-253:105",
                   "when" : {
-                     "localId" : "798",
-                     "locator" : "280:10-280:49",
+                     "localId" : "665",
+                     "locator" : "253:10-253:49",
                      "type" : "Is",
                      "operand" : {
-                        "localId" : "796",
-                        "locator" : "280:10-280:25",
+                        "localId" : "663",
+                        "locator" : "253:10-253:25",
                         "path" : "code",
                         "type" : "Property",
                         "source" : {
-                           "localId" : "795",
-                           "locator" : "280:10-280:20",
+                           "localId" : "662",
+                           "locator" : "253:10-253:20",
                            "name" : "observation",
                            "type" : "OperandRef"
                         }
                      },
                      "isTypeSpecifier" : {
-                        "localId" : "797",
-                        "locator" : "280:30-280:49",
+                        "localId" : "664",
+                        "locator" : "253:30-253:49",
                         "name" : "{http://hl7.org/fhir}CodeableConcept",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "then" : {
-                     "localId" : "804",
-                     "locator" : "280:56-280:105",
+                     "localId" : "671",
+                     "locator" : "253:56-253:105",
                      "type" : "Query",
                      "source" : [ {
                         "alias" : "$this",
                         "expression" : {
-                           "localId" : "803",
-                           "locator" : "280:56-280:100",
+                           "localId" : "670",
+                           "locator" : "253:56-253:100",
                            "path" : "coding",
                            "type" : "Property",
                            "source" : {
-                              "localId" : "802",
-                              "locator" : "280:56-280:93",
+                              "localId" : "669",
+                              "locator" : "253:56-253:93",
                               "strict" : false,
                               "type" : "As",
                               "operand" : {
-                                 "localId" : "800",
-                                 "locator" : "280:57-280:73",
+                                 "localId" : "667",
+                                 "locator" : "253:57-253:73",
                                  "path" : "value",
                                  "type" : "Property",
                                  "source" : {
-                                    "localId" : "799",
-                                    "locator" : "280:57-280:67",
+                                    "localId" : "666",
+                                    "locator" : "253:57-253:67",
                                     "name" : "observation",
                                     "type" : "OperandRef"
                                  }
                               },
                               "asTypeSpecifier" : {
-                                 "localId" : "801",
-                                 "locator" : "280:78-280:92",
+                                 "localId" : "668",
+                                 "locator" : "253:78-253:92",
                                  "name" : "{http://hl7.org/fhir}CodeableConcept",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -11084,8 +9209,8 @@
                "else" : {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "806",
-                     "locator" : "281:10-281:13",
+                     "localId" : "673",
+                     "locator" : "254:10-254:13",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -11100,15 +9225,15 @@
             "operand" : [ {
                "name" : "observation",
                "operandTypeSpecifier" : {
-                  "localId" : "794",
-                  "locator" : "278:55-278:70",
+                  "localId" : "661",
+                  "locator" : "251:55-251:70",
                   "name" : "{http://hl7.org/fhir}Observation",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "817",
-            "locator" : "287:1-288:45",
+            "localId" : "684",
+            "locator" : "260:1-261:45",
             "name" : "getObservationCodes",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -11117,18 +9242,18 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "817",
+                  "r" : "684",
                   "s" : [ {
                      "value" : [ "/**\n * @description Returns a list of codes of an a list of Observations\n */\n","define fluent function getObservationCodes(obslist List<FHIR.Observation>):\n  " ]
                   }, {
-                     "r" : "816",
+                     "r" : "683",
                      "s" : [ {
-                        "r" : "816",
+                        "r" : "683",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "812",
+                              "r" : "679",
                               "s" : [ {
-                                 "r" : "811",
+                                 "r" : "678",
                                  "s" : [ {
                                     "s" : [ {
                                        "value" : [ "obslist" ]
@@ -11141,20 +9266,20 @@
                         }, {
                            "value" : [ " " ]
                         }, {
-                           "r" : "815",
+                           "r" : "682",
                            "s" : [ {
                               "value" : [ "return " ]
                            }, {
-                              "r" : "814",
+                              "r" : "681",
                               "s" : [ {
-                                 "r" : "813",
+                                 "r" : "680",
                                  "s" : [ {
                                     "value" : [ "obs" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "814",
+                                 "r" : "681",
                                  "s" : [ {
                                     "value" : [ "getObservationCode","()" ]
                                  } ]
@@ -11166,32 +9291,32 @@
                }
             } ],
             "expression" : {
-               "localId" : "816",
-               "locator" : "288:3-288:45",
+               "localId" : "683",
+               "locator" : "261:3-261:45",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "812",
-                  "locator" : "288:3-288:13",
+                  "localId" : "679",
+                  "locator" : "261:3-261:13",
                   "alias" : "obs",
                   "expression" : {
-                     "localId" : "811",
-                     "locator" : "288:3-288:9",
+                     "localId" : "678",
+                     "locator" : "261:3-261:9",
                      "name" : "obslist",
                      "type" : "OperandRef"
                   }
                } ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "815",
-                  "locator" : "288:15-288:45",
+                  "localId" : "682",
+                  "locator" : "261:15-261:45",
                   "expression" : {
-                     "localId" : "814",
-                     "locator" : "288:22-288:45",
+                     "localId" : "681",
+                     "locator" : "261:22-261:45",
                      "name" : "getObservationCode",
                      "type" : "FunctionRef",
                      "operand" : [ {
-                        "localId" : "813",
-                        "locator" : "288:22-288:24",
+                        "localId" : "680",
+                        "locator" : "261:22-261:24",
                         "name" : "obs",
                         "type" : "AliasRef"
                      } ]
@@ -11201,12 +9326,12 @@
             "operand" : [ {
                "name" : "obslist",
                "operandTypeSpecifier" : {
-                  "localId" : "810",
-                  "locator" : "287:52-287:73",
+                  "localId" : "677",
+                  "locator" : "260:52-260:73",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "809",
-                     "locator" : "287:57-287:72",
+                     "localId" : "676",
+                     "locator" : "260:57-260:72",
                      "name" : "{http://hl7.org/fhir}Observation",
                      "type" : "NamedTypeSpecifier"
                   }

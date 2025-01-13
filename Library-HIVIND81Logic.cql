@@ -64,11 +64,6 @@
  * - method: Patient monitoring tools (electronic or paper), for example, hepatitis and HIV testing service records, lab registers, logbooks and reporting forms at facility and community levels, EMR/electronic information systems
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
- * 
- * Profiles:
- * - HivStatus
- * - HivHtsVisit
- * - HivHbsAgTest
  */
 
 library HIVIND81Logic
@@ -131,7 +126,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 9"
+	HIE."By Age Stratifier 2"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -145,6 +140,6 @@ define "patientGroups Stratifier":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 9"
+  + ':' + HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')

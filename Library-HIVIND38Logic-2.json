@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "78",
+            "r" : "60",
             "s" : [ {
                "value" : [ "/**\n * Library: HIV.IND.38 Logic\n * Ref No: VER.2\n * Short Name: Early infant diagnosis (EID) coverage\n *\n * Definition: % of HIV-exposed infants who receive a virological test for HIV within two months (and 12 months) of birth\n *\n * Numerator: Number of HIV-exposed infants born during the reporting period who received a virological HIV test within two months (and 12 months) of birth\n * Numerator Calculation: COUNT of infants who are an \"HIV-exposed infant or child\" with \"Infant date of birth\" within the reporting period AND with \"Date of viral load sample collection\" LESS THAN 2 months AFTER \"Infant date of birth\" AND \"HIV test type\"='Nucleic acid test for HIV'\n * Numerator Exclusions: \n *\n * Denominator: Estimated number of HIV-positive women who delivered during the reporting period.   |  | Note: The denominator is a proxy measure for the number of infants born to HIV-infected women.\n * Denominator Calculation: *Estimated number of HIV-positive women who delivered during the reporting period\n * Denominator Exclusions: \n *\n * Disaggregations:\n * • Test result (HIV-positive, HIV-negative, indeterminate, other) to enable calculation of the percentage positive and the percentage with an indeterminate result among HIV-exposed infants receiving a virological test \n *  • Age of infant (<2 months, 2-12 months) to allow the separate calculation of the proportion of exposed infants receiving virological testing within two months of birth and within 12 months of birth \n *  • Cities and other administrative regions of epidemiologic importance\n *\n * Disaggregation Elements: HIV test date (at 2 months, at 12 months) | Age of infant (<2 months, 2-12 months)\n *\n * Numerator and Denominator Elements:\n * Date of viral load sample collection \n *  HIV test type \n *  HIV-exposed infant or child \n *  Infant date of birth\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.B.DE81: HIV test type | Type of HIV test\n * HIV.B.DE82: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic\n * HIV.B.DE83: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay\n * HIV.B.DE84: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis\n * HIV.B.DE85: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic\n * HIV.B.DE86: HIV self-test | Antibody test for HIV performed by self-tester using a rapid diagnostic\n * HIV.B.DE110: HIV test date | Date of the HIV test\n * HIV.D.DE194: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.E.DE87: Infant date of birth | The infant's date of birth (DOB) if known\n * HIV.E.DE90: Age of infant | Infant age calculated using date of birth\n * HIV.E.DE112: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure\n * HIV.E.DE168: HIV test type | Type of HIV test\n * HIV.E.DE169: Rapid diagnostic test for HIV | Antibody test for HIV performed with a rapid diagnostic (RDT)\n * HIV.E.DE170: Enzyme immunoassay for HIV | Antibody test for HIV performed with an enzyme immunoassay (EIA)\n * HIV.E.DE171: Nucleic acid test for HIV | Virological test, which includes testing for early infant diagnosis\n * HIV.E.DE172: Dual HIV/syphilis rapid diagnostic test | Antibody test for HIV and syphilis performed with a rapid diagnostic\n * HIV.E.DE224: HIV test date | Date of the HIV test\n * HIV.G.DE8: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.SRV.DE1: HIV test date | Date of the HIV test\n * HIV.SRV.DE12: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.SRV.DE20: HIV-exposed infant or child | Whether the infant or child was determined to have had HIV exposure\n *\n * Additional Context\n * - what it measures: This indicator measures early HIV diagnosis in infants.\n * - rationale: • High coverage of early virological testing of infants helps initiate ART early in children with confirmed HIV infection and supports counselling on efforts to prevent seroconversion of those with a negative early test result. | • Current PMTCT guidelines recommend virological testing for HIV-exposed infants within two months of birth.\n * - method: For the numerator: Programme records (for example, PMTCT registers, laboratory records). |  | For the denominator: Modelling-based estimates (for example, Spectrum AIM) |  | The recommended reporting period is 12 months.\n * \n * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm\n */\n\n","library HIVIND38Logic" ]
             } ]
@@ -850,8 +850,8 @@
             }
          }, {
             "localId" : "60",
-            "locator" : "123:1-124:26",
-            "name" : "Age Stratifier",
+            "locator" : "124:1-125:38",
+            "name" : "Geographic Region Stratifier",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -859,7 +859,7 @@
                "s" : {
                   "r" : "60",
                   "s" : [ {
-                     "value" : [ "/* end Populations */\n\n/*\n * Disaggregators\n */\n\n","define ","\"Age Stratifier\"",":\n\t" ]
+                     "value" : [ "/* end Populations */\n\n/*\n * Disaggregators\n */\n\n\n","define ","\"Geographic Region Stratifier\"",":\n\t" ]
                   }, {
                      "r" : "59",
                      "s" : [ {
@@ -872,43 +872,6 @@
                      }, {
                         "r" : "59",
                         "s" : [ {
-                           "value" : [ "\"By Age Stratifier 7\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "59",
-               "locator" : "124:2-124:26",
-               "name" : "By Age Stratifier 7",
-               "libraryName" : "HIE",
-               "type" : "ExpressionRef"
-            }
-         }, {
-            "localId" : "63",
-            "locator" : "126:1-127:38",
-            "name" : "Geographic Region Stratifier",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "63",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Geographic Region Stratifier\"",":\n\t" ]
-                  }, {
-                     "r" : "62",
-                     "s" : [ {
-                        "r" : "61",
-                        "s" : [ {
-                           "value" : [ "HIE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "62",
-                        "s" : [ {
                            "value" : [ "\"By Geographic Region Stratifier\"" ]
                         } ]
                      } ]
@@ -916,193 +879,11 @@
                }
             } ],
             "expression" : {
-               "localId" : "62",
-               "locator" : "127:2-127:38",
+               "localId" : "59",
+               "locator" : "125:2-125:38",
                "name" : "By Geographic Region Stratifier",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
-            }
-         }, {
-            "localId" : "66",
-            "locator" : "129:1-130:37",
-            "name" : "EID test number 1 test result",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "66",
-                  "s" : [ {
-                     "value" : [ "","define ","\"EID test number 1 test result\"",":\n  " ]
-                  }, {
-                     "r" : "65",
-                     "s" : [ {
-                        "r" : "64",
-                        "s" : [ {
-                           "value" : [ "HIE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "65",
-                        "s" : [ {
-                           "value" : [ "\"EID test number 1 test result\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "65",
-               "locator" : "130:3-130:37",
-               "name" : "EID test number 1 test result",
-               "libraryName" : "HIE",
-               "type" : "ExpressionRef"
-            }
-         }, {
-            "localId" : "78",
-            "locator" : "132:1-135:42",
-            "name" : "Stratification",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "78",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Stratification\"",":\n " ]
-                  }, {
-                     "r" : "77",
-                     "s" : [ {
-                        "r" : "73",
-                        "s" : [ {
-                           "r" : "70",
-                           "s" : [ {
-                              "r" : "68",
-                              "s" : [ {
-                                 "r" : "67",
-                                 "s" : [ {
-                                    "value" : [ "HIE" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "68",
-                                 "s" : [ {
-                                    "value" : [ "\"By Age Stratifier 7\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n+ " ]
-                           }, {
-                              "r" : "69",
-                              "s" : [ {
-                                 "value" : [ "':'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " + " ]
-                        }, {
-                           "r" : "72",
-                           "s" : [ {
-                              "r" : "71",
-                              "s" : [ {
-                                 "value" : [ "HIE" ]
-                              } ]
-                           }, {
-                              "value" : [ "." ]
-                           }, {
-                              "r" : "72",
-                              "s" : [ {
-                                 "value" : [ "\"By Geographic Region Stratifier\"" ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n+ " ]
-                     }, {
-                        "r" : "76",
-                        "s" : [ {
-                           "r" : "75",
-                           "s" : [ {
-                              "r" : "74",
-                              "s" : [ {
-                                 "value" : [ "HIE" ]
-                              } ]
-                           }, {
-                              "value" : [ "." ]
-                           }, {
-                              "r" : "75",
-                              "s" : [ {
-                                 "value" : [ "\"EID test number 1 test result\"" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "." ]
-                        }, {
-                           "r" : "76",
-                           "s" : [ {
-                              "value" : [ "code" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "77",
-               "locator" : "133:2-135:42",
-               "type" : "Concatenate",
-               "operand" : [ {
-                  "localId" : "73",
-                  "locator" : "133:2-134:45",
-                  "type" : "Concatenate",
-                  "operand" : [ {
-                     "localId" : "70",
-                     "locator" : "133:2-134:5",
-                     "type" : "Concatenate",
-                     "operand" : [ {
-                        "localId" : "68",
-                        "locator" : "133:2-133:26",
-                        "name" : "By Age Stratifier 7",
-                        "libraryName" : "HIE",
-                        "type" : "ExpressionRef"
-                     }, {
-                        "localId" : "69",
-                        "locator" : "134:3-134:5",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : ":",
-                        "type" : "Literal"
-                     } ]
-                  }, {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
-                     "signature" : [ {
-                        "name" : "{http://hl7.org/fhir}string",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "72",
-                        "locator" : "134:9-134:45",
-                        "name" : "By Geographic Region Stratifier",
-                        "libraryName" : "HIE",
-                        "type" : "ExpressionRef"
-                     } ]
-                  } ]
-               }, {
-                  "localId" : "76",
-                  "locator" : "135:3-135:42",
-                  "path" : "code",
-                  "type" : "Property",
-                  "source" : {
-                     "localId" : "75",
-                     "locator" : "135:3-135:37",
-                     "name" : "EID test number 1 test result",
-                     "libraryName" : "HIE",
-                     "type" : "ExpressionRef"
-                  }
-               } ]
             }
          } ]
       }

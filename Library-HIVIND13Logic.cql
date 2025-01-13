@@ -45,9 +45,6 @@
  * - method: Individual-level data obtained from programme records
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
- 
- * Profiles: HivOamtTreatment
- 
  */
 
 library HIVIND13Logic
@@ -60,8 +57,6 @@ include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
 include HIVIndicatorElements called HIE
-include HIVElements called HE
-
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
@@ -83,7 +78,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HE."OAMT" t where t starts during "Measurement Period" and t ends after (end of "Measurement Period" + 6 months))
+  HIE.OAMT_retained
 
 
 /**
@@ -94,7 +89,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  HIE.OAMT
+  HIE.OAMT_initiated
     
 
 /* end Populations */
@@ -112,6 +107,9 @@ define "Age Stratifier":
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
 
+define "patientGroups Stratifier":
+	HIE."patientGroups"
+
 define "Setting":
     HIE."setting"
 
@@ -119,6 +117,7 @@ define "Setting":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 3"
+  + ':' + HIE."By Age Stratifier"
 + ':' + HIE."By Geographic Region Stratifier"
- + ':' + HIE."setting".code
++ Combine(HIE.patientGroups, ':')
++ Combine(HIE.setting, ':')

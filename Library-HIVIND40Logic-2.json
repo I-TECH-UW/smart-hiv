@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "29",
+            "r" : "16",
             "s" : [ {
                "value" : [ "/**\n * Library: HIV.IND.40 Logic\n * Ref No: VER.4\n * Short Name: ART coverage in pregnant women\n *\n * Definition: % of HIV-positive pregnant women who received ART during pregnancy and/or at labour and delivery\n *\n * Numerator: Number of HIV-positive pregnant women who delivered during the reporting period and received ART during pregnancy and/or at labour and delivery\n * Numerator Calculation: COUNT of women with \"HIV status\"='HIV-positive' AND \"Delivery date\" in the reporting period AND ((\"On ART\"=True at labour and delivery) OR (\"On ART\"=True during pregnancy, for this pregnancy))\n * Numerator Exclusions: \n *\n * Denominator: a) Programme-based/service delivery denominator | Number of HIV-positive pregnant women who delivered during the reporting period and attended ANC or had a facility-based delivery | b) Population-based denominator | Number of HIV-positive pregnant women who delivered during the reporting period\n * Denominator Calculation: Programme-based/service delivery denominator: | COUNT of women with \"HIV status\"='HIV-positive' AND \"Delivery date\" in the reporting period AND (had an \"ANC contact date\" during reporting period OR \"Place of delivery\" was a 'Health facility') |  | Population-based denominator: | *Number of HIV-positive pregnant women who delivered during the reporting period\n * Denominator Exclusions: \n *\n * Disaggregations:\n * Numerator: \n *  • Timing of ART initiation (1. already on ART at first ANC visit, 2. newly on ART during pregnancy, 3. newly on ART during labour and delivery, 4. on non-recommended ART regimen) \n *   \n *  The primary indicator calculation should include ART status categories 1, 2 and 3. Removing the women in category 1 \"already on ART at first ANC visit\" from the numerator and denominator gives a measure of ART coverage among HIV-positive pregnant women newly diagnosed during ANC. Dividing category 2 by the sum of categories 2 and 3 gives the proportion of new ART initiations occurring during pregnancy rather than at delivery. Calculating the indicator with those in category 4 (non-recommended ARV regimen) included in the numerator gives a broader measure, that is, coverage of HIV-positive pregnant women receiving any ARV drug.\n *\n * Disaggregation Elements: Timing of ART initiation\n *\n * Numerator and Denominator Elements:\n * ANC contact date \n *  Delivery date \n *  HIV status \n *  On ART \n *  Place of delivery\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.\n * HIV.B.DE116: HIV-positive | Client is HIV-positive\n * HIV.B.DE117: HIV-negative | Client is HIV-negative\n * HIV.B.DE118: Unknown | Client has unknown HIV status\n * HIV.D.DE38: On ART | Client is currently taking ART\n * HIV.E.DE41: Timing of ART initiation | When the pregnant woman or mother initiated ART, for women living with HIV.\n * HIV.E.DE42: Already on ART at first antenatal care visit | The pregnant woman was already on antiretroviral therapy (ART) at first antenatal care visit\n * HIV.E.DE43: Newly on ART during pregnancy | The pregnant woman started ART during her pregnancy\n * HIV.E.DE44: Newly on ART during labour and delivery | The woman started ART during labour and delivery\n * HIV.E.DE46: Delivery date | Date on which the woman delivered\n * HIV.E.DE67: Place of delivery | The type of place where the woman delivered\n * HIV.E.DE68: Health facility | The woman delivered at a health facility\n * HIV.E.DE69: Home | The woman delivered at home\n * HIV.E.DE70: Other | The woman delivered at another location that is not at home or at a health facility\n * HIV.E.DE85: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')\n * HIV.H.DE47: On ART | Client is currently taking ART \n * HIV.SRV.DE18: ANC contact date | The date and time of the client's ANC contact (in the ANC DAK this is called 'Contact date')\n *\n * Additional Context\n * - what it measures: This indicator measures whether a recommended course of ART has been provided to HIV-positive pregnant women.\n * - rationale: • Providing ART for HIV-positive pregnant women is a critical strategy for preventing vertical transmission of HIV. | • In an era of \"Treat All\", all HIV-positive pregnant women should be given a recommended regimen of ART as soon as possible after diagnosis, including during labour and delivery.\n * - method: a) For the numerator and programme-based/service delivery denominator: Programme records (for example, PMTCT registers, ARV registers, labour and delivery registers) |  | b) For the population-based denominator: Modelling-based estimates (for example, Spectrum AIM) |  | The recommended reporting period is 12 months.\n * \n * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm\n */\n\n","library HIVIND40Logic" ]
             } ]
@@ -111,66 +111,26 @@
                   } ]
                }
             } ]
-         }, {
-            "localId" : "5",
-            "locator" : "70:1-70:29",
-            "localIdentifier" : "HE",
-            "path" : "http://smart.who.int/hiv/HIVElements",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "5",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "HIVElements" ]
-                     } ]
-                  }, {
-                     "value" : [ " called ","HE" ]
-                  } ]
-               }
-            } ]
-         }, {
-            "localId" : "6",
-            "locator" : "71:1-71:39",
-            "localIdentifier" : "HIE",
-            "path" : "http://smart.who.int/hiv/HIVIndicatorElements",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "6",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "HIVIndicatorElements" ]
-                     } ]
-                  }, {
-                     "value" : [ " called ","HIE" ]
-                  } ]
-               }
-            } ]
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "12",
-            "locator" : "74:1-74:88",
+            "localId" : "10",
+            "locator" : "71:1-71:88",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "10",
                   "s" : [ {
                      "value" : [ "// Indicator Definition\n","parameter ","\"Measurement Period\""," " ]
                   }, {
-                     "r" : "11",
+                     "r" : "9",
                      "s" : [ {
                         "value" : [ "Interval<" ]
                      }, {
-                        "r" : "10",
+                        "r" : "8",
                         "s" : [ {
                            "value" : [ "Date" ]
                         } ]
@@ -180,23 +140,23 @@
                   }, {
                      "value" : [ " default " ]
                   }, {
-                     "r" : "9",
+                     "r" : "7",
                      "s" : [ {
-                        "r" : "7",
+                        "r" : "5",
                         "value" : [ "Interval[","@2023-01-01",", ","@2023-01-30","]" ]
                      } ]
                   } ]
                }
             } ],
             "default" : {
-               "localId" : "9",
-               "locator" : "74:55-74:88",
+               "localId" : "7",
+               "locator" : "71:55-71:88",
                "lowClosed" : true,
                "highClosed" : true,
                "type" : "Interval",
                "low" : {
-                  "localId" : "7",
-                  "locator" : "74:64-74:74",
+                  "localId" : "5",
+                  "locator" : "71:64-71:74",
                   "type" : "Date",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -215,8 +175,8 @@
                   }
                },
                "high" : {
-                  "localId" : "8",
-                  "locator" : "74:77-74:87",
+                  "localId" : "6",
+                  "locator" : "71:77-71:87",
                   "type" : "Date",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -236,12 +196,12 @@
                }
             },
             "parameterTypeSpecifier" : {
-               "localId" : "11",
-               "locator" : "74:32-74:45",
+               "localId" : "9",
+               "locator" : "71:32-71:45",
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
-                  "localId" : "10",
-                  "locator" : "74:41-74:44",
+                  "localId" : "8",
+                  "locator" : "71:41-71:44",
                   "name" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "NamedTypeSpecifier"
                }
@@ -250,28 +210,51 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "76:1-76:15",
+            "locator" : "73:1-73:15",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "76:1-76:15",
+            "locator" : "73:1-73:15",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "locator" : "76:1-76:15",
+                  "locator" : "73:1-73:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
                   "type" : "Retrieve"
                }
             }
          }, {
-            "localId" : "14",
-            "locator" : "83:1-84:6",
+            "localId" : "12",
+            "locator" : "80:1-81:6",
             "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "r" : "11",
+                     "value" : [ "/* Populations */\n\n/*\n *Initial Population\n */\n\n","define ","\"Initial Population\"",":\n  ","true" ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "11",
+               "locator" : "81:3-81:6",
+               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "value" : "true",
+               "type" : "Literal"
+            }
+         }, {
+            "localId" : "14",
+            "locator" : "90:1-91:6",
+            "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -280,252 +263,36 @@
                   "r" : "14",
                   "s" : [ {
                      "r" : "13",
-                     "value" : [ "/* Populations */\n\n/*\n *Initial Population\n */\n\n","define ","\"Initial Population\"",":\n  ","true" ]
+                     "value" : [ "/**\n * Numerator\n * \n * Definition: Number of HIV-positive pregnant women who delivered during the reporting period and received ART during pregnancy and/or at labour and delivery\n * Calculation: COUNT of women with \"HIV status\"='HIV-positive' AND \"Delivery date\" in the reporting period AND ((\"On ART\"=True at labour and delivery) OR (\"On ART\"=True during pregnancy, for this pregnancy))\n */\n\n","define ","\"Numerator\"",":\n  ","true" ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "13",
-               "locator" : "84:3-84:6",
+               "locator" : "91:3-91:6",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "true",
                "type" : "Literal"
             }
          }, {
-            "localId" : "27",
-            "locator" : "95:1-99:3",
-            "name" : "Numerator",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "27",
-                  "s" : [ {
-                     "value" : [ "/**\n * Numerator\n * \n * Definition: Number of HIV-positive pregnant women who delivered during the reporting period and received ART during pregnancy and/or at labour and delivery\n * Calculation: COUNT of women with \"HIV status\"='HIV-positive' AND \"Delivery date\" in the reporting period AND ((\"On ART\"=True at labour and delivery) OR (\"On ART\"=True during pregnancy, for this pregnancy))\n */\n\n// TODO: figure out how do we indicate this vs. another pregnancy, and this labor/delivery vs. another, and how this relates to measurement period\n\n","define ","\"Numerator\"",":\n  " ]
-                  }, {
-                     "r" : "26",
-                     "s" : [ {
-                        "r" : "16",
-                        "s" : [ {
-                           "r" : "15",
-                           "s" : [ {
-                              "value" : [ "HIE" ]
-                           } ]
-                        }, {
-                           "value" : [ "." ]
-                        }, {
-                           "r" : "16",
-                           "s" : [ {
-                              "value" : [ "\"Has HIV-positive Status\"" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " and\n  " ]
-                     }, {
-                        "r" : "25",
-                        "s" : [ {
-                           "value" : [ "exists" ]
-                        }, {
-                           "r" : "24",
-                           "s" : [ {
-                              "value" : [ "(" ]
-                           }, {
-                              "r" : "24",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "r" : "18",
-                                    "s" : [ {
-                                       "r" : "17",
-                                       "s" : [ {
-                                          "s" : [ {
-                                             "value" : [ "HIE",".","\"Live Birth Delivery\"" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " ","BirthDelivery" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n    " ]
-                              }, {
-                                 "r" : "23",
-                                 "s" : [ {
-                                    "value" : [ "where " ]
-                                 }, {
-                                    "r" : "23",
-                                    "s" : [ {
-                                       "r" : "21",
-                                       "s" : [ {
-                                          "r" : "20",
-                                          "s" : [ {
-                                             "r" : "19",
-                                             "s" : [ {
-                                                "value" : [ "BirthDelivery" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "20",
-                                             "s" : [ {
-                                                "value" : [ "effective" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "21",
-                                          "s" : [ {
-                                             "value" : [ "toInterval","()" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "r" : "23",
-                                       "value" : [ " ","during"," " ]
-                                    }, {
-                                       "r" : "22",
-                                       "s" : [ {
-                                          "value" : [ "\"Measurement Period\"" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n  )" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "26",
-               "locator" : "96:3-99:3",
-               "type" : "And",
-               "operand" : [ {
-                  "localId" : "16",
-                  "locator" : "96:3-96:31",
-                  "name" : "Has HIV-positive Status",
-                  "libraryName" : "HIE",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "25",
-                  "locator" : "97:3-99:3",
-                  "type" : "Exists",
-                  "operand" : {
-                     "localId" : "24",
-                     "locator" : "97:9-99:3",
-                     "type" : "Query",
-                     "source" : [ {
-                        "localId" : "18",
-                        "locator" : "97:10-97:48",
-                        "alias" : "BirthDelivery",
-                        "expression" : {
-                           "localId" : "17",
-                           "locator" : "97:10-97:34",
-                           "name" : "Live Birth Delivery",
-                           "libraryName" : "HIE",
-                           "type" : "ExpressionRef"
-                        }
-                     } ],
-                     "relationship" : [ ],
-                     "where" : {
-                        "localId" : "23",
-                        "locator" : "98:5-98:74",
-                        "type" : "IncludedIn",
-                        "operand" : [ {
-                           "localId" : "21",
-                           "locator" : "98:11-98:46",
-                           "name" : "toInterval",
-                           "libraryName" : "WCom",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "localId" : "20",
-                              "locator" : "98:11-98:33",
-                              "path" : "effective",
-                              "scope" : "BirthDelivery",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "Interval",
-                           "low" : {
-                              "type" : "ToDateTime",
-                              "signature" : [ {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Date",
-                                 "type" : "NamedTypeSpecifier"
-                              } ],
-                              "operand" : {
-                                 "path" : "low",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "22",
-                                    "locator" : "98:55-98:74",
-                                    "name" : "Measurement Period",
-                                    "type" : "ParameterRef"
-                                 }
-                              }
-                           },
-                           "lowClosedExpression" : {
-                              "path" : "lowClosed",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "22",
-                                 "locator" : "98:55-98:74",
-                                 "name" : "Measurement Period",
-                                 "type" : "ParameterRef"
-                              }
-                           },
-                           "high" : {
-                              "type" : "ToDateTime",
-                              "signature" : [ {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Date",
-                                 "type" : "NamedTypeSpecifier"
-                              } ],
-                              "operand" : {
-                                 "path" : "high",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "localId" : "22",
-                                    "locator" : "98:55-98:74",
-                                    "name" : "Measurement Period",
-                                    "type" : "ParameterRef"
-                                 }
-                              }
-                           },
-                           "highClosedExpression" : {
-                              "path" : "highClosed",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "22",
-                                 "locator" : "98:55-98:74",
-                                 "name" : "Measurement Period",
-                                 "type" : "ParameterRef"
-                              }
-                           }
-                        } ]
-                     }
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "29",
-            "locator" : "110:1-111:6",
+            "localId" : "16",
+            "locator" : "101:1-102:6",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "29",
+                  "r" : "16",
                   "s" : [ {
-                     "r" : "28",
+                     "r" : "15",
                      "value" : [ "/**\n * Denominator\n *\n * Definition: a) Programme-based/service delivery denominator | Number of HIV-positive pregnant women who delivered during the reporting period and attended ANC or had a facility-based delivery | b) Population-based denominator | Number of HIV-positive pregnant women who delivered during the reporting period\n * Calculation: Programme-based/service delivery denominator: | COUNT of women with \"HIV status\"='HIV-positive' AND \"Delivery date\" in the reporting period AND (had an \"ANC contact date\" during reporting period OR \"Place of delivery\" was a 'Health facility') |  | Population-based denominator: | *Number of HIV-positive pregnant women who delivered during the reporting period\n */\n\n","define ","\"Denominator\"",":\n  ","true" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "28",
-               "locator" : "111:3-111:6",
+               "localId" : "15",
+               "locator" : "102:3-102:6",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "true",
                "type" : "Literal"

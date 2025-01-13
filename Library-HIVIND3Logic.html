@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 16:44:09+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
         </tr>
         
 
@@ -522,7 +522,7 @@
               
                 <tr><th>patientGroups Stratifier</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Setting</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+                <tr><th>Setting</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
                 <tr><th>prep product</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
@@ -634,10 +634,6 @@
  * - method: Individual-level data obtained from programme records. |  | If individual-level data are not available, the indicator can be reported using aggregate programme data. Because de-duplication is not possible, individuals prescribed multiple | PrEP products or formulations at different times during the reporting period may be counted multiple times, and the number reported may be greater than the number of unique individuals receiving PrEP during the reporting period.
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
- * 
- * Profiles:
- * - HivPrepTreatment
- * - HivPepTreatment
  */
 
 library HIVIND3Logic
@@ -665,12 +661,11 @@ define &quot;Initial Population&quot;:
 /* Numerator Calculation: Count of clients with &quot;Date medications prescribed&quot; within reporting period AND &quot;Medications prescribed&quot;='PrEP for HIV prevention'*/
 
 define &quot;numerator&quot;:
-    HIE.&quot;PrEP for HIV prevention&quot; and HIE.&quot;HIV-negative test result&quot; and 
-    HIE.&quot;At elevated risk for HIV acquisition B.DE225&quot;
+    HIE.&quot;HIV PREP Active&quot;
 
 /*  * Denominator Calculation: Programme/service provider level:  | COUNT of clients with &quot;HIV test date&quot; within reporting period AND &quot;HIV test result&quot;='HIV-negative' AND &quot;At elevated risk for HIV acquisition&quot;=True † |  | Population level: *Estimate of the number of people who would benefit from PrEP */
 define &quot;denominator&quot;:
-	HIE.&quot;HIV-negative test result&quot; and 
+	exists(HIE.&quot;Negative HIV test within measurement period&quot;) and 
     HIE.&quot;At elevated risk for HIV acquisition B.DE225&quot;
 
     
@@ -709,7 +704,7 @@ define &quot;Stratification&quot;:
   + ':' + HIE.&quot;By Age Stratifier 3&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIE.patientGroups, ':')
- + ':' + HIE.&quot;setting&quot;.code
++ Combine(HIE.setting, ':')
 + Combine(HIE.prep_product, ':')
 + Combine(HIE.prep_experience, ':')
 + Combine(HIE.prep_dosing, ':')</code></pre></td></tr>
@@ -725,7 +720,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (48140 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (45924 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -737,7 +732,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (76668 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (72744 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -770,7 +765,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 16:44+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
