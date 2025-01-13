@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:28:16+0000</td>
         </tr>
         
 
@@ -522,7 +522,7 @@
               
                 <tr><th>patientGroups Stratifier</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Setting</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Setting</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
@@ -623,13 +623,11 @@ define &quot;Initial Population&quot;:
 
 
 define &quot;numerator&quot;:
-    exists(HE.&quot;Needle Syringe Dispensed&quot; DUS
-	where (DUS.timing during &quot;Measurement Period&quot;)
-   ) 
+    HIE.&quot;People who inject drugs&quot; and HIE.&quot;Date injecting equipment provided&quot;
 
 
 define &quot;denominator&quot;:
-    exists(HIE.&quot;People who inject drugs&quot;) 
+    HIE.&quot;People who inject drugs&quot;
 
 /*
  * Disaggregators
@@ -639,7 +637,7 @@ define &quot;Administrative Gender Stratifier&quot;:
 	HIE.&quot;By Administrative Gender Stratifier&quot;
 
 define &quot;Age Stratifier&quot;:
-	HIE.&quot;By Age Stratifier 3&quot;
+	HIE.&quot;By Age Stratifier 4&quot;
 
 define &quot;Geographic Region Stratifier&quot;:
 	HIE.&quot;By Geographic Region Stratifier&quot;
@@ -654,10 +652,10 @@ define &quot;Setting&quot;:
 
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
-  + ':' + HIE.&quot;By Age Stratifier&quot;
+  + ':' + HIE.&quot;By Age Stratifier 4&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')</code></pre></td></tr>
+ + ':' + HIE.&quot;setting&quot;.code</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -670,7 +668,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (34608 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (30724 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -682,7 +680,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (56952 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (49524 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -715,7 +713,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:28+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

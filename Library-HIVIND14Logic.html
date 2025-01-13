@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:28:16+0000</td>
         </tr>
         
 
@@ -483,6 +483,10 @@
                   
                     <li><a href="Library-WHOCommon.html">WHOCommon</a></li>
                   
+                    <li><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></li>
+                  
+                    <li><a href="Library-HIVElements.html">HIVElements</a></li>
+                  
                 </ul>
                 
                 
@@ -513,6 +517,16 @@
                 <tr><th>Denominator</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Denominator Exclusions</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Administrative Gender Stratifier</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Age Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Geographic Region Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Setting</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
             </table>
           </td>
@@ -580,6 +594,8 @@
  * - method: Individual-level data obtained from programme records
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ 
+ * Profiles: HivTreatmentMedicationRequest, HivOamtEpisodeOfCare
  */
 
 library HIVIND14Logic
@@ -590,6 +606,9 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+
+include HIVIndicatorElements called HIE
+include HIVElements called HE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -612,7 +631,8 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
+  First(HIE.&quot;Methadone D.DE555&quot;).dailyDose() &gt;= System.Quantity{ value: 60, unit: 'mg' }
+  or First(HIE.&quot;Buprenorphine D.DE552&quot;).dailyDose() &gt;= System.Quantity{ value: 8, unit: 'mg' }
 
 /**
  * Numerator Exclusions
@@ -621,7 +641,7 @@ define &quot;Numerator&quot;:
  */
     
 define &quot;Numerator Exclusions&quot;:
-  false
+  HIE.&quot;Client being inducted on OAMT&quot; or HIE.&quot;Client on reducing doses of OAMT&quot;
 
 /**
  * Denominator
@@ -631,7 +651,7 @@ define &quot;Numerator Exclusions&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
+  Exists(HIE.&quot;Methadone D.DE555&quot;) or Exists(HIE.&quot;Buprenorphine D.DE552&quot;)
     
 /**
 * Denominator Exclusions
@@ -640,11 +660,34 @@ define &quot;Denominator&quot;:
 */
 
 define &quot;Denominator Exclusions&quot;:
-  false
+  HIE.&quot;Client being inducted on OAMT&quot; or HIE.&quot;Client on reducing doses of OAMT&quot;
 
 /* end Populations */
 
-</code></pre></td></tr>
+
+/*
+ * Disaggregators
+ */
+
+define &quot;Administrative Gender Stratifier&quot;:
+	HIE.&quot;By Administrative Gender Stratifier&quot;
+
+define &quot;Age Stratifier&quot;:
+	HIE.&quot;By Age Stratifier 3&quot;
+
+define &quot;Geographic Region Stratifier&quot;:
+	HIE.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;Setting&quot;:
+    HIE.&quot;setting&quot;
+
+//provider type not provided?
+
+define &quot;Stratification&quot;:
+ HIE.&quot;By Administrative Gender Stratifier&quot;.code 
+  + ':' + HIE.&quot;By Age Stratifier 3&quot;
++ ':' + HIE.&quot;By Geographic Region Stratifier&quot;
+ + ':' + HIE.&quot;setting&quot;.code</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -657,7 +700,7 @@ define &quot;Denominator Exclusions&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (16360 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (41072 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -669,7 +712,7 @@ define &quot;Denominator Exclusions&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (22412 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (67088 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -702,7 +745,7 @@ define &quot;Denominator Exclusions&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:28+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

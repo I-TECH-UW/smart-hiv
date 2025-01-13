@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:28:16+0000</td>
         </tr>
         
 
@@ -520,7 +520,7 @@
               
                 <tr><th>patientGroups Stratifier</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Setting</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Setting</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>prep product</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
@@ -628,7 +628,9 @@
 
 /**
  * Profiles:
- * 
+ * - HivPrepTreatment
+ * - HivCurrentPrepRegimenPrescription
+ * - 
  */
 
 library HIVIND2Logic
@@ -648,7 +650,7 @@ parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@
 
 context Patient
 define &quot;Measure Population&quot;:
-   HIE.&quot;HIV PREP Active&quot; 
+   HIE.&quot;PrEP for HIV prevention&quot;
 
 /*
  * As defined by Member States
@@ -696,10 +698,10 @@ define &quot;prep_dosing&quot;:
 
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
-  + ':' + HIE.&quot;By Age Stratifier&quot;
+  + ':' + HIE.&quot;By Age Stratifier 3&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
+ + ':' + HIE.&quot;setting&quot;.code
 + Combine(HIE.prep_product, ':')
 + Combine(HIE.prep_experience, ':')
 + Combine(HIE.prep_dosing, ':')</code></pre></td></tr>
@@ -715,7 +717,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (42172 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (43064 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -727,7 +729,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (68024 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (69612 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -760,7 +762,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:28+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

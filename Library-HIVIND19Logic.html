@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:28:16+0000</td>
         </tr>
         
 
@@ -522,7 +522,9 @@
               
                 <tr><th>patientGroups Stratifier</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
               
-                <tr><th>Setting</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Setting</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>TB Stratifier</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
@@ -646,28 +648,6 @@ define &quot;denominator&quot;:
 	Count(HIE.&quot;Non-Self HIV test with date and results returned in measurement period&quot;)
 
 
-//     exists(HE.&quot;HIV Positive Condition&quot; C
-// 	where C.onset during &quot;Measurement Period&quot;)
-// 	or 
-// 	exists(HIE.&quot;HIV Positive Observation&quot; O
-// 	where (O.issued before end of &quot;Measurement Period&quot;
-// 	and O.issued after start of &quot;Measurement Period&quot;)
-// 	) 
-
-// define &quot;numeratorExclusion&quot;:
-// 	exists(HIC.&quot;HIV Positive Observation - HIV Self Test&quot; O
-// 	where (O.issued before end of &quot;Measurement Period&quot;
-// 	and O.issued after start of &quot;Measurement Period&quot;)
-// 	) 
-
-// define &quot;denominator&quot;:
-
-
-// define &quot;denominatorExclusion&quot;:
-// 	exists(HIC.&quot;HIV Positive Observation - HIV Self Test&quot; O
-// 	where (O.issued before end of &quot;Measurement Period&quot;
-// 	and O.issued after start of &quot;Measurement Period&quot;)
-// 	) 
 
 /*
  * Disaggregators
@@ -688,16 +668,16 @@ define &quot;patientGroups Stratifier&quot;:
 define &quot;Setting&quot;:
     HIE.&quot;setting&quot;
 
-// define &quot;TB Stratifier&quot;:
-//     HIC.&quot;tb&quot;
+ define &quot;TB Stratifier&quot;:
+     HIE.&quot;tb&quot;
 
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
   + ':' + HIE.&quot;By Age Stratifier&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
 + Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
-//+ Combine(HIC.tb, ':')
+ + ':' + HIE.&quot;setting&quot;.code
++ ':' + HIE.&quot;tb&quot;.code
 </code></pre></td></tr>
             </table>
           </td>
@@ -711,7 +691,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (34040 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (37248 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -723,7 +703,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (51960 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (59336 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -756,7 +736,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:28+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

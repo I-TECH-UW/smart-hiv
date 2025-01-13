@@ -87,6 +87,10 @@
  * - method: Individual-level data obtained from programme records. |  | If individual-level data are not available, the indicator can be reported using aggregate programme data. Because de-duplication is not possible, individuals prescribed multiple | PrEP products or formulations at different times during the reporting period may be counted multiple times, and the number reported may be greater than the number of unique individuals receiving PrEP during the reporting period.
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivPrepTreatment
+ * - HivPepTreatment
  */
 
 library HIVIND3Logic
@@ -114,11 +118,12 @@ define "Initial Population":
 /* Numerator Calculation: Count of clients with "Date medications prescribed" within reporting period AND "Medications prescribed"='PrEP for HIV prevention'*/
 
 define "numerator":
-    HIE."HIV PREP Active"
+    HIE."PrEP for HIV prevention" and HIE."HIV-negative test result" and 
+    HIE."At elevated risk for HIV acquisition B.DE225"
 
 /*  * Denominator Calculation: Programme/service provider level:  | COUNT of clients with "HIV test date" within reporting period AND "HIV test result"='HIV-negative' AND "At elevated risk for HIV acquisition"=True † |  | Population level: *Estimate of the number of people who would benefit from PrEP */
 define "denominator":
-	exists(HIE."Negative HIV test within measurement period") and 
+	HIE."HIV-negative test result" and 
     HIE."At elevated risk for HIV acquisition B.DE225"
 
     
@@ -157,7 +162,7 @@ define "Stratification":
   + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
+ + ':' + HIE."setting".code
 + Combine(HIE.prep_product, ':')
 + Combine(HIE.prep_experience, ':')
 + Combine(HIE.prep_dosing, ':')

@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:28:16+0000</td>
         </tr>
         
 
@@ -485,6 +485,8 @@
                   
                     <li><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></li>
                   
+                    <li><a href="Library-HIVElements.html">HIVElements</a></li>
+                  
                 </ul>
                 
                 
@@ -518,9 +520,7 @@
               
                 <tr><th>Geographic Region Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
-                <tr><th>patientGroups Stratifier</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
-              
-                <tr><th>Setting</th><th>string</th><th>0</th><th>*</th><th>Out</th></tr>
+                <tr><th>Setting</th><th>Coding</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
@@ -584,6 +584,9 @@
  * - method: Individual-level data obtained from programme records
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ 
+ * Profiles: HivOamtTreatment
+ 
  */
 
 library HIVIND13Logic
@@ -596,6 +599,8 @@ include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 
 include HIVIndicatorElements called HIE
+include HIVElements called HE
+
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
 
@@ -617,7 +622,7 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  HIE.OAMT_retained
+  exists(HE.&quot;OAMT&quot; t where t starts during &quot;Measurement Period&quot; and t ends after (end of &quot;Measurement Period&quot; + 6 months))
 
 
 /**
@@ -628,7 +633,7 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  HIE.OAMT_initiated
+  HIE.OAMT
     
 
 /* end Populations */
@@ -646,9 +651,6 @@ define &quot;Age Stratifier&quot;:
 define &quot;Geographic Region Stratifier&quot;:
 	HIE.&quot;By Geographic Region Stratifier&quot;
 
-define &quot;patientGroups Stratifier&quot;:
-	HIE.&quot;patientGroups&quot;
-
 define &quot;Setting&quot;:
     HIE.&quot;setting&quot;
 
@@ -656,10 +658,9 @@ define &quot;Setting&quot;:
 
 define &quot;Stratification&quot;:
  HIE.&quot;By Administrative Gender Stratifier&quot;.code 
-  + ':' + HIE.&quot;By Age Stratifier&quot;
+  + ':' + HIE.&quot;By Age Stratifier 3&quot;
 + ':' + HIE.&quot;By Geographic Region Stratifier&quot;
-+ Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
+ + ':' + HIE.&quot;setting&quot;.code
 </code></pre></td></tr>
             </table>
           </td>
@@ -673,7 +674,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (27468 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (34128 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -685,7 +686,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (44632 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (57496 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -718,7 +719,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:28+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

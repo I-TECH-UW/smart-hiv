@@ -57,6 +57,10 @@
  * - method: Individual-level data obtained from programme records. |  | The total population of people who are opioid dependent includes both people who inject drugs as well as people who consume opioids by other routes of administration. Not all OAMT recipients will have a history of injecting and not all people who inject drugs will use or be dependent on opioids.
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - Key Population Member Type
+ * - OAMT Treatment Status
  */
 
 library HIVIND11Logic
@@ -66,6 +70,9 @@ using FHIR version '4.0.1'
 
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
+
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 include WHOCommon called WCom
 
@@ -90,8 +97,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
-
+  exists(HIE."People who inject drugs") and HIE."Currently on OAMT"
 
 /**
  * Denominator
@@ -101,7 +107,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HE."HIV prevention intervention" and exists(HIE."People who inject drugs")
     
 
 /* end Populations */

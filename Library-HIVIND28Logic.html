@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-13 18:26:13+0000</td>
+            <td style="padding-left: 4px;">2025-01-13 18:28:16+0000</td>
         </tr>
         
 
@@ -487,6 +487,10 @@
                   
                     <li><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></li>
                   
+                    <li><a href="Library-HIVConcepts.html">HIVConcepts</a></li>
+                  
+                    <li><a href="Library-HIVConfig.html">HIVConfig</a></li>
+                  
                 </ul>
                 
                 
@@ -531,6 +535,34 @@
         </tr>
         
 
+        
+        <tr>
+          <th scope="row"><b>Data Requirements:</b></th>
+          <td style="padding-left: 4px;">
+            <table class="grid-dict">
+              <tr><th><b>Type</b></th><th><b>Profile</b></th><th><b>MS</b></th><th><b>Code Filter</b></th></tr>
+              
+                <tr>
+                  <th>EpisodeOfCare</th>
+                  <th>http://hl7.org/fhir/StructureDefinition/EpisodeOfCare</th>
+                  <th/>
+                  <th>
+                    
+                  </th>
+                </tr>
+              
+                <tr>
+                  <th>EpisodeOfCare</th>
+                  <th>http://hl7.org/fhir/StructureDefinition/EpisodeOfCare</th>
+                  <th/>
+                  <th>
+                    
+                  </th>
+                </tr>
+              
+            </table>
+          </td>
+        </tr>
         
 
         
@@ -622,6 +654,8 @@ include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
 include HIVElements called HE
 include HIVIndicatorElements called HIE
+include HIVConcepts called Concepts
+include HIVConfig called Config
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -635,46 +669,40 @@ define &quot;Initial Population&quot;:
 
 
 define &quot;numerator&quot;:
-//MINUS | COUNT of clients with &quot;HIV status&quot;='HIV-positive' AND &quot;On ART&quot;=True on the reporting period end date
-   (
-    HIE.&quot;Has death documented&quot;
-   or HIE.&quot;Has transferred out&quot;
-   or HIE.&quot;Is lost to follow-up&quot;
-   )
-   and (((
-    //saying needs to not be counted this measurement period but should have counted this period or last period
-   HIE.&quot;Has HIV-positive Status&quot;
-   and HIE.&quot;On ART H.DE47&quot;
-   )
-   ) or
-   (
-    //Accounts for end of last period
-    HIE.&quot;Has HIV-positive Status at last measurment period&quot;
-   and exists(HE.&quot;On ART H.DE47&quot; ART
-   where ART.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
-    and ART.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
-   )
-   )
-   )
+//HIV Positive
+HIE.&quot;Has HIV-positive Status&quot;
+   and exists(HE.&quot;On ART H.DE47&quot; A
+    with [EpisodeOfCare] EOC
+      such that A.context.references(EOC) and 
+      //On ART during last measurement period or started ART during this measurement period
+      ((A.effective.toInterval() starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+    and A.effective.toInterval() ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;))
+    or (date from start of HE.&quot;First On ART&quot;.effective.toInterval() during &quot;Measurement Period&quot;))
+     and
+      //and either Transferred out
+      (exists(EOC.type T where T ~ Concepts.&quot;On ART - HIV.H.DE47&quot;)
+      and EOC.status = 'finished' and EOC.period.toInterval() ends during &quot;Measurement Period&quot;)
+      or exists (
+      EOC.statusHistory H
+      where H.status = 'finished'
+      and H.period.toInterval() ends during &quot;Measurement Period&quot;)
+      //or Lost to follow up
+      or (A.effective.toInterval() ends before (end of &quot;Measurement Period&quot; - Config.&quot;LTFU Days&quot;)
+   //or death   
+   or HIE.&quot;Has death documented&quot;))
 
 
 
  define &quot;denominator&quot;:
-   (((
-    //saying needs to not be counted this measurement period but should have counted this period or last period
-   HIE.&quot;Has HIV-positive Status&quot;
-   and HIE.&quot;On ART H.DE47&quot;
-   )
-   ) or
-   (
-    //Accounts for end of last period
-    HIE.&quot;Has HIV-positive Status at last measurment period&quot;
-   and exists(HE.&quot;On ART H.DE47&quot; ART
-   where ART.effective starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
-    and ART.effective ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
-   )
-   )
-   )
+   //HIV Positive
+HIE.&quot;Has HIV-positive Status&quot;
+   and exists(HE.&quot;On ART H.DE47&quot; A
+    with [EpisodeOfCare] EOC
+      such that A.context.references(EOC) and 
+      //On ART during last measurement period or started ART during this measurement period
+      ((A.effective.toInterval() starts before (end of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;)
+    and A.effective.toInterval() ends after (start of &quot;Measurement Period&quot; - duration in days of &quot;Measurement Period&quot;))
+    or (date from start of HE.&quot;First On ART&quot;.effective.toInterval() during &quot;Measurement Period&quot;)))
 
 
 
@@ -715,7 +743,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (78724 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (132732 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -727,7 +755,7 @@ define &quot;Stratification&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (137032 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (244316 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -760,7 +788,7 @@ define &quot;Stratification&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:26+0000">2025-01-13</span>
+          IG &#169; 2023+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.3.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Mon, Jan 13, 2025 18:28+0000">2025-01-13</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

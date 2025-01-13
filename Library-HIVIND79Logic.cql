@@ -82,6 +82,10 @@
 
 THE DEFINITION IS INCONSISTENT WITH THE CONTEXT - no mention of HIV prevention services.
 
+ * Profiles:
+ * HivHtsVisit
+ * HivStatus
+ * HivSyndromeStiDiagnosisCondition
  */
 
 library HIVIND79Logic
@@ -118,10 +122,14 @@ define "Initial Population":
  */
 
 define "Numerator":
-HIE."Has HIV-positive Status"
-  and Count((HE."Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Visit date SRV.DE15" t where start of t.period.toInterval() = start of O.effective.toInterval())))>1
+  HIE."Has HIV-positive Status"
+  and Count(
+    (HIE."Syndrome/STI diagnosed B.DE226 Condition" C
+    where exists (
+      HE."Visit date SRV.DE15" t
+      where start of t.toInterval() = start of C.prevalenceInterval()
+    ))
+  ) > 1
 
 
 /**
@@ -147,7 +155,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -162,7 +170,7 @@ define "patientGroups Stratifier":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 2"
+  + ':' + HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
 + Combine(HIE."STI syndrome", ':')

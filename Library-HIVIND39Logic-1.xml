@@ -2,7 +2,7 @@
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="16">
+      <a:s r="33">
          <a:s>/**
  * Library: HIV.IND.39 Logic
  * Ref No: VER.3
@@ -56,6 +56,15 @@
  * - method: For the numerator: Programme records (for example, PMTCT registers) | a) For the programme-based/service delivery denominator: Programme records, labour and delivery registers | b) For the population-based denominator: Modelling-based estimates (for example, Spectrum AIM). |  | Note: The population-based denominator is a proxy measure for the number of infants born to HIV-infected women. |  | The recommended reporting period is 12 months.
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ * 
+ * Profiles:
+ * - HivInfant
+ * - HivMother
+ * - HivChildDelivery
+ * - HivAntiRetroviralTreatment
+ * - HivStatus
+ * - HivOnArt
+ * 
  */
 
 library HIVIND39Logic</a:s>
@@ -65,7 +74,7 @@ library HIVIND39Logic</a:s>
    <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
    <usings>
       <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
-      <def localId="1" locator="59:1-59:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+      <def localId="1" locator="68:1-68:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
          <annotation xsi:type="a:Annotation">
             <a:s r="1">
                <a:s>// Included Libraries
@@ -79,7 +88,7 @@ using </a:s>
       </def>
    </usings>
    <includes>
-      <def localId="2" locator="61:1-61:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+      <def localId="2" locator="70:1-70:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
          <annotation xsi:type="a:Annotation">
             <a:s r="2">
                <a:s>include </a:s>
@@ -90,7 +99,7 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="3" locator="62:1-62:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+      <def localId="3" locator="71:1-71:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
          <annotation xsi:type="a:Annotation">
             <a:s r="3">
                <a:s>include </a:s>
@@ -101,7 +110,7 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
-      <def localId="4" locator="64:1-64:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+      <def localId="4" locator="73:1-73:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
          <annotation xsi:type="a:Annotation">
             <a:s r="4">
                <a:s>include </a:s>
@@ -112,56 +121,78 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
+      <def localId="5" locator="75:1-75:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="76:1-76:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
    </includes>
    <parameters>
-      <def localId="10" locator="67:1-67:88" name="Measurement Period" accessLevel="Public">
+      <def localId="12" locator="79:1-79:88" name="Measurement Period" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="10">
+            <a:s r="12">
                <a:s>// Indicator Definition
 parameter &quot;Measurement Period&quot; </a:s>
-               <a:s r="9">
+               <a:s r="11">
                   <a:s>Interval&lt;</a:s>
-                  <a:s r="8">
+                  <a:s r="10">
                      <a:s>Date</a:s>
                   </a:s>
                   <a:s>></a:s>
                </a:s>
                <a:s> default </a:s>
-               <a:s r="7">
-                  <a:s r="5">Interval[@2023-01-01, @2023-01-30]</a:s>
+               <a:s r="9">
+                  <a:s r="7">Interval[@2023-01-01, @2023-01-30]</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <default localId="7" locator="67:55-67:88" lowClosed="true" highClosed="true" xsi:type="Interval">
-            <low localId="5" locator="67:64-67:74" xsi:type="Date">
+         <default localId="9" locator="79:55-79:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="7" locator="79:64-79:74" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="1" xsi:type="Literal"/>
             </low>
-            <high localId="6" locator="67:77-67:87" xsi:type="Date">
+            <high localId="8" locator="79:77-79:87" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="30" xsi:type="Literal"/>
             </high>
          </default>
-         <parameterTypeSpecifier localId="9" locator="67:32-67:45" xsi:type="IntervalTypeSpecifier">
-            <pointType localId="8" locator="67:41-67:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         <parameterTypeSpecifier localId="11" locator="79:32-79:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="79:41-79:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
          </parameterTypeSpecifier>
       </def>
    </parameters>
    <contexts>
-      <def locator="69:1-69:15" name="Patient"/>
+      <def locator="81:1-81:15" name="Patient"/>
    </contexts>
    <statements>
-      <def locator="69:1-69:15" name="Patient" context="Patient">
+      <def locator="81:1-81:15" name="Patient" context="Patient">
          <expression xsi:type="SingletonFrom">
-            <operand locator="69:1-69:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+            <operand locator="81:1-81:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="12" locator="76:1-77:6" name="Initial Population" context="Patient" accessLevel="Public">
+      <def localId="14" locator="88:1-89:6" name="Initial Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="12">
-               <a:s r="11">/* Populations */
+            <a:s r="14">
+               <a:s r="13">/* Populations */
 
 /*
  *Initial Population
@@ -171,12 +202,12 @@ define &quot;Initial Population&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="11" locator="77:3-77:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="13" locator="89:3-89:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="14" locator="86:1-87:6" name="Numerator" context="Patient" accessLevel="Public">
+      <def localId="27" locator="98:1-100:81" name="Numerator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="14">
-               <a:s r="13">/**
+            <a:s r="27">
+               <a:s>/**
  * Numerator
  * 
  * Definition: Number of HIV-exposed infants born within the past 12 months who were started on ARV prophylaxis at birth
@@ -184,15 +215,90 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true</a:s>
+  </a:s>
+               <a:s r="26">
+                  <a:s r="16">
+                     <a:s r="15">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="16">
+                        <a:s>&quot;is HIV-exposed infant or child E.DE112&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and 
+    </a:s>
+                  <a:s r="25">
+                     <a:s>exists</a:s>
+                     <a:s r="24">
+                        <a:s>(</a:s>
+                        <a:s r="24">
+                           <a:s>
+                              <a:s r="18">
+                                 <a:s r="17">
+                                    <a:s>
+                                       <a:s>HE.&quot;ART start date&quot;</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> d</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s> </a:s>
+                           <a:s r="23">
+                              <a:s>where </a:s>
+                              <a:s r="23">
+                                 <a:s r="20">
+                                    <a:s>date from </a:s>
+                                    <a:s r="19">
+                                       <a:s>d</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s r="23"> same day as </a:s>
+                                 <a:s r="22">
+                                    <a:s r="21">
+                                       <a:s>Patient</a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="22">
+                                       <a:s>birthDate</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="13" locator="87:3-87:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="26" locator="99:3-100:81" xsi:type="And">
+            <operand localId="16" locator="99:3-99:46" name="is HIV-exposed infant or child E.DE112" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="25" locator="100:5-100:81" xsi:type="Exists">
+               <operand localId="24" locator="100:11-100:81" xsi:type="Query">
+                  <source localId="18" locator="100:12-100:32" alias="d">
+                     <expression localId="17" locator="100:12-100:30" name="ART start date" libraryName="HE" xsi:type="ExpressionRef"/>
+                  </source>
+                  <where localId="23" locator="100:34-100:80" precision="Day" xsi:type="SameAs">
+                     <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                     <operand localId="20" locator="100:40-100:50" xsi:type="DateFrom">
+                        <operand localId="19" locator="100:50" name="d" xsi:type="AliasRef"/>
+                     </operand>
+                     <operand name="ToDate" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <operand localId="22" locator="100:64-100:80" path="birthDate" xsi:type="Property">
+                           <source localId="21" locator="100:64-100:70" name="Patient" xsi:type="ExpressionRef"/>
+                        </operand>
+                     </operand>
+                  </where>
+               </operand>
+            </operand>
+         </expression>
       </def>
-      <def localId="16" locator="97:1-98:6" name="Denominator" context="Patient" accessLevel="Public">
+      <def localId="33" locator="109:1-111:41" name="Denominator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="16">
-               <a:s r="15">/**
+            <a:s r="33">
+               <a:s>/**
  * Denominator
  *
  * Definition: a) Programme-based/service delivery denominator: Number of HIV-positive women who delivered in a facility within the past 12 months. |  | B) Population-based denominator: Number of HIV-positive women who delivered within the past 12 months.
@@ -200,10 +306,35 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true</a:s>
+  </a:s>
+               <a:s r="32">
+                  <a:s r="29">
+                     <a:s r="28">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="29">
+                        <a:s>&quot;Has HIV-positive Status&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and
+    </a:s>
+                  <a:s r="31">
+                     <a:s r="30">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="31">
+                        <a:s>&quot;Has Delivery in Health Facility&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="15" locator="98:3-98:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="32" locator="110:3-111:41" xsi:type="And">
+            <operand localId="29" locator="110:3-110:31" name="Has HIV-positive Status" libraryName="HIE" xsi:type="ExpressionRef"/>
+            <operand localId="31" locator="111:5-111:41" name="Has Delivery in Health Facility" libraryName="HIE" xsi:type="ExpressionRef"/>
+         </expression>
       </def>
    </statements>
 </library>

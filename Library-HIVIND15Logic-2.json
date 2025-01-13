@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "59",
+            "r" : "60",
             "s" : [ {
                "value" : [ "/**\n * Library: HIV.IND.15 Logic\n * Ref No: PRV.15\n * Short Name: VMMC scale-up\n *\n * Definition: Total number of voluntary medical male circumcisions (VMMCs) performed according to national standard during the reporting period\n *\n * Numerator: Total number of people undergoing VMMC performed according to national standard during the reporting period\n * Numerator Calculation: COUNT of clients with a \"VMMC procedure date\" in the reporting period\n * Numerator Exclusions: \n *\n * Denominator: 1\n * Denominator Calculation: 1\n * Denominator Exclusions: \n *\n * Disaggregations:\n * • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years) \n *  • HIV status (positive, negative) \n *  • Provider type (key population-led or community-led organization, public sector provider, other entities such as private for-profit and not-for-profit organizations, including faith- based, international, nongovernmental) \n *  • Setting: facility-based service (including hospitals, health clinics, general practice offices, etc.) or community-based service (including drop-in centres, community service delivery points, mobile clinics or vans, outreach teams, community support groups, etc.) \n *  • Cities and other administrative regions of epidemiologic importance\n *\n * Disaggregation Elements: Age | HIV status\n *\n * Numerator and Denominator Elements:\n * VMMC procedure date\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth\n * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.\n * HIV.B.DE116: HIV-positive | Client is HIV-positive\n * HIV.B.DE117: HIV-negative | Client is HIV-negative\n * HIV.B.DE118: Unknown | Client has unknown HIV status\n * HIV.B.DE198: VMMC procedure date | Date on which a voluntary medical male circumcision procedure was performed\n *\n * Additional Context\n * - what it measures: This indicator measures progress in scaling up male circumcision services.\n * - rationale: WHO and UNAIDS recommend VMMC as an efficacious intervention for HIV prevention in priority* countries and regions with high HIV prevalence and low male circumcision prevalence. |  | Randomized controlled trials have shown that VMMC provided by trained health professionals with proper equipment can reduce the risk of men heterosexually acquiring HIV infection.\n * - method: Individual-level data obtained from programme records (for example, VMMC registers).   |  | The recommended reporting period is 12 months.\n * \n * Suggested Scoring Method: continuous-variable | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/cv-measure-cqfm\n */\n\n","library HIVIND15Logic" ]
             } ]
@@ -407,7 +407,7 @@
                      }, {
                         "r" : "24",
                         "s" : [ {
-                           "value" : [ "\"By Age Stratifier 3\"" ]
+                           "value" : [ "\"By Age Stratifier 2\"" ]
                         } ]
                      } ]
                   } ]
@@ -416,7 +416,7 @@
             "expression" : {
                "localId" : "24",
                "locator" : "98:2-98:26",
-               "name" : "By Age Stratifier 3",
+               "name" : "By Age Stratifier 2",
                "libraryName" : "HIE",
                "type" : "ExpressionRef"
             }
@@ -532,7 +532,7 @@
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "59",
+            "localId" : "60",
             "locator" : "111:1-116:40",
             "name" : "Stratification",
             "context" : "Patient",
@@ -540,136 +540,142 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "59",
+                  "r" : "60",
                   "s" : [ {
                      "value" : [ "//provider type not provided?\n\n","define ","\"Stratification\"",":\n " ]
                   }, {
-                     "r" : "58",
+                     "r" : "59",
                      "s" : [ {
-                        "r" : "54",
+                        "r" : "55",
                         "s" : [ {
-                           "r" : "52",
+                           "r" : "53",
                            "s" : [ {
-                              "r" : "47",
+                              "r" : "49",
                               "s" : [ {
-                                 "r" : "44",
+                                 "r" : "47",
                                  "s" : [ {
-                                    "r" : "42",
+                                    "r" : "44",
                                     "s" : [ {
-                                       "r" : "39",
+                                       "r" : "42",
                                        "s" : [ {
-                                          "r" : "37",
+                                          "r" : "39",
                                           "s" : [ {
-                                             "r" : "36",
+                                             "r" : "37",
                                              "s" : [ {
-                                                "r" : "35",
+                                                "r" : "36",
                                                 "s" : [ {
-                                                   "value" : [ "HIE" ]
+                                                   "r" : "35",
+                                                   "s" : [ {
+                                                      "value" : [ "HIE" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "." ]
+                                                }, {
+                                                   "r" : "36",
+                                                   "s" : [ {
+                                                      "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                                   } ]
                                                 } ]
                                              }, {
                                                 "value" : [ "." ]
                                              }, {
-                                                "r" : "36",
+                                                "r" : "37",
                                                 "s" : [ {
-                                                   "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                                   "value" : [ "code" ]
                                                 } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " \n  + " ]
+                                          }, {
+                                             "r" : "38",
+                                             "s" : [ {
+                                                "value" : [ "':'" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " + " ]
+                                       }, {
+                                          "r" : "41",
+                                          "s" : [ {
+                                             "r" : "40",
+                                             "s" : [ {
+                                                "value" : [ "HIE" ]
                                              } ]
                                           }, {
                                              "value" : [ "." ]
                                           }, {
-                                             "r" : "37",
+                                             "r" : "41",
                                              "s" : [ {
-                                                "value" : [ "code" ]
+                                                "value" : [ "\"By Age Stratifier 2\"" ]
                                              } ]
                                           } ]
-                                       }, {
-                                          "value" : [ " \n  + " ]
-                                       }, {
-                                          "r" : "38",
-                                          "s" : [ {
-                                             "value" : [ "':'" ]
-                                          } ]
                                        } ]
                                     }, {
-                                       "value" : [ " + " ]
+                                       "value" : [ "\n+ " ]
                                     }, {
-                                       "r" : "41",
+                                       "r" : "43",
                                        "s" : [ {
-                                          "r" : "40",
-                                          "s" : [ {
-                                             "value" : [ "HIE" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "41",
-                                          "s" : [ {
-                                             "value" : [ "\"By Age Stratifier\"" ]
-                                          } ]
+                                          "value" : [ "':'" ]
                                        } ]
                                     } ]
                                  }, {
-                                    "value" : [ "\n+ " ]
-                                 }, {
-                                    "r" : "43",
-                                    "s" : [ {
-                                       "value" : [ "':'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " + " ]
-                              }, {
-                                 "r" : "46",
-                                 "s" : [ {
-                                    "r" : "45",
-                                    "s" : [ {
-                                       "value" : [ "HIE" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
+                                    "value" : [ " + " ]
                                  }, {
                                     "r" : "46",
                                     "s" : [ {
-                                       "value" : [ "\"By Geographic Region Stratifier\"" ]
+                                       "r" : "45",
+                                       "s" : [ {
+                                          "value" : [ "HIE" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "46",
+                                       "s" : [ {
+                                          "value" : [ "\"By Geographic Region Stratifier\"" ]
+                                       } ]
                                     } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n + " ]
+                              }, {
+                                 "r" : "48",
+                                 "s" : [ {
+                                    "value" : [ "':'" ]
                                  } ]
                               } ]
                            }, {
-                              "value" : [ "\n+ " ]
+                              "value" : [ " + " ]
                            }, {
-                              "r" : "51",
+                              "r" : "52",
                               "s" : [ {
-                                 "value" : [ "Combine","(" ]
-                              }, {
-                                 "r" : "49",
+                                 "r" : "51",
                                  "s" : [ {
-                                    "r" : "48",
+                                    "r" : "50",
                                     "s" : [ {
                                        "value" : [ "HIE" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "49",
+                                    "r" : "51",
                                     "s" : [ {
-                                       "value" : [ "setting" ]
+                                       "value" : [ "\"setting\"" ]
                                     } ]
                                  } ]
                               }, {
-                                 "value" : [ ", " ]
+                                 "value" : [ "." ]
                               }, {
-                                 "r" : "50",
+                                 "r" : "52",
                                  "s" : [ {
-                                    "value" : [ "':'" ]
+                                    "value" : [ "code" ]
                                  } ]
-                              }, {
-                                 "value" : [ ")" ]
                               } ]
                            } ]
                         }, {
                            "value" : [ "\n+ " ]
                         }, {
-                           "r" : "53",
+                           "r" : "54",
                            "s" : [ {
                               "value" : [ "':'" ]
                            } ]
@@ -677,18 +683,18 @@
                      }, {
                         "value" : [ " + " ]
                      }, {
-                        "r" : "57",
+                        "r" : "58",
                         "s" : [ {
-                           "r" : "56",
+                           "r" : "57",
                            "s" : [ {
-                              "r" : "55",
+                              "r" : "56",
                               "s" : [ {
                                  "value" : [ "HIE" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "56",
+                              "r" : "57",
                               "s" : [ {
                                  "value" : [ "\"HIV Status Stratifier\"" ]
                               } ]
@@ -696,7 +702,7 @@
                         }, {
                            "value" : [ "." ]
                         }, {
-                           "r" : "57",
+                           "r" : "58",
                            "s" : [ {
                               "value" : [ "code" ]
                            } ]
@@ -706,115 +712,120 @@
                }
             } ],
             "expression" : {
-               "localId" : "58",
+               "localId" : "59",
                "locator" : "112:2-116:40",
                "type" : "Concatenate",
                "operand" : [ {
-                  "localId" : "54",
+                  "localId" : "55",
                   "locator" : "112:2-116:5",
                   "type" : "Concatenate",
                   "operand" : [ {
-                     "localId" : "52",
+                     "localId" : "53",
                      "locator" : "112:2-115:27",
                      "type" : "Concatenate",
                      "operand" : [ {
-                        "localId" : "47",
-                        "locator" : "112:2-114:45",
+                        "localId" : "49",
+                        "locator" : "112:2-115:6",
                         "type" : "Concatenate",
                         "operand" : [ {
-                           "localId" : "44",
-                           "locator" : "112:2-114:5",
+                           "localId" : "47",
+                           "locator" : "112:2-114:45",
                            "type" : "Concatenate",
                            "operand" : [ {
-                              "localId" : "42",
-                              "locator" : "112:2-113:33",
+                              "localId" : "44",
+                              "locator" : "112:2-114:5",
                               "type" : "Concatenate",
                               "operand" : [ {
-                                 "localId" : "39",
-                                 "locator" : "112:2-113:7",
+                                 "localId" : "42",
+                                 "locator" : "112:2-113:35",
                                  "type" : "Concatenate",
                                  "operand" : [ {
-                                    "localId" : "37",
-                                    "locator" : "112:2-112:47",
-                                    "path" : "code",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "localId" : "36",
-                                       "locator" : "112:2-112:42",
-                                       "name" : "By Administrative Gender Stratifier",
-                                       "libraryName" : "HIE",
-                                       "type" : "ExpressionRef"
-                                    }
+                                    "localId" : "39",
+                                    "locator" : "112:2-113:7",
+                                    "type" : "Concatenate",
+                                    "operand" : [ {
+                                       "localId" : "37",
+                                       "locator" : "112:2-112:47",
+                                       "path" : "code",
+                                       "type" : "Property",
+                                       "source" : {
+                                          "localId" : "36",
+                                          "locator" : "112:2-112:42",
+                                          "name" : "By Administrative Gender Stratifier",
+                                          "libraryName" : "HIE",
+                                          "type" : "ExpressionRef"
+                                       }
+                                    }, {
+                                       "localId" : "38",
+                                       "locator" : "113:5-113:7",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : ":",
+                                       "type" : "Literal"
+                                    } ]
                                  }, {
-                                    "localId" : "38",
-                                    "locator" : "113:5-113:7",
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : ":",
-                                    "type" : "Literal"
+                                    "localId" : "41",
+                                    "locator" : "113:11-113:35",
+                                    "name" : "By Age Stratifier 2",
+                                    "libraryName" : "HIE",
+                                    "type" : "ExpressionRef"
                                  } ]
                               }, {
-                                 "localId" : "41",
-                                 "locator" : "113:11-113:33",
-                                 "name" : "By Age Stratifier",
+                                 "localId" : "43",
+                                 "locator" : "114:3-114:5",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : ":",
+                                 "type" : "Literal"
+                              } ]
+                           }, {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "signature" : [ {
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "localId" : "46",
+                                 "locator" : "114:9-114:45",
+                                 "name" : "By Geographic Region Stratifier",
                                  "libraryName" : "HIE",
                                  "type" : "ExpressionRef"
                               } ]
-                           }, {
-                              "localId" : "43",
-                              "locator" : "114:3-114:5",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : ":",
-                              "type" : "Literal"
                            } ]
                         }, {
-                           "name" : "ToString",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}string",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "localId" : "46",
-                              "locator" : "114:9-114:45",
-                              "name" : "By Geographic Region Stratifier",
-                              "libraryName" : "HIE",
-                              "type" : "ExpressionRef"
-                           } ]
-                        } ]
-                     }, {
-                        "localId" : "51",
-                        "locator" : "115:3-115:27",
-                        "type" : "Combine",
-                        "source" : {
-                           "localId" : "49",
-                           "locator" : "115:11-115:21",
-                           "name" : "setting",
-                           "libraryName" : "HIE",
-                           "type" : "ExpressionRef"
-                        },
-                        "separator" : {
-                           "localId" : "50",
-                           "locator" : "115:24-115:26",
+                           "localId" : "48",
+                           "locator" : "115:4-115:6",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : ":",
                            "type" : "Literal"
+                        } ]
+                     }, {
+                        "localId" : "52",
+                        "locator" : "115:10-115:27",
+                        "path" : "code",
+                        "type" : "Property",
+                        "source" : {
+                           "localId" : "51",
+                           "locator" : "115:10-115:22",
+                           "name" : "setting",
+                           "libraryName" : "HIE",
+                           "type" : "ExpressionRef"
                         }
                      } ]
                   }, {
-                     "localId" : "53",
+                     "localId" : "54",
                      "locator" : "116:3-116:5",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : ":",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "57",
+                  "localId" : "58",
                   "locator" : "116:9-116:40",
                   "path" : "code",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "56",
+                     "localId" : "57",
                      "locator" : "116:9-116:35",
                      "name" : "HIV Status Stratifier",
                      "libraryName" : "HIE",
