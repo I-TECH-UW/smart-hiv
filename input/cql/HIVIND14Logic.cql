@@ -51,6 +51,8 @@
  * - method: Individual-level data obtained from programme records
  * 
  * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm
+ 
+ * Profiles: HivTreatmentMedicationRequest, HivOamtEpisodeOfCare
  */
 
 library HIVIND14Logic
@@ -61,6 +63,9 @@ using FHIR version '4.0.1'
 include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 include WHOCommon called WCom
+
+include HIVIndicatorElements called HIE
+include HIVElements called HE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -83,7 +88,8 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  First(HIE."Methadone D.DE555").dailyDose() >= System.Quantity{ value: 60, unit: 'mg' }
+  or First(HIE."Buprenorphine D.DE552").dailyDose() >= System.Quantity{ value: 8, unit: 'mg' }
 
 /**
  * Numerator Exclusions
@@ -92,7 +98,7 @@ define "Numerator":
  */
     
 define "Numerator Exclusions":
-  false
+  HIE."Client being inducted on OAMT" or HIE."Client on reducing doses of OAMT"
 
 /**
  * Denominator
@@ -102,7 +108,7 @@ define "Numerator Exclusions":
  */
 
 define "Denominator":
-  true
+  Exists(HIE."Methadone D.DE555") or Exists(HIE."Buprenorphine D.DE552")
     
 /**
 * Denominator Exclusions
@@ -111,7 +117,31 @@ define "Denominator":
 */
 
 define "Denominator Exclusions":
-  false
+  HIE."Client being inducted on OAMT" or HIE."Client on reducing doses of OAMT"
 
 /* end Populations */
 
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIE."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 3"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "Setting":
+    HIE."setting"
+
+//provider type not provided?
+
+define "Stratification":
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier 3"
++ ':' + HIE."By Geographic Region Stratifier"
+ + ':' + HIE."setting".code

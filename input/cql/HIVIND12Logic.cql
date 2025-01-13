@@ -67,8 +67,11 @@ include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
 
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
 // Indicator Definition
-parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
+parameter "Measurement Period" Interval<DateTime> default Interval[@2023-01-01, @2023-01-30]
 
 context Patient
 /* Populations */
@@ -87,20 +90,37 @@ define "Initial Population":
  * Calculation: SUM of [DIFFERENCE in MIN("Date OAMT initiated", "Reporting period start date") and MAX("Date of loss to follow-up or OAMT stopped", "Reporting period end date")] for all clients with "Medications prescribed" IN 'Methadone', 'Buprenorphine'
  */
 
-define "Numerator":
-  true
+define "Measure Population":
+  exists(HIE."buprenorphine_prescribed at date") or exists(HIE."methadone_prescribed at date")
 
 
+define "Measure Observation":
+  (
+    difference in days between
+    Min(
+      {
+        ToDate(First(HIE."OAMT start")), 
+        ToDate(start of "Measurement Period")
+      }
+    )
+
+    and ToDate(start of "Measurement Period")
+  )
+  +
+  (
+    difference in days between end of "Measurement Period"
+    and Coalesce(
+        ToDate(First(HIE."OAMT end")), 
+        end of "Measurement Period"
+      )
+  )
+  
 /**
  * Denominator
  *
  * Definition: a) Programme/service provider level: estimated PYFU for all opioid dependent people accessing service during defined reporting period | b) Population level: estimated PYFU for total population of opioid dependent people in relevant geographic area during defined reporting period
  * Calculation: Service level: Not calculated in DAK |  | Population denominator:  | *Estimated PYFU for all opioid-dependent people accessing service during defined reporting period |  | Note: Can be reported only as numerator; by population or service level if these denominator estimates available.
  */
-
-define "Denominator":
-  true
-    
 
 /* end Populations */
 

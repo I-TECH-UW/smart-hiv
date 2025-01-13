@@ -122,10 +122,13 @@ define "Initial Population":
  */
 
 define "Numerator":
-  Count((HE."Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval())))>1
-
+  Count(
+    (HIE."Syndrome/STI diagnosed B.DE226 Condition" C
+    where exists (
+      HE."Date accessed HIV prevention intervention" t
+      where t = start of C.prevalenceInterval()
+    ))
+  ) > 1
 
 /**
  * Denominator
@@ -135,9 +138,7 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HE."Syndrome/STI diagnosed B.DE226 Observation" O
-    where O.effective.toInterval() during "Measurement Period" 
-  and exists (HE."Date accessed HIV prevention intervention" t where t = start of O.effective.toInterval()))
+  exists(HIE."Date accessed HIV prevention intervention")
     
 
 /* end Populations */
@@ -151,7 +152,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -171,7 +172,7 @@ define "HIV Status":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 2"
+  + ':' + HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
 + Combine(HIE."HIV prevention intervention", ':')

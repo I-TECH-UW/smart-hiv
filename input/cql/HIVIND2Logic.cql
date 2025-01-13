@@ -83,7 +83,9 @@
 
 /**
  * Profiles:
- * 
+ * - HivPrepTreatment
+ * - HivCurrentPrepRegimenPrescription
+ * - 
  */
 
 library HIVIND2Logic
@@ -103,7 +105,7 @@ parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @202
 
 context Patient
 define "Measure Population":
-   HIE."HIV PREP Active" 
+   HIE."PrEP for HIV prevention"
 
 /*
  * As defined by Member States
@@ -151,10 +153,10 @@ define "prep_dosing":
 
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
+  + ':' + HIE."By Age Stratifier 3"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-+ Combine(HIE.setting, ':')
+ + ':' + HIE."setting".code
 + Combine(HIE.prep_product, ':')
 + Combine(HIE.prep_experience, ':')
 + Combine(HIE.prep_dosing, ':')

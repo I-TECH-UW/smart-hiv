@@ -149,7 +149,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HIE."Positive B.DE257")
+  HIE."Positive B.DE257"
 
 
 /**
@@ -160,11 +160,9 @@ define "Numerator":
  */
 
 define "Denominator":
-  exists(HE."Gonorrhoea test date B.DE255" d
-  where d during "Measurement Period"
-  and exists (HE."Date accessed HIV prevention intervention" t where t = d))
+  exists(HIE."Gonorrhoea test date B.DE255" d
+    where exists(HE."Date accessed HIV prevention intervention" t where t = d))
     
-
 /* end Populations */
 
 /*
@@ -175,7 +173,7 @@ define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
 define "Age Stratifier":
-	HIE."By Age Stratifier 2"
+	HIE."By Age Stratifier 9"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -189,12 +187,18 @@ define "HIV prevention intervention":
 define "HIV Status":
   HIE."HIV Status Stratifier"
 
+define "Neisseria gonorrhoeae test type B.DE276":
+  HIE."Neisseria gonorrhoeae test type B.DE276"
+
+define "Type of specimen B.DE261":
+  HIE."Type of specimen B.DE261"
+
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier 2"
+  + ':' + HIE."By Age Stratifier 9"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
 + Combine(HIE."HIV prevention intervention", ':')
 + ':' + HIE."HIV Status Stratifier".code 
-
-//need to add Diagnostic test used and anatomic site sampled 
++ ':' + HIE."Neisseria gonorrhoeae test type B.DE276".code 
++ ':' + HIE."Type of specimen B.DE261".code 

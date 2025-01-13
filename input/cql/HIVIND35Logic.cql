@@ -214,8 +214,8 @@ define "Denominator":
 define "Administrative Gender Stratifier":
 	HIE."By Administrative Gender Stratifier"
 
-define "Age Stratifier":
-	HIE."By Age Stratifier"
+define "Age Stratifier 6":
+	HIE."By Age Stratifier 6"
 
 define "Geographic Region Stratifier":
 	HIE."By Geographic Region Stratifier"
@@ -223,15 +223,21 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIE."patientGroups"
 
+define "Current ART regimen":
+  HIE."Current ART regimen"
+
+define "pregnancy stratifier":
+  HIE."pregnancy stratifier"
+
+define "Type of treatment-limiting toxicity":
+  HIE."Type of treatment-limiting toxicity"
+
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
-  + ':' + HIE."By Age Stratifier"
+  + ':' + HIE."By Age Stratifier 6"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
++ HIE."Current ART regimen".code 
++ HIE."Type of treatment-limiting toxicity".code
++ HIE."pregnancy stratifier".code
 
-/*
-need to add
-*  • ART regimen 
- *  • Pregnancy status 
- *  • Type of toxicity (gastrointestinal, skin, peripheral neuropathy, central nervous system, weight gain, hepatic dysfunction, haematological, fatigue, headache, bone dysfunction, metabolic, kidney dysfunction) 
-*/
