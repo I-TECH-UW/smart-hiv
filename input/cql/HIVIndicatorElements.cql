@@ -1688,13 +1688,13 @@ define "STI syndrome":
   List<String>{
     if exists("Urethral discharge syndrome B.DE227") then 'Urethral Discharge' else null,
     if exists("Vaginal discharge syndrome B.DE228") then 'Vaginal Discharge' else null,
-    if exists("Lower Abdominal pain  B.DE229") then 'Lower Abdominal Pain' else null,
+    if exists("Lower Abdominal pain B.DE229") then 'Lower Abdominal Pain' else null,
     if exists("Genital ulcer disease syndrome B.DE230") then 'Genital Ulcer' else null,
     if exists("Anorectal discharge B.DE231") then 'Anorectal discharge ' else null
   }
 
 define "Syndrome/STI diagnosed B.DE226":
-  exists("Urethral discharge syndrome B.DE227") or exists("Vaginal discharge syndrome B.DE228") or exists("Lower Abdominal pain  B.DE229") or exists("Genital ulcer disease syndrome B.DE230") or
+  exists("Urethral discharge syndrome B.DE227") or exists("Vaginal discharge syndrome B.DE228") or exists("Lower Abdominal pain B.DE229") or exists("Genital ulcer disease syndrome B.DE230") or
   exists("Anorectal discharge B.DE231")
 
 define "Syndrome/STI diagnosed B.DE226 Condition":
@@ -1727,10 +1727,10 @@ define "Vaginal discharge syndrome B.DE228":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-define "Lower Abdominal pain  B.DE229":
-  Elements."Lower Abdominal pain  B.DE229" C
+define "Lower Abdominal pain B.DE229":
+  Elements."Lower Abdominal pain B.DE229" C
     where C.prevalenceInterval() overlaps "Measurement Period"
-/* End of Lower Abdominal pain  B.DE229 */
+/* End of Lower Abdominal pain B.DE229 */
 
 /*
 @dataElement: HIV.B.DE230 - Genital ulcer disease syndrome
@@ -4281,16 +4281,16 @@ define "Vaginal discharge syndrome D.DE780 Observation":
 @description: Client diagnosed with lower abdominal pain
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Lower Abdominal pain  D.DE781":
-  exists "Lower Abdominal pain  D.DE781 Condition"
-    or exists "Lower Abdominal pain  D.DE781 Observation"
-define "Lower Abdominal pain  D.DE781 Condition":
-  Elements."Lower Abdominal pain  D.DE781 Condition" C
+define "Lower Abdominal pain D.DE781":
+  exists "Lower Abdominal pain D.DE781 Condition"
+    or exists "Lower Abdominal pain D.DE781 Observation"
+define "Lower Abdominal pain D.DE781 Condition":
+  Elements."Lower Abdominal pain D.DE781 Condition" C
     where C.prevalenceInterval() overlaps "Measurement Period"
-define "Lower Abdominal pain  D.DE781 Observation":
-  Elements."Lower Abdominal pain  D.DE781 Observation" O
+define "Lower Abdominal pain D.DE781 Observation":
+  Elements."Lower Abdominal pain D.DE781 Observation" O
     where O.effective.toInterval() during "Measurement Period"
-/* End of Lower Abdominal pain  D.DE781 */
+/* End of Lower Abdominal pain D.DE781 */
 
 /*
 @dataElement: HIV.D.DE782 - Genital ulcer disease syndrome
@@ -6115,40 +6115,6 @@ define "Severe illness, hospitalization H.DE76 Observation":
   Elements."Severe illness, hospitalization H.DE76 Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Severe illness, hospitalization H.DE76 */
-
-/*
-@dataElement: HIV.H.DE77 - Drugs out of stock 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because of drugs being out of stock 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Drugs out of stock ":
-  exists "Drugs out of stock  Condition"
-    or exists "Drugs out of stock  Observation"
-define "Drugs out of stock  Condition":
-  Elements."Drugs out of stock  Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "Drugs out of stock  Observation":
-  Elements."Drugs out of stock  Observation" O
-    where O.effective.toInterval() during "Measurement Period"
-/* End of Drugs out of stock  */
-
-/*
-@dataElement: HIV.H.DE78 - Client lacks finances 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because client lacked finances 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Client lacks finances ":
-  exists "Client lacks finances  Condition"
-    or exists "Client lacks finances  Observation"
-define "Client lacks finances  Condition":
-  Elements."Client lacks finances  Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "Client lacks finances  Observation":
-  Elements."Client lacks finances  Observation" O
-    where O.effective.toInterval() during "Measurement Period"
-/* End of Client lacks finances  */
 
 /*
 @dataElement: HIV.H.DE79 - Excluded HIV infection in infant

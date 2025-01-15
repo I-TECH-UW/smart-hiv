@@ -4,7 +4,7 @@ codesystem "HIVConceptsCustom": 'http://smart.who.int/hiv/CodeSystem/HIVConcepts
 codesystem "ConditionCategoryCodes": 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem "ConditionClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/condition-clinical'
 codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/observation-category'
-codesystem "missing concepts": 'missing concepts'
+codesystem "missing concepts": 'https://worldhealthorganization.github.io/smart-hiv/CodeSystem/missing-concepts'
 codesystem "Devicestatement-status": 'http://hl7.org/fhir/device-statement-status'
 codesystem "SNOMEDCT:2018-03": 'urn:oid:2.16.840.1.113883.6.96' version 'urn:hl7:version:2018-03'
 codesystem "SNOMEDCT": 'urn:oid:2.16.840.1.113883.6.96'

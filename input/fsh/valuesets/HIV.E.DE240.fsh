@@ -8,3 +8,5 @@ Description: "Value set of the infant's cause of death"
 * ^experimental = true
 * ^name = "HIVEDE240"
 * ^url = "http://smart.who.int/hiv/ValueSet/HIV.E.DE240"
+
+* HIVConcepts#HIV.E.DE241 "Infant died within 24 hours of childbirth"

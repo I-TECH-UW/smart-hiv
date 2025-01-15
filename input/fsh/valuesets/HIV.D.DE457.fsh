@@ -8,3 +8,7 @@ Description: "Value set of name or regimen code of all other medications prescri
 * ^experimental = true
 * ^name = "HIVDDE457"
 * ^url = "http://smart.who.int/hiv/ValueSet/HIV.D.DE457"
+
+* HIVConcepts#HIV.D.DE458 "Date medications prescribed"
+* HIVConcepts#HIV.D.DE459 "Dose of medications prescribed"
+* HIVConcepts#HIV.D.DE460 "Number of days medications prescribed"

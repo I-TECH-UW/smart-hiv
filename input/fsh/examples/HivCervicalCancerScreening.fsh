@@ -3,7 +3,7 @@ InstanceOf: HivCervicalCancerScreening
 Title: "Example Cervical Cancer Screening Procedure"
 Description: "An example of a cervical cancer screening procedure."
 
-* status = #completed
+* status = #final
 * category = http://snomed.info/sct#103693007 "Diagnostic procedure"
 * code = HIVConcepts#HIV.D.DE706
 * subject = Reference(Patient/ExampleHivPatient)

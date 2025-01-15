@@ -3,6 +3,8 @@ Parent: Observation
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-shareablestructuredefinition"
 * ^meta.profile[+] = "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-publishablestructuredefinition"
 * ^experimental = true
+* ^title = "Hiv Lab Test Observation"
+* ^description = "Hiv Lab Test Observation Profile"
 * category = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * effective[x] ^short = "Time at which test performed"
 * effective[x] only dateTime or instant
