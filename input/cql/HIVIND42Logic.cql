@@ -63,6 +63,10 @@ include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
 
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
+
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
@@ -84,7 +88,17 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  HIE."is HIV-exposed infant or child E.DE112"
+  and
+  (exists(HIE."Live Birth Delivery" B where months between end of B.effective.toInterval() and end of  "Measurement Period" < 12 months)
+  or 
+  (
+  exists(HIE."Breastfeeding B.DE32" B) and
+  exists(HIE."Live Birth Delivery" B where months between end of B.effective.toInterval() and end of  "Measurement Period" < 24 months)
+  )
+  )
+  and HIE."Registered in birth cohort"
+  and HE."Final diagnosis of HIV-exposed infant E.DE230" is not null
 
 
 /**
@@ -95,8 +109,34 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."is HIV-exposed infant or child E.DE112"
+  and
+  (exists(HIE."Live Birth Delivery" B where months between end of B.effective.toInterval() and end of  "Measurement Period" < 12 months)
+  or 
+  (
+  exists(HIE."Breastfeeding B.DE32" B) and
+  exists(HIE."Live Birth Delivery" B where months between end of B.effective.toInterval() and end of  "Measurement Period" < 24 months)
+  )
+  )
+  and HIE."Registered in birth cohort"
     
 
 /* end Populations */
+
+/* 
+ * Disaggregators
+ */
+  
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "HIV Status Stratifier infant":
+  HIE."HIV Status Stratifier infant"
+
+define "Stratification":
+HIE."HIV Status Stratifier infant".code
++ ':' + HIE."By Geographic Region Stratifier"
+
+
+
 

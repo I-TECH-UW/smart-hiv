@@ -557,6 +557,11 @@ define "Breastfeeding B.DE32":
   [Observation: Concepts."Breastfeeding - HIV.B.DE32"] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
+
+define "Not Breastfeeding B.DE32":
+  [Observation: Concepts."Breastfeeding - HIV.B.DE32"] O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value is false
 /* End of Breastfeeding B.DE32 */
 
 /*
@@ -8212,13 +8217,11 @@ define "Dates of substitution within third-line regimen Value":
 @activity: HIV.D24 Counsel
 @description: Enhanced adherence counselling was provided to the client during the visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+ 
 define "Enhanced adherence counselling provided":
-  exists "Enhanced adherence counselling provided Observation"
-define "Enhanced adherence counselling provided Observation":
-  [Observation: Concepts."Enhanced adherence counselling provided"] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  [Communication] C
+  where C.topic ~ Concepts."Enhanced adherence counselling provided"
+
 /* End of Enhanced adherence counselling provided */
 
 /*
@@ -11832,12 +11835,11 @@ define "Dual HIV/syphilis rapid diagnostic test E.DE172 Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: Maternal and child health service visit attended by an HIV-exposed infant
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Maternal and child health service visit":
-  exists "Maternal and child health service visit Observation"
-define "Maternal and child health service visit Observation":
-  [Observation: Concepts."Maternal and child health service visit"] O
-    where O.status in { 'final', 'amended', 'corrected' }
+    [Encounter] E
+    where E.type.coding.code contains Concepts."Maternal and child health service visit".code
+
 /* End of Maternal and child health service visit */
 
 /*
@@ -11845,16 +11847,10 @@ define "Maternal and child health service visit Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infant attending MCH services for a 12-month visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "12-month visit":
-  exists "12-month visit Condition"
-    or exists "12-month visit Observation"
-define "12-month visit Condition":
-  [Condition: Concepts."12-month visit"]
-define "12-month visit Observation":
-  "Maternal and child health service visit Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."12-month visit"
+  "Maternal and child health service visit" E
+    where E.type.coding.code contains Concepts."12-month visit".code
 /* End of 12-month visit */
 
 /*
@@ -11862,16 +11858,10 @@ define "12-month visit Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infants attending MCH services for a 24-month visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "24-month visit":
-  exists "24-month visit Condition"
-    or exists "24-month visit Observation"
-define "24-month visit Condition":
-  [Condition: Concepts."24-month visit"]
-define "24-month visit Observation":
-  "Maternal and child health service visit Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."24-month visit"
+  "Maternal and child health service visit" E
+    where E.type.coding.code contains Concepts."24-month visit".code
 /* End of 24-month visit */
 
 /*
@@ -11879,16 +11869,10 @@ define "24-month visit Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infant attending MCH services for a first visit after the end of breastfeeding
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "First visit after the end of breastfeeding":
-  exists "First visit after the end of breastfeeding Condition"
-    or exists "First visit after the end of breastfeeding Observation"
-define "First visit after the end of breastfeeding Condition":
-  [Condition: Concepts."First visit after the end of breastfeeding"]
-define "First visit after the end of breastfeeding Observation":
-  "Maternal and child health service visit Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."First visit after the end of breastfeeding"
+    "Maternal and child health service visit" E
+    where E.type.coding.code contains Concepts."First visit after the end of breastfeeding".code
 /* End of First visit after the end of breastfeeding */
 
 /*
@@ -11896,13 +11880,12 @@ define "First visit after the end of breastfeeding Observation":
 @activity: HIV.F3 Capture or update infant's/child's history
 @description: Whether the infant has been registered in a birth cohort
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Registered in birth cohort":
-  exists "Registered in birth cohort Observation"
-define "Registered in birth cohort Observation":
   [Observation: Concepts."Registered in birth cohort"] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
+
 /* End of Registered in birth cohort */
 
 /*
@@ -12689,12 +12672,16 @@ define "Infant ART start date Value":
 @activity: HIV.F20 Record infant's/child's final HIV diagnosis
 @description: HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later).
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Final diagnosis of HIV-exposed infant E.DE230":
-  exists "Final diagnosis of HIV-exposed infant E.DE230 Observation"
+  "Final diagnosis of HIV-exposed infant E.DE230 Observation".value
+
 define "Final diagnosis of HIV-exposed infant E.DE230 Observation":
   [Observation: Concepts."Final diagnosis of HIV-exposed infant - HIV.E.DE230"] O
     where O.status in { 'final', 'amended', 'corrected' }
+
+
+/* End of HIV-negative E.DE227 */
 /* End of Final diagnosis of HIV-exposed infant E.DE230 */
 
 /*

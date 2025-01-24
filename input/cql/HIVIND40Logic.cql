@@ -90,12 +90,20 @@ define "Initial Population":
  * Calculation: COUNT of women with "HIV status"='HIV-positive' AND "Delivery date" in the reporting period AND (("On ART"=True at labour and delivery) OR ("On ART"=True during pregnancy, for this pregnancy))
  */
 
-// TODO: figure out how do we indicate this vs. another pregnancy, and this labor/delivery vs. another, and how this relates to measurement period
 
 define "Numerator":
   HIE."Has HIV-positive Status" and
   exists(HIE."Live Birth Delivery" BirthDelivery
     where BirthDelivery.effective.toInterval() during "Measurement Period"
+  ) and 
+  exists ( 
+    HE."On ART D.DE38" A 
+    where A.effective.toInterval() during First(HIE."Live Birth Delivery" BirthDelivery
+    where BirthDelivery.effective.toInterval() during "Measurement Period").effective.toInterval()
+    or 
+    A.effective.toInterval() during First(HE."Currently pregnant B.DE29" C 
+    where C.prevalenceInterval() during "Measurement Period").prevalenceInterval()
+  
   )
 
 
@@ -108,8 +116,24 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."Has HIV-positive Status" and
+  exists(HIE."Live Birth Delivery" BirthDelivery
+    where BirthDelivery.effective.toInterval() during "Measurement Period"
+  )and 
+  (First(HIE."ANC within pregnancy").period.toInterval() during "Measurement Period"
+  or
+    HIE."Has Delivery in Health Facility")
     
 
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+
+define "Timing of ART initiation":
+  HIE."Timing of ART initiation"
+
+define "Stratification":
+  HIE."Timing of ART initiation".code 

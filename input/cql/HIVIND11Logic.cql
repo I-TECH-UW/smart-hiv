@@ -97,7 +97,7 @@ define "Initial Population":
  */
 
 define "Numerator":
-  exists(HIE."People who inject drugs") and HIE."Currently on OAMT"
+  HIE."People who inject drugs" and HIE."Currently on OAMT"
 
 /**
  * Denominator
@@ -107,8 +107,32 @@ define "Numerator":
  */
 
 define "Denominator":
-  HE."HIV prevention intervention" and exists(HIE."People who inject drugs")
+  HE."HIV prevention intervention" and HIE."People who inject drugs"
     
 
 /* end Populations */
 
+
+/*
+ * Disaggregators
+ */
+
+define "Administrative Gender Stratifier":
+	HIE."By Administrative Gender Stratifier"
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 4"
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "Setting":
+    HIE."setting"
+
+//provider type not provided?
+
+define "Stratification":
+ HIE."By Administrative Gender Stratifier".code 
+  + ':' + HIE."By Age Stratifier 4"
++ ':' + HIE."By Geographic Region Stratifier"
+ + ':' + HIE."setting".code

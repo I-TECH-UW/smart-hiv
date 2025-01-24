@@ -404,7 +404,7 @@ define "By Age Stratifier 4":
 
 define "By Age Stratifier 5":
   case 
-      when "Age In Years" < 15 and "Age In Years"<= 19 then '<15'
+      when "Age In Years" < 15 then '<15'
       when "Age In Years" >= 15 and "Age In Years"<= 19 then '15-19'
       when "Age In Years" <= 24 then '20-24'
       when "Age In Years" <= 49 then '25–49'
@@ -447,6 +447,30 @@ define "By Age Stratifier 9":
       when "Age In Years" <= 24 then '20-24'
       when "Age In Years" <= 29 then '25–29'
       when "Age In Years" <= 49 then '30–49'
+      when "Age In Years" >= 50 then '50+'
+      else null
+  end
+
+//(<15, 15–19, 20–24, 25+ years) 
+define "By Age Stratifier 10":
+  case 
+      when "Age In Years" < 15 then '<15'
+      when "Age In Years" >= 15 and "Age In Years"<= 19 then '15-19'
+      when "Age In Years" <= 24 then '20-24'
+      when "Age In Years" >= 25 then '25+'
+      else null
+  end
+
+//(<15, 15–19, 20–24, 25–29, 30–34, 35–39, 40–49, 50+ years) 
+define "By Age Stratifier 11":
+  case 
+      when "Age In Years" < 15 then '<15'
+      when "Age In Years"<= 19 then '15-19'
+      when "Age In Years" <= 24 then '20-24'
+      when "Age In Years" <= 29 then '25-29'
+      when "Age In Years" <= 34 then '30–34'
+      when "Age In Years" <= 39 then '35–39'
+      when "Age In Years" <= 49 then '40–49'
       when "Age In Years" >= 50 then '50+'
       else null
   end
@@ -666,6 +690,12 @@ define "pregnancy stratifier":
 define "Breastfeeding B.DE32":
   Elements."Breastfeeding B.DE32" O
     where O.effective.toInterval() during "Measurement Period"
+
+define "Not Breastfeeding B.DE32":
+  Elements."Breastfeeding B.DE32" O
+    where O.effective.toInterval() during "Measurement Period"
+
+  
 /* End of Breastfeeding B.DE32 */
 
 /*
@@ -1000,6 +1030,22 @@ define "HIV Status Stratifier":
       else Concepts."Unknown - HIV.B.DE118"
   end
 
+define "HIV Status Stratifier infant":
+  case 
+      when "Has HIV-positive Status" then Concepts."HIV-positive - HIV.B.DE116"
+      when not exists("HIV Status Positive Condition") and exists("HIV Status Negative Observation") then  Concepts."HIV-negative - HIV.B.DE117"
+      when exists("Not Breastfeeding B.DE32") then ConceptsCustom."No longer breastfeeding"
+      else null
+  end
+
+//HIV status at first test during current pregnancy (known positive, tested HIV-negative, tested HIV-positive, not tested) 
+  define "HIV Status pregnancy Stratifier":
+  case 
+      when "Has HIV-positive Status before pregnancy" then 'Known Positive'
+      when "Has HIV-positive Status during pregnancy" then 'Tested Positive'
+      when not "Has HIV-positive Status before pregnancy" and not "Has HIV-positive Status during pregnancy" and exists("HIV Status Negative Observation") then  'Tested Negative'
+      else 'Not tested'
+  end
 
 
 /* End of HIV status */
@@ -1033,6 +1079,36 @@ define "HIV Status Positive Observation":
   Elements."HIV Status Positive Observation" O
   where O.issued before end of "Measurement Period"
   or O.effective.toInterval() starts before end of "Measurement Period"
+
+define "Has HIV-positive Status before pregnancy":
+  exists "HIV Status Positive Condition before pregnancy"
+  or exists "HIV Status Positive Observation before pregnancy"
+
+define "HIV Status Positive Condition before pregnancy":
+  Elements."HIV Status Positive Condition" C
+  where C.onset before end of "Measurement Period"
+  and C.onset before start of First("Currently pregnant SRV.DE7 Condition").prevalenceInterval()
+
+define "HIV Status Positive Observation before pregnancy":
+  Elements."HIV Status Positive Observation" O
+  where O.issued before end of "Measurement Period"
+  or O.effective.toInterval() starts before end of "Measurement Period"
+  and O.effective.toInterval() before start of First("Currently pregnant SRV.DE7 Condition").prevalenceInterval()
+
+define "Has HIV-positive Status during pregnancy":
+  exists "HIV Status Positive Condition during pregnancy"
+  or exists "HIV Status Positive Observation during pregnancy"
+
+define "HIV Status Positive Condition during pregnancy":
+  Elements."HIV Status Positive Condition" C
+  where C.onset before end of "Measurement Period"
+  and C.onset during First("Currently pregnant SRV.DE7 Condition").prevalenceInterval()
+
+define "HIV Status Positive Observation during pregnancy":
+  Elements."HIV Status Positive Observation" O
+  where O.issued before end of "Measurement Period"
+  or O.effective.toInterval() starts before end of "Measurement Period"
+  and O.effective.toInterval() during First("Currently pregnant SRV.DE7 Condition").prevalenceInterval()
 
 /* End of HIV-positive B.DE116 */
 
@@ -3554,12 +3630,18 @@ define "Dates of substitution within third-line regimen Value":
 @activity: HIV.D24 Counsel
 @description: Enhanced adherence counselling was provided to the client during the visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Enhanced adherence counselling provided":
-  exists "Enhanced adherence counselling provided Observation"
-define "Enhanced adherence counselling provided Observation":
-  Elements."Enhanced adherence counselling provided Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists (Elements."Enhanced adherence counselling provided" C
+  where C.received.toInterval() during "Measurement Period"
+  )
+
+define "Enhanced adherence counselling provided Disaggregation":
+  case 
+      when "Enhanced adherence counselling provided" then Concepts."Enhanced adherence counselling provided"
+      else null
+  end
+
 /* End of Enhanced adherence counselling provided */
 
 /*
@@ -5300,12 +5382,10 @@ define "Dual HIV/syphilis rapid diagnostic test E.DE172 Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: Maternal and child health service visit attended by an HIV-exposed infant
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Maternal and child health service visit":
-  exists "Maternal and child health service visit Observation"
-define "Maternal and child health service visit Observation":
-  Elements."Maternal and child health service visit Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."Maternal and child health service visit" E
+  where E.period.toInterval() during "Measurement Period"
 /* End of Maternal and child health service visit */
 
 /*
@@ -5313,16 +5393,10 @@ define "Maternal and child health service visit Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infant attending MCH services for a 12-month visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "12-month visit":
-  exists "12-month visit Condition"
-    or exists "12-month visit Observation"
-define "12-month visit Condition":
-  Elements."12-month visit Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "12-month visit Observation":
-  Elements."12-month visit Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."12-month visit" E
+  where E.period.toInterval() during "Measurement Period"
 /* End of 12-month visit */
 
 /*
@@ -5330,16 +5404,10 @@ define "12-month visit Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infants attending MCH services for a 24-month visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "24-month visit":
-  exists "24-month visit Condition"
-    or exists "24-month visit Observation"
-define "24-month visit Condition":
-  Elements."24-month visit Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "24-month visit Observation":
-  Elements."24-month visit Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."24-month visit" E
+  where E.period.toInterval() during "Measurement Period"
 /* End of 24-month visit */
 
 /*
@@ -5347,16 +5415,10 @@ define "24-month visit Observation":
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infant attending MCH services for a first visit after the end of breastfeeding
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "First visit after the end of breastfeeding":
-  exists "First visit after the end of breastfeeding Condition"
-    or exists "First visit after the end of breastfeeding Observation"
-define "First visit after the end of breastfeeding Condition":
-  Elements."First visit after the end of breastfeeding Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "First visit after the end of breastfeeding Observation":
-  Elements."First visit after the end of breastfeeding Observation" O
-    where O.effective.toInterval() during "Measurement Period"
+  exists Elements."First visit after the end of breastfeeding" E
+  where E.period.toInterval() during "Measurement Period"
 /* End of First visit after the end of breastfeeding */
 
 /*
@@ -5364,11 +5426,9 @@ define "First visit after the end of breastfeeding Observation":
 @activity: HIV.F3 Capture or update infant's/child's history
 @description: Whether the infant has been registered in a birth cohort
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Registered in birth cohort":
-  exists "Registered in birth cohort Observation"
-define "Registered in birth cohort Observation":
-  Elements."Registered in birth cohort Observation" O
+  exists Elements."Registered in birth cohort" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Registered in birth cohort */
 
@@ -5506,11 +5566,9 @@ define "Infant ART start date Value":
 @activity: HIV.F20 Record infant's/child's final HIV diagnosis
 @description: HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later).
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define "Final diagnosis of HIV-exposed infant E.DE230":
-  exists "Final diagnosis of HIV-exposed infant E.DE230 Observation"
-define "Final diagnosis of HIV-exposed infant E.DE230 Observation":
-  Elements."Final diagnosis of HIV-exposed infant E.DE230 Observation" O
+  exists Elements."Final diagnosis of HIV-exposed infant E.DE230 Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Final diagnosis of HIV-exposed infant E.DE230 */
 
