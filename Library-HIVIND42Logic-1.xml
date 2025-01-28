@@ -2,7 +2,7 @@
 <library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
    <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
    <annotation xsi:type="a:Annotation">
-      <a:s r="16">
+      <a:s r="111">
          <a:s>/**
  * Library: HIV.IND.42 Logic
  * Ref No: VER.6
@@ -112,56 +112,78 @@ using </a:s>
             </a:s>
          </annotation>
       </def>
+      <def localId="5" locator="66:1-66:29" localIdentifier="HE" path="http://smart.who.int/hiv/HIVElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVElements</a:s>
+               </a:s>
+               <a:s> called HE</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="67:1-67:39" localIdentifier="HIE" path="http://smart.who.int/hiv/HIVIndicatorElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVIndicatorElements</a:s>
+               </a:s>
+               <a:s> called HIE</a:s>
+            </a:s>
+         </annotation>
+      </def>
    </includes>
    <parameters>
-      <def localId="10" locator="67:1-67:88" name="Measurement Period" accessLevel="Public">
+      <def localId="12" locator="71:1-71:88" name="Measurement Period" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="10">
+            <a:s r="12">
                <a:s>// Indicator Definition
 parameter &quot;Measurement Period&quot; </a:s>
-               <a:s r="9">
+               <a:s r="11">
                   <a:s>Interval&lt;</a:s>
-                  <a:s r="8">
+                  <a:s r="10">
                      <a:s>Date</a:s>
                   </a:s>
                   <a:s>></a:s>
                </a:s>
                <a:s> default </a:s>
-               <a:s r="7">
-                  <a:s r="5">Interval[@2023-01-01, @2023-01-30]</a:s>
+               <a:s r="9">
+                  <a:s r="7">Interval[@2023-01-01, @2023-01-30]</a:s>
                </a:s>
             </a:s>
          </annotation>
-         <default localId="7" locator="67:55-67:88" lowClosed="true" highClosed="true" xsi:type="Interval">
-            <low localId="5" locator="67:64-67:74" xsi:type="Date">
+         <default localId="9" locator="71:55-71:88" lowClosed="true" highClosed="true" xsi:type="Interval">
+            <low localId="7" locator="71:64-71:74" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="1" xsi:type="Literal"/>
             </low>
-            <high localId="6" locator="67:77-67:87" xsi:type="Date">
+            <high localId="8" locator="71:77-71:87" xsi:type="Date">
                <year valueType="t:Integer" value="2023" xsi:type="Literal"/>
                <month valueType="t:Integer" value="1" xsi:type="Literal"/>
                <day valueType="t:Integer" value="30" xsi:type="Literal"/>
             </high>
          </default>
-         <parameterTypeSpecifier localId="9" locator="67:32-67:45" xsi:type="IntervalTypeSpecifier">
-            <pointType localId="8" locator="67:41-67:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+         <parameterTypeSpecifier localId="11" locator="71:32-71:45" xsi:type="IntervalTypeSpecifier">
+            <pointType localId="10" locator="71:41-71:44" name="t:Date" xsi:type="NamedTypeSpecifier"/>
          </parameterTypeSpecifier>
       </def>
    </parameters>
    <contexts>
-      <def locator="69:1-69:15" name="Patient"/>
+      <def locator="73:1-73:15" name="Patient"/>
    </contexts>
    <statements>
-      <def locator="69:1-69:15" name="Patient" context="Patient">
+      <def locator="73:1-73:15" name="Patient" context="Patient">
          <expression xsi:type="SingletonFrom">
-            <operand locator="69:1-69:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+            <operand locator="73:1-73:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
          </expression>
       </def>
-      <def localId="12" locator="76:1-77:6" name="Initial Population" context="Patient" accessLevel="Public">
+      <def localId="14" locator="80:1-81:6" name="Initial Population" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="12">
-               <a:s r="11">/* Populations */
+            <a:s r="14">
+               <a:s r="13">/* Populations */
 
 /*
  *Initial Population
@@ -171,12 +193,12 @@ define &quot;Initial Population&quot;:
   true</a:s>
             </a:s>
          </annotation>
-         <expression localId="11" locator="77:3-77:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="13" locator="81:3-81:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
       </def>
-      <def localId="14" locator="86:1-87:6" name="Numerator" context="Patient" accessLevel="Public">
+      <def localId="57" locator="90:1-101:68" name="Numerator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="14">
-               <a:s r="13">/**
+            <a:s r="57">
+               <a:s>/**
  * Numerator
  * 
  * Definition: HIV-exposed infants born within the past 12 months (or 24 months in breastfeeding settings) who have known final HIV outcome status
@@ -184,15 +206,303 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true</a:s>
+  </a:s>
+               <a:s r="56">
+                  <a:s r="52">
+                     <a:s r="49">
+                        <a:s r="16">
+                           <a:s r="15">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="16">
+                              <a:s>&quot;is HIV-exposed infant or child E.DE112&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  and
+  </a:s>
+                        <a:s r="48">
+                           <a:s>(</a:s>
+                           <a:s r="48">
+                              <a:s r="29">
+                                 <a:s>exists</a:s>
+                                 <a:s r="28">
+                                    <a:s>(</a:s>
+                                    <a:s r="28">
+                                       <a:s>
+                                          <a:s r="18">
+                                             <a:s r="17">
+                                                <a:s>
+                                                   <a:s>HIE.&quot;Live Birth Delivery&quot;</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> B</a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s> </a:s>
+                                       <a:s r="27">
+                                          <a:s>where </a:s>
+                                          <a:s r="27">
+                                             <a:s r="25">
+                                                <a:s>months between </a:s>
+                                                <a:s r="22">
+                                                   <a:s>end of </a:s>
+                                                   <a:s r="21">
+                                                      <a:s r="20">
+                                                         <a:s r="19">
+                                                            <a:s>B</a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="20">
+                                                            <a:s>effective</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="21">
+                                                         <a:s>toInterval()</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> and </a:s>
+                                                <a:s r="24">
+                                                   <a:s>end of  </a:s>
+                                                   <a:s r="23">
+                                                      <a:s>&quot;Measurement Period&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> &lt; </a:s>
+                                             <a:s r="26">
+                                                <a:s>12 months</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>)</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+  or 
+  </a:s>
+                              <a:s r="47">
+                                 <a:s>(
+  </a:s>
+                                 <a:s r="47">
+                                    <a:s r="33">
+                                       <a:s>exists</a:s>
+                                       <a:s r="32">
+                                          <a:s>(</a:s>
+                                          <a:s r="32">
+                                             <a:s>
+                                                <a:s r="31">
+                                                   <a:s r="30">
+                                                      <a:s>
+                                                         <a:s>HIE.&quot;Breastfeeding B.DE32&quot;</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s> B</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> and
+  </a:s>
+                                    <a:s r="46">
+                                       <a:s>exists</a:s>
+                                       <a:s r="45">
+                                          <a:s>(</a:s>
+                                          <a:s r="45">
+                                             <a:s>
+                                                <a:s r="35">
+                                                   <a:s r="34">
+                                                      <a:s>
+                                                         <a:s>HIE.&quot;Live Birth Delivery&quot;</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s> B</a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> </a:s>
+                                             <a:s r="44">
+                                                <a:s>where </a:s>
+                                                <a:s r="44">
+                                                   <a:s r="42">
+                                                      <a:s>months between </a:s>
+                                                      <a:s r="39">
+                                                         <a:s>end of </a:s>
+                                                         <a:s r="38">
+                                                            <a:s r="37">
+                                                               <a:s r="36">
+                                                                  <a:s>B</a:s>
+                                                               </a:s>
+                                                               <a:s>.</a:s>
+                                                               <a:s r="37">
+                                                                  <a:s>effective</a:s>
+                                                               </a:s>
+                                                            </a:s>
+                                                            <a:s>.</a:s>
+                                                            <a:s r="38">
+                                                               <a:s>toInterval()</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                      <a:s> and </a:s>
+                                                      <a:s r="41">
+                                                         <a:s>end of  </a:s>
+                                                         <a:s r="40">
+                                                            <a:s>&quot;Measurement Period&quot;</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s> &lt; </a:s>
+                                                   <a:s r="43">
+                                                      <a:s>24 months</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>
+  )</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  )</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  and </a:s>
+                     <a:s r="51">
+                        <a:s r="50">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="51">
+                           <a:s>&quot;Registered in birth cohort&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  and </a:s>
+                  <a:s r="55">
+                     <a:s r="54">
+                        <a:s r="53">
+                           <a:s>HE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="54">
+                           <a:s>&quot;Final diagnosis of HIV-exposed infant E.DE230&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s> is not null</a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="13" locator="87:3-87:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="56" locator="91:3-101:68" xsi:type="And">
+            <operand localId="52" locator="91:3-100:38" xsi:type="And">
+               <operand localId="49" locator="91:3-99:3" xsi:type="And">
+                  <operand localId="16" locator="91:3-91:46" name="is HIV-exposed infant or child E.DE112" libraryName="HIE" xsi:type="ExpressionRef"/>
+                  <operand localId="48" locator="93:3-99:3" xsi:type="Or">
+                     <operand localId="29" locator="93:4-93:136" xsi:type="Exists">
+                        <operand localId="28" locator="93:10-93:136" xsi:type="Query">
+                           <source localId="18" locator="93:11-93:37" alias="B">
+                              <expression localId="17" locator="93:11-93:35" name="Live Birth Delivery" libraryName="HIE" xsi:type="ExpressionRef"/>
+                           </source>
+                           <where localId="27" locator="93:39-93:135" xsi:type="Less">
+                              <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <operand xsi:type="ToQuantity">
+                                 <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="25" locator="93:45-93:123" precision="Month" xsi:type="DurationBetween">
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <operand localId="22" locator="93:60-93:90" xsi:type="End">
+                                       <operand localId="21" locator="93:67-93:90" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                          <operand localId="20" locator="93:67-93:77" path="effective" scope="B" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                    <operand xsi:type="ToDateTime">
+                                       <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                       <operand localId="24" locator="93:96-93:123" xsi:type="End">
+                                          <signature xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                          </signature>
+                                          <operand localId="23" locator="93:104-93:123" name="Measurement Period" xsi:type="ParameterRef"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                              <operand localId="26" locator="93:127-93:135" value="12" unit="months" xsi:type="Quantity"/>
+                           </where>
+                        </operand>
+                     </operand>
+                     <operand localId="47" locator="95:3-98:3" xsi:type="And">
+                        <operand localId="33" locator="96:3-96:38" xsi:type="Exists">
+                           <operand localId="32" locator="96:9-96:38" xsi:type="Query">
+                              <source localId="31" locator="96:10-96:37" alias="B">
+                                 <expression localId="30" locator="96:10-96:35" name="Breastfeeding B.DE32" libraryName="HIE" xsi:type="ExpressionRef"/>
+                              </source>
+                           </operand>
+                        </operand>
+                        <operand localId="46" locator="97:3-97:135" xsi:type="Exists">
+                           <operand localId="45" locator="97:9-97:135" xsi:type="Query">
+                              <source localId="35" locator="97:10-97:36" alias="B">
+                                 <expression localId="34" locator="97:10-97:34" name="Live Birth Delivery" libraryName="HIE" xsi:type="ExpressionRef"/>
+                              </source>
+                              <where localId="44" locator="97:38-97:134" xsi:type="Less">
+                                 <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                                 <operand xsi:type="ToQuantity">
+                                    <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                                    <operand localId="42" locator="97:44-97:122" precision="Month" xsi:type="DurationBetween">
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       <operand localId="39" locator="97:59-97:89" xsi:type="End">
+                                          <signature xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                          </signature>
+                                          <operand localId="38" locator="97:66-97:89" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                             <operand localId="37" locator="97:66-97:76" path="effective" scope="B" xsi:type="Property"/>
+                                          </operand>
+                                       </operand>
+                                       <operand xsi:type="ToDateTime">
+                                          <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                          <operand localId="41" locator="97:95-97:122" xsi:type="End">
+                                             <signature xsi:type="IntervalTypeSpecifier">
+                                                <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                             </signature>
+                                             <operand localId="40" locator="97:103-97:122" name="Measurement Period" xsi:type="ParameterRef"/>
+                                          </operand>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                                 <operand localId="43" locator="97:126-97:134" value="24" unit="months" xsi:type="Quantity"/>
+                              </where>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+               <operand localId="51" locator="100:7-100:38" name="Registered in birth cohort" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="55" locator="101:7-101:68" xsi:type="Not">
+               <operand locator="101:7-101:68" xsi:type="IsNull">
+                  <operand localId="54" locator="101:7-101:56" name="Final diagnosis of HIV-exposed infant E.DE230" libraryName="HE" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
       </def>
-      <def localId="16" locator="97:1-98:6" name="Denominator" context="Patient" accessLevel="Public">
+      <def localId="96" locator="111:1-121:38" name="Denominator" context="Patient" accessLevel="Public">
          <annotation xsi:type="a:Annotation">
-            <a:s r="16">
-               <a:s r="15">/**
+            <a:s r="96">
+               <a:s>/**
  * Denominator
  *
  * Definition: a) Programme-based/service delivery denominator | Number of HIV-exposed infants who were born within the 12 months (or 24 months in breastfeeding settings) prior to the reporting period and registered in the birth cohort | For example, for the reporting period January to December 2021 the denominator would be the number of HIV-exposed infants born between January to December 2020 in non-breast feeding settings and January to December 2019 in breastfeeding settings. |  | b) Population-based denominator | Estimated number of HIV-positive women who delivered within the past 12 months | (or 24 months in breastfeeding settings)
@@ -200,10 +510,374 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true</a:s>
+  </a:s>
+               <a:s r="95">
+                  <a:s r="92">
+                     <a:s r="59">
+                        <a:s r="58">
+                           <a:s>HIE</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="59">
+                           <a:s>&quot;is HIV-exposed infant or child E.DE112&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  and
+  </a:s>
+                     <a:s r="91">
+                        <a:s>(</a:s>
+                        <a:s r="91">
+                           <a:s r="72">
+                              <a:s>exists</a:s>
+                              <a:s r="71">
+                                 <a:s>(</a:s>
+                                 <a:s r="71">
+                                    <a:s>
+                                       <a:s r="61">
+                                          <a:s r="60">
+                                             <a:s>
+                                                <a:s>HIE.&quot;Live Birth Delivery&quot;</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> B</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> </a:s>
+                                    <a:s r="70">
+                                       <a:s>where </a:s>
+                                       <a:s r="70">
+                                          <a:s r="68">
+                                             <a:s>months between </a:s>
+                                             <a:s r="65">
+                                                <a:s>end of </a:s>
+                                                <a:s r="64">
+                                                   <a:s r="63">
+                                                      <a:s r="62">
+                                                         <a:s>B</a:s>
+                                                      </a:s>
+                                                      <a:s>.</a:s>
+                                                      <a:s r="63">
+                                                         <a:s>effective</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s>.</a:s>
+                                                   <a:s r="64">
+                                                      <a:s>toInterval()</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                             </a:s>
+                                             <a:s> and </a:s>
+                                             <a:s r="67">
+                                                <a:s>end of  </a:s>
+                                                <a:s r="66">
+                                                   <a:s>&quot;Measurement Period&quot;</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> &lt; </a:s>
+                                          <a:s r="69">
+                                             <a:s>12 months</a:s>
+                                          </a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s>)</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>
+  or 
+  </a:s>
+                           <a:s r="90">
+                              <a:s>(
+  </a:s>
+                              <a:s r="90">
+                                 <a:s r="76">
+                                    <a:s>exists</a:s>
+                                    <a:s r="75">
+                                       <a:s>(</a:s>
+                                       <a:s r="75">
+                                          <a:s>
+                                             <a:s r="74">
+                                                <a:s r="73">
+                                                   <a:s>
+                                                      <a:s>HIE.&quot;Breastfeeding B.DE32&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> B</a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> and
+  </a:s>
+                                 <a:s r="89">
+                                    <a:s>exists</a:s>
+                                    <a:s r="88">
+                                       <a:s>(</a:s>
+                                       <a:s r="88">
+                                          <a:s>
+                                             <a:s r="78">
+                                                <a:s r="77">
+                                                   <a:s>
+                                                      <a:s>HIE.&quot;Live Birth Delivery&quot;</a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> B</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s> </a:s>
+                                          <a:s r="87">
+                                             <a:s>where </a:s>
+                                             <a:s r="87">
+                                                <a:s r="85">
+                                                   <a:s>months between </a:s>
+                                                   <a:s r="82">
+                                                      <a:s>end of </a:s>
+                                                      <a:s r="81">
+                                                         <a:s r="80">
+                                                            <a:s r="79">
+                                                               <a:s>B</a:s>
+                                                            </a:s>
+                                                            <a:s>.</a:s>
+                                                            <a:s r="80">
+                                                               <a:s>effective</a:s>
+                                                            </a:s>
+                                                         </a:s>
+                                                         <a:s>.</a:s>
+                                                         <a:s r="81">
+                                                            <a:s>toInterval()</a:s>
+                                                         </a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                   <a:s> and </a:s>
+                                                   <a:s r="84">
+                                                      <a:s>end of  </a:s>
+                                                      <a:s r="83">
+                                                         <a:s>&quot;Measurement Period&quot;</a:s>
+                                                      </a:s>
+                                                   </a:s>
+                                                </a:s>
+                                                <a:s> &lt; </a:s>
+                                                <a:s r="86">
+                                                   <a:s>24 months</a:s>
+                                                </a:s>
+                                             </a:s>
+                                          </a:s>
+                                       </a:s>
+                                       <a:s>)</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+  )</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+  )</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  and </a:s>
+                  <a:s r="94">
+                     <a:s r="93">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="94">
+                        <a:s>&quot;Registered in birth cohort&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
             </a:s>
          </annotation>
-         <expression localId="15" locator="98:3-98:6" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+         <expression localId="95" locator="112:3-121:38" xsi:type="And">
+            <operand localId="92" locator="112:3-120:3" xsi:type="And">
+               <operand localId="59" locator="112:3-112:46" name="is HIV-exposed infant or child E.DE112" libraryName="HIE" xsi:type="ExpressionRef"/>
+               <operand localId="91" locator="114:3-120:3" xsi:type="Or">
+                  <operand localId="72" locator="114:4-114:136" xsi:type="Exists">
+                     <operand localId="71" locator="114:10-114:136" xsi:type="Query">
+                        <source localId="61" locator="114:11-114:37" alias="B">
+                           <expression localId="60" locator="114:11-114:35" name="Live Birth Delivery" libraryName="HIE" xsi:type="ExpressionRef"/>
+                        </source>
+                        <where localId="70" locator="114:39-114:135" xsi:type="Less">
+                           <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           <operand xsi:type="ToQuantity">
+                              <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                              <operand localId="68" locator="114:45-114:123" precision="Month" xsi:type="DurationBetween">
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="65" locator="114:60-114:90" xsi:type="End">
+                                    <signature xsi:type="IntervalTypeSpecifier">
+                                       <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    </signature>
+                                    <operand localId="64" locator="114:67-114:90" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                       <operand localId="63" locator="114:67-114:77" path="effective" scope="B" xsi:type="Property"/>
+                                    </operand>
+                                 </operand>
+                                 <operand xsi:type="ToDateTime">
+                                    <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                    <operand localId="67" locator="114:96-114:123" xsi:type="End">
+                                       <signature xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                       </signature>
+                                       <operand localId="66" locator="114:104-114:123" name="Measurement Period" xsi:type="ParameterRef"/>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                           </operand>
+                           <operand localId="69" locator="114:127-114:135" value="12" unit="months" xsi:type="Quantity"/>
+                        </where>
+                     </operand>
+                  </operand>
+                  <operand localId="90" locator="116:3-119:3" xsi:type="And">
+                     <operand localId="76" locator="117:3-117:38" xsi:type="Exists">
+                        <operand localId="75" locator="117:9-117:38" xsi:type="Query">
+                           <source localId="74" locator="117:10-117:37" alias="B">
+                              <expression localId="73" locator="117:10-117:35" name="Breastfeeding B.DE32" libraryName="HIE" xsi:type="ExpressionRef"/>
+                           </source>
+                        </operand>
+                     </operand>
+                     <operand localId="89" locator="118:3-118:135" xsi:type="Exists">
+                        <operand localId="88" locator="118:9-118:135" xsi:type="Query">
+                           <source localId="78" locator="118:10-118:36" alias="B">
+                              <expression localId="77" locator="118:10-118:34" name="Live Birth Delivery" libraryName="HIE" xsi:type="ExpressionRef"/>
+                           </source>
+                           <where localId="87" locator="118:38-118:134" xsi:type="Less">
+                              <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <operand xsi:type="ToQuantity">
+                                 <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                                 <operand localId="85" locator="118:44-118:122" precision="Month" xsi:type="DurationBetween">
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                    <operand localId="82" locator="118:59-118:89" xsi:type="End">
+                                       <signature xsi:type="IntervalTypeSpecifier">
+                                          <pointType name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                                       </signature>
+                                       <operand localId="81" locator="118:66-118:89" name="toInterval" libraryName="WCom" xsi:type="FunctionRef">
+                                          <operand localId="80" locator="118:66-118:76" path="effective" scope="B" xsi:type="Property"/>
+                                       </operand>
+                                    </operand>
+                                    <operand xsi:type="ToDateTime">
+                                       <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                       <operand localId="84" locator="118:95-118:122" xsi:type="End">
+                                          <signature xsi:type="IntervalTypeSpecifier">
+                                             <pointType name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                                          </signature>
+                                          <operand localId="83" locator="118:103-118:122" name="Measurement Period" xsi:type="ParameterRef"/>
+                                       </operand>
+                                    </operand>
+                                 </operand>
+                              </operand>
+                              <operand localId="86" locator="118:126-118:134" value="24" unit="months" xsi:type="Quantity"/>
+                           </where>
+                        </operand>
+                     </operand>
+                  </operand>
+               </operand>
+            </operand>
+            <operand localId="94" locator="121:7-121:38" name="Registered in birth cohort" libraryName="HIE" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="99" locator="130:1-131:38" name="Geographic Region Stratifier" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="99">
+               <a:s>/* end Populations */
+
+/* 
+ * Disaggregators
+ */
+  
+define &quot;Geographic Region Stratifier&quot;:
+	</a:s>
+               <a:s r="98">
+                  <a:s r="97">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="98">
+                     <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="98" locator="131:2-131:38" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="102" locator="133:1-134:36" name="HIV Status Stratifier infant" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="102">
+               <a:s>define &quot;HIV Status Stratifier infant&quot;:
+  </a:s>
+               <a:s r="101">
+                  <a:s r="100">
+                     <a:s>HIE</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="101">
+                     <a:s>&quot;HIV Status Stratifier infant&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="101" locator="134:3-134:36" name="HIV Status Stratifier infant" libraryName="HIE" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="111" locator="136:1-138:45" name="Stratification" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="111">
+               <a:s>define &quot;Stratification&quot;:
+</a:s>
+               <a:s r="110">
+                  <a:s r="107">
+                     <a:s r="105">
+                        <a:s r="104">
+                           <a:s r="103">
+                              <a:s>HIE</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="104">
+                              <a:s>&quot;HIV Status Stratifier infant&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="105">
+                           <a:s>code</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
++ </a:s>
+                     <a:s r="106">
+                        <a:s>':'</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> + </a:s>
+                  <a:s r="109">
+                     <a:s r="108">
+                        <a:s>HIE</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="109">
+                        <a:s>&quot;By Geographic Region Stratifier&quot;</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="110" locator="137:1-138:45" xsi:type="Concatenate">
+            <operand localId="107" locator="137:1-138:5" xsi:type="Concatenate">
+               <operand localId="105" locator="137:1-137:39" path="code" xsi:type="Property">
+                  <source localId="104" locator="137:1-137:34" name="HIV Status Stratifier infant" libraryName="HIE" xsi:type="ExpressionRef"/>
+               </operand>
+               <operand localId="106" locator="138:3-138:5" valueType="t:String" value=":" xsi:type="Literal"/>
+            </operand>
+            <operand name="ToString" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+               <signature name="fhir:string" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="109" locator="138:9-138:45" name="By Geographic Region Stratifier" libraryName="HIE" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
       </def>
    </statements>
 </library>

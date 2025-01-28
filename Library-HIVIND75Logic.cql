@@ -117,9 +117,7 @@ define "Initial Population":
 
 define "Numerator":
 HIE."Has HIV-positive Status" and
-  exists(HE."Positive B.DE257" G
-  with HE."Gonorrhoea test date B.DE255" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  HIE."Positive B.DE257"
   and HIE."Gonorrhoea treatment start date B.DE260"
 
 
@@ -133,9 +131,8 @@ HIE."Has HIV-positive Status" and
 
 define "Denominator":
 HIE."Has HIV-positive Status" and
-  exists(HE."Positive B.DE257" G
-  with HE."Gonorrhoea test date B.DE255" P
-  such that G.partOf.references(P) and P.performed.toInterval() during "Measurement Period")
+  HIE."Positive B.DE257"
+
     
 
 /* end Populations */

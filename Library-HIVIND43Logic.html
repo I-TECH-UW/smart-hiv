@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2025-01-21
+            as of 2025-01-28
           
         
       </td>
@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-21 18:11:19+0000</td>
+            <td style="padding-left: 4px;">2025-01-28 16:09:20+0000</td>
         </tr>
         
 
@@ -483,6 +483,10 @@
                   
                     <li><a href="Library-WHOCommon.html">WHOCommon</a></li>
                   
+                    <li><a href="Library-HIVElements.html">HIVElements</a></li>
+                  
+                    <li><a href="Library-HIVIndicatorElements.html">HIVIndicatorElements</a></li>
+                  
                 </ul>
                 
                 
@@ -509,6 +513,14 @@
                 <tr><th>Numerator</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
               
                 <tr><th>Denominator</th><th>boolean</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Age Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Geographic Region Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>HIV Status pregnancy Stratifier</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
+              
+                <tr><th>Stratification</th><th>string</th><th>0</th><th>1</th><th>Out</th></tr>
               
             </table>
           </td>
@@ -591,6 +603,8 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter &quot;Measurement Period&quot; Interval&lt;Date&gt; default Interval[@2023-01-01, @2023-01-30]
@@ -613,8 +627,12 @@ define &quot;Initial Population&quot;:
  */
 
 define &quot;Numerator&quot;:
-  true
+  HIE.&quot;Currently pregnant SRV.DE7&quot;
+  and exists(HE.&quot;HIV-positive test result&quot; O
+  where start of O.effective.toInterval() = start of HIE.&quot;first anc date&quot;
+  ) and HE.&quot;Date HIV Status Positive&quot; before start of HIE.&quot;first anc date&quot;
 
+  
 
 /**
  * Denominator
@@ -624,10 +642,32 @@ define &quot;Numerator&quot;:
  */
 
 define &quot;Denominator&quot;:
-  true
+  HIE.&quot;Currently pregnant SRV.DE7&quot;
+  and exists(HE.&quot;HIV test&quot; O
+  where start of O.effective.toInterval() = start of HIE.&quot;first anc date&quot;
+  ) and HE.&quot;Date HIV Status Positive&quot; before start of HIE.&quot;first anc date&quot;
     
 
 /* end Populations */
+
+/* 
+ * Disaggregators
+ */
+
+define &quot;Age Stratifier&quot;:
+	HIE.&quot;By Age Stratifier 11&quot;
+  
+define &quot;Geographic Region Stratifier&quot;:
+	HIE.&quot;By Geographic Region Stratifier&quot;
+
+define &quot;HIV Status pregnancy Stratifier&quot;:
+  HIE.&quot;HIV Status pregnancy Stratifier&quot;
+
+define &quot;Stratification&quot;:
+HIE.&quot;By Age Stratifier 11&quot;
++ ':' + HIE.&quot;By Geographic Region Stratifier&quot;
++ ':' + &quot;HIV Status pregnancy Stratifier&quot;
+
 
 </code></pre></td></tr>
             </table>
@@ -642,7 +682,7 @@ define &quot;Denominator&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (16156 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (41724 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -654,7 +694,7 @@ define &quot;Denominator&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (21268 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (67636 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -687,7 +727,7 @@ define &quot;Denominator&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2025+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.4.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Jan 21, 2025 18:11+0000">2025-01-21</span>
+          IG &#169; 2025+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.4.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Jan 28, 2025 16:09+0000">2025-01-28</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

@@ -7,7 +7,7 @@
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "84",
+            "r" : "98",
             "s" : [ {
                "value" : [ "/**\n * Library: HIV.IND.34 Logic\n * Ref No: ART.8\n * Short Name: Appropriate second viral load test after adherence counselling\n *\n * Definition: % of people living with HIV receiving ART with VL ≥1000 copies/mL who received a follow-up viral load test within three months\n *\n * Numerator: Number of people living with HIV on ART who received a follow-up VL test three months after a VL test result of ≥1000 copies/mL during the reporting period*\n * Numerator Calculation: COUNT of clients with \"HIV status\"='HIV-positive' AND \"On ART\"=True AND \"Date of viral load sample collection\" within reporting period AND \"Viral load test result\" GREATER THAN 1000 copies/mL AND follow-up \"Date of viral load sample collection\" LESS THAN 3 months AFTER elevated viral load result\n * Numerator Exclusions: \n *\n * Denominator: Number of people living with HIV on ART with VL ≥1000 copies/mL during the reporting period\n * Denominator Calculation: COUNT of clients with \"HIV status\"='HIV-positive' AND \"On ART\"=True AND \"Date of viral load sample collection\" within reporting period AND \"Viral load test result\" GREATER THAN 1000 copies/mL\n * Denominator Exclusions: \n *\n * Disaggregations:\n * • Gender (female, male, other**) \n *  • Age (0–4, 5–9, 10–14, 15–19, 20–24, 25–49, 50+ years)*** \n *  • Key populations (men who have sex with men, people living in prisons and other closed settings, people who inject drugs, sex workers, trans and gender diverse people)**** \n *  • ART regimen \n *  • Receipt of enhanced adherence counselling (yes/no/unknown) \n *  • Cities and other administrative regions of epidemiologic importance\n *\n * Disaggregation Elements: Gender | Age | Key population member type | Current ART regimen | Enhanced adherence counselling provided\n *\n * Numerator and Denominator Elements:\n * Date of viral load sample collection \n *  HIV status \n *  On ART \n *  Viral load test result\n *\n * Reference: Consolidated guidelines on person-centred HIV strategic information: strengthening routine data for impact. Geneva: World Health Organization; 2022\n * \n * Data Concepts:\n * HIV.A.DE17: Age | Calculated age (number of years) of the client based on date of birth\n * HIV.A.DE18: Gender* | Gender of the client*\n * HIV.A.DE19: Female | Client identifies as female\n * HIV.A.DE20: Male | Client identifies as male\n * HIV.A.DE21: Transgender male | Client identifies as transgender male\n * HIV.A.DE22: Transgender female | Client identifies as transgender female\n * HIV.A.DE23: Other | Additional category\n * HIV.B.DE50: Key population member type* | The type of key population that the client is included in\n * HIV.B.DE51: Sex worker | Client is a sex worker\n * HIV.B.DE52: Men who have sex with men | Client is a man who has sex with men\n * HIV.B.DE53: Trans and gender-diverse people | Client identifies as trans and gender-diverse\n * HIV.B.DE54: People who inject drugs | Client is a person who injects drugs\n * HIV.B.DE55: People living in prisons and other closed settings | Client lives in a prison or another closed setting\n * HIV.B.DE115: HIV status | HIV status reported after applying the national HIV testing algorithm. No single HIV test can provide an HIV-positive diagnosis.\n * HIV.B.DE116: HIV-positive | Client is HIV-positive\n * HIV.B.DE117: HIV-negative | Client is HIV-negative\n * HIV.B.DE118: Unknown | Client has unknown HIV status\n * HIV.D.DE38: On ART | Client is currently taking ART\n * HIV.D.DE75: Current ART regimen | The current ART regimen the client is taking\n * HIV.D.DE194: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.D.DE387: Viral load test result | Result from the viral load test in number of copies/mL\n * HIV.D.DE496: Enhanced adherence counselling provided | Enhanced adherence counselling was provided to the client during the visit\n * HIV.E.DE114: Key population member type* | The type of key population that the infant's mother is included in\n * HIV.E.DE115: Sex worker | Infant's mother is a sex worker\n * HIV.E.DE116: People who inject drugs | Infant's mother is a person who injects drugs\n * HIV.E.DE117: Trans and gender-diverse people | Infant's mother identifies as trans and gender-diverse\n * HIV.E.DE118: People living in prisons and other closed setting | Infant's mother is in a prison or closed setting\n * HIV.G.DE8: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.G.DE12: Viral load test result | Result from the viral load test in number of copies/mL\n * HIV.H.DE47: On ART | Client is currently taking ART \n * HIV.SRV.DE12: Date of viral load sample collection | Date and time when the sample was collected to test the client's HIV viral load\n * HIV.SRV.DE13: Viral load test result | Result from the viral load test in number of copies/mL\n *\n * Additional Context\n * - what it measures: Measures the extent to which people living with HIV with non-suppressed VL receive appropriate follow-up VL testing to check virologic suppression.\n * - rationale: • Virologic suppression is essential to the 95–95–95-related impact goals. | • This indicator complements the VL testing coverage (ART.6) and VL suppression (ART.3) indicators.\n * - method: For the numerator and denominator: HIV patient monitoring tools (for example, ART registers, EMRs, laboratory information system) |  | The recommended maximum reporting period is 12 months. Shorter reporting intervals, for example, three months, are recommended where feasible.\n * \n * Suggested Scoring Method: proportion | http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/proportion-measure-cqfm\n */\n\n","library HIVIND34Logic" ]
             } ]
@@ -1000,56 +1000,160 @@
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "84",
-            "locator" : "154:1-158:33",
+            "localId" : "68",
+            "locator" : "154:1-155:27",
+            "name" : "Current ART regimen",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "68",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Current ART regimen\"",":\n  " ]
+                  }, {
+                     "r" : "67",
+                     "s" : [ {
+                        "r" : "66",
+                        "s" : [ {
+                           "value" : [ "HIE" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "67",
+                        "s" : [ {
+                           "value" : [ "\"Current ART regimen\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "67",
+               "locator" : "155:3-155:27",
+               "name" : "Current ART regimen",
+               "libraryName" : "HIE",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "71",
+            "locator" : "157:1-158:62",
+            "name" : "Enhanced adherence counselling provided Disaggregation",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "71",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Enhanced adherence counselling provided Disaggregation\"",":\n  " ]
+                  }, {
+                     "r" : "70",
+                     "s" : [ {
+                        "r" : "69",
+                        "s" : [ {
+                           "value" : [ "HIE" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "70",
+                        "s" : [ {
+                           "value" : [ "\"Enhanced adherence counselling provided Disaggregation\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "70",
+               "locator" : "158:3-158:62",
+               "name" : "Enhanced adherence counselling provided Disaggregation",
+               "libraryName" : "HIE",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "98",
+            "locator" : "160:1-166:67",
             "name" : "Stratification",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "84",
+                  "r" : "98",
                   "s" : [ {
                      "value" : [ "","define ","\"Stratification\"",":\n " ]
                   }, {
-                     "r" : "83",
+                     "r" : "97",
                      "s" : [ {
-                        "r" : "78",
+                        "r" : "93",
                         "s" : [ {
-                           "r" : "75",
+                           "r" : "89",
                            "s" : [ {
-                              "r" : "73",
+                              "r" : "84",
                               "s" : [ {
-                                 "r" : "70",
+                                 "r" : "81",
                                  "s" : [ {
-                                    "r" : "68",
+                                    "r" : "79",
                                     "s" : [ {
-                                       "r" : "67",
+                                       "r" : "76",
                                        "s" : [ {
-                                          "r" : "66",
+                                          "r" : "74",
+                                          "s" : [ {
+                                             "r" : "73",
+                                             "s" : [ {
+                                                "r" : "72",
+                                                "s" : [ {
+                                                   "value" : [ "HIE" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "73",
+                                                "s" : [ {
+                                                   "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "74",
+                                             "s" : [ {
+                                                "value" : [ "code" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " \n  + " ]
+                                       }, {
+                                          "r" : "75",
+                                          "s" : [ {
+                                             "value" : [ "':'" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " + " ]
+                                    }, {
+                                       "r" : "78",
+                                       "s" : [ {
+                                          "r" : "77",
                                           "s" : [ {
                                              "value" : [ "HIE" ]
                                           } ]
                                        }, {
                                           "value" : [ "." ]
                                        }, {
-                                          "r" : "67",
+                                          "r" : "78",
                                           "s" : [ {
-                                             "value" : [ "\"By Administrative Gender Stratifier\"" ]
+                                             "value" : [ "\"By Age Stratifier 2\"" ]
                                           } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "68",
-                                       "s" : [ {
-                                          "value" : [ "code" ]
                                        } ]
                                     } ]
                                  }, {
-                                    "value" : [ " \n  + " ]
+                                    "value" : [ "\n+ " ]
                                  }, {
-                                    "r" : "69",
+                                    "r" : "80",
                                     "s" : [ {
                                        "value" : [ "':'" ]
                                     } ]
@@ -1057,168 +1161,232 @@
                               }, {
                                  "value" : [ " + " ]
                               }, {
-                                 "r" : "72",
+                                 "r" : "83",
                                  "s" : [ {
-                                    "r" : "71",
+                                    "r" : "82",
                                     "s" : [ {
                                        "value" : [ "HIE" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "72",
+                                    "r" : "83",
                                     "s" : [ {
-                                       "value" : [ "\"By Age Stratifier 2\"" ]
+                                       "value" : [ "\"By Geographic Region Stratifier\"" ]
                                     } ]
                                  } ]
                               } ]
                            }, {
                               "value" : [ "\n+ " ]
                            }, {
-                              "r" : "74",
+                              "r" : "88",
                               "s" : [ {
-                                 "value" : [ "':'" ]
+                                 "value" : [ "Combine","(" ]
+                              }, {
+                                 "r" : "86",
+                                 "s" : [ {
+                                    "r" : "85",
+                                    "s" : [ {
+                                       "value" : [ "HIE" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "86",
+                                    "s" : [ {
+                                       "value" : [ "patientGroups" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ", " ]
+                              }, {
+                                 "r" : "87",
+                                 "s" : [ {
+                                    "value" : [ "':'" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
                               } ]
                            } ]
                         }, {
-                           "value" : [ " + " ]
+                           "value" : [ "\n+ " ]
                         }, {
-                           "r" : "77",
+                           "r" : "92",
                            "s" : [ {
-                              "r" : "76",
+                              "r" : "91",
                               "s" : [ {
-                                 "value" : [ "HIE" ]
+                                 "r" : "90",
+                                 "s" : [ {
+                                    "value" : [ "HIE" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "91",
+                                 "s" : [ {
+                                    "value" : [ "\"Current ART regimen\"" ]
+                                 } ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "77",
+                              "r" : "92",
                               "s" : [ {
-                                 "value" : [ "\"By Geographic Region Stratifier\"" ]
+                                 "value" : [ "code" ]
                               } ]
                            } ]
                         } ]
                      }, {
-                        "value" : [ "\n+ " ]
+                        "value" : [ " \n+ " ]
                      }, {
-                        "r" : "82",
+                        "r" : "96",
                         "s" : [ {
-                           "value" : [ "Combine","(" ]
-                        }, {
-                           "r" : "80",
+                           "r" : "95",
                            "s" : [ {
-                              "r" : "79",
+                              "r" : "94",
                               "s" : [ {
                                  "value" : [ "HIE" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "80",
+                              "r" : "95",
                               "s" : [ {
-                                 "value" : [ "patientGroups" ]
+                                 "value" : [ "\"Enhanced adherence counselling provided Disaggregation\"" ]
                               } ]
                            } ]
                         }, {
-                           "value" : [ ", " ]
+                           "value" : [ "." ]
                         }, {
-                           "r" : "81",
+                           "r" : "96",
                            "s" : [ {
-                              "value" : [ "':'" ]
+                              "value" : [ "code" ]
                            } ]
-                        }, {
-                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "83",
-               "locator" : "155:2-158:33",
+               "localId" : "97",
+               "locator" : "161:2-166:67",
                "type" : "Concatenate",
                "operand" : [ {
-                  "localId" : "78",
-                  "locator" : "155:2-157:45",
+                  "localId" : "93",
+                  "locator" : "161:2-165:32",
                   "type" : "Concatenate",
                   "operand" : [ {
-                     "localId" : "75",
-                     "locator" : "155:2-157:5",
+                     "localId" : "89",
+                     "locator" : "161:2-164:33",
                      "type" : "Concatenate",
                      "operand" : [ {
-                        "localId" : "73",
-                        "locator" : "155:2-156:35",
+                        "localId" : "84",
+                        "locator" : "161:2-163:45",
                         "type" : "Concatenate",
                         "operand" : [ {
-                           "localId" : "70",
-                           "locator" : "155:2-156:7",
+                           "localId" : "81",
+                           "locator" : "161:2-163:5",
                            "type" : "Concatenate",
                            "operand" : [ {
-                              "localId" : "68",
-                              "locator" : "155:2-155:47",
-                              "path" : "code",
-                              "type" : "Property",
-                              "source" : {
-                                 "localId" : "67",
-                                 "locator" : "155:2-155:42",
-                                 "name" : "By Administrative Gender Stratifier",
+                              "localId" : "79",
+                              "locator" : "161:2-162:35",
+                              "type" : "Concatenate",
+                              "operand" : [ {
+                                 "localId" : "76",
+                                 "locator" : "161:2-162:7",
+                                 "type" : "Concatenate",
+                                 "operand" : [ {
+                                    "localId" : "74",
+                                    "locator" : "161:2-161:47",
+                                    "path" : "code",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "localId" : "73",
+                                       "locator" : "161:2-161:42",
+                                       "name" : "By Administrative Gender Stratifier",
+                                       "libraryName" : "HIE",
+                                       "type" : "ExpressionRef"
+                                    }
+                                 }, {
+                                    "localId" : "75",
+                                    "locator" : "162:5-162:7",
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : ":",
+                                    "type" : "Literal"
+                                 } ]
+                              }, {
+                                 "localId" : "78",
+                                 "locator" : "162:11-162:35",
+                                 "name" : "By Age Stratifier 2",
                                  "libraryName" : "HIE",
                                  "type" : "ExpressionRef"
-                              }
+                              } ]
                            }, {
-                              "localId" : "69",
-                              "locator" : "156:5-156:7",
+                              "localId" : "80",
+                              "locator" : "163:3-163:5",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : ":",
                               "type" : "Literal"
                            } ]
                         }, {
-                           "localId" : "72",
-                           "locator" : "156:11-156:35",
-                           "name" : "By Age Stratifier 2",
-                           "libraryName" : "HIE",
-                           "type" : "ExpressionRef"
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "signature" : [ {
+                              "name" : "{http://hl7.org/fhir}string",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : [ {
+                              "localId" : "83",
+                              "locator" : "163:9-163:45",
+                              "name" : "By Geographic Region Stratifier",
+                              "libraryName" : "HIE",
+                              "type" : "ExpressionRef"
+                           } ]
                         } ]
                      }, {
-                        "localId" : "74",
-                        "locator" : "157:3-157:5",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : ":",
-                        "type" : "Literal"
+                        "localId" : "88",
+                        "locator" : "164:3-164:33",
+                        "type" : "Combine",
+                        "source" : {
+                           "localId" : "86",
+                           "locator" : "164:11-164:27",
+                           "name" : "patientGroups",
+                           "libraryName" : "HIE",
+                           "type" : "ExpressionRef"
+                        },
+                        "separator" : {
+                           "localId" : "87",
+                           "locator" : "164:30-164:32",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : ":",
+                           "type" : "Literal"
+                        }
                      } ]
                   }, {
-                     "name" : "ToString",
-                     "libraryName" : "FHIRHelpers",
-                     "type" : "FunctionRef",
-                     "signature" : [ {
-                        "name" : "{http://hl7.org/fhir}string",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "77",
-                        "locator" : "157:9-157:45",
-                        "name" : "By Geographic Region Stratifier",
+                     "localId" : "92",
+                     "locator" : "165:3-165:32",
+                     "path" : "code",
+                     "type" : "Property",
+                     "source" : {
+                        "localId" : "91",
+                        "locator" : "165:3-165:27",
+                        "name" : "Current ART regimen",
                         "libraryName" : "HIE",
                         "type" : "ExpressionRef"
-                     } ]
+                     }
                   } ]
                }, {
-                  "localId" : "82",
-                  "locator" : "158:3-158:33",
-                  "type" : "Combine",
+                  "localId" : "96",
+                  "locator" : "166:3-166:67",
+                  "path" : "code",
+                  "type" : "Property",
                   "source" : {
-                     "localId" : "80",
-                     "locator" : "158:11-158:27",
-                     "name" : "patientGroups",
+                     "localId" : "95",
+                     "locator" : "166:3-166:62",
+                     "name" : "Enhanced adherence counselling provided Disaggregation",
                      "libraryName" : "HIE",
                      "type" : "ExpressionRef"
-                  },
-                  "separator" : {
-                     "localId" : "81",
-                     "locator" : "158:30-158:32",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : ":",
-                     "type" : "Literal"
                   }
                } ]
             }

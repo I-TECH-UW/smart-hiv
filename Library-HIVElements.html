@@ -315,7 +315,7 @@
         
           Draft
           
-            as of 2025-01-21
+            as of 2025-01-28
           
         
       </td>
@@ -430,7 +430,7 @@
         
         <tr>
             <th scope="row"><b>Date: </b></th>
-            <td style="padding-left: 4px;">2025-01-21 18:11:19+0000</td>
+            <td style="padding-left: 4px;">2025-01-28 16:09:20+0000</td>
         </tr>
         
 
@@ -1070,6 +1070,11 @@ define &quot;Breastfeeding B.DE32&quot;:
   [Observation: Concepts.&quot;Breastfeeding - HIV.B.DE32&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
+
+define &quot;Not Breastfeeding B.DE32&quot;:
+  [Observation: Concepts.&quot;Breastfeeding - HIV.B.DE32&quot;] O
+    where O.status in { 'final', 'amended', 'corrected' }
+      and O.value is false
 /* End of Breastfeeding B.DE32 */
 
 /*
@@ -8725,13 +8730,11 @@ define &quot;Dates of substitution within third-line regimen Value&quot;:
 @activity: HIV.D24 Counsel
 @description: Enhanced adherence counselling was provided to the client during the visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+ 
 define &quot;Enhanced adherence counselling provided&quot;:
-  exists &quot;Enhanced adherence counselling provided Observation&quot;
-define &quot;Enhanced adherence counselling provided Observation&quot;:
-  [Observation: Concepts.&quot;Enhanced adherence counselling provided&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value is true
+  [Communication] C
+  where C.topic ~ Concepts.&quot;Enhanced adherence counselling provided&quot;
+
 /* End of Enhanced adherence counselling provided */
 
 /*
@@ -12345,12 +12348,11 @@ define &quot;Dual HIV/syphilis rapid diagnostic test E.DE172 Observation&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: Maternal and child health service visit attended by an HIV-exposed infant
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Maternal and child health service visit&quot;:
-  exists &quot;Maternal and child health service visit Observation&quot;
-define &quot;Maternal and child health service visit Observation&quot;:
-  [Observation: Concepts.&quot;Maternal and child health service visit&quot;] O
-    where O.status in { 'final', 'amended', 'corrected' }
+    [Encounter] E
+    where E.type.coding.code contains Concepts.&quot;Maternal and child health service visit&quot;.code
+
 /* End of Maternal and child health service visit */
 
 /*
@@ -12358,16 +12360,10 @@ define &quot;Maternal and child health service visit Observation&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infant attending MCH services for a 12-month visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;12-month visit&quot;:
-  exists &quot;12-month visit Condition&quot;
-    or exists &quot;12-month visit Observation&quot;
-define &quot;12-month visit Condition&quot;:
-  [Condition: Concepts.&quot;12-month visit&quot;]
-define &quot;12-month visit Observation&quot;:
-  &quot;Maternal and child health service visit Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;12-month visit&quot;
+  &quot;Maternal and child health service visit&quot; E
+    where E.type.coding.code contains Concepts.&quot;12-month visit&quot;.code
 /* End of 12-month visit */
 
 /*
@@ -12375,16 +12371,10 @@ define &quot;12-month visit Observation&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infants attending MCH services for a 24-month visit
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;24-month visit&quot;:
-  exists &quot;24-month visit Condition&quot;
-    or exists &quot;24-month visit Observation&quot;
-define &quot;24-month visit Condition&quot;:
-  [Condition: Concepts.&quot;24-month visit&quot;]
-define &quot;24-month visit Observation&quot;:
-  &quot;Maternal and child health service visit Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;24-month visit&quot;
+  &quot;Maternal and child health service visit&quot; E
+    where E.type.coding.code contains Concepts.&quot;24-month visit&quot;.code
 /* End of 24-month visit */
 
 /*
@@ -12392,16 +12382,10 @@ define &quot;24-month visit Observation&quot;:
 @activity: HIV.E1 Capture or update mother's history
 @description: HIV-exposed infant attending MCH services for a first visit after the end of breastfeeding
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;First visit after the end of breastfeeding&quot;:
-  exists &quot;First visit after the end of breastfeeding Condition&quot;
-    or exists &quot;First visit after the end of breastfeeding Observation&quot;
-define &quot;First visit after the end of breastfeeding Condition&quot;:
-  [Condition: Concepts.&quot;First visit after the end of breastfeeding&quot;]
-define &quot;First visit after the end of breastfeeding Observation&quot;:
-  &quot;Maternal and child health service visit Observation&quot; O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts.&quot;First visit after the end of breastfeeding&quot;
+    &quot;Maternal and child health service visit&quot; E
+    where E.type.coding.code contains Concepts.&quot;First visit after the end of breastfeeding&quot;.code
 /* End of First visit after the end of breastfeeding */
 
 /*
@@ -12409,13 +12393,12 @@ define &quot;First visit after the end of breastfeeding Observation&quot;:
 @activity: HIV.F3 Capture or update infant's/child's history
 @description: Whether the infant has been registered in a birth cohort
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Registered in birth cohort&quot;:
-  exists &quot;Registered in birth cohort Observation&quot;
-define &quot;Registered in birth cohort Observation&quot;:
   [Observation: Concepts.&quot;Registered in birth cohort&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value is true
+
 /* End of Registered in birth cohort */
 
 /*
@@ -13202,12 +13185,16 @@ define &quot;Infant ART start date Value&quot;:
 @activity: HIV.F20 Record infant's/child's final HIV diagnosis
 @description: HIV-exposed infant final status at 18 months or 3 months after cessation of breastfeeding (whichever is later).
 */
-// TODO: Replace placeholder with relevant CQL logic
+
 define &quot;Final diagnosis of HIV-exposed infant E.DE230&quot;:
-  exists &quot;Final diagnosis of HIV-exposed infant E.DE230 Observation&quot;
+  &quot;Final diagnosis of HIV-exposed infant E.DE230 Observation&quot;.value
+
 define &quot;Final diagnosis of HIV-exposed infant E.DE230 Observation&quot;:
   [Observation: Concepts.&quot;Final diagnosis of HIV-exposed infant - HIV.E.DE230&quot;] O
     where O.status in { 'final', 'amended', 'corrected' }
+
+
+/* End of HIV-negative E.DE227 */
 /* End of Final diagnosis of HIV-exposed infant E.DE230 */
 
 /*
@@ -14570,7 +14557,7 @@ define &quot;Reporting date Value&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+xml</th></tr>
-              <tr><td><pre><code>Encoded data (9287172 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (9278104 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -14582,7 +14569,7 @@ define &quot;Reporting date Value&quot;:
           <td colspan="2">
             <table>
               <tr><th><b>Content: </b> application/elm+json</th></tr>
-              <tr><td><pre><code>Encoded data (16268304 characters)</code></pre></td></tr>
+              <tr><td><pre><code>Encoded data (16253560 characters)</code></pre></td></tr>
             </table>
           </td>
         </tr>
@@ -14615,7 +14602,7 @@ define &quot;Reporting date Value&quot;:
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2025+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.4.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Jan 21, 2025 18:11+0000">2025-01-21</span>
+          IG &#169; 2025+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.4.0 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Tue, Jan 28, 2025 16:09+0000">2025-01-28</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |

@@ -111,3 +111,16 @@ define "Denominator":
     HIE."Has Delivery in Health Facility"
 /* end Populations */
 
+/*
+ * Disaggregators
+ */
+
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "Current ART regimen":
+  HIE."Current ART regimen"
+
+define "Stratification":
+HIE."By Geographic Region Stratifier"
++ HIE."Current ART regimen".code 

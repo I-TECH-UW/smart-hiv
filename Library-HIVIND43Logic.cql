@@ -66,6 +66,8 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
+include HIVElements called HE
+include HIVIndicatorElements called HIE
 
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
@@ -88,8 +90,12 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  HIE."Currently pregnant SRV.DE7"
+  and exists(HE."HIV-positive test result" O
+  where start of O.effective.toInterval() = start of HIE."first anc date"
+  ) and HE."Date HIV Status Positive" before start of HIE."first anc date"
 
+  
 
 /**
  * Denominator
@@ -99,8 +105,30 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
+  HIE."Currently pregnant SRV.DE7"
+  and exists(HE."HIV test" O
+  where start of O.effective.toInterval() = start of HIE."first anc date"
+  ) and HE."Date HIV Status Positive" before start of HIE."first anc date"
     
 
 /* end Populations */
+
+/* 
+ * Disaggregators
+ */
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 11"
+  
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "HIV Status pregnancy Stratifier":
+  HIE."HIV Status pregnancy Stratifier"
+
+define "Stratification":
+HIE."By Age Stratifier 11"
++ ':' + HIE."By Geographic Region Stratifier"
++ ':' + "HIV Status pregnancy Stratifier"
+
 

@@ -65,6 +65,9 @@ include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
 
+include HIVElements called HE
+include HIVIndicatorElements called HIE
+
 // Indicator Definition
 parameter "Measurement Period" Interval<Date> default Interval[@2023-01-01, @2023-01-30]
 
@@ -86,7 +89,16 @@ define "Initial Population":
  */
 
 define "Numerator":
-  true
+  HIE."is HIV-exposed infant or child E.DE112"
+  and exists(HIE."Breastfeeding B.DE32" B 
+  where months between end of B.effective.toInterval() and end of Last(HIE."Live Birth Delivery" B where B.effective.toInterval() before "Measurement Period").effective.toInterval() > 12 months
+  )
+  and 
+  exists ( 
+    HE."On ART D.DE38" A 
+    where months between end of A.effective.toInterval() and end of Last(HIE."Live Birth Delivery" B where B.effective.toInterval() before "Measurement Period").effective.toInterval() > 12 months
+  )
+  
 
 
 /**
@@ -97,8 +109,29 @@ define "Numerator":
  */
 
 define "Denominator":
-  true
-    
-
+  HIE."is HIV-exposed infant or child E.DE112"
+  and (HIE."12-month visit"
+  or 
+  exists(HE."Not Breastfeeding B.DE32" B 
+  with HE."Maternal and child health service visit" E
+  such that B.encounter.references(E) and E.period.toInterval() after end of Last(HIE."Live Birth Delivery" B where B.effective.toInterval() before "Measurement Period").effective.toInterval())
+  )
 /* end Populations */
 
+/* 
+ * Disaggregators
+ */
+
+define "Age Stratifier":
+	HIE."By Age Stratifier 10"
+
+define "Timing of ART initiation":
+  HIE."Timing of ART initiation"
+  
+define "Geographic Region Stratifier":
+	HIE."By Geographic Region Stratifier"
+
+define "Stratification":
+HIE."By Age Stratifier 10"
++ ':' + HIE."By Geographic Region Stratifier"
++ HIE."Timing of ART initiation".code

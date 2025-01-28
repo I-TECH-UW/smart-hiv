@@ -151,12 +151,16 @@ define "Geographic Region Stratifier":
 define "patientGroups Stratifier":
 	HIE."patientGroups"
 
+define "Current ART regimen":
+  HIE."Current ART regimen"
+
+define "Enhanced adherence counselling provided Disaggregation":
+  HIE."Enhanced adherence counselling provided Disaggregation"
+
 define "Stratification":
  HIE."By Administrative Gender Stratifier".code 
   + ':' + HIE."By Age Stratifier 2"
 + ':' + HIE."By Geographic Region Stratifier"
 + Combine(HIE.patientGroups, ':')
-
-//Need to add
-// *  • ART regimen 
- //*  • Receipt of enhanced adherence counselling (yes/no/unknown) 
++ HIE."Current ART regimen".code 
++ HIE."Enhanced adherence counselling provided Disaggregation".code
