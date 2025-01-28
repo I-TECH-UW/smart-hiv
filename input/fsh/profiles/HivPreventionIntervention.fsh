@@ -7,5 +7,5 @@ Description: "HIV prevention intervention"
 * ^title = "HIV Prevention Intervention"
 * code = HIVConcepts#HIV.PRV.DE2 "HIV Prevention Intervention"
 * value[x] only CodeableConcept
-* valueCodeableConcept from HIV.PRV.DE2 (required)
+* valueCodeableConcept from http://smart.who.int/hiv/ValueSet/HIV.PRV.DE2 (required)
 * effective[x] 1..1

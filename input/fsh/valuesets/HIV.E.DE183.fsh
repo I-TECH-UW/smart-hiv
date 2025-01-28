@@ -8,3 +8,6 @@ Description: "Value set of early infant diagnosis (EID) HIV test number using th
 * ^experimental = true
 * ^name = "HIVEDE183"
 * ^url = "http://smart.who.int/hiv/ValueSet/HIV.E.DE183"
+
+* HIVConcepts#HIV.E.DE184 "EID test number 1"
+* HIVConcepts#HIV.E.DE185 "EID test number 2"

@@ -2557,7 +2557,7 @@ define "At elevated risk for HIV acquisition B.DE225":
 */
 
 define "Syndrome/STI diagnosed B.DE226":
-    exists("Urethral discharge syndrome B.DE227") or exists("Vaginal discharge syndrome B.DE228") or exists("Lower Abdominal pain  B.DE229") or exists("Genital ulcer disease syndrome B.DE230") or
+    exists("Urethral discharge syndrome B.DE227") or exists("Vaginal discharge syndrome B.DE228") or exists("Lower Abdominal pain B.DE229") or exists("Genital ulcer disease syndrome B.DE230") or
     exists("Anorectal discharge B.DE231")
 
 define "Syndrome/STI diagnosed B.DE226 Condition":
@@ -2591,10 +2591,10 @@ define "Vaginal discharge syndrome B.DE228":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-define "Lower Abdominal pain  B.DE229":
+define "Lower Abdominal pain B.DE229":
   [Condition: Concepts."Lower Abdominal pain  - HIV.B.DE229"]
 
-/* End of Lower Abdominal pain  B.DE229 */
+/* End of Lower Abdominal pain B.DE229 */
 
 /*
 @dataElement: HIV.B.DE230 - Genital ulcer disease syndrome
@@ -9514,16 +9514,16 @@ define "Vaginal discharge syndrome D.DE780 Observation":
 @description: Client diagnosed with lower abdominal pain
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Lower Abdominal pain  D.DE781":
-  exists "Lower Abdominal pain  D.DE781 Condition"
-    or exists "Lower Abdominal pain  D.DE781 Observation"
-define "Lower Abdominal pain  D.DE781 Condition":
+define "Lower Abdominal pain D.DE781":
+  exists "Lower Abdominal pain D.DE781 Condition"
+    or exists "Lower Abdominal pain D.DE781 Observation"
+define "Lower Abdominal pain D.DE781 Condition":
   [Condition: Concepts."Lower Abdominal pain  - HIV.D.DE781"]
-define "Lower Abdominal pain  D.DE781 Observation":
+define "Lower Abdominal pain D.DE781 Observation":
   "Syndrome/STI diagnosed D.DE778 Observation" O
     where O.status in { 'final', 'amended', 'corrected' }
       and O.value ~ Concepts."Lower Abdominal pain  - HIV.D.DE781"
-/* End of Lower Abdominal pain  D.DE781 */
+/* End of Lower Abdominal pain D.DE781 */
 
 /*
 @dataElement: HIV.D.DE782 - Genital ulcer disease syndrome
@@ -13283,39 +13283,6 @@ define "Severe illness, hospitalization H.DE76 Observation":
       and O.value ~ Concepts."Severe illness, hospitalization - HIV.H.DE76"
 /* End of Severe illness, hospitalization H.DE76 */
 
-/*
-@dataElement: HIV.H.DE77 - Drugs out of stock 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because of drugs being out of stock 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Drugs out of stock ":
-  exists "Drugs out of stock  Condition"
-    or exists "Drugs out of stock  Observation"
-define "Drugs out of stock  Condition":
-  [Condition: Concepts."Drugs out of stock "]
-define "Drugs out of stock  Observation":
-  "Reason ART stopped H.DE74 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Drugs out of stock "
-/* End of Drugs out of stock  */
-
-/*
-@dataElement: HIV.H.DE78 - Client lacks finances 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because client lacked finances 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Client lacks finances ":
-  exists "Client lacks finances  Condition"
-    or exists "Client lacks finances  Observation"
-define "Client lacks finances  Condition":
-  [Condition: Concepts."Client lacks finances "]
-define "Client lacks finances  Observation":
-  "Reason ART stopped H.DE74 Observation" O
-    where O.status in { 'final', 'amended', 'corrected' }
-      and O.value ~ Concepts."Client lacks finances "
-/* End of Client lacks finances  */
 
 /*
 @dataElement: HIV.H.DE79 - Excluded HIV infection in infant

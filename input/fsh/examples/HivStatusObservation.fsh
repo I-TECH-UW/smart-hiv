@@ -5,6 +5,6 @@ Description: "This is an example of an HIV Positive Status Observation resource 
 
 * status = #final
 * code = HIVConcepts#HIV.B.DE115
-* subject = Reference(Patient/HivExamplePatient) // Reference to a Patient resource
+* subject = Reference(Patient/ExampleHivPatient) // Reference to a Patient resource
 * effectiveDateTime = "2023-01-10T09:00:00Z" // Example effective dateTime
 * valueCodeableConcept = HIVConcepts#HIV.B.DE116 "HIV-positive"
