@@ -72,9 +72,8 @@ include HIVCommon version '0.0.1' called HIC
 include FHIRHelpers version '4.0.1'
 
 include WHOCommon called WCom
-include HIVConcepts called HC
-include HIVConceptsCustom called HCC
-include HIVCommon called Common
+include HIVConceptsCustom version '0.0.1' called HCC
+include HIVCommon version '0.0.1' called Common
 include HIVElements called HE
 include HIVIndicatorElements called HIE
 

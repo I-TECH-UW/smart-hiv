@@ -9,8 +9,8 @@ include WHOConcepts
 include WHOCommon called WC
 include WHOElements called WE
 
-include HIVConcepts called Concepts
-include HIVConceptsCustom called ConceptsCustom
+include HIVConcepts version '0.0.2' called Concepts
+include HIVConceptsCustom version '0.0.1' called ConceptsCustom
 include HIVElements called Elements
 include HIVCommon called Common
 include HIVConfig called Config
@@ -6213,7 +6213,9 @@ define "OAMT":
 */
 
 define "NSP":
-  exists(Elements."NSP" DUS where DUS.timing.toInterval() during "Measurement Period")
+  false
+  // TODO: doesn't compile DeviceUseStatement causes translation error
+  //exists(Elements."NSP" DUS where DUS.timing.toInterval() during "Measurement Period")
 /* End of NSP */
 
 /*
@@ -6319,8 +6321,10 @@ define "HIV-negative PRV.DE13 Observation":
 */
 
 define "Date injecting equipment provided":
-  exists(Elements."Date injecting equipment provided" DUS
-  where DUS.timing.toInterval() during "Measurement Period")
+  false
+  // TODO: doesn't compile DeviceUseStatement causes translation error
+  // exists(Elements."Date injecting equipment provided" DUS
+  // where DUS.timing.toInterval() during "Measurement Period")
 /* End of Date injecting equipment provided */
 
 /*

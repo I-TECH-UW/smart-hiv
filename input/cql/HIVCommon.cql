@@ -254,7 +254,7 @@ define fluent function dailyDose(Dispense "MedicationDispense"):
   define STI_testing:
     [Procedure] P
   where P.status = 'completed'
-  and P.code ~ Concepts."STI testing and treatment services"
+  and P.code ~ Concepts."STI testing and treatment services" 
 
 
 /**

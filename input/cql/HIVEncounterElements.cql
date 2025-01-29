@@ -4077,9 +4077,10 @@ define "Adherence counselling provided D.DE465 Observation":
 define "Enhanced adherence counselling provided":
   exists "Enhanced adherence counselling provided Observation"
 define "Enhanced adherence counselling provided Observation":
-  Elements."Enhanced adherence counselling provided Observation" O
-    where O.encounter.references(EncounterId)
-      or O.effective.toInterval() starts on or before Today
+  Elements."Enhanced adherence counselling provided" C
+    where C.encounter.references(EncounterId)
+      or C.sent.toInterval() starts on or before Today
+      or C.received.toInterval() starts on or before Today
 /* End of Enhanced adherence counselling provided */
 
 /*

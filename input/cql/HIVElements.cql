@@ -9,8 +9,8 @@ include WHOConcepts
 include WHOCommon called WC
 include WHOElements called WE
 
-include HIVConcepts called Concepts
-include HIVConceptsCustom called ConceptsCustom
+include HIVConcepts version '0.0.2' called Concepts
+include HIVConceptsCustom version '0.0.1' called ConceptsCustom
 include HIVCommon called Common
 
 context Patient
@@ -50,13 +50,15 @@ define Exposure_Non_Occupational_consensual_sex:
 
 // Needle Syringe Dispensed
 define "Needle Syringe Dispensed":  
-  [DeviceUseStatement] DUS
-  with [Observation: Concepts."Key population member - HIV.E.DE113"] O
-      such that DUS.reasonReference.references(O) 
-        and O.status in { 'final', 'amended', 'corrected' }
-        and exists(O.category OC where OC ~ ConceptsCustom."social-history")
-        and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
-  where DUS.status = 'completed'
+  null
+  // Todo: Error with compilation
+  // [DeviceUseStatement] DUS
+  // with [Observation: Concepts."Key population member - HIV.E.DE113"] O
+  //     such that DUS.reasonReference.references(O) 
+  //       and O.status in { 'final', 'amended', 'corrected' }
+  //       and exists(O.category OC where OC ~ ConceptsCustom."social-history")
+  //       and O.value ~ Concepts."People who inject drugs - HIV.B.DE54"
+  // where DUS.status = 'completed'
 
 define "HIV PREP Active":
 [MedicationStatement] MS
@@ -13338,7 +13340,7 @@ define "At elevated risk for HIV acquisition PRV.DE1":
 */
 
 define "HIV prevention intervention":
-  exists ("PrEP service") or exists("OAMT") or exists("NSP") or exists("STI services") or exists("VMMC") or exists("Other PRV.DE8")
+  exists ("PrEP service") or exists("OAMT") or "NSP" or exists("STI services") or exists("VMMC") or exists("Other PRV.DE8")
 /* End of HIV prevention intervention */
 
 /*
@@ -13402,19 +13404,21 @@ define "OAMT statusHistory date":
 */
 
 define "NSP":
-  [DeviceUseStatement] DUS
-  with [Device: ConceptsCustom."needle-syringe"] D
-      such that DUS.reasonReference.references(D) 
-        and D.status in { 'active' }
-  where DUS.status = 'completed'
+  false
+  // TODO: fix device use statement 
+  // [DeviceUseStatement] DUS
+  // with [Device: ConceptsCustom."needle-syringe"] D
+  //     such that DUS.reasonReference.references(D) 
+  //       and D.status in { 'active' }
+  // where DUS.status = 'completed'
 
-  define "NSP date":
-  [DeviceUseStatement] DUS
-  with [Device: ConceptsCustom."needle-syringe"] D
-      such that DUS.reasonReference.references(D) 
-        and D.status in { 'active' }
-  where DUS.status = 'completed'
-  return start of DUS.timing.toInterval()
+  // define "NSP date":
+  // [DeviceUseStatement] DUS
+  // with [Device: ConceptsCustom."needle-syringe"] D
+  //     such that DUS.reasonReference.references(D) 
+  //       and D.status in { 'active' }
+  // where DUS.status = 'completed'
+  // return start of DUS.timing.toInterval()
 /* End of NSP */
 
 /*
@@ -13483,9 +13487,9 @@ define "Other PRV.DE8 date":
 @activity: HIV.B6 Capture or update client history
 @description: Date the client accessed HIV prevention intervention
 */
-
+// TODO: NSP date requires fix to DeviceUseStatement support
 define "Date accessed HIV prevention intervention": 
-  flatten{"PrEP service date", "NSP date", "STI services date", "VMMC date", "Other PRV.DE8 date","OAMT status date"}
+  flatten{"PrEP service date", /*"NSP date",*/ "STI services date", "VMMC date", "Other PRV.DE8 date","OAMT status date"}
   
   //, "OAMT","NSP".timing,"STI services".performed,"VMMC".performed,"Other PRV.DE8".effective}
 /* End of Date accessed HIV prevention intervention */
@@ -13562,11 +13566,12 @@ define "Unknown PRV.DE14 Observation":
 */
 
 define "Date injecting equipment provided":
-  [DeviceUseStatement] DUS
-  with [Device] D
-    such that DUS.device.references(D)
-    and D.type ~ ConceptsCustom."needle-syringe"
-  where DUS.status = 'completed'
+  null
+  // [DeviceUseStatement] DUS
+  // with [Device] D
+  //   such that DUS.device.references(D)
+  //   and D.type ~ ConceptsCustom."needle-syringe"
+  // where DUS.status = 'completed'
 
 
 /* End of Date injecting equipment provided */

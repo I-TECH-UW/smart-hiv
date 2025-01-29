@@ -1,5 +1,5 @@
-library HIVConceptsCustom
-codesystem "HIVConceptsCustom": 'http://smart.who.int/hiv/CodeSystem/HIVConceptsCustom'
+library HIVConceptsCustom version '0.0.1'
+// codesystem "HIVConceptsCustom": 'http://smart.who.int/hiv/CodeSystem/HIVConceptsCustom'
 
 codesystem "ConditionCategoryCodes": 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem "ConditionClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/condition-clinical'
@@ -61,7 +61,7 @@ code "Two to four times a day (qualifier value)": '396111001' from "SNOMEDCT" di
 
 
 // Encounter Types
-code "HTS Visit": 'HTS Visit' from "HIVConceptsCustom"
+code "HTS Visit": 'HTS Visit' from "missing concepts"
 
 //not currently provided
 code "needle-syringe": 'needle syringe' from "missing concepts"

@@ -1,5 +1,4 @@
-library WHOConcepts
-
+library WHOConcepts version '0.0.2'
 // Code Systems
 codesystem "ICD-10": 'http://hl7.org/fhir/sid/icd-10'
 codesystem "SNOMED-CT": 'http://snomed.info/sct'

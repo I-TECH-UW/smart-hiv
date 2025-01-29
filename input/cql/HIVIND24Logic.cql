@@ -119,9 +119,10 @@ define "Numerator":
   exists(HE."OAMT" t where t starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
       and t starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
   or 
-  exists(HE."NSP" DUS where DUS.timing.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
-  and DUS.timing.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
-  or 
+  // TODO: DeviceUseStatement causing translation issue
+  // exists(HE."NSP" DUS where DUS.timing.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
+  // and DUS.timing.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
+  // or 
   exists(HE."STI services" STI where STI.performed.toInterval() starts before (start of HIE."First Negative Test within Measurement Period".effective.toInterval() + "Intervention Interval")
   and STI.performed.toInterval() starts after (start of HIE."First Negative Test within Measurement Period".effective.toInterval()))
   or 
