@@ -6,8 +6,8 @@ codesystem "ConditionClinicalStatusCodes": 'http://terminology.hl7.org/CodeSyste
 codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/observation-category'
 codesystem "missing concepts": 'https://worldhealthorganization.github.io/smart-hiv/CodeSystem/missing-concepts'
 codesystem "Devicestatement-status": 'http://hl7.org/fhir/device-statement-status'
-codesystem "SNOMEDCT:2018-03": 'urn:oid:2.16.840.1.113883.6.96' version 'urn:hl7:version:2018-03'
-codesystem "SNOMEDCT": 'urn:oid:2.16.840.1.113883.6.96'
+codesystem "SNOMEDCT:2018-03": 'http://snomed.info/sct' version '2018-03'
+codesystem "SNOMEDCT": 'http://snomed.info/sct'
 codesystem "AdverseEventSeverity": 'http://terminology.hl7.org/CodeSystem/adverse-event-severity'
 codesystem "RoleCode": 'http://terminology.hl7.org/CodeSystem/v3-RoleCode'
 

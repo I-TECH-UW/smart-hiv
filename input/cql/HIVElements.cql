@@ -147,13 +147,14 @@ define "Visit date A.DE3":
 @activity: HIV.A6.1 Review sociodemographic data with client | HIV.A5 Create new client record
 @description: If DOB is unknown, enter the client's estimated age. Display client's age in number of years.
 */
-// TODO: Replace placeholder with relevant CQL logic
 define "Estimated age":
   [Observation: Concepts."Estimated age"] O
     where O.status in { 'final', 'amended', 'corrected' }
 define "Estimated age Value":
-  "Estimated age" O
-  return O.value
+  First("Estimated age" O
+    where O.value is not null
+    and O.value is Quantity
+  ).value as Quantity
 /* End of Estimated age */
 
 /*
@@ -294,8 +295,8 @@ define "HTS Visit":
 @description: Reason for HIV testing services visit
 */
 define "Reason for visit B.DE1":
-  "HTS Visit" E
-  return E.reasonCode 
+  flatten("HTS Visit" E
+  return E.reasonCode)
 /* End of Reason for visit B.DE1 */
 
 /*
@@ -792,7 +793,7 @@ define "Date informed of HIV-positive diagnosis":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date informed of HIV-positive diagnosis Value":
   "Date informed of HIV-positive diagnosis" O
-  return O.value
+  return O.value as dateTime
 /* End of Date informed of HIV-positive diagnosis */
 
 /*
@@ -817,7 +818,7 @@ define "HIV diagnosis date":
     where O.status in { 'final', 'amended', 'corrected' }
 define "HIV diagnosis date Value":
   "HIV diagnosis date" O
-  return O.value
+  return O.value as dateTime
 /* End of HIV diagnosis date */
 
 /*
@@ -831,7 +832,7 @@ define "ART start date B.DE72":
     where O.status in { 'final', 'amended', 'corrected' }
 define "ART start date B.DE72 Value":
   "ART start date B.DE72" O
-  return O.value
+  return O.value as dateTime
 /* End of ART start date B.DE72 */
 
 /*
@@ -858,7 +859,9 @@ define "HIV test type B.DE81":
     where O.status in { 'final', 'amended', 'corrected' }
 define "HIV test type B.DE81 Value":
   "HIV test type B.DE81" O
-  return O.value
+  where O.value is CodeableConcept
+  and O.value is not null
+  return O.value as CodeableConcept
 /* End of HIV test type B.DE81 */
 
 /*
@@ -1272,7 +1275,9 @@ define "HIV test result Observation":
 
 define "HIV test result Value":
   "HIV test" O
-  return O.value
+  where O.value is CodeableConcept
+  and O.value is not null
+  return O.value as CodeableConcept
 
 // Moved and Redefined in HIE
 // define "HIV test resulted":
@@ -2157,7 +2162,9 @@ define "Date/time of follow-up appointment B.DE195":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date/time of follow-up appointment B.DE195 Value":
   "Date/time of follow-up appointment B.DE195" O
-  return O.value
+  where O.value is not null
+  and O.value is dateTime
+  return O.value as dateTime
 /* End of Date/time of follow-up appointment B.DE195 */
 
 /*
@@ -2729,7 +2736,7 @@ define "Syphilis treatment start date B.DE254":
 
 define "Gonorrhoea test date B.DE255":
   "Gonorrhoea test result B.DE256" O
-  return O.effective
+  return start of O.effective.toInterval()
 /* End of Gonorrhoea test date B.DE255 */
 
 /*
@@ -2941,7 +2948,9 @@ define "Date/time of suspected exposure to HIV C.DE9":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date/time of suspected exposure to HIV C.DE9 Value":
   "Date/time of suspected exposure to HIV C.DE9" O
-  return O.value
+  where O.value is dateTime
+  and O.value is not null
+  return O.value as dateTime
 /* End of Date/time of suspected exposure to HIV C.DE9 */
 
 /*
@@ -3352,7 +3361,7 @@ define "Date medications prescribed C.DE74":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date medications prescribed C.DE74 Value":
   "Date medications prescribed C.DE74" O
-  return O.value
+  return O.value as dateTime
 /* End of Date medications prescribed C.DE74 */
 
 /*
@@ -3742,7 +3751,7 @@ define "Estimated creatinine clearance":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Estimated creatinine clearance Value":
   "Estimated creatinine clearance" O
-  return O.value
+  return O.value as Quantity
 /* End of Estimated creatinine clearance */
 
 /*
@@ -3861,7 +3870,7 @@ define "Number of days prescribed C.DE121":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Number of days prescribed C.DE121 Value":
   "Number of days prescribed C.DE121" O
-  return O.value
+  return O.value as Quantity
 /* End of Number of days prescribed C.DE121 */
 
 /*
@@ -3889,7 +3898,7 @@ define "Date/time of follow-up appointment C.DE124":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date/time of follow-up appointment C.DE124 Value":
   "Date/time of follow-up appointment C.DE124" O
-  return O.value
+  return O.value as dateTime
 /* End of Date/time of follow-up appointment C.DE124 */
 
 /*
@@ -4095,7 +4104,7 @@ define "Number of HIV self-test kits distributed":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Number of HIV self-test kits distributed Value":
   "Number of HIV self-test kits distributed" O
-  return O.value
+  return O.value as Quantity
 /* End of Number of HIV self-test kits distributed */
 
 /*
@@ -4562,7 +4571,7 @@ define "Body temperature":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Body temperature Value":
   "Body temperature" O
-  return O.value
+  return O.value as Quantity
 /* End of Body temperature */
 
 /*
@@ -4576,7 +4585,7 @@ define "Body weight":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Body weight Value":
   "Body weight" O
-  return O.value
+  return O.value as Quantity
 /* End of Body weight */
 
 /*
@@ -5919,7 +5928,7 @@ define "Date of scheduled review of viral load test results":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date of scheduled review of viral load test results Value":
   "Date of scheduled review of viral load test results" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of scheduled review of viral load test results */
 
 /*
@@ -7311,7 +7320,7 @@ define "CD4 count D.DE364":
     where O.status in { 'final', 'amended', 'corrected' }
 define "CD4 count D.DE364 Value":
   "CD4 count D.DE364" O
-  return O.value
+  return O.value as Quantity
 /* End of CD4 count D.DE364 */
 
 /*
@@ -7325,7 +7334,7 @@ define "Baseline CD4 count D.DE367":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Baseline CD4 count D.DE367 Value":
   "Baseline CD4 count D.DE367" O
-  return O.value
+  return O.value as Quantity
 /* End of Baseline CD4 count D.DE367 */
 
 /*
@@ -7339,7 +7348,7 @@ define "Date of baseline CD4 count test D.DE368":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date of baseline CD4 count test D.DE368 Value":
   "Date of baseline CD4 count test D.DE368" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of baseline CD4 count test D.DE368 */
 
 /*
@@ -7367,7 +7376,7 @@ define "Viral load test result D.DE387":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Viral load test result D.DE387 Value":
   "Viral load test result D.DE387" O
-  return O.value
+  return O.value as Quantity
 /* End of Viral load test result D.DE387 */
 
 /*
@@ -7705,7 +7714,7 @@ define "Date of scheduled monitoring examination":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date of scheduled monitoring examination Value":
   "Date of scheduled monitoring examination" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of scheduled monitoring examination */
 
 /*
@@ -7719,7 +7728,7 @@ define "Date viral load test results received by client D.DE417":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date viral load test results received by client D.DE417 Value":
   "Date viral load test results received by client D.DE417" O
-  return O.value
+  return O.value as dateTime
 /* End of Date viral load test results received by client D.DE417 */
 
 /*
@@ -7934,7 +7943,7 @@ define "Date medications prescribed D.DE458":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date medications prescribed D.DE458 Value":
   "Date medications prescribed D.DE458" O
-  return O.value
+  return O.value as dateTime
 /* End of Date medications prescribed D.DE458 */
 
 /*
@@ -7959,8 +7968,8 @@ define "Number of days medications prescribed":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Number of days medications prescribed Value":
   "Number of days medications prescribed" O
-  return O.value
-/* End of Number of days medications prescribed */
+  return O.value as Quantity
+/* End of Number of days medicat ions prescribed */
 
 /*
 @dataElement: HIV.D.DE465 - Adherence counselling provided
@@ -8197,7 +8206,7 @@ define "Dates of substitution within second-line regimen":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Dates of substitution within second-line regimen Value":
   "Dates of substitution within second-line regimen" O
-  return O.value
+  return O.value as dateTime
 /* End of Dates of substitution within second-line regimen */
 
 /*
@@ -8211,7 +8220,7 @@ define "Dates of substitution within third-line regimen":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Dates of substitution within third-line regimen Value":
   "Dates of substitution within third-line regimen" O
-  return O.value
+  return O.value as dateTime
 /* End of Dates of substitution within third-line regimen */
 
 /*
@@ -8346,7 +8355,7 @@ define "Date/time of follow-up appointment D.DE524":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date/time of follow-up appointment D.DE524 Value":
   "Date/time of follow-up appointment D.DE524" O
-  return O.value
+  return O.value as dateTime
 /* End of Date/time of follow-up appointment D.DE524 */
 
 /*
@@ -8441,7 +8450,7 @@ define "Follow-up test recommended date":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Follow-up test recommended date Value":
   "Follow-up test recommended date" O
-  return O.value
+  return O.value as dateTime
 /* End of Follow-up test recommended date */
 
 /*
@@ -9208,7 +9217,7 @@ define "Cervical cancer screening interval amongst WLHIV":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Cervical cancer screening interval amongst WLHIV Value":
   "Cervical cancer screening interval amongst WLHIV" O
-  return O.value
+  return O.value as Quantity
 /* End of Cervical cancer screening interval amongst WLHIV */
 
 /*
@@ -9620,7 +9629,7 @@ define "Syphilis test date D.DE801":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Syphilis test date D.DE801 Value":
   "Syphilis test date D.DE801" O
-  return O.value
+  return O.value as dateTime
 /* End of Syphilis test date D.DE801 */
 
 /*
@@ -9698,7 +9707,7 @@ define "Syphilis treatment start date D.DE806":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Syphilis treatment start date D.DE806 Value":
   "Syphilis treatment start date D.DE806" O
-  return O.value
+  return O.value as dateTime
 /* End of Syphilis treatment start date D.DE806 */
 
 /*
@@ -9712,7 +9721,7 @@ define "Gonorrhoea test date D.DE807":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Gonorrhoea test date D.DE807 Value":
   "Gonorrhoea test date D.DE807" O
-  return O.value
+  return O.value as dateTime
 /* End of Gonorrhoea test date D.DE807 */
 
 /*
@@ -9790,7 +9799,7 @@ define "Gonorrhoea treatment start date D.DE812":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Gonorrhoea treatment start date D.DE812 Value":
   "Gonorrhoea treatment start date D.DE812" O
-  return O.value
+  return O.value as dateTime
 /* End of Gonorrhoea treatment start date D.DE812 */
 
 /*
@@ -11277,7 +11286,7 @@ define "C reactive protein test result":
     where O.status in { 'final', 'amended', 'corrected' }
 define "C reactive protein test result Value":
   "C reactive protein test result" O
-  return O.value
+  return O.value as Quantity
 /* End of C reactive protein test result */
 
 /*
@@ -11451,7 +11460,7 @@ define "Live Birth Delivery":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Delivery date":
   "Live Birth Delivery" O
-  return O.effective
+  return start of O.effective.toInterval()
 /* End of Delivery date */
 
 /*
@@ -11534,7 +11543,7 @@ define "Infant date of birth":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Infant date of birth Value":
   "Infant date of birth" O
-  return O.value
+  return O.value as dateTime
 /* End of Infant date of birth */
 
 /*
@@ -12588,7 +12597,7 @@ define "HIV test date E.DE224":
     where O.status in { 'final', 'amended', 'corrected' }
 define "HIV test date E.DE224 Value":
   "HIV test date E.DE224" O
-  return O.value
+  return O.value as dateTime
 /* End of HIV test date E.DE224 */
 
 /*
@@ -12666,7 +12675,7 @@ define "Infant ART start date":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Infant ART start date Value":
   "Infant ART start date" O
-  return O.value
+  return O.value as dateTime
 /* End of Infant ART start date */
 
 /*
@@ -12676,7 +12685,7 @@ define "Infant ART start date Value":
 */
 
 define "Final diagnosis of HIV-exposed infant E.DE230":
-  "Final diagnosis of HIV-exposed infant E.DE230 Observation".value
+  First("Final diagnosis of HIV-exposed infant E.DE230 Observation".value) as FHIR.CodeableConcept
 
 define "Final diagnosis of HIV-exposed infant E.DE230 Observation":
   [Observation: Concepts."Final diagnosis of HIV-exposed infant - HIV.E.DE230"] O
@@ -12748,7 +12757,7 @@ define "CD4 count G.DE1":
     where O.status in { 'final', 'amended', 'corrected' }
 define "CD4 count G.DE1 Value":
   "CD4 count G.DE1" O
-  return O.value
+  return O.value as Quantity
 /* End of CD4 count G.DE1 */
 
 /*
@@ -12762,7 +12771,7 @@ define "Baseline CD4 count G.DE3":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Baseline CD4 count G.DE3 Value":
   "Baseline CD4 count G.DE3" O
-  return O.value
+  return O.value as Quantity
 /* End of Baseline CD4 count G.DE3 */
 
 /*
@@ -12776,7 +12785,7 @@ define "Date of viral load sample collection G.DE8":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date of viral load sample collection G.DE8 Value":
   "Date of viral load sample collection G.DE8" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of viral load sample collection G.DE8 */
 
 /*
@@ -12790,7 +12799,7 @@ define "Viral load test result G.DE12":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Viral load test result G.DE12 Value":
   "Viral load test result G.DE12" O
-  return O.value
+  return O.value as Quantity
 /* End of Viral load test result G.DE12 */
 
 /*
@@ -12804,7 +12813,7 @@ define "HBsAg test date G.DE17":
     where O.status in { 'final', 'amended', 'corrected' }
 define "HBsAg test date G.DE17 Value":
   "HBsAg test date G.DE17" O
-  return O.value
+  return O.value as dateTime
 /* End of HBsAg test date G.DE17 */
 
 /*
@@ -12882,7 +12891,7 @@ define "HCV test date G.DE42":
     where O.status in { 'final', 'amended', 'corrected' }
 define "HCV test date G.DE42 Value":
   "HCV test date G.DE42" O
-  return O.value
+  return O.value as dateTime
 /* End of HCV test date G.DE42 */
 
 /*
@@ -12960,7 +12969,7 @@ define "HCV viral load test date G.DE47":
     where O.status in { 'final', 'amended', 'corrected' }
 define "HCV viral load test date G.DE47 Value":
   "HCV viral load test date G.DE47" O
-  return O.value
+  return O.value as dateTime
 /* End of HCV viral load test date G.DE47 */
 
 /*
@@ -13021,7 +13030,7 @@ define "Syphilis test date G.DE69":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Syphilis test date G.DE69 Value":
   "Syphilis test date G.DE69" O
-  return O.value
+  return O.value as dateTime
 /* End of Syphilis test date G.DE69 */
 
 /*
@@ -13238,7 +13247,7 @@ define "Date ART stopped H.DE73":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date ART stopped H.DE73 Value":
   "Date ART stopped H.DE73" O
-  return O.value
+  return O.value as dateTime
 /* End of Date ART stopped H.DE73 */
 
 /*
@@ -13642,7 +13651,7 @@ define "Date of loss to follow-up or OAMT stopped":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date of loss to follow-up or OAMT stopped Value":
   "Date of loss to follow-up or OAMT stopped" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of loss to follow-up or OAMT stopped */
 
 /*
@@ -13656,7 +13665,7 @@ define "Date medications prescribed PRV.DE27":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date medications prescribed PRV.DE27 Value":
   "Date medications prescribed PRV.DE27" O
-  return O.value
+  return O.value as dateTime
 /* End of Date medications prescribed PRV.DE27 */
 
 /*
@@ -13670,7 +13679,7 @@ define "Number of days prescribed PRV.DE28":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Number of days prescribed PRV.DE28 Value":
   "Number of days prescribed PRV.DE28" O
-  return O.value
+  return O.value as integer
 /* End of Number of days prescribed PRV.DE28 */
 
 /*
@@ -13684,7 +13693,7 @@ define "HIV test date SRV.DE1":
     where O.status in { 'final', 'amended', 'corrected' }
 define "HIV test date SRV.DE1 Value":
   "HIV test date SRV.DE1" O
-  return O.value
+  return O.value as dateTime
 /* End of HIV test date SRV.DE1 */
 
 /*
@@ -13708,7 +13717,7 @@ define "Baseline CD4 count SRV.DE3":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Baseline CD4 count SRV.DE3 Value":
   "Baseline CD4 count SRV.DE3" O
-  return O.value
+  return O.value as integer
 /* End of Baseline CD4 count SRV.DE3 */
 
 /*
@@ -13746,7 +13755,7 @@ define "ART start date SRV.DE6":
     where O.status in { 'final', 'amended', 'corrected' }
 define "ART start date SRV.DE6 Value":
   "ART start date SRV.DE6" O
-  return O.value
+  return O.value as dateTime
 /* End of ART start date SRV.DE6 */
 
 /*
@@ -13772,7 +13781,7 @@ define "CD4 count SRV.DE8":
     where O.status in { 'final', 'amended', 'corrected' }
 define "CD4 count SRV.DE8 Value":
   "CD4 count SRV.DE8" O
-  return O.value
+  return O.value as integer
 /* End of CD4 count SRV.DE8 */
 
 /*
@@ -13786,7 +13795,7 @@ define "Date of viral load sample collection SRV.DE12":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Date of viral load sample collection SRV.DE12 Value":
   "Date of viral load sample collection SRV.DE12" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of viral load sample collection SRV.DE12 */
 
 /*
@@ -13800,7 +13809,7 @@ define "Viral load test result SRV.DE13":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Viral load test result SRV.DE13 Value":
   "Viral load test result SRV.DE13" O
-  return O.value
+  return O.value as integer
 /* End of Viral load test result SRV.DE13 */
 
 /*
@@ -13825,7 +13834,7 @@ define "ANC contact date SRV.DE18":
     where O.status in { 'final', 'amended', 'corrected' }
 define "ANC contact date SRV.DE18 Value":
   "ANC contact date SRV.DE18" O
-  return O.value
+  return O.value as dateTime
 /* End of ANC contact date SRV.DE18 */
 
 /*
@@ -13967,7 +13976,7 @@ define "Reporting period end date":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Reporting period end date Value":
   "Reporting period end date" O
-  return O.value
+  return O.value as dateTime
 /* End of Reporting period end date */
 
 /*
@@ -13981,7 +13990,7 @@ define "Reporting period start date":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Reporting period start date Value":
   "Reporting period start date" O
-  return O.value
+  return O.value as dateTime
 /* End of Reporting period start date */
 
 /*
@@ -13995,7 +14004,7 @@ define "Reporting date":
     where O.status in { 'final', 'amended', 'corrected' }
 define "Reporting date Value":
   "Reporting date" O
-  return O.value
+  return O.value as dateTime
 /* End of Reporting date */
 
 
