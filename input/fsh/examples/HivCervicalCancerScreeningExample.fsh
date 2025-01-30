@@ -1,3 +1,13 @@
+
+Instance: HivCervicalCancerScreeningExample
+InstanceOf: HivCervicalCancerScreening
+Usage: #example
+* id = "HivCervicalCancerScreeningExample"
+* status = #final
+* code = HIV.D.DE658#CervicalScreening
+* subject = Reference(Patient/ExampleHivPatient)
+* valueCodeableConcept = HIV.D.DE706#ScreeningResult
+
 Instance: ExampleCervicalCancerScreening
 InstanceOf: HivCervicalCancerScreening
 Title: "Example Cervical Cancer Screening Procedure"

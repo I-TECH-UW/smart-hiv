@@ -1,3 +1,12 @@
+
+Instance: HivElevatedHivAcquisitionRiskConditionExample
+InstanceOf: HivElevatedHivAcquisitionRiskCondition
+Usage: #example
+* id = "HivElevatedHivAcquisitionRiskConditionExample"
+* clinicalStatus = #active
+* verificationStatus = #confirmed
+* subject = Reference(Patient/ExampleHivPatient)
+
 Instance: ExampleElevatedHivRiskCondition
 InstanceOf: HivElevatedRiskForAcquisition
 Title: "Example Elevated HIV Risk Condition"
