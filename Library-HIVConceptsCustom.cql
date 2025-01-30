@@ -1,13 +1,13 @@
-library HIVConceptsCustom
-codesystem "HIVConceptsCustom": 'http://smart.who.int/hiv/CodeSystem/HIVConceptsCustom'
+library HIVConceptsCustom version '0.0.1'
+// codesystem "HIVConceptsCustom": 'http://smart.who.int/hiv/CodeSystem/HIVConceptsCustom'
 
 codesystem "ConditionCategoryCodes": 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem "ConditionClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/condition-clinical'
 codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/observation-category'
-codesystem "missing concepts": 'missing concepts'
+codesystem "missing concepts": 'https://worldhealthorganization.github.io/smart-hiv/CodeSystem/missing-concepts'
 codesystem "Devicestatement-status": 'http://hl7.org/fhir/device-statement-status'
-codesystem "SNOMEDCT:2018-03": 'urn:oid:2.16.840.1.113883.6.96' version 'urn:hl7:version:2018-03'
-codesystem "SNOMEDCT": 'urn:oid:2.16.840.1.113883.6.96'
+codesystem "SNOMEDCT:2018-03": 'http://snomed.info/sct' version '2018-03'
+codesystem "SNOMEDCT": 'http://snomed.info/sct'
 codesystem "AdverseEventSeverity": 'http://terminology.hl7.org/CodeSystem/adverse-event-severity'
 codesystem "RoleCode": 'http://terminology.hl7.org/CodeSystem/v3-RoleCode'
 
@@ -61,7 +61,7 @@ code "Two to four times a day (qualifier value)": '396111001' from "SNOMEDCT" di
 
 
 // Encounter Types
-code "HTS Visit": 'HTS Visit' from "HIVConceptsCustom"
+code "HTS Visit": 'HTS Visit' from "missing concepts"
 
 //not currently provided
 code "needle-syringe": 'needle syringe' from "missing concepts"

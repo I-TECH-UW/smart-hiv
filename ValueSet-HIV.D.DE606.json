@@ -7,8 +7,8 @@
     "http://hl7.org/fhir/uv/crmi/StructureDefinition/crmi-computablevalueset"]
   },
   "text" : {
-    "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet HIV.D.DE606</b></p><a name=\"HIV.D.DE606\"> </a><a name=\"hcHIV.D.DE606\"> </a><a name=\"HIV.D.DE606-en-US\"> </a><p>This value set includes codes based on the following rules:</p><ul/></div>"
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet HIV.D.DE606</b></p><a name=\"HIV.D.DE606\"> </a><a name=\"hcHIV.D.DE606\"> </a><a name=\"HIV.D.DE606-en-US\"> </a><ul><li>Include these codes as defined in <a href=\"CodeSystem-HIVConcepts.html\"><code>http://smart.who.int/hiv/CodeSystem/HIVConcepts</code></a><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"CodeSystem-HIVConcepts.html#HIVConcepts-HIV.46D.46DE607\">HIV.D.DE607</a></td><td>Dose number</td><td>Vaccine dose number within series</td></tr><tr><td><a href=\"CodeSystem-HIVConcepts.html#HIVConcepts-HIV.46D.46DE608\">HIV.D.DE608</a></td><td>Dose quantity</td><td>The quantity of vaccine product that was administered</td></tr><tr><td><a href=\"CodeSystem-HIVConcepts.html#HIVConcepts-HIV.46D.46DE609\">HIV.D.DE609</a></td><td>Total doses in series</td><td>The recommended number of vaccine doses for immunity according to national protocol</td></tr></table></li></ul></div>"
   },
   "url" : "http://smart.who.int/hiv/ValueSet/HIV.D.DE606",
   "version" : "0.4.0",
@@ -16,7 +16,7 @@
   "title" : "Vaccination location ValueSet",
   "status" : "active",
   "experimental" : true,
-  "date" : "2025-01-28T16:09:20+00:00",
+  "date" : "2025-01-30T04:52:13+00:00",
   "publisher" : "WHO",
   "contact" : [{
     "name" : "WHO",
@@ -25,5 +25,22 @@
       "value" : "http://who.int"
     }]
   }],
-  "description" : "Value set of the service delivery location where the vaccine adminstration occurred"
+  "description" : "Value set of the service delivery location where the vaccine adminstration occurred",
+  "compose" : {
+    "include" : [{
+      "system" : "http://smart.who.int/hiv/CodeSystem/HIVConcepts",
+      "concept" : [{
+        "code" : "HIV.D.DE607",
+        "display" : "Dose number"
+      },
+      {
+        "code" : "HIV.D.DE608",
+        "display" : "Dose quantity"
+      },
+      {
+        "code" : "HIV.D.DE609",
+        "display" : "Total doses in series"
+      }]
+    }]
+  }
 }

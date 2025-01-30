@@ -30,7 +30,7 @@
   fhir:title [ fhir:v "WHO SMART Guidelines - HIV"] ; # 
   fhir:status [ fhir:v "draft"] ; # 
   fhir:experimental [ fhir:v "true"^^xsd:boolean] ; # 
-  fhir:date [ fhir:v "2025-01-28T16:09:20+00:00"^^xsd:dateTime] ; # 
+  fhir:date [ fhir:v "2025-01-30T04:52:13+00:00"^^xsd:dateTime] ; # 
   fhir:publisher [ fhir:v "WHO"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "WHO" ] ;
@@ -2066,6 +2066,21 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "Patient" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/Patient/ExampleHivPatient> ;
+         fhir:reference [ fhir:v "Patient/ExampleHivPatient" ]
+       ] ;
+       fhir:name [ fhir:v "Example Hiv Patient" ] ;
+       fhir:description [ fhir:v "This is an example of HIV Patient Resouce" ] ;
+       fhir:example [
+         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPatient"^^xsd:anyURI ;
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPatient>
+       ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
          fhir:value [ fhir:v "Condition" ]
        ] ) ;
        fhir:reference [
@@ -2216,17 +2231,15 @@
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "Patient" ]
+         fhir:value [ fhir:v "Practitioner" ]
        ] ) ;
        fhir:reference [
-         fhir:link <http://smart.who.int/hiv/Patient/ExampleHivPatient> ;
-         fhir:reference [ fhir:v "Patient/ExampleHivPatient" ]
+         fhir:link <http://smart.who.int/hiv/Practitioner/ExampleSurgeon> ;
+         fhir:reference [ fhir:v "Practitioner/ExampleSurgeon" ]
        ] ;
-       fhir:name [ fhir:v "ExampleHivPatient" ] ;
-       fhir:example [
-         fhir:v "http://smart.who.int/hiv/StructureDefinition/HivPatient"^^xsd:anyURI ;
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPatient>
-       ]
+       fhir:name [ fhir:v "ExampleHivPractitioner" ] ;
+       fhir:description [ fhir:v "ExampleHivPractitioner" ] ;
+       fhir:example [ fhir:v "true"^^xsd:boolean ]
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
@@ -2585,19 +2598,7 @@
          fhir:reference [ fhir:v "StructureDefinition/HivHcvViralLoadTest" ]
        ] ;
        fhir:name [ fhir:v "HCV Viral Load Test" ] ;
-       fhir:description [ fhir:v "A DAK-specific HCV Viral Load observation with possible results" ] ;
-       fhir:example [ fhir:v "false"^^xsd:boolean ]
-     ] [
-       fhir:extension ( [
-         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "StructureDefinition:resource" ]
-       ] ) ;
-       fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivHcvViralLoadTestD> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivHcvViralLoadTestD" ]
-       ] ;
-       fhir:name [ fhir:v "HCV Viral Load Test" ] ;
-       fhir:description [ fhir:v "A DAK-specific HCV Viral Load observation with possible results" ] ;
+       fhir:description [ fhir:v "HCV Viral Load Test Profile" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -2646,18 +2647,6 @@
        ] ;
        fhir:name [ fhir:v "Hepatitis C diagnosis ValueSet" ] ;
        fhir:description [ fhir:v "Value set of client's hepatitis C diagnosis" ] ;
-       fhir:example [ fhir:v "false"^^xsd:boolean ]
-     ] [
-       fhir:extension ( [
-         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "StructureDefinition:resource" ]
-       ] ) ;
-       fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HcvViralLoadTestG> ;
-         fhir:reference [ fhir:v "StructureDefinition/HcvViralLoadTestG" ]
-       ] ;
-       fhir:name [ fhir:v "Hepatitis C Viral Load Result" ] ;
-       fhir:description [ fhir:v "Hepatitis C viral load result" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -2773,10 +2762,35 @@
          fhir:value [ fhir:v "StructureDefinition:resource" ]
        ] ) ;
        fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestObservation> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivLabTestObservation" ]
+       ] ;
+       fhir:name [ fhir:v "Hiv Lab Test Observation" ] ;
+       fhir:description [ fhir:v "Hiv Lab Test Observation Profile" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestServiceRequest> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivLabTestServiceRequest" ]
+       ] ;
+       fhir:name [ fhir:v "Hiv Lab Test ServiceRequest" ] ;
+       fhir:description [ fhir:v "Hiv Lab Test ServiceRequest profile" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
          fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestSpecimen> ;
          fhir:reference [ fhir:v "StructureDefinition/HivLabTestSpecimen" ]
        ] ;
        fhir:name [ fhir:v "HIV Lab Test Specimen" ] ;
+       fhir:description [ fhir:v "A profile of HIV Lab Test Specimen" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -2790,6 +2804,18 @@
        fhir:name [ fhir:v "HIV non Functional Requirements" ] ;
        fhir:description [ fhir:v "Non Functional Requirements For HIV" ] ;
        fhir:example [ fhir:v "true"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPatient> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivPatient" ]
+       ] ;
+       fhir:name [ fhir:v "HIV patient Profile" ] ;
+       fhir:description [ fhir:v "Profile for patients requiring gender, date of birth, and geographic region." ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
          fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
@@ -3041,6 +3067,18 @@
        ] ;
        fhir:name [ fhir:v "HIV viral load specimen type ValueSet" ] ;
        fhir:description [ fhir:v "Value set of the type of specimen to be used to test viral load" ] ;
+       fhir:example [ fhir:v "false"^^xsd:boolean ]
+     ] [
+       fhir:extension ( [
+         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
+         fhir:value [ fhir:v "StructureDefinition:resource" ]
+       ] ) ;
+       fhir:reference [
+         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivVmmcAdverseEvent> ;
+         fhir:reference [ fhir:v "StructureDefinition/HivVmmcAdverseEvent" ]
+       ] ;
+       fhir:name [ fhir:v "Hiv Vmmc AdverseEvent" ] ;
+       fhir:description [ fhir:v "An adverse event related to voluntary medical male circumcision" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [
@@ -5654,52 +5692,6 @@
        ] ;
        fhir:name [ fhir:v "HIVIndicatorElements" ] ;
        fhir:description [ fhir:v "Description not yet available for HIVIndicatorElements." ] ;
-       fhir:example [ fhir:v "false"^^xsd:boolean ]
-     ] [
-       fhir:extension ( [
-         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "StructureDefinition:resource" ]
-       ] ) ;
-       fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestObservation> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivLabTestObservation" ]
-       ] ;
-       fhir:name [ fhir:v "HivLabTestObservation" ] ;
-       fhir:example [ fhir:v "false"^^xsd:boolean ]
-     ] [
-       fhir:extension ( [
-         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "StructureDefinition:resource" ]
-       ] ) ;
-       fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivLabTestServiceRequest> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivLabTestServiceRequest" ]
-       ] ;
-       fhir:name [ fhir:v "HivLabTestServiceRequest" ] ;
-       fhir:example [ fhir:v "false"^^xsd:boolean ]
-     ] [
-       fhir:extension ( [
-         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "StructureDefinition:resource" ]
-       ] ) ;
-       fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivPatient> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivPatient" ]
-       ] ;
-       fhir:name [ fhir:v "HivPatient" ] ;
-       fhir:description [ fhir:v "Profile for patients requiring gender, date of birth, and geographic region." ] ;
-       fhir:example [ fhir:v "false"^^xsd:boolean ]
-     ] [
-       fhir:extension ( [
-         fhir:url [ fhir:v "http://hl7.org/fhir/tools/StructureDefinition/resource-information"^^xsd:anyURI ] ;
-         fhir:value [ fhir:v "StructureDefinition:resource" ]
-       ] ) ;
-       fhir:reference [
-         fhir:link <http://smart.who.int/hiv/StructureDefinition/HivVmmcAdverseEvent> ;
-         fhir:reference [ fhir:v "StructureDefinition/HivVmmcAdverseEvent" ]
-       ] ;
-       fhir:name [ fhir:v "HivVmmcAdverseEvent" ] ;
-       fhir:description [ fhir:v "An adverse event related to voluntary medical male circumcision" ] ;
        fhir:example [ fhir:v "false"^^xsd:boolean ]
      ] [
        fhir:extension ( [

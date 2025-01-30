@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:t name="DecisionID" value="HIV.B7.DT"/>
+      <a:t name="BusinessRule" value="WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)"/>
+      <a:t name="Trigger" value="HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy"/>
+      <a:t name="Description" value="WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)&#xa;&#xa;Data Concepts:"/>
+      <a:s r="22">
+         <a:s>/**
+Library: HIV.B7.DT Logic
+
+@DecisionID: HIV.B7.DT
+@BusinessRule: WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
+@Trigger: HIV.B7 Test for HIV using testing algorithm, HIV.C4 Test for HIV using testing algorithm, HIV.D.11 Retest using HIV strategy
+@Description: WHO standard testing strategy for HIV-1 diagnosis (among people ≥18 months of age)
+
+Data Concepts:
+
+*/
+
+library HIVB7DTLogic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVB7DTLogic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="15:1-15:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="17:1-17:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="18:1-18:35" localIdentifier="Concepts" path="http://smart.who.int/hiv/HIVConcepts">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVConcepts</a:s>
+               </a:s>
+               <a:s> called Concepts</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="19:1-19:44" localIdentifier="Elements" path="http://smart.who.int/hiv/HIVEncounterElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVEncounterElements</a:s>
+               </a:s>
+               <a:s> called Elements</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="20:1-20:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="22:1-22:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <contexts>
+      <def locator="24:1-24:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="24:1-24:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="24:1-24:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="9" locator="48:1-49:46" name="Assay 1 result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>define &quot;Assay 1 result&quot;:
+  </a:s>
+               <a:s r="8">
+                  <a:s r="7">
+                     <a:s>Elements</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="8">
+                     <a:s>&quot;Test result of HIV assay 1 B.DE94&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="8" locator="49:3-49:46" name="Test result of HIV assay 1 B.DE94" libraryName="Elements" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="14" locator="51:1-52:46" name="Assay 2 result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="14">
+               <a:s>define &quot;Assay 2 result&quot;:
+  </a:s>
+               <a:s r="13">
+                  <a:s r="12">
+                     <a:s>Elements</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="13">
+                     <a:s>&quot;Test result of HIV assay 2 B.DE98&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="52:3-52:46" name="Test result of HIV assay 2 B.DE98" libraryName="Elements" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="19" locator="39:1-40:60" name="Assay 1" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="19">
+               <a:s>/*
+ Supporting Logic
+ */
+define &quot;Assay 1&quot;:
+  </a:s>
+               <a:s r="18">
+                  <a:s r="11">
+                     <a:s>exists</a:s>
+                     <a:s r="10">
+                        <a:s>(</a:s>
+                        <a:s r="10">
+                           <a:s>&quot;Assay 1 result&quot;</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="17">
+                     <a:s>not</a:s>
+                     <a:s r="16">
+                        <a:s>(</a:s>
+                        <a:s r="16">
+                           <a:s>exists</a:s>
+                           <a:s r="15">
+                              <a:s>(</a:s>
+                              <a:s r="15">
+                                 <a:s>&quot;Assay 2 result&quot;</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="18" locator="40:3-40:60" xsi:type="And">
+            <operand localId="11" locator="40:3-40:26" xsi:type="Exists">
+               <operand localId="10" locator="40:9-40:26" name="Assay 1 result" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="17" locator="40:32-40:60" xsi:type="Not">
+               <operand localId="16" locator="40:35-40:60" xsi:type="Exists">
+                  <operand localId="15" locator="40:42-40:59" name="Assay 2 result" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="22" locator="57:1-58:7" name="Non-reactive result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="22">
+               <a:s r="21">define &quot;Non-reactive result&quot;:
+  false</a:s>
+            </a:s>
+         </annotation>
+         <expression localId="21" locator="58:3-58:7" valueType="t:Boolean" value="false" xsi:type="Literal"/>
+      </def>
+      <def localId="29" locator="29:1-34:5" name="Report as HIV-negative" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="output" value="&quot;Report as HIV-negative&quot;"/>
+            <a:s r="29">
+               <a:s>/*
+ @output: &quot;Report as HIV-negative&quot;
+ */
+define &quot;Report as HIV-negative&quot;:
+  </a:s>
+               <a:s r="28">
+                  <a:s>case 
+  </a:s>
+                  <a:s r="26">
+                     <a:s>when </a:s>
+                     <a:s r="24">
+                        <a:s r="20">
+                           <a:s>&quot;Assay 1&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="23">
+                           <a:s>&quot;Non-reactive result&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="25">
+    then true</a:s>
+                  </a:s>
+                  <a:s r="27">
+  else null
+  end</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="28" locator="30:3-34:5" xsi:type="Case">
+            <caseItem localId="26" locator="31:3-32:13">
+               <when localId="24" locator="31:8-31:42" xsi:type="And">
+                  <operand localId="20" locator="31:8-31:16" name="Assay 1" xsi:type="ExpressionRef"/>
+                  <operand localId="23" locator="31:22-31:42" name="Non-reactive result" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="25" locator="32:10-32:13" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+            </caseItem>
+            <else asType="t:Boolean" xsi:type="As">
+               <operand localId="27" locator="33:8-33:11" xsi:type="Null"/>
+            </else>
+         </expression>
+      </def>
+      <def localId="34" locator="54:1-55:47" name="Assay 3 result" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="34">
+               <a:s>define &quot;Assay 3 result&quot;:
+  </a:s>
+               <a:s r="33">
+                  <a:s r="32">
+                     <a:s>Elements</a:s>
+                  </a:s>
+                  <a:s>.</a:s>
+                  <a:s r="33">
+                     <a:s>&quot;Test result of HIV assay 3 B.DE102&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="33" locator="55:3-55:47" name="Test result of HIV assay 3 B.DE102" libraryName="Elements" xsi:type="ExpressionRef"/>
+      </def>
+      <def localId="39" locator="42:1-43:60" name="Assay 2" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="39">
+               <a:s>define &quot;Assay 2&quot;:
+  </a:s>
+               <a:s r="38">
+                  <a:s r="31">
+                     <a:s>exists</a:s>
+                     <a:s r="30">
+                        <a:s>(</a:s>
+                        <a:s r="30">
+                           <a:s>&quot;Assay 2 result&quot;</a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="37">
+                     <a:s>not</a:s>
+                     <a:s r="36">
+                        <a:s>(</a:s>
+                        <a:s r="36">
+                           <a:s>exists</a:s>
+                           <a:s r="35">
+                              <a:s>(</a:s>
+                              <a:s r="35">
+                                 <a:s>&quot;Assay 3 result&quot;</a:s>
+                              </a:s>
+                              <a:s>)</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>)</a:s>
+                     </a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="38" locator="43:3-43:60" xsi:type="And">
+            <operand localId="31" locator="43:3-43:26" xsi:type="Exists">
+               <operand localId="30" locator="43:9-43:26" name="Assay 2 result" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="37" locator="43:32-43:60" xsi:type="Not">
+               <operand localId="36" locator="43:35-43:60" xsi:type="Exists">
+                  <operand localId="35" locator="43:42-43:59" name="Assay 3 result" xsi:type="ExpressionRef"/>
+               </operand>
+            </operand>
+         </expression>
+      </def>
+      <def localId="42" locator="45:1-46:26" name="Assay 3" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="42">
+               <a:s>define &quot;Assay 3&quot;:
+  </a:s>
+               <a:s r="41">
+                  <a:s>exists</a:s>
+                  <a:s r="40">
+                     <a:s>(</a:s>
+                     <a:s r="40">
+                        <a:s>&quot;Assay 3 result&quot;</a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="41" locator="46:3-46:26" xsi:type="Exists">
+            <operand localId="40" locator="46:9-46:26" name="Assay 3 result" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+   </statements>
+</library>

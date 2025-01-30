@@ -21,8 +21,8 @@
      ] )
   ] ; # 
   fhir:text [
-     fhir:status [ fhir:v "generated" ] ;
-     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet HIV.D.DE457</b></p><a name=\"HIV.D.DE457\"> </a><a name=\"hcHIV.D.DE457\"> </a><a name=\"HIV.D.DE457-en-US\"> </a><p>This value set includes codes based on the following rules:</p><ul/></div>"
+     fhir:status [ fhir:v "extensions" ] ;
+     fhir:div "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet HIV.D.DE457</b></p><a name=\"HIV.D.DE457\"> </a><a name=\"hcHIV.D.DE457\"> </a><a name=\"HIV.D.DE457-en-US\"> </a><ul><li>Include these codes as defined in <a href=\"CodeSystem-HIVConcepts.html\"><code>http://smart.who.int/hiv/CodeSystem/HIVConcepts</code></a><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"CodeSystem-HIVConcepts.html#HIVConcepts-HIV.46D.46DE458\">HIV.D.DE458</a></td><td>Date medications prescribed</td><td>Date the medications were prescribed</td></tr><tr><td><a href=\"CodeSystem-HIVConcepts.html#HIVConcepts-HIV.46D.46DE459\">HIV.D.DE459</a></td><td>Dose of medications prescribed</td><td>Number of doses (quantity taken at a single point in time) of drugs prescribed/dispensed</td></tr><tr><td><a href=\"CodeSystem-HIVConcepts.html#HIVConcepts-HIV.46D.46DE460\">HIV.D.DE460</a></td><td>Number of days medications prescribed</td><td>Number of days supply of each medication or regimen prescribed during the visit</td></tr></table></li></ul></div>"
   ] ; # 
   fhir:url [ fhir:v "http://smart.who.int/hiv/ValueSet/HIV.D.DE457"^^xsd:anyURI] ; # 
   fhir:version [ fhir:v "0.4.0"] ; # 
@@ -30,7 +30,7 @@
   fhir:title [ fhir:v "Medications prescribed ValueSet"] ; # 
   fhir:status [ fhir:v "active"] ; # 
   fhir:experimental [ fhir:v "true"^^xsd:boolean] ; # 
-  fhir:date [ fhir:v "2025-01-28T16:09:20+00:00"^^xsd:dateTime] ; # 
+  fhir:date [ fhir:v "2025-01-30T04:52:13+00:00"^^xsd:dateTime] ; # 
   fhir:publisher [ fhir:v "WHO"] ; # 
   fhir:contact ( [
      fhir:name [ fhir:v "WHO" ] ;
@@ -39,7 +39,22 @@
        fhir:value [ fhir:v "http://who.int" ]
      ] )
   ] ) ; # 
-  fhir:description [ fhir:v "Value set of name or regimen code of all other medications prescribed during the visit"] . # 
+  fhir:description [ fhir:v "Value set of name or regimen code of all other medications prescribed during the visit"] ; # 
+  fhir:compose [
+     fhir:include ( [
+       fhir:system [ fhir:v "http://smart.who.int/hiv/CodeSystem/HIVConcepts"^^xsd:anyURI ] ;
+       fhir:concept ( [
+         fhir:code [ fhir:v "HIV.D.DE458" ] ;
+         fhir:display [ fhir:v "Date medications prescribed" ]
+       ] [
+         fhir:code [ fhir:v "HIV.D.DE459" ] ;
+         fhir:display [ fhir:v "Dose of medications prescribed" ]
+       ] [
+         fhir:code [ fhir:v "HIV.D.DE460" ] ;
+         fhir:display [ fhir:v "Number of days medications prescribed" ]
+       ] )
+     ] )
+  ] . # 
 
 # -------------------------------------------------------------------------------------
 

@@ -1,0 +1,2753 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion",
+         "signatureLevel" : "Overloads",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "t" : [ {
+            "name" : "DecisionID",
+            "value" : "HIV.D4.DT"
+         }, {
+            "name" : "BusinessRule"
+         }, {
+            "name" : "Trigger"
+         }, {
+            "name" : "HitPolicy",
+            "value" : "Rule Order"
+         }, {
+            "name" : "Description",
+            "value" : "Data Concepts:\n\n\nConsolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease."
+         } ],
+         "s" : {
+            "r" : "196",
+            "s" : [ {
+               "value" : [ "/**\nLibrary: HIV.D4.DT Logic\n\n@DecisionID: HIV.D4.DT\n@BusinessRule: \n@Trigger: \n@HitPolicy: Rule Order\n@Description:\n\nData Concepts:\n\n\nConsolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease.\n*/\n","library HIVD4DTLogic" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "HIVD4DTLogic",
+         "system" : "http://smart.who.int/hiv"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "locator" : "17:1-17:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIR" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '4.0.1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "2",
+            "locator" : "19:1-19:44",
+            "localIdentifier" : "HIC",
+            "path" : "http://smart.who.int/hiv/HIVCommon",
+            "version" : "0.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "HIVCommon" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'0.0.1'"," called ","HIC" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "3",
+            "locator" : "20:1-20:35",
+            "localIdentifier" : "Concepts",
+            "path" : "http://smart.who.int/hiv/HIVConcepts",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "HIVConcepts" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","Concepts" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "4",
+            "locator" : "21:1-21:44",
+            "localIdentifier" : "Elements",
+            "path" : "http://smart.who.int/hiv/HIVEncounterElements",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "HIVEncounterElements" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","Elements" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "5",
+            "locator" : "22:1-22:35",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "http://hl7.org/fhir/FHIRHelpers",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIRHelpers" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.1'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "6",
+            "locator" : "24:1-24:29",
+            "localIdentifier" : "WCom",
+            "path" : "http://smart.who.int/hiv/WHOCommon",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "WHOCommon" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","WCom" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "26:1-26:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "26:1-26:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "26:1-26:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "16",
+            "locator" : "32:1-36:3",
+            "name" : "W4SS single screening algorithm",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "TB screening algorithm"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"TB screening algorithm\"='W4SS single screening algorithm'"
+               } ],
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "/*\n  @input: TB screening algorithm\n  @pseudocode: \"TB screening algorithm\"='W4SS single screening algorithm'\n  */\n","define ","\"W4SS single screening algorithm\"",":\n  " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "value" : [ "exists" ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "(\n    " ]
+                        }, {
+                           "r" : "14",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "8",
+                                 "s" : [ {
+                                    "r" : "7",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Elements",".","\"TB screening algorithm Observation\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","O" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      " ]
+                           }, {
+                              "r" : "13",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "13",
+                                 "s" : [ {
+                                    "r" : "10",
+                                    "s" : [ {
+                                       "r" : "9",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "10",
+                                       "s" : [ {
+                                          "value" : [ "value" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","~"," " ]
+                                 }, {
+                                    "r" : "12",
+                                    "s" : [ {
+                                       "r" : "11",
+                                       "s" : [ {
+                                          "value" : [ "Concepts" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "12",
+                                       "s" : [ {
+                                          "value" : [ "\"W4SS single screening algorithm\"" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "locator" : "33:3-36:3",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "14",
+                  "locator" : "33:9-36:3",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "8",
+                     "locator" : "34:5-34:51",
+                     "alias" : "O",
+                     "expression" : {
+                        "localId" : "7",
+                        "locator" : "34:5-34:49",
+                        "name" : "TB screening algorithm Observation",
+                        "libraryName" : "Elements",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "13",
+                     "locator" : "35:7-35:64",
+                     "type" : "Equivalent",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                           "type" : "As",
+                           "operand" : {
+                              "localId" : "10",
+                              "locator" : "35:13-35:19",
+                              "path" : "value",
+                              "scope" : "O",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "type" : "ToConcept",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : {
+                           "localId" : "12",
+                           "locator" : "35:23-35:64",
+                           "name" : "W4SS single screening algorithm",
+                           "libraryName" : "Concepts",
+                           "type" : "CodeRef"
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "26",
+            "locator" : "42:1-46:3",
+            "name" : "Sequential positive screening algorithm with W4SS and CRP",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "TB screening algorithm"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"TB screening algorithm\"='Sequential positive screening algorithm with W4SS and CRP'"
+               } ],
+               "s" : {
+                  "r" : "26",
+                  "s" : [ {
+                     "value" : [ "/*\n  @input: TB screening algorithm\n  @pseudocode: \"TB screening algorithm\"='Sequential positive screening algorithm with W4SS and CRP'\n  */\n","define ","\"Sequential positive screening algorithm with W4SS and CRP\"",":\n  " ]
+                  }, {
+                     "r" : "25",
+                     "s" : [ {
+                        "value" : [ "exists" ]
+                     }, {
+                        "r" : "24",
+                        "s" : [ {
+                           "value" : [ "(\n    " ]
+                        }, {
+                           "r" : "24",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "18",
+                                 "s" : [ {
+                                    "r" : "17",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Elements",".","\"TB screening algorithm Observation\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","O" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      " ]
+                           }, {
+                              "r" : "23",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "23",
+                                 "s" : [ {
+                                    "r" : "20",
+                                    "s" : [ {
+                                       "r" : "19",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "20",
+                                       "s" : [ {
+                                          "value" : [ "value" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","~"," " ]
+                                 }, {
+                                    "r" : "22",
+                                    "s" : [ {
+                                       "r" : "21",
+                                       "s" : [ {
+                                          "value" : [ "Concepts" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "22",
+                                       "s" : [ {
+                                          "value" : [ "\"Sequential positive screening algorithm with W4SS and CRP\"" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "25",
+               "locator" : "43:3-46:3",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "24",
+                  "locator" : "43:9-46:3",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "18",
+                     "locator" : "44:5-44:51",
+                     "alias" : "O",
+                     "expression" : {
+                        "localId" : "17",
+                        "locator" : "44:5-44:49",
+                        "name" : "TB screening algorithm Observation",
+                        "libraryName" : "Elements",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "23",
+                     "locator" : "45:7-45:90",
+                     "type" : "Equivalent",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                           "type" : "As",
+                           "operand" : {
+                              "localId" : "20",
+                              "locator" : "45:13-45:19",
+                              "path" : "value",
+                              "scope" : "O",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "type" : "ToConcept",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : {
+                           "localId" : "22",
+                           "locator" : "45:23-45:90",
+                           "name" : "Sequential positive screening algorithm with W4SS and CRP",
+                           "libraryName" : "Concepts",
+                           "type" : "CodeRef"
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "36",
+            "locator" : "52:1-56:3",
+            "name" : "Screening with any TB symptom",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "TB screening algorithm"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"TB screening algorithm\"='Screening with any TB symptom'"
+               } ],
+               "s" : {
+                  "r" : "36",
+                  "s" : [ {
+                     "value" : [ "/*\n  @input: TB screening algorithm\n  @pseudocode: \"TB screening algorithm\"='Screening with any TB symptom'\n  */\n","define ","\"Screening with any TB symptom\"",":\n  " ]
+                  }, {
+                     "r" : "35",
+                     "s" : [ {
+                        "value" : [ "exists" ]
+                     }, {
+                        "r" : "34",
+                        "s" : [ {
+                           "value" : [ "(\n    " ]
+                        }, {
+                           "r" : "34",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "28",
+                                 "s" : [ {
+                                    "r" : "27",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Elements",".","\"TB screening algorithm Observation\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","O" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      " ]
+                           }, {
+                              "r" : "33",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "33",
+                                 "s" : [ {
+                                    "r" : "30",
+                                    "s" : [ {
+                                       "r" : "29",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "30",
+                                       "s" : [ {
+                                          "value" : [ "value" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","~"," " ]
+                                 }, {
+                                    "r" : "32",
+                                    "s" : [ {
+                                       "r" : "31",
+                                       "s" : [ {
+                                          "value" : [ "Concepts" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "32",
+                                       "s" : [ {
+                                          "value" : [ "\"Screening with any TB symptom\"" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "35",
+               "locator" : "53:3-56:3",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "34",
+                  "locator" : "53:9-56:3",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "28",
+                     "locator" : "54:5-54:51",
+                     "alias" : "O",
+                     "expression" : {
+                        "localId" : "27",
+                        "locator" : "54:5-54:49",
+                        "name" : "TB screening algorithm Observation",
+                        "libraryName" : "Elements",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "33",
+                     "locator" : "55:7-55:62",
+                     "type" : "Equivalent",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                           "type" : "As",
+                           "operand" : {
+                              "localId" : "30",
+                              "locator" : "55:13-55:19",
+                              "path" : "value",
+                              "scope" : "O",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "type" : "ToConcept",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : {
+                           "localId" : "32",
+                           "locator" : "55:23-55:62",
+                           "name" : "Screening with any TB symptom",
+                           "libraryName" : "Concepts",
+                           "type" : "CodeRef"
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "41",
+            "locator" : "62:1-63:47",
+            "name" : "Age 10 or older",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "Estimated age"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"Estimated age\" >= 10 years"
+               } ],
+               "s" : {
+                  "r" : "41",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: Estimated age\n @pseudocode: \"Estimated age\" >= 10 years\n */\n","define ","\"Age 10 or older\"",":\n  " ]
+                  }, {
+                     "r" : "40",
+                     "s" : [ {
+                        "r" : "38",
+                        "s" : [ {
+                           "r" : "37",
+                           "s" : [ {
+                              "value" : [ "Elements" ]
+                           } ]
+                        }, {
+                           "value" : [ "." ]
+                        }, {
+                           "r" : "38",
+                           "s" : [ {
+                              "value" : [ "\"Current Patient Age In Years\"" ]
+                           } ]
+                        } ]
+                     }, {
+                        "r" : "39",
+                        "value" : [ " ",">="," ","10" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "40",
+               "locator" : "63:3-63:47",
+               "type" : "GreaterOrEqual",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "38",
+                  "locator" : "63:3-63:41",
+                  "name" : "Current Patient Age In Years",
+                  "libraryName" : "Elements",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "39",
+                  "locator" : "63:46-63:47",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "46",
+            "locator" : "69:1-70:46",
+            "name" : "Age under 15",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "Estimated age"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"Estimated age\" < 15 years"
+               } ],
+               "s" : {
+                  "r" : "46",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: Estimated age\n @pseudocode: \"Estimated age\" < 15 years\n */\n","define ","\"Age under 15\"",":\n  " ]
+                  }, {
+                     "r" : "45",
+                     "s" : [ {
+                        "r" : "43",
+                        "s" : [ {
+                           "r" : "42",
+                           "s" : [ {
+                              "value" : [ "Elements" ]
+                           } ]
+                        }, {
+                           "value" : [ "." ]
+                        }, {
+                           "r" : "43",
+                           "s" : [ {
+                              "value" : [ "\"Current Patient Age In Years\"" ]
+                           } ]
+                        } ]
+                     }, {
+                        "r" : "44",
+                        "value" : [ " ","<"," ","15" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "45",
+               "locator" : "70:3-70:46",
+               "type" : "Less",
+               "signature" : [ {
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "43",
+                  "locator" : "70:3-70:41",
+                  "name" : "Current Patient Age In Years",
+                  "libraryName" : "Elements",
+                  "type" : "ExpressionRef"
+               }, {
+                  "localId" : "44",
+                  "locator" : "70:45-70:46",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "15",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "74",
+            "locator" : "76:1-83:3",
+            "name" : "Has symptoms of TB",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "Symptoms of TB"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"Symptoms of TB\" IN 'Current cough', 'Fever of 39 °C or greater', 'Weight loss (reported)', 'Night sweats'"
+               } ],
+               "s" : {
+                  "r" : "74",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: Symptoms of TB\n @pseudocode: \"Symptoms of TB\" IN 'Current cough', 'Fever of 39 °C or greater', 'Weight loss (reported)', 'Night sweats'\n */\n","define ","\"Has symptoms of TB\"",":\n  " ]
+                  }, {
+                     "r" : "73",
+                     "s" : [ {
+                        "value" : [ "exists" ]
+                     }, {
+                        "r" : "72",
+                        "s" : [ {
+                           "value" : [ "(\n    " ]
+                        }, {
+                           "r" : "72",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "48",
+                                 "s" : [ {
+                                    "r" : "47",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Elements",".","\"Symptoms of TB Observation\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","O" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      " ]
+                           }, {
+                              "r" : "71",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "71",
+                                 "s" : [ {
+                                    "r" : "65",
+                                    "s" : [ {
+                                       "r" : "59",
+                                       "s" : [ {
+                                          "r" : "53",
+                                          "s" : [ {
+                                             "r" : "50",
+                                             "s" : [ {
+                                                "r" : "49",
+                                                "s" : [ {
+                                                   "value" : [ "O" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "50",
+                                                "s" : [ {
+                                                   "value" : [ "value" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","~"," " ]
+                                          }, {
+                                             "r" : "52",
+                                             "s" : [ {
+                                                "r" : "51",
+                                                "s" : [ {
+                                                   "value" : [ "Concepts" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "52",
+                                                "s" : [ {
+                                                   "value" : [ "\"Current cough\"" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n         or " ]
+                                       }, {
+                                          "r" : "58",
+                                          "s" : [ {
+                                             "r" : "55",
+                                             "s" : [ {
+                                                "r" : "54",
+                                                "s" : [ {
+                                                   "value" : [ "O" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "55",
+                                                "s" : [ {
+                                                   "value" : [ "value" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","~"," " ]
+                                          }, {
+                                             "r" : "57",
+                                             "s" : [ {
+                                                "r" : "56",
+                                                "s" : [ {
+                                                   "value" : [ "Concepts" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "57",
+                                                "s" : [ {
+                                                   "value" : [ "\"Fever of 39 °C or greater\"" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n         or " ]
+                                    }, {
+                                       "r" : "64",
+                                       "s" : [ {
+                                          "r" : "61",
+                                          "s" : [ {
+                                             "r" : "60",
+                                             "s" : [ {
+                                                "value" : [ "O" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "61",
+                                             "s" : [ {
+                                                "value" : [ "value" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " ","~"," " ]
+                                       }, {
+                                          "r" : "63",
+                                          "s" : [ {
+                                             "r" : "62",
+                                             "s" : [ {
+                                                "value" : [ "Concepts" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "63",
+                                             "s" : [ {
+                                                "value" : [ "\"Weight loss reported\"" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n         or " ]
+                                 }, {
+                                    "r" : "70",
+                                    "s" : [ {
+                                       "r" : "67",
+                                       "s" : [ {
+                                          "r" : "66",
+                                          "s" : [ {
+                                             "value" : [ "O" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "67",
+                                          "s" : [ {
+                                             "value" : [ "value" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","~"," " ]
+                                    }, {
+                                       "r" : "69",
+                                       "s" : [ {
+                                          "r" : "68",
+                                          "s" : [ {
+                                             "value" : [ "Concepts" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "69",
+                                          "s" : [ {
+                                             "value" : [ "\"Night sweats\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "73",
+               "locator" : "77:3-83:3",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "72",
+                  "locator" : "77:9-83:3",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "48",
+                     "locator" : "78:5-78:43",
+                     "alias" : "O",
+                     "expression" : {
+                        "localId" : "47",
+                        "locator" : "78:5-78:41",
+                        "name" : "Symptoms of TB Observation",
+                        "libraryName" : "Elements",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "71",
+                     "locator" : "79:7-82:45",
+                     "type" : "Or",
+                     "operand" : [ {
+                        "localId" : "65",
+                        "locator" : "79:13-81:53",
+                        "type" : "Or",
+                        "operand" : [ {
+                           "localId" : "59",
+                           "locator" : "79:13-80:58",
+                           "type" : "Or",
+                           "operand" : [ {
+                              "localId" : "53",
+                              "locator" : "79:13-79:46",
+                              "type" : "Equivalent",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                                    "type" : "As",
+                                    "operand" : {
+                                       "localId" : "50",
+                                       "locator" : "79:13-79:19",
+                                       "path" : "value",
+                                       "scope" : "O",
+                                       "type" : "Property"
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "ToConcept",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
+                                 "operand" : {
+                                    "localId" : "52",
+                                    "locator" : "79:23-79:46",
+                                    "name" : "Current cough",
+                                    "libraryName" : "Concepts",
+                                    "type" : "CodeRef"
+                                 }
+                              } ]
+                           }, {
+                              "localId" : "58",
+                              "locator" : "80:13-80:58",
+                              "type" : "Equivalent",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : [ {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                                    "type" : "As",
+                                    "operand" : {
+                                       "localId" : "55",
+                                       "locator" : "80:13-80:19",
+                                       "path" : "value",
+                                       "scope" : "O",
+                                       "type" : "Property"
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "ToConcept",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
+                                 "operand" : {
+                                    "localId" : "57",
+                                    "locator" : "80:23-80:58",
+                                    "name" : "Fever of 39 °C or greater",
+                                    "libraryName" : "Concepts",
+                                    "type" : "CodeRef"
+                                 }
+                              } ]
+                           } ]
+                        }, {
+                           "localId" : "64",
+                           "locator" : "81:13-81:53",
+                           "type" : "Equivalent",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : [ {
+                              "name" : "ToConcept",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "localId" : "61",
+                                    "locator" : "81:13-81:19",
+                                    "path" : "value",
+                                    "scope" : "O",
+                                    "type" : "Property"
+                                 }
+                              } ]
+                           }, {
+                              "type" : "ToConcept",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : {
+                                 "localId" : "63",
+                                 "locator" : "81:23-81:53",
+                                 "name" : "Weight loss reported",
+                                 "libraryName" : "Concepts",
+                                 "type" : "CodeRef"
+                              }
+                           } ]
+                        } ]
+                     }, {
+                        "localId" : "70",
+                        "locator" : "82:13-82:45",
+                        "type" : "Equivalent",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                              "type" : "As",
+                              "operand" : {
+                                 "localId" : "67",
+                                 "locator" : "82:13-82:19",
+                                 "path" : "value",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }
+                           } ]
+                        }, {
+                           "type" : "ToConcept",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : {
+                              "localId" : "69",
+                              "locator" : "82:23-82:45",
+                              "name" : "Night sweats",
+                              "libraryName" : "Concepts",
+                              "type" : "CodeRef"
+                           }
+                        } ]
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "87",
+            "locator" : "89:1-93:32",
+            "name" : "Does not have symptoms of TB",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "Symptoms of TB"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"Symptoms of TB\" = 'None'"
+               } ],
+               "s" : {
+                  "r" : "87",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: Symptoms of TB\n @pseudocode: \"Symptoms of TB\" = 'None'\n */\n","define ","\"Does not have symptoms of TB\"",":\n  " ]
+                  }, {
+                     "r" : "86",
+                     "s" : [ {
+                        "r" : "83",
+                        "s" : [ {
+                           "value" : [ "exists" ]
+                        }, {
+                           "r" : "82",
+                           "s" : [ {
+                              "value" : [ "(\n    " ]
+                           }, {
+                              "r" : "82",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "76",
+                                    "s" : [ {
+                                       "r" : "75",
+                                       "s" : [ {
+                                          "s" : [ {
+                                             "value" : [ "Elements",".","\"Symptoms of TB Observation\"" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","O" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n      " ]
+                              }, {
+                                 "r" : "81",
+                                 "s" : [ {
+                                    "value" : [ "where " ]
+                                 }, {
+                                    "r" : "81",
+                                    "s" : [ {
+                                       "r" : "78",
+                                       "s" : [ {
+                                          "r" : "77",
+                                          "s" : [ {
+                                             "value" : [ "O" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "78",
+                                          "s" : [ {
+                                             "value" : [ "value" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","~"," " ]
+                                    }, {
+                                       "r" : "80",
+                                       "s" : [ {
+                                          "r" : "79",
+                                          "s" : [ {
+                                             "value" : [ "Concepts" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "80",
+                                          "s" : [ {
+                                             "value" : [ "\"None\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n  )" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " or " ]
+                     }, {
+                        "r" : "85",
+                        "s" : [ {
+                           "value" : [ "not" ]
+                        }, {
+                           "r" : "84",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "84",
+                              "s" : [ {
+                                 "value" : [ "\"Has symptoms of TB\"" ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "86",
+               "locator" : "90:3-93:32",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "83",
+                  "locator" : "90:3-93:3",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "82",
+                     "locator" : "90:9-93:3",
+                     "type" : "Query",
+                     "source" : [ {
+                        "localId" : "76",
+                        "locator" : "91:5-91:43",
+                        "alias" : "O",
+                        "expression" : {
+                           "localId" : "75",
+                           "locator" : "91:5-91:41",
+                           "name" : "Symptoms of TB Observation",
+                           "libraryName" : "Elements",
+                           "type" : "ExpressionRef"
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "localId" : "81",
+                        "locator" : "92:7-92:37",
+                        "type" : "Equivalent",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "asType" : "{http://hl7.org/fhir}CodeableConcept",
+                              "type" : "As",
+                              "operand" : {
+                                 "localId" : "78",
+                                 "locator" : "92:13-92:19",
+                                 "path" : "value",
+                                 "scope" : "O",
+                                 "type" : "Property"
+                              }
+                           } ]
+                        }, {
+                           "type" : "ToConcept",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : {
+                              "localId" : "80",
+                              "locator" : "92:23-92:37",
+                              "name" : "None",
+                              "libraryName" : "Concepts",
+                              "type" : "CodeRef"
+                           }
+                        } ]
+                     }
+                  }
+               }, {
+                  "localId" : "85",
+                  "locator" : "93:8-93:32",
+                  "type" : "Not",
+                  "operand" : {
+                     "localId" : "84",
+                     "locator" : "93:11-93:32",
+                     "name" : "Has symptoms of TB",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "92",
+            "locator" : "99:1-102:4",
+            "name" : "No C-reactive protein test done",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "C-reactive protein test result"
+               }, {
+                  "name" : "pseudocode"
+               } ],
+               "s" : {
+                  "r" : "92",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: C-reactive protein test result\n @pseudocode:\n */\n","define ","\"No C-reactive protein test done\"",":\n  " ]
+                  }, {
+                     "r" : "91",
+                     "s" : [ {
+                        "value" : [ "not" ]
+                     }, {
+                        "r" : "90",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "90",
+                           "s" : [ {
+                              "value" : [ "exists" ]
+                           }, {
+                              "r" : "89",
+                              "s" : [ {
+                                 "value" : [ "(\n    " ]
+                              }, {
+                                 "r" : "89",
+                                 "s" : [ {
+                                    "r" : "88",
+                                    "s" : [ {
+                                       "value" : [ "Elements" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "89",
+                                    "s" : [ {
+                                       "value" : [ "\"C reactive protein test result\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n  )" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "91",
+               "locator" : "100:3-102:4",
+               "type" : "Not",
+               "operand" : {
+                  "localId" : "90",
+                  "locator" : "100:6-102:4",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "89",
+                     "locator" : "100:13-102:3",
+                     "name" : "C reactive protein test result",
+                     "libraryName" : "Elements",
+                     "type" : "ExpressionRef"
+                  }
+               }
+            }
+         }, {
+            "localId" : "101",
+            "locator" : "108:1-112:3",
+            "name" : "C-reactive protein at or under 5mg/L",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "C-reactive protein test result"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"C reactive protein test result\" ≤ 5 mg/L"
+               } ],
+               "s" : {
+                  "r" : "101",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: C-reactive protein test result\n @pseudocode: \"C reactive protein test result\" ≤ 5 mg/L\n */\n","define ","\"C-reactive protein at or under 5mg/L\"",":\n  " ]
+                  }, {
+                     "r" : "100",
+                     "s" : [ {
+                        "value" : [ "exists" ]
+                     }, {
+                        "r" : "99",
+                        "s" : [ {
+                           "value" : [ "(\n    " ]
+                        }, {
+                           "r" : "99",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "94",
+                                 "s" : [ {
+                                    "r" : "93",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Elements",".","\"C reactive protein test result\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","O" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      " ]
+                           }, {
+                              "r" : "98",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "98",
+                                 "s" : [ {
+                                    "r" : "96",
+                                    "s" : [ {
+                                       "r" : "95",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "96",
+                                       "s" : [ {
+                                          "value" : [ "value" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "r" : "97",
+                                    "value" : [ " ","<"," ","5" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "100",
+               "locator" : "109:3-112:3",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "99",
+                  "locator" : "109:9-112:3",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "94",
+                     "locator" : "110:5-110:47",
+                     "alias" : "O",
+                     "expression" : {
+                        "localId" : "93",
+                        "locator" : "110:5-110:45",
+                        "name" : "C reactive protein test result",
+                        "libraryName" : "Elements",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "98",
+                     "locator" : "111:7-111:23",
+                     "type" : "Less",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "name" : "ToInteger",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}integer",
+                           "type" : "As",
+                           "operand" : {
+                              "localId" : "96",
+                              "locator" : "111:13-111:19",
+                              "path" : "value",
+                              "scope" : "O",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "97",
+                        "locator" : "111:23",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "110",
+            "locator" : "118:1-122:3",
+            "name" : "C-reactive protein over 5mg/L",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "C-reactive protein test result"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"C reactive protein test result\" > 5 mg/L"
+               } ],
+               "s" : {
+                  "r" : "110",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: C-reactive protein test result\n @pseudocode: \"C reactive protein test result\" > 5 mg/L\n */\n","define ","\"C-reactive protein over 5mg/L\"",":\n  " ]
+                  }, {
+                     "r" : "109",
+                     "s" : [ {
+                        "value" : [ "exists" ]
+                     }, {
+                        "r" : "108",
+                        "s" : [ {
+                           "value" : [ "(\n    " ]
+                        }, {
+                           "r" : "108",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "103",
+                                 "s" : [ {
+                                    "r" : "102",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Elements",".","\"C reactive protein test result\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","O" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      " ]
+                           }, {
+                              "r" : "107",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "107",
+                                 "s" : [ {
+                                    "r" : "105",
+                                    "s" : [ {
+                                       "r" : "104",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "105",
+                                       "s" : [ {
+                                          "value" : [ "value" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "r" : "106",
+                                    "value" : [ " ",">"," ","5" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "109",
+               "locator" : "119:3-122:3",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "108",
+                  "locator" : "119:9-122:3",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "103",
+                     "locator" : "120:5-120:47",
+                     "alias" : "O",
+                     "expression" : {
+                        "localId" : "102",
+                        "locator" : "120:5-120:45",
+                        "name" : "C reactive protein test result",
+                        "libraryName" : "Elements",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "107",
+                     "locator" : "121:7-121:23",
+                     "type" : "Greater",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "name" : "ToInteger",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}integer",
+                           "type" : "As",
+                           "operand" : {
+                              "localId" : "105",
+                              "locator" : "121:13-121:19",
+                              "path" : "value",
+                              "scope" : "O",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "106",
+                        "locator" : "121:23",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "5",
+                        "type" : "Literal"
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "119",
+            "locator" : "128:1-132:3",
+            "name" : "History of contact with a person with TB",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "input",
+                  "value" : "History of contact with a person with TB"
+               }, {
+                  "name" : "pseudocode",
+                  "value" : "\"History of contact with a person with TB\"=True"
+               } ],
+               "s" : {
+                  "r" : "119",
+                  "s" : [ {
+                     "value" : [ "/*\n @input: History of contact with a person with TB\n @pseudocode: \"History of contact with a person with TB\"=True\n */\n","define ","\"History of contact with a person with TB\"",":\n  " ]
+                  }, {
+                     "r" : "118",
+                     "s" : [ {
+                        "value" : [ "exists" ]
+                     }, {
+                        "r" : "117",
+                        "s" : [ {
+                           "value" : [ "(\n    " ]
+                        }, {
+                           "r" : "117",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "112",
+                                 "s" : [ {
+                                    "r" : "111",
+                                    "s" : [ {
+                                       "s" : [ {
+                                          "value" : [ "Elements",".","\"History of contact with a person with TB Observation\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","O" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      " ]
+                           }, {
+                              "r" : "116",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "116",
+                                 "s" : [ {
+                                    "r" : "114",
+                                    "s" : [ {
+                                       "r" : "113",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "114",
+                                       "s" : [ {
+                                          "value" : [ "value" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "r" : "115",
+                                    "value" : [ " ","="," ","true" ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "118",
+               "locator" : "129:3-132:3",
+               "type" : "Exists",
+               "operand" : {
+                  "localId" : "117",
+                  "locator" : "129:9-132:3",
+                  "type" : "Query",
+                  "source" : [ {
+                     "localId" : "112",
+                     "locator" : "130:5-130:69",
+                     "alias" : "O",
+                     "expression" : {
+                        "localId" : "111",
+                        "locator" : "130:5-130:67",
+                        "name" : "History of contact with a person with TB Observation",
+                        "libraryName" : "Elements",
+                        "type" : "ExpressionRef"
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "116",
+                     "locator" : "131:7-131:26",
+                     "type" : "Equal",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "name" : "ToBoolean",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "asType" : "{http://hl7.org/fhir}boolean",
+                           "type" : "As",
+                           "operand" : {
+                              "localId" : "114",
+                              "locator" : "131:13-131:19",
+                              "path" : "value",
+                              "scope" : "O",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "115",
+                        "locator" : "131:23-131:26",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value" : "true",
+                        "type" : "Literal"
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "196",
+            "locator" : "137:1-179:4",
+            "name" : "Guidance",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "dynamicValue",
+                  "value" : "Guidance"
+               } ],
+               "s" : {
+                  "r" : "196",
+                  "s" : [ {
+                     "value" : [ "/*\n @dynamicValue: Guidance\n */\n","define ","\"Guidance\"",":\n  " ]
+                  }, {
+                     "r" : "195",
+                     "s" : [ {
+                        "value" : [ "Combine","(" ]
+                     }, {
+                        "r" : "194",
+                        "s" : [ {
+                           "value" : [ "{\n    " ]
+                        }, {
+                           "r" : "127",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "124",
+                              "s" : [ {
+                                 "r" : "122",
+                                 "s" : [ {
+                                    "r" : "120",
+                                    "s" : [ {
+                                       "value" : [ "\"W4SS single screening algorithm\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "121",
+                                    "s" : [ {
+                                       "value" : [ "\"Age 10 or older\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "123",
+                                 "s" : [ {
+                                    "value" : [ "\"Has symptoms of TB\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "125",
+                              "s" : [ {
+                                 "value" : [ "'Screen positive for TB.  Refer for diagnostic evaluation including mWRD & clinical evaluation as indicated.  \n\nIn PLHIV, diagnostic testing for TB with LF-LAM and other methods is usually considered early on.  See WHO consolidated guidelines on tuberculosis, Module 3: Diagnosis - Rapid diagnostics for tuberculosis detection.  \n\nLF-LAM can assist TB diagnosis among people with advanced HIV disease (AHD) with symptoms and signs of TB. For inpatients with CD4 count ≤200 cells/mm3, outpatients with CD4 count ≤100 cells/mm3, or individuals with any CD4 count with symptoms of AHD or if seriously ill (See WHO Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021))'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "126",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "135",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "132",
+                              "s" : [ {
+                                 "r" : "130",
+                                 "s" : [ {
+                                    "r" : "128",
+                                    "s" : [ {
+                                       "value" : [ "\"W4SS single screening algorithm\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "129",
+                                    "s" : [ {
+                                       "value" : [ "\"Age 10 or older\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "131",
+                                 "s" : [ {
+                                    "value" : [ "\"Does not have symptoms of TB\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "133",
+                              "s" : [ {
+                                 "value" : [ "'Screen negative for TB, assess for TPT.'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "134",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "143",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "140",
+                              "s" : [ {
+                                 "r" : "138",
+                                 "s" : [ {
+                                    "r" : "136",
+                                    "s" : [ {
+                                       "value" : [ "\"Sequential positive screening algorithm with W4SS and CRP\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "137",
+                                    "s" : [ {
+                                       "value" : [ "\"Age 10 or older\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "139",
+                                 "s" : [ {
+                                    "value" : [ "\"Does not have symptoms of TB\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "141",
+                              "s" : [ {
+                                 "value" : [ "'Screen negative for TB.  Assess for TPT.'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "142",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "153",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "150",
+                              "s" : [ {
+                                 "r" : "148",
+                                 "s" : [ {
+                                    "r" : "146",
+                                    "s" : [ {
+                                       "r" : "144",
+                                       "s" : [ {
+                                          "value" : [ "\"Sequential positive screening algorithm with W4SS and CRP\"" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " and " ]
+                                    }, {
+                                       "r" : "145",
+                                       "s" : [ {
+                                          "value" : [ "\"Age 10 or older\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "147",
+                                    "s" : [ {
+                                       "value" : [ "\"Has symptoms of TB\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "149",
+                                 "s" : [ {
+                                    "value" : [ "\"No C-reactive protein test done\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "151",
+                              "s" : [ {
+                                 "value" : [ "'Perform C reative protein test.'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "152",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "163",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "160",
+                              "s" : [ {
+                                 "r" : "158",
+                                 "s" : [ {
+                                    "r" : "156",
+                                    "s" : [ {
+                                       "r" : "154",
+                                       "s" : [ {
+                                          "value" : [ "\"Sequential positive screening algorithm with W4SS and CRP\"" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " and " ]
+                                    }, {
+                                       "r" : "155",
+                                       "s" : [ {
+                                          "value" : [ "\"Age 10 or older\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "157",
+                                    "s" : [ {
+                                       "value" : [ "\"Has symptoms of TB\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "159",
+                                 "s" : [ {
+                                    "value" : [ "\"C-reactive protein at or under 5mg/L\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "161",
+                              "s" : [ {
+                                 "value" : [ "'Screen positive for TB.  Refer for diagnostic evaluation including mWRD & clinical evaluation as indicated.  \n\nIn PLHIV, diagnostic testing for TB with LF-LAM and other methods is usually considered early on.  \n\nCurrently, the c-reative protein cut-off value of > 5 mg/L is recommended, as it is the lowest threshold indicating abnormality in many clinical settings and because it is the most sensitive. At this cut-off, CRP has a similar sensitivity and higher or similar specificity to symptom screening in all subpopulations of adults and adolescents living with HIV tested (Section 5.2.2, 2021 WHO operation handbook on tuberculosis, Module 2: screening).  \n\nLF-LAM can assist TB diagnosis among people with advanced HIV disease (AHD) with symptoms and signs of TB. For inpatients with CD4 count ≤200 cells/mm3, outpatients with CD4 count ≤100 cells/mm3, or individuals with any CD4 count with symptoms of AHD or if seriously ill.'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "162",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "173",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "170",
+                              "s" : [ {
+                                 "r" : "168",
+                                 "s" : [ {
+                                    "r" : "166",
+                                    "s" : [ {
+                                       "r" : "164",
+                                       "s" : [ {
+                                          "value" : [ "\"Sequential positive screening algorithm with W4SS and CRP\"" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " and " ]
+                                    }, {
+                                       "r" : "165",
+                                       "s" : [ {
+                                          "value" : [ "\"Age 10 or older\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "167",
+                                    "s" : [ {
+                                       "value" : [ "\"Has symptoms of TB\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "169",
+                                 "s" : [ {
+                                    "value" : [ "\"C-reactive protein over 5mg/L\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "171",
+                              "s" : [ {
+                                 "value" : [ "'In PLHIV, diagnostic testing for TB with LF-LAM and other methods is usually considered early on.  \n\nCurrently, the c-reative protein cut-off value of > 5 mg/L is recommended, as it is the lowest threshold indicating abnormality in many clinical settings and because it is the most sensitive. At this cut-off, CRP has a similar sensitivity and higher or similar specificity to symptom screening in all subpopulations of adults and adolescents living with HIV tested (Section 5.2.2, 2021 WHO operation handbook on tuberculosis, Module 2: screening).  \n\nLF-LAM can assist TB diagnosis among people with advanced HIV disease (AHD) with symptoms and signs of TB. For inpatients with CD4 count ≤200 cells/mm3, outpatients with CD4 count ≤100 cells/mm3, or individuals with any CD4 count with symptoms of AHD or if seriously ill.'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "172",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "183",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "180",
+                              "s" : [ {
+                                 "r" : "178",
+                                 "s" : [ {
+                                    "r" : "176",
+                                    "s" : [ {
+                                       "r" : "174",
+                                       "s" : [ {
+                                          "value" : [ "\"Screening with any TB symptom\"" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " and " ]
+                                    }, {
+                                       "r" : "175",
+                                       "s" : [ {
+                                          "value" : [ "\"Age under 15\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "177",
+                                    "s" : [ {
+                                       "value" : [ "\"Has symptoms of TB\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "179",
+                                 "s" : [ {
+                                    "value" : [ "\"History of contact with a person with TB\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "181",
+                              "s" : [ {
+                                 "value" : [ "'Screen positive for TB.  Refer for diagnostic evaluation including mWRD & clinical evaluation as indicated.  \n\nAny child < 15 years who has had close contact with someone with TB disease should be screened for TB with a symptom screen and/or CXR as part of active contact-tracing (see Algorithm A.5.1 in Annex 5). Symptoms that should be used to screen for TB are cough, fever and poor weight gain (or weight loss). In young children, reduced playfulness or lethargy should also be included in symptom screening; cough may be absent.'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "182",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "193",
+                           "s" : [ {
+                              "value" : [ "if " ]
+                           }, {
+                              "r" : "190",
+                              "s" : [ {
+                                 "r" : "188",
+                                 "s" : [ {
+                                    "r" : "186",
+                                    "s" : [ {
+                                       "r" : "184",
+                                       "s" : [ {
+                                          "value" : [ "\"Screening with any TB symptom\"" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " and " ]
+                                    }, {
+                                       "r" : "185",
+                                       "s" : [ {
+                                          "value" : [ "\"Age under 15\"" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " and " ]
+                                 }, {
+                                    "r" : "187",
+                                    "s" : [ {
+                                       "value" : [ "\"Does not have symptoms of TB\"" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " and " ]
+                              }, {
+                                 "r" : "189",
+                                 "s" : [ {
+                                    "value" : [ "\"History of contact with a person with TB\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      then " ]
+                           }, {
+                              "r" : "191",
+                              "s" : [ {
+                                 "value" : [ "'Screen negative for TB.  Refer for TPT.'" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n      else " ]
+                           }, {
+                              "r" : "192",
+                              "s" : [ {
+                                 "value" : [ "''" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n  }" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "195",
+               "locator" : "138:3-179:4",
+               "type" : "Combine",
+               "source" : {
+                  "localId" : "194",
+                  "locator" : "138:11-179:3",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "127",
+                     "locator" : "139:5-145:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "124",
+                        "locator" : "139:8-139:87",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "122",
+                           "locator" : "139:8-139:62",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "120",
+                              "locator" : "139:8-139:40",
+                              "name" : "W4SS single screening algorithm",
+                              "type" : "ExpressionRef"
+                           }, {
+                              "localId" : "121",
+                              "locator" : "139:46-139:62",
+                              "name" : "Age 10 or older",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "123",
+                           "locator" : "139:68-139:87",
+                           "name" : "Has symptoms of TB",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "125",
+                        "locator" : "140:12-140:771",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Screen positive for TB.  Refer for diagnostic evaluation including mWRD & clinical evaluation as indicated.  \n\nIn PLHIV, diagnostic testing for TB with LF-LAM and other methods is usually considered early on.  See WHO consolidated guidelines on tuberculosis, Module 3: Diagnosis - Rapid diagnostics for tuberculosis detection.  \n\nLF-LAM can assist TB diagnosis among people with advanced HIV disease (AHD) with symptoms and signs of TB. For inpatients with CD4 count ≤200 cells/mm3, outpatients with CD4 count ≤100 cells/mm3, or individuals with any CD4 count with symptoms of AHD or if seriously ill (See WHO Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021))",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "126",
+                        "locator" : "145:12-145:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "135",
+                     "locator" : "146:5-148:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "132",
+                        "locator" : "146:8-146:97",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "130",
+                           "locator" : "146:8-146:62",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "128",
+                              "locator" : "146:8-146:40",
+                              "name" : "W4SS single screening algorithm",
+                              "type" : "ExpressionRef"
+                           }, {
+                              "localId" : "129",
+                              "locator" : "146:46-146:62",
+                              "name" : "Age 10 or older",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "131",
+                           "locator" : "146:68-146:97",
+                           "name" : "Does not have symptoms of TB",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "133",
+                        "locator" : "147:12-147:52",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Screen negative for TB, assess for TPT.",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "134",
+                        "locator" : "148:12-148:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "143",
+                     "locator" : "149:5-151:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "140",
+                        "locator" : "149:8-149:123",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "138",
+                           "locator" : "149:8-149:88",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "136",
+                              "locator" : "149:8-149:66",
+                              "name" : "Sequential positive screening algorithm with W4SS and CRP",
+                              "type" : "ExpressionRef"
+                           }, {
+                              "localId" : "137",
+                              "locator" : "149:72-149:88",
+                              "name" : "Age 10 or older",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "139",
+                           "locator" : "149:94-149:123",
+                           "name" : "Does not have symptoms of TB",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "141",
+                        "locator" : "150:12-150:53",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Screen negative for TB.  Assess for TPT.",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "142",
+                        "locator" : "151:12-151:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "153",
+                     "locator" : "152:5-154:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "150",
+                        "locator" : "152:8-152:151",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "148",
+                           "locator" : "152:8-152:113",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "146",
+                              "locator" : "152:8-152:88",
+                              "type" : "And",
+                              "operand" : [ {
+                                 "localId" : "144",
+                                 "locator" : "152:8-152:66",
+                                 "name" : "Sequential positive screening algorithm with W4SS and CRP",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "localId" : "145",
+                                 "locator" : "152:72-152:88",
+                                 "name" : "Age 10 or older",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "localId" : "147",
+                              "locator" : "152:94-152:113",
+                              "name" : "Has symptoms of TB",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "149",
+                           "locator" : "152:119-152:151",
+                           "name" : "No C-reactive protein test done",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "151",
+                        "locator" : "153:12-153:44",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Perform C reative protein test.",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "152",
+                        "locator" : "154:12-154:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "163",
+                     "locator" : "155:5-163:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "160",
+                        "locator" : "155:8-155:156",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "158",
+                           "locator" : "155:8-155:113",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "156",
+                              "locator" : "155:8-155:88",
+                              "type" : "And",
+                              "operand" : [ {
+                                 "localId" : "154",
+                                 "locator" : "155:8-155:66",
+                                 "name" : "Sequential positive screening algorithm with W4SS and CRP",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "localId" : "155",
+                                 "locator" : "155:72-155:88",
+                                 "name" : "Age 10 or older",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "localId" : "157",
+                              "locator" : "155:94-155:113",
+                              "name" : "Has symptoms of TB",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "159",
+                           "locator" : "155:119-155:156",
+                           "name" : "C-reactive protein at or under 5mg/L",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "161",
+                        "locator" : "156:12-156:947",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Screen positive for TB.  Refer for diagnostic evaluation including mWRD & clinical evaluation as indicated.  \n\nIn PLHIV, diagnostic testing for TB with LF-LAM and other methods is usually considered early on.  \n\nCurrently, the c-reative protein cut-off value of > 5 mg/L is recommended, as it is the lowest threshold indicating abnormality in many clinical settings and because it is the most sensitive. At this cut-off, CRP has a similar sensitivity and higher or similar specificity to symptom screening in all subpopulations of adults and adolescents living with HIV tested (Section 5.2.2, 2021 WHO operation handbook on tuberculosis, Module 2: screening).  \n\nLF-LAM can assist TB diagnosis among people with advanced HIV disease (AHD) with symptoms and signs of TB. For inpatients with CD4 count ≤200 cells/mm3, outpatients with CD4 count ≤100 cells/mm3, or individuals with any CD4 count with symptoms of AHD or if seriously ill.",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "162",
+                        "locator" : "163:12-163:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "173",
+                     "locator" : "164:5-170:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "170",
+                        "locator" : "164:8-164:149",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "168",
+                           "locator" : "164:8-164:113",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "166",
+                              "locator" : "164:8-164:88",
+                              "type" : "And",
+                              "operand" : [ {
+                                 "localId" : "164",
+                                 "locator" : "164:8-164:66",
+                                 "name" : "Sequential positive screening algorithm with W4SS and CRP",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "localId" : "165",
+                                 "locator" : "164:72-164:88",
+                                 "name" : "Age 10 or older",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "localId" : "167",
+                              "locator" : "164:94-164:113",
+                              "name" : "Has symptoms of TB",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "169",
+                           "locator" : "164:119-164:149",
+                           "name" : "C-reactive protein over 5mg/L",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "171",
+                        "locator" : "165:12-165:836",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "In PLHIV, diagnostic testing for TB with LF-LAM and other methods is usually considered early on.  \n\nCurrently, the c-reative protein cut-off value of > 5 mg/L is recommended, as it is the lowest threshold indicating abnormality in many clinical settings and because it is the most sensitive. At this cut-off, CRP has a similar sensitivity and higher or similar specificity to symptom screening in all subpopulations of adults and adolescents living with HIV tested (Section 5.2.2, 2021 WHO operation handbook on tuberculosis, Module 2: screening).  \n\nLF-LAM can assist TB diagnosis among people with advanced HIV disease (AHD) with symptoms and signs of TB. For inpatients with CD4 count ≤200 cells/mm3, outpatients with CD4 count ≤100 cells/mm3, or individuals with any CD4 count with symptoms of AHD or if seriously ill.",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "172",
+                        "locator" : "170:12-170:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "183",
+                     "locator" : "171:5-175:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "180",
+                        "locator" : "171:8-171:129",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "178",
+                           "locator" : "171:8-171:82",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "176",
+                              "locator" : "171:8-171:57",
+                              "type" : "And",
+                              "operand" : [ {
+                                 "localId" : "174",
+                                 "locator" : "171:8-171:38",
+                                 "name" : "Screening with any TB symptom",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "localId" : "175",
+                                 "locator" : "171:44-171:57",
+                                 "name" : "Age under 15",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "localId" : "177",
+                              "locator" : "171:63-171:82",
+                              "name" : "Has symptoms of TB",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "179",
+                           "locator" : "171:88-171:129",
+                           "name" : "History of contact with a person with TB",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "181",
+                        "locator" : "172:12-172:546",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Screen positive for TB.  Refer for diagnostic evaluation including mWRD & clinical evaluation as indicated.  \n\nAny child < 15 years who has had close contact with someone with TB disease should be screened for TB with a symptom screen and/or CXR as part of active contact-tracing (see Algorithm A.5.1 in Annex 5). Symptoms that should be used to screen for TB are cough, fever and poor weight gain (or weight loss). In young children, reduced playfulness or lethargy should also be included in symptom screening; cough may be absent.",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "182",
+                        "locator" : "175:12-175:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "193",
+                     "locator" : "176:5-178:13",
+                     "type" : "If",
+                     "condition" : {
+                        "localId" : "190",
+                        "locator" : "176:8-176:139",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "188",
+                           "locator" : "176:8-176:92",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "186",
+                              "locator" : "176:8-176:57",
+                              "type" : "And",
+                              "operand" : [ {
+                                 "localId" : "184",
+                                 "locator" : "176:8-176:38",
+                                 "name" : "Screening with any TB symptom",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "localId" : "185",
+                                 "locator" : "176:44-176:57",
+                                 "name" : "Age under 15",
+                                 "type" : "ExpressionRef"
+                              } ]
+                           }, {
+                              "localId" : "187",
+                              "locator" : "176:63-176:92",
+                              "name" : "Does not have symptoms of TB",
+                              "type" : "ExpressionRef"
+                           } ]
+                        }, {
+                           "localId" : "189",
+                           "locator" : "176:98-176:139",
+                           "name" : "History of contact with a person with TB",
+                           "type" : "ExpressionRef"
+                        } ]
+                     },
+                     "then" : {
+                        "localId" : "191",
+                        "locator" : "177:12-177:52",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Screen negative for TB.  Refer for TPT.",
+                        "type" : "Literal"
+                     },
+                     "else" : {
+                        "localId" : "192",
+                        "locator" : "178:12-178:13",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }
+            }
+         } ]
+      }
+   }
+}

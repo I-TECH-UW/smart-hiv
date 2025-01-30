@@ -16,7 +16,7 @@
   "title" : "WHO SMART Guidelines - HIV",
   "status" : "draft",
   "experimental" : true,
-  "date" : "2025-01-28T16:09:20+00:00",
+  "date" : "2025-01-30T04:52:13+00:00",
   "publisher" : "WHO",
   "contact" : [{
     "name" : "WHO",
@@ -2151,6 +2151,18 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "Patient"
+      }],
+      "reference" : {
+        "reference" : "Patient/ExampleHivPatient"
+      },
+      "name" : "Example Hiv Patient",
+      "description" : "This is an example of HIV Patient Resouce",
+      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPatient"
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
         "valueString" : "Condition"
       }],
       "reference" : {
@@ -2271,13 +2283,14 @@
     {
       "extension" : [{
         "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "Patient"
+        "valueString" : "Practitioner"
       }],
       "reference" : {
-        "reference" : "Patient/ExampleHivPatient"
+        "reference" : "Practitioner/ExampleSurgeon"
       },
-      "name" : "ExampleHivPatient",
-      "exampleCanonical" : "http://smart.who.int/hiv/StructureDefinition/HivPatient"
+      "name" : "ExampleHivPractitioner",
+      "description" : "ExampleHivPractitioner",
+      "exampleBoolean" : true
     },
     {
       "extension" : [{
@@ -2636,19 +2649,7 @@
         "reference" : "StructureDefinition/HivHcvViralLoadTest"
       },
       "name" : "HCV Viral Load Test",
-      "description" : "A DAK-specific HCV Viral Load observation with possible results",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/HivHcvViralLoadTestD"
-      },
-      "name" : "HCV Viral Load Test",
-      "description" : "A DAK-specific HCV Viral Load observation with possible results",
+      "description" : "HCV Viral Load Test Profile",
       "exampleBoolean" : false
     },
     {
@@ -2697,18 +2698,6 @@
       },
       "name" : "Hepatitis C diagnosis ValueSet",
       "description" : "Value set of client's hepatitis C diagnosis",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/HcvViralLoadTestG"
-      },
-      "name" : "Hepatitis C Viral Load Result",
-      "description" : "Hepatitis C viral load result",
       "exampleBoolean" : false
     },
     {
@@ -2825,9 +2814,34 @@
         "valueString" : "StructureDefinition:resource"
       }],
       "reference" : {
+        "reference" : "StructureDefinition/HivLabTestObservation"
+      },
+      "name" : "Hiv Lab Test Observation",
+      "description" : "Hiv Lab Test Observation Profile",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivLabTestServiceRequest"
+      },
+      "name" : "Hiv Lab Test ServiceRequest",
+      "description" : "Hiv Lab Test ServiceRequest profile",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
         "reference" : "StructureDefinition/HivLabTestSpecimen"
       },
       "name" : "HIV Lab Test Specimen",
+      "description" : "A profile of HIV Lab Test Specimen",
       "exampleBoolean" : false
     },
     {
@@ -2841,6 +2855,18 @@
       "name" : "HIV non Functional Requirements",
       "description" : "Non Functional Requirements For HIV",
       "exampleBoolean" : true
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivPatient"
+      },
+      "name" : "HIV patient Profile",
+      "description" : "Profile for patients requiring gender, date of birth, and geographic region.",
+      "exampleBoolean" : false
     },
     {
       "extension" : [{
@@ -3092,6 +3118,18 @@
       },
       "name" : "HIV viral load specimen type ValueSet",
       "description" : "Value set of the type of specimen to be used to test viral load",
+      "exampleBoolean" : false
+    },
+    {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
+        "valueString" : "StructureDefinition:resource"
+      }],
+      "reference" : {
+        "reference" : "StructureDefinition/HivVmmcAdverseEvent"
+      },
+      "name" : "Hiv Vmmc AdverseEvent",
+      "description" : "An adverse event related to voluntary medical male circumcision",
       "exampleBoolean" : false
     },
     {
@@ -5705,52 +5743,6 @@
       },
       "name" : "HIVIndicatorElements",
       "description" : "Description not yet available for HIVIndicatorElements.",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/HivLabTestObservation"
-      },
-      "name" : "HivLabTestObservation",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/HivLabTestServiceRequest"
-      },
-      "name" : "HivLabTestServiceRequest",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/HivPatient"
-      },
-      "name" : "HivPatient",
-      "description" : "Profile for patients requiring gender, date of birth, and geographic region.",
-      "exampleBoolean" : false
-    },
-    {
-      "extension" : [{
-        "url" : "http://hl7.org/fhir/tools/StructureDefinition/resource-information",
-        "valueString" : "StructureDefinition:resource"
-      }],
-      "reference" : {
-        "reference" : "StructureDefinition/HivVmmcAdverseEvent"
-      },
-      "name" : "HivVmmcAdverseEvent",
-      "description" : "An adverse event related to voluntary medical male circumcision",
       "exampleBoolean" : false
     },
     {

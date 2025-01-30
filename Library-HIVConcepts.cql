@@ -7,7 +7,8 @@
 // Codes are provided for each Data Dictionary concept
 // Specific Data Element IDs are appended to the label if the label is not unique within the DAK
 
-library HIVConcepts
+library HIVConcepts version '0.0.2'
+
 codesystem "HIVConcepts": 'http://smart.who.int/hiv/CodeSystem/HIVConcepts'
 
 valueset "Referred by Choices": 'http://smart.who.int/hiv/ValueSet/HIV.A.DE5'

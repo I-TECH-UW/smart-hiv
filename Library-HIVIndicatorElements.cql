@@ -9,8 +9,8 @@ include WHOConcepts
 include WHOCommon called WC
 include WHOElements called WE
 
-include HIVConcepts called Concepts
-include HIVConceptsCustom called ConceptsCustom
+include HIVConcepts version '0.0.2' called Concepts
+include HIVConceptsCustom version '0.0.1' called ConceptsCustom
 include HIVElements called Elements
 include HIVCommon called Common
 include HIVConfig called Config
@@ -925,7 +925,7 @@ define "Date informed of HIV-positive diagnosis":
     where O.effective.toInterval() during "Measurement Period"
 define "Date informed of HIV-positive diagnosis Value":
   "Date informed of HIV-positive diagnosis" O
-  return O.value
+  return O.value as dateTime
 /* End of Date informed of HIV-positive diagnosis */
 
 /*
@@ -939,7 +939,7 @@ define "HIV diagnosis date":
     where O.effective.toInterval() during "Measurement Period"
 define "HIV diagnosis date Value":
   "HIV diagnosis date" O
-  return O.value
+  return O.value as dateTime
 /* End of HIV diagnosis date */
 
 /*
@@ -953,7 +953,7 @@ define "ART start date B.DE72":
     where O.effective.toInterval() during "Measurement Period"
 define "ART start date B.DE72 Value":
   "ART start date B.DE72" O
-  return O.value
+  return O.value as dateTime
 /* End of ART start date B.DE72 */
 
 /*
@@ -966,7 +966,7 @@ define "HIV test type B.DE81":
     where O.effective.toInterval() during "Measurement Period"
 define "HIV test type B.DE81 Value":
   "HIV test type B.DE81" O
-  return O.value
+  return O.value as CodeableConcept
 /* End of HIV test type B.DE81 */
 
 /*
@@ -1688,13 +1688,13 @@ define "STI syndrome":
   List<String>{
     if exists("Urethral discharge syndrome B.DE227") then 'Urethral Discharge' else null,
     if exists("Vaginal discharge syndrome B.DE228") then 'Vaginal Discharge' else null,
-    if exists("Lower Abdominal pain  B.DE229") then 'Lower Abdominal Pain' else null,
+    if exists("Lower Abdominal pain B.DE229") then 'Lower Abdominal Pain' else null,
     if exists("Genital ulcer disease syndrome B.DE230") then 'Genital Ulcer' else null,
     if exists("Anorectal discharge B.DE231") then 'Anorectal discharge ' else null
   }
 
 define "Syndrome/STI diagnosed B.DE226":
-  exists("Urethral discharge syndrome B.DE227") or exists("Vaginal discharge syndrome B.DE228") or exists("Lower Abdominal pain  B.DE229") or exists("Genital ulcer disease syndrome B.DE230") or
+  exists("Urethral discharge syndrome B.DE227") or exists("Vaginal discharge syndrome B.DE228") or exists("Lower Abdominal pain B.DE229") or exists("Genital ulcer disease syndrome B.DE230") or
   exists("Anorectal discharge B.DE231")
 
 define "Syndrome/STI diagnosed B.DE226 Condition":
@@ -1727,10 +1727,10 @@ define "Vaginal discharge syndrome B.DE228":
 @activity: HIV.B23 Offer sexual and reproductive health services
 @description: Client diagnosed with lower abdominal pain
 */
-define "Lower Abdominal pain  B.DE229":
-  Elements."Lower Abdominal pain  B.DE229" C
+define "Lower Abdominal pain B.DE229":
+  Elements."Lower Abdominal pain B.DE229" C
     where C.prevalenceInterval() overlaps "Measurement Period"
-/* End of Lower Abdominal pain  B.DE229 */
+/* End of Lower Abdominal pain B.DE229 */
 
 /*
 @dataElement: HIV.B.DE230 - Genital ulcer disease syndrome
@@ -2270,7 +2270,7 @@ define "Date medications prescribed C.DE74":
     where O.effective.toInterval() during "Measurement Period"
 define "Date medications prescribed C.DE74 Value":
   "Date medications prescribed C.DE74" O
-  return O.value
+  return O.value as dateTime
 /* End of Date medications prescribed C.DE74 */
 
 /*
@@ -2423,7 +2423,7 @@ define "Number of days prescribed C.DE121":
     where O.effective.toInterval() during "Measurement Period"
 define "Number of days prescribed C.DE121 Value":
   "Number of days prescribed C.DE121" O
-  return O.value
+  return O.value as integer
 /* End of Number of days prescribed C.DE121 */
 
 /*
@@ -2484,7 +2484,7 @@ define "Number of HIV self-test kits distributed":
     where O.effective.toInterval() during "Measurement Period"
 define "Number of HIV self-test kits distributed Value":
   "Number of HIV self-test kits distributed" O
-  return O.value
+  return O.value as integer
 /* End of Number of HIV self-test kits distributed */
 
 /*
@@ -3111,7 +3111,7 @@ define "Baseline CD4 count D.DE367":
     where O.effective.toInterval() during "Measurement Period"
 define "Baseline CD4 count D.DE367 Value":
   "Baseline CD4 count D.DE367" O
-  return O.value
+  return O.value as integer
 /* End of Baseline CD4 count D.DE367 */
 
 /*
@@ -3125,7 +3125,7 @@ define "Date of baseline CD4 count test D.DE368":
     where O.effective.toInterval() during "Measurement Period"
 define "Date of baseline CD4 count test D.DE368 Value":
   "Date of baseline CD4 count test D.DE368" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of baseline CD4 count test D.DE368 */
 
 /*
@@ -3139,7 +3139,7 @@ define "Viral load test result D.DE387":
     where O.effective.toInterval() during "Measurement Period"
 define "Viral load test result D.DE387 Value":
   "Viral load test result D.DE387" O
-  return O.value
+  return O.value as integer
 /* End of Viral load test result D.DE387 */
 
 /*
@@ -3234,7 +3234,7 @@ define "Date viral load test results received by client D.DE417":
     where O.effective.toInterval() during "Measurement Period"
 define "Date viral load test results received by client D.DE417 Value":
   "Date viral load test results received by client D.DE417" O
-  return O.value
+  return O.value as dateTime
 /* End of Date viral load test results received by client D.DE417 */
 
 /*
@@ -3393,7 +3393,7 @@ define "Date medications prescribed D.DE458":
     where O.effective.toInterval() during "Measurement Period"
 define "Date medications prescribed D.DE458 Value":
   "Date medications prescribed D.DE458" O
-  return O.value
+  return O.value as dateTime
 /* End of Date medications prescribed D.DE458 */
 
 /*
@@ -3420,7 +3420,7 @@ define "Number of days medications prescribed":
     where O.effective.toInterval() during "Measurement Period"
 define "Number of days medications prescribed Value":
   "Number of days medications prescribed" O
-  return O.value
+  return O.value as integer
 /* End of Number of days medications prescribed */
 
 /*
@@ -3608,7 +3608,7 @@ define "Dates of substitution within second-line regimen":
     where O.effective.toInterval() during "Measurement Period"
 define "Dates of substitution within second-line regimen Value":
   "Dates of substitution within second-line regimen" O
-  return O.value
+  return O.value as dateTime
 /* End of Dates of substitution within second-line regimen */
 
 /*
@@ -3622,7 +3622,7 @@ define "Dates of substitution within third-line regimen":
     where O.effective.toInterval() during "Measurement Period"
 define "Dates of substitution within third-line regimen Value":
   "Dates of substitution within third-line regimen" O
-  return O.value
+  return O.value as dateTime
 /* End of Dates of substitution within third-line regimen */
 
 /*
@@ -4281,16 +4281,16 @@ define "Vaginal discharge syndrome D.DE780 Observation":
 @description: Client diagnosed with lower abdominal pain
 */
 // TODO: Replace placeholder with relevant CQL logic
-define "Lower Abdominal pain  D.DE781":
-  exists "Lower Abdominal pain  D.DE781 Condition"
-    or exists "Lower Abdominal pain  D.DE781 Observation"
-define "Lower Abdominal pain  D.DE781 Condition":
-  Elements."Lower Abdominal pain  D.DE781 Condition" C
+define "Lower Abdominal pain D.DE781":
+  exists "Lower Abdominal pain D.DE781 Condition"
+    or exists "Lower Abdominal pain D.DE781 Observation"
+define "Lower Abdominal pain D.DE781 Condition":
+  Elements."Lower Abdominal pain D.DE781 Condition" C
     where C.prevalenceInterval() overlaps "Measurement Period"
-define "Lower Abdominal pain  D.DE781 Observation":
-  Elements."Lower Abdominal pain  D.DE781 Observation" O
+define "Lower Abdominal pain D.DE781 Observation":
+  Elements."Lower Abdominal pain D.DE781 Observation" O
     where O.effective.toInterval() during "Measurement Period"
-/* End of Lower Abdominal pain  D.DE781 */
+/* End of Lower Abdominal pain D.DE781 */
 
 /*
 @dataElement: HIV.D.DE782 - Genital ulcer disease syndrome
@@ -4384,8 +4384,8 @@ define "Syphilis test date D.DE801":
     where O.effective.toInterval() during "Measurement Period"
 define "Syphilis test date D.DE801 Value":
   "Syphilis test date D.DE801" O
-  return O.value
-/* End of Syphilis test date D.DE801 */
+  return O.value as dateTime
+/* End of Syphilis test date D.DE801  */
 
 /*
 @dataElement: HIV.D.DE802 - Syphilis test result
@@ -4462,7 +4462,7 @@ define "Syphilis treatment start date D.DE806":
     where O.effective.toInterval() during "Measurement Period"
 define "Syphilis treatment start date D.DE806 Value":
   "Syphilis treatment start date D.DE806" O
-  return O.value
+  return O.value as dateTime
 /* End of Syphilis treatment start date D.DE806 */
 
 /*
@@ -4476,7 +4476,7 @@ define "Gonorrhoea test date D.DE807":
     where O.effective.toInterval() during "Measurement Period"
 define "Gonorrhoea test date D.DE807 Value":
   "Gonorrhoea test date D.DE807" O
-  return O.value
+  return O.value as dateTime
 /* End of Gonorrhoea test date D.DE807 */
 
 /*
@@ -4554,7 +4554,7 @@ define "Gonorrhoea treatment start date D.DE812":
     where O.effective.toInterval() during "Measurement Period"
 define "Gonorrhoea treatment start date D.DE812 Value":
   "Gonorrhoea treatment start date D.DE812" O
-  return O.value
+  return O.value as dateTime
 /* End of Gonorrhoea treatment start date D.DE812 */
 
 /*
@@ -5238,7 +5238,7 @@ define "Infant date of birth":
     where O.effective.toInterval() during "Measurement Period"
 define "Infant date of birth Value":
   "Infant date of birth" O
-  return O.value
+  return O.value as dateTime
 /* End of Infant date of birth */
 
 /*
@@ -5480,7 +5480,7 @@ define "HIV test date E.DE224":
     where O.effective.toInterval() during "Measurement Period"
 define "HIV test date E.DE224 Value":
   "HIV test date E.DE224" O
-  return O.value
+  return O.value as dateTime
 /* End of HIV test date E.DE224 */
 
 /*
@@ -5558,7 +5558,7 @@ define "Infant ART start date":
     where O.effective.toInterval() during "Measurement Period"
 define "Infant ART start date Value":
   "Infant ART start date" O
-  return O.value
+  return O.value as dateTime
 /* End of Infant ART start date */
 
 /*
@@ -5634,7 +5634,7 @@ define "Baseline CD4 count G.DE3":
     where O.effective.toInterval() during "Measurement Period"
 define "Baseline CD4 count G.DE3 Value":
   "Baseline CD4 count G.DE3" O
-  return O.value
+  return O.value as Quantity
 /* End of Baseline CD4 count G.DE3 */
 
 /*
@@ -5648,7 +5648,7 @@ define "Date of viral load sample collection G.DE8":
     where O.effective.toInterval() during "Measurement Period"
 define "Date of viral load sample collection G.DE8 Value":
   "Date of viral load sample collection G.DE8" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of viral load sample collection G.DE8 */
 
 /*
@@ -5662,7 +5662,7 @@ define "Viral load test result G.DE12":
     where O.effective.toInterval() during "Measurement Period"
 define "Viral load test result G.DE12 Value":
   "Viral load test result G.DE12" O
-  return O.value
+  return O.value as Quantity
 /* End of Viral load test result G.DE12 */
 
 /*
@@ -5676,7 +5676,7 @@ define "HBsAg test date G.DE17":
     where O.effective.toInterval() during "Measurement Period"
 define "HBsAg test date G.DE17 Value":
   "HBsAg test date G.DE17" O
-  return O.value
+  return O.value as dateTime
 /* End of HBsAg test date G.DE17 */
 
 /*
@@ -5754,7 +5754,7 @@ define "HCV test date G.DE42":
     where O.effective.toInterval() during "Measurement Period"
 define "HCV test date G.DE42 Value":
   "HCV test date G.DE42" O
-  return O.value
+  return O.value as dateTime
 /* End of HCV test date G.DE42 */
 
 /*
@@ -5832,7 +5832,7 @@ define "HCV viral load test date G.DE47":
     where O.effective.toInterval() during "Measurement Period"
 define "HCV viral load test date G.DE47 Value":
   "HCV viral load test date G.DE47" O
-  return O.value
+  return O.value as dateTime
 /* End of HCV viral load test date G.DE47 */
 
 /*
@@ -5893,7 +5893,7 @@ define "Syphilis test date G.DE69":
     where O.effective.toInterval() during "Measurement Period"
 define "Syphilis test date G.DE69 Value":
   "Syphilis test date G.DE69" O
-  return O.value
+  return O.value as dateTime
 /* End of Syphilis test date G.DE69 */
 
 /*
@@ -6069,7 +6069,7 @@ define "Date ART stopped H.DE73":
     where O.effective.toInterval() during "Measurement Period"
 define "Date ART stopped H.DE73 Value":
   "Date ART stopped H.DE73" O
-  return O.value
+  return O.value as dateTime
 /* End of Date ART stopped H.DE73 */
 
 /*
@@ -6115,40 +6115,6 @@ define "Severe illness, hospitalization H.DE76 Observation":
   Elements."Severe illness, hospitalization H.DE76 Observation" O
     where O.effective.toInterval() during "Measurement Period"
 /* End of Severe illness, hospitalization H.DE76 */
-
-/*
-@dataElement: HIV.H.DE77 - Drugs out of stock 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because of drugs being out of stock 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Drugs out of stock ":
-  exists "Drugs out of stock  Condition"
-    or exists "Drugs out of stock  Observation"
-define "Drugs out of stock  Condition":
-  Elements."Drugs out of stock  Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "Drugs out of stock  Observation":
-  Elements."Drugs out of stock  Observation" O
-    where O.effective.toInterval() during "Measurement Period"
-/* End of Drugs out of stock  */
-
-/*
-@dataElement: HIV.H.DE78 - Client lacks finances 
-@activity: HIV.H3 Record outreach and result
-@description: Client stopped ART because client lacked finances 
-*/
-// TODO: Replace placeholder with relevant CQL logic
-define "Client lacks finances ":
-  exists "Client lacks finances  Condition"
-    or exists "Client lacks finances  Observation"
-define "Client lacks finances  Condition":
-  Elements."Client lacks finances  Condition" C
-    where C.prevalenceInterval() overlaps "Measurement Period"
-define "Client lacks finances  Observation":
-  Elements."Client lacks finances  Observation" O
-    where O.effective.toInterval() during "Measurement Period"
-/* End of Client lacks finances  */
 
 /*
 @dataElement: HIV.H.DE79 - Excluded HIV infection in infant
@@ -6247,7 +6213,9 @@ define "OAMT":
 */
 
 define "NSP":
-  exists(Elements."NSP" DUS where DUS.timing.toInterval() during "Measurement Period")
+  false
+  // TODO: doesn't compile DeviceUseStatement causes translation error
+  //exists(Elements."NSP" DUS where DUS.timing.toInterval() during "Measurement Period")
 /* End of NSP */
 
 /*
@@ -6353,8 +6321,10 @@ define "HIV-negative PRV.DE13 Observation":
 */
 
 define "Date injecting equipment provided":
-  exists(Elements."Date injecting equipment provided" DUS
-  where DUS.timing.toInterval() during "Measurement Period")
+  false
+  // TODO: doesn't compile DeviceUseStatement causes translation error
+  // exists(Elements."Date injecting equipment provided" DUS
+  // where DUS.timing.toInterval() during "Measurement Period")
 /* End of Date injecting equipment provided */
 
 /*
@@ -6437,7 +6407,7 @@ define "Date of loss to follow-up or OAMT stopped":
     where O.effective.toInterval() during "Measurement Period"
 define "Date of loss to follow-up or OAMT stopped Value":
   "Date of loss to follow-up or OAMT stopped" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of loss to follow-up or OAMT stopped */
 
 /*
@@ -6451,7 +6421,7 @@ define "Date medications prescribed PRV.DE27":
     where O.effective.toInterval() during "Measurement Period"
 define "Date medications prescribed PRV.DE27 Value":
   "Date medications prescribed PRV.DE27" O
-  return O.value
+  return O.value as dateTime
 /* End of Date medications prescribed PRV.DE27 */
 
 /*
@@ -6465,7 +6435,7 @@ define "Number of days prescribed PRV.DE28":
     where O.effective.toInterval() during "Measurement Period"
 define "Number of days prescribed PRV.DE28 Value":
   "Number of days prescribed PRV.DE28" O
-  return O.value
+  return O.value as integer
 /* End of Number of days prescribed PRV.DE28 */
 
 /*
@@ -6479,7 +6449,7 @@ define "HIV test date SRV.DE1":
     where O.effective.toInterval() during "Measurement Period"
 define "HIV test date SRV.DE1 Value":
   "HIV test date SRV.DE1" O
-  return O.value
+  return O.value as dateTime
 /* End of HIV test date SRV.DE1 */
 
 /*
@@ -6504,7 +6474,7 @@ define "Baseline CD4 count SRV.DE3":
     where O.effective.toInterval() during "Measurement Period"
 define "Baseline CD4 count SRV.DE3 Value":
   "Baseline CD4 count SRV.DE3" O
-  return O.value
+  return O.value as integer
 /* End of Baseline CD4 count SRV.DE3 */
 
 /*
@@ -6528,7 +6498,7 @@ define "ART start date SRV.DE6":
     where O.effective.toInterval() during "Measurement Period"
 define "ART start date SRV.DE6 Value":
   "ART start date SRV.DE6" O
-  return O.value
+  return O.value as dateTime
 /* End of ART start date SRV.DE6 */
 
 /*
@@ -6555,7 +6525,7 @@ define "Date of viral load sample collection SRV.DE12":
     where O.effective.toInterval() during "Measurement Period"
 define "Date of viral load sample collection SRV.DE12 Value":
   "Date of viral load sample collection SRV.DE12" O
-  return O.value
+  return O.value as dateTime
 /* End of Date of viral load sample collection SRV.DE12 */
 
 /*
@@ -6569,7 +6539,7 @@ define "Viral load test result SRV.DE13":
     where O.effective.toInterval() during "Measurement Period"
 define "Viral load test result SRV.DE13 Value":
   "Viral load test result SRV.DE13" O
-  return O.value
+  return O.value as integer
 /* End of Viral load test result SRV.DE13 */
 
 /*
@@ -6594,7 +6564,7 @@ define "ANC contact date SRV.DE18":
     where O.effective.toInterval() during "Measurement Period"
 define "ANC contact date SRV.DE18 Value":
   "ANC contact date SRV.DE18" O
-  return O.value
+  return O.value as dateTime
 /* End of ANC contact date SRV.DE18 */
 
 /*
@@ -6647,7 +6617,7 @@ define "Reporting period end date":
     where O.effective.toInterval() during "Measurement Period"
 define "Reporting period end date Value":
   "Reporting period end date" O
-  return O.value
+  return O.value as dateTime
 /* End of Reporting period end date */
 
 /*
@@ -6661,7 +6631,7 @@ define "Reporting period start date":
     where O.effective.toInterval() during "Measurement Period"
 define "Reporting period start date Value":
   "Reporting period start date" O
-  return O.value
+  return O.value as dateTime
 /* End of Reporting period start date */
 
 /*
@@ -6675,7 +6645,7 @@ define "Reporting date":
     where O.effective.toInterval() during "Measurement Period"
 define "Reporting date Value":
   "Reporting date" O
-  return O.value
+  return O.value as dateTime
 /* End of Reporting date */
 
 

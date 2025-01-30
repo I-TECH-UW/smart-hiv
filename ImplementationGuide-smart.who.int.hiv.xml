@@ -17,7 +17,7 @@
   <title value="WHO SMART Guidelines - HIV"/>
   <status value="draft"/>
   <experimental value="true"/>
-  <date value="2025-01-28T16:09:20+00:00"/>
+  <date value="2025-01-30T04:52:13+00:00"/>
   <publisher value="WHO"/>
   <contact>
     <name value="WHO"/>
@@ -1824,6 +1824,17 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="Patient"/>
+      </extension>
+      <reference>
+        <reference value="Patient/ExampleHivPatient"/>
+      </reference>
+      <name value="Example Hiv Patient"/>
+      <description value="This is an example of HIV Patient Resouce"/>
+      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPatient"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
         <valueString value="Condition"/>
       </extension>
       <reference>
@@ -1934,13 +1945,14 @@
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="Patient"/>
+        <valueString value="Practitioner"/>
       </extension>
       <reference>
-        <reference value="Patient/ExampleHivPatient"/>
+        <reference value="Practitioner/ExampleSurgeon"/>
       </reference>
-      <name value="ExampleHivPatient"/>
-      <exampleCanonical value="http://smart.who.int/hiv/StructureDefinition/HivPatient"/>
+      <name value="ExampleHivPractitioner"/>
+      <description value="ExampleHivPractitioner"/>
+      <exampleBoolean value="true"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
@@ -2269,18 +2281,7 @@
         <reference value="StructureDefinition/HivHcvViralLoadTest"/>
       </reference>
       <name value="HCV Viral Load Test"/>
-      <description value="A DAK-specific HCV Viral Load observation with possible results"/>
-      <exampleBoolean value="false"/>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="StructureDefinition:resource"/>
-      </extension>
-      <reference>
-        <reference value="StructureDefinition/HivHcvViralLoadTestD"/>
-      </reference>
-      <name value="HCV Viral Load Test"/>
-      <description value="A DAK-specific HCV Viral Load observation with possible results"/>
+      <description value="HCV Viral Load Test Profile"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -2325,17 +2326,6 @@
       </reference>
       <name value="Hepatitis C diagnosis ValueSet"/>
       <description value="Value set of client's hepatitis C diagnosis"/>
-      <exampleBoolean value="false"/>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="StructureDefinition:resource"/>
-      </extension>
-      <reference>
-        <reference value="StructureDefinition/HcvViralLoadTestG"/>
-      </reference>
-      <name value="Hepatitis C Viral Load Result"/>
-      <description value="Hepatitis C viral load result"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -2442,9 +2432,32 @@
         <valueString value="StructureDefinition:resource"/>
       </extension>
       <reference>
+        <reference value="StructureDefinition/HivLabTestObservation"/>
+      </reference>
+      <name value="Hiv Lab Test Observation"/>
+      <description value="Hiv Lab Test Observation Profile"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivLabTestServiceRequest"/>
+      </reference>
+      <name value="Hiv Lab Test ServiceRequest"/>
+      <description value="Hiv Lab Test ServiceRequest profile"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
         <reference value="StructureDefinition/HivLabTestSpecimen"/>
       </reference>
       <name value="HIV Lab Test Specimen"/>
+      <description value="A profile of HIV Lab Test Specimen"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -2457,6 +2470,17 @@
       <name value="HIV non Functional Requirements"/>
       <description value="Non Functional Requirements For HIV"/>
       <exampleBoolean value="true"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivPatient"/>
+      </reference>
+      <name value="HIV patient Profile"/>
+      <description value="Profile for patients requiring gender, date of birth, and geographic region."/>
+      <exampleBoolean value="false"/>
     </resource>
     <resource>
       <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
@@ -2687,6 +2711,17 @@
       </reference>
       <name value="HIV viral load specimen type ValueSet"/>
       <description value="Value set of the type of specimen to be used to test viral load"/>
+      <exampleBoolean value="false"/>
+    </resource>
+    <resource>
+      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
+        <valueString value="StructureDefinition:resource"/>
+      </extension>
+      <reference>
+        <reference value="StructureDefinition/HivVmmcAdverseEvent"/>
+      </reference>
+      <name value="Hiv Vmmc AdverseEvent"/>
+      <description value="An adverse event related to voluntary medical male circumcision"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>
@@ -5082,48 +5117,6 @@
       </reference>
       <name value="HIVIndicatorElements"/>
       <description value="Description not yet available for HIVIndicatorElements."/>
-      <exampleBoolean value="false"/>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="StructureDefinition:resource"/>
-      </extension>
-      <reference>
-        <reference value="StructureDefinition/HivLabTestObservation"/>
-      </reference>
-      <name value="HivLabTestObservation"/>
-      <exampleBoolean value="false"/>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="StructureDefinition:resource"/>
-      </extension>
-      <reference>
-        <reference value="StructureDefinition/HivLabTestServiceRequest"/>
-      </reference>
-      <name value="HivLabTestServiceRequest"/>
-      <exampleBoolean value="false"/>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="StructureDefinition:resource"/>
-      </extension>
-      <reference>
-        <reference value="StructureDefinition/HivPatient"/>
-      </reference>
-      <name value="HivPatient"/>
-      <description value="Profile for patients requiring gender, date of birth, and geographic region."/>
-      <exampleBoolean value="false"/>
-    </resource>
-    <resource>
-      <extension url="http://hl7.org/fhir/tools/StructureDefinition/resource-information">
-        <valueString value="StructureDefinition:resource"/>
-      </extension>
-      <reference>
-        <reference value="StructureDefinition/HivVmmcAdverseEvent"/>
-      </reference>
-      <name value="HivVmmcAdverseEvent"/>
-      <description value="An adverse event related to voluntary medical male circumcision"/>
       <exampleBoolean value="false"/>
     </resource>
     <resource>

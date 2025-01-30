@@ -1,0 +1,1209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="urn:hl7-org:elm:r1" xmlns:t="urn:hl7-org:elm-types:r1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fhir="http://hl7.org/fhir" xmlns:qdm43="urn:healthit-gov:qdm:v4_3" xmlns:qdm53="urn:healthit-gov:qdm:v5_3" xmlns:a="urn:hl7-org:cql-annotations:r1">
+   <annotation translatorOptions="EnableAnnotations,EnableLocators,DisableListDemotion,DisableListPromotion" signatureLevel="Overloads" xsi:type="a:CqlToElmInfo"/>
+   <annotation xsi:type="a:Annotation">
+      <a:t name="DecisionID" value="HIV.C23.DT"/>
+      <a:t name="BusinessRule" value="Determine PEP or PrEP regimen"/>
+      <a:t name="Trigger" value="HIV.C23 Prescribe or administer PrEP or PEP"/>
+      <a:t name="HitPolicy" value="Rule Order"/>
+      <a:t name="Description" value="Determine PEP or PrEP regimen&#xa;&#xa;Data Concepts:&#xa;  &#xa;&#xa;Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease."/>
+      <a:s r="178">
+         <a:s>/**
+Library: HIV.C23.DT Logic
+
+@DecisionID: HIV.C23.DT
+@BusinessRule: Determine PEP or PrEP regimen
+@Trigger: HIV.C23 Prescribe or administer PrEP or PEP
+@HitPolicy: Rule Order
+@Description: Determine PEP or PrEP regimen
+
+Data Concepts:
+  
+
+Consolidated guidelines on HIV prevention, testing, treatment, service delivery and monitoring: recommendations for a public health approach (2021) Chapter 5: Advanced HIV Disease. Figure 5.1: Algorithm for providing a package of care for people with advanced HIV disease.
+*/
+
+library HIVC23DTLogic</a:s>
+      </a:s>
+   </annotation>
+   <identifier id="HIVC23DTLogic" system="http://smart.who.int/hiv"/>
+   <schemaIdentifier id="urn:hl7-org:elm" version="r1"/>
+   <usings>
+      <def localIdentifier="System" uri="urn:hl7-org:elm-types:r1"/>
+      <def localId="1" locator="18:1-18:26" localIdentifier="FHIR" uri="http://hl7.org/fhir" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="1">
+               <a:s>using </a:s>
+               <a:s>
+                  <a:s>FHIR</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </usings>
+   <includes>
+      <def localId="2" locator="20:1-20:44" localIdentifier="HIC" path="http://smart.who.int/hiv/HIVCommon" version="0.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="2">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVCommon</a:s>
+               </a:s>
+               <a:s> version '0.0.1' called HIC</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="3" locator="21:1-21:35" localIdentifier="Concepts" path="http://smart.who.int/hiv/HIVConcepts">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="3">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVConcepts</a:s>
+               </a:s>
+               <a:s> called Concepts</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="4" locator="22:1-22:44" localIdentifier="Elements" path="http://smart.who.int/hiv/HIVEncounterElements">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="4">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>HIVEncounterElements</a:s>
+               </a:s>
+               <a:s> called Elements</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="5" locator="23:1-23:35" localIdentifier="FHIRHelpers" path="http://hl7.org/fhir/FHIRHelpers" version="4.0.1">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="5">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>FHIRHelpers</a:s>
+               </a:s>
+               <a:s> version '4.0.1'</a:s>
+            </a:s>
+         </annotation>
+      </def>
+      <def localId="6" locator="25:1-25:29" localIdentifier="WCom" path="http://smart.who.int/hiv/WHOCommon">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="6">
+               <a:s>include </a:s>
+               <a:s>
+                  <a:s>WHOCommon</a:s>
+               </a:s>
+               <a:s> called WCom</a:s>
+            </a:s>
+         </annotation>
+      </def>
+   </includes>
+   <parameters>
+      <def localId="9" locator="27:1-27:36" name="Today" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:s r="9">
+               <a:s>parameter Today </a:s>
+               <a:s r="8">
+                  <a:s>Date</a:s>
+               </a:s>
+               <a:s> default </a:s>
+               <a:s r="7">
+                  <a:s>Today()</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <default localId="7" locator="27:30-27:36" xsi:type="Today"/>
+         <parameterTypeSpecifier localId="8" locator="27:17-27:20" name="t:Date" xsi:type="NamedTypeSpecifier"/>
+      </def>
+   </parameters>
+   <contexts>
+      <def locator="29:1-29:15" name="Patient"/>
+   </contexts>
+   <statements>
+      <def locator="29:1-29:15" name="Patient" context="Patient">
+         <expression xsi:type="SingletonFrom">
+            <operand locator="29:1-29:15" dataType="fhir:Patient" templateId="http://hl7.org/fhir/StructureDefinition/Patient" xsi:type="Retrieve"/>
+         </expression>
+      </def>
+      <def localId="14" locator="35:1-36:47" name="Age 10 or older" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="input" value="Age"/>
+            <a:t name="pseudocode" value="&quot;Age&quot; >= 10 years"/>
+            <a:s r="14">
+               <a:s>/*
+  @input: Age
+  @pseudocode: &quot;Age&quot; >= 10 years
+  */
+define &quot;Age 10 or older&quot;:
+  </a:s>
+               <a:s r="13">
+                  <a:s r="11">
+                     <a:s r="10">
+                        <a:s>Elements</a:s>
+                     </a:s>
+                     <a:s>.</a:s>
+                     <a:s r="11">
+                        <a:s>&quot;Current Patient Age In Years&quot;</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s r="12"> >= 10</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="13" locator="36:3-36:47" xsi:type="GreaterOrEqual">
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+            <operand localId="11" locator="36:3-36:41" name="Current Patient Age In Years" libraryName="Elements" xsi:type="ExpressionRef"/>
+            <operand localId="12" locator="36:46-36:47" valueType="t:Integer" value="10" xsi:type="Literal"/>
+         </expression>
+      </def>
+      <def localId="24" locator="42:1-43:94" name="Age between 2 and 10" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="input" value="Age"/>
+            <a:t name="pseudocode" value="&quot;Age&quot; &lt; 10 years"/>
+            <a:s r="24">
+               <a:s>/*
+  @input: Age
+  @pseudocode: 2 years &lt; &quot;Age&quot; &lt; 10 years
+  */
+define &quot;Age between 2 and 10&quot;:
+  </a:s>
+               <a:s r="23">
+                  <a:s r="18">
+                     <a:s r="15">2 &lt; </a:s>
+                     <a:s r="17">
+                        <a:s r="16">
+                           <a:s>Elements</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="17">
+                           <a:s>&quot;Current Patient Age In Years&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="22">
+                     <a:s r="20">
+                        <a:s r="19">
+                           <a:s>Elements</a:s>
+                        </a:s>
+                        <a:s>.</a:s>
+                        <a:s r="20">
+                           <a:s>&quot;Current Patient Age In Years&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s r="21"> &lt; 10</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="23" locator="43:3-43:94" xsi:type="And">
+            <operand localId="18" locator="43:3-43:45" xsi:type="Less">
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="15" locator="43:3" valueType="t:Integer" value="2" xsi:type="Literal"/>
+               <operand localId="17" locator="43:7-43:45" name="Current Patient Age In Years" libraryName="Elements" xsi:type="ExpressionRef"/>
+            </operand>
+            <operand localId="22" locator="43:51-43:94" xsi:type="Less">
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+               <operand localId="20" locator="43:51-43:89" name="Current Patient Age In Years" libraryName="Elements" xsi:type="ExpressionRef"/>
+               <operand localId="21" locator="43:93-43:94" valueType="t:Integer" value="10" xsi:type="Literal"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="50" locator="49:1-55:3" name="Suspected exposure to HIV within 72 hours" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="input" value="Date/time of suscepted exposure to HIV"/>
+            <a:t name="pseudocode" value="&quot;Date/time of suspected exposure to HIV&quot; &lt; 72 hours from Current DateTime"/>
+            <a:s r="50">
+               <a:s>/*
+ @input: Date/time of suscepted exposure to HIV
+ @pseudocode: &quot;Date/time of suspected exposure to HIV&quot; &lt; 72 hours from Current DateTime
+ */
+define &quot;Suspected exposure to HIV within 72 hours&quot;:
+  </a:s>
+               <a:s r="49">
+                  <a:s>exists</a:s>
+                  <a:s r="48">
+                     <a:s>(
+    </a:s>
+                     <a:s r="48">
+                        <a:s>
+                           <a:s r="26">
+                              <a:s r="25">
+                                 <a:s>
+                                    <a:s>Elements.&quot;Date/time of suspected exposure to HIV B.DE14&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> O</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="47">
+                           <a:s>where </a:s>
+                           <a:s r="47">
+                              <a:s r="39">
+                                 <a:s r="32">
+                                    <a:s r="30">
+                                       <a:s r="27">
+                                          <a:s>FHIRHelpers</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="30">
+                                          <a:s>ToInteger(</a:s>
+                                          <a:s r="29">
+                                             <a:s r="28">
+                                                <a:s>O</a:s>
+                                             </a:s>
+                                             <a:s>.</a:s>
+                                             <a:s r="29">
+                                                <a:s>value</a:s>
+                                             </a:s>
+                                          </a:s>
+                                          <a:s>)</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s r="31"> &lt; 72</a:s>
+                                 </a:s>
+                                 <a:s>
+        or </a:s>
+                                 <a:s r="38">
+                                    <a:s r="34">
+                                       <a:s r="33">
+                                          <a:s>O</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="34">
+                                          <a:s>value</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s> &lt; </a:s>
+                                    <a:s r="37">
+                                       <a:s r="35">
+                                          <a:s>Today</a:s>
+                                       </a:s>
+                                       <a:s> + </a:s>
+                                       <a:s r="36">
+                                          <a:s>72 hours</a:s>
+                                       </a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s>
+        or </a:s>
+                              <a:s r="46">
+                                 <a:s r="42">
+                                    <a:s r="41">
+                                       <a:s r="40">
+                                          <a:s>O</a:s>
+                                       </a:s>
+                                       <a:s>.</a:s>
+                                       <a:s r="41">
+                                          <a:s>value</a:s>
+                                       </a:s>
+                                    </a:s>
+                                    <a:s>.</a:s>
+                                    <a:s r="42">
+                                       <a:s>end</a:s>
+                                    </a:s>
+                                 </a:s>
+                                 <a:s> &lt; </a:s>
+                                 <a:s r="45">
+                                    <a:s r="43">
+                                       <a:s>Today</a:s>
+                                    </a:s>
+                                    <a:s> + </a:s>
+                                    <a:s r="44">
+                                       <a:s>72 hours</a:s>
+                                    </a:s>
+                                 </a:s>
+                              </a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="49" locator="50:3-55:3" xsi:type="Exists">
+            <operand localId="48" locator="50:9-55:3" xsi:type="Query">
+               <source localId="26" locator="51:5-51:62" alias="O">
+                  <expression localId="25" locator="51:5-51:60" name="Date/time of suspected exposure to HIV B.DE14" libraryName="Elements" xsi:type="ExpressionRef"/>
+               </source>
+               <where localId="47" locator="52:7-54:41" xsi:type="Or">
+                  <operand localId="39" locator="52:13-53:37" xsi:type="Or">
+                     <operand localId="32" locator="52:13-52:47" xsi:type="Less">
+                        <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                        <signature name="t:Integer" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="30" locator="52:13-52:42" name="ToInteger" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <operand asType="fhir:integer" xsi:type="As">
+                              <operand localId="29" locator="52:35-52:41" path="value" scope="O" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand localId="31" locator="52:46-52:47" valueType="t:Integer" value="72" xsi:type="Literal"/>
+                     </operand>
+                     <operand localId="38" locator="53:12-53:37" xsi:type="Less">
+                        <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                        <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                           <signature name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                           <operand asType="fhir:dateTime" xsi:type="As">
+                              <operand localId="34" locator="53:12-53:18" path="value" scope="O" xsi:type="Property"/>
+                           </operand>
+                        </operand>
+                        <operand xsi:type="ToDateTime">
+                           <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="37" locator="53:22-53:37" xsi:type="Add">
+                              <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                              <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                              <operand localId="35" locator="53:22-53:26" name="Today" xsi:type="ParameterRef"/>
+                              <operand localId="36" locator="53:30-53:37" value="72" unit="hours" xsi:type="Quantity"/>
+                           </operand>
+                        </operand>
+                     </operand>
+                  </operand>
+                  <operand localId="46" locator="54:12-54:41" xsi:type="Less">
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <signature name="t:DateTime" xsi:type="NamedTypeSpecifier"/>
+                     <operand name="ToDateTime" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                        <signature name="fhir:dateTime" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="42" locator="54:12-54:22" path="end" xsi:type="Property">
+                           <source localId="41" locator="54:12-54:18" path="value" scope="O" xsi:type="Property"/>
+                        </operand>
+                     </operand>
+                     <operand xsi:type="ToDateTime">
+                        <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                        <operand localId="45" locator="54:26-54:41" xsi:type="Add">
+                           <signature name="t:Date" xsi:type="NamedTypeSpecifier"/>
+                           <signature name="t:Quantity" xsi:type="NamedTypeSpecifier"/>
+                           <operand localId="43" locator="54:26-54:30" name="Today" xsi:type="ParameterRef"/>
+                           <operand localId="44" locator="54:34-54:41" value="72" unit="hours" xsi:type="Quantity"/>
+                        </operand>
+                     </operand>
+                  </operand>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="59" locator="61:1-65:3" name="Client is suitable for PrEP" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="input" value="Suitable for PrEP"/>
+            <a:t name="pseudocode" value="&quot;Suitable for PrEP&quot;=True"/>
+            <a:s r="59">
+               <a:s>/*
+ @input: Suitable for PrEP
+ @pseudocode: &quot;Suitable for PrEP&quot;=True
+ */
+define &quot;Client is suitable for PrEP&quot;:
+  </a:s>
+               <a:s r="58">
+                  <a:s>exists</a:s>
+                  <a:s r="57">
+                     <a:s>(
+    </a:s>
+                     <a:s r="57">
+                        <a:s>
+                           <a:s r="52">
+                              <a:s r="51">
+                                 <a:s>
+                                    <a:s>Elements.&quot;Suitable for PrEP&quot;</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s> O</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      </a:s>
+                        <a:s r="56">
+                           <a:s>where </a:s>
+                           <a:s r="56">
+                              <a:s r="54">
+                                 <a:s r="53">
+                                    <a:s>O</a:s>
+                                 </a:s>
+                                 <a:s>.</a:s>
+                                 <a:s r="54">
+                                    <a:s>value</a:s>
+                                 </a:s>
+                              </a:s>
+                              <a:s r="55"> = true</a:s>
+                           </a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  )</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="58" locator="62:3-65:3" xsi:type="Exists">
+            <operand localId="57" locator="62:9-65:3" xsi:type="Query">
+               <source localId="52" locator="63:5-63:34" alias="O">
+                  <expression localId="51" locator="63:5-63:32" name="Suitable for PrEP" libraryName="Elements" xsi:type="ExpressionRef"/>
+               </source>
+               <where localId="56" locator="64:7-64:26" xsi:type="Equal">
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <signature name="t:Boolean" xsi:type="NamedTypeSpecifier"/>
+                  <operand name="ToBoolean" libraryName="FHIRHelpers" xsi:type="FunctionRef">
+                     <operand asType="fhir:boolean" xsi:type="As">
+                        <operand localId="54" locator="64:13-64:19" path="value" scope="O" xsi:type="Property"/>
+                     </operand>
+                  </operand>
+                  <operand localId="55" locator="64:23-64:26" valueType="t:Boolean" value="true" xsi:type="Literal"/>
+               </where>
+            </operand>
+         </expression>
+      </def>
+      <def localId="65" locator="70:1-71:95" name="What to use in HIV post-exposure prophylaxis (PEP) for adults and adolescents" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="output" value="What to use in HIV post-exposure prophylaxis (PEP) for adults and adolescents"/>
+            <a:s r="65">
+               <a:s>/*
+ @output: What to use in HIV post-exposure prophylaxis (PEP) for adults and adolescents
+ */
+define &quot;What to use in HIV post-exposure prophylaxis (PEP) for adults and adolescents&quot;:
+  </a:s>
+               <a:s r="64">
+                  <a:s r="60">
+                     <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="63">
+                     <a:s>(</a:s>
+                     <a:s r="63">
+                        <a:s r="61">
+                           <a:s>&quot;Age between 2 and 10&quot;</a:s>
+                        </a:s>
+                        <a:s> or </a:s>
+                        <a:s r="62">
+                           <a:s>&quot;Age 10 or older&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>)</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="64" locator="71:3-71:95" xsi:type="And">
+            <operand localId="60" locator="71:3-71:45" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+            <operand localId="63" locator="71:51-71:95" xsi:type="Or">
+               <operand localId="61" locator="71:52-71:73" name="Age between 2 and 10" xsi:type="ExpressionRef"/>
+               <operand localId="62" locator="71:78-71:94" name="Age 10 or older" xsi:type="ExpressionRef"/>
+            </operand>
+         </expression>
+      </def>
+      <def localId="69" locator="76:1-77:53" name="What to use in HIV pre-exposure prophylaxis (PrEP) for adults and adolescents" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="output" value="What to use in HIV pre-exposure prophylaxis (PrEP) for adults and adolescents"/>
+            <a:s r="69">
+               <a:s>/*
+ @output: What to use in HIV pre-exposure prophylaxis (PrEP) for adults and adolescents
+ */
+define &quot;What to use in HIV pre-exposure prophylaxis (PrEP) for adults and adolescents&quot;:
+  </a:s>
+               <a:s r="68">
+                  <a:s r="66">
+                     <a:s>&quot;Client is suitable for PrEP&quot;</a:s>
+                  </a:s>
+                  <a:s> and </a:s>
+                  <a:s r="67">
+                     <a:s>&quot;Age 10 or older&quot;</a:s>
+                  </a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="68" locator="77:3-77:53" xsi:type="And">
+            <operand localId="66" locator="77:3-77:31" name="Client is suitable for PrEP" xsi:type="ExpressionRef"/>
+            <operand localId="67" locator="77:37-77:53" name="Age 10 or older" xsi:type="ExpressionRef"/>
+         </expression>
+      </def>
+      <def localId="88" locator="82:1-89:5" name="Preferred PEP backbone regimen" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="dynamicValue" value="Preferred PEP backbone regimen"/>
+            <a:s r="88">
+               <a:s>/*
+ @dynamicValue: Preferred PEP backbone regimen
+ */
+define &quot;Preferred PEP backbone regimen&quot;:
+  </a:s>
+               <a:s r="87">
+                  <a:s>case
+  </a:s>
+                  <a:s r="78">
+                     <a:s>when </a:s>
+                     <a:s r="72">
+                        <a:s r="70">
+                           <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="71">
+                           <a:s>&quot;Age 10 or older&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    then </a:s>
+                     <a:s r="77">
+                        <a:s>{ </a:s>
+                        <a:s r="74">
+                           <a:s r="73">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="74">
+                              <a:s>&quot;TDF + 3TC - HIV.C.DE20&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="76">
+                           <a:s r="75">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="76">
+                              <a:s>&quot;TDF + FTC - HIV.C.DE18&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> }</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  </a:s>
+                  <a:s r="85">
+                     <a:s>when </a:s>
+                     <a:s r="81">
+                        <a:s r="79">
+                           <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="80">
+                           <a:s>&quot;Age between 2 and 10&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    then </a:s>
+                     <a:s r="84">
+                        <a:s>{ </a:s>
+                        <a:s r="83">
+                           <a:s r="82">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="83">
+                              <a:s>&quot;AZT + 3TC&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> }</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s r="86">
+  else null
+  end</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="87" locator="83:3-89:5" xsi:type="Case">
+            <caseItem localId="78" locator="84:3-85:81">
+               <when localId="72" locator="84:8-84:72" xsi:type="And">
+                  <operand localId="70" locator="84:8-84:50" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  <operand localId="71" locator="84:56-84:72" name="Age 10 or older" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="77" locator="85:10-85:81" xsi:type="List">
+                  <element localId="74" locator="85:12-85:44" name="TDF + 3TC - HIV.C.DE20" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="76" locator="85:47-85:79" name="TDF + FTC - HIV.C.DE18" libraryName="Concepts" xsi:type="CodeRef"/>
+               </then>
+            </caseItem>
+            <caseItem localId="85" locator="86:3-87:33">
+               <when localId="81" locator="86:8-86:77" xsi:type="And">
+                  <operand localId="79" locator="86:8-86:50" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  <operand localId="80" locator="86:56-86:77" name="Age between 2 and 10" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="84" locator="87:10-87:33" xsi:type="List">
+                  <element localId="83" locator="87:12-87:31" name="AZT + 3TC" libraryName="Concepts" xsi:type="CodeRef"/>
+               </then>
+            </caseItem>
+            <else xsi:type="As">
+               <operand localId="86" locator="88:8-88:11" xsi:type="Null"/>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </asTypeSpecifier>
+            </else>
+         </expression>
+      </def>
+      <def localId="102" locator="94:1-99:5" name="Alternative PEP backbone regimen" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="dynamicValue" value="Alternative PEP backbone regimen"/>
+            <a:s r="102">
+               <a:s>/*
+ @dynamicValue: Alternative PEP backbone regimen
+ */
+define &quot;Alternative PEP backbone regimen&quot;:
+  </a:s>
+               <a:s r="101">
+                  <a:s>case
+  </a:s>
+                  <a:s r="99">
+                     <a:s>when </a:s>
+                     <a:s r="91">
+                        <a:s r="89">
+                           <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="90">
+                           <a:s>&quot;Age between 2 and 10&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    then </a:s>
+                     <a:s r="98">
+                        <a:s>{ </a:s>
+                        <a:s r="93">
+                           <a:s r="92">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="93">
+                              <a:s>&quot;ABC + 3TC&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="95">
+                           <a:s r="94">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="95">
+                              <a:s>&quot;TDF + 3TC - HIV.C.DE20&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>, </a:s>
+                        <a:s r="97">
+                           <a:s r="96">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="97">
+                              <a:s>&quot;TDF + FTC - HIV.C.DE18&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> }</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s r="100">
+  else null
+  end</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="101" locator="95:3-99:5" xsi:type="Case">
+            <caseItem localId="99" locator="96:3-97:103">
+               <when localId="91" locator="96:8-96:77" xsi:type="And">
+                  <operand localId="89" locator="96:8-96:50" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  <operand localId="90" locator="96:56-96:77" name="Age between 2 and 10" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="98" locator="97:10-97:103" xsi:type="List">
+                  <element localId="93" locator="97:12-97:31" name="ABC + 3TC" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="95" locator="97:34-97:66" name="TDF + 3TC - HIV.C.DE20" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="97" locator="97:69-97:101" name="TDF + FTC - HIV.C.DE18" libraryName="Concepts" xsi:type="CodeRef"/>
+               </then>
+            </caseItem>
+            <else xsi:type="As">
+               <operand localId="100" locator="98:8-98:11" xsi:type="Null"/>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </asTypeSpecifier>
+            </else>
+         </expression>
+      </def>
+      <def localId="119" locator="104:1-111:5" name="Preferred third PEP drug" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="dynamicValue" value="Preferred third PEP drug"/>
+            <a:s r="119">
+               <a:s>/*
+ @dynamicValue: Preferred third PEP drug
+ */
+define &quot;Preferred third PEP drug&quot;:
+  </a:s>
+               <a:s r="118">
+                  <a:s>case
+  </a:s>
+                  <a:s r="109">
+                     <a:s>when </a:s>
+                     <a:s r="105">
+                        <a:s r="103">
+                           <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="104">
+                           <a:s>&quot;Age 10 or older&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    then </a:s>
+                     <a:s r="108">
+                        <a:s>{ </a:s>
+                        <a:s r="107">
+                           <a:s r="106">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="107">
+                              <a:s>&quot;DTG - HIV.C.DE100&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> }</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s>
+  </a:s>
+                  <a:s r="116">
+                     <a:s>when </a:s>
+                     <a:s r="112">
+                        <a:s r="110">
+                           <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="111">
+                           <a:s>&quot;Age between 2 and 10&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    then </a:s>
+                     <a:s r="115">
+                        <a:s>{ </a:s>
+                        <a:s r="114">
+                           <a:s r="113">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="114">
+                              <a:s>&quot;DTG - HIV.C.DE100&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> }</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s r="117">
+  else null
+  end</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="118" locator="105:3-111:5" xsi:type="Case">
+            <caseItem localId="109" locator="106:3-107:41">
+               <when localId="105" locator="106:8-106:72" xsi:type="And">
+                  <operand localId="103" locator="106:8-106:50" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  <operand localId="104" locator="106:56-106:72" name="Age 10 or older" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="108" locator="107:10-107:41" xsi:type="List">
+                  <element localId="107" locator="107:12-107:39" name="DTG - HIV.C.DE100" libraryName="Concepts" xsi:type="CodeRef"/>
+               </then>
+            </caseItem>
+            <caseItem localId="116" locator="108:3-109:41">
+               <when localId="112" locator="108:8-108:77" xsi:type="And">
+                  <operand localId="110" locator="108:8-108:50" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  <operand localId="111" locator="108:56-108:77" name="Age between 2 and 10" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="115" locator="109:10-109:41" xsi:type="List">
+                  <element localId="114" locator="109:12-109:39" name="DTG - HIV.C.DE100" libraryName="Concepts" xsi:type="CodeRef"/>
+               </then>
+            </caseItem>
+            <else xsi:type="As">
+               <operand localId="117" locator="110:8-110:11" xsi:type="Null"/>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </asTypeSpecifier>
+            </else>
+         </expression>
+      </def>
+      <def localId="137" locator="116:1-126:5" name="Alternative third PEP drug" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="dynamicValue" value="Alternative third PEP drug"/>
+            <a:s r="137">
+               <a:s>/*
+ @dynamicValue: Alternative third PEP drug
+ */
+define &quot;Alternative third PEP drug&quot;:
+  </a:s>
+               <a:s r="136">
+                  <a:s>case
+  </a:s>
+                  <a:s r="134">
+                     <a:s>when </a:s>
+                     <a:s r="124">
+                        <a:s r="120">
+                           <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="123">
+                           <a:s>(</a:s>
+                           <a:s r="123">
+                              <a:s r="121">
+                                 <a:s>&quot;Age 10 or older&quot;</a:s>
+                              </a:s>
+                              <a:s> or </a:s>
+                              <a:s r="122">
+                                 <a:s>&quot;Age between 2 and 10&quot;</a:s>
+                              </a:s>
+                           </a:s>
+                           <a:s>)</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    then </a:s>
+                     <a:s r="133">
+                        <a:s>{ 
+      </a:s>
+                        <a:s r="126">
+                           <a:s r="125">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="126">
+                              <a:s>&quot;ATV/r - HIV.C.DE102&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="128">
+                           <a:s r="127">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="128">
+                              <a:s>&quot;DRV/r - HIV.C.DE103&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="130">
+                           <a:s r="129">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="130">
+                              <a:s>&quot;LPV/r - HIV.C.DE104&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="132">
+                           <a:s r="131">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="132">
+                              <a:s>&quot;RAL - HIV.C.DE105&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s> 
+    }</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s r="135">
+  else null
+  end</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="136" locator="117:3-126:5" xsi:type="Case">
+            <caseItem localId="134" locator="118:3-124:5">
+               <when localId="124" locator="118:8-118:100" xsi:type="And">
+                  <operand localId="120" locator="118:8-118:50" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  <operand localId="123" locator="118:56-118:100" xsi:type="Or">
+                     <operand localId="121" locator="118:57-118:73" name="Age 10 or older" xsi:type="ExpressionRef"/>
+                     <operand localId="122" locator="118:78-118:99" name="Age between 2 and 10" xsi:type="ExpressionRef"/>
+                  </operand>
+               </when>
+               <then localId="133" locator="119:10-124:5" xsi:type="List">
+                  <element localId="126" locator="120:7-120:36" name="ATV/r - HIV.C.DE102" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="128" locator="121:7-121:36" name="DRV/r - HIV.C.DE103" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="130" locator="122:7-122:36" name="LPV/r - HIV.C.DE104" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="132" locator="123:7-123:34" name="RAL - HIV.C.DE105" libraryName="Concepts" xsi:type="CodeRef"/>
+               </then>
+            </caseItem>
+            <else xsi:type="As">
+               <operand localId="135" locator="125:8-125:11" xsi:type="Null"/>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </asTypeSpecifier>
+            </else>
+         </expression>
+      </def>
+      <def localId="157" locator="131:1-143:5" name="Recommended PrEP regimen" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="dynamicValue" value="Recommended PrEP regimen"/>
+            <a:s r="157">
+               <a:s>/*
+ @dynamicValue: Recommended PrEP regimen
+ */
+define &quot;Recommended PrEP regimen&quot;:
+  </a:s>
+               <a:s r="156">
+                  <a:s>case
+  </a:s>
+                  <a:s r="154">
+                     <a:s>when </a:s>
+                     <a:s r="140">
+                        <a:s r="138">
+                           <a:s>&quot;Age 10 or older&quot;</a:s>
+                        </a:s>
+                        <a:s> and </a:s>
+                        <a:s r="139">
+                           <a:s>&quot;Client is suitable for PrEP&quot;</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+    then </a:s>
+                     <a:s r="153">
+                        <a:s>{
+      </a:s>
+                        <a:s r="142">
+                           <a:s r="141">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="142">
+                              <a:s>&quot;TDF + FTC - HIV.C.DE18&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="144">
+                           <a:s r="143">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="144">
+                              <a:s>&quot;TDF - HIV.C.DE19&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="146">
+                           <a:s r="145">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="146">
+                              <a:s>&quot;TDF + 3TC - HIV.C.DE20&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="148">
+                           <a:s r="147">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="148">
+                              <a:s>&quot;Other TDF-based regimen&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="150">
+                           <a:s r="149">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="150">
+                              <a:s>&quot;Dapivirine vaginal ring DVR - HIV.C.DE22&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>,
+      </a:s>
+                        <a:s r="152">
+                           <a:s r="151">
+                              <a:s>Concepts</a:s>
+                           </a:s>
+                           <a:s>.</a:s>
+                           <a:s r="152">
+                              <a:s>&quot;CAB-LA - HIV.C.DE23&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+    }</a:s>
+                     </a:s>
+                  </a:s>
+                  <a:s r="155">
+  else null
+  end</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="156" locator="132:3-143:5" xsi:type="Case">
+            <caseItem localId="154" locator="133:3-141:5">
+               <when localId="140" locator="133:8-133:58" xsi:type="And">
+                  <operand localId="138" locator="133:8-133:24" name="Age 10 or older" xsi:type="ExpressionRef"/>
+                  <operand localId="139" locator="133:30-133:58" name="Client is suitable for PrEP" xsi:type="ExpressionRef"/>
+               </when>
+               <then localId="153" locator="134:10-141:5" xsi:type="List">
+                  <element localId="142" locator="135:7-135:39" name="TDF + FTC - HIV.C.DE18" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="144" locator="136:7-136:33" name="TDF - HIV.C.DE19" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="146" locator="137:7-137:39" name="TDF + 3TC - HIV.C.DE20" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="148" locator="138:7-138:40" name="Other TDF-based regimen" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="150" locator="139:7-139:57" name="Dapivirine vaginal ring DVR - HIV.C.DE22" libraryName="Concepts" xsi:type="CodeRef"/>
+                  <element localId="152" locator="140:7-140:36" name="CAB-LA - HIV.C.DE23" libraryName="Concepts" xsi:type="CodeRef"/>
+               </then>
+            </caseItem>
+            <else xsi:type="As">
+               <operand localId="155" locator="142:8-142:11" xsi:type="Null"/>
+               <asTypeSpecifier xsi:type="ListTypeSpecifier">
+                  <elementType name="t:Code" xsi:type="NamedTypeSpecifier"/>
+               </asTypeSpecifier>
+            </else>
+         </expression>
+      </def>
+      <def localId="178" locator="148:1-185:4" name="Guidance" context="Patient" accessLevel="Public">
+         <annotation xsi:type="a:Annotation">
+            <a:t name="dynamicValue" value="Guidance"/>
+            <a:s r="178">
+               <a:s>/*
+ @dynamicValue: Guidance
+ */
+define &quot;Guidance&quot;:
+  </a:s>
+               <a:s r="177">
+                  <a:s>Combine(</a:s>
+                  <a:s r="176">
+                     <a:s>{
+    </a:s>
+                     <a:s r="163">
+                        <a:s>if </a:s>
+                        <a:s r="160">
+                           <a:s r="158">
+                              <a:s>&quot;Age 10 or older&quot;</a:s>
+                           </a:s>
+                           <a:s> and </a:s>
+                           <a:s r="159">
+                              <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      then </a:s>
+                        <a:s r="161">
+                           <a:s>'An HIV post-exposure prophylaxis (PEP) regimen with two ARV drugs is effective, but three drugs are preferred.
+
+  TDF + 3TC (or FTC) is recommended as the preferred backbone regimen for HIV post-exposure prophylaxis for adults and adolescents. 
+
+  DTG is recommended as the preferred third drug for HIV PEP.
+
+  When available, ATV/r, DRV/r, LPV/r and RAL may be considered as alternative third drug options for PEP.
+
+  NVP should not be used for PEP for adults, adolescents and older children because of the risk of life-threatening serious adverse events associated with HIV-negative adults using this drug.'</a:s>
+                        </a:s>
+                        <a:s>
+      else </a:s>
+                        <a:s r="162">
+                           <a:s>''</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="169">
+                        <a:s>if </a:s>
+                        <a:s r="166">
+                           <a:s r="164">
+                              <a:s>&quot;Age between 2 and 10&quot;</a:s>
+                           </a:s>
+                           <a:s> and </a:s>
+                           <a:s r="165">
+                              <a:s>&quot;Suspected exposure to HIV within 72 hours&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      then </a:s>
+                        <a:s r="167">
+                           <a:s>'An HIV PEP regimen with two ARV drugs is effective, but three drugs are preferred.
+
+  AZT + 3TC is recommended as the preferred backbone regimen for HIV PEP for children 10 years and younger. 
+
+  ABC + 3TC or TDF + 3TC (or FTC) can be considered as alternative regimens.
+
+  DTG is recommended as the preferred third drug for HIV PEP with approved DTG dosing.
+
+  When available, ATV/r, DRV/r, LPV/r and RAL may be considered as alternative third drug options for PEP.
+
+  The choice of ARV drugs for children will depend on the availability of approved dosing and age-appropriate formulations.
+  for children. 
+
+  DTG was approved in June 2020 for all children older than 4 weeks weighing more than 3kg and available with dispersible tablets that can be easily administered for all children weighting less than 20 kg. For children weighting more than 20 kg, 50 mg adult film-coated tablets can be use.'</a:s>
+                        </a:s>
+                        <a:s>
+      else </a:s>
+                        <a:s r="168">
+                           <a:s>''</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>,
+    </a:s>
+                     <a:s r="175">
+                        <a:s>if </a:s>
+                        <a:s r="172">
+                           <a:s r="170">
+                              <a:s>&quot;Age 10 or older&quot;</a:s>
+                           </a:s>
+                           <a:s> and </a:s>
+                           <a:s r="171">
+                              <a:s>&quot;Client is suitable for PrEP&quot;</a:s>
+                           </a:s>
+                        </a:s>
+                        <a:s>
+      then </a:s>
+                        <a:s r="173">
+                           <a:s>'If PrEP is suitable for client, prescribe one of the PrEP regimens: \'TDF + FTC\', \'TDF\',
+  \'TDF + 3TC\', \'Other TDF-based regimen\', \'Dapivirine vaginal ring (DVR)\', \'CAB-LA\'.
+
+  The dapivirine vaginal ring may be offered as an additional prevention choice for women* at substantial risk of HIV infection as part of combination prevention approaches.
+
+  *For the recommendation on dapirivirine vaginal ring, the term women applies to cisgender women, meaning women assigned female at birth.  There is no research at this time to support the dapivirine vaginal ring for other populations.'</a:s>
+                        </a:s>
+                        <a:s>
+      else </a:s>
+                        <a:s r="174">
+                           <a:s>''</a:s>
+                        </a:s>
+                     </a:s>
+                     <a:s>
+  }</a:s>
+                  </a:s>
+                  <a:s>)</a:s>
+               </a:s>
+            </a:s>
+         </annotation>
+         <expression localId="177" locator="149:3-185:4" xsi:type="Combine">
+            <source localId="176" locator="149:11-185:3" xsi:type="List">
+               <element localId="163" locator="150:5-160:13" xsi:type="If">
+                  <condition localId="160" locator="150:8-150:72" xsi:type="And">
+                     <operand localId="158" locator="150:8-150:24" name="Age 10 or older" xsi:type="ExpressionRef"/>
+                     <operand localId="159" locator="150:30-150:72" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  </condition>
+                  <then localId="161" locator="151:12-151:621" valueType="t:String" value="An HIV post-exposure prophylaxis (PEP) regimen with two ARV drugs is effective, but three drugs are preferred.&#xa;&#xa;  TDF + 3TC (or FTC) is recommended as the preferred backbone regimen for HIV post-exposure prophylaxis for adults and adolescents. &#xa;&#xa;  DTG is recommended as the preferred third drug for HIV PEP.&#xa;&#xa;  When available, ATV/r, DRV/r, LPV/r and RAL may be considered as alternative third drug options for PEP.&#xa;&#xa;  NVP should not be used for PEP for adults, adolescents and older children because of the risk of life-threatening serious adverse events associated with HIV-negative adults using this drug." xsi:type="Literal"/>
+                  <else localId="162" locator="160:12-160:13" valueType="t:String" value="" xsi:type="Literal"/>
+               </element>
+               <element localId="169" locator="161:5-176:13" xsi:type="If">
+                  <condition localId="166" locator="161:8-161:77" xsi:type="And">
+                     <operand localId="164" locator="161:8-161:29" name="Age between 2 and 10" xsi:type="ExpressionRef"/>
+                     <operand localId="165" locator="161:35-161:77" name="Suspected exposure to HIV within 72 hours" xsi:type="ExpressionRef"/>
+                  </condition>
+                  <then localId="167" locator="162:12-162:912" valueType="t:String" value="An HIV PEP regimen with two ARV drugs is effective, but three drugs are preferred.&#xa;&#xa;  AZT + 3TC is recommended as the preferred backbone regimen for HIV PEP for children 10 years and younger. &#xa;&#xa;  ABC + 3TC or TDF + 3TC (or FTC) can be considered as alternative regimens.&#xa;&#xa;  DTG is recommended as the preferred third drug for HIV PEP with approved DTG dosing.&#xa;&#xa;  When available, ATV/r, DRV/r, LPV/r and RAL may be considered as alternative third drug options for PEP.&#xa;&#xa;  The choice of ARV drugs for children will depend on the availability of approved dosing and age-appropriate formulations.&#xa;  for children. &#xa;&#xa;  DTG was approved in June 2020 for all children older than 4 weeks weighing more than 3kg and available with dispersible tablets that can be easily administered for all children weighting less than 20 kg. For children weighting more than 20 kg, 50 mg adult film-coated tablets can be use." xsi:type="Literal"/>
+                  <else localId="168" locator="176:12-176:13" valueType="t:String" value="" xsi:type="Literal"/>
+               </element>
+               <element localId="175" locator="177:5-184:13" xsi:type="If">
+                  <condition localId="172" locator="177:8-177:58" xsi:type="And">
+                     <operand localId="170" locator="177:8-177:24" name="Age 10 or older" xsi:type="ExpressionRef"/>
+                     <operand localId="171" locator="177:30-177:58" name="Client is suitable for PrEP" xsi:type="ExpressionRef"/>
+                  </condition>
+                  <then localId="173" locator="178:12-178:609" valueType="t:String" value="If PrEP is suitable for client, prescribe one of the PrEP regimens: 'TDF + FTC', 'TDF',&#xa;  'TDF + 3TC', 'Other TDF-based regimen', 'Dapivirine vaginal ring (DVR)', 'CAB-LA'.&#xa;&#xa;  The dapivirine vaginal ring may be offered as an additional prevention choice for women* at substantial risk of HIV infection as part of combination prevention approaches.&#xa;&#xa;  *For the recommendation on dapirivirine vaginal ring, the term women applies to cisgender women, meaning women assigned female at birth.  There is no research at this time to support the dapivirine vaginal ring for other populations." xsi:type="Literal"/>
+                  <else localId="174" locator="184:12-184:13" valueType="t:String" value="" xsi:type="Literal"/>
+               </element>
+            </source>
+         </expression>
+      </def>
+   </statements>
+</library>
