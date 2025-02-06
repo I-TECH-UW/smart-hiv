@@ -1,3 +1,4 @@
+
 Instance: ExampleHivInvasiveCervicalCancerDiagnosis
 InstanceOf: HivInvasiveCervicalCancerDiagnosis
 Title: "Example Invasive Cervical Cancer Diagnosis"
@@ -9,3 +10,4 @@ Description: "This is an example of an Invasive Cervical Cancer Diagnosis Condit
 * clinicalStatus = http://terminology.hl7.org/CodeSystem/condition-clinical#active
 * verificationStatus = http://terminology.hl7.org/CodeSystem/condition-ver-status#confirmed
 * onsetDateTime = "2023-10-01"
+* clinicalStatus = http://terminology.hl7.org/CodeSystem/condition-clinical#active

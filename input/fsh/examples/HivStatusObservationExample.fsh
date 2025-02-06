@@ -1,3 +1,13 @@
+
+Instance: ExampleHivStatusObservation
+InstanceOf: HivStatusObservation
+Title: "Example HIV Status Observation"
+Description: "An example observation for a patient's HIV status."
+* status = #final
+* code = HIVConcepts#HIV.B.DE115
+* valueCodeableConcept = HIVConcepts#HIV.B.DE117
+* subject = Reference(Patient/ExampleHivPatient)
+
 Instance: ExampleHivStatusPositiveObservation
 InstanceOf: HivStatusObservation
 Title: "Example HIV Positive Status Observation"

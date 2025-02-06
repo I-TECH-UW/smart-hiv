@@ -1,3 +1,19 @@
+
+Instance: ExampleHcvTest
+InstanceOf: HivHcvTest
+Title: "Example HCV Test"
+Description: "Example resource for HivHcvTest profile."
+* status = #final
+* subject = Reference(Patient/ExampleHivInfant)
+
+Instance: ExampleHcvTestD
+InstanceOf: HivHcvTestD
+Title: "Example HCV Test D"
+Description: "Another example for the HivHcvTestD profile."
+* status = #final
+* subject = Reference(Patient/ExampleHivInfant)
+
+
 Instance: ExampleHcvTestObservation
 InstanceOf: HivHcvTest
 Title: "Example HCV Test Observation"
