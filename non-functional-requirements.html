@@ -3,7 +3,7 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
-    <title>Non-functional Requirements - WHO SMART Guidelines - HIV v0.4.1</title>
+    <title>Non-functional Requirements - WHO SMART Guidelines - HIV v0.4.3</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="author" content="http://hl7.org/fhir"/>
@@ -217,7 +217,7 @@
         <div id="ig-status" class="ig-status-draft">
           <p><span style="font-size:12pt;font-weight:bold">WHO SMART Guidelines - HIV</span>
             <br/>
-            <span style="display:inline-block;">0.4.1 - ci-build
+            <span style="display:inline-block;">0.4.3 - ci-build
 
 
             </span>
@@ -252,7 +252,7 @@ h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) ".
 h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
 </style>
 <div class="col-12">
-  <!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.4.1) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
+  <!--ReleaseHeader--><p id="publish-box">WHO SMART Guidelines - HIV - Local Development build (v0.4.3) built by the FHIR (HL7® FHIR® Standard) Build Tools. See the <a href="http://smart.who.int/hiv/history.html">Directory of published versions</a></p><!--EndReleaseHeader-->
   <h2>Non-functional Requirements</h2>
   
 
@@ -271,9 +271,368 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 <div>
 <!-- do not remove - needed to prevent Jekyll from adding a p tag to any non block level element in the markdown.-->
 </div>
+<p>This page provides an overview of illustrative non-functional requirements that may be considered to kick-start the process of designing or adapting the electronic immunization registry digital tracking and decision-support system.</p>
+
 <p>Non-functional requirements provide the general attributes and features of the digital system to ensure usability and overcome technical and physical constraints. Examples of non-functional requirements include ability to work offline, multiple language settings and password protection.</p>
 
-<p>Table 17 in the DAK provides non-functional requirements as general characteristics of the overall system.</p>
+<h1 id="table-17---non-functional-requirements">Table 17 - Non-functional Requirements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Requirement ID</th>
+      <th>Category</th>
+      <th>Non-Functional Requirement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HIV.NFXNREQ.001</td>
+      <td>Security - confidentiality</td>
+      <td>Provide password protected access for authorized users</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.002</td>
+      <td>Security - confidentiality</td>
+      <td>Provide a means to ensure confidentiality and privacy of personal health information</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.003</td>
+      <td>Security - confidentiality</td>
+      <td>Provide ability for authorized users to view confidential data</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.004</td>
+      <td>Security - confidentiality</td>
+      <td>Anonymise data that is exported from the system</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.005</td>
+      <td>Security - confidentiality</td>
+      <td>Prevent remembering username and password</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.006</td>
+      <td>Security - confidentiality</td>
+      <td>Log out the user after specified time of inactivity</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.007</td>
+      <td>Security - confidentiality</td>
+      <td>Provide encrypted communication between components</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.008</td>
+      <td>Security - authentication</td>
+      <td>Notify the user to change their password the first time they log in</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.009</td>
+      <td>Security - authentication</td>
+      <td>Adhere to complex password requirements</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.010</td>
+      <td>Security - authentication</td>
+      <td>Provide a mechanism to securely change a user's password</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.011</td>
+      <td>Security - authentication</td>
+      <td>Notify the user of password change to their account</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.012</td>
+      <td>Security - authentication</td>
+      <td>Reset a user's password in a secure manner</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.013</td>
+      <td>Security - authentication</td>
+      <td>Lock a user out after a specified number of wrong password attempts</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.014</td>
+      <td>Security - authentication</td>
+      <td>Notify a user if their account is locked due to wrong password attempts</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.015</td>
+      <td>Security - authentication</td>
+      <td>Provide role-based access to the system</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.016</td>
+      <td>Security - audit trail and logs</td>
+      <td>Log system logins and logouts</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.017</td>
+      <td>Security - audit trail and logs</td>
+      <td>Record all authentication violations</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.018</td>
+      <td>Security - audit trail and logs</td>
+      <td>Log all activities performed by the user, including date and time stamp</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.019</td>
+      <td>Security - audit trail and logs</td>
+      <td>Log access to views of individual client records</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.020</td>
+      <td>Security - audit trail and logs</td>
+      <td>Log access to data summaries, reports, analysis and visualization features</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.021</td>
+      <td>Security - audit trail and logs</td>
+      <td>Log exchange of data with other systems</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.022</td>
+      <td>Security - audit trail and logs</td>
+      <td>Generate analysis of the usage of different system features and reports</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.023</td>
+      <td>Security - audit trail and logs</td>
+      <td>Log all data and system errors</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.024</td>
+      <td>Security - user management</td>
+      <td>Allow user with permission to create a new user and temporary password</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.025</td>
+      <td>Security - user management</td>
+      <td>Provide role-based access</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.026</td>
+      <td>Security - user management</td>
+      <td>Allow roles to be associated with specific geographical areas and/or health facilities</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.027</td>
+      <td>Security - user management</td>
+      <td>Allow cascading user management and assignment of roles</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.028</td>
+      <td>Security - user management</td>
+      <td>Allow user to change their own password</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.029</td>
+      <td>Security - user management</td>
+      <td>Allow admin user to request password reset</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.030</td>
+      <td>Security - user management</td>
+      <td>Notify the user to regularly change the user's password</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.031</td>
+      <td>Security - user management</td>
+      <td>Allow each user to be assigned to one or more roles</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.032</td>
+      <td>Security - user management</td>
+      <td>Support definitions of unlimited roles and assigned levels of access, viewing, entry, editing and auditing</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.033</td>
+      <td>System requirements - general</td>
+      <td>Provide a unique version number for each revision</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.034</td>
+      <td>System requirements - general</td>
+      <td>Enable earlier versions of a record to be recoverable</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.035</td>
+      <td>System requirements - general</td>
+      <td>Enable deployment in an environment subject to power loss</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.036</td>
+      <td>System requirements - general</td>
+      <td>Work in an environment that is subject to loss of connectivity</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.037</td>
+      <td>System requirements - general</td>
+      <td>Generate IDs that are unique across different installations or sites</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.038</td>
+      <td>System requirements - general</td>
+      <td>Report version number when saving data to the database</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.039</td>
+      <td>System requirements - general</td>
+      <td>Be designed to be flexible enough to accommodate necessary changes in the future</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.040</td>
+      <td>System requirements - general</td>
+      <td>Allow for offline and online functionality</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.041</td>
+      <td>System requirements - general</td>
+      <td>Show the number of records that are not yet synchronised</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.042</td>
+      <td>System requirements - general</td>
+      <td>Have ability to easily back up information</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.043</td>
+      <td>System requirements - general</td>
+      <td>Warn user if no valid backup for more than a predefined number of days</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.044</td>
+      <td>System requirements - general</td>
+      <td>Must have the ability to store images and other unstructured data</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.045</td>
+      <td>System requirements - scalability</td>
+      <td>Scalable to accommodate new demands</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.046</td>
+      <td>System requirements - scalability</td>
+      <td>Be able to accommodate at least [x number of] health facilities</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.047</td>
+      <td>System requirements - scalability</td>
+      <td>Be able to accommodate at least [x number of] concurrent users</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.048</td>
+      <td>System requirements - usability</td>
+      <td>Be user-friendly for people with low computer literacy</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.049</td>
+      <td>System requirements - usability</td>
+      <td>Provide informative error messages and tooltips</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.050</td>
+      <td>System requirements - usability</td>
+      <td>Alert the user when navigating away from the form without saving</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.051</td>
+      <td>System requirements - usability</td>
+      <td>Support real time data entry validation and feedback to prevent data entry errors from being recorded</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.052</td>
+      <td>System requirements - usability</td>
+      <td>Simplify data recording through predefined drop-down or searchable lists, radio buttons, check boxes</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.053</td>
+      <td>System requirements - usability</td>
+      <td>Support multiple languages</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.054</td>
+      <td>System requirements - usability</td>
+      <td>Use industry standard user interface practices and apply them in a consistent manner throughout the system</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.055</td>
+      <td>System requirements - usability</td>
+      <td>Easy to learn and intuitive to enable user to navigate between pages</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.056</td>
+      <td>System requirements - usability</td>
+      <td>Provide guidance to the users to better support clinical guidelines and best clinical practices</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.057</td>
+      <td>System requirements - usability</td>
+      <td>Be reliable and robust (minimize the number of system crashes)</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.058</td>
+      <td>System requirements - usability</td>
+      <td>Adjust display to fit small screens (e.g. mobile phones)</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.059</td>
+      <td>System requirements - configuration</td>
+      <td>Configure the system centrally</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.060</td>
+      <td>System requirements - configuration</td>
+      <td>Configure business rules in line with guidelines and standard operating procedures (SOPs)</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.061</td>
+      <td>System requirements - configuration</td>
+      <td>Configure error messages</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.062</td>
+      <td>System requirements - configuration</td>
+      <td>Configure workflows and business rules to accommodate differences between facilities</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.063</td>
+      <td>System requirements - interoperability</td>
+      <td>Communicate with external systems through mediators</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.064</td>
+      <td>System requirements - interoperability</td>
+      <td>Provide access to data through application programming interfaces (APIs)</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.065</td>
+      <td>System requirements - interoperability</td>
+      <td>Be interoperable with external systems through mediators</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.066</td>
+      <td>System requirements - interoperability</td>
+      <td>Link with insurance systems to verify eligibility and submit claims</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.067</td>
+      <td>System requirements - interoperability</td>
+      <td>Exchange data with other approved systems</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.068</td>
+      <td>System requirements - interoperability</td>
+      <td>Accept data from multiple input methods including paper, geocoding (GPS)</td>
+    </tr>
+    <tr>
+      <td>HIV.NFXNREQ.069</td>
+      <td>System requirements - hardware and connectivity</td>
+      <td>Allow for data exchange and efficient synchronization across multiple facilities and points of service when internet is available, even when it is intermittent and slow</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
@@ -294,7 +653,7 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
 
       <div class="inner-wrapper">
         <p>
-          IG &#169; 2025+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.4.1 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Sat, Feb 1, 2025 23:38+0000">2025-02-01</span>
+          IG &#169; 2025+ <a style="color:var(--footer-hyperlink-text-color)" href="http://who.int">WHO</a>.  Package smart.who.int.hiv#0.4.3 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Feb 7, 2025 14:15+0000">2025-02-07</span>
           <br/>
           <span style="color: var(--footer-highlight-text-color)">
                       Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
