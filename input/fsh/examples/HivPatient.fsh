@@ -1,7 +1,7 @@
 Instance: ExampleHivPatient
 InstanceOf: HivPatient
 Title: "Example Hiv Patient"
-Description: "This is an example of HIV Patient Resouce"
+Description: "This is an example of HIV Patient Resource"
 
 * id = "ExampleHivPatient"
 * active = true
